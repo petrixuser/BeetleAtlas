@@ -1,0 +1,24 @@
+# Lokale Konfiguration — enthaelt API-Keys, darf nie ins Repository
+frontend/config.local.js
+
+# Claude Code memory — nur lokal
+.claude/
+
+# macOS
+.DS_Store
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Dependencies
+node_modules/
+
+# Build-Output
+dist/
+build/
+
+# Umgebungsvariablen
+.env
+.env.*

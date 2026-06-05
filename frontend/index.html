@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Beetle Box</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <header class="header">
+        <h1>Beetle Box</h1>
+        <p class="subtitle">Latin Americas Beetle Atlas</p>
+        <p>Find your favorite Beetles</p>
+      </header>
+
+      <section class="search-box" aria-label="Suche und Filter">
+        <label>
+          Art suchen
+          <input id="searchInput" type="search" placeholder="z. B. Dynastes" />
+        </label>
+
+        <label>
+          Klimazone
+          <select id="climateFilter">
+            <option value="all">Alle</option>
+            <option value="Tropisch">Tropisch</option>
+            <option value="Subtropisch">Subtropisch</option>
+            <option value="Trocken">Trocken</option>
+            <option value="Gebirge">Gebirge</option>
+            <option value="Gemaessigt">Gemaessigt</option>
+          </select>
+        </label>
+
+        <label>
+          Vegetation
+          <select id="vegetationFilter">
+            <option value="all">Alle</option>
+            <option value="Regenwald">Regenwald</option>
+            <option value="Savanne">Savanne</option>
+            <option value="Trockenwald">Trockenwald</option>
+            <option value="Gebirgsvegetation">Gebirgsvegetation</option>
+            <option value="Grasland">Grasland</option>
+            <option value="Mangroven">Mangroven</option>
+          </select>
+        </label>
+
+        <label>
+          Hoehenlage
+          <select id="elevationFilter">
+            <option value="all">Alle</option>
+            <option value="low">0-500 m</option>
+            <option value="mid">500-1500 m</option>
+            <option value="high">1500-3000 m</option>
+            <option value="veryHigh">ueber 3000 m</option>
+          </select>
+        </label>
+
+        <button id="resetButton" type="button">Zuruecksetzen</button>
+      </section>
+
+      <section class="map-section" aria-label="Karten">
+        <div class="map-header">
+          <div>
+            <h2>Atlas Karte</h2>
+            <p>Lateinamerika mit klaren Umrissen, Laendergrenzen und Laendernamen.</p>
+          </div>
+          <div class="map-view-toggle" role="group" aria-label="Kartenansicht">
+            <button class="toggle-btn is-active" data-view="normal" type="button">Normal</button>
+            <button class="toggle-btn" data-view="elevation" type="button">Höhe</button>
+            <button class="toggle-btn" data-view="climate" type="button">Klima</button>
+            <button class="toggle-btn" data-view="vegetation" type="button">Vegetation</button>
+          </div>
+        </div>
+
+        <div class="map-view">
+          <div class="map-canvas">
+            <!-- Ladezustand -->
+            <div id="mapLoadingState" class="map-state-overlay">
+              <p>Karte wird geladen …</p>
+            </div>
+
+            <!-- Fehlerzustand -->
+            <div id="mapErrorState" class="map-state-overlay is-hidden">
+              <p>Karte konnte nicht geladen werden.<br>Lokale Konfiguration (<code>config.local.js</code>) fehlt oder API-Key ist ungültig.</p>
+            </div>
+
+            <!-- Google Maps Container -->
+            <div id="googleMap"></div>
+
+            <!-- Höhenlegende (OpenTopoMap) -->
+            <div id="elevationLegend" class="map-legend is-hidden" aria-label="Höhenlegende">
+              <p class="legend-title">Höhe ü. NN</p>
+              <ul class="legend-list">
+                <li><span class="legend-swatch" style="background:#c4c5cc"></span> &gt; 4500 m</li>
+                <li><span class="legend-swatch" style="background:#b89e7e"></span> 3000–4500 m</li>
+                <li><span class="legend-swatch" style="background:#c1a27c"></span> 2000–3000 m</li>
+                <li><span class="legend-swatch" style="background:#d8c8a4"></span> 1000–2000 m</li>
+                <li><span class="legend-swatch" style="background:#e7e5c9"></span> 500–1000 m</li>
+                <li><span class="legend-swatch" style="background:#cee5b9"></span> 100–500 m</li>
+                <li><span class="legend-swatch" style="background:#aecfa4"></span> 0–100 m</li>
+              </ul>
+              <p style="font-size:0.7rem;color:#888;margin-top:0.4rem">© OpenTopoMap (CC-BY-SA)</p>
+            </div>
+
+            <!-- Klimazonen-Legende (Köppen-Geiger 1991–2020) -->
+            <div id="climateLegend" class="map-legend is-hidden" aria-label="Klimazonen-Legende">
+              <p class="legend-title">Köppen-Geiger Klimazonen</p>
+              <div class="legend-group">
+                <p class="legend-group-title">A — Tropisch</p>
+                <ul class="legend-list">
+                  <li><span class="legend-swatch" style="background:#006400"></span> Af Regenwald</li>
+                  <li><span class="legend-swatch" style="background:#228B22"></span> Am Monsun</li>
+                  <li><span class="legend-swatch" style="background:#96D26C"></span> Aw Savanne</li>
+                </ul>
+              </div>
+              <div class="legend-group">
+                <p class="legend-group-title">B — Arid</p>
+                <ul class="legend-list">
+                  <li><span class="legend-swatch" style="background:#FF4500"></span> BWh Wüste heiß</li>
+                  <li><span class="legend-swatch" style="background:#FF8C69"></span> BWk Wüste kalt</li>
+                  <li><span class="legend-swatch" style="background:#F5A623"></span> BSh Steppe heiß</li>
+                  <li><span class="legend-swatch" style="background:#F5DCA0"></span> BSk Steppe kalt</li>
+                </ul>
+              </div>
+              <div class="legend-group">
+                <p class="legend-group-title">C — Gemäßigt</p>
+                <ul class="legend-list">
+                  <li><span class="legend-swatch" style="background:#FFFF00"></span> Csa tr. Sommer, heiß</li>
+                  <li><span class="legend-swatch" style="background:#D4D400"></span> Csb tr. Sommer, warm</li>
+                  <li><span class="legend-swatch" style="background:#AAAA00"></span> Csc tr. Sommer, kühl</li>
+                  <li><span class="legend-swatch" style="background:#AAFFAA"></span> Cwa tr. Winter, heiß</li>
+                  <li><span class="legend-swatch" style="background:#78C878"></span> Cwb tr. Winter, warm</li>
+                  <li><span class="legend-swatch" style="background:#449944"></span> Cwc tr. Winter, kühl</li>
+                  <li><span class="legend-swatch" style="background:#C8FF50"></span> Cfa feucht, heiß</li>
+                  <li><span class="legend-swatch" style="background:#78FF50"></span> Cfb feucht, warm</li>
+                  <li><span class="legend-swatch" style="background:#40C800"></span> Cfc feucht, kühl</li>
+                </ul>
+              </div>
+              <div class="legend-group">
+                <p class="legend-group-title">D — Kalt</p>
+                <ul class="legend-list">
+                  <li><span class="legend-swatch" style="background:#CC00CC"></span> Dsb tr. Sommer, warm</li>
+                  <li><span class="legend-swatch" style="background:#990099"></span> Dsc tr. Sommer, kühl</li>
+                  <li><span class="legend-swatch" style="background:#38CCFF"></span> Dfb feucht, warm</li>
+                  <li><span class="legend-swatch" style="background:#0088AA"></span> Dfc feucht, kühl</li>
+                </ul>
+              </div>
+              <div class="legend-group">
+                <p class="legend-group-title">E — Polar</p>
+                <ul class="legend-list">
+                  <li><span class="legend-swatch" style="background:#B0B0B0"></span> ET Tundra</li>
+                  <li><span class="legend-swatch" style="background:#808080"></span> EF Eis</li>
+                </ul>
+              </div>
+              <p style="font-size:0.7rem;color:#888;margin-top:0.4rem">Beck et al. (2023), CC-BY 4.0</p>
+            </div>
+
+            <!-- Vegetations-Legende (WWF Ecoregions) -->
+            <div id="vegetationLegend" class="map-legend is-hidden" aria-label="Vegetations-Legende">
+              <p class="legend-title">Vegetationszonen</p>
+              <ul class="legend-list">
+                <li><span class="legend-swatch" style="background:#006400"></span> Tropischer Regenwald</li>
+                <li><span class="legend-swatch" style="background:#55A857"></span> Tropischer Trockenwald</li>
+                <li><span class="legend-swatch" style="background:#2E8B57"></span> Tropischer Nadelwald</li>
+                <li><span class="legend-swatch" style="background:#8B9B2E"></span> Gemäßigter Laubwald</li>
+                <li><span class="legend-swatch" style="background:#556B2F"></span> Gemäßigter Nadelwald</li>
+                <li><span class="legend-swatch" style="background:#1E5C3A"></span> Borealer Wald / Taiga</li>
+                <li><span class="legend-swatch" style="background:#C8B400"></span> Tropisches Grasland / Savanne</li>
+                <li><span class="legend-swatch" style="background:#C8D250"></span> Gemäßigtes Grasland</li>
+                <li><span class="legend-swatch" style="background:#00CED1"></span> Überschwemmtes Grasland</li>
+                <li><span class="legend-swatch" style="background:#8B7355"></span> Gebirgs-Grasland</li>
+                <li><span class="legend-swatch" style="background:#B0C4DE"></span> Tundra</li>
+                <li><span class="legend-swatch" style="background:#D4A84B"></span> Mittelmeervegetation</li>
+                <li><span class="legend-swatch" style="background:#F5DEB3"></span> Wüste / Trockengebiete</li>
+                <li><span class="legend-swatch" style="background:#20B2AA"></span> Mangroven</li>
+              </ul>
+              <p style="font-size:0.7rem;color:#888;margin-top:0.4rem">WWF Terrestrial Ecoregions</p>
+            </div>
+
+            <!-- SVG-Fallback (ausgeblendet, bleibt als Reserve) -->
+            <div id="svgFallback" style="display:none">
+              <div class="map-tools" aria-label="Kartensteuerung">
+                <button id="zoomInButton" type="button">+</button>
+                <button id="zoomOutButton" type="button">-</button>
+                <button id="resetMapButton" type="button">Reset</button>
+              </div>
+              <div id="pointPopup" class="point-popup is-hidden" role="dialog" aria-label="Punktinformationen"></div>
+              <svg id="atlasSvg" viewBox="0 0 1000 980" role="img" aria-label="Interaktive Karte Lateinamerikas">
+                <rect class="ocean" width="1000" height="980"></rect>
+                <g id="mapViewport">
+                  <g id="baseLayer"></g>
+                  <g id="zoneLayer"></g>
+                  <g id="countryLineLayer"></g>
+                  <g id="labelLayer"></g>
+                  <g id="beetleLayer"></g>
+                </g>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <aside id="countrySidebar" class="country-sidebar" aria-label="Laenderinformationen" aria-hidden="true">
+        <div class="sidebar-header">
+          <div>
+            <p class="sidebar-label">Laenderinformationen</p>
+            <h2 id="countrySidebarTitle">Land</h2>
+          </div>
+          <button id="closeSidebarButton" type="button" aria-label="Seitenleiste schliessen">x</button>
+        </div>
+        <div id="countrySidebarContent" class="sidebar-content">
+          <p>Noch keine Informationen eingetragen.</p>
+        </div>
+      </aside>
+
+      <section class="content">
+        <section aria-label="Suchergebnisse">
+          <h2 id="resultHeading">Gefundene Arten</h2>
+          <div id="resultList" class="result-list"></div>
+        </section>
+
+        <aside class="details" aria-label="Detailansicht">
+          <div id="detailContent"></div>
+        </aside>
+      </section>
+    </main>
+
+    <script src="config.local.js"></script>
+    <script src="data/demo-beetles.js"></script>
+    <script src="assets/latin-america-countries.js?v=2"></script>
+    <script src="app.js?v=2"></script>
+  </body>
+</html>

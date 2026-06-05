@@ -1,0 +1,14 @@
+services:
+  BeetleAtlas:
+    image: ghcr.io/petrixuser/beetleatlas:latest
+    container_name: BeetleAtlas
+    restart: unless-stopped
+    networks:
+      - npm_proxy
+    environment:
+      - GMAPS_KEY=${GMAPS_KEY}
+      - API_BASE_URL=${API_BASE_URL:-}
+
+networks:
+  npm_proxy:
+    external: true
