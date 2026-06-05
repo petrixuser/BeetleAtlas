@@ -579,16 +579,17 @@ function initGeoJsonLayer() {
   googleMapInstance.data.addGeoJson(window.LATIN_AMERICA_COUNTRIES);
 
   googleMapInstance.data.setStyle({
-    fillColor: "#2f6b47",
-    fillOpacity: 0,
-    strokeWeight: 0
+    fillOpacity:   0,
+    strokeOpacity: 0,
+    strokeWeight:  0
   });
 
-  // Hover-Effekt
+  // Hover-Effekt: nur dezenter Fill, kein Strich
   googleMapInstance.data.addListener("mouseover", (event) => {
     googleMapInstance.data.overrideStyle(event.feature, {
-      fillOpacity: 0.18,
-      strokeColor: "#2f6b47",
+      fillColor:   "#2f6b47",
+      fillOpacity: 0.15,
+      strokeOpacity: 0,
       strokeWeight: 0
     });
   });
