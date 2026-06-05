@@ -1,0 +1,2555 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="https://eml.ecoinformatics.org/eml-2.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://eml.ecoinformatics.org/eml-2.2.0 https://rs.gbif.org/schema/eml-gbif-profile/1.3/eml.xsd"
+packageId="0b5f0f86-5743-4f04-a19e-d8e0a983e55a"  system="http://gbif.org" scope="system"
+xml:lang="es">
+    <dataset>
+        <alternateIdentifier>10.15468/p4bw2s</alternateIdentifier>
+        <alternateIdentifier>https://www.snib.mx/iptconabio/resource?r=SNIB-HC010</alternateIdentifier>
+        <alternateIdentifier>http://ipttest.conabio.gob.mx/iptconabiotest/resource?r=SNIB-HC010</alternateIdentifier>
+        <alternateIdentifier>http://www.snib.mx/iptconabio/resource?r=SNIB-HC010</alternateIdentifier>
+        <alternateIdentifier>http://www.snib.mx/iptconabio/resource?r=SNIB-HC010-HC0101309F_corregida-ND</alternateIdentifier>
+        <alternateIdentifier>0b5f0f86-5743-4f04-a19e-d8e0a983e55a</alternateIdentifier>
+        <title>Captura de datos de la Colección de Curculionoidea (Insecta: Coleoptera) de la Universidad Autónoma de Querétaro</title>
+        <creator>
+            <individualName>
+                <givenName>Robert</givenName>
+                <surName>Wallace Jones</surName>
+            </individualName>
+            <organizationName>Universidad Autónoma de QuerétaroFacultad de Ciencias Naturales</organizationName>
+            <positionName>Responsable</positionName>
+            <address>
+                <city>Querétaro</city>
+                <administrativeArea>Querétaro</administrativeArea>
+                <postalCode>76010</postalCode>
+                <country>MEXICO</country>
+            </address>
+            <phone>Tel. (442) 192-1200, Ext 5333 Fax (442) 192-1328</phone>
+            <electronicMailAddress>amphidees@yahoo.com.mx</electronicMailAddress>
+        </creator>
+        <metadataProvider>
+            <individualName>
+                <givenName>CONABIO</givenName>
+                <surName>Comisión nacional para el conocimiento y uso de la biodiversidad</surName>
+            </individualName>
+            <organizationName>Comisión Nacional para el Conocimiento y Uso de la Biodiversidad</organizationName>
+            <positionName>Dirección General de Sistemas</positionName>
+            <address>
+                <deliveryPoint>Liga Periférico-Insurgentes Sur No. 4903, Col. Parques del Pedregal</deliveryPoint>
+                <city>MÉXICO</city>
+                <administrativeArea>Tlalpan</administrativeArea>
+                <postalCode>14010</postalCode>
+                <country>MEXICO</country>
+            </address>
+            <phone>50045000</phone>
+            <electronicMailAddress>patricia.ramos@conabio.gob.mx</electronicMailAddress>
+            <onlineUrl>https://www.gob.mx/conabio</onlineUrl>
+        </metadataProvider>
+        <pubDate>
+                2026-05-08
+        </pubDate>
+        <language>SPANISH</language>
+        <abstract>
+            <para>La presente propuesta propone capturar los datos de las especies de Curculionoidea (Insecta: Coleoptera) cos, montadas, etiquetadas e identificadas (91%  a nivel 6 de curación, y 9% a nivel 3) por el responsable del proyecto y colaboradores desde 1996 hasta la fecha en  México y guardada en la colección zoológica en la Facultad de Ciencias Naturales en la Universidad Autónoma de Querétaro (UAQ).  La colección es producto de varios proyectos financiados en los últimos años. Uno de ellos es un proyecto previo de CONABIO: Proyecto L044: Los crisomélidos del bosque mesófilo de la reserva de la biósfera El Cielo, Gómez Farías, Tamaulipas, del cual, el  responsable, el Dr. Santiago Niño aportó los especímenes de Curculionoidea colectados junto con la colecta de su grupo de interés.  Además, la presente propuesta es posible por otro apoyo de CONABIO a la colección faunistica de la Facultad de Ciencias Natural de la UAQ de 1998 (Proyecto I028, Colecciones Faunísticas, responsable Dr Robert W. Jones, de la Universidad Autónoma de Querétaro).  La mayoría de las especies identificadas en el presente trabajo actualmente están publicadas en dos artículos: 1) Coleoptera: Curculionoidea , del Libro Historia Natural de la Reserva de la Biósfera El Cielo, (Tamaulipas, México) 2005; y 2) Lista de especies de Curculionoidea del estado de Querétaro, México (2007, Acta Zoológica Mexicana 23(3): 59-57).  
+
+Se propone la captura los datos de 3201 ejemplares, con 408 especies, y 804 registros de aproximadamente 100 localidades de varios estados de México (principalmente de Tamaulipas en la Reserva de la Biosfera El Cielo (RBEC)  y el estado de Querétaro) y analizar los datos en una publicación de la distribución altitudinal de los Curculionoidea de RBEC, apoyo a estudiantes de la Licenciatura y Posgrado e iniciar una página web de los Curculionoidea de México.</para><para>Reino: 1
+Filo: 1
+Clase: 1
+Orden: 1
+Familia: 7
+Género: 157
+Subgénero: 1
+Especie: 413
+</para>
+        </abstract>
+        <keywordSet>
+            <keyword>Occurrence</keyword>
+            <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type.xml</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+            <keyword>Invertebrados</keyword>
+            <keywordThesaurus>N/A</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+            <keyword>Occurrence</keyword>
+            <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type_2015-07-10.xml</keywordThesaurus>
+        </keywordSet>
+        <intellectualRights>
+            <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by/4.0/legalcode"><citetitle>Creative Commons Attribution (CC-BY) 4.0 License</citetitle></ulink>.</para>
+        </intellectualRights>
+        <licensed>
+            <licenseName>Creative Commons Attribution 4.0 International</licenseName>
+            <url>https://spdx.org/licenses/CC-BY-4.0.html</url>
+            <identifier>CC-BY-4.0</identifier>
+        </licensed>
+        <distribution scope="document">
+            <online>
+                <url function="information">http://www.snib.mx/proyectos/cgi-bin/datos2.cgi?Letras=HC&amp;Numero=10</url>
+            </online>
+        </distribution>
+        <distribution scope="document">
+            <online>
+                <url function="download">https://www.snib.mx/iptconabio/archive.do?r=SNIB-HC010</url>
+            </online>
+        </distribution>
+        <coverage>
+            <geographicCoverage>
+                <geographicDescription>País: MEXICO (BAJA CALIFORNIA SUR, CHIAPAS, CIUDAD DE MEXICO, COAHUILA DE ZARAGOZA, COLIMA, DISTRITO FEDERAL, DURANGO, GUANAJUATO, GUERRERO, HIDALGO, JALISCO, MEXICO, MICHOACAN DE OCAMPO, MORELOS, NAYARIT, NUEVO LEON, OAXACA, PUEBLA, QUERETARO, QUERETARO DE ARTEAGA, QUINTANA ROO, SAN LUIS POTOSI, SONORA, TABASCO, TAMAULIPAS, TLAXCALA, VERACRUZ DE IGNACIO DE LA LLAVE, YUCATAN, ZACATECAS)</geographicDescription>
+                <boundingCoordinates>
+                    <westBoundingCoordinate>-112.000833</westBoundingCoordinate>
+                    <eastBoundingCoordinate>-86.841667</eastBoundingCoordinate>
+                    <northBoundingCoordinate>31.02</northBoundingCoordinate>
+                    <southBoundingCoordinate>14.546111</southBoundingCoordinate>
+                </boundingCoordinates>
+            </geographicCoverage>
+            <temporalCoverage>
+                <rangeOfDates>
+                    <beginDate>
+                        <calendarDate>                1960-08-08
+</calendarDate>
+                    </beginDate>
+                    <endDate>
+                        <calendarDate>                2012-09-29
+</calendarDate>
+                    </endDate>
+                </rangeOfDates>
+            </temporalCoverage>
+            <taxonomicCoverage>
+                <generalTaxonomicCoverage>Reino: Animalia
+Filo: Arthropoda
+Clase: Insecta
+Orden: Coleoptera
+Familia: Curculionidae, Brentidae, Apionidae, Dryophthoridae, Attelabidae, Brachyceridae, Rhynchitidae</generalTaxonomicCoverage>
+                <taxonomicClassification>
+                    <taxonRankName>Kingdom</taxonRankName>
+                    <taxonRankValue>Animalia</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Phylum</taxonRankName>
+                    <taxonRankValue>Arthropoda</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Insecta</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Coleoptera</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Curculionidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Brentidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Apionidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Dryophthoridae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Attelabidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Brachyceridae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Rhynchitidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Conotrachelus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Coelocephalapion</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Trichapion</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Hadromeropsis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Cylindrocopturus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Chalcodermus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Anthonomus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Theognete</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Sitophilus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Lechriops</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Exophthalmus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Pandeleteius</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Cyrionyx</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Geraeus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Ileomus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Kissingeria</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Hypocoeliodes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Baris</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Rhodobaenus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Glyptobaris</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Himatolabus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Cercobaris</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Copturomimus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Marshallius</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Xestolabus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Alocentron</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Linogeraeus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Pheloconus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Cylindrocerus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Anthonomopsis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Compsus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Zygobarella</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Chrysapion</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Atractomerus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Heilipodus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Ampeloglypter</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Piazorhinus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Epicaerus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Isodrusus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Sibinia</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Pantomorus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Apionion</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Neapion</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Philides</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Chrysobaris</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Mitostylus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Madarellus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Anisorrhamphus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Limnobaris</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Sphenophorus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Ophryastes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Trichobaris</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Naupactus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Cactophagus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Macrorhoptus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Sitona</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Pseudocentrinus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Scyphophorus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Ericydeus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Megalostylus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Sibariops</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Centrinopus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Leptoschoinus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Piazurus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Madarus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Sayapion</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Pilolabus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Nicentrus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Eurhinus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Nanobaris</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Rhyssomatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Apinocis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Melexerus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Ceratopus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Centrinaspis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Neomastix</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Orchestomerus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Isotrachelus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Sapotes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Zascelis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Pterocolus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Notiodes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Laemosaccus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Pseudobaris</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Myrmex</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Platyomus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Pandeleteinus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Tanymecus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Eudociminus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Craptus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Lepidobaris</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Smicronyx</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Prionobrachium</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Hypera</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Buchananius</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Isodacrys</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Euscepes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Colecerus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Odontopus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Alceis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Auletobius</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Metriophilus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Coelosternus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Microzurus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Trachyphloeomimus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Amphidees</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Oxytenopterus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Xystus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Vasseletia</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Allopentarthrum</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Phelypera</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Linomadarus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Nicentrites</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Pseudopiazurus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Cionomimus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Polytus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Microhyus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Desmoglyptus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Promecops</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Botanebius</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Ambates</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Hoplocopturus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Caulophilus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Optatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Macrocopturus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Neochetina</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Grypidiopsis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Trepobaris</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Sternechus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Phyrdenus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Sciomias</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Mazenes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Lixus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Copturus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Claeoteges</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Curculio</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Thegilis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Peltophorus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Eustylus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Peridinetus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Oopterinus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Apteromechus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Hypoptus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Metamasius</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Eugnamptus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Auletes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Orthognathus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Pseudhypoptus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Achia</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Euscelus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Cholus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Aphrastus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Tomolips</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Cionopsis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Pantoteles</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Ameladus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Cratosomus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Subgenus</taxonRankName>
+                    <taxonRankValue>Pandeleteius</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Conotrachelus dimidiatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Coelocephalapion erythropterum</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Trichapion tenuirostrum</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Coelocephalapion sordidum</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Hadromeropsis flagellata</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Cylindrocopturus imbricatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Chalcodermus mexicanus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Anthonomus tenuirostris</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Theognete laurentae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Sitophilus zeamais</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Lechriops oculata</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Trichapion consanguineum</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Trichapion proclive</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Exophthalmus agrestis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Coelocephalapion decoloratum</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Pandeleteius ornatifrons</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Cyrionyx clathratus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Geraeus metoecus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Ileomus distinguendus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Geraeus simulator</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Cyrionyx championi</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Kissingeria trichium</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Trichapion murinum</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Lechriops lebasii</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Hypocoeliodes chiriquensis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Rhodobaenus sanguineus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Glyptobaris rugata</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Trichapion submetallicum</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Coelocephalapion carinatum</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Himatolabus vestitus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Trichapion rufipenne</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Cercobaris fortirostris</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Cylindrocopturus armatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Copturomimus confluens</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Trichapion lassum</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Trichapion plectrocolum</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Marshallius guttatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Xestolabus sedatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Alocentron chiriquense</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Linogeraeus x-albus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Pheloconus rubicundulus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Cylindrocerus circumlineatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Anthonomopsis mixta</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Compsus auricephalus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Zygobarella tristicula</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Chrysapion auctum</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Atractomerus albolateralis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Trichapion hadromerum</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Heilipodus lentiginosus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Anthonomus alboannulatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Cylindrocopturus albonotatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Ampeloglypter ovalis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Alocentron relictum</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Geraeus mendax</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Piazorhinus scutellaris</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Epicaerus cultripennis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Isodrusus debilis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Sibinia ruidula</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Sibinia candidata</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Epicaerus operculatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Kissingeria disparipes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Trichapion godmani</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Pantomorus albosignatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Ampeloglypter sulcifrons</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Rhodobaenus deltoides</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Apionion fenyesi</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Hypocoeliodes phytobioides</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Trichapion oscillator</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Neapion cretaceicolle</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Philides comans</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Trichapion modicum</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Coelocephalapion prosolitare</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Chrysobaris plurisetosa</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Trichapion macropus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Theognete tuberosa</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Theognete grimblyae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Lechriops californica</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Trichapion brunnicornis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Mitostylus setosus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Sitophilus oryzae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Madarellus cuneatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Kissingeria amaura</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Hypocoeliodes coronatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Xestolabus corvinus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Anisorrhamphus squamiventris</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Lechriops festiva</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Sphenophorus memnonius</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Ophryastes cinereus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Anthonomus rufipennis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Trichobaris mucorea</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Naupactus godmanni</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Cylindrocopturus biradiatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Cactophagus spinolae</taxonRankValue>
+                    <commonName>picudo del nopal</commonName>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Pandeleteius tibialis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Macrorhoptus sphaeralceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Pantomorus globicollis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Sibinia inermis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Sitona hispidulus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Sphenophorus quadrivittatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Pseudocentrinus ochraceus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Pandeleteius plumosiventris</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Conotrachelus leucophaeatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Rhodobaenus lebasii</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Scyphophorus acupunctatus</taxonRankValue>
+                    <commonName>botija, chatita, gusano del maguey mezcalero, picudo del agave, picudo del maguey, tepocho</commonName>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Sibinia earina</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Ericydeus modestus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Megalostylus albicans</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Trichapion tomentosum</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Pandeleteius rotundicollis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Anthonomus heterogenus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Sibariops concinna</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Rhodobaenus subcylindricus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Anthonomus singularis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Geraeus picumnus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Chalcodermus longirostris</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Centrinopus mendax</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Geraeus lentiginosa</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Conotrachelus guatemalensis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Leptoschoinus aspersus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Geraeus bipustulatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Glyptobaris lecontei</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Conotrachelus dentiferus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Sibinia seminicola</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Linogeraeus lineellus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Conotrachelus foveicollis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Anthonomus grandis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Coelocephalapion subaequale</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Lechriops stictica</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Atractomerus indicivus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Piazurus succivus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Conotrachelus albinus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Madarus bistrigellus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Sayapion absonum</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Trichapion evustum</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Pilolabus nigriclava</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Pandeleteius flexilis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Anthonomus baridioides</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Geraeus senilis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Nicentrus testaceipes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Eurhinus festivus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Ampeloglypter speculifer</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Nanobaris retusa</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Rhyssomatus perparvulus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Kissingeria seminudum</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Coelocephalapion emaciipes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Rhodobaenus thoracicus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Sayapion terale</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Anthonomus unipustulatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Melexerus hispidus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Ceratopus subfasciatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Hypocoeliodes gibbicollis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Centrinaspis picumna</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Sibariops confusa</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Neomastix idolum</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Orchestomerus gibbicollis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Conotrachelus parvicollis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Hypocoeliodes bicarinatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Isotrachelus tibialis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Coelocephalapion pallitarse</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Cylindrocopturus tetralobus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Sapotes caseyi</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Anthonomus eugenii</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Zascelis sulcifrons</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Rhyssomatus ovalis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Pantomorus uniformis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Pterocolus ovatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Sphenophorus venatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Notiodes robustus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Notiodes aeratus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Conotrachelus corallinus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Trichapion mirandum</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Trichapion aurichalceum</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Himatolabus umbosis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Chrysapion tantillum</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Coelocephalapion aduncirostre</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Coelocephalapion praeditum</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Laemosaccus ruficornis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Himatolabus nudus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Geraeus inchoatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Piazorhinus uniformis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Conotrachelus crucifer</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Anthonomus squamans</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Pseudobaris gibbicollis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Myrmex cylindricollis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Pilolabus klugii</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Trichapion laminatum</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Platyomus chrysopus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Coelocephalapion subornatum</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Sibinia setosa</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Sibinia tessellata</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Pandeleteinus subcancer</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Tanymecus confusus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Rhodobaenus arcuatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Rhodobaenus auctus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Conotrachelus nigricollis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Sapotes sordidus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Eudociminus mannerheimii</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Anthonomus griseisquamis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Anthonomus phymosiae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Pandeleteius thomasi</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Anthonomus lomonga</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Trichapion occiduum</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Trichapion eccentricum</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Pandeleteius brevipes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Craptus undulatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Trichapion heterogeneum</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Lepidobaris latisquamis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Smicronyx spretus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Prionobrachium schoenherri</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Conotrachelus longirostris</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Pandeleteius fasciatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Sibinia grypa</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Pandeleteius vitticollis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Hypera postica</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Epicaerus aurifer</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Pantomorus viridis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Sibinia variegata</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Ophryastes simulans</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Pandeleteius (Pandeleteius) robustus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Buchananius sulcatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Ophryastes vittatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Isodacrys crispum</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Piazurus maculipes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Anthonomus cyaneus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Anthonomus morbosus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Euscepes divisus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Sibinia championi</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Colecerus marmoratus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Sibinia aulacis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Geraeus x-notatum</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Anthonomus ruficollis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Chalcodermus dentipes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Odontopus mucidus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Sapotes setosus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Alceis sulfuratus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Auletobius rostralis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Metriophilus ramosus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Coelosternus albocaudatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Conotrachelus cristatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Chrysapion chrysocomum</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Microzurus championi</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Trachyphloeomimus mexicanus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Trichapion gracilirostre</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Amphidees latifrons</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Oxytenopterus clotho</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Centrinopus scutellinus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Trichapion enoplus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Ceratopus longiclava</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Trichapion auriferum</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Trichapion glyphicum</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Xystus mexicanus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Vasseletia vasseleti</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Allopentarthrum elumbe</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Kissingeria pauper</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Rhyssomatus acutecostatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Kissingeria disparatum</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Phelypera distigma</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Coelocephalapion luteirostre</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Trichapion innocens</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Lechriops alboterminata</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Linomadarus distigma</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Anthonomus hunteri</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Nicentrites hidalgoanus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Tanymecus confertus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Lechriops bicolor</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Anthonomus elutus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Pseudopiazurus centraliamericanus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Geraeus tonsus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Cionomimus brevis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Rhyssomatus nigerrimus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Coelocephalapion lividum</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Pilolabus splendens</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Rhyssomatus rugosus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Apionion neolentum</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Apionion inflatipenne</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Odontopus carinatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Conotrachelus curvilineatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Trichapion acanonicum</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Anthonomus distigma</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Polytus mellerborgii</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Conotrachelus serpentinus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Anthonomus canescens</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Anthonomus solarii</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Microhyus angustatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Desmoglyptus arizonicus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Anthonomus altamnis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Coelocephalapion epicum</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Sibinia aspersa</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Pandeleteius brevinasus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Pandeleteius maculicollis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Pandeleteius inflatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Cactophagus fahraei</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Promecops leucothyreus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Exophthalmus verecundus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Botanebius gibbosus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Ambates solani</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Hoplocopturus leptopus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Ophryastes squalidus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Sphenophorus cicatristriatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Rhyssomatus sculpturatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Rhyssomatus sexcostatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Sphenophorus cariosus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Caulophilus filirostris</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Optatus palmaris</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Pandeleteius ciliatipennis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Rhodobaenus quinquepunctatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Lepidobaris nitidipennis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Anthonomus palmeri</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Myrmex dugesi</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Apionion howdeni</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Macrocopturus lamprothorax</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Cylindrocopturus ganglbaueri</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Neochetina eichhorniae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Grypidiopsis variegata</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Naupactus virescens</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Anthonomus mexicanus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Zascelis irrorata</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Coelocephalapion nodicorne</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Trepobaris perlonga</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Sternechus tuberculatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Phyrdenus muriceus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Conotrachelus subfasciatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Sciomias subtilis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Himatolabus rudis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Sphenophorus incurrens</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Trichapion neocoxale</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Trichapion latitator</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Conotrachelus inexplicatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Lechriops maculiceps</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Conotrachelus tetrastigma</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Mazenes bifoveatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Anthonomus dormitor</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Lixus maculipennis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Exophthalmus cupreipes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Cylindrocopturus binotatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Nicentrites lineicollis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Lechriops infusa</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Conotrachelus nodulosus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Copturus aguacatae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Caulophilus oryzae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Pandeleteius hispidus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Conotrachelus anaglypticus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Zascelis affaber</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Amphidees nubilosus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Trachyphloeomimus championi</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Claeoteges obliterata</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Curculio longinasus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Amphidees nasutus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Coelocephalapion spretissimum</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Thegilis baridioides</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Peltophorus polymitus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Piazorhinus albofasciatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Epicaerus mexicanus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Pantomorus stupidus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Conotrachelus humerosus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Eustylus striatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Anthonomus morpheus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Claeoteges granulosa</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Peridinetus rufotorquatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Anthonomus somniculosus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Rhodobaenus cariniventris</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Trichapion bicolor</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Copturomimus asperatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Anthonomus aereus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Oopterinus laevigatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Apteromechus longulus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Hypoptus macularis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Epicaerus samson</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Curculio montanus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Epicaerus spretus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Metamasius quadrilineatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Pilolabus californicus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Trichobaris major</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Eugnamptus nigripennis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Pandeleteius nodifer</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Colecerus variegatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Auletes sulcifrons</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Orthognathus subparallelus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Trichapion alticola</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Xystus gracilirostris</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Conotrachelus cinerascens</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Piazurus plagiatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Pseudhypoptus parcus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Colecerus setosus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Achia adusta</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Euscelus fenestratus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Atractomerus punctipennis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Ophryastes lucanus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Pandeleteius viridiventris</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Sapotes puncticollis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Anthonomus pazmani</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Cholus nigrofasciatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Ophryastes prolatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Rhodobaenus varieguttatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Peridinetus distinctus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Pseudhypoptus eurylobus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Aphrastus submarginatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Metamasius callizona</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Tomolips quercicola</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Xystus pallidipennis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Trichobaris championi</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Megalostylus splendidus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Cionopsis crispula</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Epicaerus monclovae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Pantoteles longimanus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Cylindrocopturus filicornis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Claeoteges virosa</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Ameladus inornatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Trachyphloeomimus undulatoides</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Exophthalmus opulentus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Trachyphloeomimus alternatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Cratosomus punctulatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Anthonomus arrogans</taxonRankValue>
+                </taxonomicClassification>
+            </taxonomicCoverage>
+        </coverage>
+        <maintenance>
+            <description>
+                <para></para>
+            </description>
+            <maintenanceUpdateFrequency>notPlanned</maintenanceUpdateFrequency>
+        </maintenance>
+        <contact>
+            <individualName>
+                <givenName>Patricia</givenName>
+                <surName>Ramos Rivera</surName>
+            </individualName>
+            <organizationName>Comisión Nacional para el Conocimiento y Uso de la Biodiversidad</organizationName>
+            <positionName>Directora General de Sistemas</positionName>
+            <address>
+                <deliveryPoint>Liga Periférico-Insurgentes Sur No. 4903, Col. Parques del Pedregal</deliveryPoint>
+                <city>México</city>
+                <administrativeArea>Tlalpan</administrativeArea>
+                <postalCode>14010</postalCode>
+                <country>MEXICO</country>
+            </address>
+            <phone>50045000</phone>
+            <electronicMailAddress>patricia.ramos@conabio.gob.mx</electronicMailAddress>
+            <onlineUrl>https://www.gob.mx/conabio</onlineUrl>
+        </contact>
+
+            <project id="SNIB-HC010-HC0101309F_corregida-ND">
+                <title>Captura de datos de la Colección de Curculionoidea (Insecta: Coleoptera) de la Universidad Autónoma de Querétaro</title>
+                <personnel>
+                    <individualName>
+                    <givenName>Robert</givenName>
+                    <surName>Wallace Jones</surName>
+                    </individualName>
+                    <role>CONTENT_PROVIDER</role>
+                </personnel>
+                <abstract>
+                    <para>La presente propuesta propone capturar los datos de las especies de Curculionoidea (Insecta: Coleoptera) cos, montadas, etiquetadas e identificadas (91%  a nivel 6 de curación, y 9% a nivel 3) por el responsable del proyecto y colaboradores desde 1996 hasta la fecha en  México y guardada en la colección zoológica en la Facultad de Ciencias Naturales en la Universidad Autónoma de Querétaro (UAQ).  La colección es producto de varios proyectos financiados en los últimos años. Uno de ellos es un proyecto previo de CONABIO: Proyecto L044: Los crisomélidos del bosque mesófilo de la reserva de la biósfera El Cielo, Gómez Farías, Tamaulipas, del cual, el  responsable, el Dr. Santiago Niño aportó los especímenes de Curculionoidea colectados junto con la colecta de su grupo de interés.  Además, la presente propuesta es posible por otro apoyo de CONABIO a la colección faunistica de la Facultad de Ciencias Natural de la UAQ de 1998 (Proyecto I028, Colecciones Faunísticas, responsable Dr Robert W. Jones, de la Universidad Autónoma de Querétaro).  La mayoría de las especies identificadas en el presente trabajo actualmente están publicadas en dos artículos: 1) Coleoptera: Curculionoidea , del Libro Historia Natural de la Reserva de la Biósfera El Cielo, (Tamaulipas, México) 2005; y 2) Lista de especies de Curculionoidea del estado de Querétaro, México (2007, Acta Zoológica Mexicana 23(3): 59-57).  
+
+Se propone la captura los datos de 3201 ejemplares, con 408 especies, y 804 registros de aproximadamente 100 localidades de varios estados de México (principalmente de Tamaulipas en la Reserva de la Biosfera El Cielo (RBEC)  y el estado de Querétaro) y analizar los datos en una publicación de la distribución altitudinal de los Curculionoidea de RBEC, apoyo a estudiantes de la Licenciatura y Posgrado e iniciar una página web de los Curculionoidea de México.</para>
+                </abstract>
+                <funding>
+                    <para>Comisión Nacional para el Conocimiento y Uso de la Biodiversidad (CONABIO)</para>
+                </funding>
+                <studyAreaDescription>
+                    <descriptor name="generic" citableClassificationSystem="false">
+                        <descriptorValue>Invertebrados
+insectos como catarinas, escarabajos, gorgojos, luciérnagas</descriptorValue>
+                    </descriptor>
+                </studyAreaDescription>
+            </project>
+    </dataset>
+
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2026-05-24T11:59:29Z</dateStamp>
+                <citation>Wallace Jones R, Comisión nacional para el conocimiento y uso de la biodiversidad C (2026). Captura de datos de la Colección de Curculionoidea (Insecta: Coleoptera) de la Universidad Autónoma de Querétaro. Version 1.18. Comisión nacional para el conocimiento y uso de la biodiversidad. Occurrence dataset https://doi.org/10.15468/p4bw2s accessed via GBIF.org on 2026-05-24.</citation>
+                <physical>
+                    <objectName>SNIB-HC010-CSV.zip</objectName>
+                    <characterEncoding>UTF-8</characterEncoding>
+                    <dataFormat>
+                        <externallyDefinedFormat>
+                            <formatName>CSV</formatName>
+                        </externallyDefinedFormat>
+                    </dataFormat>
+                    <distribution>
+                        <online>
+                            <url function="download">http://www.snib.mx/proyectos/HC010/SNIB-HC010-CSV.zip</url>
+                        </online>
+                    </distribution>
+                </physical>
+                <physical>
+                    <objectName>SNIB-HC010-BD.zip</objectName>
+                    <characterEncoding>UTF-8</characterEncoding>
+                    <dataFormat>
+                        <externallyDefinedFormat>
+                            <formatName>MDB</formatName>
+                            <formatVersion>MicrosoftAccess2007</formatVersion>
+                        </externallyDefinedFormat>
+                    </dataFormat>
+                    <distribution>
+                        <online>
+                            <url function="download">http://www.snib.mx/proyectos/HC010/SNIB-HC010-BD.zip</url>
+                        </online>
+                    </distribution>
+                </physical>
+                <collection>
+                    <parentCollectionIdentifier>NO APLICA</parentCollectionIdentifier>
+                    <collectionIdentifier>SNIB-HC010-HC0101309F_corregida-ND</collectionIdentifier>
+                    <collectionName>Colección de Insectos;BUAQ-I;Facultad de Ciencias Naturales, Universidad Autónoma de Querétaro;FCN-UAQ</collectionName>
+                </collection>
+                <jgtiCuratorialUnit>
+                    <jgtiUnitType>Ejemplar</jgtiUnitType>
+                    <jgtiUnitRange>
+                        <beginRange>1</beginRange>
+                        <endRange>3,459</endRange>
+                    </jgtiUnitRange>
+                </jgtiCuratorialUnit>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
+    </eml:eml>

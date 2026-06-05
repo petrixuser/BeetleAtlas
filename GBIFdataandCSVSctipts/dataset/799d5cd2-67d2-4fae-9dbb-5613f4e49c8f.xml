@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="https://eml.ecoinformatics.org/eml-2.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://eml.ecoinformatics.org/eml-2.2.0 https://rs.gbif.org/schema/eml-gbif-profile/1.3/eml.xsd"
+packageId="799d5cd2-67d2-4fae-9dbb-5613f4e49c8f"  system="http://gbif.org" scope="system"
+xml:lang="es">
+    <dataset>
+        <alternateIdentifier>10.15472/haufds</alternateIdentifier>
+        <alternateIdentifier>https://ipt.biodiversidad.co/sib/resource?r=terreo_hidrobiologicos_taraza</alternateIdentifier>
+        <title>Caracterización de hidrobiológicos en fuentes ubicadas en el proyecto minero JDG16061</title>
+        <creator>
+            <individualName>
+                <surName>Térreo Consultoría en Servicios Ambientales</surName>
+            </individualName>
+            <organizationName>Térreo Consultoría en Servicios Ambientales</organizationName>
+            <address>
+                <city>Medellín</city>
+                <administrativeArea>Antioquia</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>coordinador@terreoconsultoria.com.co</electronicMailAddress>
+            <onlineUrl>https://terreoconsultoria.com.co/</onlineUrl>
+        </creator>
+        <pubDate>
+                2026-05-22
+        </pubDate>
+        <language>SPANISH</language>
+        <abstract>
+            <para>Conjunto de eventos de muestreo de comunidades hidrobiológicas realizados en el área de influencia del Título Minero JDG-16061, municipio de Tarazá, Antioquia, Colombia, durante los días 5 y 6 de noviembre de 2025. Los muestreos se llevaron a cabo en cinco (5) puntos de monitoreo distribuidos en tres cuerpos de agua: la Quebrada Apaví (P1), un lago interior al título (P2), una fuente superficial sin nombre afluente al título (P3 y P4) y el río Cauca (P5). En cada punto se evaluaron los componentes de bentos (macroinvertebrados acuáticos), perifiton, zooplancton, fitoplancton e ictiofauna, empleando protocolos estandarizados como red D, cuadrante, red de fitoplancton, red de zooplancton, electropesca y atarraya. Los registros fueron colectados por Térreo Consultoría en Servicios Ambientales y procesados por Hidroquímica Laboratorio Ambiental S.A.S. Los datos se documentaron siguiendo el estándar Darwin Core (DwC) para eventos de muestreo, versión 2.1, en el marco de las exigencias de monitoreo de biodiversidad acuática para proyectos mineros en Colombia.</para>
+        </abstract>
+        <keywordSet>
+            <keyword>Tarazá</keyword>
+            <keyword>minería</keyword>
+            <keyword>macroinvertebrados</keyword>
+            <keyword>fitoplancton</keyword>
+            <keyword>Darwin Core</keyword>
+            <keyword>perifiton</keyword>
+            <keyword>hidrobiología</keyword>
+            <keyword>ictiofauna</keyword>
+            <keyword>río Cauca</keyword>
+            <keyword>calidad del agua</keyword>
+            <keyword>ecosistemas acuáticos</keyword>
+            <keyword>zooplancton</keyword>
+            <keyword>monitoreo ambiental</keyword>
+            <keyword>Antioquia</keyword>
+            <keywordThesaurus>NA</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+            <keyword>Observation</keyword>
+            <keywordThesaurus>GBIF Dataset Subtype Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_subtype.xml</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+            <keyword>Samplingevent</keyword>
+            <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type_2015-07-10.xml</keywordThesaurus>
+        </keywordSet>
+        <intellectualRights>
+            <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by/4.0/legalcode"><citetitle>Creative Commons Attribution (CC-BY) 4.0 License</citetitle></ulink>.</para>
+        </intellectualRights>
+        <licensed>
+            <licenseName>Creative Commons Attribution 4.0 International</licenseName>
+            <url>https://spdx.org/licenses/CC-BY-4.0.html</url>
+            <identifier>CC-BY-4.0</identifier>
+        </licensed>
+        <distribution scope="document">
+            <online>
+                <url function="download">https://ipt.biodiversidad.co/sib/archive.do?r=terreo_hidrobiologicos_taraza</url>
+            </online>
+        </distribution>
+        <coverage>
+            <geographicCoverage>
+                <geographicDescription>Área de influencia del Título Minero JDG-16061, ubicada en la Vereda Tamaco, municipio de Tarazá, departamento de Antioquia, Colombia. Comprende cinco puntos de muestreo hidrobiológico distribuidos en la Quebrada Apaví, un lago interior al título, dos fuentes superficiales sin nombre y el río Cauca.</geographicDescription>
+                <boundingCoordinates>
+                    <westBoundingCoordinate>-75.3342</westBoundingCoordinate>
+                    <eastBoundingCoordinate>-75.3256</eastBoundingCoordinate>
+                    <northBoundingCoordinate>7.5192</northBoundingCoordinate>
+                    <southBoundingCoordinate>7.5069</southBoundingCoordinate>
+                </boundingCoordinates>
+            </geographicCoverage>
+            <temporalCoverage>
+                <rangeOfDates>
+                    <beginDate>
+                        <calendarDate>                2025-11-05
+</calendarDate>
+                    </beginDate>
+                    <endDate>
+                        <calendarDate>                2025-11-06
+</calendarDate>
+                    </endDate>
+                </rangeOfDates>
+            </temporalCoverage>
+            <taxonomicCoverage>
+                <generalTaxonomicCoverage>Organismos invertebrados asociados al sustrato de fondo de cuerpos de agua, utilizados como indicadores de calidad del agua. Muestreados mediante red D con 10 submuestras por punto en quebradas y cuerpos lénticos del área de influencia del Título Minero JDG-16061.</generalTaxonomicCoverage>
+                <taxonomicClassification>
+                    <taxonRankName>Kingdom</taxonRankName>
+                    <taxonRankValue>invertebrata</taxonRankValue>
+                    <commonName>Macroinventebrados Acuaticos</commonName>
+                </taxonomicClassification>
+            </taxonomicCoverage>
+            <taxonomicCoverage>
+                <generalTaxonomicCoverage>Comunidad de microorganismos (principalmente algas, bacterias y protozoos) adheridos a sustratos sumergidos. Muestreado mediante raspado en cuadrantes de 10 unidades por punto, en quebradas, lago y río del área de estudio.</generalTaxonomicCoverage>
+                <taxonomicClassification>
+                    <taxonRankName>Phylum</taxonRankName>
+                    <taxonRankValue>Bacillariophyta</taxonRankValue>
+                    <commonName>Perifiton</commonName>
+                </taxonomicClassification>
+            </taxonomicCoverage>
+            <taxonomicCoverage>
+                <generalTaxonomicCoverage>Comunidad de organismos animales microscópicos en suspensión en la columna de agua. Muestreado mediante red de zooplancton con filtración de 70 litros por punto, en fuentes superficiales del área de influencia del Título Minero JDG-16061.</generalTaxonomicCoverage>
+                <taxonomicClassification>
+                    <taxonRankName>Kingdom</taxonRankName>
+                    <taxonRankValue>Zooplankton</taxonRankValue>
+                    <commonName>Zooplacton</commonName>
+                </taxonomicClassification>
+            </taxonomicCoverage>
+            <taxonomicCoverage>
+                <generalTaxonomicCoverage>Comunidad de microalgas y cianobacterias en suspensión en la columna de agua, indicadoras del estado trófico del ecosistema. Muestreado mediante red de fitoplancton con filtración de 50 litros por punto en los cuerpos de agua del área de estudio.</generalTaxonomicCoverage>
+                <taxonomicClassification>
+                    <taxonRankName>Kingdom</taxonRankName>
+                    <taxonRankValue>Phytoplakton</taxonRankValue>
+                    <commonName>Fitoplacton</commonName>
+                </taxonomicClassification>
+            </taxonomicCoverage>
+            <taxonomicCoverage>
+                <generalTaxonomicCoverage>Comunidad de peces de aguas continentales. Muestreada mediante electropesca (50 m²) en quebradas y fuentes sin nombre, y mediante atarraya (50 m²) en el río Cauca, dentro del área de influencia del Título Minero JDG-16061, municipio de Tarazá, Antioquia.</generalTaxonomicCoverage>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Actinopterygii</taxonRankValue>
+                    <commonName>Ictiofauna</commonName>
+                </taxonomicClassification>
+            </taxonomicCoverage>
+        </coverage>
+        <purpose><para>El presente conjunto de datos tiene como propósito documentar y publicar los eventos de muestreo de comunidades hidrobiológicas realizados en el área de influencia del Título Minero JDG-16061, en el municipio de Tarazá, Antioquia, como parte de las obligaciones de monitoreo de biodiversidad acuática asociadas a proyectos mineros en Colombia. Los datos buscan contribuir al conocimiento del estado ecológico de los ecosistemas acuáticos de la región y servir como línea base para el seguimiento ambiental del área intervenida.</para></purpose>
+        <introduction><para>El monitoreo de comunidades hidrobiológicas es una herramienta fundamental para evaluar la integridad ecológica de los ecosistemas acuáticos continentales. En el contexto de proyectos de minería en Colombia, este tipo de monitoreo permite establecer líneas base del estado de la biodiversidad acuática antes, durante y después de las actividades extractivas, en cumplimiento de la normativa ambiental vigente.El presente conjunto de datos reúne los eventos de muestreo realizados durante la temporada húmeda de noviembre de 2025 en cinco puntos de monitoreo distribuidos en la Quebrada Apaví, un lago interior al título, fuentes superficiales sin nombre y el río Cauca, todos ubicados en la Vereda Tamaco, municipio de Tarazá, Antioquia. Se evaluaron cinco grupos biológicos indicadores: macroinvertebrados bentónicos, perifiton, zooplancton, fitoplancton e ictiofauna, empleando protocolos estandarizados de muestreo.Los datos fueron colectados por Térreo Consultoría en Servicios Ambientales y procesados por Hidroquímica Laboratorio Ambiental S.A.S., y se publican a través del Sistema de Información sobre Biodiversidad de Colombia (SiB Colombia) siguiendo el estándar Darwin Core para eventos de muestreo, con el fin de contribuir a la disponibilidad pública de información sobre biodiversidad en ecosistemas acuáticos del Bajo Cauca antioqueño.</para></introduction>
+        <gettingStarted><para>El conjunto de datos está compuesto por un archivo de eventos de muestreo estructurado bajo el estándar Darwin Core (DwC), en formato de hoja de cálculo (.xlsx), que contiene 20 registros de eventos distribuidos en cinco puntos de muestreo (P1 a P5) y cinco grupos biológicos (bentos, perifiton, zooplancton, fitoplancton e ictiofauna).Cada fila del archivo corresponde a un evento de muestreo individual, identificado mediante los campos, los cuales, agrupa los eventos por grupo biológico y el eventID identifica cada muestra específica. Los datos incluyen información sobre el protocolo de muestreo, el esfuerzo, la ubicación geográfica en coordenadas decimales (datum Magna Origen Nacional), la fecha y hora de colecta, y el hábitat asociado.</para></gettingStarted>
+        <maintenance>
+            <description>
+                <para></para>
+            </description>
+            <maintenanceUpdateFrequency>asNeeded</maintenanceUpdateFrequency>
+        </maintenance>
+        <contact>
+            <individualName>
+                <givenName>Laura Marcela</givenName>
+                <surName>Gallo Bermúdez</surName>
+            </individualName>
+            <organizationName>Térreo Consultoria en servicios ambientales</organizationName>
+            <address>
+                <city>Medellin</city>
+                <administrativeArea>Antioquia</administrativeArea>
+                <postalCode>050032</postalCode>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>laura_gallo.terreo@outlook.com</electronicMailAddress>
+        </contact>
+        <methods>
+            <methodStep>
+                <description>
+                    <para>Perifiton: Raspar sustratos sumergidos (rocas, troncos) con cepillo en cuadrantes de 9 cm², completando 10 raspados por punto. Resuspender en frasco ámbar de 240 ml y fijar con 10 ml de Lugol y 10 ml de solución Transeau.</para>
+                </description>
+            </methodStep>
+            <methodStep>
+                <description>
+                    <para>Macroinvertebrados: Tomar hasta 10 submuestras con red tipo D o red Surber (500 µm), distribuidas entre los hábitats del cuerpo de agua. Unir submuestras, eliminar rocas y material vegetal grueso, y preservar en bolsas Ziplock con alcohol al 96%.</para>
+                </description>
+            </methodStep>
+            <methodStep>
+                <description>
+                    <para>Ictiofauna: Realizar capturas con electropesca (sitios con baja conductividad) o atarraya (sitios de mayor caudal) en un área de 50 m². Tomar datos biométricos y registro fotográfico. Devolver los individuos a su medio natural.</para>
+                </description>
+            </methodStep>
+            <methodStep>
+                <description>
+                    <para>Fitoplancton: Filtrar 60 litros de agua con red de 23 µm. Lavar la red por cara externa hacia el copo colector. Transferir al recipiente de 250 ml y preservar con solución Transeau y Lugol.</para>
+                </description>
+            </methodStep>
+            <methodStep>
+                <description>
+                    <para>Zooplancton: Filtrar 70 litros de agua con red de 54 µm. Lavar la red hacia el copo colector. Transferir al recipiente de 250 ml y preservar con agua carbonatada y solución Transeau.</para>
+                </description>
+            </methodStep>
+            <sampling>
+                <studyExtent>
+                    <description>
+                        <para>El área de estudio corresponde a los cuerpos de agua ubicados en el área de influencia del Título Minero JDG-16061, en la Vereda Tamaco, municipio de Tarazá, departamento de Antioquia, Colombia. Se evaluaron ecosistemas acuáticos lóticos y lénticos distribuidos en cinco puntos de monitoreo: la Quebrada Apaví (P1), un lago interior al título (P2), dos fuentes superficiales sin nombre tributarias (P3 y P4) y el río Cauca (P5), con elevaciones entre 85 y 109 m.s.n.m.</para>
+                    </description>
+                </studyExtent>
+                <samplingDescription>
+                    <para>Se realizaron muestreos de cinco comunidades hidrobiológicas en cada punto: perifiton, macroinvertebrados bentónicos, ictiofauna, fitoplancton y zooplancton. El perifiton fue colectado mediante raspado de sustratos sumergidos en cuadrantes de 9 cm², completando 10 raspados por punto (área total de 90 cm²). Los macroinvertebrados se recolectaron con red tipo D y red Surber (ojo de malla 500 µm), tomando hasta 10 submuestras por sitio. La ictiofauna fue muestreada con electropesca y atarraya según las condiciones de conductividad del sitio. El fitoplancton se colectó filtrando 60 litros de agua con red de 23 µm, y el zooplancton filtrando 70 litros con red de 54 µm.</para>
+                </samplingDescription>
+            </sampling>
+            <qualityControl>
+                <description>
+                    <para>Las muestras de macroinvertebrados fueron preservadas en alcohol al 96% en nevera de icopor. Las muestras de perifiton fueron fijadas con Lugol y solución Transeau en frascos ámbar de 240 ml. Las muestras de fitoplancton fueron preservadas con solución Transeau y Lugol (5 gotas por 100 ml), y las de zooplancton con agua carbonatada y solución Transeau. Todos los individuos de ictiofauna fueron devueltos a su medio natural tras el registro biométrico y fotográfico. El procesamiento e identificación taxonómica fue realizado por Hidroquímica Laboratorio Ambiental S.A.S.</para>
+                </description>
+            </qualityControl>
+        </methods>
+
+            <project id="JDG-16061">
+                <title>Contrato de concesion JDG-16061</title>
+                <personnel>
+                    <individualName>
+                    <givenName>Laura Marcela</givenName>
+                    <surName>Gallo Bermúdez</surName>
+                    </individualName>
+                    <role>METADATA_AUTHOR</role>
+                </personnel>
+                <abstract>
+                    <para>Proyecto de minería bajo el Contrato de Concesión JDG-16061, localizado en la Vereda Tamaco, municipio de Tarazá, departamento de Antioquia, Colombia. El presente conjunto de datos corresponde a la caracterización de comunidades hidrobiológicas realizada como parte de las obligaciones de monitoreo ambiental asociadas al desarrollo del título minero.</para>
+                </abstract>
+                <funding>
+                    <para>Recursos propios del titular del Contrato de Concesión Minera JDG-16061. Los estudios fueron ejecutados por Térreo Consultoría en Servicios Ambientales</para>
+                </funding>
+                <studyAreaDescription>
+                    <descriptor name="generic" citableClassificationSystem="false">
+                        <descriptorValue>El área de estudio corresponde al polígono del Título Minero JDG-16061 y su zona de influencia, ubicada en la Vereda Tamaco, municipio de Tarazá, Antioquia, a orillas del río Cauca. El área comprende ecosistemas acuáticos lóticos y lénticos, incluyendo la Quebrada Apaví, un lago interior al título, fuentes superficiales sin nombre tributarias y el propio río Cauca, con elevaciones entre 85 y 109 m.s.n.m.</descriptorValue>
+                    </descriptor>
+                </studyAreaDescription>
+                <designDescription>
+                    <description>
+                        <para>El diseño de muestreo contempló cinco puntos de monitoreo (P1 a P5) distribuidos en los principales cuerpos de agua del área de influencia del título minero. En cada punto se evaluaron cinco grupos hidrobiológicos: macroinvertebrados bentónicos, perifiton, zooplancton, fitoplancton e ictiofauna, empleando protocolos estandarizados. El muestreo se realizó durante la temporada húmeda de noviembre de 2025, en dos jornadas de campo (5 y 6 de noviembre de 2025).</para>
+                    </description>
+                </designDescription>
+            </project>
+    </dataset>
+
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2026-05-24T11:59:28Z</dateStamp>
+                <citation identifier="https://doi.org/10.15472/haufds">Térreo Consultoría en Servicios Ambientales (2026). Caracterización de hidrobiológicos en fuentes ubicadas en el proyecto minero JDG16061. Térreo Consultoría en servicios ambientales. Occurrence dataset https://doi.org/10.15472/haufds accessed via GBIF.org on 2026-05-24.</citation>
+                <resourceLogoUrl>https://gitlab.com/sib-colombia/logos/-/raw/main/socio-SiB-terreo.png</resourceLogoUrl>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
+    </eml:eml>

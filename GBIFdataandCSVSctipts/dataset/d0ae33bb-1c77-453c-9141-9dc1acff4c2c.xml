@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="https://eml.ecoinformatics.org/eml-2.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://eml.ecoinformatics.org/eml-2.2.0 https://rs.gbif.org/schema/eml-gbif-profile/1.3/eml.xsd"
+packageId="d0ae33bb-1c77-453c-9141-9dc1acff4c2c"  system="http://gbif.org" scope="system"
+xml:lang="es">
+    <dataset>
+        <alternateIdentifier>10.15472/ycwuxd</alternateIdentifier>
+        <alternateIdentifier>https://ipt.biodiversidad.co/sib/resource?r=entomofaunagorgona</alternateIdentifier>
+        <alternateIdentifier>http://ipt.biodiversidad.co/sib/resource?r=entomofaunagorgona</alternateIdentifier>
+        <alternateIdentifier>10.15468/7wco9u</alternateIdentifier>
+        <alternateIdentifier>http://ipt.biodiversidad.co/valle/resource?r=entomofaunagorgona</alternateIdentifier>
+        <alternateIdentifier>http://data.biodiversidad.co/valle/resource.do?r=entomofaunagorgona</alternateIdentifier>
+        <alternateIdentifier>http://ipt.sibcolombia.net/valle/resource.do?r=entomofaunagorgona</alternateIdentifier>
+        <alternateIdentifier>d0ae33bb-1c77-453c-9141-9dc1acff4c2c</alternateIdentifier>
+        <alternateIdentifier>14705</alternateIdentifier>
+        <title>Colección de artrópodos del PNN Gorgona - Museo de Entomología de la Universidad del Valle (MUSENUV)</title>
+        <creator>
+            <individualName>
+                <givenName>Eliana Catherine</givenName>
+                <surName>Garzón Romero</surName>
+            </individualName>
+            <organizationName>Universidad del Valle</organizationName>
+            <positionName>Monitora</positionName>
+            <address>
+                <deliveryPoint>Calle 13 # 100 - 00, Sede Melendez, Facultad de Ciencias (Edificio: 320), Sección de Entomología</deliveryPoint>
+                <city>Cali</city>
+                <administrativeArea>Valle del Cauca</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <phone>+57 (2) 3212100 2570</phone>
+            <electronicMailAddress>eliana.garzon@correounivalle.edu.co</electronicMailAddress>
+            <onlineUrl>http://www.univalle.edu.co/</onlineUrl>
+        </creator>
+        <metadataProvider>
+            <individualName>
+                <givenName>Diana Marcela</givenName>
+                <surName>Torres Domínguez</surName>
+            </individualName>
+            <organizationName>Universidad del Valle</organizationName>
+            <positionName>Bióloga</positionName>
+            <address>
+                <deliveryPoint>Calle 13 # 100-00, sede Melendez, Facultad de Ciencias (Edificio: 320), Sección Entomología  (Espacio: 3033)</deliveryPoint>
+                <city>Cali</city>
+                <administrativeArea>Valle del Cauca</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <phone>+57 (2) 3212100 2570</phone>
+            <electronicMailAddress>diana.marcela.torres@correounivalle.edu.co</electronicMailAddress>
+            <onlineUrl>http://www.univalle.edu.co/</onlineUrl>
+        </metadataProvider>
+        <associatedParty>
+            <individualName>
+                <givenName>Patricia</givenName>
+                <surName>Chacón de Ulloa</surName>
+            </individualName>
+            <organizationName>Universidad del Valle</organizationName>
+            <positionName>Profesora</positionName>
+            <address>
+                <deliveryPoint>Calle 13 # 100 - 00, Sede Melendez, Facultad de Ciencias (Edificio: 320), Sección de Entomología</deliveryPoint>
+                <city>Cali</city>
+                <administrativeArea>Valle del Cauca</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <phone>+57 (2) 3212100 2497</phone>
+            <electronicMailAddress>patricia.chacon@correounivalle.edu.co</electronicMailAddress>
+            <onlineUrl>http://www.univalle.edu.co/</onlineUrl>
+            <role>CUSTODIAN_STEWARD</role>
+        </associatedParty>
+        <associatedParty>
+            <individualName>
+                <givenName>Ranulfo</givenName>
+                <surName>González Obando</surName>
+            </individualName>
+            <organizationName>Universidad del Valle</organizationName>
+            <positionName>Curador MUSENUV</positionName>
+            <address>
+                <deliveryPoint>Calle 13 # 100-00, sede Melendez, Facultad de Ciencias (Edificio: 320), Sección Entomología  (Espacio: 3033)</deliveryPoint>
+                <city>Cali</city>
+                <administrativeArea>Valle del Cauca</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <phone>+57 (2) 3212100 ext 3137</phone>
+            <electronicMailAddress>ranulfo.gonzalez@correounivalle.edu.co</electronicMailAddress>
+            <role>CUSTODIAN_STEWARD</role>
+        </associatedParty>
+        <associatedParty>
+            <individualName>
+                <givenName>Maria Ximena</givenName>
+                <surName>Zorrilla</surName>
+            </individualName>
+            <organizationName>Parques Nacionales Naturales</organizationName>
+            <positionName>Directora Parque Nacional Natural Gorgona</positionName>
+            <address>
+                <deliveryPoint>Calle 29N # 6N-43</deliveryPoint>
+                <city>Santiago de Cali</city>
+                <administrativeArea>Valle del Cauca</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>mzorrillaa@gmail.com</electronicMailAddress>
+            <onlineUrl>http://www.parquesnacionales.gov.co/</onlineUrl>
+            <role>POINT_OF_CONTACT</role>
+        </associatedParty>
+        <pubDate>
+                2022-01-21
+        </pubDate>
+        <language>SPANISH</language>
+        <abstract>
+            <para>Se describe el conjunto de datos de artrópodos presentes en el Parque Nacional Natural Gorgona, administrativamente pertenece al municipio de Guapí, departamento del Cauca, Colombia. Este conjunto es producto de varios proyectos de investigación, gracias a una serie iniciativas del departamento de Biología de la Universidad del Valle, que desde el año 1985 viene adelantando estudios esporádicos sobre la entomofauna de la isla. El conjunto está compuesto por 4810 registros, distribuidos en seis clases, 33 órdenes, 249 familias, 264 géneros y 116 especies.</para>
+        </abstract>
+        <keywordSet>
+            <keyword>Diversidad</keyword>
+            <keyword>artrópodos</keyword>
+            <keyword>Insecta</keyword>
+            <keywordThesaurus>http://www.cabi.org/cabthesaurus/</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+            <keyword>Occurrence</keyword>
+            <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type.xml</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+            <keyword>Specimen</keyword>
+            <keywordThesaurus>GBIF Dataset Subtype Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_subtype.xml</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+            <keyword>Parque nacional</keyword>
+            <keywordThesaurus>http://databases.unesco.org/thessp/</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+            <keyword>VALLE_DEL_CAUCA</keyword>
+            <keywordThesaurus>SiB Colombia</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+            <keyword>Occurrence</keyword>
+            <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type_2015-07-10.xml</keywordThesaurus>
+        </keywordSet>
+        <additionalInfo>
+            <para>Créditos del conjunto de datos: Instituto de Investigación de Recursos Biológicos Alexander Von Humboldt, Universidad del Valle, Grupo de biología, ecología y manejo de Hormigas de la Universidad del Valle, Grupo de Investigaciones Entomológicas (GIE) de la Universidad del Valle, Grupo Ecología de agroecosistemas y hábitats naturales (GEAHNA) de la Universidad del Valle, a los funcionarios del Parque Nacional Natural Gorgona y a los estudiantes de biología Laura Marcela Martínez Chávez, Juan Sebastián Ramírez Díaz e Isabela Vivas Toro por su colaboración en la organización del material.</para>
+        </additionalInfo>
+        <intellectualRights>
+            <para>To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the <ulink url="http://creativecommons.org/publicdomain/zero/1.0/legalcode"><citetitle>Public Domain (CC0 1.0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction.</para>
+        </intellectualRights>
+        <licensed>
+            <licenseName>Creative Commons Zero v1.0 Universal</licenseName>
+            <url>https://spdx.org/licenses/CC0-1.0.html</url>
+            <identifier>CC0-1.0</identifier>
+        </licensed>
+        <distribution scope="document">
+            <online>
+                <url function="information">http://ipt.sibcolombia.net/valle/resource.do?r=entomofaunagorgona</url>
+            </online>
+        </distribution>
+        <distribution scope="document">
+            <online>
+                <url function="download">https://ipt.biodiversidad.co/sib/archive.do?r=entomofaunagorgona</url>
+            </online>
+        </distribution>
+        <coverage>
+            <geographicCoverage>
+                <geographicDescription>Los registros de artrópodos provienen en su totalidad del Parque Nacional Natural Gorgona, ubicado en el municipio de Guapí, departamento del Cauca en Colombia.</geographicDescription>
+                <boundingCoordinates>
+                    <westBoundingCoordinate>-78.212</westBoundingCoordinate>
+                    <eastBoundingCoordinate>-78.17</eastBoundingCoordinate>
+                    <northBoundingCoordinate>3.002</northBoundingCoordinate>
+                    <southBoundingCoordinate>2.936</southBoundingCoordinate>
+                </boundingCoordinates>
+            </geographicCoverage>
+            <temporalCoverage>
+                <rangeOfDates>
+                    <beginDate>
+                        <calendarDate>                2007-11-17
+</calendarDate>
+                    </beginDate>
+                    <endDate>
+                        <calendarDate>                2014-08-27
+</calendarDate>
+                    </endDate>
+                </rangeOfDates>
+            </temporalCoverage>
+            <taxonomicCoverage>
+                <generalTaxonomicCoverage>Los artrópodos presentes en el PNN Gorgona reportados en el presente conjunto de datos con 4810 registros, fueron determinados en su mayoría hasta género (1770 registros) y hasta familia (1689). Se encuentran reportadas seis clases, 33 órdenes, 249 familias, 264 géneros, 116 especies y seis subespecies. La clase con mayor representación es Insecta, con 4610 registros, seguida de Arachnida con 151 registros.</generalTaxonomicCoverage>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Arachnida</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Chilopoda</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Diplopoda</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Entognatha</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Insecta</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Malacostraca</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Subclass</taxonRankName>
+                    <taxonRankValue>Acari</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Amblypygi</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Araneae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Archaeognatha</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Blattodea</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Coleoptera</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Collembola</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Dermaptera</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Diplura</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Diptera</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Embioptera</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Ephemeroptera</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Hemiptera</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Hymenoptera</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Isopoda</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Isoptera</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Lepidoptera</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Mantodea</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Megaloptera</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Neuroptera</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Odonata</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Opiliones</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Orthoptera</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Phasmida</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Plecoptera</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Polydesmida</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Pseudoscorpiones</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Psocoptera</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Scorpiones</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Scutigeromorpha</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Spirobolida</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Strepsiptera</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Thysanoptera</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Trichoptera</taxonRankValue>
+                </taxonomicClassification>
+            </taxonomicCoverage>
+        </coverage>
+        <purpose><para>Los artrópodos y especialmente los insectos son un componente muy importante de todos los ecosistemas debido a su abundancia, ubicuidad, diversidad taxonómica, funciones ecológicas, extensión de hábitats ocupados y a la gran variedad de roles tróficos que poseen. Estos animales son, por lo tanto, importantes para que a partir de inventarios de la biodiversidad se pueda caracterizar un ecosistema (González y Sarria, 2010).</para></purpose>
+        <maintenance>
+            <description>
+                <para></para>
+            </description>
+            <maintenanceUpdateFrequency>unkown</maintenanceUpdateFrequency>
+        </maintenance>
+        <contact>
+            <individualName>
+                <givenName>Carmen Elisa</givenName>
+                <surName>Posso Gomez</surName>
+            </individualName>
+            <organizationName>Universidad del Valle</organizationName>
+            <positionName>Profesional</positionName>
+            <address>
+                <deliveryPoint>Calle 13 # 100 - 00, Sede Melendez, Facultad de Ciencias (Edificio: 320), Sección de Entomología</deliveryPoint>
+                <city>Cali</city>
+                <administrativeArea>Valle del Cauca</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <phone>+57 (2) 3212100 2570</phone>
+            <electronicMailAddress>carmen.posso@correounivalle.edu.co</electronicMailAddress>
+            <onlineUrl>http://www.univalle.edu.co/</onlineUrl>
+        </contact>
+        <methods>
+            <methodStep>
+                <description>
+                    <para>Colecta directa: Consiste en la búsqueda activa de los insectos en diferentes sustratos: hojarasca, troncos, sobre plantas; la ventaja es que permite encontrar especies que escapan a otros métodos de muestreo y permiten establecer una relación directa entre la especie encontrada y su hábitat. En este tipo de colecta generalmente se emplean herramientas como la red entomológica (jama), aspiradores bucales, agitadores de follaje, pinceles y pinzas que permiten capturar cualquier grupo de interés. La colecta directa con el uso de bandeja y bastón de agitación de follaje para grupos como Psocoptera y Blattaria. Estos métodos se realizaron tanto de día como de noche. 
+
+Colecta indirecta: consiste en el uso de trampas con y sin atrayentes. 
+-Trampas de caída o “pitfall”: vasos plásticos de 12 onzas, que se llenan con agua jabón hasta un tercio de su capacidad y se entierran a ras de suelo para colectar artrópodos que habitan o forrajean entre la hojarasca. Se dejaron durante 24 horas en cada uno de los lugares muestreados. 
+
+-Trampas Malaise: tienen forma de tienda de acampar; los insectos al chocar y desviados por las paredes laterales, tienden a volar hacia arriba, en donde terminan entrando en un recipiente colector; este tipo de trampa es muy eficiente como método de muestreo, ya que actúa sin importar la jornada (diurna o nocturna).
+
+En las trampas con atrayentes se utilizaron cebos (sustancias, compuestos o alimentos) que permitieron atraer un determinado grupo de insectos; entre estas trampas se utilizaron:
+-Trampas Van Someren-Rydon (VSR): Un cilindro colgante (30 cm diámetro y 80 cm de alto) de tela de muselina, cubierto por un extremo con lona y por el otro con un plato plástico donde se deposita el cebo. Los insectos atraídos entran al tubo por el espacio entre la muselina y el plato plástico. Se utilizan generalmente para lepidópteros e himenópteros. El cebo utilizado fue fruta fermentada y cabezas de pescado en descomposición.
+
+-Trampas de luz: resultan útiles para colectar lepidópteros nocturnos (polillas), plecópteros, ortópteros, psocópteros, coleópteros, entre otros; se utilizaron trampas de luz con fuente de leds y trampas de luz (Pantalla), con una sábana blanca extendida; ambas ejercen atracción de insectos pero en las primeras estos se dirigen directamente a un recipiente colector, mientras que en las segundas son colectados manualmente. 
+
+-Trampas cebadas: se emplearon dos tipos de cebos: arbóreos y epígeos; para esto se utilizaron cuadros de pergamino de 10x10 cm y como atrayente trozos (aprox. 0.5 cm3) de sardina en aceite. El cebo arbóreo fue colgado de un tronco a 1.6 m de altura, el epígeo se depositó en el suelo con el atrayente ubicado en el centro. Estos cebos son utilizados generalmente para hormigas y se dejaron actuar por 30 minutos cada uno.
+
+-Sacos Winkler: se hicieron recolecciones de un metro cuadrado (1m²) de hojarasca, en cada estación de muestreo a lo largo del transecto, teniendo un total de 5 muestras por lugar, posteriormente, por 48 horas se tamizaron para extraer los artrópodos encontrados en la hojarasca usando una trampa mini-Winkler y se almacenaron en recipientes plásticos con alcohol al 80%. 
+Los especímenes fueron identificados hasta el menor nivel taxonómico posible, el cual dependió de los conocimientos específicos de cada uno de los investigadores con ayuda de claves taxonómicas de diversos autores a nivel mundial. Una vez identificados,fueron depositados en el Museo de Entomología de la Universidad del Valle, con su debido código de ingreso y en una accesión separada como colección del PNN Gorgona. Con el objeto de evitar el sacrificio innecesario de organismos siempre se tuvo en cuenta especímenes colectados en previas incursiones de campo.</para>
+                </description>
+            </methodStep>
+            <sampling>
+                <studyExtent>
+                    <description>
+                        <para>Los especímenes registrados provienen del Parque Nacional Natural Gorgona, este parque cuenta con 61.687 hectáreas de superficie continental y marina, se encuentra ubicado a 35 km al oeste de la costa pacífica colombiana, ente 0 y 330 m.s.n.m. En el área están presentes dos zonas de vidas del trópico: los arrecifes coralinos y el bosque muy húmedo tropical. 
+Los lugares visitados fueron: Playa Palmeras, Playa Blanca, Playa Yundigua, El Poblado, Sendero La Chonta, Sendero Acueducto, Cerro Trinidad, Cerro Los Micos, la Camaronera, la Ventana, Playa Pizarro, Piedra Redonda, la Azufrada, El Mirador, Playa Mancora y el Horno. Además se ubicó un área de muestreo en Gorgonilla.</para>
+                    </description>
+                </studyExtent>
+                <samplingDescription>
+                    <para>Para la caracterización y descripción de la diversidad de la artropofauna asociada al bosque muy húmedo tropical, en el Parque Nacional Natural Gorgona, se delimitaron tres zonas de muestreo con base en el grado de perturbación antropogénica: alta (cerca al poblado y al área de visitantes), media (senderos turísticos transitados frecuentemente) y baja (áreas de bosque y senderos poco transitados). Se emplearon métodos de captura como: captura directa  e indirecta de día y noche. En captura directa se emplearon jamas aéreas y acuáticas y otros implementos entomológicos; en captura indirecta se utilizaron trampas de caída “pitfall”, sacos Winkler, trampas Malaise, Van Someren Rydon, trampas de luz (pantalla y tipo leds), trampas con atrayentes (cebos) y en algunos sitios específicos se realizó nebulización (&quot;fogging&quot;).
+
+Ajuste de vocabularios controlados en:
+- Elementos de registro: collectionID y type;
+- Elemento geográfico: county;
+- Elementos temporales: day y month;
+- Elementos de taxonomía: scientificName, se documentan autorías en el elemento scientificNameAuthorship.</para>
+                </samplingDescription>
+            </sampling>
+            <qualityControl>
+                <description>
+                    <para>La determinación de las especies se realizó con la ayuda de claves taxonómicas (disponibles en Catalogue of Life: 2013 Annual Checklist, Global Biodiversity Information Facility, http://www.odonata.info/odonata/odonata/search.html, Encyclopedia of life (EOL), http://www.antcat.org/, Index to organism names (ION), Butterflies of America, Sphingidae of the Americas y http://www.termitologia.unb.br/). También se contó con la colaboración de expertos nacionales e internacionales en los diferentes grupos taxonómicos.
+Los departamentos y municipios colombianos fueron verificados y validados teniendo en cuenta Codificación político-administrativa de Colombia suministrada por el DANE (https://www.dane.gov.co/index.php/nomenclaturas-y-clasificaciones/divipola) y los países con el estándar ISO 3166-1.
+
+Ajuste de vocabularios controlados en:
+Elementos de registros: type y collectionID  de acuerdo a la naturaleza de los datos;
+Elementos geográficos: county;
+Elementos de taxonomía: scientificName, se documentan autorías en el elemento scientificNameAuthorship.</para>
+                </description>
+            </qualityControl>
+        </methods>
+
+            <project >
+                <title>Colección de artrópodos del PNN Gorgona - Museo de Entomología de la Universidad del Valle (MUSENUV)</title>
+                <personnel>
+                    <individualName>
+                    <givenName>Carmen Elisa</givenName>
+                    <surName>Posso</surName>
+                    </individualName>
+                    <role>POINT_OF_CONTACT</role>
+                </personnel>
+                <abstract>
+                    <para></para>
+                </abstract>
+                <funding>
+                    <para>Convenios entre el Instituto de Investigación de Recursos Biológicos Alexander von Humboldt y la Universidad del Valle: 
+Convenio No. 11-11-020-228FN, para la creación y distribución digital de la base de datos de artrópodos provenientes del Parque Nacional Natural Gorgona en el departamento de Cauca, Colombia.
+Convenio No. 13-13-014-242ce, para la actualización del recurso e incorporación de nuevos registros, con información estandard y georreferencias de las localidades.</para>
+                </funding>
+                <designDescription>
+                    <description>
+                        <para>En el desarrollo de varios convenios entre el Instituto de Investigación de Recursos Biológicos Alexander von Humboldt y la Universidad del Valle se realizó la creación, distribución digital, actualización, estandarización, georreferenciación de las localidades asociadas a los registros y publicación de los mismos en el portal SiB Colombia.</para>
+                    </description>
+                </designDescription>
+            </project>
+    </dataset>
+
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2026-05-24T11:59:17Z</dateStamp>
+                <citation identifier="http://doi.org/10.15472/ycwuxd">Garzón Romero E C, Torres Domínguez D M (2022). Colección de artrópodos del PNN Gorgona - Museo de Entomología de la Universidad del Valle (MUSENUV). Version 9.3. Universidad del Valle. Occurrence dataset https://doi.org/10.15472/ycwuxd accessed via GBIF.org on 2026-05-24.</citation>
+                <bibliography>
+                <citation>Armbrecht, I. &amp; Montoya-Lerma, J. 2014. Mariposas diurnas y nocturnas (Lepidoptera: Papilionoidae, Saturniidae, Sphingidae) del Parque Nacional Natural Gorgona, Pacífico.</citation>
+                <citation>Baena, M. 1992. Relaciones biogeográficas de las hormigas de Isla Gorgona. Trabajo de pregrado. Cali-Colombia. Universidad del Valle, Facultad de Ciencias. 116p.</citation>
+                <citation>Castro-Huertas, V. &amp; D. Forero. 2014. First record of the genus Tagalis Stål, 1860 (Hemiptera: Reduviidae: Saicinae) from Colombia with the description of two new species. Zootaxa 3838 (4): 475- 485. 2014.</citation>
+                <citation>Chacón de Ulloa, P., Valdés-Rodríguez, S., Hurtado-Giraldo, A. &amp; C. Pimienta. 2014. Hormigas arbóreas del Parque Nacional Natural Gorgona (Pacífico de Colombia). Rev. Biol. Trop. (Int. J. Trop. Biol. ISSN-0034-7744) Vol. 62 (Suppl. 1): 277-287.</citation>
+                <citation>González, M. &amp; J. Montoya-Lerma. 2014. Las abejas (Hymenoptera: Apoidea) del Parque Nacional Natural Gorgona, Pacífico colombiano. Rev. Biol. Trop. (Int. J. Trop. Biol. ISSN-0034-7744) Vol. 62 (Suppl. 1): 297-305.</citation>
+                <citation>González, M. 2014. Registro de un ginandromorfo de Euglossa gorgonensis Cheesman, 1929 (Hymenoptera: Apidae), del Parque Nacional Natural Gorgona, Colombia. Dugesiana 21(1): 77-80.</citation>
+                <citation>González, R., Armbrecht, I., Montoya-Lerma, J., Carrejo, N., Zúñiga, M., Chacón de Ulloa, P., Posso, C.E., Torres, D., Calero, H., Mendivil, J., González, M., Valdés-Rodríguez, S., Sarria, F.,W. Cardona. 2012. &quot;Capítulo 8: Artropofauna del Parque Nacional Natural Gorgona&quot;. Pp. En: Isla Gorgona: Paraíso De Biodiversidad Y Ciencia. Departamento de Biología, Facultad de Ciencias Naturales y Exactas, Universidad del Valle. Cali, Colombia. 218p. ISBN: 978-958-670-988-0.</citation>
+                <citation>González, R., Montoya-Lerma, J., Chacón de Ulloa, P., Zúñiga, M., Armbrecht, I., Carrejo, N., Posso, C.E., Torres, D., Valdés-Rodríguez, S., Sarria, F., González, M., Calero, H., Mendivil, J., Cardona, W. 2011. &quot;Protocolo para la obtención de datos de insectos&quot;. Pp. 9-40. En: Protocolos de Investigación en Ecosistemas Terrestres, Intermareales, Submareales y Pelágicos para el Parque Nacional Natural Gorgona. Departamento de Biología, Facultad de Ciencias Naturales y Exactas, Universidad del Valle. Cali, Colombia. 218p. ISBN: 978-958-44-9675.</citation>
+                <citation>González, R., Saldaña, C. &amp; A. García-Aldrete. 2013. Lachesillidae (Psocodea: &quot;Psocoptera&quot;) de Valle Del Cauca Y PNN Gorgona, Colombia. Boletín del Museo de Entomología de la Universidad del Valle 14(1):51-6.</citation>
+                <citation>Lopez, L., Valdés-Rodríguez, S. &amp; P. Chacón de Ulloa. 2014. Avispas de la vegetación arbórea en el Parque Nacional Natural Gorgona, Pacífico de Colombia. Rev. Biol. Trop. (Int. J. Trop. Biol. ISSN-0034-7744) Vol. 62 (Suppl. 1): 307-315.</citation>
+                <citation>Montealegre, F., Sarria, F., Pimienta, C. &amp; A. Mason. 2014. Lack of correlation between vertical distribution and carrier frequency, and preference for open spaces in arboreal katydids that use extreme ultrasound, in Gorgona, Colombia (Orthoptera: Tettigoniidae). Rev. Biol. Trop. (Int. J. Trop. Biol. ISSN-0034-7744) Vol. 62 (Suppl. 1): 289-296.</citation>
+                <citation>Rangel, O. 1990. Tipos de vegetación. En: J. Aguirre &amp; O. Rangel (ed.). Biota y ecosistemas de Gorgona. Fondo FEN, Bogotá, Colombia. 109-126p.</citation>
+                <citation>Saenz, O., González, R. &amp; García-Aldrete, A. 2014. Ectopsocidae (Psocodea: ‘Psocoptera’) from Valle del Cauca and NNP Gorgona, Colombia. Zootaxa 3786 (5): 523–540.</citation>
+                <citation>Sarria, F., García-Aldrete, A. &amp; R. González. 2014. Diversidad de Psocoptera (Insecta: Psocodea) en el Parque Nacional Natural Gorgona (Océano Pacífico, Colombia). Rev. Biol. Trop. (Int. J. Trop. Biol. ISSN-0034-7744) Vol. 62 (Suppl. 1): 257-264.</citation>
+                <citation>Sarria, F., González, R. &amp; A. García-Aldrete. 2014. Psocoptera (Insecta: Psocodea) from the National Natural Park Gorgona, Cauca, Colombia. Rev. Biol. Trop. (Int. J. Trop. Biol. ISSN-0034-7744) Vol. 62 (Suppl. 1): 243-256.</citation>
+                <citation>Sarria, F., Morris, G., Windmill, J., Jackson, J. &amp; F. Montealegre. 2014. Shrinking wings for Ultrasonic pitch production: Hyperintense ultra-short-wavelenght calls in a new Genus of neotropical Katydids (Orthoptera: Tettigonidae). PLos ONE 9(6): e98708.</citation>
+                <citation>Torres, D. &amp; Mendivil, J. 2012. Escarabajos tigre (Coleoptera: Carabidae: Cicindelinae) del PNN Gorgona, Cauca, Colombia. Boletín del Museo de Entomología de la Universidad del Valle 13(2):20-25.</citation>
+                <citation>Torres, O., Pinilla, G. &amp; C. Chamorro. 1998. Artropofauna de los suelos de Isla Gorgona. Colombia Geográfica 14(2):22-29.</citation>
+                <citation>Valdés-Rodríguez, S., Chacón de Ulloa, P. &amp; I. Armbrecht. 2014. Especies de hormigas del suelo en el Parque Nacional Natural Gorgona, Pacífico Colombiano. Rev. Biol. Trop. (Int. J. Trop. Biol. ISSN-0034-7744) Vol. 62 (Suppl. 1): 265-276.</citation>
+                <citation>Víquez, C., Chirivi, D., Moreno-González, J. &amp; J. Christense. 2014. Heterophrynus armiger Pocock, 1902 (Amblypygi: Phrynidae): First record from Colombia, with notes on its historic distribution records and natural history. Checklist 10(2): 457-460.</citation>
+                <citation>Zúñiga, M., B. P. Stark., Posso C.E. &amp; E. Garzón. Especies de Anacroneuria (Insecta: Plecoptera: Perlidae) de Colombia, depositadas en el Museo de Entomología de la Universidad del Valle (Cali, Colombia). Biota Colombiana, Suplemento Especial, Artículo de datos. 14(3): 5-12.</citation>
+                <citation>Zúñiga, M.C., Cardona, W., Molineri, C., Mendivil, J., Cultid, C., Chará, A. &amp; Giraldo, A. 2014. Entomofauna acuática del Parque Nacional Natural Gorgona, Pacífico colombiano, con énfasis en Ephemeroptera y Plecoptera. Rev. Biol. Trop. (Int. J. Trop. Biol. ISSN-0034-7744) Vol. 62 (Suppl. 1): 221-241.</citation>
+                </bibliography>
+                <resourceLogoUrl>https://statics.sibcolombia.net/sib-resources/images/logos-socios/500px/univalle.jpg</resourceLogoUrl>
+                <collection>
+                    <parentCollectionIdentifier>MUSENUV</parentCollectionIdentifier>
+                    <collectionIdentifier>Registro Nacional de Colecciones Biológicas: 77</collectionIdentifier>
+                    <collectionName>Museo de Entomología de la Universidad del Valle</collectionName>
+                </collection>
+                <specimenPreservationMethod>ALCOHOL</specimenPreservationMethod>
+                <jgtiCuratorialUnit>
+                    <jgtiUnitType>Animal Completo (ETOH)</jgtiUnitType>
+                    <jgtiUnitRange>
+                        <beginRange>4,300</beginRange>
+                        <endRange>4,340</endRange>
+                    </jgtiUnitRange>
+                </jgtiCuratorialUnit>
+                <jgtiCuratorialUnit>
+                    <jgtiUnitType>Montado con alfileres</jgtiUnitType>
+                    <jgtiUnitRange>
+                        <beginRange>470</beginRange>
+                        <endRange>480</endRange>
+                    </jgtiUnitRange>
+                </jgtiCuratorialUnit>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
+    </eml:eml>

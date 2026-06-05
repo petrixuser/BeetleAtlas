@@ -1,0 +1,380 @@
+Dataset: Estonian Museum of Natural History Department of Zoology 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Samanta Orellana Research Collection 
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: Observation.org, Nature data from around the World 
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: Coleoptera World (Luomus) (CW) 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Snow Entomological Museum Collection 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Biodiversity of intertidal invertebrates of Taraba Sound (Magellan Region, Chile) 
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: Proyecto para compatibilizar el inventario de biota edáfica BGBD con el Sistema Nacional de Información sobre Biodiversidad 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: NEON Biorepository Benthic Macroinvertebrate Collection (Taxonomy Subsample) 
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: Registros de macroinvertebrados acuáticos en un bosque seco del municipio de Honda 
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: Occurrences of aquatic invertebrates in the Antarctic and Subantarctic regions 
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: Études entomologiques pilotées par la Société entomologique Antilles-Guyane-Étude des insectes de la canopée (SEAG - Montagne des Chevaux) 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: CardObs : Observations naturalistes issues de l'outil CardObs-Inventaire entomologique à la Forêt Inondée de Jarry, Guadeloupe 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Museum of Comparative Zoology, Harvard University 
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: Étude entomologique de la réserve biologique du Nord de la Grande Terre-Inventaire entomologique 2020-2022 de la réserve biologique dirigée du Nord Grande Terre, Guadeloupe (ONF) 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: iNaturalist Research-grade Observations 
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: NEON Biorepository Carabid Collection (DNA Extracts) 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: NABU|naturgucker 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Illinois Natural History Survey Insect Collection 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Registros de macroinvertebrados acuáticos tomados en el tramo medio del río Otún 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Registros de macroinvertebrados acuáticos en ríos alto andinos de la cuenca media del río Chicamocha 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Metacomunidad de animales de charcos temporales de Rocha, Uruguay 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Cornell University Insect Collection (CUIC) 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: CardObs : Observations naturalistes issues de l'outil CardObs-Observations naturalistes de Philippe RAVAT. Inventaire entomologique du Morne Bigot 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Estonian University of Life Sciences Institute of Agricultural and Environmental Sciences Entomological Collection 
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: Brigham Young University Arthropod Museum 
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: Colección de artrópodos del PNN Gorgona - Museo de Entomología de la Universidad del Valle (MUSENUV) 
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: CardObs : Observations naturalistes issues de l'outil CardObs-Observations naturalistes et collection entomologique de Julien TOUROULT 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Monitoreo Ambiental del Proyecto La Colosa 
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: Colección entomológica del Museo de Historia Natural “Luis Gonzalo Andrade” de la UPTC 
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: Colección Entomológica Universidad de Antioquia 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Colección Limnológica del Chocó 
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: Grupos faunísticos de la expedición Ocetá - Proyecto Boyacá BIO UPTC 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Études entomologiques pilotées par la Société entomologique Antilles-Guyane-Étude des insectes du sous-bois de la Montagne des Chevaux (SEAG) 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: CardObs : Observations naturalistes issues de l'outil CardObs-Étude entomologique des forêts publiques de Martinique, pour l'ONF 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: CardObs : Observations naturalistes issues de l'outil CardObs-Données naturalistes de Vincent Prié 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: CardObs : Observations naturalistes issues de l'outil CardObs-Données naturalistes de MOULIN Nicolas 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Registros de Escarabajos (Convención, Norte de Santander) asociados a la mejora de la sostenibilidad ambiental en el marco de la estrategia nacional para el cultivo de Cacao 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Colección Entomológica del Programa de Biología - Universidad de Caldas (CEBUC) 
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: Registros de macroinvertebrados acuáticos presentes en la Laguna La Virginia, páramo del Sumapaz 
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: Monitoreo hidrobiológico en el Río Aures para el tramo de influencia de la central Aures Bajo 
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: CardObs : Observations naturalistes issues de l'outil CardObs-Données naturalistes de Jean-Michel LEMAIRE 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Gestión para el Monitoreo Participativo de Biodiversidad en las cuencas del río Frío, Cartama y San Antonio del Municipio de Támesis, Antioquia 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: CardObs : Observations naturalistes issues de l'outil CardObs-Inventaire naturaliste de la commune de Papaichton (Guyane) : mission 2018 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Salvatore S. Anzaldo Collection 
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: Entomology Division, Yale Peabody Museum 
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: Inventaire entomologique standardisé des ZNIEFF et autres sites naturels de Martinique-Étude entomologique massif forestier de Lépinay & Montravail (2023) 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: CardObs : Observations naturalistes issues de l'outil CardObs-Campagne de Piègeages lumineux en Guadeloupe 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Museum at Texas Tech University Invertebrate Zoology Collection 
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: Scarabaeoidea y colección de tipos de la colección entomológica del Centro de Estudios en Zoología, Universidad de Guadalajara 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Museu de Ciències Naturals de Barcelona: MCNB-Art 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Études entomologiques pilotées par la Société entomologique Antilles-Guyane - Inventaire par piégeage des Coléoptères Phanaeini de Guyane (SEAG) 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Escarabajos y moscas de los bosques de niebla del sureste mexicano (Coleoptera: Scarabaeoidea; Diptera: Syrphidae y Calliphoridae) 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Entomologische Sammlung (ETHZ-ENT) of Eidgenössische Technische Hochschule Zürich 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: The Albert J. Cook Arthropod Research Collection 
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: CardObs : Observations naturalistes issues de l'outil CardObs-KARUHET : Hétéroptères de Guadeloupe 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: First record of the species Macraspis phallocardia Bento, Jameson & Seidel, 2022 (Scarabaeidae: Rutelinae: Rutelini) from Peru 
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: Inventaire entomologique standardisé des ZNIEFF et autres sites naturels de Martinique-Étude entomologique canopée et sous-bois de la Montagne Pelée, 2022 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: CardObs : Observations naturalistes issues de l'outil CardObs-Étude de la Faune du sol de Guadeloupe - Projet de Thibault Ramage - Partie Coléoptères et Hémiptères 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Extension du quai 12 et confortement des quais 7 et 8 - Monitoring environnemental GPMG - 2019 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Museo Laboratorio de Entomología (MENT-UT) 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: VIT-Coleopterotheca (The Natural History Museum of Álava) 
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: Artropofauna de las Reservas Distritales de Humedal de Bogotá, D.C. 
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: Artrópodos de los Parques Distritales Ecológicos de Montaña 
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: Caracterización de la biodiversidad de la cuenca del río Chipalo (quebrada Ambalá) para el diseño de un corredor urbano y periurbano que facilite la conectividad ecológica en el municipio de Ibagué , Fase II 
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: Denver Museum of Nature & Science - Entomology 
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: CardObs : Observations naturalistes issues de l'outil CardObs-Inventaire des insectes de neuf stations au sud du Parc national de Guadeloupe, 25 ans après l'inventaire de C. Sautière. 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Données du Parc national de la Guadeloupe - Données de type contact en Guadeloupe (PNG-obsocc - Observations occasionnelles) 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Inventaire entomologique standardisé des ZNIEFF et autres sites naturels de Martinique-Observations diverses réalisées à l'occasion de l'inventaire entomologique des ZNIEFF de Martinique 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Insectos asociados a las sabanas de montañas altas de República Dominicana 
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: NEON Biorepository Carabid Collection (Pinned Vouchers) 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Biodiversidad marina de la Bahía Tukakas, Alta Guajira colombiana. Proyecto Colombia BIO: Expedición Lamuuna Neimalu’u. 
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: University of Tennessee at Chattanooga Insect Collection 
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: University of Hawaii Insect Museum 
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: First record in Colombia of Microscapus hymenaeae Costa Lima, 1950 (Coleoptera: Curculionidae: Cryptorhynchini) 
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: Fauna acuática de importancia ecológica (crustáceos, insectos y peces) de la cuenca del río Moctezuma Querétaro-Hidalgo 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: La Planète Revisitée - Guyane 2014/2015-La Planète Revisitée, massif du Mitaraka, mission principale (février-mars 2015) 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Coleópteros colectados mediante trampas de intercepción en el Valle Exploradores (Aysén, Chile) 
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: Línea base general derivada de sonidos unidireccionales (espectro audible) para el valle medio del Magdalena - VMM 
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: La Planète Revisitée - Îles de Guadeloupe-La Planète revisitée Îles de Guadeloupe : reconnaissances et observations connexes 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Evan Waite Invertebrate Collection 
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: Bibliographie de la faune, la flore et la fonge de France métropolitaine et outre-mer-Bibliographique de la faune, la flore et la fonge de France métropolitaine et outre-mer 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Invertebrados y aves playeras de la Laguna Madre de Tamaulipas, México (Insectos) 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Distribución potencial de plagas de Chrysomelidae (Insecta: Coleoptera) 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Distribución espacio-temporal de aves playeras y su relación con los invertebrados bentónicos en la Reserva de la Biósfera Marismas Nacionales, Nayarit, México 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Distribución potencial en taxones hiperdiversos y poco conocidos (Insecta:  Coleoptera: Scarabaeoidea): estimando la localización de nuevos taxones y el efecto de los cambios en los usos del suelo 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Computarización de la colección científica del proyecto de control biológico de malezas de CSIRO-Australia 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Digitalización y Sistematización de las Colecciones Biológicas Nacionales del Instituto de Biología, UNAM (CNIN) 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Museo de Insectos, Centro de Investigaciones en Protección de Cultivos (CIPROC), Escuela de Agronomía, Universidad de Costa Rica 
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: Comunidades hidrobiológicas asociadas al Corredor Accesos Cali y Palmira Unidad Funcional 4 
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: Carábidos (Coleoptera: Carabidae) del Museo de Entomología de la Universidad del Valle (Cali, Colombia) 
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: CardObs : Observations naturalistes issues de l'outil CardObs-Données naturalistes de PIOLAIN Julien 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Colección Entomológica de Piedras Blancas 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Colección Zoológica de la Universidad del Tolima (CZUT) - Macroinvertebrados 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Colección Entomológica de la Orinoquia (CEO) 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Colección de Insectos de la Universidad del Quindío 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Colección de Entomología (CE-IRNAD), Instituto de Investigaciones en Recursos Naturales, Agroecología y Desarrollo Rural (IRNAD), Bariloche. Argentina 
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: Grupos faunístios de la expedición El Consuelo - Proyecto Boyacá BIO 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: CardObs : Observations naturalistes issues de l'outil CardObs-Données naturalistes de Lilian LEONARD 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: University of Michigan Museum of Zoology, Division of Insects 
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: Monitoreo participativo de biodiversidad, diagnóstico de viveros y turismo - Fase 3 de aceleración de la ruta Cartama Sostenible 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Arizona State University Hasbrouck Insect Collection 
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: CardObs : Observations naturalistes issues de l'outil CardObs-Coléoptères collectés dans le cadre de l'Inventaire des Diptères de Martinique (Dipterological survey of Martinique (Marc Pollet) - captures annexes) 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Lund University Biological Museum - Insect collections Specimens 
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: Inventaire des longicornes des Antilles - Inventaire des Coléoptères Longicornes des Antilles françaises 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Fortalecimiento de las colecciones de ECOSUR. Primera fase (Entomologica Tapachula) 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Diagnóstico del estado actual de la invasión biológica por Aedes (Stegomyia) albopictus (Skuse) (Díptera: Culícidae) en las principales áreas naturales protegidas de la Península de Yucatán, México 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: C.P. Gillette Museum of Arthropod Diversity 
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: Colección del Laboratorio de Entomología Universidad de Caldas - LEUC 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Programme d'observation naturaliste participative avec l'application mobile INPN Espèces - Application INPN Espèces: Observations naturalistes, participatives et opportunistes, fondées sur des photographies 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Dung beetles (Scarabaeidae, Scarabaeinae) of the Foothills–Andean Forest strip of Villavicencio, Colombia 
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: Línea base general de escarabajos para el valle medio del Magdalena - VMM 
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: Appel à projet PN Guadeloupe 2022 : Coléoptères endémiques ou méconnus-Recherche des Coléoptères endémiques ou peu connus de la Basse Terre, Guadeloupe 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: University of Nebraska State Museum Entomology 
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: Registros de Eumolpinae y potencial planta hospedera del Parque Natural Chicaque 
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: Passalidae y Lucanidae (Coleoptera: Scarabaeoidae) de México 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Bibliographie de la faune, la flore et la fonge de France métropolitaine et outre-mer-Zootaxa 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: University of Arizona Insect Collection 
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: Arizona State University Charles W. O'Brien Collection 
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: La Planète Revisitée - Guyane 2014/2015-La Planète Revisitée, mission complémentaire entomologique, massif du Mitaraka, août 2015 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Diversidad de los coleópteros Scarabaeiodea del estado de Puebla (II) 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Caracterización de flora, edafofauna epígea, anfibios y aves del Complejo Páramos Chilí - Barragán, Tolima 
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: Santa Barbara Museum of Natural History Entomology Collection 
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: Escarabajos estercoleros asociados a sistemas de ganadería sostenible en diferentes regiones de Colombia 
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: Insectos en el municipio de San Juanito, Meta - Colombia BIO 
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: Registros biológicos asociados al monitoreo de la diversidad de escarabajos en paisajes ganaderos silvopastoriles - Unillanos 2019 
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: Monitoreo de flora y fauna en el proyecto de restauración ecológica: Reviva la Primavera (Pauto M) 
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: Registros biológicos asociados al monitoreo de la diversidad de escarabajos en paisajes ganaderos de bosque 2013 - 2017 
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: CardObs : Observations naturalistes issues de l'outil de saisie et gestion CardObs mis en place par le Service du Patrimoine Naturel (MNHN) / UMS PatriNat (OFB - CNRS - MNHN) - Données naturalistes d'Olivier GARGOMINY saisies sous cardObs 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Ants from the Paraguayan dry Chaco 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: NZCS Tafelberg Expeditions 2003/2005/2013 
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: CardObs : Observations naturalistes issues de l'outil CardObs-Observations naturalistes d'Hervé BRUSTEL 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: macroinvertebrados recurso hídrico Selva de Florencia 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Inventaire entomologique standardisé des ZNIEFF et autres sites naturels de Martinique-Inventaire entomologique standardisé des ZNIEFF de Martinique, protocole utilisé en 2014 et 2015 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: University of Georgia Collection of Arthropods 
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: Biodiversidad acuática del río Amacuzac, Morelos, México (Invert_recuperada) 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Actualización y computarización de la colección del Laboratorio de Análisis y Referencia en Sanidad Forestal 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Apoyo a las colecciones biológicas de la Facultad de Ciencias de la UNAM: Fase 1 (Coleóptera) 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Colección de Insectos del Jardín Botánico del Quindío (CIJBQ) 
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: Inventario florístico y faunístico del Parque Nacional Barranca del Cupatitzio, Michoacán 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: University of Kentucky Insect Collection 
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: Colección Macroinvertebrados Acuáticos Universidad Católica de Oriente 
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: Macroinvertebrados acuáticos bioindicadores de calidad de agua utilizados en la calibración de los índices BMWP-RD e IBF-RD para ríos de República Dominicana 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Museums Victoria provider for OZCAM 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Bibliographie de la faune, la flore et la fonge de France métropolitaine et outre-mer-Le Coléoptériste (ACOREP-France) 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: NEON Biorepository Benthic Macroinvertebrate Collection (Taxonomy Reference Collection) 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: NEON Biorepository Carabid Collection (Trap Sorting) 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: CardObs : Observations naturalistes issues de l'outil CardObs-Inventaire de l'entomofaune de Petite Terre (2021-2022) 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Tasmanian Museum and Art Gallery provider for OZCAM 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Macroinvertebrados de la cuenca alta del río Chicamocha 
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: Museum of Southwestern Biology Division of Arthropods 
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: Bibliographie de la faune, la flore et la fonge de France métropolitaine et outre-mer-Revues diverses et littérature grise. 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Universidad del Valle de Guatemala - Colección de Artrópodos (UVGC) 
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: Bibliographie de la faune, la flore et la fonge de France métropolitaine et outre-mer-L'Entomologiste [1944- ] 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: University of North Texas Elm Fork Insect Collection 
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: Bases de datos de plantas, insectos, reptiles, anfibios, aves y mamíferos del “Arroyo la Junta, Una joya de biodiversidad en la Reserva de la Biosfera Sierra La Laguna” (Invertebrados) 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Caracterización de hidrobiológicos en fuentes ubicadas en el proyecto minero JDG16061 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Essig Museum of Entomology 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Artrópodos de Bahía Exploradores (Chile: Región de Aysén) 
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: Análisis de las relaciones entre las diversidades alfa, beta y gamma a distintos niveles de escala espacial: Procesos históricos y ecológicos que intervienen. V Etapa 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Computarización de la Colección de Coleoptera (Insecta) del Centro de Investigaciones Biológicas, UAEH, Pachuca, Hidalgo, México 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Naturalis Biodiversity Center (NL) - Coleoptera 
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: New Mexico State Collection of Arthropods 
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: Nouveau pont du Larivot sur la rivière de Cayenne et ses raccordements à la RN1 bidirectionnelle - Biotope_OISEAU_INV 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Inventaire entomologique des forêts de Saint-Martin-Étude entomologique des forêts de Saint-Martin (2021) 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Inventaire naturaliste des îlets de Martinique (OFB 2022) 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Field Museum of Natural History (Zoology) Insect, Arachnid and Myriapod Collection 
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: CardObs : Observations naturalistes issues de l'outil CardObs-Données naturalistes de Arnaud HORELLOU 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Chilean flower visitors 
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: Captura de datos de la Colección de Curculionoidea (Insecta: Coleoptera) de la Universidad Autónoma de Querétaro 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Incidencia de mineria a gran escala en el deterioro del Río Quimi en el Tramo comprendido entre la Reserva Biológica El Quimi y la parroquia Tundayme 
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: NEON Invertebrate Voucher Collection at Arizona State University 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: mel 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Études entomologiques pilotées par la Société entomologique Antilles-Guyane-Observations naturalistes et collection entomologique en Guyane (SEAG, Julien Touroult) 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: CardObs : Observations naturalistes issues de l'outil CardObs-Données naturalistes de Xavier JAPIOT 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: M. Andrew Johnston Research Collection 
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: Universidad de San Carlos de Guatemala - Colección de Entomología 
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: University of Texas, Biodiversity Center, Entomology Collection (UTIC) 
+Rights as supplied: http://creativecommons.org/publicdomain/zero/1.0/legalcode
+Dataset: Fortalecimiento de las colecciones de ECOSUR. Primera fase (Entomologica San cristóbal) 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Computarización de la colección de insectos de la Universidad de Morelos, CIByC, UAEM 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Diversidad de ocho grupos de insecta (Odonata, Lycidae, Phengodidae, Lampyridae, Cantharidae, Cerambycidae, Syrphidae y Vespidae) en tres regiones con bosque tropical caducifolio en México 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Colección de artrópodos del Museo de Historia Natural de la Pontificia Universidad Javeriana 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Línea base biótica del proyecto de Restauración Ecológica Re-Viva La Primavera 
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: Grupos faunisticos de la expedición El Valle - Proyecto Boyacá BIO UPTC 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Inventaire entomologique standardisé des ZNIEFF et autres sites naturels de Martinique-Inventaire entomologique standardisé des ZNIEFF de Martinique, protocole utilisé à partir de 2016 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Escarabajos coprófagos (Scarabaeinae) a lo largo de un gradiente altitudinal andino en el valle de Kosñipata, Perú 
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode
+Dataset: Inventaires naturalistes conduits par l'association Entomo Fauna-Inventaire naturaliste de la commune de Grand-Santi (Guyane) : mission 2017 Entomo Fauna 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Insect Occurrence Data from MIZA 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Sistematización de la colección entomológica y actualización de la colección del herbario CHIP del Instituto de Historia Natural y Ecología (IHNE), Chiapas (Insectos) 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Inventaire entomologique standardisé des ZNIEFF et autres sites naturels de Martinique-Inventaire entomologique standardisé des ZNIEFF de Martinique, protocole utilisé de 2011 à 2013 
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
+Dataset: Angiospermas y Fauna presente en áreas de potrero de la Reserva Natural de la Sociedad Civil Fundo Palmarito Yopal, Casanare 
+Rights as supplied: http://creativecommons.org/licenses/by-nc/4.0/legalcode

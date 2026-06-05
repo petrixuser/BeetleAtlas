@@ -1,0 +1,864 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="https://eml.ecoinformatics.org/eml-2.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://eml.ecoinformatics.org/eml-2.2.0 https://rs.gbif.org/schema/eml-gbif-profile/1.3/eml.xsd"
+packageId="c74b948e-eab9-4a6e-8ed3-5ffe49bc4895"  system="http://gbif.org" scope="system"
+xml:lang="es">
+    <dataset>
+        <alternateIdentifier>10.15472/h1rfri</alternateIdentifier>
+        <alternateIdentifier>https://ipt.biodiversidad.co/sib/resource?r=ut_corredores</alternateIdentifier>
+        <title>Caracterización de la biodiversidad de la cuenca del río Chipalo (quebrada Ambalá) para el diseño de un corredor urbano y periurbano que facilite la conectividad ecológica en el municipio de Ibagué , Fase II</title>
+        <creator>
+            <individualName>
+                <givenName>Sergio</givenName>
+                <surName>Losada Prado</surName>
+            </individualName>
+            <organizationName>Universidad del Tolima (UT)</organizationName>
+            <positionName>Docente Investigador</positionName>
+            <address>
+                <deliveryPoint>Barrio Santa Helena Parte Alta, bloque 13</deliveryPoint>
+                <city>Ibagué</city>
+                <administrativeArea>Tolima</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>slosada@ut.edu.co</electronicMailAddress>
+            <userId directory="http://orcid.org/">0000-0001-6916-3893</userId>
+        </creator>
+        <metadataProvider>
+            <individualName>
+                <givenName>Leidy Viviana</givenName>
+                <surName>García Herrera</surName>
+            </individualName>
+            <organizationName>Universidad del Tolima (UT)</organizationName>
+            <positionName>Contratista</positionName>
+            <address>
+                <deliveryPoint>Barrio Santa Helena Parte Alta</deliveryPoint>
+                <city>Ibagué</city>
+                <administrativeArea>Tolima</administrativeArea>
+                <postalCode>Tolima</postalCode>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>lvgarcia@ut.edu.co</electronicMailAddress>
+        </metadataProvider>
+        <associatedParty>
+            <individualName>
+                <givenName>Olga lucia</givenName>
+                <surName>Alfonso Lannini</surName>
+            </individualName>
+            <organizationName>Corporación Autónoma Regional del Tolima (CORTOLIMA)</organizationName>
+            <positionName>Directora Corporación Autónoma Regional del Tolima</positionName>
+            <address>
+                <deliveryPoint>Avenida Ferrocarril Calle 44 Esquina</deliveryPoint>
+                <city>Ibagué</city>
+                <administrativeArea>Tolima</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <phone>(8) 265 5378 - 2654553</phone>
+            <onlineUrl>https://www.cortolima.gov.co/</onlineUrl>
+            <role>OWNER</role>
+        </associatedParty>
+        <associatedParty>
+            <individualName>
+                <givenName>Omar Albeiro</givenName>
+                <surName>Mejía Patiño</surName>
+            </individualName>
+            <organizationName>Universidad del Tolima (UT)</organizationName>
+            <positionName>Rector</positionName>
+            <address>
+                <deliveryPoint>Barrio Santa Helena Parte Alta, bloque 13</deliveryPoint>
+                <city>Ibagué</city>
+                <administrativeArea>Tolima</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <role>OWNER</role>
+        </associatedParty>
+        <associatedParty>
+            <individualName>
+                <surName>CORTOLIMA</surName>
+            </individualName>
+            <organizationName>Corporación Autónoma Regional del Tolima (CORTOLIMA)</organizationName>
+            <positionName>Corporación Autónoma Regional</positionName>
+            <address>
+                <deliveryPoint>Avenida Ferrocarril Calle 44 Esquina</deliveryPoint>
+                <city>Ibagué</city>
+                <administrativeArea>Tolima</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <phone>(8) 265 5378 - 2654553</phone>
+            <onlineUrl>https://www.cortolima.gov.co/</onlineUrl>
+            <role>OWNER</role>
+        </associatedParty>
+        <pubDate>
+                2022-09-23
+        </pubDate>
+        <language>SPANISH</language>
+        <abstract>
+            <para>El área de estudio se ubica en el municipio de Ibagué jurisdicción del departamento del Tolima, sobre la región biogeográfica del Valle Magdalena, subregión Alto Magdalena, en la cuenca del río Chipalo (quebrada Ambalá), que corresponde al área de estudio específica para el diseño del corredor urbano y periurbano, que facilite la conectividad ecológica en el municipio, fase II. El estudio fue llevado a cabo en el marco del contrato interadministrativo No. 0815 del 19 de octubre de 2021 firmado entre CORTOLIMA y la Universidad del Tolima. Se evaluó la diversidad de flora, macroinvertebrados acuáticos, peces, lepidópteros, herpetos, aves y mamíferos.</para>
+<para>En el presente recurso, contiene la información asociada a 902 registros pertenecientes a 280 especies entre los siete grupos taxonómicos estudiados, muestreados entre mayo y junio de 2022.</para>
+        </abstract>
+        <keywordSet>
+            <keyword>Biodiversidad</keyword>
+            <keyword>Fauna</keyword>
+            <keyword>Flora</keyword>
+            <keyword>Urbano</keyword>
+            <keyword>Corredor</keyword>
+            <keywordThesaurus>n/a</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+            <keyword>Occurrence</keyword>
+            <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type_2015-07-10.xml</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+            <keyword>Observation</keyword>
+            <keywordThesaurus>GBIF Dataset Subtype Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_subtype.xml</keywordThesaurus>
+        </keywordSet>
+        <intellectualRights>
+            <para>To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the <ulink url="http://creativecommons.org/publicdomain/zero/1.0/legalcode"><citetitle>Public Domain (CC0 1.0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction.</para>
+        </intellectualRights>
+        <licensed>
+            <licenseName>Creative Commons Zero v1.0 Universal</licenseName>
+            <url>https://spdx.org/licenses/CC0-1.0.html</url>
+            <identifier>CC0-1.0</identifier>
+        </licensed>
+        <distribution scope="document">
+            <online>
+                <url function="download">https://ipt.biodiversidad.co/sib/archive.do?r=ut_corredores</url>
+            </online>
+        </distribution>
+        <coverage>
+            <geographicCoverage>
+                <geographicDescription>El estudio fue llevado a cabo en el municipio de Ibagué, ubicado en el centro-occidente de Colombia, sobre la cordillera central de los Andes. El municipio cuenta con varios ríos que conforman cuencas hidrográficas que desembocan en el río Magdalena, entre ellos el río Coello, en el cual desembocan los ríos Combeima y el Cócora, el río Totare en el que desembocan los ríos Chipalo, Alvarado y La China, que es a su vez es afluente del río Magdalena y el río La Opia que desemboca directamente al río Magdalena. Elementos que constituyen un soporte fundamental para el desarrollo urbano, industrial y agropecuario de la región. La subcuenca hidrográfica del río Chipalo pertenece a la cuenca mayor del río Totare, con una extensión de 15.466.9 ha, ubicada al noroccidente del departamento del Tolima. Nace en la vereda la cascada en los cerros noroccidentales del municipio de Ibagué (área de manejo especial del municipio). Sobre esta subcuenca se ubica la microcuenca Ambalá la cual se localiza en una latitud de 4.48278 y longitud de -75.2092, a lo largo de su recorrido interviene más de 15 barrios de la ciudad de Ibagué entre ellos Ambalá, El Triunfo, La Castilla, San Antonio, Onzaga, Pijao, Calarcá, entre otros, y algunas veredas como Ambalá sector El Triunfo y Ambalá parte alta, su cota mayor alcanza los 2.400 m y la menor de 1.200 m.</geographicDescription>
+                <boundingCoordinates>
+                    <westBoundingCoordinate>-75.211</westBoundingCoordinate>
+                    <eastBoundingCoordinate>-75.197</eastBoundingCoordinate>
+                    <northBoundingCoordinate>4.482</northBoundingCoordinate>
+                    <southBoundingCoordinate>4.45</southBoundingCoordinate>
+                </boundingCoordinates>
+            </geographicCoverage>
+            <temporalCoverage>
+                <rangeOfDates>
+                    <beginDate>
+                        <calendarDate>                2022-05-17
+</calendarDate>
+                    </beginDate>
+                    <endDate>
+                        <calendarDate>                2022-06-04
+</calendarDate>
+                    </endDate>
+                </rangeOfDates>
+            </temporalCoverage>
+            <taxonomicCoverage>
+                <generalTaxonomicCoverage>La mayoría de las plantas vasculares fueron identificadas hasta especie, con algunas excepciones, musgos y líquenes hasta género. En relación con los macroinvertebrados acuáticos todos se identificaron hasta género, mientras que los peces, lepidópteros, herpetos y mamíferos fueron en su mayoría identificados a nivel de especie.
+
+FLORA: Se registró un total de 31 ordenes, 53 familias y 74 géneros asociados a 83 especies de árboles, arbustos, musgos, hepáticas y líquenes.</generalTaxonomicCoverage>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Mniaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Brachytheciaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Fabroniaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Hypnaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Sematophyllaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Stereophyllaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Thuidiaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Meteoriaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Neckeraceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Helicophyllaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Pottiaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Plagiochilaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Metzgeriaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Lejeuneaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Porellaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Araceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Arecaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Commelinaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Cyclanthaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Bromeliaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Poaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Heliconiaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Marantaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Araliaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Amaranthaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Cactaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Loasaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Primulaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Fabaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Rubiaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Bignoniaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Gesneriaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Lauraceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Annonaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Clusiaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Erythroxylaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Euphorbiaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Lacistemataceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Phyllanthaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Malvaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Lythraceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Melastomataceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Myrtaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Piperaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Moraceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Urticaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Anacardiaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Meliaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Rutaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Sapindaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Solanaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Dennstaedtiaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Polypodiaceae</taxonRankValue>
+                </taxonomicClassification>
+            </taxonomicCoverage>
+            <taxonomicCoverage>
+                <generalTaxonomicCoverage>MACROINVERTEBRADOS ACUÁTICOS: Se colectaron dos filo, dos clases, seis ordenes, 22 familias y 35 géneros.</generalTaxonomicCoverage>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Elmidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Hydrophilidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Lutrochidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Ptilodactylidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Blephariceridae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Ceratopogonidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Empididae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Limoniidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Psychodidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Simuliidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Tipulidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Baetidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Leptohyphidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Oligoneuriidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Corydalidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Glossosomatidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Hydrobiosidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Hydropsychidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Hydroptilidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Leptoceridae</taxonRankValue>
+                </taxonomicClassification>
+            </taxonomicCoverage>
+            <taxonomicCoverage>
+                <generalTaxonomicCoverage>ICTIOFAUNA: Se colectaron 69 individuos perteneciente a un filo, una clase, un orden, dos familias, dos géneros y tres especies.</generalTaxonomicCoverage>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Astroblepidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Trichomycteridae</taxonRankValue>
+                </taxonomicClassification>
+            </taxonomicCoverage>
+            <taxonomicCoverage>
+                <generalTaxonomicCoverage>LEPIDÓPTEROS DIURNOS: Se colectaron 183 individuos, dentro de los cuales se registraron 65 especies agrupadas en seis familias, cinco subfamilias y 49 géneros.</generalTaxonomicCoverage>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Hesperiidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Lycaenidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Nymphalidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Papilionidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Pieridae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Riodinidae</taxonRankValue>
+                </taxonomicClassification>
+            </taxonomicCoverage>
+            <taxonomicCoverage>
+                <generalTaxonomicCoverage>HERPETOFAUNA:  Se registraron 65 individuos pertenecientes a 36 registros de anfibios y ocho de reptiles, agrupados en ocho familias, ocho géneros y 11 especies</generalTaxonomicCoverage>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Bufonidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Craugastoridae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Dendrobatidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Plethodontidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Corytophanidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Dactyloidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Gymnophthalmidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Polychrotidae</taxonRankValue>
+                </taxonomicClassification>
+            </taxonomicCoverage>
+            <taxonomicCoverage>
+                <generalTaxonomicCoverage>AVIFAUNA : Se  reportan 96 especies de aves, agrupadas en 13 ordenes, 33 familias y 84 géneros.</generalTaxonomicCoverage>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Accipitridae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Cathartidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Apodidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Trochilidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Charadriidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Columbidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Momotidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Cuculidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Falconidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Phylum</taxonRankName>
+                    <taxonRankValue>Rallidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Cardinalidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Coerebidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Corvidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Cotingidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Emberizidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Fringillidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Phylum</taxonRankName>
+                    <taxonRankValue>Furnariidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Hirundinidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Icteridae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Parulidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Pipridae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Thamnophilidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Thraupidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Troglodytidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Turdidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Tyrannidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Vireonidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Ardeidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Threskiornithidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Picidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Ramphastidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Psittacidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Strigidae</taxonRankValue>
+                </taxonomicClassification>
+            </taxonomicCoverage>
+            <taxonomicCoverage>
+                <generalTaxonomicCoverage>MAMÍFEROS: Se registran 22 especies, agrupadas en 18 géneros,  12 familias y ocho ordenes.</generalTaxonomicCoverage>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Canidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Procyonidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Molossidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Phyllostomidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Vespertilionidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Dasypodidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Didelphidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Leporidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Myrmecophagidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Aotidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Dasyproctidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Sciuridae</taxonRankValue>
+                </taxonomicClassification>
+            </taxonomicCoverage>
+        </coverage>
+        <purpose><para>Los datos del recurso fueron consolidados en el marco del contrato interadministrativo No. 0815 del 19 de octubre de 2021 firmado entre CORTOLIMA y la Universidad del Tolima, cuyo objeto es aunar esfuerzos técnicos, humanos y financieros para realizar la caracterización de la biodiversidad de la cuenca del río Chipalo (quebrada Ambalá) para el diseño de un corredor urbano y periurbano que facilite la conectividad ecológica en el municipio de Ibagué, Fase II.</para></purpose>
+        <maintenance>
+            <description>
+                <para></para>
+            </description>
+            <maintenanceUpdateFrequency>asNeeded</maintenanceUpdateFrequency>
+        </maintenance>
+        <contact>
+            <individualName>
+                <givenName>Sergio</givenName>
+                <surName>Losada Prado</surName>
+            </individualName>
+            <organizationName>Universidad del Tolima (UT)</organizationName>
+            <positionName>Docente Investigador</positionName>
+            <address>
+                <deliveryPoint>Barrio Santa Helena Parte Alta, bloque 13</deliveryPoint>
+                <city>Ibagué</city>
+                <administrativeArea>Tolima</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>slosada@ut.edu.co</electronicMailAddress>
+            <userId directory="http://orcid.org/">0000-0001-6916-3893</userId>
+        </contact>
+        <methods>
+            <methodStep>
+                <description>
+                    <para>A continuación se detallan las metodologías utilizadas por grupos taxonómicos abordados:
+
+FLORA: Para la evaluación de flora se siguió el método Rapid Assesment Program (RAP) y se establecieron 12 transectos de 25 x 4 m distribuidos cuatro por estación.</para>
+                </description>
+            </methodStep>
+            <methodStep>
+                <description>
+                    <para>MACROINVERTEBRADOS ACUÁTICOS:  iguiendo la metodología propuesta por Wantzen y Rueda (2009), se evaluaron usando una Red Surber en cuatro sustratos (roca, grava, arena y hojarasca).</para>
+                </description>
+            </methodStep>
+            <methodStep>
+                <description>
+                    <para>ICTIOFAUNA: Se realizó por medio de un equipo de electropesca en dirección aguas arriba, en los distintos tipos de hábitats (rápidos, remansos) y sustratos (roca, grava, arena, hojarasca), a lo largo de un transecto de 100 m de largo y ancho variable, con un esfuerzo de muestreo de una hora por estación.</para>
+                </description>
+            </methodStep>
+            <methodStep>
+                <description>
+                    <para>LEPIDÓPTEROS DIURNOS: Se empleó jama o red entomológica, siguiendo los parámetros establecidos en Andrade et al., (2013) y Villarreal et al., (2006).</para>
+                </description>
+            </methodStep>
+            <methodStep>
+                <description>
+                    <para>HERPETOFAUNA: Se empleó la técnica de búsqueda libre y sin restricciones, a través de transectos aleatorios, apoyado por encuentro casual y auditivo propuesto por Angulo et al., (2006).</para>
+                </description>
+            </methodStep>
+            <methodStep>
+                <description>
+                    <para>AVIFAUNA: Se realizó mediante dos metodologías, la primera abarco nueve horas diarias, comprendieron el horario entre las 05:30-11:00 h y 14:30-17:00 h (adaptado de Villareal et al., 2004), a excepción de las observaciones libres, que se prolongaron a lo largo del día hasta cerca de las 21:00 h con el fin de incluir algunas especies nocturnas en el inventario, y se instalaron cinco redes de niebla de 2.5 x 12 m, según el procedimiento descrito por Ralph et al., (1996) y teniendo en cuenta lo recomendado por Villareal et al., (2004).</para>
+                </description>
+            </methodStep>
+            <methodStep>
+                <description>
+                    <para>MAMÍFEROS: Se siguieron diferentes metodologías; para los mamíferos voladores se empelaron cinco redes de niebla de 12 x 2.5  m, calibre de 36 mm y ojo de 1”1/2, ubicadas ad libitum teniendo en cuenta las características del área de estudio y la composición vegetal y para los medianos y grandes mamíferos se trazó un transecto lineal, de longitud de 2 km y ancho variable realizándose observaciones entre las 07:00-17:00 h, a una velocidad promedio de 1 km/hora para la búsqueda de rastros o indicios, además se instalaron cinco cámaras trampa Bushnell Trophy, desplegándose una cámara por cada 1 km  durante 30 días consecutivos.</para>
+                </description>
+            </methodStep>
+            <sampling>
+                <studyExtent>
+                    <description>
+                        <para>El área de estudio corresponde al municipio de Ibagué, ubicado en el centro-occidente de Colombia, sobre la cordillera central de los Andes. El municipio cuenta con varios ríos que conforman cuencas hidrográficas que desembocan en el río Magdalena, entre ellos el río Coello, en el cual desembocan los ríos Combeima y el Cócora, el río Totare en el que desembocan los ríos Chipalo, Alvarado y La China, que es a su vez es afluente del río Magdalena y el río La Opia que desemboca directamente al río Magdalena. Elementos que constituyen un soporte fundamental para el desarrollo urbano, industrial y agropecuario de la región. La subcuenca hidrográfica del río Chipalo pertenece a la cuenca mayor del río Totare, con una extensión de 15.466.9 ha, ubicada al noroccidente del departamento del Tolima. Nace en la vereda la cascada en los cerros noroccidentales del municipio de Ibagué (área de manejo especial del municipio). Sobre esta subcuenca se ubica la microcuenca Ambalá la cual se localiza en una latitud de 4.48278 y longitud de -75.2092, a lo largo de su recorrido interviene más de 15 barrios de la ciudad de Ibagué entre ellos Ambalá, El Triunfo, La Castilla, San Antonio, Onzaga, Pijao, Calarcá, entre otros, y algunas veredas como Ambalá sector El Triunfo y Ambalá parte alta, su cota mayor alcanza los 2.400 m y la menor de 1.200 m.</para>
+                    </description>
+                </studyExtent>
+                <samplingDescription>
+                    <para>Para la evaluación de flora se siguió el método Rapid Assesment Program (RAP). Los macroinvertebrados acuáticos se evaluaron usando una Red Surber. La evaluación de la ictiofauna se realizó por medio de un equipo de electropesca. Para la colecta de lepidópteros diurnos se empleó jama o red entomológica. Para la detección de la herpetofauna se empleó la técnica de búsqueda libre y sin restricciones, a través de transectos aleatorios, apoyado por encuentro casual y auditivo. La evaluación de la avifauna se realizó mediante dos metodologías. En relación con la evaluación de mamíferos se siguieron diferentes metodologías para los mamíferos voladores y para los medianos y grandes mamíferos.</para>
+                </samplingDescription>
+            </sampling>
+            <qualityControl>
+                <description>
+                    <para>En el proceso de estructuración y validación de los datos, se realizó el control de la calidad de la información. A continuación, se enumeran los procesos asociados a esta actividad: 1. Revisión de la información documentada asociada a los datos biológicos; 2. Estructuración de los datos en el estándar Darwin Core (DwC) según elementos, definiciones y vocabularios controlados; 3. Validación y limpieza de la información consignada en el DwC, 3.1. Corrección de errores de tipeo, para esta tarea se usó OpenRefine, adicionalmente se identificaron datos erróneos como sinonimias, con el uso de Species Matching, COL | The Catalogue of Life, adicionalmente se utilizó Tropicos - Home (tropicos.org), Taxonomic Name Resolution Service y SACC Classification; 4. Finalmente, la base datos DwC se validó haciendo uso del Validador de datos - GBIF.</para>
+                </description>
+            </qualityControl>
+        </methods>
+
+            <project >
+                <title>CARACTERIZACIÓN DE LA BIODIVERSIDAD DE LA CUENCA DEL RÍO CHIPALO (QUEBRADA AMBALÁ) PARA EL DISEÑO DE UN CORREDOR URBANO Y PERIURBANO QUE FACILITE LA CONECTIVIDAD ECOLÓGICA EN EL MUNICIPIO DE IBAGUÉ, FASE II</title>
+                <personnel>
+                    <individualName>
+                    <givenName>Olga lucia</givenName>
+                    <surName>Alfonso Lannini</surName>
+                    </individualName>
+                    <role>OWNER</role>
+                </personnel>
+                <personnel>
+                    <individualName>
+                    <givenName>Omar</givenName>
+                    <surName>Mejía Patiño</surName>
+                    </individualName>
+                    <role>OWNER</role>
+                </personnel>
+                <personnel>
+                    <individualName>
+                    <givenName>Sergio</givenName>
+                    <surName>Losada Prado</surName>
+                    </individualName>
+            <userId directory="http://orcid.org/">0000-0001-6916-3893</userId>
+                    <role>PRINCIPAL_INVESTIGATOR</role>
+                </personnel>
+                <personnel>
+                    <individualName>
+                    <givenName>Leidy Viviana</givenName>
+                    <surName>García Herrera</surName>
+                    </individualName>
+                    <role>CONTENT_PROVIDER</role>
+                </personnel>
+                <abstract>
+                    <para>El contrato interadministrativo No. 0815 del 19 de octubre de 2021 firmado entre CORTOLIMA y la Universidad del Tolima, cuyo objeto era aunar esfuerzos técnicos, humanos y financieros para realizar la caracterización de la biodiversidad de la cuenca del río chípalo (quebrada Ambalá) para el diseño de un corredor urbano y periurbano que facilite la conectividad ecológica en el municipio de Ibagué, fase II. Evaluó la diversidad de flora, macroinvertebrados acuáticos, peces, lepidópteros, herpetos, aves y mamíferos. A través del método Rapid Assesment Program (RAP) se establecieron 12 transectos de 25 x 4 m distribuidos cuatro por estación para flora. Siguiendo la metodología propuesta por Wantzen y Rueda (2009), usando una red surber en cuatro sustratos (roca, grava, arena y hojarasca) para macroinvertebrados acuáticos. La evaluación de la ictiofauna se realizó por medio de un equipo de electropesca en dirección aguas arriba, en los distintos tipos de hábitats (rápidos, remansos) y sustratos (roca, grava, arena, hojarasca), a lo largo de un transecto de 100 m de largo y ancho variable, con un esfuerzo de muestreo de una hora por estación, lo que permitió la colecta de cerca de 69 organismos. Para la colecta de lepidópteros diurnos se empleó jama o red entomológica, siguiendo los parámetros establecidos en Andrade et al., (2013) y Villarreal et al., (2006), colectando cerca de 181 individuos. Para la detección de la herpetofauna se empleó la técnica de búsqueda libre y sin restricciones, a través de transectos aleatorios, apoyado por encuentro casual y auditivo propuesto por Angulo et al., 2006. Para la evaluación de la avifauna se abarcó un total de nueve horas diarias, comprendieron el horario entre las 05:30-11:00 h y 14:30-17:00 h (adaptado de Villareal et al., 2004), a excepción de las observaciones libres, que se prolongaron a lo largo del día hasta cerca de las 21:00 h con el fin de incluir algunas especies nocturnas en el inventario, además se instalaron cinco redes de niebla de 2.5 x 12 m, según el procedimiento descrito por Ralph et al., (1996) y teniendo en cuenta lo recomendado por Villareal et al., (2004). En relación con la evaluación de mamíferos se siguieron diferentes metodologías; para los mamíferos voladores se empelaron cinco redes de niebla de 12 x 2.5 m, calibre de 36 mm y ojo de 1”1/2, ubicadas ad libitum teniendo en cuenta las características del área de estudio y la composición vegetal, para los medianos y grandes mamíferos se trazó un transecto lineal, de longitud de 2 km y ancho variable realizándose observaciones entre las 07:00-17:00 h, a una velocidad promedio de 1 km/hora para la búsqueda de rastros o indicios, además se instalaron cinco cámaras trampa Bushnell Trophy, desplegándose una cámara por cada 1 km  durante 30 días consecutivos. En relación con los registros de fauna y flora se definieron los principios y criterios frente a los cuales se realizará delimitación del corredor urbano y se proyectó los polígonos.</para>
+                </abstract>
+                <funding>
+                    <para>Convenio interadministrativo No. 0815 del 19 de octubre de 2021 firmado entre CORTOLIMA y la Universidad del Tolima</para>
+                </funding>
+                <studyAreaDescription>
+                    <descriptor name="generic" citableClassificationSystem="false">
+                        <descriptorValue>El área de estudio corresponde al municipio de Ibagué, ubicado en el centro-occidente de Colombia, sobre la cordillera central de los Andes. El municipio cuenta con varios ríos que conforman cuencas hidrográficas que desembocan en el río Magdalena, entre ellos el río Coello, en el cual desembocan los ríos Combeima y el Cócora, el río Totare en el que desembocan los ríos Chipalo, Alvarado y La China, que es a su vez es afluente del río Magdalena y el río La Opia que desemboca directamente al río Magdalena. Elementos que constituyen un soporte fundamental para el desarrollo urbano, industrial y agropecuario de la región. La subcuenca hidrográfica del río Chipalo pertenece a la cuenca mayor del río Totare, con una extensión de 15.466.9 ha, ubicada al noroccidente del departamento del Tolima. Nace en la vereda la cascada en los cerros noroccidentales del municipio de Ibagué (área de manejo especial del municipio). Sobre esta subcuenca se ubica la microcuenca Ambalá la cual se localiza en una latitud de 4.48278 y longitud de -75.2092, a lo largo de su recorrido interviene más de 15 barrios de la ciudad de Ibagué entre ellos Ambalá, El Triunfo, La Castilla, San Antonio, Onzaga, Pijao, Calarcá, entre otros, y algunas veredas como Ambalá sector El Triunfo y Ambalá parte alta, su cota mayor alcanza los 2.400 m y la menor de 1.200 m.</descriptorValue>
+                    </descriptor>
+                </studyAreaDescription>
+                <designDescription>
+                    <description>
+                        <para>Se evaluó la diversidad de flora, macroinvertebrados acuáticos, peces, lepidópteros, herpetos, aves y mamíferos. A través del método Rapid Assesment Program (RAP) para musgos, ocho hepáticas y seis líquenes. Siguiendo la metodología propuesta por Wantzen y Rueda (2009), usando una red surber en cuatro sustratos (roca, grava, arena y hojarasca) se colectó macroinvertebrados acuáticos. La evaluación de la ictiofauna se realizó por medio de un equipo de electropesca en dirección aguas arriba, en los distintos tipos de hábitats (rápidos, remansos) y sustratos (roca, grava, arena, hojarasca), a lo largo de un transecto de 100 m de largo y ancho variable, con un esfuerzo de muestreo de una hora por estación. Para la colecta de lepidópteros diurnos se empleó jama o red entomológica, siguiendo los parámetros establecidos en Andrade et al., (2013) y Villarreal et al., (2006). Para la detección de la herpetofauna se empleó la técnica de búsqueda libre y sin restricciones, a través de transectos aleatorios, apoyado por encuentro casual y auditivo propuesto por Angulo et al., 2006. Para la evaluación de la avifauna se abarcó un total de nueve horas diarias, comprendieron el horario entre las 05:30-11:00 h y 14:30-17:00 h (adaptado de Villareal et al., 2004), a excepción de las observaciones libres, que se prolongaron a lo largo del día hasta cerca de las 21:00 h con el fin de incluir algunas especies nocturnas en el inventario, además se instalaron cinco redes de niebla de 2.5 x 12 m, según el procedimiento descrito por Ralph et al., (1996) y teniendo en cuenta lo recomendado por Villareal et al., (2004). En relación con la evaluación de mamíferos se siguieron diferentes metodologías; para los mamíferos voladores se empelaron cinco redes de niebla de 12 x 2.5 m, calibre de 36 mm y ojo de 1”1/2, ubicadas ad libitum teniendo en cuenta las características del área de estudio y la composición vegetal, para los medianos y grandes mamíferos se trazó un transecto lineal, de longitud de 2 km y ancho variable realizándose observaciones entre las 07:00-17:00 h, a una velocidad promedio de 1 km/hora para la búsqueda de rastros o indicios, además se instalaron cinco cámaras trampa Bushnell Trophy, desplegándose una cámara por cada 1 km  durante 30 días consecutivos. En relación con los registros de fauna y flora se definieron los principios y criterios frente a los cuales se realizará delimitación del corredor urbano y se proyectó los polígonos.</para>
+                    </description>
+                </designDescription>
+            </project>
+    </dataset>
+
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2026-05-24T11:59:20Z</dateStamp>
+                <citation identifier="https://doi.org/10.15472/h1rfri">Losada Prado S, García Herrera L V (2022). Caracterización de la biodiversidad de la cuenca del río Chipalo (quebrada Ambalá) para el diseño de un corredor urbano y periurbano que facilite la conectividad ecológica en el municipio de Ibagué , Fase II. Universidad del Tolima. Occurrence dataset https://doi.org/10.15472/h1rfri accessed via GBIF.org on 2026-05-24.</citation>
+                <bibliography>
+                <citation identifier="10.18257/raccefyn.12">Andrade, G., Henao, E., &amp; Triviño, P. (2013). Ciencias naturales técnicas y procesamiento para la recolección, preservación y montaje de mariposas en estudios de bio diversidad y conservación. (Lepidoptera: Hesperoidea - Papilionoidea). Revista de la Academia Colombiana de Ciencias Exactas, Físicas y Naturales, 37 (144), 311-325.</citation>
+                <citation>Angulo A., Rueda-Almonacid, J. V. Rodríguez-Mahecha y E. La Marca. 2006. Técnicas de inventario y monitoreo para los anfibios de la región tropical Andina. Conservación Internacional-Colombia, Series Manuales de Campo, Panamericana Formas e Impresos S. A. Bogotá D.C.</citation>
+                <citation>Ralph, C.J., G.R. Geupel, P. Pyle, T.E. Martin, D.F. De Sante y B. Milá. 1996. Manual de métodos de campo para el monitoreo de aves terrestres. General Technical Report, PSW– GTR–159, Pacific Southwest Research Station, Forest Services, U.S. Department of Agriculture, Albany, California.</citation>
+                <citation identifier="http://repository.humboldt.org.co/bitstream/handle/ 20.500.11761/31419/63.pdf?sequence=1">Villarreal, H., Alvarez, M., Córdoba, S., Escobar, F., Fagua, G., Gast, F., &amp; Umaña, A. (2006). Manual de métodos para el desarrollo de inventarios de biodiversidad. Programa de inventarios de biodiversidad. Instituto de Investigaci´on de Recursos Biol´ogicos Alexander von Humboldt.</citation>
+                <citation>Wantzen, R. &amp; Rueda-Delgado, G. (2009). Técnica de muestreo de macroinvertebrados bentónicos. En: Domínguez, E. y H. Fernández (Eds.), Macroinvertebrados bentónicos Sudamericano: sistemática y biología. Primera edición. Tucumán - Argentina. Fundación Miguel Lillo.</citation>
+                </bibliography>
+                <resourceLogoUrl>https://statics.sibcolombia.net/sib-resources/images/logos-socios/500px/ut.jpg</resourceLogoUrl>
+                <collection>
+                    <parentCollectionIdentifier>CZUT</parentCollectionIdentifier>
+                    <collectionIdentifier>https://www.gbif.org/grscicoll/collection/3a57606a-e8ee-4d9c-aa11-7918bc3f12a0</collectionIdentifier>
+                    <collectionName>Colección Zoológica de la Universidad del Tolima</collectionName>
+                </collection>
+                <collection>
+                    <parentCollectionIdentifier>TOLI</parentCollectionIdentifier>
+                    <collectionIdentifier>https://www.gbif.org/grscicoll/collection/4412b3d4-7b11-4aa8-8ba7-384cc4ece62b</collectionIdentifier>
+                    <collectionName>Herbario TOLI</collectionName>
+                </collection>
+                <specimenPreservationMethod>DRIED_AND_PRESSED</specimenPreservationMethod>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
+    </eml:eml>

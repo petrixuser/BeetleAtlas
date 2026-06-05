@@ -1,0 +1,550 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="https://eml.ecoinformatics.org/eml-2.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://eml.ecoinformatics.org/eml-2.2.0 https://rs.gbif.org/schema/eml-gbif-profile/1.3/eml.xsd"
+packageId="9cc67633-537a-4acc-8d37-92feeaddb2cd"  system="http://gbif.org" scope="system"
+xml:lang="es">
+    <dataset>
+        <alternateIdentifier>10.15472/lavgys</alternateIdentifier>
+        <alternateIdentifier>9cc67633-537a-4acc-8d37-92feeaddb2cd</alternateIdentifier>
+        <alternateIdentifier>https://ipt.biodiversidad.co/sib/resource?r=ucaldas_colosa</alternateIdentifier>
+        <title>Monitoreo Ambiental del Proyecto La Colosa</title>
+        <creator>
+            <individualName>
+                <givenName>Luis Miguel</givenName>
+                <surName>Alvarez Mejìa</surName>
+            </individualName>
+            <organizationName>Universidad de Caldas</organizationName>
+            <positionName>Profesor</positionName>
+            <address>
+                <deliveryPoint>Calle 58 26-10</deliveryPoint>
+                <city>Manizales</city>
+                <administrativeArea>Caldas</administrativeArea>
+                <postalCode>170004</postalCode>
+                <country>COLOMBIA</country>
+            </address>
+            <phone>57 6 8781500</phone>
+            <electronicMailAddress>luis.alvarez@ucaldas.edu.co</electronicMailAddress>
+            <onlineUrl>http://www.ucaldas.edu.co</onlineUrl>
+            <userId directory="http://orcid.org/">0000-0002-5936-5384</userId>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Andres Miguel</givenName>
+                <surName>Betancourth</surName>
+            </individualName>
+            <organizationName>Universidad de Caldas</organizationName>
+            <positionName>Auxiliar de Investigación</positionName>
+            <address>
+                <deliveryPoint>Calle 58 26-10</deliveryPoint>
+                <city>Manizales</city>
+                <administrativeArea>Caldas</administrativeArea>
+                <postalCode>170004</postalCode>
+                <country>COLOMBIA</country>
+            </address>
+            <phone>57 6 8781554</phone>
+            <electronicMailAddress>andresmiguel.b.r@gmail.com</electronicMailAddress>
+            <onlineUrl>http://www.ucaldas.edu.co</onlineUrl>
+            <userId directory="http://orcid.org/">0000-0002-5312-4723</userId>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Nohora Efigenia</givenName>
+                <surName>Gutierrez Hoyos</surName>
+            </individualName>
+            <organizationName>Universidad de Caldas</organizationName>
+            <positionName>Investigador</positionName>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Ana María</givenName>
+                <surName>Meza Salazar</surName>
+            </individualName>
+            <organizationName>Universidad de Caldas</organizationName>
+            <positionName>Profesora</positionName>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Camilo Andrés</givenName>
+                <surName>Llano Arias</surName>
+            </individualName>
+            <organizationName>Universidad de Caldas</organizationName>
+            <positionName>Profesor</positionName>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Alejandr</givenName>
+                <surName>Villareal Grisales</surName>
+            </individualName>
+            <organizationName>Universidad de Caldas</organizationName>
+            <positionName>Investigador</positionName>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Gustavo Adolfo</givenName>
+                <surName>Gomez Zuluaga</surName>
+            </individualName>
+            <organizationName>Universidad del Quindío</organizationName>
+            <positionName>Investigador</positionName>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Kennedy Anibal</givenName>
+                <surName>Bernal Florez</surName>
+            </individualName>
+            <organizationName>Universidad del Quindío</organizationName>
+            <positionName>Investigador</positionName>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Larri</givenName>
+                <surName>Alvarez Rodas</surName>
+            </individualName>
+            <organizationName>Universidad del Quindío</organizationName>
+            <positionName>Profesor</positionName>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Juan Manuel</givenName>
+                <surName>Duque Orozco</surName>
+            </individualName>
+            <organizationName>Universidad del Quindío</organizationName>
+            <positionName>Investigador</positionName>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Victor Hugo</givenName>
+                <surName>Grande López</surName>
+            </individualName>
+            <organizationName>Universidad del Quindío</organizationName>
+            <positionName>Investigador</positionName>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Yennifer</givenName>
+                <surName>Ramos Arias</surName>
+            </individualName>
+            <organizationName>Universidad del Quindío</organizationName>
+            <positionName>Investigador</positionName>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Laura Alejandra</givenName>
+                <surName>Gonzalez</surName>
+            </individualName>
+            <organizationName>Universidad del Quindío</organizationName>
+            <positionName>Investigador</positionName>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Julio Giovanny</givenName>
+                <surName>Cortes Molina</surName>
+            </individualName>
+            <organizationName>Universidad de Caldads</organizationName>
+            <positionName>Investigador</positionName>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Luz Amparo</givenName>
+                <surName>Triana Moreno</surName>
+            </individualName>
+            <organizationName>Universidad de Caldas</organizationName>
+            <positionName>Profesor</positionName>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Nelson</givenName>
+                <surName>Londoño Gutierrez</surName>
+            </individualName>
+            <organizationName>Universidad del Quindío</organizationName>
+            <positionName>Investigador</positionName>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Gloria Esperanza</givenName>
+                <surName>Iglesias</surName>
+            </individualName>
+            <organizationName>Universidad del Quindío</organizationName>
+            <positionName>Investigador</positionName>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Silvia Pamela</givenName>
+                <surName>Castañeda Arredondo</surName>
+            </individualName>
+            <organizationName>Universidad de Caldas</organizationName>
+            <positionName>Investigador</positionName>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Sebastian</givenName>
+                <surName>Villada Bedoya</surName>
+            </individualName>
+            <organizationName>Universidad de Caldas</organizationName>
+            <positionName>Investigador</positionName>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Cristian A.</givenName>
+                <surName>Fernandez Betancur</surName>
+            </individualName>
+            <organizationName>Universidad del Quindío</organizationName>
+            <positionName>Investigador</positionName>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Jhonattan</givenName>
+                <surName>Vanegas Guerrero</surName>
+            </individualName>
+            <organizationName>Universidad del Quindío</organizationName>
+            <positionName>Investigador</positionName>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Juan Carlos</givenName>
+                <surName>Obado Chacon</surName>
+            </individualName>
+            <organizationName>Universidad de Caldas</organizationName>
+            <positionName>Investigador</positionName>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Daniel</givenName>
+                <surName>Moreno Lopez</surName>
+            </individualName>
+            <organizationName>Universidad de Caldads</organizationName>
+            <positionName>Investigador</positionName>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Monica María</givenName>
+                <surName>Peñuela</surName>
+            </individualName>
+            <organizationName>Universidad de Caldas</organizationName>
+            <positionName>Investigador</positionName>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Ana Lucía</givenName>
+                <surName>Rueda Arcila</surName>
+            </individualName>
+            <organizationName>Universidad de Caldas</organizationName>
+            <positionName>Investigador</positionName>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Luis Fernando</givenName>
+                <surName>Vallejo Espinosa</surName>
+            </individualName>
+            <organizationName>Universidad de Caldas</organizationName>
+            <positionName>Profesor</positionName>
+        </creator>
+        <metadataProvider>
+            <individualName>
+                <givenName>Luis Miguel</givenName>
+                <surName>Álvarez Mejía</surName>
+            </individualName>
+            <organizationName>Universidad de Caldas</organizationName>
+            <positionName>Profesor</positionName>
+            <address>
+                <deliveryPoint>Calle 58 26-10</deliveryPoint>
+                <city>Manizales</city>
+                <administrativeArea>Caldads</administrativeArea>
+                <postalCode>170004</postalCode>
+                <country>COLOMBIA</country>
+            </address>
+            <phone>57 6 8781500</phone>
+            <electronicMailAddress>luis.alvarez@ucaldas.edu.co</electronicMailAddress>
+            <onlineUrl>http://www.ucaldas.edu.co</onlineUrl>
+            <userId directory="http://orcid.org/">0000-0002-5936-5384</userId>
+        </metadataProvider>
+        <associatedParty>
+            <individualName>
+                <givenName>Luis Miguel</givenName>
+                <surName>Álvarez Mejía</surName>
+            </individualName>
+            <organizationName>Universidad de Caldas</organizationName>
+            <positionName>Profesor</positionName>
+            <address>
+                <deliveryPoint>Calle 58 26 10</deliveryPoint>
+                <city>ManizaleS</city>
+                <administrativeArea>CALDAS</administrativeArea>
+                <postalCode>170004</postalCode>
+                <country>COLOMBIA</country>
+            </address>
+            <phone>57 6 8781501</phone>
+            <electronicMailAddress>luis.alvarez@ucaldas.edu.co</electronicMailAddress>
+            <onlineUrl>http://www.ucaldas.edu.co</onlineUrl>
+            <userId directory="http://orcid.org/">0000-0002-5936-5384</userId>
+            <role>USER</role>
+        </associatedParty>
+        <pubDate>
+                2021-03-19
+        </pubDate>
+        <language>SPANISH</language>
+        <abstract>
+            Registro de observaciones de plantas, mamíferos, aves, herpetos, coleópteros, lepidópteros, peces, perifiton y macroinvertebrados acuáticos derivados el proyecto de Monitoreo Ambiental Durante la Fase de Exploración del Proyecto Minero La Colosa, realizado entre junio de 2012 y mayo de 2015. Localizado en el Municipio de Cajamarca, Tolima y su zona de influencia, a lo largo del río Coello, desde la alta montaña a 3200 msnm hasta  la desembocadura en el río Magdalena a 200 msnm.
+        </abstract>
+        <keywordSet>
+            <keyword>Occurrence</keyword>
+            <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type.xml</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+            <keyword>Observation</keyword>
+            <keywordThesaurus>GBIF Dataset Subtype Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_subtype.xml</keywordThesaurus>
+        </keywordSet>
+        <intellectualRights>
+            <para>To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the <ulink url="http://creativecommons.org/publicdomain/zero/1.0/legalcode"><citetitle>Public Domain (CC0 1.0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction.</para>
+        </intellectualRights>
+        <licensed>
+            <licenseName>Creative Commons Zero v1.0 Universal</licenseName>
+            <url>https://spdx.org/licenses/CC0-1.0.html</url>
+            <identifier>CC0-1.0</identifier>
+        </licensed>
+        <distribution scope="document">
+            <online>
+                <url function="download">https://ipt.biodiversidad.co/sib/archive.do?r=ucaldas_colosa</url>
+            </online>
+        </distribution>
+        <coverage>
+            <geographicCoverage>
+                <geographicDescription>Cuenca del Rio Coello</geographicDescription>
+                <boundingCoordinates>
+                    <westBoundingCoordinate>-75.392</westBoundingCoordinate>
+                    <eastBoundingCoordinate>-75.255</eastBoundingCoordinate>
+                    <northBoundingCoordinate>4.524</northBoundingCoordinate>
+                    <southBoundingCoordinate>4.448</southBoundingCoordinate>
+                </boundingCoordinates>
+            </geographicCoverage>
+            <temporalCoverage>
+                <rangeOfDates>
+                    <beginDate>
+                        <calendarDate>                2012-07-26
+</calendarDate>
+                    </beginDate>
+                    <endDate>
+                        <calendarDate>                2015-05-30
+</calendarDate>
+                    </endDate>
+                </rangeOfDates>
+            </temporalCoverage>
+            <taxonomicCoverage>
+                <generalTaxonomicCoverage>El conjunto registrado abarca Plantas, Mamíferos, Aves, Peces, Herpetos, Coleópteros, lepidópteros, Perifiton y Macroinvertebrados acuáticos.</generalTaxonomicCoverage>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Angiospermae</taxonRankValue>
+                    <commonName>Plantas con flor</commonName>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Gimnospermae</taxonRankValue>
+                    <commonName>Coníferas</commonName>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Ptheridophytha</taxonRankValue>
+                    <commonName>Helechos</commonName>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Bryophytha</taxonRankValue>
+                    <commonName>Musgos</commonName>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Aves</taxonRankValue>
+                    <commonName>Aves</commonName>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Chondrichthyes</taxonRankValue>
+                    <commonName>Peces</commonName>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Mammalia</taxonRankValue>
+                    <commonName>Mamíferos</commonName>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Amphibia</taxonRankValue>
+                    <commonName>Anfibios</commonName>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Reptilia</taxonRankValue>
+                    <commonName>Reptiles</commonName>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Sarcopterygii</taxonRankValue>
+                    <commonName>Peces</commonName>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Molusca</taxonRankValue>
+                    <commonName>Moluscos</commonName>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Artropoda</taxonRankValue>
+                    <commonName>Artropodos</commonName>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Coleoptera</taxonRankValue>
+                    <commonName>Cucarrones</commonName>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Lepidopthera</taxonRankValue>
+                    <commonName>Mariposas</commonName>
+                </taxonomicClassification>
+            </taxonomicCoverage>
+        </coverage>
+        <purpose><para>Respaldo de investigación científica</para></purpose>
+        <maintenance>
+            <description>
+                <para>Preservación de ejemplares en diferentes colecciones en condiciones acordes con los taxa objeto de conservación</para>
+            </description>
+            <maintenanceUpdateFrequency>asNeeded</maintenanceUpdateFrequency>
+        </maintenance>
+        <contact>
+            <individualName>
+                <givenName>Luis Miguel</givenName>
+                <surName>Alvarez Mejìa</surName>
+            </individualName>
+            <organizationName>Universidad de Caldas</organizationName>
+            <positionName>Profesor</positionName>
+            <address>
+                <deliveryPoint>Calle 58 26-10</deliveryPoint>
+                <city>Manizales</city>
+                <administrativeArea>Caldas</administrativeArea>
+                <postalCode>170004</postalCode>
+                <country>COLOMBIA</country>
+            </address>
+            <phone>57 6 8781500</phone>
+            <electronicMailAddress>luis.alvarez@ucaldas.edu.co</electronicMailAddress>
+            <onlineUrl>http://www.ucaldas.edu.co</onlineUrl>
+            <userId directory="http://orcid.org/">0000-0002-5936-5384</userId>
+        </contact>
+        <methods>
+            <methodStep>
+                <description>
+                    <para>Lepidoptera: se ubicaron tres transectos por cada punto de muestreo, teniendo en cuenta las coberturas Bosque (BOS), Vegetación secundaria (VS) Pasto arbolado (PAR). En cada transecto se ubicaron seis trampas Van Someren-Rydon (T.V.S.R) (DeVries 1987), suspendidas a tres metros de altura y distanciadas entre 20 y 50 metros de acuerdo a las características topográficas y cobertura vegetal del punto de muestreo. Se muestrearon nueve transectos lineales entre los 200 y 250 m siguiendo tres intervalos altitudinales: 2500 a 2700 m, 2701 a 3000 m y 3001 a 3300 m (Tabla 3-14). Las trampas permanecieron instaladas 48 horas con revisiones periódicas, y fueron cebadas con fruta ￼fermentada mezclada con cerveza. Adicionalmente se realizaron recorridos para la búsqueda libre de mariposas entre las 09:00 y 15:00 horas en las coberturas de interés. Para completar el registro con especies que presentan hábito crepuscular, se destinó un recorrido de dos horas por cada sitio de muestreo, entre las 16:30 y 18:30.
+Coleoptera: Se establecieron  cuatro puntos de muestreo dentro del proyecto, Mirador, El abuelo, El filo (Línea M22) y Bélgica. En cada punto de muestreo se instalaron 3 transectos longitudinales de cinco trampas pitfall cada uno (120 m lineales) con distancia entre trampas y entre transectos de 30 y 100 m respectivamente. Los muestreos se llevaron a cabo de manera mensual, donde se realizó el marcaje de los escarabajos coprófagos con un tamaño mayor a diez milímetros (e.g. Ontherus lunicollis), las demás especies capturadas (tamaño &lt;10mm) fueon registradas, pero no se les realizó seguimiento con marca. Se instalaron mensualmente tres trampas de luz negra en dos sitios (Mirador y Bélgica. Los resultados obtenidos hasta el momento, evidencian que las trampas de luz negra están capturando las mismas especies en mayores abundancias que la trampa de luz de mercurio, por lo tanto, se optó por usar solamente la trampa de luz negra, 3 por punto de muestreo.  Dado la baja eficiencia de captura, se eliminó el uso de carpo-trampas.  El monitoreo del orden Coleoptera se centró únicamente en la colecta de organismos pertenecientes a la familia Melolonthidae y a la subfamilia Scarabaeinae (organismos bioindicadores de la calidad de hábitat), por lo tanto, los recorridos libres están siendo suplidos por la metodología de trampas de luz, ya que los organismos pertenecientes a la subfamilia Scarabaeinae son en su mayoría de hábitos coprófagos y la luz negra es metodología altamente efectiva para la colecta de este tipo de organismos.  Se propuso el uso de grupos potenciales bioindicadores de la familia Melolonthidae y la subfamilia Scarabaeinae y, algunos grupos que están fuera de estas dos subfamilias siguen siendo cuantificados (e.g. familia Lucanidae). 
+Herpetofauna: En el área de influencia del Proyecto La Colosa (PLC) se realizó búsqueda de individuos utilizando las metodologías de búsqueda directa, trampas de caída/barrera, transectos y cuadrantes, propuestas por Heyer et al. (2001) . El marcaje de los Anfibios capturados se realizó utilizando un polímero sintético fluorescente no reactivo (VIE) que se insertó en el tegumento bajo la epidermis de los especímenes. Para tener el registro serial de los individuos muestreados se modificó el sistema de marcaje propuesto por Hero (1989) (citado por Donnelly et al. 1994) asignándoles valores a cada extremidad y alternando el sitio de inserción del polímero, permitiendo la configuración de un número determinado desde el número 1 hasta 3831, permitiendo llevar una codificación serial de cada individuo . En lagartos se realizó el marcaje con esmalte para uñas de un sólo tono (Figura 3-66a), tanto en las uñas de las extremidades anteriores como posteriores teniendo en cuenta codificación propuesta por Hero (1989) (citado por Donnelly et al. 1994) en anfibios. La ventaja de realizar el marcaje en las uñas está en que es una técnica inocua y perdura en el tiempo, debido a que los individuos (Saurios) no presentan muda en sus uñas. Las serpientes se marcaron mediante incisiones en las escamas ventrales, siguiendo el sistema de numeración de las escamas (Brown &amp; Parker 1976) 
+Para la avifauna se monitorearon 3 coberturas que comprenden Bosque, Vegetación secundaria y Pasto, las cuales se estudiaron y analizaron en dos cotas altitudinales: (1) 2300-2800m y (2) 2800-3200m, clasificados así siguiendo la propuesta del Ministerio del Medio Ambiente. Para la cota alta las coberturas se clasificaron como Bosque 1 (B1), Vegetación secundaria 1 (VS1) y Pasto 1 (P1) y para la cota baja se denominaron Bosque 2 (B2), Vegetación secundaria 2 (VS2) y Pasto 2 (P2) (Tabla 3-1, Figura 3-8). Cada cota altitudinal fue analizada independiente para evitar sesgos debido a las diferencias en cuanto a la vegetación respecto al gradiente altitudinal.
+Mamíferos : se muestrearon tres transectos La Arenosa, La Colosa y El Filo . DE cada uno se establecieron cordenadas y la caracterización general de la cobertura vegetal. Para la captura de diferentes tallas de mamíferos se utilizaron redes de niebla, trampas Sherman, recorridos diurnos y nocturnos (observación directa), trampas cámara, búsqueda de rastros y entrevistas a los pobladores de la zona. 
+Con base en lo establecido en la metodología del componente Flora, se realizaron los perfiles de vegetación de los sitios de muestreo dentro del PLC. En la Tabla 3-1 se listan las respectivas coberturas, con las familias y géneros más abundantes cada área.
+Composición florística: Desde junio de 2012 y hasta mayo de 2015, se realizaron recorridos aleatorios por los caminos y alrededores de los bosques dentro del área de monitoreo del PLC, lo que permitió cubrir la mayor cantidad de área, aumentando las posibilidades de encontrar un mayor número de especies, que permitió estimar la riqueza de la vegetación de la zona y sirvió de referencia para la determinación de los individuos de las parcelas permanentes. Durante los recorridos se recolectaron ejemplares fértiles (con flores, frutos o esporas) de todos los hábitos y grupos taxonómicos de plantas vasculares, así como de plantas no vasculares. De cada especie se ha realizado una colección de referencia según métodos estandarizados de Rangel-Ch. &amp; Velázquez (1997), se registraron las características que se pierden en el proceso de herborización (tamaños, olores, colores, exudados, formas, sabores, entre otras) (Liesner 1990), y se tomarón registros fotográficos de cada ejemplar. La descripción de las coberturas de la tierra se basó en la metodología CORINE Land Cover (IDEAM 2010). La cual fue desarrollando en Europa desde 1990; dicha metodología propone un estándar para realizar el inventario de coberturas de la tierra, y se constituye en soporte para la toma de decisiones en políticas relacionadas con el medio ambiente y el ordenamiento territorial. 
+Parcelas permanentes y transectos complementarios: Para el establecimiento de las parcelas permanentes (57 de 0,05 ha y una de 1 ha), se tomó como referencia la propuesta aprobada por el IDEAM en enero de 2012; sin embargo, al cotejar las coordenadas inicialmente establecidas en la propuesta y el mapa de coberturas, no se encontró coincidencia en cuanto a la ubicación de algunas unidades de vegetación, por lo que se redefinió la ubicación de las 57 parcelas de acuerdo con la cobertura vegetal observada. Las nuevas coordenadas se registraron con GPS de hasta 3 m de precisión, en su mayoría con su eje principal en orientación N-S, excepto en los casos en que se especificó una azimut diferente. Todas las parcelas de 0,05 ha fueron subdivididas en cuadrantes de 10 m # 10 m (5 cuadrantes cada una). Para el establecimiento de la parcela de una hectárea, correspondiente al Bosque Abierto Alto de Tierra Firme (BAA), fue necesario dividir la parcela de 100 m # 100 m como se describe en la propuesta aprobada por el IDEAM, en dos parcelas de 20 m # 250 m cada una, ubicadas en el sector “La N” (E 445080, N 494308), ello debido a dificultades topográficas, pues no es posible en el sector trazar dos líneas perpendiculares de 100 m, sin encontrar un precipicio infranqueable. Al igual que las parcelas de 0,05 ha, ésta fue subdividida en 100 cuadrantes de 10 m #10 m 
+Adicional a la parcela de una hectárea (BAA), se ubicaron cuatro transectos de 250 m2 (125 m # 2 m) dentro del mismo tipo de bosque, pero por fuera de la parcela. Para cada transecto, se trazó una línea recta de 125 m, con fibra sintética. En la delimitación de los cuadrantes de las parcelas permanentes y transectos, se utilizaron tubos blancos de PVC, marcados con la respectiva información del cuadrante, y se señalizaron con pintura de color visible y cinta flagging.  También se establecieron cuatro transectos de 100 m2 (50 x 2 m) en la zona alta del proyecto (3200-3550 m de altitud), donde la cobertura vegetal hace parte de lo que se puede denominar Arbustal abierto mesofilo (Metodología de CORINE Land Cover Adaptada para Colombia), es importante mencionar que este tipo de cobertura ocupa el 1,5% del polígono de exploración y se monitorea para tener estimativos de la flora asociada al PLC, se caracteriza por un entramado de plantas leñosas que no permiten observar en ocasiones la tierra firme bajo ella. 
+Perifiton, Macroinvertebrados acuáticos y Peces : La evaluación de los componentes fisicoquímicos y fauna acuática cobija el área de influencia del proyecto que corresponde a la cuenca del Río Coello, donde se incluyen las fuentes hídricas que abastecen a los acueductos de los municipios de Espinal, Chicoral, Coello y distrito de riego USOCOELLO. Se cuenta con 3 estaciones de muestreo  ubicadas en la zona de Bosque Seco Tropical (286-550 m) con temperatura promedio de 26°C. 
+perifiton : En cada sitio de muestreo se trazaron transectos lineales de 20 m y se tomaron al azar piedras y troncos, en los que se realizó el raspado del sustrato con cepillo plástico. En cada estación de muestreo se eligió un área de 64 cm2 donde se incluyeron seis réplicas, de tal manera que se muestreo un área de 384 cm2 por estación. Este procedimiento garantizó la estimación de todas las especies del perifiton y su densidad. Las muestras fueron colocadas en frascos plásticos de 40 ml, con una solución preservante de Lugol/Etanol (70%) .Para determinaciones cuantitativas, se dejó sedimentar cada muestra durante una hora (APHA 1992, Arcos-Pulido y Gómez-Prieto 2006). En el laboratorio se tomó un mililitro (1ml) de la muestra, el cual fue depositado en una cámara de conteo Sedgwick-Rafter que limita el área y volumen y permite calculór las densidades poblacionales mediante cuantificación en bandas, después de un periodo de asentamiento. Para la determinación y cuantificación se utilizó un microscopio óptico triocular, provisto de reglilla micrométrica y cámara fotográfica. La determinación de algas e invertebrados se realizó siguiendo las claves de Prescott (1962,1970), Bourrelly (1968), Streble &amp; Krauter (1987), Lopretto &amp; Tell (1995), Biggs (2000), Ramírez (2000), Wehr &amp; Sheath (2003), Bicudo &amp; Menezes (2006), Bellinger &amp; Sigee (2010) y Ettl et al. (1997a, 1997b). La densidad de células por unidad de área se calculó con la siguiente ecuación (APHA 1992, Ramírez 2000)
+peces: Para la colecta de los individuos se empleó un equipo de electropesca por las ventajas que representa frente a otros artes de pesca convencionales, en términos de volumen y talla de captura de los organismos (Mojica &amp; Galvis 2002). Adicionalmente, es el método que más se ajusta a las condiciones que presentan los cuerpos de agua andinos (torrentosos y fondos pedregosos) y el más utilizado para estimar la abundancia y composición en ecosistemas dulceacuícolas (Maldonado-Ocampo et al. 2005). Este método consiste en una corriente que fluye entre dos electrodos puestos en el agua y que al tener contacto con los peces les produce un estado de electrotaxis (natación de forma obligada), electrotétano (contracción muscular) y electronarcosis (relajación muscular) (Lobón-Cerviá 1991) lo que facilita su captura.  El equipo utilizado fue el Smith-Root LR-20B®, con red de arrastre de 3 m de ancho por 2 m de alto con ojo de malla de 1 mm y dos nasas con aro de 40 cm de diámetro y ojo de malla de 3 mm para la captura de los peces. El equipo fue operado de acuerdo a los parámetros planteados por el National Marine Fisheries Service (NOAA 2000), con el fin de causar el menor daño posible a los organismos presentes en los cuerpos de agua. De esta manera, antes de la operación del equipo se tuvo en cuenta la conductividad del cuerpo de agua, para posteriormente determinar el voltaje, los ciclos de trabajo y la frecuencia de operación del equipo. En cada uno de los puntos de muestreo se evaluó una sección longitudinal de 100 m. En la mayoría de los casos, la red de arrastre se colocó aguas abajo del trayecto, es decir, en contracorriente de manera que los peces fueran arrastrados hacia esta y se procedió a realizar un pase con el equipo de electropesca. Adicionalmente se utilizó un “chile” o “atarraya” de 1 cm de ojo de malla para complementar las capturas. Los peces capturados fueron colocados en bolsas plásticas de cierre hermético a las cuales se les realizó recambios de agua cada cinco minutos. Se recolectó alrededor del 5% de los ejemplares encontrados (según los establecido por Villa- Navarro et al. 2006) hasta un máximo del 10%, de acuerdo con lo contemplado por el permiso de investigación científica otorgado por la autoridad ambiental (CORTOLIMA 2012). Posteriormente fueron determinados, medidos con un calibrador digital de 0,01 mm de precisión (en ocasiones se utilizó una cinta métrica para especies con longitud estándar mayor a 20 cm), además fueron pesados y sexados, antes de ser liberados. Uno o dos ejemplares de cada especie recolectada se fijaron en formol al 10%, y se trasladaron a la ciudad de Armenia. Posteriormente se conservaron en etanol al 70%, y fueron depositados en el Centro de Estudios e Investigaciones en Biodiversidad y Biotecnología – CIBUQ, de la Universidad del Quindío. La determinación de los ejemplares se realizó con base a las claves taxonómicas y descripciones disponibles en Eigenmann (1918,), Dahl (1971), Harold &amp; Vari (1994), Ambruster (2004), Briñez-Vásquez (2004), García-Melo (2005), Maldonado - Ocampo et al. (2005), Covain &amp; Fisch-Muller (2007), Bertaco (2008), Román-Valencia et al. (2008) y Provenzano (2011). 
+macroinvertebrados acuáticos: Para la colecta de macroinvertebrados se seleccionó aleatoriamente un transecto de 100 m en cada punto de muestreo. Se empleó el método cuantitativo con red Surber (Roldán 2008) con área de 930.25 cm2 y ojo de malla de 560 μm, (Figura 3-39), sobre los diferentes tipos de sustrato (roca, hojarasca, sedimento fino), con 12 réplicas por estación (Usseglio- Polaterra et al. 2007). Las muestras se fijaron en alcohol al 96% (García et al. 2006; Jiménez-Arce et al. 2007). Posteriormente, se llevaron al Laboratorio de la Colección Entomológica CEBUC de la Universidad de Caldas, donde se realizó la separación e identificación de los macroinvertebrados presentes. Para la determinación taxonómica, se emplearon las claves y descripciones de McCafferty (1981), Roldán (1988 y 2003), Muñoz-Quesada (2004). Merritt &amp; Cummins (2008) y Domínguez &amp; Fernández (2009) y se tomaron fotografías bajo estereomicroscopio/microscopio con una cámara digital articulada al equipo, para tener registro de las especies capturadas. El material obtenido se preservó en tubos de vidrio debidamente etiquetados, con información del sitio de muestreo, coordenadas, fecha de colecta e información taxonómica. Se diligenció una ficha de campo con la información respectiva del punto de muestreo (Chará 2004), la cual contiene información como fecha, coordenadas y descripción del área</para>
+                </description>
+            </methodStep>
+            <sampling>
+                <studyExtent>
+                    <description>
+                        <para>El área de estudio incluye un sector rural del municipio de Cajamarca, al occidente del departamento del Tolima, a 37 Km de la ciudad de Ibagué y a 10 Km de la vía que del casco urbano de Cajamarca conduce al departamento del Quindío, por la ruta nacional 40, que hacen parte del proyecto de exploración minera La Colosa (515.75 ha.). El proyecto está ubicado entre las microcuencas de las quebradas La Colosa y La Arenosa, zonas de vida correspondientes al Bosque Húmedo Montano y Bosque Húmedo Montano￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼ ￼bajo, según la clasificación de Holdridge (1967). La zona presenta temperatura promedio de 18oC y altitud entre 2300 y 3200 m (UNal-UCaldas 2012). La evaluación de los componentes fisicoquímicos y fauna acuática cobija el área de influencia del proyecto que corresponde a la cuenca del Río Coello, donde se incluyen las fuentes hídricas que abastecen a los acueductos de los municipios de Espinal, Chicoral, Coello y distrito de riego USOCOELLO. Se cuenta con 13 estaciones de muestreo (Figura 3-3) ubicadas en la zona de Bosque Seco Tropical (286-550 m) con temperatura promedio de 26°C.</para>
+                    </description>
+                </studyExtent>
+                <samplingDescription>
+                    <para>Se realizó la evaluación mensual, desde junio de 2012 a mayo de 2015, de las poblaciones de Coleópteros, mamíferos, aves, peces, mariposas, anfibios, reptiles, macroinvertebrados acuáticos, perifiton y plantas, en el área de desarrollo del proceso de exploración minera del proyecto La Colosa y, a lo largo de la cuenca del río Coello, se valuaron los componentes acuáticos, en 8 sitios de muestreo.</para>
+                </samplingDescription>
+            </sampling>
+            <qualityControl>
+                <description>
+                    <para>Cada grupo de trabajo, de acuerdo con las características del objeto de estudio realizó la valoración y control de calidad de los datos.
+
+Ajuste de vocabularios controlados en:
+- Elementos de registros: collectionID, collectionCode, type de acuerdo a la naturaleza de los datos;
+- Elementos de taxonomía: scientificName, se documentan categorías del taxón en el elemento verbatimTaxonRank.</para>
+                </description>
+            </qualityControl>
+        </methods>
+
+            <project id="Monitoreo La Colosa">
+                <title>Monitoreo Ambiental Durante la Fase de Exploración del Proyecto Minero La Colosa</title>
+                <personnel>
+                    <individualName>
+                    <givenName>Luis Miguel</givenName>
+                    <surName>Alvarez Mejía</surName>
+                    </individualName>
+            <userId directory="http://orcid.org/">0000-0002-5936-5384</userId>
+                    <role>PRINCIPAL_INVESTIGATOR</role>
+                </personnel>
+                <personnel>
+                    <individualName>
+                    <givenName>Sandra Jimena</givenName>
+                    <surName>Amezquita Melo</surName>
+                    </individualName>
+                    <role>AUTHOR</role>
+                </personnel>
+                <abstract>
+                    <para>A travez de evaluaciones mensuales de las plantas, peces, mamíferos, aves, herpetos, macroinvertebrados acuáticos, perifiton, lepidópteros y coleópteros,  desde julio de 2012 y mayo de 2015, se realizó el Monitoreo de los impactos ambientales sobre la biota terrestre y acuática del proceso de exploración del proyecto Minero La Colosa, tanto en el polígono de 515 hectáreas correspondientes a la zona de sustracción de la reserva forestal central, donde se ubica el proyecto minero en las veredas La Luisa y Las Palomas, cerros la Guala y la Colosa, en municipio de Cajamarca Tolima, como de su área de influencia a lo largo de la cuenca del río Coello.</para>
+                </abstract>
+                <funding>
+                    <para>Los recursos para el proyecto fueron aportados por la empresa Anglogold Ashanti Colombia, que contratara para este servicio a la Universidad de Caldas.</para>
+                </funding>
+                <studyAreaDescription>
+                    <descriptor name="generic" citableClassificationSystem="false">
+                        <descriptorValue>El área principal corresponde las zonas de Bosque Montano y Montano Bajo, en los cerros La Guala y La Colsa, veredas La Luisa y La Paloma, municipio de Cajamarca, Tolima. También se realizó evaluación de los componentes acuáticos en 8 estaciones de muestreo a lo largo de los rìos Bermellón y Coello.</descriptorValue>
+                    </descriptor>
+                </studyAreaDescription>
+                <designDescription>
+                    <description>
+                        <para>El diseño de los sistemas de evaluación de cada grupo obedece a las metodologías científicas específicas de cada uno desarrolladas por diversos autores.</para>
+                    </description>
+                </designDescription>
+            </project>
+    </dataset>
+
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2026-05-24T11:59:17Z</dateStamp>
+                <citation identifier="https://doi.org/10.15472/lavgys">Alvarez Mejìa L M, Betancourth A M, Gutierrez Hoyos N E, Meza Salazar A M, Llano Arias C A, Villareal Grisales A, Gomez Zuluaga G A, Bernal Florez K A, Alvarez Rodas L, Duque Orozco J M, Grande López V H, Ramos Arias Y, Gonzalez L A, Cortes Molina J G, Triana Moreno L A, Londoño Gutierrez N, Iglesias G E, Castañeda Arredondo S P, Villada Bedoya S, Fernandez Betancur C A, Vanegas Guerrero J, Obado Chacon J C, Moreno Lopez D, Peñuela M M, Rueda Arcila A L, Vallejo Espinosa L F, Álvarez Mejía L M (2021). Monitoreo Ambiental del Proyecto La Colosa. Version 2.2. Universidad de Caldas. Occurrence dataset https://doi.org/10.15472/lavgys accessed via GBIF.org on 2026-05-24.</citation>
+                <resourceLogoUrl>https://statics.sibcolombia.net/sib-resources/images/logos-socios/500px/ucaldas.jpg</resourceLogoUrl>
+                <collection>
+                    <parentCollectionIdentifier>FAUC</parentCollectionIdentifier>
+                    <collectionIdentifier>Registro Nacional de Colecciones Biológicas: 28</collectionIdentifier>
+                    <collectionName>Herbario de la Universidad de Caldas</collectionName>
+                </collection>
+                <collection>
+                    <parentCollectionIdentifier>HUQ</parentCollectionIdentifier>
+                    <collectionIdentifier>Registro Nacional de Colecciones Biológicas: 10</collectionIdentifier>
+                    <collectionName>Herbario Universidad del Quindio</collectionName>
+                </collection>
+                <collection>
+                    <parentCollectionIdentifier>CIUQ</parentCollectionIdentifier>
+                    <collectionIdentifier>Registro Nacional de Colecciones Biológicas: 153</collectionIdentifier>
+                    <collectionName>Colección de Insectos de la Universidad del Quindío</collectionName>
+                </collection>
+                <collection>
+                    <parentCollectionIdentifier>IUQ</parentCollectionIdentifier>
+                    <collectionIdentifier>Registro Nacional de Colecciones Biológicas: 164</collectionIdentifier>
+                    <collectionName>Colección de Ictiología Universidad del Quindío</collectionName>
+                </collection>
+                <collection>
+                    <parentCollectionIdentifier>MHN-UCa</parentCollectionIdentifier>
+                    <collectionIdentifier>Registro Nacional de Colecciones Biológicas: 86</collectionIdentifier>
+                    <collectionName>Colección de Vertebrados e Invertebrados</collectionName>
+                </collection>
+                <collection>
+                    <parentCollectionIdentifier>CEBUC</parentCollectionIdentifier>
+                    <collectionIdentifier>Registro Nacional de Colecciones Biológicas: 188</collectionIdentifier>
+                    <collectionName>Colección Entomológica del Programa de Biología - Universidad de Caldas</collectionName>
+                </collection>
+                <collection>
+                    <parentCollectionIdentifier>LEUC</parentCollectionIdentifier>
+                    <collectionIdentifier>Registro Nacional de Colecciones Biológicas: 206</collectionIdentifier>
+                    <collectionName>Laboratorio de Entomología - Universidad de Caldas</collectionName>
+                </collection>
+                <specimenPreservationMethod>PINNED</specimenPreservationMethod>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
+    </eml:eml>

@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="https://eml.ecoinformatics.org/eml-2.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://eml.ecoinformatics.org/eml-2.2.0 https://rs.gbif.org/schema/eml-gbif-profile/1.3/eml.xsd"
+packageId="6a7c5156-2e11-4046-a01a-3569030d821f"  system="http://gbif.org" scope="system"
+xml:lang="es">
+    <dataset>
+        <alternateIdentifier>10.15472/yly2jm</alternateIdentifier>
+        <alternateIdentifier>6a7c5156-2e11-4046-a01a-3569030d821f</alternateIdentifier>
+        <alternateIdentifier>https://ipt.biodiversidad.co/sib/resource?r=1133_limnologicos_20210325</alternateIdentifier>
+        <title>Registros de macroinvertebrados acuáticos tomados en el tramo medio del río Otún</title>
+        <creator>
+            <individualName>
+                <givenName>Jeymmy Milena</givenName>
+                <surName>Walteros Rodríguez</surName>
+            </individualName>
+            <organizationName>Universidad Tecnológica de Pereira - Docente catedrático - Contratista</organizationName>
+            <positionName>Investigadora</positionName>
+            <address>
+                <deliveryPoint>CR 37 B # 36 - 05 TORR 2 APTO 508</deliveryPoint>
+                <city>Pereira</city>
+                <administrativeArea>Risaralda</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>jeymmy.walteros@utp.edu.co</electronicMailAddress>
+            <userId directory="http://orcid.org/">0000-0002-1834-7753</userId>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Andrés</givenName>
+                <surName>Correa</surName>
+            </individualName>
+            <organizationName>Universidad Tecnológica de Pereira</organizationName>
+            <positionName>Técnico profesional</positionName>
+            <address>
+                <city>Pereira</city>
+                <administrativeArea>Risaralda</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>grupoeis@utp.edu.co</electronicMailAddress>
+        </creator>
+        <metadataProvider>
+            <individualName>
+                <surName>Universidad Tecnológica de Pereira</surName>
+            </individualName>
+            <organizationName>Universidad Tecnológica de Pereira</organizationName>
+            <positionName>Institución educativa</positionName>
+            <address>
+                <deliveryPoint>CR 37 B # 36 - 05 TORR 2 APTO 508</deliveryPoint>
+                <city>Pereira</city>
+                <administrativeArea>Risaralda</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>viceiie@utp.edu.co</electronicMailAddress>
+        </metadataProvider>
+        <associatedParty>
+            <individualName>
+                <surName>Universidad Tecnológica de Pereira</surName>
+            </individualName>
+            <organizationName>Universidad Tecnológica de Pereira</organizationName>
+            <positionName>Gestor</positionName>
+            <address>
+                <city>Pereira</city>
+                <administrativeArea>Risaralda</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>viceiie@utp.edu.co</electronicMailAddress>
+            <role>USER</role>
+        </associatedParty>
+        <associatedParty>
+            <individualName>
+                <surName>Aguas y Aguas de Pereira</surName>
+            </individualName>
+            <organizationName>Aguas y Aguas de Pereira</organizationName>
+            <positionName>Financiador</positionName>
+            <address>
+                <city>Pereira</city>
+                <administrativeArea>Risaralda</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>aarroyave@aguasyaguas.com.co</electronicMailAddress>
+            <role>CONTENT_PROVIDER</role>
+        </associatedParty>
+        <associatedParty>
+            <individualName>
+                <surName>Empresa de energía de Pereira</surName>
+            </individualName>
+            <organizationName>Empresa de energía de Pereira</organizationName>
+            <positionName>Financiador</positionName>
+            <address>
+                <city>Pereira</city>
+                <administrativeArea>Risaralda</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <role>CONTENT_PROVIDER</role>
+        </associatedParty>
+        <pubDate>
+                2025-03-31
+        </pubDate>
+        <language>SPANISH</language>
+        <abstract>
+            <para>El siguiente reporte corresponde al monitoreo realizado en el tramo de las bocatomas de acueducto y empresa de energía de Pereira, sobre el río Otún, como parte a los requerimientos ante la Corporación Autónoma Regional de Risaralda-CARDER y teniendo presente los lineamientos de la Resolución 2851 de 2015. Corresponde al muestreo de macroinvertebrados acuáticos, se encuentran aguas arriba y abajo de las captaciones en la ciudad de Pereira. Corresponden en su mayoría a géneros y o subfamilias de este ensamblaje.</para>
+        </abstract>
+        <keywordSet>
+            <keyword>Occurrence</keyword>
+            <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type_2015-07-10.xml</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+            <keyword>Observation</keyword>
+            <keywordThesaurus>GBIF Dataset Subtype Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_subtype.xml</keywordThesaurus>
+        </keywordSet>
+        <intellectualRights>
+            <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by/4.0/legalcode"><citetitle>Creative Commons Attribution (CC-BY) 4.0 License</citetitle></ulink>.</para>
+        </intellectualRights>
+        <licensed>
+            <licenseName>Creative Commons Attribution 4.0 International</licenseName>
+            <url>https://spdx.org/licenses/CC-BY-4.0.html</url>
+            <identifier>CC-BY-4.0</identifier>
+        </licensed>
+        <distribution scope="document">
+            <online>
+                <url function="download">https://ipt.biodiversidad.co/sib/archive.do?r=1133_limnologicos_20210325</url>
+            </online>
+        </distribution>
+        <coverage>
+            <geographicCoverage>
+                <geographicDescription>Cuenca media del río Otún en Pereira, Risaralda.</geographicDescription>
+                <boundingCoordinates>
+                    <westBoundingCoordinate>-75.612</westBoundingCoordinate>
+                    <eastBoundingCoordinate>-75.537</eastBoundingCoordinate>
+                    <northBoundingCoordinate>4.761</northBoundingCoordinate>
+                    <southBoundingCoordinate>4.703</southBoundingCoordinate>
+                </boundingCoordinates>
+            </geographicCoverage>
+            <temporalCoverage>
+                <rangeOfDates>
+                    <beginDate>
+                        <calendarDate>                2024-04-02
+</calendarDate>
+                    </beginDate>
+                    <endDate>
+                        <calendarDate>                2024-10-22
+</calendarDate>
+                    </endDate>
+                </rangeOfDates>
+            </temporalCoverage>
+            <taxonomicCoverage>
+                <generalTaxonomicCoverage>El recurso cuenta con 203 registros biológicos que se encuentran representados por 5 clases, 14 órdenes, 33 familias y 43 géneros. Del total, se identificó un 79% a nivel de género, un 12.8% a nivel de familia y el 8.2% restante a subfamilia y orden.</generalTaxonomicCoverage>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Arachnida</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Clitellata</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Collembola</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Gastropoda</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Insecta</taxonRankValue>
+                </taxonomicClassification>
+            </taxonomicCoverage>
+        </coverage>
+        <maintenance>
+            <description>
+                <para></para>
+            </description>
+            <maintenanceUpdateFrequency>unkown</maintenanceUpdateFrequency>
+        </maintenance>
+        <contact>
+            <individualName>
+                <givenName>Jeymmy Milena</givenName>
+                <surName>Walteros Rodríguez</surName>
+            </individualName>
+            <organizationName>Universidad Tecnológica de Pereira - Docente catedrático - Contratista</organizationName>
+            <positionName>Investigadora</positionName>
+            <address>
+                <deliveryPoint>CR 37 B # 36 - 05 TORR 2 APTO 508</deliveryPoint>
+                <city>Pereira</city>
+                <administrativeArea>Risaralda</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>jeymmy.walteros@utp.edu.co</electronicMailAddress>
+            <userId directory="http://orcid.org/">0000-0002-1834-7753</userId>
+        </contact>
+        <methods>
+            <methodStep>
+                <description>
+                    <para>El muestreo de los macroinvertebrados acuáticos, se realizó con ayuda de la red D-net, manteniendo un esfuerzo de muestreo de 25 minutos en promedio para cada estación. Se tomó una muestra integral, conformada por 20 sub-muestras tomadas en los diferentes sustratos. El material recolectado se empacó en envases plásticos, previamente etiquetado y conservado con etanol al 90%.</para>
+                </description>
+            </methodStep>
+            <sampling>
+                <studyExtent>
+                    <description>
+                        <para>Cuenca media del río Otún en Pereira, Risaralda.</para>
+                    </description>
+                </studyExtent>
+                <samplingDescription>
+                    <para>El muestreo correspondió al ensamblaje de macroinvertebrados acuáticos, con muestra integral que representa la heterogeneidad de los sustratos.</para>
+                </samplingDescription>
+            </sampling>
+        </methods>
+
+            <project >
+                <title>Monitoreo de la calidad y cantidad de agua sobre el río Otún asociada a las Bocatomas Nuevo Libaré y Belmonte 2023- Orden de servicio 2615/2023</title>
+                <personnel>
+                    <individualName>
+                    <givenName>Jeymmy Milena</givenName>
+                    <surName>Walteros Rodríguez</surName>
+                    </individualName>
+            <userId directory="http://orcid.org/">0000-0002-1834-7753</userId>
+                    <role>PRINCIPAL_INVESTIGATOR</role>
+                </personnel>
+                <abstract>
+                    <para>El objetivo de esta consultoría es definir la condición de calidad biótica de los puntos de muestreo sobre el río Otún</para>
+                </abstract>
+                <funding>
+                    <para>Empresa de energía y Aguas y Aguas de Pereira</para>
+                </funding>
+                <studyAreaDescription>
+                    <descriptor name="generic" citableClassificationSystem="false">
+                        <descriptorValue>Cuenca media del río Otún, entre zonas rural y urbana</descriptorValue>
+                    </descriptor>
+                </studyAreaDescription>
+                <designDescription>
+                    <description>
+                        <para>El tramo muestreado corresponde a antes de las bocatomas, en sitio de generación y después de bocatomas</para>
+                    </description>
+                </designDescription>
+            </project>
+    </dataset>
+
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2026-05-24T11:59:17Z</dateStamp>
+                <citation identifier="https://doi.org/10.15472/yly2jm">Walteros Rodríguez J M, Correa A, Universidad Tecnológica de Pereira (2025). Registros de macroinvertebrados acuáticos tomados en el tramo medio del río Otún. Version 1.2. Universidad Tecnológica de Pereira. Occurrence dataset https://doi.org/10.15472/yly2jm accessed via GBIF.org on 2026-05-24.</citation>
+                <resourceLogoUrl>https://raw.githubusercontent.com/SIB-Colombia/logos/main/socio-SiB-utp.png</resourceLogoUrl>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
+    </eml:eml>

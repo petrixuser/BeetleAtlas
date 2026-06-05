@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="https://eml.ecoinformatics.org/eml-2.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://eml.ecoinformatics.org/eml-2.2.0 https://rs.gbif.org/schema/eml-gbif-profile/1.3/eml.xsd"
+packageId="5978f9a9-c6e9-4f45-aa12-54743b72fe78"  system="http://gbif.org" scope="system"
+xml:lang="en">
+    <dataset>
+        <alternateIdentifier>10.15470/qzikh6</alternateIdentifier>
+        <alternateIdentifier>5978f9a9-c6e9-4f45-aa12-54743b72fe78</alternateIdentifier>
+        <alternateIdentifier>https://ipt.gbif.es/resource?r=vit-coleopterotheca</alternateIdentifier>
+        <title>VIT-Coleopterotheca (The Natural History Museum of Álava)</title>
+        <creator>
+            <individualName>
+                <givenName>Juan María</givenName>
+                <surName>Marcos Alonso</surName>
+            </individualName>
+            <organizationName>Museo de Ciencias naturales de Álava / Arabako Natur Zientzien Museoa</organizationName>
+            <positionName>Retired</positionName>
+            <address>
+                <country>SPAIN</country>
+            </address>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Ibón</givenName>
+                <surName>de Olano</surName>
+            </individualName>
+            <organizationName>Museo de Ciencias naturales de Álava / Arabako Natur Zientzien Museoa</organizationName>
+            <positionName>Departamento Invertebrados</positionName>
+            <address>
+                <deliveryPoint>Siervas de Jesús 24</deliveryPoint>
+                <city>Vitoria-Gasteiz</city>
+                <administrativeArea>Álava / Araba</administrativeArea>
+                <postalCode>E-01001</postalCode>
+                <country>SPAIN</country>
+            </address>
+            <phone>+34945181924</phone>
+            <electronicMailAddress>ideolano@externos.araba.eus</electronicMailAddress>
+            <onlineUrl>https://naturazientzienmuseoa.eus/es/</onlineUrl>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Marta</givenName>
+                <surName>Infante Sánchez</surName>
+            </individualName>
+            <organizationName>Museo de Ciencias naturales de Álava / Arabako Natur Zientzien Museoa</organizationName>
+            <positionName>Departamento Botánica</positionName>
+            <address>
+                <deliveryPoint>Siervas de Jesús 24</deliveryPoint>
+                <city>Vitoria-Gasteiz</city>
+                <administrativeArea>Álava / Araba</administrativeArea>
+                <postalCode>E-01001</postalCode>
+                <country>SPAIN</country>
+            </address>
+            <phone>+34945181924</phone>
+            <electronicMailAddress>bazzania.vit@gmail.com</electronicMailAddress>
+            <onlineUrl>https://naturazientzienmuseoa.eus/es/</onlineUrl>
+        </creator>
+        <metadataProvider>
+            <individualName>
+                <givenName>Ibón</givenName>
+                <surName>de Olano</surName>
+            </individualName>
+            <organizationName>Museo de Ciencias naturales de Álava / Arabako Natur Zientzien Museoa</organizationName>
+            <positionName>Departamento Invertebrados</positionName>
+            <address>
+                <deliveryPoint>Siervas de Jesús 24</deliveryPoint>
+                <city>Vitoria-Gasteiz</city>
+                <administrativeArea>Álava / Araba</administrativeArea>
+                <postalCode>E-01001</postalCode>
+                <country>SPAIN</country>
+            </address>
+            <phone>+34945181924</phone>
+            <electronicMailAddress>ideolano@externos.araba.eus</electronicMailAddress>
+            <onlineUrl>https://naturazientzienmuseoa.eus/es/</onlineUrl>
+        </metadataProvider>
+        <metadataProvider>
+            <individualName>
+                <givenName>Marta</givenName>
+                <surName>Infante Sánchez</surName>
+            </individualName>
+            <organizationName>Museo de Ciencias naturales de Álava / Arabako Natur Zientzien Museoa</organizationName>
+            <positionName>Departamento Botánica</positionName>
+            <address>
+                <deliveryPoint>Siervas de Jesús 24</deliveryPoint>
+                <city>Vitoria-Gasteiz</city>
+                <administrativeArea>Álava / Araba</administrativeArea>
+                <postalCode>E-01001</postalCode>
+                <country>SPAIN</country>
+            </address>
+            <phone>+34945181924</phone>
+            <electronicMailAddress>bazzania.vit@gmail.com</electronicMailAddress>
+            <onlineUrl>https://naturazientzienmuseoa.eus/es/</onlineUrl>
+        </metadataProvider>
+        <associatedParty>
+            <individualName>
+                <givenName>Jesús</givenName>
+                <surName>Alonso Ramírez</surName>
+            </individualName>
+            <organizationName>Museo de Ciencias naturales de Álava / Arabako Natur Zientzien Museoa</organizationName>
+            <positionName>Técnico responsable</positionName>
+            <address>
+                <deliveryPoint>Siervas de Jesús 24</deliveryPoint>
+                <city>Vitoria-Gasteiz</city>
+                <administrativeArea>Álava / Araba</administrativeArea>
+                <postalCode>E-01001</postalCode>
+                <country>SPAIN</country>
+            </address>
+            <phone>+34945181924</phone>
+            <electronicMailAddress>mcna@araba.eus</electronicMailAddress>
+            <onlineUrl>https://naturazientzienmuseoa.eus/es/</onlineUrl>
+            <role>CUSTODIAN_STEWARD</role>
+        </associatedParty>
+        <pubDate>
+                2023-05-12
+        </pubDate>
+        <language>SPANISH</language>
+        <abstract>
+            The Coleopterotheca of the Natural History Museum of Álava began in 1974 and nowadays, it holds around 160.000 specimens, of which 133.700 are databased. The number of taxa is approximately 5.000.
+The main collectors are Juan María Marcos, Imanol Zabalegui, Federico Zuazo, Ibon de Olano, Diego Sánchez Miyares, Pablo Bahillo, Felipe Calvo, José María Salgado y José Sebastián Estévez.
+The collection is particularly numerous in specimens of the Caraboidea superfamily from the Basque Country (Northern Spain)(Ortuño &amp; Marcos, 2003); and in cave fauna, including many paratypes, collected in different locations in the Northern half of Spain.
+
+Ortuño, V.M. &amp; Marcos, J.M. (2003). Los Caraboidea (Insecta: Coleoptera) de la Comunidad Autónoma del País Vasco. Tomo I: Cincidelidae y Carabidae. Gobierno Vasco, Vitoria-Gasteiz, 573 p.
+        </abstract>
+        <keywordSet>
+            <keyword>Occurrence</keyword>
+            <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type_2015-07-10.xml</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+            <keyword>Specimen</keyword>
+            <keywordThesaurus>GBIF Dataset Subtype Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_subtype.xml</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+            <keyword>Animalia</keyword>
+            <keyword>Coleoptera</keyword>
+            <keyword>Arthropoda</keyword>
+            <keyword>Insecta</keyword>
+            <keywordThesaurus>n/a</keywordThesaurus>
+        </keywordSet>
+        <intellectualRights>
+            <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by-nc/4.0/legalcode"><citetitle>Creative Commons Attribution Non Commercial (CC-BY-NC) 4.0 License</citetitle></ulink>.</para>
+        </intellectualRights>
+        <licensed>
+            <licenseName>Creative Commons Attribution Non Commercial 4.0 International</licenseName>
+            <url>https://spdx.org/licenses/CC-BY-NC-4.0.html</url>
+            <identifier>CC-BY-NC-4.0</identifier>
+        </licensed>
+        <distribution scope="document">
+            <online>
+                <url function="information">http://www.araba.eus/cs/Satellite?c=DPA_Cultura_FA&amp;cid=1193045760162&amp;pageid=1193045487374&amp;pagename=DiputacionAlava%2FDPA_Cultura_FA%2FDPA_museo</url>
+            </online>
+        </distribution>
+        <distribution scope="document">
+            <online>
+                <url function="download">https://ipt.gbif.es/archive.do?r=vit-coleopterotheca</url>
+            </online>
+        </distribution>
+        <coverage>
+            <geographicCoverage>
+                <geographicDescription>World, but the vast majority of records come from Spain. Within Spain, Álava is the best represented province, followed by Gipuzkoa, Bizkaia, Asturias and Cantabria.</geographicDescription>
+                <boundingCoordinates>
+                    <westBoundingCoordinate>-90.963</westBoundingCoordinate>
+                    <eastBoundingCoordinate>125.67</eastBoundingCoordinate>
+                    <northBoundingCoordinate>52.019</northBoundingCoordinate>
+                    <southBoundingCoordinate>-47.461</southBoundingCoordinate>
+                </boundingCoordinates>
+            </geographicCoverage>
+            <temporalCoverage>
+                <rangeOfDates>
+                    <beginDate>
+                        <calendarDate>                1901-01-01
+</calendarDate>
+                    </beginDate>
+                    <endDate>
+                        <calendarDate>                2022-12-31
+</calendarDate>
+                    </endDate>
+                </rangeOfDates>
+            </temporalCoverage>
+            <taxonomicCoverage>
+                <taxonomicClassification>
+                    <taxonRankName>Kingdom</taxonRankName>
+                    <taxonRankValue>Animalia</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Phylum</taxonRankName>
+                    <taxonRankValue>Arthropoda</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Coleoptera</taxonRankValue>
+                </taxonomicClassification>
+            </taxonomicCoverage>
+        </coverage>
+        <maintenance>
+            <description>
+                <para></para>
+            </description>
+            <maintenanceUpdateFrequency>irregular</maintenanceUpdateFrequency>
+        </maintenance>
+        <contact>
+            <individualName>
+                <givenName>Ibón</givenName>
+                <surName>de Olano</surName>
+            </individualName>
+            <organizationName>Museo de Ciencias naturales de Álava / Arabako Natur Zientzien Museoa</organizationName>
+            <positionName>Departamento Invertebrados</positionName>
+            <address>
+                <deliveryPoint>Siervas de Jesús 24</deliveryPoint>
+                <city>Vitoria-Gasteiz</city>
+                <administrativeArea>Álava / Araba</administrativeArea>
+                <postalCode>E-01001</postalCode>
+                <country>SPAIN</country>
+            </address>
+            <phone>+34945181924</phone>
+            <electronicMailAddress>ideolano@externos.araba.eus</electronicMailAddress>
+            <onlineUrl>https://naturazientzienmuseoa.eus/es/</onlineUrl>
+        </contact>
+        <contact>
+            <individualName>
+                <givenName>Marta</givenName>
+                <surName>Infante Sánchez</surName>
+            </individualName>
+            <organizationName>Museo de Ciencias naturales de Álava / Arabako Natur Zientzien Museoa</organizationName>
+            <positionName>Departamento Botánica</positionName>
+            <address>
+                <deliveryPoint>Siervas de Jesús 24</deliveryPoint>
+                <city>Vitoria-Gasteiz</city>
+                <administrativeArea>Álava / Araba</administrativeArea>
+                <postalCode>E-01001</postalCode>
+                <country>SPAIN</country>
+            </address>
+            <phone>+34945181924</phone>
+            <electronicMailAddress>bazzania.vit@gmail.com</electronicMailAddress>
+            <onlineUrl>https://naturazientzienmuseoa.eus/es/</onlineUrl>
+        </contact>
+
+            <project >
+                <title>Museo de Ciencias Naturales de Álava / Arabako Natura Zientzien Museoa</title>
+                <abstract>
+                    <para></para>
+                </abstract>
+                <funding>
+                    <para></para>
+                </funding>
+            </project>
+    </dataset>
+
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2026-05-24T11:59:20Z</dateStamp>
+                <citation identifier="https://doi.org/10.15470/qzikh6">Marcos Alonso J M, de Olano I, Infante Sánchez M (2023). VIT-Coleopterotheca (The Natural History Museum of Álava). Version 2.3. Natural History Museum of Alava (Museo de Ciencias Naturales de Álava / Arabako Natura Zientzien Museoa). Occurrence dataset https://doi.org/10.15470/qzikh6 accessed via GBIF.org on 2026-05-24.</citation>
+                <resourceLogoUrl>https://ipt.gbif.es/logo.do?r=vit-coleopterotheca</resourceLogoUrl>
+                <formationPeriod>This collection has been built since 1974</formationPeriod>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
+    </eml:eml>

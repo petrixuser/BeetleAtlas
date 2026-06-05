@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="https://eml.ecoinformatics.org/eml-2.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://eml.ecoinformatics.org/eml-2.2.0 https://rs.gbif.org/schema/eml-gbif-profile/1.3/eml.xsd"
+packageId="b4ba17bb-057d-460f-9968-ff40333037b9"  system="http://gbif.org" scope="system"
+xml:lang="es">
+    <dataset>
+        <alternateIdentifier>10.15472/m6s0lh</alternateIdentifier>
+        <alternateIdentifier>b4ba17bb-057d-460f-9968-ff40333037b9</alternateIdentifier>
+        <alternateIdentifier>https://ipt.biodiversidad.co/sib/resource?r=fauna_oceta_boyacabio</alternateIdentifier>
+        <title>Grupos faunísticos de la expedición Ocetá - Proyecto Boyacá BIO UPTC</title>
+        <creator>
+            <individualName>
+                <givenName>Gladys</givenName>
+                <surName>Cárdenas Arévalo</surName>
+            </individualName>
+            <organizationName>Universidad Pedagógica y Tecnológica de Colombia</organizationName>
+            <positionName>Investigador</positionName>
+            <address>
+                <deliveryPoint>Avenida Central del Norte No. 39-115</deliveryPoint>
+                <city>Tunja</city>
+                <administrativeArea>Boyacá</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>gladysc4@gmail.com</electronicMailAddress>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Azarys</givenName>
+                <surName>Paternina Hernández</surName>
+            </individualName>
+            <organizationName>Universidad Pedagógica y Tecnológica de Colombia</organizationName>
+            <positionName>Investigador</positionName>
+            <address>
+                <deliveryPoint>Avenida Central del Norte No. 39-115</deliveryPoint>
+                <city>Tunja</city>
+                <administrativeArea>Boyacá</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>azarysp@gmail.com</electronicMailAddress>
+            <userId directory="http://orcid.org/">0000-0002-4542-6967</userId>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Héctor</givenName>
+                <surName>Samudio</surName>
+            </individualName>
+            <organizationName>Universidad Pedagógica y Tecnológica de Colombia</organizationName>
+            <positionName>Investigador</positionName>
+            <address>
+                <deliveryPoint>Avenida Central del Norte No. 39-115</deliveryPoint>
+                <city>Tunja</city>
+                <administrativeArea>Boyacá</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>hectorsagaster@gmail.com</electronicMailAddress>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Alejandro</givenName>
+                <surName>Lopera Toro</surName>
+            </individualName>
+            <organizationName>Universidad Pedagógica y Tecnológica de Colombia</organizationName>
+            <positionName>Investigador</positionName>
+            <address>
+                <deliveryPoint>Avenida Central del Norte No. 39-115</deliveryPoint>
+                <city>Tunja</city>
+                <administrativeArea>Boyacá</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>alejandro.lopera@gmail.com</electronicMailAddress>
+            <userId directory="http://orcid.org/">0000-0001-5097-1655</userId>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Johann Stephens</givenName>
+                <surName>Cárdenas Bautista</surName>
+            </individualName>
+            <organizationName>Universidad Pedagógica y Tecnológica de Colombia</organizationName>
+            <positionName>Investigador</positionName>
+            <address>
+                <deliveryPoint>Avenida Central del Norte No. 39-115</deliveryPoint>
+                <city>Tunja</city>
+                <administrativeArea>Boyacá</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>johannstephens@gmail.com</electronicMailAddress>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Ximena Alejandra</givenName>
+                <surName>Galindo</surName>
+            </individualName>
+            <organizationName>Universidad Pedagógica y Tecnológica de Colombia</organizationName>
+            <positionName>Investigador</positionName>
+            <address>
+                <deliveryPoint>Avenida Central del Norte No. 39-115</deliveryPoint>
+                <city>Tunja</city>
+                <administrativeArea>Boyacá</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>ximenagm13@gmail.com</electronicMailAddress>
+            <userId directory="http://orcid.org/">0000-0003-0617-9403</userId>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Silvia Patricia</givenName>
+                <surName>Mondragón</surName>
+            </individualName>
+            <organizationName>Universidad Pedagógica y Tecnológica de Colombia</organizationName>
+            <positionName>Investigador</positionName>
+            <address>
+                <deliveryPoint>Avenida Central del Norte No. 39-115</deliveryPoint>
+                <city>Tunja</city>
+                <administrativeArea>Boyacá</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>patriciamondragon18@gmail.com</electronicMailAddress>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Nohora Elizabeth</givenName>
+                <surName>Pérez</surName>
+            </individualName>
+            <organizationName>Universidad Pedagógica y Tecnológica de Colombia</organizationName>
+            <positionName>Investigador</positionName>
+            <address>
+                <deliveryPoint>Avenida Central del Norte No. 39-115</deliveryPoint>
+                <city>Tunja</city>
+                <administrativeArea>Boyacá</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>nohora.perez@uptc.edu.co</electronicMailAddress>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Diana Katherine</givenName>
+                <surName>Pérez</surName>
+            </individualName>
+            <organizationName>Universidad Pedagógica y Tecnológica de Colombia</organizationName>
+            <positionName>Investigador</positionName>
+            <address>
+                <deliveryPoint>Avenida Central del Norte No. 39-115</deliveryPoint>
+                <city>Tunja</city>
+                <administrativeArea>Boyacá</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>katherine.perezg12@gmail.com</electronicMailAddress>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Jenny Andrea</givenName>
+                <surName>Parada Alfonso</surName>
+            </individualName>
+            <organizationName>Universidad Pedagógica y Tecnológica de Colombia</organizationName>
+            <positionName>Documentador de datos</positionName>
+            <address>
+                <deliveryPoint>Avenida Central del Norte No. 39-115</deliveryPoint>
+                <city>Tunja</city>
+                <administrativeArea>Boyacá</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>jeanjapane@gmail.com</electronicMailAddress>
+            <userId directory="http://orcid.org/">0000-0002-5583-4227</userId>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Juan Sebastián</givenName>
+                <surName>González Sanabria</surName>
+            </individualName>
+            <organizationName>Universidad Pedagógica y Tecnológica de Colombia</organizationName>
+            <positionName>Asesor</positionName>
+            <address>
+                <deliveryPoint>Avenida Central del Norte No. 39-115</deliveryPoint>
+                <city>Tunja</city>
+                <administrativeArea>Boyacá</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>juansebastian.gonzalez@uptc.edu.co</electronicMailAddress>
+        </creator>
+        <metadataProvider>
+            <individualName>
+                <givenName>María Eugenia</givenName>
+                <surName>Morales Puentes</surName>
+            </individualName>
+            <organizationName>Universidad Pedagógica y Tecnológica de Colombia</organizationName>
+            <positionName>Investigador</positionName>
+            <address>
+                <deliveryPoint>Avenida Central del Norte No. 39-115</deliveryPoint>
+                <city>Tunja</city>
+                <administrativeArea>Boyacá</administrativeArea>
+                <postalCode>150001</postalCode>
+                <country>COLOMBIA</country>
+            </address>
+            <phone>87425626</phone>
+            <electronicMailAddress>maria.morales@uptc.edu.co</electronicMailAddress>
+            <userId directory="http://orcid.org/">/0000-0002-5332-9956</userId>
+        </metadataProvider>
+        <associatedParty>
+            <individualName>
+                <givenName>María Eugenia</givenName>
+                <surName>Morales Puentes</surName>
+            </individualName>
+            <organizationName>Universidad Pedagógica y Tecnológica de Colombia</organizationName>
+            <positionName>Investigador</positionName>
+            <address>
+                <deliveryPoint>Avenida Central del Norte No. 39-115</deliveryPoint>
+                <city>Tunja</city>
+                <administrativeArea>Boyacá</administrativeArea>
+                <postalCode>150001</postalCode>
+                <country>COLOMBIA</country>
+            </address>
+            <phone>87425626</phone>
+            <electronicMailAddress>maria.morales@uptc.edu.co</electronicMailAddress>
+            <userId directory="http://orcid.org/">/0000-0002-5332-9956</userId>
+            <role>PRINCIPAL_INVESTIGATOR</role>
+        </associatedParty>
+        <associatedParty>
+            <individualName>
+                <givenName>Universidad Pedagógica y Tecnológica de Colombia</givenName>
+                <surName>UPTC</surName>
+            </individualName>
+            <address>
+                <deliveryPoint>Avenida Central del Norte No. 39-115</deliveryPoint>
+                <city>Tunja</city>
+                <administrativeArea>Boyacá</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <onlineUrl>http://www.uptc.edu.co/</onlineUrl>
+            <role>AUTHOR</role>
+        </associatedParty>
+        <pubDate>
+                2021-05-20
+        </pubDate>
+        <language>SPANISH</language>
+        <abstract>
+            Se presentan los resultados de la expedición realizada al páramo de Ocetá, en los ecosistemas de bosque altoandino, páramo, y sistemas acuáticos lóticos y lénticos. Se muestreo flora vascular y no vascular, grupos faunísticos representados por anfibios y reptiles, mamíferos, peces e insectos, y finalmente, el reino Fungi; de las zonas de muestreo establecidas en los municipios de Mongua y Monguí. El objetivo propuesto fue recopilar información integrada sobre la biodiversidad, los servicios ecosistémicos de ésta, y los saberes tradicionales de las comunidades locales, como sustento para formular pautas de conservación y uso sostenible de los recursos. El recurso presentado contiene 420 registros de fauna, de los cuales 352 registros pertenecen a la clase Insecta representados en 32 familias, 49 géneros, 11 especies y cinco morfoespecies; la clase Actinopterygii con 24 registros, correspondientes a  tres familias, tres géneros, tres especies y una morfoespecie; a la clase Amphibia, pertenecen 31 registros representados en dos familias, tres géneros y cuatro especies del orden Anura; para la clase Reptilia, 11 fueron los registros representados en dos familias, dos géneros y dos especies del orden Squamata y la clase Mammalia, representada en dos registros que pertenecen a dos familias, dos géneros y dos especies. Este inventario se desarrolló bajo el Convenio de cooperación No 17-17-170-195CE, suscrito entre UPTC-IAVH, Análisis de la biodiversidad y servicios ecosistémicos para su aplicación en la toma de decisiones en el departamento de Boyacá/Boyacá Bio.
+        </abstract>
+        <keywordSet>
+            <keyword>Occurrence</keyword>
+            <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type.xml</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+            <keyword>Observation</keyword>
+            <keywordThesaurus>GBIF Dataset Subtype Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_subtype.xml</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+            <keyword>Reptiles</keyword>
+            <keyword>cuerpos de agua</keyword>
+            <keyword>BOYACA_BIO</keyword>
+            <keyword>biodiversidad</keyword>
+            <keyword>Anfibios</keyword>
+            <keyword>frailejonal</keyword>
+            <keyword>Boyacá</keyword>
+            <keyword>Monguí</keyword>
+            <keyword>Insectos Acuáticos</keyword>
+            <keyword>Peces</keyword>
+            <keyword>pajonal</keyword>
+            <keyword>Mamíferos</keyword>
+            <keyword>registro biológico</keyword>
+            <keyword>bosque secundario</keyword>
+            <keyword>Mongua</keyword>
+            <keyword>páramo</keyword>
+            <keyword>río Cravo Sur</keyword>
+            <keyword>Escarabajos Coprófagos</keyword>
+            <keyword>Ocetá</keyword>
+            <keyword>matorral</keyword>
+            <keyword>áreas abiertas</keyword>
+            <keyword>rastrojo mixto</keyword>
+            <keywordThesaurus>n/a</keywordThesaurus>
+        </keywordSet>
+        <intellectualRights>
+            <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by/4.0/legalcode"><citetitle>Creative Commons Attribution (CC-BY) 4.0 License</citetitle></ulink>.</para>
+        </intellectualRights>
+        <licensed>
+            <licenseName>Creative Commons Attribution 4.0 International</licenseName>
+            <url>https://spdx.org/licenses/CC-BY-4.0.html</url>
+            <identifier>CC-BY-4.0</identifier>
+        </licensed>
+        <distribution scope="document">
+            <online>
+                <url function="download">https://ipt.biodiversidad.co/sib/archive.do?r=fauna_oceta_boyacabio</url>
+            </online>
+        </distribution>
+        <coverage>
+            <geographicCoverage>
+                <geographicDescription>El parque Natural Regional “Unidad Biogeográfica Siscunsí-Ocetá” (en el que se ubica el páramo de Ocetá) pertenece al complejo de páramos denominado Tota-Bijagual-Mamapacha y se encuentra en jurisdicción de los municipios de Sogamoso, Aquitania, Mongua y Monguí. Es un ecosistema conformado en su mayor parte por áreas de páramo, pastizales y relictos dispersos de rastrojo y bosque altoandino (Corpoboyacá y Neotropical, 2008, Corpoboyacá y Neotropical, 2011).</geographicDescription>
+                <boundingCoordinates>
+                    <westBoundingCoordinate>-72.857</westBoundingCoordinate>
+                    <eastBoundingCoordinate>-72.769</eastBoundingCoordinate>
+                    <northBoundingCoordinate>5.766</northBoundingCoordinate>
+                    <southBoundingCoordinate>5.696</southBoundingCoordinate>
+                </boundingCoordinates>
+            </geographicCoverage>
+            <temporalCoverage>
+                <rangeOfDates>
+                    <beginDate>
+                        <calendarDate>                2019-02-23
+</calendarDate>
+                    </beginDate>
+                    <endDate>
+                        <calendarDate>                2019-03-04
+</calendarDate>
+                    </endDate>
+                </rangeOfDates>
+            </temporalCoverage>
+            <taxonomicCoverage>
+                <generalTaxonomicCoverage>El recurso contiene 420 registros de fauna, de los cuales 352 registros pertenecen a la clase Insecta representados en 32 familias, 49 géneros, 11 especies y cinco morfoespecies; la familia Scarabaeidae fue mejor la  representada con 9 géneros, 9 especies y 3 morfoespecies, seguida de la familia Leptoceridae con los géneros Atanatolica, Grumichella, Nectopsyche, Oecetis y Triplectides del orden Trichoptera; la clase Actinopterygii con 24 registros, correspondientes a  tres familias, tres géneros, tres especies y una morfoespecie; a la clase Amphibia, pertenecen 31 registros representados en dos familias, tres géneros y cuatro especies del orden Anura; la familia Craugastoridae fue la mejor representada con 27 registros para tres especies de los géneros Pristimantis y Niceforonia; para la clase Reptilia, 11 fueron los registros representados en dos familias, dos géneros y dos especies del orden Squamata y la clase Mammalia, representada en dos registros que pertenecen a dos familias, dos géneros y dos especies.</generalTaxonomicCoverage>
+                <taxonomicClassification>
+                    <taxonRankName>Kingdom</taxonRankName>
+                    <taxonRankValue>Animalia</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Phylum</taxonRankName>
+                    <taxonRankValue>Arthropoda, Chordata</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Insecta, Actinopterygii, Amphibia, Reptilia, Mammalia</taxonRankValue>
+                </taxonomicClassification>
+            </taxonomicCoverage>
+        </coverage>
+        <maintenance>
+            <description>
+                <para></para>
+            </description>
+            <maintenanceUpdateFrequency>asNeeded</maintenanceUpdateFrequency>
+        </maintenance>
+        <contact>
+            <individualName>
+                <givenName>María Eugenia</givenName>
+                <surName>Morales Puentes</surName>
+            </individualName>
+            <organizationName>Universidad Pedagógica y Tecnológica de Colombia</organizationName>
+            <positionName>Investigador principal</positionName>
+            <address>
+                <deliveryPoint>Avenida Central del Norte No. 39-115</deliveryPoint>
+                <city>Tunja</city>
+                <administrativeArea>Boyacá</administrativeArea>
+                <postalCode>150001</postalCode>
+                <country>COLOMBIA</country>
+            </address>
+            <phone>87425626</phone>
+            <electronicMailAddress>maria.morales@uptc.edu.co</electronicMailAddress>
+            <userId directory="http://orcid.org/">/0000-0002-5332-9956</userId>
+        </contact>
+        <methods>
+            <methodStep>
+                <description>
+                    <para>Para realizar el muestreo de peces, se seleccionaron 14 puntos de muestreo correspondientes a diferentes cuerpos de agua (tramos de ríos, y quebradas). Para el municipio de Monguí (río El Morro, río El Tejar, quebrada La Estrella, tributario río El Judio) y para el municipio de Mongua (quebrada La Colorada, río La Leonera, río Balcones, quebrada Quiñonez, tributario río El Morro, río El Judio, río Cravo Sur, quebrada Sismosá, quebrada El Chuscal, quebrada La Batea, tributario quebrada El Chuscal). En cada punto de muestreo, por alrededor de 60 minutos, se realizó una faena de electropesca, apoyada con salabardos y una red de espera (individuos encontrados aguas abajo) explorando los diferentes tipos de flujo (rápidos, pozos, meandros, etc.) y sustratos (rocoso, fango, hojarasca, vegetación sumergida, etc.) presentes en el canal. Los peces capturados fueron fijados en solución de formol a los 10%, lavados y preservados en alcohol al 70%; otros preservados en alcohol al 96% para la posterior obtención de muestras de tejido. La identificación taxonómica se realizó utilizando claves especializadas o las descripciones originales de las especies.
+El muestreo de herpetofauna, se realizó durante ocho días de muestreo efectivo en las coberturas vegetales o hábitats identificados (comunidades de páramo de frailejonales, pajonales, chuscales y/o matorrales; cuerpos de agua, bosque y áreas abiertas o transformadas como potreros, bordes de trocha y carretera), en los diferentes estratos (rasante, herbáceo y arbustivo) para cada una de las localidades visitadas de los municipios de Mongua y Monguí. Empleando la técnica de búsqueda libre por encuentros visuales VES: (Visual Encounter Surveys) y remoción (Crump &amp; Scott, 1994), en recorridos diurnos y/o nocturnos se efectuó la búsqueda (levantando rocas, frailejones, remoción de necromasa, etc.), observación, registro auditivo, captura manual o con lazada y registros ocasionales en las mismas localidades, suministrados por otros investigadores. El esfuerzo total de muestreo fue de 227.15 horas/hombre, en el que trabajaron de cuatro a cinco personas. Por espécimen fueron registrados datos de localidad, coordenadas, altitd, tipo de cobertura (hábitat), hora de captura, tipo de sustrato sobre el que se observó (entre hojarasca en pie o caída, montículos de musgo; bajo troncos o piedras; sobre musgo, ramas, hojas, etc.), estrato (altura con respecto al suelo) y otros aspectos de hábitat. Adicionalmente, a varios individuos de anfibios se les grabó el canto (grabaciones depositadas en la colección de sonidos del IAvH). Todos los especímenes fueron fotografiados y se les describió el patrón de coloración. La identificación taxonómica de los especímenes se estableció de acuerdo con Frost (2018) y Acosta-G. (2018), para anfibios y con Uetz &amp; Hošek (2018), para reptiles. Para el banco de tejidos (ADN), después de ser sacrificados, a la mayoría de los ejemplares, se les tomó una muestra de tejido (músculo o hígado) que se depositó en crioviales debidamente marcados y con alcohol al 96 %, estas muestras quedaron depositadas en la colección de tejidos del IAvH.
+
+La captura de mamíferos, se realizó a partir de la implementación de tres metodologías para aumentar la detección de la mayor cantidad de las especies en zonas de páramo, bosque andino y altoandino y rastrojo mixto en los municipios de Mongua y Monguí. Para la captura de mamíferos voladores en zonas de bosque altoandino, rastrojo mixto y páramo, se instalaron siete redes de niebla, desde las 18:00 hasta las 22:00 horas, revisadas cada 30 minutos. Los individuos capturados fueron medidos, fotografiados, recolectados  e identificados hasta el nivel taxonómico más específico Para pequeños mamíferos en zonas bosque altoandino, rastrojo mixto y páramo, se instalaron 15  trampas Sherman con una mezcla de mantequilla de maní, nueces, esencia de vainilla/banano y avena. Además del uso de trampas se realizaron caminatas de observación a lo largo de transectos que abarcaron los diferentes tipos de vegetación; durante las cuales se tomó registro escrito y fotográfico (cuando fuese posible) de los mamíferos y los rastros encontrados en el trayecto. En los muestreos nocturnos se desarrollaron  caminatas en las mismas coberturas vegetales (páramo, bosque andino y altoandino y rastrojo mixto), donde por punto de muestreo se realizaron grabaciones (tres) de llamado de murciélagos con ayuda de Echo meter touch module conectado a un dispositivo móvil. Para la identificación se emplearon las claves taxonómicas de Emmons (1997), Tim y LaVal (1998) y Linares (1998), descripciones de Gardner (2008) y Patton et al. 2015. Corroborando con la lista de mamíferos de Colombia y con los trabajos de Solari et al. 2013 y Ramírez-Chávez et al. 2016
+
+El esfuerzo de muestreo para escarabajos coprófagos se basó en la metodología de Larsen &amp; Forsyth (2005) con algunas modificaciones de acuerdo a las condiciones de las coberturas encontradas. En cada una de las coberturas vegetales evaluadas por localidad, se instalaron trampas de caída cebadas con 30g de excremento o carroña; así: Para Monguí en área urbana y pastizal - 0 transecto/2 trampas, rastrojo/pastizal - 1/10, rastrojo/subpáramo - 1/13. Para Mongua en bosque andino/cultivos/pastizal/páramo - 1/20 y colecta manual en pastizales. Los escarabajos fueron colectados cada 24 horas, momento en que se recebó la trampa, se cambió el líquido preservante y se empacaron los ejemplares y sus respectivas etiquetas en bolsas Whirlpack con alcohol al 96%. La identificación taxonómica del material se realizó hasta morfo especie o especie cuando fue posible. La identificación del material recolectado se hizo con ayuda de la colección de referencia de escarabajos coprófagos del instituto Humboldt (CRECC). El muestreo de Insectos acuáticos, se efectuó en los municipios de Mongua y Monguí, en donde se establecieron 19 puntos de muestreo, en 14 cuerpos de agua (cinco quebradas, cuatro ríos (río Morro, río El Tejar, río Pericos, río La Leonera, río Laguna Negra, río Balcones, río Cravo Sur y río Sismoza), una laguna), ubicados entre los 1697 y los 3559 m de elevación. En cada cuerpo lótico dependiendo de la geografía del sitio, fueron dispuestos de uno a dos transectos de 15 m, separados entre sí por mínimo 200 m. La captura de especímenes se realizó durante un periodo de 30 minutos/hombre, usando red acuáticas triangular en fondo, y recolecta directa (levantamiento de rocas, troncos y hojarasca, y barridos con red acuática sobre la película superficial del agua) en cada transecto durante 15 minutos. Para los ecosistemas lenticos, por cada cuerpo de agua se estableció un transecto de 15 m por la orilla, y se realizó barrido de fondo y superficie, con redes acuáticas por 30 minutos/hombre. La identificación del material recolectado se hizo con ayuda de las claves de Angrisano y Sganga (2009), Contreras-Ramos (2009), Domínguez et al. (2009), Gutiérrez y Dias (2015), Megna et al. (2019), Posada-García y Roldán-Pérez (2003) y claves complementarias para los respectivos órdenes y géneros encontrados.</para>
+                </description>
+            </methodStep>
+            <sampling>
+                <studyExtent>
+                    <description>
+                        <para>El parque Natural Regional “Unidad Biogeográfica Siscunsí-Ocetá” (en el que se ubica el páramo de Ocetá) pertenece al complejo de páramos denominado Tota-Bijagual-Mamapacha y se encuentra en jurisdicción de los municipios de Sogamoso, Aquitania, Mongua y Monguí. Es un ecosistema conformado en su mayor parte por áreas de páramo, pastizales y relictos dispersos de rastrojo y bosque altoandino (Corpoboyacá y Neotropical, 2008, 2011). Se constituye una reserva hídrica de gran importancia para Boyacá y Casanare, representada en el nacimiento de numerosos tributarios de las cuencas de los ríos Cusiana, Cravo Sur, medio Chicamocha y lago de Tota. El terreno es de ondulado ha quebrado, con algunos sectores con fuertes pendientes. El muestreo se realizó en localidades de los municipios de los municipios de Mongua (Vereda Hato Viejo, vereda Docuazúa, vereda Vallados y vereda Pericos) y Mongua (Vereda Duzgua, vereda Monguí, vereda San Ignacio, vereda Sirguazá y vereda Tunjuelo), entre los 1697 y 3791 m. de elevación, en coberturas de páramo de frailejonales, pajonales, chuscales y/o matorrales; bosque andino y altoandino, cuerpos de agua (afluentes de los ríos Chicamocha, Cravo Sur y Gámeza), y áreas abiertas (potreros, bordes de trocha y carretera).</para>
+                    </description>
+                </studyExtent>
+                <samplingDescription>
+                    <para>Para realizar el muestreo de peces, se seleccionaron 14 puntos de muestreo correspondientes a diferentes cuerpos de agua (tramos de ríos, y quebradas). Para el municipio de Monguí (río El Morro, río El Tejar, quebrada La Estrella, tributario río El Judio) y para el municipio de Mongua (quebrada La Colorada, río La Leonera, río Balcones, quebrada Quiñonez, tributario río El Morro, río El Judio, río Cravo Sur, quebrada Sismosá, quebrada El Chuscal, quebrada La Batea, tributario quebrada El Chuscal). En cada punto de muestreo, por alrededor de 60 minutos, se realizó una faena de electropesca, apoyada con salabardos y una red de espera (individuos encontrados aguas abajo) explorando los diferentes tipos de flujo (rápidos, pozos, meandros, etc.) y sustratos (rocoso, fango, hojarasca, vegetación sumergida, etc.) presentes en el canal. Los peces capturados fueron fijados en solución de formol a los 10%, lavados y preservados en alcohol al 70%; otros preservados en alcohol al 96% para la posterior obtención de muestras de tejido. La identificación taxonómica se realizó utilizando claves especializadas o las descripciones originales de las especies.
+El muestreo de herpetofauna, se realizó durante ocho días de muestreo efectivo en las coberturas vegetales o hábitats identificados (comunidades de páramo de frailejonales, pajonales, chuscales y/o matorrales; cuerpos de agua, bosque y áreas abiertas o transformadas como potreros, bordes de trocha y carretera), en los diferentes estratos (rasante, herbáceo y arbustivo) para cada una de las localidades visitadas de los municipios de Mongua y Monguí. Empleando la técnica de búsqueda libre por encuentros visuales VES: (Visual Encounter Surveys) y remoción (Crump &amp; Scott, 1994), en recorridos diurnos y/o nocturnos se efectuó la búsqueda (levantando rocas, frailejones, remoción de necromasa, etc.), observación, registro auditivo, captura manual o con lazada y registros ocasionales en las mismas localidades, suministrados por otros investigadores. El esfuerzo total de muestreo fue de 227.15 horas/hombre, en el que trabajaron de cuatro a cinco personas. Por espécimen fueron registrados datos de localidad, coordenadas, altitd, tipo de cobertura (hábitat), hora de captura, tipo de sustrato sobre el que se observó (entre hojarasca en pie o caída, montículos de musgo; bajo troncos o piedras; sobre musgo, ramas, hojas, etc.), estrato (altura con respecto al suelo) y otros aspectos de hábitat. Adicionalmente, a varios individuos de anfibios se les grabó el canto (grabaciones depositadas en la colección de sonidos del IAvH). Todos los especímenes fueron fotografiados y se les describió el patrón de coloración. La identificación taxonómica de los especímenes se estableció de acuerdo con Frost (2018) y Acosta-G. (2018), para anfibios y con Uetz &amp; Hošek (2018), para reptiles. Para el banco de tejidos (ADN), después de ser sacrificados, a la mayoría de los ejemplares, se les tomó una muestra de tejido (músculo o hígado) que se depositó en crioviales debidamente marcados y con alcohol al 96 %, estas muestras quedaron depositadas en la colección de tejidos del IAvH.
+
+La captura de mamíferos, se realizó a partir de la implementación de tres metodologías para aumentar la detección de la mayor cantidad de las especies en zonas de páramo, bosque andino y altoandino y rastrojo mixto en los municipios de Mongua y Monguí. Para la captura de mamíferos voladores en zonas de bosque altoandino, rastrojo mixto y páramo, se instalaron siete redes de niebla, desde las 18:00 hasta las 22:00 horas, revisadas cada 30 minutos. Los individuos capturados fueron medidos, fotografiados, recolectados  e identificados hasta el nivel taxonómico más específico Para pequeños mamíferos en zonas bosque altoandino, rastrojo mixto y páramo, se instalaron 15  trampas Sherman con una mezcla de mantequilla de maní, nueces, esencia de vainilla/banano y avena. Además del uso de trampas se realizaron caminatas de observación a lo largo de transectos que abarcaron los diferentes tipos de vegetación; durante las cuales se tomó registro escrito y fotográfico (cuando fuese posible) de los mamíferos y los rastros encontrados en el trayecto. En los muestreos nocturnos se desarrollaron  caminatas en las mismas coberturas vegetales (páramo, bosque andino y altoandino y rastrojo mixto), donde por punto de muestreo se realizaron grabaciones (tres) de llamado de murciélagos con ayuda de Echo meter touch module conectado a un dispositivo móvil. Para la identificación se emplearon las claves taxonómicas de Emmons (1997), Tim y LaVal (1998) y Linares (1998), descripciones de Gardner (2008) y Patton et al. 2015. Corroborando con la lista de mamíferos de Colombia y con los trabajos de Solari et al. 2013 y Ramírez-Chávez et al. 2016
+
+El esfuerzo de muestreo para escarabajos coprófagos se basó en la metodología de Larsen &amp; Forsyth (2005) con algunas modificaciones de acuerdo a las condiciones de las coberturas encontradas. En cada una de las coberturas vegetales evaluadas por localidad, se instalaron trampas de caída cebadas con 30g de excremento o carroña; así: Para Monguí en área urbana y pastizal - 0 transecto/2 trampas, rastrojo/pastizal - 1/10, rastrojo/subpáramo - 1/13. Para Mongua en bosque andino/cultivos/pastizal/páramo - 1/20 y colecta manual en pastizales. Los escarabajos fueron colectados cada 24 horas, momento en que se recebó la trampa, se cambió el líquido preservante y se empacaron los ejemplares y sus respectivas etiquetas en bolsas Whirlpack con alcohol al 96%. La identificación taxonómica del material se realizó hasta morfo especie o especie cuando fue posible. La identificación del material recolectado se hizo con ayuda de la colección de referencia de escarabajos coprófagos del instituto Humboldt (CRECC). El muestreo de Insectos acuáticos, se efectuó en los municipios de Mongua y Monguí, en donde se establecieron 19 puntos de muestreo, en 14 cuerpos de agua (cinco quebradas, cuatro ríos (río Morro, río El Tejar, río Pericos, río La Leonera, río Laguna Negra, río Balcones, río Cravo Sur y río Sismoza), una laguna), ubicados entre los 1697 y los 3559 m de elevación. En cada cuerpo lótico dependiendo de la geografía del sitio, fueron dispuestos de uno a dos transectos de 15 m, separados entre sí por mínimo 200 m. La captura de especímenes se realizó durante un periodo de 30 minutos/hombre, usando red acuáticas triangular en fondo, y recolecta directa (levantamiento de rocas, troncos y hojarasca, y barridos con red acuática sobre la película superficial del agua) en cada transecto durante 15 minutos. Para los ecosistemas lenticos, por cada cuerpo de agua se estableció un transecto de 15 m por la orilla, y se realizó barrido de fondo y superficie, con redes acuáticas por 30 minutos/hombre. La identificación del material recolectado se hizo con ayuda de las claves de Angrisano y Sganga (2009), Contreras-Ramos (2009), Domínguez et al. (2009), Gutiérrez y Dias (2015), Megna et al. (2019), Posada-García y Roldán-Pérez (2003) y claves complementarias para los respectivos órdenes y géneros encontrados.</para>
+                </samplingDescription>
+            </sampling>
+        </methods>
+
+            <project id="Boyaca_BIO">
+                <title>Análisis de la biodiversidad y servicios ecosistémicos para su aplicación en la toma de decisiones en el departamento de Boyacá/Boyacá Bio-Fauna Oceta</title>
+                <personnel>
+                    <individualName>
+                    <givenName>María Eugenia</givenName>
+                    <surName>Morales Puentes</surName>
+                    </individualName>
+            <userId directory="http://orcid.org/">/0000-0002-5332-9956</userId>
+                    <role>PRINCIPAL_INVESTIGATOR</role>
+                </personnel>
+                <abstract>
+                    <para>Este proyecto busca la información integrada en el conocimiento sobre la biodiversidad, los servicios ecosistémicos de ésta, y los saberes tradicionales de las comunidades locales en Boyacá. Así también se busca ampliar el conocimiento y la percepción de la biodiversidad que alberga el departamento de Boyacá, como un soporte para procesos de conservación y uso sostenible de los recursos. Por lo tanto, para generar conocimiento especializado de la biodiversidad y sus aplicaciones en la toma de decisiones a nivel territorial, se hace necesario analizar la información ya existente, completar los vacíos de información en campo (expediciones) y la relación que las comunidades. El proyecto comprende 10 expediciones a áreas de páramo, bosque andino y pie de monte llanero, con el análisis de grupos de flora como plantas vasculares y vasculares, en fauna como anfibios y reptiles, mamíferos, peces, insectos, y finalmente el reino Fungi. Dichos muestreos se extendieron en zonas consideradas estratégicas, por falta de muestreo, acceso o información biológica. Los datos obtenidos fueron cruzados con información de comunidades locales y la participación directa de ellos.</para>
+                </abstract>
+                <funding>
+                    <para>Boyacá Bio, convenio No 17-17-170-195CE, suscrito entre UPTC-IAvH, con el objeto fundamental es aunar esfuerzos entre las partes para generar la línea base de información de biodiversidad para el departamento de Boyacá, así como desarrollar procesos de investigación con miras a complementar vacíos de información y contribuir a la consolidación de redes de investigación del departamento de Boyacá en el marco del Convenio.</para>
+                </funding>
+                <studyAreaDescription>
+                    <descriptor name="generic" citableClassificationSystem="false">
+                        <descriptorValue>El parque Natural Regional “Unidad Biogeográfica Siscunsí-Ocetá” (en el que se ubica el páramo de Ocetá) pertenece al complejo de páramos denominado Tota-Bijagual-Mamapacha y se encuentra en jurisdicción de los municipios de Sogamoso, Aquitania, Mongua y Monguí. Es un ecosistema conformado en su mayor parte por áreas de páramo, pastizales y relictos dispersos de rastrojo y bosque altoandino (Corpoboyacá y Neotropical, 2008, 2011).</descriptorValue>
+                    </descriptor>
+                </studyAreaDescription>
+            </project>
+    </dataset>
+
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2026-05-24T11:59:18Z</dateStamp>
+                <citation identifier="https://doi.org/10.15472/m6s0lh">Cárdenas Arévalo G, Paternina Hernández A, Samudio H, Lopera Toro A, Cárdenas Bautista J S, Galindo X A, Mondragón S P, Pérez N E, Pérez D K, Parada Alfonso J A, González Sanabria J S, Morales Puentes M E (2021). Grupos faunísticos de la expedición Ocetá - Proyecto Boyacá BIO UPTC. Version 1.1. Universidad Pedagógica y Tecnológica de Colombia. Occurrence dataset https://doi.org/10.15472/m6s0lh accessed via GBIF.org on 2026-05-24.</citation>
+                <bibliography>
+                <citation>Angrisano E.B. y J.V. Sganga (2009). Trichoptera. En: E. Domínguez y H. R. Fernández (eds). Macroinvertebrados bentónicos sudamericanos Sistemática y biología: 167-231. Fundación Miguel Lillo, Tucumán, Argentina.
+
+Contreras-Ramos, A. (2009). Megaloptera. Capítulo 7. En Domínguez E. y H.R. Fernández (eds). Macroinvertebrados bentónicos sudamericanos: sistemática y biología. 1a ed. Tucumán: Fund. Miguel Lillo 656 p. ISBN 978-950-668-015-2.
+
+Corpoboyacá &amp; Neotropical. (2008). Parque Natural Regional Unidad Biogeográfica Siscunsí – Ocetá. 57p.
+
+Corpoboyacá &amp; Neotropical. (2011). Formulación del Plan de Manejo del Parque Natural Regional Siscunsí – Ocetá, mediante la participación local y la actualización de los planes de manejo preexistentes para los páramos de Siscunsí y Ocetá. Informe final para valoración, Tunja. 138p.
+
+Domínguez E., Molineri C. y C. Nieto. (2009). Ephemeroptera. En: E. Domínguez y H. R. Fernández (eds). Macroinvertebrados bentónicos sudamericanos Sistemática y biología: 167-231. Fundación Miguel Lillo, Tucumán, Argentina.
+
+Emmons, L. 1997. Neotropical Rainforest Mammals. A field guide. Second Edition. The University of Chicago Press. Chicago.
+
+Gardner Al (ed.). 2008. Mammals of South America: Xenarthrans, Shrew, and Bats. The University of Chicago Press, Chicago, USA. 669 pp.
+
+Gutiérrez Y. y Dias L.G. (2015). Ephemeroptera (Insecta) de Caldas – Colombia, claves taxonómicas para los géneros y notas sobre su distribución. Papéis Avulsos de Zoologia, Museu de Zoologia da Universidade de São Paulo, 55(2):13‑46.
+
+Larsen, T. H., &amp; Forsyth, A. (2005). Trap Spacing and Transect Design for Dung Beetle Biodiversity Studies1. Biotropica, 37(2), 322-325.
+
+Linares O. 1998. Mamíferos de Venezuela. Caracas: Sociedad Conservacionista Audobun de Venezuela. pp. 348-590.
+
+Megna, Y.S., Hendrich, L., García-Hernández, A.L., Ospina-Torres, R., Prieto, C. &amp; M. Balke (2019). Diving beetles of the genus Liodessus Guignot, 1953 in Colombia, with description of three new species (Coleoptera: Dytiscidae), Aquatic Insects, 1-24. DOI: 10.1080/01650424.2018.1538521.
+
+Patton, J. L., U. F. J. Pardiñas &amp; G. D’Elía (eds.). 2015. Mammals of South America, vol. 2. Rodents. University of Chicago Press, Chicago, Illinois, xxvi + 1336 pp. ISBN 978-0-226-16957-6
+
+Posada-García J.A. y G. Roldán-Pérez (2003). Clave Ilustrada y Diversidad de las larvas de Trichoptera en el nor-occidente de Colombia. Caldasia 25(1): 169-192.
+
+Ramírez-Chaves, H., Suárez-Castro, A.F., González-Maya, J.F. (2016). Cambios recientes a la lista de los mamíferos de Colombia. Mammalogy Notes | Notas Mastozoológicas. 3 (1): 1-9.
+
+Sociedad Colombiana de Mastozoología. 2017. Lista de referencia de especies de mamíferos de Colombia. Versión 1.2. Conjunto de datos/Lista de especies. 
+
+Solari, S., .Muñoz-Saba, Y., Rodríguez-Mahecha, J., Defler, T., Ramírez-Chávez, H. &amp; Trujillo F.2013. Riqueza, endemismo y conservación de los mamíferos de Colombia. Mastozoología Neotropical 20: 301-365. Valle
+
+Timm RM, LaVal RK. 1998. A field key to the bats of Costa Rica. University of Kansas Center of Latin American Studies 22: 1-30.</citation>
+                </bibliography>
+                <resourceLogoUrl>https://statics.sibcolombia.net/sib-resources/images/logos-socios/500px/uptc.jpg</resourceLogoUrl>
+                <collection>
+                    
+                    <collectionIdentifier>UPTC-R-, UPTC-Am, UPTC-M-, UPTC-P-, UPTC-INS-</collectionIdentifier>
+                    <collectionName>Colección Biológica del Museo de Historia Natural “Luis Gonzalo Andrade”</collectionName>
+                </collection>
+                <specimenPreservationMethod>OTHER</specimenPreservationMethod>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
+    </eml:eml>

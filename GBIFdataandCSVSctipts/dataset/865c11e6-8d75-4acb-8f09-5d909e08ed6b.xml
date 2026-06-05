@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="https://eml.ecoinformatics.org/eml-2.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://eml.ecoinformatics.org/eml-2.2.0 https://rs.gbif.org/schema/eml-gbif-profile/1.3/eml.xsd"
+packageId="865c11e6-8d75-4acb-8f09-5d909e08ed6b"  system="http://gbif.org" scope="system"
+xml:lang="es">
+    <dataset>
+        <alternateIdentifier>10.15472/cwrg3e</alternateIdentifier>
+        <alternateIdentifier>10.15472/2200ee</alternateIdentifier>
+        <alternateIdentifier>4b04f487-712e-4ade-80fb-14e45f32e5f4</alternateIdentifier>
+        <alternateIdentifier>865c11e6-8d75-4acb-8f09-5d909e08ed6b</alternateIdentifier>
+        <alternateIdentifier>https://ipt.biodiversidad.co/sib/resource?r=sda_artropofauna_aie-montana</alternateIdentifier>
+        <title>Artrópodos de los Parques Distritales Ecológicos de Montaña</title>
+        <creator>
+            <individualName>
+                <givenName>Natalia María</givenName>
+                <surName>Ramírez Martínez</surName>
+            </individualName>
+            <organizationName>Secretaria Distrital de Ambiente SDA</organizationName>
+            <positionName>Subdirectora de Ecosistemas y Ruralidad</positionName>
+            <address>
+                <deliveryPoint>Avenida Caracas No. 54 - 38</deliveryPoint>
+                <city>Bogotá, D.C.</city>
+                <administrativeArea>Bogotá, D.C.</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <phone>60 (1) 3778899</phone>
+            <electronicMailAddress>natalia.ramirez@ambientebogota.gov.co</electronicMailAddress>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Juliana</givenName>
+                <surName>Rodríguez Ortíz</surName>
+            </individualName>
+            <organizationName>Secretaria Distrital de Ambiente SDA</organizationName>
+            <positionName>Coordinadora Grupo de Monitoreo de la Biodiversidad</positionName>
+            <address>
+                <deliveryPoint>Avenida Caracas No. 54 - 38</deliveryPoint>
+                <city>Bogotá, D.C.</city>
+                <administrativeArea>Bogotá, D.C.</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>juliana.rodriguez@ambientebogota.gov.co</electronicMailAddress>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Maria del Pilar</givenName>
+                <surName>Urrego Salinas</surName>
+            </individualName>
+            <organizationName>Secretaria Distrital de Ambiente SDA</organizationName>
+            <positionName>Contratista</positionName>
+            <address>
+                <deliveryPoint>Avenida Caracas No. 54 - 38</deliveryPoint>
+                <city>Bogotá, D.C.</city>
+                <administrativeArea>Bogotá, D.C.</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Cristian Camilo</givenName>
+                <surName>Gonzalez Aguas</surName>
+            </individualName>
+            <organizationName>Secretaria Distrital de Ambiente SDA</organizationName>
+            <positionName>Contratista</positionName>
+            <address>
+                <deliveryPoint>Avenida Caracas No. 54 - 38</deliveryPoint>
+                <city>Bogotá, D.C.</city>
+                <administrativeArea>Bogotá, D.C.</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Jorge Humberto</givenName>
+                <surName>García concha</surName>
+            </individualName>
+            <organizationName>Secretaria Distrital de Ambiente SDA</organizationName>
+            <positionName>Biólogo</positionName>
+            <address>
+                <deliveryPoint>Avenida Caracas No. 54 - 38</deliveryPoint>
+                <city>Bogotá, D.C.</city>
+                <administrativeArea>Bogotá, D.C.</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <phone>60 (1) 3778899</phone>
+            <electronicMailAddress>jhgarciac@unal.edu.co</electronicMailAddress>
+        </creator>
+        <metadataProvider>
+            <individualName>
+                <givenName>Natalia María</givenName>
+                <surName>Ramírez Martínez</surName>
+            </individualName>
+            <organizationName>Secretaria Distrital de Ambiente SDA</organizationName>
+            <positionName>Subdirectora de Ecosistemas y Ruralidad</positionName>
+            <address>
+                <deliveryPoint>Avenida Caracas No. 54 - 38</deliveryPoint>
+                <city>Bogotá, D.C.</city>
+                <administrativeArea>Bogotá, D.C.</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <phone>60 (1) 3778899</phone>
+            <electronicMailAddress>natalia.ramirez@ambientebogota.gov.co</electronicMailAddress>
+        </metadataProvider>
+        <pubDate>
+                2025-03-25
+        </pubDate>
+        <language>SPANISH</language>
+        <abstract>
+            <para>En este recurso, El Grupo de Monitoreo de la Biodiversidad de la Secretaría Distrital de Ambiente –SDA, adscrito a la Subdirección de Ecosistemas y Ruralidad, presenta un consolidado de los registros biológicos de artrópodos, producto del monitoreo de biodiversidad realizado a los Parques Distritales Ecológicos de Montaña: Entre Nubes, La Serranía de Zuqué (anteriormente denominado Área de interés Ambiental), Soratama y Mirador de los Nevados (anteriormente denominado Aula Ambiental) para el 2021, 2022 y 2023. En este se incluye información del grupo biológico, registrados en áreas administradas por la SDA ubicadas en los Cerros Orientales y demás ecosistemas de montaña que presenta el Distrito. Dentro de los resultados obtenidos se tiene para el grupo de atropados un registro total de siete clases, 28 órdenes y 150 familia.</para>
+        </abstract>
+        <keywordSet>
+            <keyword>Artrópodos</keyword>
+            <keyword>Parques Ecológicos Distritales de Montaña Entre Nubes</keyword>
+            <keyword>Entomofauna</keyword>
+            <keyword>Soratama</keyword>
+            <keyword>Mirador de los Nevados</keyword>
+            <keyword>Biodiversidad urbana</keyword>
+            <keyword>La Serranía del Zuqué</keyword>
+            <keywordThesaurus>n/a</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+            <keyword>Occurrence</keyword>
+            <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type_2015-07-10.xml</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+            <keyword>Observation</keyword>
+            <keywordThesaurus>GBIF Dataset Subtype Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_subtype.xml</keywordThesaurus>
+        </keywordSet>
+        <intellectualRights>
+            <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by-nc/4.0/legalcode"><citetitle>Creative Commons Attribution Non Commercial (CC-BY-NC) 4.0 License</citetitle></ulink>.</para>
+        </intellectualRights>
+        <licensed>
+            <licenseName>Creative Commons Attribution Non Commercial 4.0 International</licenseName>
+            <url>https://spdx.org/licenses/CC-BY-NC-4.0.html</url>
+            <identifier>CC-BY-NC-4.0</identifier>
+        </licensed>
+        <distribution scope="document">
+            <online>
+                <url function="download">https://ipt.biodiversidad.co/sib/archive.do?r=sda_artropofauna_aie-montana</url>
+            </online>
+        </distribution>
+        <coverage>
+            <geographicCoverage>
+                <geographicDescription>Los datos han sido tomados en parques al interior de Bogotá: PEDM Mirador de los Nevados, PEDM Soratama, PEDM Serranía del Zuqué, PEDM Entre Nubes y PEDM Entre Nubes Cerro El Gavilan.</geographicDescription>
+                <boundingCoordinates>
+                    <westBoundingCoordinate>-74.41</westBoundingCoordinate>
+                    <eastBoundingCoordinate>-74.012</eastBoundingCoordinate>
+                    <northBoundingCoordinate>4.743</northBoundingCoordinate>
+                    <southBoundingCoordinate>4.493</southBoundingCoordinate>
+                </boundingCoordinates>
+            </geographicCoverage>
+            <temporalCoverage>
+                <rangeOfDates>
+                    <beginDate>
+                        <calendarDate>                2021-03-15
+</calendarDate>
+                    </beginDate>
+                    <endDate>
+                        <calendarDate>                2023-10-09
+</calendarDate>
+                    </endDate>
+                </rangeOfDates>
+            </temporalCoverage>
+            <taxonomicCoverage>
+                <generalTaxonomicCoverage>La cobertura taxonómica corresponde al filo Arthropoda, distribuidos en 7 clases, 28 ordenes, 150 familias y 67 géneros. Con un 81% clasificado a nivel de familia, 10.3% a género y 6.9% a especie.</generalTaxonomicCoverage>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Chilopoda</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Collembola</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Diplopoda</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Euchelicerata</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Insecta</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Malacostraca</taxonRankValue>
+                </taxonomicClassification>
+            </taxonomicCoverage>
+        </coverage>
+        <maintenance>
+            <description>
+                <para></para>
+            </description>
+            <maintenanceUpdateFrequency>unkown</maintenanceUpdateFrequency>
+        </maintenance>
+        <contact>
+            <individualName>
+                <givenName>Natalia María</givenName>
+                <surName>Ramírez Martínez</surName>
+            </individualName>
+            <organizationName>Secretaria Distrital de Ambiente SDA</organizationName>
+            <positionName>Subdirectora de Ecosistemas y Ruralidad</positionName>
+            <address>
+                <deliveryPoint>Avenida Caracas No. 54 - 38</deliveryPoint>
+                <city>Bogotá, D.C.</city>
+                <administrativeArea>Bogotá, D.C.</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <phone>60 (1) 3778899</phone>
+            <electronicMailAddress>natalia.ramirez@ambientebogota.gov.co</electronicMailAddress>
+        </contact>
+        <methods>
+            <methodStep>
+                <description>
+                    <para>Trampas de caída “Pitfall” convencional y con cebo: 
+Este método permitió conocer la entomofauna presente en el suelo. Consistió en un transecto de ocho metros, donde se dispuso un recipiente de nueve oz con cebos diferentes (control (50 ml), fruta (15g), cerveza (150 ml), hígado (15g) y heces (15g)) cada 2 metros; los recipientes fueron enterrados al ras de suelo. Las trampas se dejaron por un periodo de 48 horas.</para>
+                </description>
+            </methodStep>
+            <methodStep>
+                <description>
+                    <para>Paraguas Japonés:
+Fue usado con el fin de recolectar insectos pequeños que habitualmente se esconden en los árboles y arbustos de vegetación densa. En cada punto de monitoreo se escogieron cinco arbustos, que fueron golpeados por 30 segundos aproximadamente. Una vez finalizado, se separaron los individuos según cuerpo blando o duro para su posterior sacrificio. Se colectaron los ejemplares no conocidos, y a las especies ya determinadas se les realizó registro fotográfico y conteo de individuos.</para>
+                </description>
+            </methodStep>
+            <methodStep>
+                <description>
+                    <para>Red entomológica o jama:
+La red permitió recolectar insectos voladores y otro tipo de artrópodos presentes en los tres tipos de pastos. En cada punto de monitoreo donde se presentó la cobertura, se trabajó un transecto de 15 metros, donde se realizaron pases suaves y continuados con la jama a más o menos 1 metro de altura entre la vegetación circundante. Este método también permitió hacer recolecta selectiva fuera de los transectos establecidos. Se colectaron los ejemplares no conocidos y a las especies ya determinadas se les realizó registro fotográfico y conteo de individuos.</para>
+                </description>
+            </methodStep>
+            <methodStep>
+                <description>
+                    <para>Platos trampa (“pan traps” o “bowl traps”):
+Este método fue planteado para recolectar especies de abejas, sin embargo, cayeron diferentes insectos voladores. Se usó la modificación del método de yellow pan propuesto por Ramírez (2014), el cual consistió en utilizar recipientes de plástico, de boca ancha y de diferentes colores: blanco, rosa, amarillo y azul. Los platos se ubicaron en un transecto de tres metros, cada color a un metro de distancia; se agregó una solución jabonosa a cada recipiente.</para>
+                </description>
+            </methodStep>
+            <methodStep>
+                <description>
+                    <para>Muestreo manual por búsqueda intensiva:
+Este método se aplicó tanto en la jornada de día como de noche. Consistió en transectos de longitud no definida entre puntos de monitoreo con un ancho de dos metros, con el fin de recolectar y registrar los individuos que no fueron visualizados en los otros métodos para los recorridos diurnos. La búsqueda se realizó en troncos caídos, debajo de rocas y demás áreas que el profesional consideraba pertinente.
+Por otro lado, para los recorridos nocturnos se usaron linternas de cabeza de 200 lúmenes de luz blanca y linternas de luz ultravioleta (UV) para la búsqueda de individuos como escorpiones opiliones y solífugos (Armas et al., 2017). Los recorridos se realizaron en las áreas donde se presentaron una combinación de arbustos, bosque y pastos, con el fin de cubrir la mayoría de cobertura presentes en el humedal; los recorridos tuvieron una duración de 3 horas, su inicio y finalización dependió del estado del clima y hora de la puesta del sol.</para>
+                </description>
+            </methodStep>
+            <methodStep>
+                <description>
+                    <para>Para el levantamiento del 2022, solo se aplicaron los métodos de: Trampas de caída, paraguas japones, red entomológica y muestreo manual diurno con el mismo diseño experimental anteriormente descrito.</para>
+                </description>
+            </methodStep>
+            <sampling>
+                <studyExtent>
+                    <description>
+                        <para>Entre Nubes es un Parque Distrital Ecológico de Montaña, localizado en el extremo suroriental de Bogotá y forma parte del grupo de cerros y montes que como estribaciones de la cordillera oriental de los Andes le dan una característica propia al paisaje de la ciudad.  Está conformado por los cerros de Guacamayas, Juan Rey y Cuchilla del Gavilán, de las localidades de Rafael Uribe, San Cristóbal y Usme. Su uso principal, de acuerdo a lo establecido en el P.O.T (Decreto 555 de 2021) Preservación y restauración de flora y fauna nativos, educación ambiental. El parque es un ecosistema urbano que ofrece una alta oferta de bienes y servicios ambientales y constituye un espacio para la recreación pasiva tanto de los habitantes de las localidades vecinas, así como para los visitantes de otros puntos de la ciudad que en gran cantidad visitan esta reserva.
+Cuenta con infraestructura habilitada para la realización de salidas ecológicas, recorridos guiados, talleres de educación ambiental, sensibilización y encuentro con la naturaleza; conferencias, charlas y cursos; constituye además un centro de encuentro de gestión social comunitaria.
+
+Su uso principal es la preservación y restauración de flora (plantas) y fauna (animales) nativas además de la educación ambiental a la comunidad.
+
+En su territorio nacen siete quebradas: Seca, Chiguaza, Bolonia, Verejones, La olla del Ramo, Santa Librada y Yomasa, que desembocan en el río Tunjuelo, uno de los tres principales afluentes del río Bogotá. 
+
+Parque Distrital Ecológico de Montaña Soratama: Anteriormente conocida como Aula Ambiental, es un espacio natural donde es posible aprender sobre el proceso de recuperación y restauración ambiental. Este PDEM era una antigua cantera de explotación arenera para construcciones, la cual operó desde 1965 hasta 1995. Luego, en el año 2000 se empezaron a realizar estudios para adaptarla como una zona de reserva y tres años más tarde se hizo una revisión de estos estudios para finalmente convertir la cantera Soratama en el Aula Ambiental Soratama. El Aula es un modelo de recuperación de áreas degradadas por actividad minera que ofrece alternativas para restituir suelos degradados. Esta Aula Ambiental está ubicada al norte de la ciudad, en la localidad de Usaquén, a la altura de la calle 166 con carrera séptima, pertenece al área de Reserva Forestal Protectora Bosque Oriental de Bogotá en los Cerros Orientales. 
+El PDEM Soratama hace parte de la Estructura Ecológica Principal de Bogotá y pertenece al área de Reserva Forestal Protectora Bosque Oriental de Bogotá, por lo cual el Plan de Manejo Ambiental aprobado por la autoridad ambiental competente –CAR- fue ejecutado por la SDA con apoyo financiero del Fondo Nacional de Regalías. A partir del año 2000 la SDA promovió la participación de la comunidad en la recuperación de la hoy PDEM, desde tres componentes: (1) las obras de estabilización geomorfológica y (2) la estrategia de rehabilitación morfológica y (2) la estrategia de rehabilitación ecológica, y (3) la investigación básica y aplicada (Barrera-Cataño, 2010). Las acciones de rehabilitación ecológica incluyeron siembra de especies nativas arbustivas y arbóreas propias del ecosistema de referencia (Bosque Alto Andino), la instalación de biomantos para la protección de taludes descubiertos y arribo de especies pioneras. Además, se adecuaron áreas de jardinería ecológica usando especies nativas y un vivero para la propagación de especies nativas (Barrera-Cataño, 2010).
+
+Parque Distrital Ecológico de Montaña Mirador de los Nevados: 
+El PDEM Mirador de los Nevados está ubicado en la localidad de suba, sobre el flanco occidental de los cerros de Suba, el acceso principal se encuentra sobre la Carrera 86 con Calle 145. Mirador de los nevados fue una cantera de donde por más de 50 años se extrajeron materiales para la construcción. Fue recuperada geomorfológicamente por el (DAMA) hoy Secretaría Distrital de Ambiente, a partir de la realización de procesos de restauración ecológica, convirtiéndose en un ejemplo a nivel Distrital y nacional, en recuperación de cantera. Esta aula es un referente en la localidad como un elemento de alto valor ambiental y paisajístico para el disfrute pasivo de los habitantes de la ciudad. Su diseño arquitectónico fue concebido con base en la cosmogonía Muisca, lo que lo hace un escenario único en el Distrito Capital. El PDEM Mirador de los Nevados es considerado un ecosistema de importancia regional por su valor paisajístico, de conectividad, restauración ecológica, y aspectos de biodiversidad. La vocación de este espacio es la conservación ambiental, y está dedicado a la pedagogía ambiental y a la recreación pasiva. 
+
+Parque Distrital Ecológico de Montaña La serranía de Zuqué:
+Se encuentra ubicada en la Localidad de San Cristóbal y comprende cerca de 557 hectáreas localizadas entre las calles 20B sur y 58 sur cubre una zona en la que se juntan el Predio Corinto, reconocido por el reasentamiento de todo un barrio debido a condiciones de riesgo no mitigable, con la Antigua Cantera el Zuque, ubicada cerca de unos 500 metros más al sur.
+Hace parte de la Reserva Forestal Bosque Oriental de Bogotá. (Artículo 61 de la Ley 99 de 1993). Al Norte limita con El barrio Aguas Claras y con el Rio San Cristóbal, Al Sur con el Alto de Cruz Verde. Al Oriente con predios del Acueducto de Bogotá y La Hoya Del rio San Cristóbal, Al Sur Occidente con el barrio Quindío y predios del Acueducto de Bogotá. Al Occidente con predios del Acueducto de Bogotá, con la Finca propiedad del Dr. Mojio y con el barrio Altos del Virrey, y al Nor-Occidente con la finca del Dr. Mojio y el barrio Altos del Zipa (CAR, 2006).</para>
+                    </description>
+                </studyExtent>
+                <samplingDescription>
+                    <para>Se aplicaron cinco metodologías, las cuales fueron modificadas de los manuales, guías y artículos de: Nielsen (2003); Mejía (2004); Márquez (2005); Palacios &amp; Mejía (2007); Clavijo &amp; Amarillo (2013); Galassi &amp; Poi (2014) y Fernández et al., (2017). Los métodos se aplicaron teniendo en cuenta el área de estudio.</para>
+                </samplingDescription>
+            </sampling>
+            <qualityControl>
+                <description>
+                    <para>La calidad de la información se garantiza por parte de los especialistas de fauna.</para>
+                </description>
+            </qualityControl>
+        </methods>
+
+            <project >
+                <title>Artrópodos de las Áreas de Importancia Ecológicas</title>
+                <personnel>
+                    <individualName>
+                    <givenName>María del Pilar</givenName>
+                    <surName>Urrego Salinas</surName>
+                    </individualName>
+                    <role>AUTHOR</role>
+                </personnel>
+                <personnel>
+                    <individualName>
+                    <givenName>Cristian Camilo</givenName>
+                    <surName>González Aguas</surName>
+                    </individualName>
+                    <role>AUTHOR</role>
+                </personnel>
+                <personnel>
+                    <individualName>
+                    <givenName>Luz Estefanía</givenName>
+                    <surName>Guzmán Moreno</surName>
+                    </individualName>
+                    <role>AUTHOR</role>
+                </personnel>
+                <personnel>
+                    <individualName>
+                    <givenName>Yessica Alejandra</givenName>
+                    <surName>Vargas Peña</surName>
+                    </individualName>
+                    <role>AUTHOR</role>
+                </personnel>
+                <personnel>
+                    <individualName>
+                    <givenName>Jorge Humberto</givenName>
+                    <surName>García Concha</surName>
+                    </individualName>
+                    <role>AUTHOR</role>
+                </personnel>
+                <personnel>
+                    <individualName>
+                    <givenName>Mireya Patricia</givenName>
+                    <surName>Córdoba Sánchez</surName>
+                    </individualName>
+                    <role>AUTHOR</role>
+                </personnel>
+                <personnel>
+                    <individualName>
+                    <givenName>Sandra Milena</givenName>
+                    <surName>Sierra Vega</surName>
+                    </individualName>
+                    <role>AUTHOR</role>
+                </personnel>
+                <personnel>
+                    <individualName>
+                    <givenName>Jesús Antonio</givenName>
+                    <surName>Barrera Contreras</surName>
+                    </individualName>
+                    <role>AUTHOR</role>
+                </personnel>
+                <personnel>
+                    <individualName>
+                    <givenName>Carlos Arturo</givenName>
+                    <surName>Reyes Munévar</surName>
+                    </individualName>
+                    <role>AUTHOR</role>
+                </personnel>
+                <personnel>
+                    <individualName>
+                    <givenName>Jerson Jair</givenName>
+                    <surName>Cárdenas Daga</surName>
+                    </individualName>
+                    <role>AUTHOR</role>
+                </personnel>
+                <personnel>
+                    <individualName>
+                    <givenName>Andrés Felipe</givenName>
+                    <surName>Alfonso Reyes</surName>
+                    </individualName>
+                    <role>AUTHOR</role>
+                </personnel>
+                <personnel>
+                    <individualName>
+                    <givenName>Jorge Humberto</givenName>
+                    <surName>Ayarza Landinez</surName>
+                    </individualName>
+                    <role>AUTHOR</role>
+                </personnel>
+                <personnel>
+                    <individualName>
+                    <givenName>Juliana</givenName>
+                    <surName>Rodríguez Ortiz</surName>
+                    </individualName>
+                    <role>AUTHOR</role>
+                </personnel>
+                <personnel>
+                    <individualName>
+                    <givenName>Aurita</givenName>
+                    <surName>Bello Espinosa</surName>
+                    </individualName>
+                    <role>AUTHOR</role>
+                </personnel>
+                <abstract>
+                    <para></para>
+                </abstract>
+                <funding>
+                    <para></para>
+                </funding>
+            </project>
+    </dataset>
+
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2026-05-24T11:59:20Z</dateStamp>
+                <citation identifier="https://doi.org/10.15472/cwrg3e">Ramírez Martínez N M, Rodríguez Ortíz J, Urrego Salinas M D P, Gonzalez Aguas C C, García concha J H (2025). Artrópodos de los Parques Distritales Ecológicos de Montaña. Version 1.5. Secretaría Distrital de Ambiente. Occurrence dataset https://doi.org/10.15472/cwrg3e accessed via GBIF.org on 2026-05-24.</citation>
+                <bibliography>
+                <citation>Secretaría Distrital de Ambiente-SDA. Ecosistemas, áreas de importancia ecológicas, PEDM Entrenubes, AIA La Serranía del Zuque, AA Mirador de los Nevados, AA Soratama.</citation>
+                <citation>Secretaria Distrital de ambiente – SDA (2016) Subdirección de Ecosistemas y Ruralidad, Grupo de monitoreo de biodiversidad. Registros biológicos pertenecientes a 2021/05/10 a 2021/08/26 Bogotá D.C.</citation>
+                <citation>Amat, E., Vélez, M. Y Wolff, M. (2008). Clave Ilustrada Para La Identificación De Los Géneros Y Las Especies De Califóridos (Diptera: Calliphoridae) De Colombia. Caldasia. 30 (1): 231-244</citation>
+                <citation>Ámat, G &amp; Vargas-Rios, O. (1991). Caracterización de Microhabitats de la Arthropofauna en Paramos del Parque Nacional Natural Chingaza Cundinamarca, Colombia. Caldasia 16 (79): 539·550,</citation>
+                <citation>Amat, G., &amp; Blanco, E. (2003). Artropofauna de los humedales de la Sabana de Bogotá. In Los Humedales de Bogotá y la Sabana. Tomo I (pp. 90–106). Empresa de Acueducto y Alcantarillado de Bogotá (EAAB) y Conservación internacional – Colombia.</citation>
+                <citation>Amat-G., G, Andrade-C., M y Fernández, F. (1999). Insectos de Colombia. Vol.II. Bogotá: Academia Colombiana de Ciencias Exactas, Físicas y Naturales</citation>
+                <citation>Amat-García, G. &amp; Fernández, F. (2011). La diversidad de insectos (Arthropoda: Hexapoda) en Colombia I. Entognatha a Polyneoptera. Acta biológica colombiana, 16 (2), 205 – 220.</citation>
+                <citation>Amat,G.(2007). Fundamentosy Métodos para el estudio de los Insectos. Universidad Nacional de Colombia.Bogotá D. C., Colombia.</citation>
+                <citation>Ángel, S., Bogotá-Ángel, Raúl. &amp; León, G. (2021). Comunidades de sírfidos (Diptera) asociadas a coberturas influenciadas por actividades antrópicas en los cerros orientales de Bogotá, Colombia. Caldasia, 43(1), 161-171. Epub March 24, 2021.https://doi.org/10.15446/caldasia.v43n1.82464</citation>
+                <citation>Barrios, Y., Ramírez, N., Ramírez, E., Sánchez, E., &amp; Del Castillo, R. (2010). Importancia de los polinizadores en la reproducción de seis especies de subpáramo del Pico Naiguatá. (Parque Nacional El Ávila-Venezuela). Acta Botánica Venezuelica, 33 (2), 213-231</citation>
+                <citation>Bousquet, Y. 2010. Illustrated Identification Guide to Adults and Larvae of Northeastern North American Ground Beetles (Coleoptera: Carabidae). Pensoft Series Faunistica No. 90 Pensoft Publishers, Sofia-Moscow, Bulgaria. ISBN 978-954-642-522-5. ISSN 1312-0174. Hard cover. Price $187.00. 562 pp.. The Coleopterists Bulletin. 64. 390-391. 10.1649/0010-065X-64.4.390.</citation>
+                <citation>Buck, M., Woodley, N.E., Borkent, A., Wood, D.M., Pape, T., Vockeroth, J.R., Michelsen, V., &amp; Marshall, S.A. 2009. Key to Diptera families - adults. Chapter 6, pp. 95-144. In Brown, B.V., Borkent, A., Cumming, J.M., Wood, D.M., Woodley, N.E., &amp; Zumbado, M.A. (eds.). Manual of Central American Diptera. Volume 1. NRC Research Press, Ottawa. i-xii + 1-714.</citation>
+                <citation>Gutiérrez, Y. &amp; Bacca, T., (2014). Phasmatodea (Insecta) de la Reserva Natural Río Ñambí, Nariño,https://doi.org/10.22201/ib.20078706e.2018.1.2175&quot;</citation>
+                <citation>Buck, M. &amp; Woodley, Norman &amp; Borkent, Art &amp; Pape, Thomas &amp; Vockeroth, J. &amp; Marshall, Steve. (2009). Key to Diptera families (adults).</citation>
+                <citation>Carabalí-Banguero, D., Montoya-Lerma, J., &amp; Carabalí-Muñoz, A. (2018). Dípteros asociados a la floración del aguacate Persea americana Mill cv. Hass en Cauca, Colombia. Biota Colombiana, 19(1), 92-111. DOI: 10.21068/ c2018v19n01a06. Colombia. Bol. Cient. Mus. Hist. Nat. U. de Caldas, 18 (1): 210-221.&quot;</citation>
+                <citation>Gotelli, N., &amp; Colwell, R. (2011). Estimating species richness. In Frontiers in Measuring Biodiversity (Vol. 12, pp. 39–54).</citation>
+                <citation>Flórez, V., Durán Prieto, J., Albornoz, M., &amp; Forero, D. (2018). New plant associations for Monalonion velezangeli (Hemiptera: Miridae) in green urban areas of Bogotá (Colombia). Acta Biológica Colombiana, 23. https://doi.org/10.15446/abc.v23n2.69374</citation>
+                <citation>Grismado, Cristian &amp; Ramírez, Martín &amp; Izquierdo, Matias. (2014). Araneae: Taxonomía, diversidad y clave de identificación de familias.  En Biodiversidad de Artrópodos Argentinos, vol. 3 IADIZA, CCT CONICET Mendoza, Argentina.</citation>
+                <citation>Mello-Leitão, C. F. de (1941b). Catalogo das aranhas da Colombia. Anais da Academia Brasileira de Ciências 13: 233-300.</citation>
+                <citation>Díaz, M., Cairo, V., Palacios-Vargas, José &amp; Sánchez, M. (2004). Clave dicotómica para la determinación de los colémbolos de Cuba. Boletín de la Sociedad Entomológica Aragonesa. 73-83.</citation>
+                <citation>Estrada, C., &amp; Fernández, F. (1999). Diversidad de hormigas (Hymenoptera: Formicidae) en un gradiente sucesional del bosque nublado (Nariño, Colombia). Revista de Biología Tropical, 47, 189-201.</citation>
+                <citation>Keiper, J., Walton, W., &amp; Foote, B. (2002). Biology and Ecology of Higher Diptera from Freshwater Wetlands. Annual Review of Entomology, 47, 207–232. https://doi.org/10.1146/annurev.ento.47.091201.145159</citation>
+                <citation>Levi, H. W. (1999). The Neotropical and Mexican Orb Weavers of the genera Cyclosa and Allocyclosa (Araneae: Araneidae). Bulletin of the Museum of Comparative Zoology 155: 299-379.</citation>
+                <citation>Medina, C. (2000). Clave Ilustrada para la identificación de géneros de escarabajos coprófagos (Coleoptera: Scarabaeinae) de Colombia. Caldasia. 22. 299 - 315.</citation>
+                <citation>Díaz, B., Maza, N., Castresana, J., &amp; Martínez, M. (2020). Los sírfidos como agentes de control biológico y polinización en horticultura. Buenos Aires. Ediciones INTA, Estación Experimental Agropecuaria Concordia. 9 p.</citation>
+                <citation>Levi, H. W. (1985a). The spiny orb-weaver genera Micrathena and Chaetacis (Araneae: Araneidae). Bulletin of the Museum of Comparative Zoology 150: 429-618.</citation>
+                <citation>biodiversidadvirtual. (2021). Suborden Heteroptera Clave de Infraórdenes. Recuperado de: http://www.scielo.org.co/scielo.php?pid=S0123-30682011000100014&amp;script=sci_abstract&amp;tlng=es</citation>
+                <citation>Marvaldi, AE. &amp; Lanteri, A. (2005). Key to higher taxa of South American weevils based on adult characters (Coleoptera, Curculionoidea). Revista chilena de historia natural, 78(1), 65-87. https://dx.doi.org/10.4067/S0716-078X2005000100006</citation>
+                <citation>Platnick, N. I., Grismado, C. J. &amp; Ramírez, M. J. (1999). On the genera of the spider subfamily Otiothopinae (Araneae, Palpimanidae). American Museum Novitates 3257: 1-25.</citation>
+                <citation>Nates, G., Higuera, D., &amp; Gómez, A. (2021). Plan de acción de la Iniciativa Colombiana de Polinizadores. Dirección de Bosques, Biodiversidad y Servicios Ecosistémicos. Bogotá D.C.: Colombia. Ministerio de Ambiente y Desarrollo Sostenible. 140 p.  ISBN: 978-958-5551-71-8.</citation>
+                <citation>Salazar-E, J. (2001). Blattodea de Colombia. Nuevas adiciones y rectificaciones a los mántidos de la primera parte (Insecta: Mantodea). Boletin Cientifico Museo de Historia Natural Universidad de Caldas. 5. 38-63.</citation>
+                <citation>Palacino-Rodríguez F., Rache-Rodríguez L., Caicedo J.C y Suárez-Tovar C.M. (2020). Danzantes del aire:  Guía para la identificación de libélulas y caballitos del diablo asociados a humedales de Bogotá. Air Dancers: Identification guide of the dragonfies and damselfies of the Bogotá wetlands. Serie guías de campo del Instituto de Ciencias Naturales N.º 26. Bogotá, D.C. Instituto de Ciencias Naturales, Universidad Nacional de Colombia</citation>
+                <citation>Tangi, T., Pakhtunkhwa, K., Farzana, P., Perveen, K. &amp; Haroon, Mr. (2016). A contribution key for identification of butterflies (Lepidoptera) of. 97-108.</citation>
+                <citation>Prado CC, Triana HD, Castillo CC, Tulande-M E (2018) First records of Lithobius (Lithobius) forficatus (Linnaeus, 1758) and Lithobius (Lithobius) obscurus Meinert, 1872 (Lithobiomorpha, Lithobiidae) introduced to Colombia. Check List 14 (3): 559–568. https://doi.org/10.15560/14.3.559</citation>
+                <citation>Carabalí-Banguero, D., Montoya-Lerma, J., &amp; Carabalí-Muñoz, A. (2018). Dípteros asociados a la floración del aguacate &amp;lt;i&amp;gt;Persea americana&amp;lt;/i&amp;gt; Mill cv. Hass en Cauca, Colombia. Biota Colombiana, 19(1), 92–111. https://doi.org/10.21068/c2018.v19n01a06</citation>
+                <citation>Kempf, J., Adams, B., &amp; Brown, B. (2021). Urban Spider Diversity in Los Angeles Assessed Using a Community Science Approach. 40, 1–10.</citation>
+                <citation>Rengifo-Correa, LA. &amp; Gonzalez, R. (2011). Clave Ilustrada Para La Identificación De Las Familias De Pentato Momorpha (Hemiptera-Heteroptera) De Distribución Neotropical. Bol. Cient. Mus. Hist. Nat. Univ. Caldas [online]. 2011, vol.15, n.1, pp.168-187. ISSN 0123-3068.</citation>
+                <citation>Miili-Peet. (2021). F. 2. Clave ilustrada para Ordenes. Recuperado de: https://www.fieldmuseum.org/sites/default/files/millipedekeyspanish.pdf</citation>
+                <citation>Universidad de Murcia. (2021). Clave Para La Identificación De Quelicerado. Recuperado de: https://www.um.es/documents/4874468/11813776/claves-quelicerados-y-miriapodos.pdf/01399be6-52ce-43eb-9a51-dec110ce0049</citation>
+                <citation>Meineke, E. K., Holmquist, A. J., Wimp, G. M., &amp; Frank, S. D. (2017). Changes in spider community composition are associated with urban temperature, not herbivore abundance. Journal of Urban Ecology, 3(1), juw010. https://doi.org/10.1093/jue/juw010</citation>
+                <citation>Barrios, Y., Ramírez, N., Ramírez, E., Sánchez, E., &amp; Del Castillo, R. (2010). Importancia de los polinizadores en la reproducción de seis especies de subpáramo del Pico Naiguatá. (Parque Nacional El Ávila-Venezuela). Acta Botánica Venezuelica, 33 (2), 213-231</citation>
+                <citation>Buck, M., Woodley, N.E., Borkent, A., Wood, D.M., Pape, T., Vockeroth, J.R., Michelsen, V., &amp; Marshall, S.A. 2009. Key to Diptera families - adults. Chapter 6, pp. 95-144. In Brown, B.V., Borkent, A., Cumming, J.M., Wood, D.M., Woodley, N.E., &amp; Zumbado, M.A. (eds.). Manual of Central American Diptera. Volume 1. NRC Research Press, Ottawa. I-XII + 1-714.</citation>
+                <citation>Azpiazu, M., González Cairo, V., Palacios-Vargas, J. y Luciáñez, M. (2004). Clave Dicotómica Para La Determinación De Los Colémbolos De Cuba (Hexapoda: Collembola). Boln. S.E.A. Vol 34: 73 – 83.</citation>
+                <citation>Martínez C. (2005). Introducción a los escarabajos Carabidae (Coleoptera) de Colombia. Instituto de Investigación de Recursos Biológicos Alexander von Humboldt. Bogotá D. C., Colombia. 546 p</citation>
+                <citation>R.L. Hoffman, S.L Golovatch, J. Adis &amp; J. W. de Morais. (1996) Practical keys to the orders and families of millipedes of the Neotropical region (Myriapoda: Diplopoda). Amazoniana. XIV(l/2):l-35</citation>
+                <citation>Stephen A. Marshall, Ashley H. Kirk-Spriggs, Burgert S. Muller, Steven M. Paiero, Tiffany Yau and Morgan D. Jackson. (2017). Key To Diptera Families — Adults. Recuperado de: https://nasmus.co.za/wp-content/uploads/2019/01/Suricata-4-12-KEY-TO-DIPTERA-FAMILIES-ADULTS-low-resolution_Part1.pdf</citation>
+                <citation>P. M. Choate. (2010). Identification Key to the Principal Families of Florida Hemiptera, s.o. Heteroptera. Recuperado de: http://entnemdept.ufl.edu/choate/florida_heteroptera_families.pdf</citation>
+                <citation>Wise, D. H. (1993). Spiders in Ecological Webs. In Cambridge Studies in Ecology. Cambridge University Press. https://doi.org/DOI: 10.1017/CBO9780511623431</citation>
+                <citation>Angela M. Montoya Q.; León Perez; Alejandro Perez H. and Oscar Mahecha-J. (2014). Common Odonata From Córdoba, Salitre And La Florida Wetlands Cundinamarca, Bogotá-Colombia. Recuperado de: https://fieldguides.fieldmuseum.org/sites/default/files/rapid-color-guides-pdfs/608%20COLOMBIA%20Common%20Odonata%20a1.pdf</citation>
+                <citation>Zompro, Oliver. (2001). A generic revision of the insect order Phasmatodea: The New World genera of the stick insect subfamily Diapheromeridae: Diapheromerinae = Heteronemiidae: Heteronemiinae sensu Bradley &amp; Galil, 1977. Revue Suisse de Zoologie, v.108, 189-255 (2001). 108. 10.5962/bhl.part.79626.</citation>
+                <citation>López-García, M.M., García-Atencia, S. &amp; Amat-García, G. (2015). Escarabajos fitófagos (Coleoptera: Scarabaeidae &quot;&quot;Pleurosticti&quot;&quot;) de los Andes orientales de Colombia (departamentos de Santander, Boyacá y Cundinamarca). Bol. Cient. Mus. Hist. Nat. U. de Caldas, 19 (2): 322-358. DOI: 10.17151/bccm.2015.19.2.20</citation>
+                <citation>Longino, J., Coddington, J., &amp; Colwell, R. (2002). The Ant Fauna of a Tropical Rain Forest: Estimating Species Richness Three Different Ways. Ecology, 83, 689–702. https://doi.org/10.2307/3071874</citation>
+                </bibliography>
+                <resourceLogoUrl>https://raw.githubusercontent.com/SIB-Colombia/logos/main/socio-SiB-sda.png</resourceLogoUrl>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
+    </eml:eml>

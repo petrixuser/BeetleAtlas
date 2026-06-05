@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="https://eml.ecoinformatics.org/eml-2.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://eml.ecoinformatics.org/eml-2.2.0 https://rs.gbif.org/schema/eml-gbif-profile/1.3/eml.xsd"
+packageId="ec4e6fa9-9bae-4e5b-af77-17cf0a1a6725"  system="http://gbif.org" scope="system"
+xml:lang="en">
+    <dataset>
+        <alternateIdentifier>10.15468/wwjm5s</alternateIdentifier>
+        <alternateIdentifier>http://gbif-chile.mma.gob.cl/ipt/resource?r=flower_visitors</alternateIdentifier>
+        <title>Chilean flower visitors</title>
+        <creator>
+            <individualName>
+                <givenName>Manuel</givenName>
+                <surName>Lopez-Aliste</surName>
+            </individualName>
+            <organizationName>Pontificia Universidad Catolica de Valparaiso</organizationName>
+            <positionName>Database specialist</positionName>
+            <address>
+                <deliveryPoint>Av. Universidad 330</deliveryPoint>
+                <city>Valparaiso</city>
+                <administrativeArea>Valparaiso</administrativeArea>
+                <postalCode>2373223</postalCode>
+                <country>CHILE</country>
+            </address>
+            <phone>+56322274875</phone>
+            <electronicMailAddress>lopezalistemanuel@gmail.com</electronicMailAddress>
+            <userId directory="http://orcid.org/">0000-0002-8791-8599</userId>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Francisco</givenName>
+                <surName>Fonturbel</surName>
+            </individualName>
+            <organizationName>Pontificia Universidad Catolica de Valparaiso</organizationName>
+            <positionName>Associate profesor</positionName>
+            <address>
+                <deliveryPoint>Av. Universidad 330</deliveryPoint>
+                <city>Valparaiso</city>
+                <administrativeArea>Valparaiso</administrativeArea>
+                <postalCode>2373223</postalCode>
+                <country>CHILE</country>
+            </address>
+            <phone>+56322274845</phone>
+            <electronicMailAddress>francisco.fonturbel@pucv.cl</electronicMailAddress>
+            <onlineUrl>https://sites.google.com/site/ecoevolutionary/</onlineUrl>
+            <userId directory="http://orcid.org/">0000-0001-8585-2816</userId>
+        </creator>
+        <metadataProvider>
+            <individualName>
+                <givenName>Francisco</givenName>
+                <surName>Fonturbel</surName>
+            </individualName>
+            <organizationName>Pontificia Universidad Catolica de Valparaiso</organizationName>
+            <positionName>Associate profesor</positionName>
+            <address>
+                <deliveryPoint>Av. Universidad 330</deliveryPoint>
+                <city>Valparaiso</city>
+                <administrativeArea>Valparaiso</administrativeArea>
+                <postalCode>2373223</postalCode>
+                <country>CHILE</country>
+            </address>
+            <phone>+56322274845</phone>
+            <electronicMailAddress>francisco.fonturbel@pucv.cl</electronicMailAddress>
+            <onlineUrl>https://sites.google.com/site/ecoevolutionary/</onlineUrl>
+            <userId directory="http://orcid.org/">0000-0001-8585-2816</userId>
+        </metadataProvider>
+        <associatedParty>
+            <individualName>
+                <givenName>Francisco</givenName>
+                <surName>Fonturbel</surName>
+            </individualName>
+            <organizationName>Pontificia Universidad Catolica de Valparaiso</organizationName>
+            <positionName>Associate profesor</positionName>
+            <address>
+                <deliveryPoint>Av. Universidad 330</deliveryPoint>
+                <city>Valparaiso</city>
+                <administrativeArea>Valparaiso</administrativeArea>
+                <postalCode>2373223</postalCode>
+                <country>CHILE</country>
+            </address>
+            <phone>+56322274845</phone>
+            <electronicMailAddress>francisco.fonturbel@pucv.cl</electronicMailAddress>
+            <onlineUrl>https://sites.google.com/site/ecoevolutionary/</onlineUrl>
+            <userId directory="http://orcid.org/">0000-0001-8585-2816</userId>
+            <role>PRINCIPAL_INVESTIGATOR</role>
+        </associatedParty>
+        <associatedParty>
+            <individualName>
+                <givenName>Manuel</givenName>
+                <surName>Lopez-Aliste</surName>
+            </individualName>
+            <organizationName>Pontificia Universidad Catolica de Valparaiso</organizationName>
+            <positionName>Database specialist</positionName>
+            <address>
+                <deliveryPoint>Av. Universidad 330</deliveryPoint>
+                <city>Valparaiso</city>
+                <administrativeArea>Valparaiso</administrativeArea>
+                <postalCode>2373223</postalCode>
+                <country>CHILE</country>
+            </address>
+            <phone>+56322274875</phone>
+            <electronicMailAddress>lopezalistemanuel@gmail.com</electronicMailAddress>
+            <userId directory="http://orcid.org/">0000-0002-8791-8599</userId>
+            <role>AUTHOR</role>
+        </associatedParty>
+        <associatedParty>
+            <individualName>
+                <givenName>Cecilia</givenName>
+                <surName>Smith-Ramirez</surName>
+            </individualName>
+            <organizationName>Universidad de Los Lagos</organizationName>
+            <positionName>Faculty</positionName>
+            <address>
+                <city>Osorno</city>
+                <country>CHILE</country>
+            </address>
+            <role>CONTENT_PROVIDER</role>
+        </associatedParty>
+        <associatedParty>
+            <individualName>
+                <givenName>Karen</givenName>
+                <surName>Yañez</surName>
+            </individualName>
+            <organizationName>Instituto de Ecología y Biodiversidad</organizationName>
+            <positionName>Technician</positionName>
+            <address>
+                <city>Santiago</city>
+                <country>CHILE</country>
+            </address>
+            <role>CONTENT_PROVIDER</role>
+        </associatedParty>
+        <associatedParty>
+            <individualName>
+                <givenName>Antonio</givenName>
+                <surName>Saraiva</surName>
+            </individualName>
+            <organizationName>Universidade de Sao Paulo</organizationName>
+            <positionName>Full professor</positionName>
+            <address>
+                <city>Sao Paulo</city>
+                <administrativeArea>Sao Paulo</administrativeArea>
+                <country>BRAZIL</country>
+            </address>
+            <electronicMailAddress>saraiva@usp.br</electronicMailAddress>
+            <userId directory="http://orcid.org/">0000-0003-2283-1123</userId>
+            <role>PROGRAMMER</role>
+        </associatedParty>
+        <associatedParty>
+            <individualName>
+                <givenName>Christian</givenName>
+                <surName>Jofre-Perez</surName>
+            </individualName>
+            <organizationName>Universidad de Playa Ancha</organizationName>
+            <positionName>Associate researcher</positionName>
+            <address>
+                <city>Valparaiso</city>
+                <administrativeArea>Valparaiso</administrativeArea>
+                <country>CHILE</country>
+            </address>
+            <electronicMailAddress>christian.jofre@gmail.com</electronicMailAddress>
+            <userId directory="http://orcid.org/">0000-0002-2408-4064</userId>
+            <role>CURATOR</role>
+        </associatedParty>
+        <pubDate>
+                2021-01-07
+        </pubDate>
+        <language>ENGLISH</language>
+        <abstract>
+            This database contains a large dataset of Chilean flower visitors (insects) with 12,001 records from 118 species of 21 families belonging to four orders (Hymenoptera, Diptera, Lepidoptera, and Coleoptera), comprising over a century of data. This dataset contains samples from six major institutions in Chile (National Museum of Natural History, University of Chile, Metropolitan University of Education Sciences, Austral University of Chile, the Chilean Agricultural and Livestock Bureau, and Luis Peña&amp;#39;s private entomological collection). A first effort to digitize this information was made in 2008 through the IABIN project that gathered pollinator datasets from Latin America (led by Cecilia Smith-Ramirez and conducted by Karen Yañez, supported by the Institute of Ecology and Biodiversity - IEB), but when the funding was over, the database became offline. Now, in the frame of the SURPASS2 project, we recovered this dataset, and performed a major data cleaning, updated the taxonomy, checked the geographic coordinates (where available), and standardized it to DarwinCore to make it freely available through GBIF. This endeavor adds to a previous dataset published in 2020, aiming to make this natural legacy open to everyone and encourage more research in this field.
+        </abstract>
+        <keywordSet>
+            <keyword>Occurrence; bee; flies; beetles; butterflies; Chile; Specimen</keyword>
+            <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type.xml</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+            <keyword>Specimen</keyword>
+            <keywordThesaurus>GBIF Dataset Subtype Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_subtype.xml</keywordThesaurus>
+        </keywordSet>
+        <additionalInfo>
+            <para>The processing and updating of this database was funded by the SURPASS2 project: https://bee-surpass.org</para>
+        </additionalInfo>
+        <intellectualRights>
+            <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by-nc/4.0/legalcode"><citetitle>Creative Commons Attribution Non Commercial (CC-BY-NC) 4.0 License</citetitle></ulink>.</para>
+        </intellectualRights>
+        <licensed>
+            <licenseName>Creative Commons Attribution Non Commercial 4.0 International</licenseName>
+            <url>https://spdx.org/licenses/CC-BY-NC-4.0.html</url>
+            <identifier>CC-BY-NC-4.0</identifier>
+        </licensed>
+        <distribution scope="document">
+            <online>
+                <url function="download">https://gbif-chile.mma.gob.cl/ipt/archive.do?r=flower_visitors</url>
+            </online>
+        </distribution>
+        <coverage>
+            <geographicCoverage>
+                <geographicDescription>Most of the Chilean continental territory is covered, with some specimens from Argentina, Peru, and Ecuador that were held at the collections included in this dataset.</geographicDescription>
+                <boundingCoordinates>
+                    <westBoundingCoordinate>-76.992</westBoundingCoordinate>
+                    <eastBoundingCoordinate>-60.117</eastBoundingCoordinate>
+                    <northBoundingCoordinate>-13.923</northBoundingCoordinate>
+                    <southBoundingCoordinate>-56.365</southBoundingCoordinate>
+                </boundingCoordinates>
+            </geographicCoverage>
+            <temporalCoverage>
+                <rangeOfDates>
+                    <beginDate>
+                        <calendarDate>                1905-01-01
+</calendarDate>
+                    </beginDate>
+                    <endDate>
+                        <calendarDate>                2010-12-31
+</calendarDate>
+                    </endDate>
+                </rangeOfDates>
+            </temporalCoverage>
+            <taxonomicCoverage>
+                <generalTaxonomicCoverage>This dataset contains 118 species from 21 families belonging to four orders: Hymenoptera, Diptera, Coleoptera, Lepidoptera</generalTaxonomicCoverage>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Hymenoptera</taxonRankValue>
+                    <commonName>Bees</commonName>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Diptera</taxonRankValue>
+                    <commonName>Flies</commonName>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Coleoptera</taxonRankValue>
+                    <commonName>Beetles</commonName>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Lepidoptera</taxonRankValue>
+                    <commonName>Butterflies</commonName>
+                </taxonomicClassification>
+            </taxonomicCoverage>
+        </coverage>
+        <purpose><para>The purpose of this dataset is to digitize the natural legacy of six major scientific collections in Chile, making it available to anyone that wants to use this information for research or informative purposes.</para></purpose>
+        <maintenance>
+            <description>
+                <para>No regular maintenance planned.</para>
+            </description>
+            <maintenanceUpdateFrequency>notPlanned</maintenanceUpdateFrequency>
+        </maintenance>
+        <contact>
+            <individualName>
+                <givenName>Francisco</givenName>
+                <surName>Fonturbel</surName>
+            </individualName>
+            <organizationName>Pontificia Universidad Catolica de Valparaiso</organizationName>
+            <positionName>Associate profesor</positionName>
+            <address>
+                <deliveryPoint>Av. Universidad 330</deliveryPoint>
+                <city>Valparaiso</city>
+                <administrativeArea>Valparaiso</administrativeArea>
+                <postalCode>2373223</postalCode>
+                <country>CHILE</country>
+            </address>
+            <phone>+56322274845</phone>
+            <electronicMailAddress>francisco.fonturbel@pucv.cl</electronicMailAddress>
+            <onlineUrl>https://sites.google.com/site/ecoevolutionary/</onlineUrl>
+            <userId directory="http://orcid.org/">0000-0001-8585-2816</userId>
+        </contact>
+        <methods>
+            <methodStep>
+                <description>
+                    <para>Database curation for data quality and accuracy.</para>
+                </description>
+            </methodStep>
+            <methodStep>
+                <description>
+                    <para>Database curation for taxonomy.</para>
+                </description>
+            </methodStep>
+            <sampling>
+                <studyExtent>
+                    <description>
+                        <para>This database contains the specimens recorded in six scientific collections in Chile. Main flower visitor insect groups were represented in this database</para>
+                    </description>
+                </studyExtent>
+                <samplingDescription>
+                    <para>Insect samples collected throughout Chile, dried and pinned at scientific collections.</para>
+                </samplingDescription>
+            </sampling>
+            <qualityControl>
+                <description>
+                    <para>A deep data quality control procedure was applied to clean the original database (i.e., the one generated in 2008 by the IABIN project) as it presented several problems. Also, this database contains very old records from different collections, the quality level of the information presented is variable and we urge caution when using location data from samples collected before 1950.
+Taxonomy updated with Taxon Match. After a deep taxonomic revision process, we have four species with partially unresolved taxonomy, being recognized to the genus level by GBIF taxon match. Therefore, we urge caution when using records belonging to those four species (Mordella erythrura, Mordella luctuosa, Trichophthalma philippi, and Trichophthalma herbsti).</para>
+                </description>
+            </qualityControl>
+        </methods>
+
+            <project id="NE/S011870/1">
+                <title>Safeguarding pollination services in a changing world: theory into practice (SURPASS2)</title>
+                <personnel>
+                    <individualName>
+                    <givenName>Francisco</givenName>
+                    <surName>Fonturbel</surName>
+                    </individualName>
+            <userId directory="http://orcid.org/">0000-0001-8585-2816</userId>
+                    <role>PRINCIPAL_INVESTIGATOR</role>
+                </personnel>
+                <personnel>
+                    <individualName>
+                    <givenName>Manuel</givenName>
+                    <surName>Lopez-Aliste</surName>
+                    </individualName>
+            <userId directory="http://orcid.org/">0000-0002-8791-8599</userId>
+                    <role>ORIGINATOR</role>
+                </personnel>
+                <personnel>
+                    <individualName>
+                    <givenName>Christian</givenName>
+                    <surName>Jofre-Perez</surName>
+                    </individualName>
+            <userId directory="http://orcid.org/">0000-0002-2408-4064</userId>
+                    <role>CURATOR</role>
+                </personnel>
+                <abstract>
+                    <para>SURPASS2 is an international partnership between Argentina, Brazil, Chile and the UK, working on pollinators and pollination services in South America. Our objectives are to develop knowledge, build capacity and define tangible actions for conservation and sustainable use of pollinators. SURPASS2 will deliver evidence for the creation of resilient pollination services for sustainable economic growth, positive agricultural and environmental outcomes for improved human health and wellbeing. Through our research activities, we are providing crucial knowledge to food producers, policy-makers, land managers and the public who need better evidence based tools to support decision making for sustainable outcomes. We aim to offer improvements to the future cultural and social recognition of the vital roles that pollinators, and those that work with them, play in sustaining crop production and ecosystem functioning.</para>
+                </abstract>
+                <funding>
+                    <para>NERC (UK) and ANID (Chile)</para>
+                </funding>
+                <studyAreaDescription>
+                    <descriptor name="generic" citableClassificationSystem="false">
+                        <descriptorValue>Continental Chile</descriptorValue>
+                    </descriptor>
+                </studyAreaDescription>
+            </project>
+    </dataset>
+
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2026-05-24T11:59:29Z</dateStamp>
+                <citation>Lopez-Aliste M, Fonturbel F (2021). Chilean flower visitors. Pontificia Universidad Católica de Valparaíso. Occurrence dataset https://doi.org/10.15468/wwjm5s accessed via GBIF.org on 2026-05-24.</citation>
+                <collection>
+                    
+                    <collectionIdentifier>UACH</collectionIdentifier>
+                    <collectionName>Universidad Austral de Chile</collectionName>
+                </collection>
+                <collection>
+                    <parentCollectionIdentifier>Instituto de Entomologia</parentCollectionIdentifier>
+                    <collectionIdentifier>UMCE</collectionIdentifier>
+                    <collectionName>Universidad Metropolitana de Ciencias de la Educación</collectionName>
+                </collection>
+                <collection>
+                    
+                    <collectionIdentifier>MNHN</collectionIdentifier>
+                    <collectionName>Museo Nacional de Historia Natural</collectionName>
+                </collection>
+                <collection>
+                    
+                    <collectionIdentifier>UCH</collectionIdentifier>
+                    <collectionName>Universidad de Chile</collectionName>
+                </collection>
+                <collection>
+                    
+                    <collectionIdentifier>SAG</collectionIdentifier>
+                    <collectionName>Servicio Agrícola y Ganadero</collectionName>
+                </collection>
+                <collection>
+                    
+                    <collectionIdentifier>CELP</collectionIdentifier>
+                    <collectionName>Colección de Luis Peña</collectionName>
+                </collection>
+                <specimenPreservationMethod>PINNED</specimenPreservationMethod>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
+    </eml:eml>

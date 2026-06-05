@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="https://eml.ecoinformatics.org/eml-2.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://eml.ecoinformatics.org/eml-2.2.0 https://rs.gbif.org/schema/eml-gbif-profile/1.3/eml.xsd"
+packageId="4ffe66a0-6c8b-11de-8226-b8a03c50a862"  system="http://gbif.org" scope="system"
+xml:lang="en">
+    <dataset>
+        <alternateIdentifier>10.15468/ijp8p9</alternateIdentifier>
+        <alternateIdentifier>https://collections.ala.org.au/public/show/dr347</alternateIdentifier>
+        <alternateIdentifier>74f85bb1-c985-3dc8-890d-8244e4f3e65c</alternateIdentifier>
+        <alternateIdentifier>http://collections.ala.org.au/public/show/dr347</alternateIdentifier>
+        <alternateIdentifier>4ffe66a0-6c8b-11de-8226-b8a03c50a862</alternateIdentifier>
+        <alternateIdentifier>cd2be41f-160f-3180-84a6-742b7e7f6d1b</alternateIdentifier>
+        <alternateIdentifier>8b49a671-79ea-33f7-98f8-2d45c29d6769</alternateIdentifier>
+        <alternateIdentifier>14122</alternateIdentifier>
+        <title>Tasmanian Museum and Art Gallery provider for OZCAM</title>
+        <creator>
+            <organizationName>OZCAM (Online Zoological Collections of Australian Museums) Provider</organizationName>
+        </creator>
+        <creator>
+            <organizationName>Tasmanian Museum and Art Gallery</organizationName>
+        </creator>
+        <creator>
+            <organizationName>Tasmanian Museum and Art Gallery Vertebrate Collection</organizationName>
+        </creator>
+        <creator>
+            <organizationName>Tasmanian Museum and Art Gallery Bulk Samples Collection</organizationName>
+        </creator>
+        <creator>
+            <organizationName>Tasmanian Museum and Art Gallery Invertebrate Collection</organizationName>
+        </creator>
+        <metadataProvider>
+            <organizationName>OZCAM (Online Zoological Collections of Australian Museums) Provider</organizationName>
+        </metadataProvider>
+        <associatedParty>
+            <organizationName>Atlas of Living Australia</organizationName>
+            <address>
+                <deliveryPoint>CSIRO Ecosystems Services</deliveryPoint>
+                <city>Canberra</city>
+                <administrativeArea>ACT</administrativeArea>
+                <postalCode>2601</postalCode>
+                <country>AUSTRALIA</country>
+            </address>
+            <electronicMailAddress>info@ala.org.au</electronicMailAddress>
+            <role>DISTRIBUTOR</role>
+        </associatedParty>
+        <pubDate>
+                2026-01-16
+        </pubDate>
+        <language>ENGLISH</language>
+        <abstract>
+            Tasmanian Museum and Art Gallery provider for OZCAM
+
+Collections include:
+- Tasmanian Museum and Art Gallery Bulk Samples Collection
+- Tasmanian Museum and Art Gallery Invertebrate Collection
+- Tasmanian Museum and Art Gallery Vertebrate Collection
+- Tasmanian Museum and Art Gallery Tissue Collection
+        </abstract>
+        <intellectualRights>
+            <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by/4.0/legalcode"><citetitle>Creative Commons Attribution (CC-BY) 4.0 License</citetitle></ulink>.</para>
+        </intellectualRights>
+        <licensed>
+            <licenseName>Creative Commons Attribution 4.0 International</licenseName>
+            <url>https://spdx.org/licenses/CC-BY-4.0.html</url>
+            <identifier>CC-BY-4.0</identifier>
+        </licensed>
+        <distribution scope="document">
+            <online>
+                <url function="download">https://dwca-exports.ala.org.au/dr347.zip</url>
+            </online>
+        </distribution>
+        <purpose>&lt;para/&gt;</purpose>
+        <contact>
+            <individualName>
+                <givenName>Clifford</givenName>
+                <surName>Davy</surName>
+            </individualName>
+            <positionName>editor</positionName>
+            <electronicMailAddress>clifford.davy@tmag.tas.gov.au</electronicMailAddress>
+        </contact>
+
+    </dataset>
+
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2026-05-24T11:59:28Z</dateStamp>
+                <citation>Tasmanian Museum and Art Gallery (2026). Tasmanian Museum and Art Gallery provider for OZCAM. Occurrence dataset https://doi.org/10.15468/ijp8p9 accessed via GBIF.org on 2026-05-24.</citation>
+                <resourceLogoUrl>https://collections.ala.org.au/data/dataProvider/ozcam.png</resourceLogoUrl>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
+    </eml:eml>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="https://eml.ecoinformatics.org/eml-2.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://eml.ecoinformatics.org/eml-2.2.0 https://rs.gbif.org/schema/eml-gbif-profile/1.3/eml.xsd"
+packageId="13fdfab7-e281-428d-8c1f-e72eb7398e97"  system="http://gbif.org" scope="system"
+xml:lang="en">
+    <dataset>
+        <alternateIdentifier>10.15468/ga4bmd</alternateIdentifier>
+        <alternateIdentifier>https://ecdysis.org/collections/misc/collprofiles.php?collid=80</alternateIdentifier>
+        <alternateIdentifier>https://biokic2.rc.asu.edu:443/portal/collections/misc/collprofiles.php?collid=7</alternateIdentifier>
+        <alternateIdentifier>https://scan-bugs.org:443/portal/collections/misc/collprofiles.php?collid=7</alternateIdentifier>
+        <title>Museum at Texas Tech University Invertebrate Zoology Collection</title>
+        <creator>
+            <organizationName>Ecdysis</organizationName>
+            <onlineUrl>https://ecdysis.org/index.php</onlineUrl>
+        </creator>
+        <metadataProvider>
+            <organizationName>Ecdysis</organizationName>
+            <onlineUrl>https://ecdysis.org/index.php</onlineUrl>
+        </metadataProvider>
+        <associatedParty>
+            <individualName>
+                <givenName>Jennifer C.</givenName>
+                <surName>Girón</surName>
+            </individualName>
+            <positionName>Curator of Invertebrate Zoology</positionName>
+            <electronicMailAddress>Jennifer.Giron@ttu.edu</electronicMailAddress>
+            <userId directory="https://orcid.org/">0000-0002-0851-6883</userId>
+            <role>CONTENT_PROVIDER</role>
+        </associatedParty>
+        <pubDate>
+                2026-05-22
+        </pubDate>
+        <language>ENGLISH</language>
+        <abstract>
+            <para>The Invertebrate Zoology collection (TTU-Z) of the Museum at Texas Tech University is international in scope with an emphasis on arthropods from semi-arid and arid lands, especially from North America. The collection consists primarily of insects (including an extensive collection of ants), medical/veterinary specimens (endo- and ectoparasites), and arachnids. The pinned collection contains over 3,200 genera and 7,500 identified species. The collection is estimated to hold about 4.6 million specimens including pinned insects, arachnids preserved in ethanol, microscope slides (medical/veterinary importance and mites), and bulk samples. There are currently slightly more than 800 type specimens (mostly paratypes) in the collection.</para>
+        </abstract>
+        <intellectualRights>
+            <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by-nc/4.0/legalcode"><citetitle>Creative Commons Attribution Non Commercial (CC-BY-NC) 4.0 License</citetitle></ulink>.</para>
+        </intellectualRights>
+        <licensed>
+            <licenseName>Creative Commons Attribution Non Commercial 4.0 International</licenseName>
+            <url>https://spdx.org/licenses/CC-BY-NC-4.0.html</url>
+            <identifier>CC-BY-NC-4.0</identifier>
+        </licensed>
+        <distribution scope="document">
+            <online>
+                <url function="download">https://ecdysis.org/content/dwca/TTU-TTU-Z_DwC-A.zip</url>
+            </online>
+        </distribution>
+        <contact>
+            <organizationName>Museum at Texas Tech University Invertebrate Zoology Collection</organizationName>
+            <electronicMailAddress>Jennifer.Giron@ttu.edu</electronicMailAddress>
+            <onlineUrl>https://www.depts.ttu.edu/nsrl/collections/Invertebrate_Zoology/index.php</onlineUrl>
+            <userId directory="https://orcid.org/">0000-0002-0851-6883</userId>
+        </contact>
+
+    </dataset>
+
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2026-05-24T11:59:19Z</dateStamp>
+                <citation>Natural Science Research Laboratory, Museum of Texas Tech University (TTU) (2026). Museum at Texas Tech University Invertebrate Zoology Collection. Occurrence dataset https://doi.org/10.15468/ga4bmd accessed via GBIF.org on 2026-05-24.</citation>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
+    </eml:eml>

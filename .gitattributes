@@ -1,0 +1,5 @@
+GBIFdataandCSVSctipts/occurrence.txt filter=lfs diff=lfs merge=lfs -text
+GBIFdataandCSVSctipts/verbatim.txt filter=lfs diff=lfs merge=lfs -text
+GBIFdataandCSVSctipts/multimedia.txt filter=lfs diff=lfs merge=lfs -text
+Database/CSV's/media.csv filter=lfs diff=lfs merge=lfs -text
+Database/CSV's/observation.csv filter=lfs diff=lfs merge=lfs -text

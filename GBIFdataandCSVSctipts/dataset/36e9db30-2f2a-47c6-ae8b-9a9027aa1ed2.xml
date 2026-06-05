@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="https://eml.ecoinformatics.org/eml-2.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://eml.ecoinformatics.org/eml-2.2.0 https://rs.gbif.org/schema/eml-gbif-profile/1.3/eml.xsd"
+packageId="36e9db30-2f2a-47c6-ae8b-9a9027aa1ed2"  system="http://gbif.org" scope="system"
+xml:lang="en">
+    <dataset>
+        <alternateIdentifier>10.15468/r2xjt8</alternateIdentifier>
+        <alternateIdentifier>36e9db30-2f2a-47c6-ae8b-9a9027aa1ed2</alternateIdentifier>
+        <shortName>Étude entomologique Lépinay &amp; Montravail</shortName>
+        <title>Inventaire entomologique standardisé des ZNIEFF et autres sites naturels de Martinique-Étude entomologique massif forestier de Lépinay &amp; Montravail (2023)</title>
+        <creator>
+            <individualName>
+                <surName>Inventaire National du Patrimoine Naturel</surName>
+            </individualName>
+            <organizationName>PatriNat</organizationName>
+            <positionName>n/a</positionName>
+        </creator>
+        <metadataProvider>
+            <individualName>
+                <surName>Inventaire National du Patrimoine Naturel</surName>
+            </individualName>
+            <organizationName>PatriNat</organizationName>
+            <positionName>n/a</positionName>
+        </metadataProvider>
+        <associatedParty>
+            <individualName>
+                <surName>GBIF France</surName>
+            </individualName>
+            <organizationName>GBIF France</organizationName>
+            <positionName>IT support</positionName>
+            <address>
+                <deliveryPoint>GBIF France - MNHN Géologie CP48, 43 rue Buffon</deliveryPoint>
+                <city>Paris</city>
+                <administrativeArea>Île-de-France</administrativeArea>
+                <postalCode>75005</postalCode>
+                <country>FRANCE</country>
+            </address>
+            <phone>+33140798065</phone>
+            <electronicMailAddress>connexion@gbif.fr</electronicMailAddress>
+            <role>DISTRIBUTOR</role>
+        </associatedParty>
+        <pubDate>
+                2023-04-03
+        </pubDate>
+        <language>FRENCH</language>
+        <abstract>
+            L&amp;#39;étude est un inventaire entomologique standardisé des Forêts Territorialo-Domaniale (FDT) de Lépinay et Montravail, en avril 2023, à la demande de l&amp;#39;ONF Martinique. Il s&amp;#39;agit de zones de forêt mésophile secondaire avec des plantations de Mahogany (Swietenia spp.), Lépinay étant moins géré et entretenu que Montravail. Les objectifs sont les suivants : 
+1) dresser un inventaire le plus large possible des espèces présentes, pour renforcer et actualiser les connaissances sur la biodiversité de la FTD de Lépinay, afin de contribuer à la création d&amp;#39;une Réserve Biologique Dirigée (RBD) ;
+2) utiliser un protocole optimisé et standardisé pour cet objectif, en s’appuyant sur l’expérience de terrain des inventaires ZNIEFF de Martinique, afin de disposer de données d&amp;#39;inventaires  comparables en termes de méthodologie et de groupes ciblés, notamment entre Lépinay et Montravail, mais aussi plus largement par rapport aux ZNIEFF du Sud de la Martinique.
+3)  se concentrer sur quatre groupes fonctionnels : Coléoptères saproxyliques, Lépidoptères (phytophages), Odonates (prédateurs en zone humide) et Hyménoptères Apoïdes (pollinisateurs) ;
+4) analyser statistiquement les inventaires de Lépinay et Montravail de façon à comparer diversité, endémismes et intérêt patrimonial des cortèges d’insectes.
+
+Les principales méthodes utilisées sont : le piège LED Bleu automatique (PVB), le piège appât fruité, le piège lumineux, le piège Malaise, le Polytrap, le bol coloré, le piège Barber, la mise en émergence de branches mortes et la collecte active au filet et parapluie japonais.
+        </abstract>
+        <keywordSet>
+            <keyword>4.3 - « Site(s) naturel(s) ».</keyword>
+            <keyword>6.15 - « Milieux forestiers ».</keyword>
+            <keyword>Mahogany</keyword>
+            <keyword>plantations</keyword>
+        </keywordSet>
+        <keywordSet>
+            <keyword>Inventaire de Zonages d&apos;intérêt</keyword>
+            <keywordThesaurus>Objectifs du jeu de données</keywordThesaurus>
+        </keywordSet>
+        <intellectualRights>
+            <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by/4.0/legalcode"><citetitle>Creative Commons Attribution (CC-BY) 4.0 License</citetitle></ulink>.</para>
+        </intellectualRights>
+        <licensed>
+            <licenseName>Creative Commons Attribution 4.0 International</licenseName>
+            <url>https://spdx.org/licenses/CC-BY-4.0.html</url>
+            <identifier>CC-BY-4.0</identifier>
+        </licensed>
+        <distribution scope="document">
+            <online>
+                <url function="download">https://apt-inpn.gbif.fr/dataset/F7DCE91D-5BA4-6C15-E053-0514A8C0BF6E</url>
+            </online>
+        </distribution>
+        <coverage>
+            <geographicCoverage>
+                <geographicDescription>La boundingBox est calculée à partir des données</geographicDescription>
+                <boundingCoordinates>
+                    <westBoundingCoordinate>-60.93488</westBoundingCoordinate>
+                    <eastBoundingCoordinate>-60.92239</eastBoundingCoordinate>
+                    <northBoundingCoordinate>14.51204</northBoundingCoordinate>
+                    <southBoundingCoordinate>14.49714</southBoundingCoordinate>
+                </boundingCoordinates>
+            </geographicCoverage>
+            <temporalCoverage>
+                <rangeOfDates>
+                    <beginDate>
+                        <calendarDate>                2023-04-11
+</calendarDate>
+                    </beginDate>
+                    <endDate>
+                        <calendarDate>                2023-09-30
+</calendarDate>
+                    </endDate>
+                </rangeOfDates>
+            </temporalCoverage>
+            <taxonomicCoverage>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Coleoptera</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Diptera</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Hemiptera</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Hymenoptera</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Lepidoptera</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Mantodea</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Odonata</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Orthoptera</taxonRankValue>
+                </taxonomicClassification>
+            </taxonomicCoverage>
+        </coverage>
+        <contact>
+            <individualName>
+                <surName>Eddy POIRIER</surName>
+            </individualName>
+            <organizationName>EDDY POIRIER</organizationName>
+            <positionName>n/a</positionName>
+        </contact>
+        <contact>
+            <individualName>
+                <surName>Julien TOUROULT</surName>
+            </individualName>
+            <organizationName>SOCIETE ENTOMOLOGIQUE ANTILLES-GUYANE</organizationName>
+            <positionName>n/a</positionName>
+        </contact>
+
+            <project >
+                <title>Inventaire entomologique standardisé des ZNIEFF et autres sites naturels de Martinique</title>
+                <personnel>
+                    <individualName>
+                    <surName>LERIDER Stéphan</surName>
+                    </individualName>
+                    <organizationName>DIRECTION DE L&apos;ENVIRONNEMENT DE L&apos;AMENAGEMENT ET DU LOGEMENT MARTINIQUE</organizationName>
+                    <positionName>n/a</positionName>
+                    <role>ADMINISTRATIVE_POINT_OF_CONTACT</role>
+                </personnel>
+                <personnel>
+                    <individualName>
+                    <surName>TOUROULT Julien</surName>
+                    </individualName>
+                    <organizationName>SOCIETE ENTOMOLOGIQUE ANTILLES-GUYANE</organizationName>
+                    <positionName>n/a</positionName>
+                    <role>ADMINISTRATIVE_POINT_OF_CONTACT</role>
+                </personnel>
+                <personnel>
+                    <individualName>
+                    <surName>POIRER Eddy</surName>
+                    </individualName>
+                    <organizationName>SOCIETE ENTOMOLOGIQUE ANTILLES-GUYANE</organizationName>
+                    <positionName>n/a</positionName>
+                    <role>ADMINISTRATIVE_POINT_OF_CONTACT</role>
+                </personnel>
+                <personnel>
+                    <individualName>
+                    <surName>TOUROULT Julien</surName>
+                    </individualName>
+                    <organizationName>SEAG (Société entomologique Antilles-Guyane)</organizationName>
+                    <positionName>n/a</positionName>
+                    <role>ADMINISTRATIVE_POINT_OF_CONTACT</role>
+                </personnel>
+                <personnel>
+                    <individualName>
+                    <surName>LUCAS Pierre-Damien</surName>
+                    </individualName>
+                    <organizationName>Martinique Entomologie</organizationName>
+                    <positionName>n/a</positionName>
+                    <role>ADMINISTRATIVE_POINT_OF_CONTACT</role>
+                </personnel>
+                <personnel>
+                    <individualName>
+                    <surName>POIRIER Eddy</surName>
+                    </individualName>
+                    <organizationName>SEAG (Société entomologique Antilles-Guyane)</organizationName>
+                    <positionName>n/a</positionName>
+                    <role>ADMINISTRATIVE_POINT_OF_CONTACT</role>
+                </personnel>
+                <personnel>
+                    <individualName>
+                    <surName>MOULIN Nicolas</surName>
+                    </individualName>
+                    <organizationName>Nicolas Moulin Entomologiste</organizationName>
+                    <positionName>n/a</positionName>
+                    <role>ADMINISTRATIVE_POINT_OF_CONTACT</role>
+                </personnel>
+                <abstract>
+                    <para>Inventaire large de l&apos;entomofaune des sites désignés comme ZNIEFF (Zone naturelle d&apos;intérêt écologique, faunistique et floristique) en Martinique.
+L&apos;objectif est de confirmer ou d&apos;évaluer l&apos;intérêt de chacun de ces sites pour l&apos;entomofaune. L&apos;objectif secondaire vise à contribuer à la connaissance encore très fragmentaire de ce compartiment de la biodiversité en fournissant du matériel d&apos;étude à des taxonomiste et en complétant la distribution connue des espèces. 
+L&apos;approche a consisté à chercher activement les situations les plus propices à la collecte d&apos;espèces rares ou remarquables, notamment les espèces déterminantes. Le protocole a été standardisé afin de permettre des comparaisons entre sites.
+Le programme d&apos;étude consiste à inventorier entre 4 et 6 ZNIEFF chaque année. D&apos;autres sites (non classés ZNIEFF) ont été étudiés en 2022 et 2023.
+Ces inventaires et les données brutes associées servent ensuite à compléter le descriptif synthétique de chaque ZNIEFF.</para>
+                </abstract>
+                <funding>
+                    <para></para>
+                </funding>
+            </project>
+    </dataset>
+
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2026-05-24T11:59:19Z</dateStamp>
+                <citation>Inventaire National du Patrimoine Naturel (2023). Inventaire entomologique standardisé des ZNIEFF et autres sites naturels de Martinique-Étude entomologique massif forestier de Lépinay &amp; Montravail (2023). UAR PatriNat (OFB-MNHN-CNRS-IRD), Paris. Occurrence dataset https://doi.org/10.15468/r2xjt8 accessed via GBIF.org on 2026-05-24.</citation>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
+    </eml:eml>

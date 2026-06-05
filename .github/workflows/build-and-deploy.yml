@@ -1,0 +1,66 @@
+name: Build and Deploy Docker Image
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+env:
+  IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/beetleatlas
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  build:
+    name: Build and push image
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Generate Docker metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.IMAGE_NAME }}
+          tags: |
+            type=raw,value=latest
+            type=sha,prefix=sha-
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+
+  deploy:
+    name: Trigger Portainer redeploy
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Trigger Portainer stack webhook
+        env:
+          WEBHOOK_URL: ${{ secrets.PORTAINER_WEBHOOK_URL }}
+        run: |
+          if [ -n "$WEBHOOK_URL" ]; then
+            curl --fail --silent --show-error -X POST "$WEBHOOK_URL"
+            echo "Portainer webhook triggered."
+          else
+            echo "PORTAINER_WEBHOOK_URL not set — skipping redeploy."
+            echo "Add the secret once the Portainer stack is created."
+          fi

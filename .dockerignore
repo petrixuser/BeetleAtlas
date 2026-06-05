@@ -1,0 +1,12 @@
+.git
+.github
+.claude
+.DS_Store
+.vscode
+.idea
+docs/
+node_modules
+npm-debug.log
+*.env
+.env
+.env.*

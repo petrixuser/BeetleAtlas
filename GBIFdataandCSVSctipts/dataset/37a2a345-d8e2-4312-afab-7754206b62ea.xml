@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="https://eml.ecoinformatics.org/eml-2.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://eml.ecoinformatics.org/eml-2.2.0 https://rs.gbif.org/schema/eml-gbif-profile/1.3/eml.xsd"
+packageId="37a2a345-d8e2-4312-afab-7754206b62ea"  system="http://gbif.org" scope="system"
+xml:lang="es">
+    <dataset>
+        <alternateIdentifier>10.15472/iuk1t0</alternateIdentifier>
+        <alternateIdentifier>https://ipt.biodiversidad.co/sib/resource?r=udes_sistemasagroforestales-escarabajos</alternateIdentifier>
+        <title>Registros de Escarabajos (Convención, Norte de Santander) asociados a la mejora de la sostenibilidad ambiental en el marco de la estrategia nacional para el cultivo de Cacao</title>
+        <creator>
+            <individualName>
+                <givenName>Maria Carolina</givenName>
+                <surName>Santos Heredia</surName>
+            </individualName>
+            <organizationName>Universidad de Santander (UDES)</organizationName>
+            <positionName>Investigadora principal</positionName>
+            <address>
+                <deliveryPoint>Campus Lagos del Cacique</deliveryPoint>
+                <city>Bucaramanga</city>
+                <administrativeArea>Santander</administrativeArea>
+                <postalCode>580003</postalCode>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>car.santos@mail.udes.edu.co</electronicMailAddress>
+            <onlineUrl>http://www.udes.co</onlineUrl>
+            <userId directory="http://orcid.org/">0000-0001-7617-0581</userId>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Arnol</givenName>
+                <surName>Cardozo-Rueda</surName>
+            </individualName>
+            <organizationName>Universidad de Santander (UDES)</organizationName>
+            <positionName>Coinvestigador</positionName>
+            <address>
+                <deliveryPoint>Campus Lagos del Cacique</deliveryPoint>
+                <city>Bucaramanga</city>
+                <administrativeArea>Santander</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>acardozor@uqvirtual.edu.co</electronicMailAddress>
+            <userId directory="http://orcid.org/">0000-0003-3652-5194</userId>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Daiana</givenName>
+                <surName>Castro-Marín</surName>
+            </individualName>
+            <organizationName>Universidad de Santander (UDES)</organizationName>
+            <positionName>Coinvestigadora</positionName>
+            <address>
+                <deliveryPoint>Campus Lagos del Cacique</deliveryPoint>
+                <city>Bucaramanga</city>
+                <administrativeArea>Santander</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>dcastrom@uqvirtual.edu.co</electronicMailAddress>
+            <userId directory="http://orcid.org/">0000-0001-7059-8368</userId>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Alfonso</givenName>
+                <surName>Villalobos-Moreno</surName>
+            </individualName>
+            <organizationName>Universidad de Santander (UDES)</organizationName>
+            <positionName>Coinvestigador</positionName>
+            <address>
+                <deliveryPoint>Campus Lagos del Cacique</deliveryPoint>
+                <city>Bucaramanga</city>
+                <administrativeArea>Santander</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>avillalobosmo@unal.edu.co</electronicMailAddress>
+            <userId directory="http://orcid.org/">0000-0003-1713-7823</userId>
+        </creator>
+        <metadataProvider>
+            <individualName>
+                <givenName>Maria Carolina</givenName>
+                <surName>Santos Heredia</surName>
+            </individualName>
+            <organizationName>Universidad de Santander (UDES)</organizationName>
+            <positionName>Investigadora principal</positionName>
+            <address>
+                <deliveryPoint>Campus Lagos del Cacique</deliveryPoint>
+                <city>Bucaramanga</city>
+                <administrativeArea>Santander</administrativeArea>
+                <postalCode>580003</postalCode>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>car.santos@mail.udes.edu.co</electronicMailAddress>
+            <onlineUrl>http://www.udes.co</onlineUrl>
+            <userId directory="http://orcid.org/">0000-0001-7617-0581</userId>
+        </metadataProvider>
+        <associatedParty>
+            <individualName>
+                <givenName>David Andrés</givenName>
+                <surName>Vanegas-Alarcón</surName>
+            </individualName>
+            <organizationName>Universidad de Santander (UDES)</organizationName>
+            <positionName>Coinvestigador</positionName>
+            <address>
+                <deliveryPoint>Campus Lagos del Cacique</deliveryPoint>
+                <city>Bucaramanga</city>
+                <administrativeArea>Santander</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>davidvaneal@gmail.com</electronicMailAddress>
+            <userId directory="http://orcid.org/">0000-0002-4394-1711</userId>
+            <role>AUTHOR</role>
+        </associatedParty>
+        <pubDate>
+                2024-04-15
+        </pubDate>
+        <language>SPANISH</language>
+        <abstract>
+            <para>Los sistemas agroforestales en general proporcionan ingresos económicos, incrementan la biodiversidad y una serie de servicios ecosistémicos (Rey Benayas &amp; Bullock 2012) por lo que son una estrategia para la rehabilitación y restauración de los bosques tropicales (Vieira et al. 2009). Sin embargo, los efectos sobre la biodiversidad y los servicios que suministran al ecosistema varían de acuerdo al nivel del paisaje intervenido, al sistema agrícola y al taxón biológico (Vandermeer and Perfecto 2007; Rigueiro-Rodríguez et al. 2009; Lombard et al 2010).</para>
+<para>Este recurso corresponde a 470 registros biológicos de escarabajos provenientes de tres coberturas vegetales (Bosque secundario, Sistemas agroforestales SAF y Pastos arbolados) del municipio de Convención (Norte de Santander, Colombia). En cada sitio de muestreo fue trazado un cuadrante de 50m de lado (para minimizar la interferencia entre las trampas, Larsen &amp; Forsyth, 2005), y en cada esquina fueron dispuestas tres trampas de caída separadas por dos metros. Las trampas de caída para el muestreo de escarabajos consistieron en recipientes plásticos (9cm de diámetro y 13cm de profundidad) con 100ml de agua jabonosa.</para>
+        </abstract>
+        <keywordSet>
+            <keyword>Catatumbo</keyword>
+            <keyword>Potreros arbolados</keyword>
+            <keyword>Escarabajos coprófagos</keyword>
+            <keyword>SAF</keyword>
+            <keyword>Bosque</keyword>
+            <keywordThesaurus>n/a</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+            <keyword>Occurrence</keyword>
+            <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type_2015-07-10.xml</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+            <keyword>Observation</keyword>
+            <keywordThesaurus>GBIF Dataset Subtype Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_subtype.xml</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+            <keyword>PERMISO_COLECTA</keyword>
+            <keywordThesaurus>SiB Colombia</keywordThesaurus>
+        </keywordSet>
+        <intellectualRights>
+            <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by/4.0/legalcode"><citetitle>Creative Commons Attribution (CC-BY) 4.0 License</citetitle></ulink>.</para>
+        </intellectualRights>
+        <licensed>
+            <licenseName>Creative Commons Attribution 4.0 International</licenseName>
+            <url>https://spdx.org/licenses/CC-BY-4.0.html</url>
+            <identifier>CC-BY-4.0</identifier>
+        </licensed>
+        <distribution scope="document">
+            <online>
+                <url function="download">https://ipt.biodiversidad.co/sib/archive.do?r=udes_sistemasagroforestales-escarabajos</url>
+            </online>
+        </distribution>
+        <coverage>
+            <geographicCoverage>
+                <geographicDescription>Se realizaron colectas activas y pasivas escarabajos coprófagos, en tres coberturas vegetales de siete fincas ubicadas en las veredas La Vega (8°28’15,10”N; 73°22’16,29”W) y Macanal-Soledad (8°30’44,25”N; 73°18’13,10”W) del municipio de Convención, Norte de Santander, Colombia.</geographicDescription>
+                <boundingCoordinates>
+                    <westBoundingCoordinate>-73.374</westBoundingCoordinate>
+                    <eastBoundingCoordinate>-73.301</eastBoundingCoordinate>
+                    <northBoundingCoordinate>8.516</northBoundingCoordinate>
+                    <southBoundingCoordinate>8.47</southBoundingCoordinate>
+                </boundingCoordinates>
+            </geographicCoverage>
+            <temporalCoverage>
+                <rangeOfDates>
+                    <beginDate>
+                        <calendarDate>                2022-06-16
+</calendarDate>
+                    </beginDate>
+                    <endDate>
+                        <calendarDate>                2022-07-15
+</calendarDate>
+                    </endDate>
+                </rangeOfDates>
+            </temporalCoverage>
+            <taxonomicCoverage>
+                <generalTaxonomicCoverage>470 registros biológicos del orden Coleoptera. Del total, se identificó un 68.5% a nivel de especie y un 31.5% a nivel de género.</generalTaxonomicCoverage>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Coleoptera</taxonRankValue>
+                    <commonName>Escarabajos</commonName>
+                </taxonomicClassification>
+            </taxonomicCoverage>
+        </coverage>
+        <maintenance>
+            <description>
+                <para></para>
+            </description>
+            <maintenanceUpdateFrequency>biannually</maintenanceUpdateFrequency>
+        </maintenance>
+        <contact>
+            <individualName>
+                <givenName>Maria Carolina</givenName>
+                <surName>Santos Heredia</surName>
+            </individualName>
+            <organizationName>Universidad de Santander (UDES)</organizationName>
+            <positionName>Investigadora principal</positionName>
+            <address>
+                <deliveryPoint>Campus Lagos del Cacique</deliveryPoint>
+                <city>Bucaramanga</city>
+                <administrativeArea>Santander</administrativeArea>
+                <postalCode>580003</postalCode>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>car.santos@mail.udes.edu.co</electronicMailAddress>
+            <onlineUrl>http://www.udes.co</onlineUrl>
+            <userId directory="http://orcid.org/">0000-0001-7617-0581</userId>
+        </contact>
+        <methods>
+            <methodStep>
+                <description>
+                    <para>Escarabajos coprófagos se conservaron en alcohol. Posteriormente, el material recolectado se montó con alfileres entomológicos, se etiquetó y se depositó en cajas entomológicas tipo Cornell, siguiendo normas internacionales (Márquez, 2005; Triplehorn y Johnson, 2004). Los escarabajos coprófagos se identificaron con el uso de claves y descripciones de Medina y Lopera-Toro (2000) y Vaz-De-Mello et al. (2011), y la determinación fue corroborada por Johann Stephens Cárdenas-Bautista y Arturo González-Alvarado del Instituto de Investigación de Recursos Biológicos Alexander von Humboldt. El material recolectado fue entregado a la Colección Taxonómica Nacional de Insectos “Luis María Murillo” del Centro de Investigación Tibaitatá de AGROSVIA (Mosquera, Cundinamarca).</para>
+                </description>
+            </methodStep>
+            <sampling>
+                <studyExtent>
+                    <description>
+                        <para>Tres coberturas vegetales de siete fincas ubicadas en las veredas La Vega (8°28’15,10”N; 73°22’16,29”W) y Macanal-Soledad (8°30’44,25”N; 73°18’13,10”W) del municipio de Convención, Norte de Santander, Colombia. El municipio de Convención se encuentra localizado en la Cordillera Oriental a una altitud entre 800 y 1.200msnm, lo cual corresponde a una franja de transición entre bosque seco y bosque húmedo premontano. La temperatura media anual es de 23°C y la precipitación anual varía entre los 1.100 y 1.200 mm, con un patrón de lluvias bimodal. El municipio de Convención hace parte de la subregión de “El Catatumbo”, que es territorio PDET (ART, 2021).</para>
+                    </description>
+                </studyExtent>
+                <samplingDescription>
+                    <para>Escarabajos coprófagos. En cada sitio de muestreo fue trazado un cuadrante de 50m de lado (para minimizar la interferencia entre las trampas, Larsen &amp; Forsyth, 2005), y en cada esquina fueron dispuestas tres trampas de caída separadas por dos metros. Las trampas de caída para el muestreo de escarabajos consistieron en recipientes plásticos (9cm de diámetro y 13cm de profundidad) con 100ml de agua jabonosa. Las trampas se enterraron a ras de suelo y protegieron de la lluvia con un plato plástico de 27cm (a manera de techo). Cada trampa de caída fue cebada con 30g de una mezcla de heces frescas (7:3 de heces de ganado porcino y de humano) (Marsh et al., 2013). Las trampas se abrieron al atardecer del primer día (4:00-6:00pm) y se mantuvieron activas por 48 horas.</para>
+                </samplingDescription>
+            </sampling>
+            <qualityControl>
+                <description>
+                    <para>Todos los investigadores del proyecto participaron en el diseño de las metodologias, control de calidad y revision de los datos se detalla en metodología paso a paso.</para>
+                </description>
+            </qualityControl>
+        </methods>
+
+            <project id="Proyecto AGROSAVIA -UDES Convenio 2035-02">
+                <title>Mejora de la sostenibilidad ambiental mediante implementación de tecnologías en el marco de la estrategia nacional para el cultivo de cacao</title>
+                <personnel>
+                    <individualName>
+                    <givenName>Jairo</givenName>
+                    <surName>Rojas-Molina</surName>
+                    </individualName>
+            <userId directory="http://orcid.org/">0000-0003-3929-9487</userId>
+                    <role>AUTHOR</role>
+                </personnel>
+                <personnel>
+                    <individualName>
+                    <givenName>María Cristina</givenName>
+                    <surName>Gallego-Ropero</surName>
+                    </individualName>
+            <userId directory="http://orcid.org/">0000-0001-9457-9487</userId>
+                    <role>AUTHOR</role>
+                </personnel>
+                <personnel>
+                    <individualName>
+                    <givenName>Maria Carolina</givenName>
+                    <surName>Santos Heredia</surName>
+                    </individualName>
+            <userId directory="http://orcid.org/">0000-0001-7617-0581</userId>
+                    <role>PRINCIPAL_INVESTIGATOR</role>
+                </personnel>
+                <personnel>
+                    <individualName>
+                    <givenName>John</givenName>
+                    <surName>Jairo Díaz</surName>
+                    </individualName>
+            <userId directory="http://orcid.org/">0000-0001-8887-1676</userId>
+                    <role>AUTHOR</role>
+                </personnel>
+                <personnel>
+                    <individualName>
+                    <givenName>Deicy</givenName>
+                    <surName>Villalba Rey</surName>
+                    </individualName>
+            <userId directory="http://orcid.org/">0000-0002-8579-1379</userId>
+                    <role>AUTHOR</role>
+                </personnel>
+                <abstract>
+                    <para>Escarabajos coprófagos de tres coberturas vegetales del municipio de Convención (Norte de Santander, Colombia).</para>
+                </abstract>
+                <funding>
+                    <para>Convenio Derivado 2035-2 entre Agrosavia y Universidad de Santander, proyecto “Mejora de la sostenibilidad ambiental mediante implementación de tecnologías en el marco de la estrategia nacional para el cultivo de cacao” financiado por el Fondo Ambiental del Ministerio de Medio Ambiente y Acción Climática de Portugal y la Corporación Colombiana de Investigación Agropecuaria– AGROSAVIA – en el marco del protocolo de colaboración técnica y financiera (número interno AGROSAVIA 2035-2 y ID 1002031).</para>
+                </funding>
+                <studyAreaDescription>
+                    <descriptor name="generic" citableClassificationSystem="false">
+                        <descriptorValue>Colectas en tres coberturas vegetales de siete fincas ubicadas en las veredas La Vega (8°28’15,10”N; 73°22’16,29”W) y Macanal-Soledad (8°30’44,25”N; 73°18’13,10”W) del municipio de Convención, Norte de Santander, Colombia. El municipio de Convención se encuentra localizado en la Cordillera Oriental a una altitud entre 800 y 1.200msnm, lo cual corresponde a una franja de transición entre bosque seco y bosque húmedo premontano. La temperatura media anual es de 23°C y la precipitación anual varía entre los 1.100 y 1.200 mm, con un patrón de lluvias bimodal (IDEAM, 2022). El municipio de Convención hace parte de la subregión de “El Catatumbo”, que es territorio PDET (ART, 2021).
+
+Dentro de cada finca, se realizaron recolectas en tres diferentes tipos de cobertura vegetal: 
+a) Bosque secundario: Fragmentos de bosque sucesional de entre 5 y 10 hectáreas.
+b) Sistemas agroforestales SAF: Corresponde a cultivos de cacao (Theobroma cacao) establecidos hace 8 años bajo la sombra de especies forestales, y que no superan las 5 hectáreas.
+c) Pastos arbolados: Potreros con árboles dispersos o agrupados provenientes de la regeneración natural y/o remanentes de la vegetación original; estos potreros son activos con una rotación de ganado bovino no intensiva y con la utilización de agroquímicos para el control de hierbas.</descriptorValue>
+                    </descriptor>
+                </studyAreaDescription>
+                <designDescription>
+                    <description>
+                        <para>Escarabajos coprófagos. En cada sitio de muestreo fue trazado un cuadrante de 50m de lado (para minimizar la interferencia entre las trampas, Larsen &amp; Forsyth, 2005), y en cada esquina fueron dispuestas tres trampas de caída separadas por dos metros. Las trampas de caída para el muestreo de escarabajos consistieron en recipientes plásticos (9cm de diámetro y 13cm de profundidad) con 100ml de agua jabonosa. Las trampas se enterraron a ras de suelo y protegieron de la lluvia con un plato plástico de 27cm (a manera de techo). Cada trampa de caída fue cebada con 30g de una mezcla de heces frescas (7:3 de heces de ganado porcino y de humano) (Marsh et al., 2013). Las trampas se abrieron al atardecer del primer día (4:00-6:00pm) y se mantuvieron activas por 48 horas</para>
+                    </description>
+                </designDescription>
+            </project>
+    </dataset>
+
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2026-05-24T11:59:18Z</dateStamp>
+                <citation identifier="https://doi.org/10.15472/iuk1t0">Santos Heredia M C, Cardozo-Rueda A, Castro-Marín D, Villalobos-Moreno A (2024). Registros de Escarabajos (Convención, Norte de Santander) asociados a la mejora de la sostenibilidad ambiental en el marco de la estrategia nacional para el cultivo de Cacao. Universidad de Santander - UDES. Occurrence dataset https://doi.org/10.15472/iuk1t0 accessed via GBIF.org on 2026-05-24.</citation>
+                <bibliography>
+                <citation>Instituto Colombiano de Hidrología, Meteorología y Estudios Ambientales - IDEAM. (2022). Características climáticas de Norte de Santander. http://atlas.ideam.gov.co/cclimatologicas/info/anadep.html</citation>
+                <citation>Larsen, T. H., &amp; Forsyth, A. (2005). Trap Spacing and Transect Design for Dung Beetle Biodiversi¬ty Studies. Biotropica, 37, 322−325. https://doi. org/10.1111/j.1744-7429.2005.00042.x</citation>
+                <citation>Lombard AT, Cowling RM, Vlok JHJ, Fabricius C. 2010. Designing conservation corridors in production landscapes: assessment methods, implementation issues, and lessons learned. Ecol Soc 15:7.</citation>
+                <citation>Márquez, J. (2005). Técnicas de colecta y preservación de insectos.- Boletín Sociedad Entomológica Aragonesa, 37: 385-408.</citation>
+                <citation>Marsh, C. J., Louzada, J., Beiroz, W., &amp; Ewers, R. M. (2013). Optimising Bait for Pitfall Trapping of Ama¬zonian Dung Beetles (Coleoptera: Scarabaeinae). PLoS ONE, 8(8), 1−8. https://doi.org/10.1371/jour¬nal.pone.0073147</citation>
+                <citation>Medina, Claudia A., Lopera Toro, Alejandro, Vítolo, Adriana, &amp; Gill, Bruce (2001). Escarabajos Coprófagos (Coleoptera: Scarabaeidae: Scarabaeinae) de Colombia. Biota Colombiana, 2(2), 131-144. [fecha de Consulta 26 de octubre de 2019]. ISSN: 0124-5376. Disponible en https://www.redalyc.org/articulo.oa?id=491/49120202</citation>
+                <citation>Rey Benayas J &amp; Bullock J. 2012. Restoration of biodiversity and ecosystem services on agricultural land. Ecosystems 15, 883–899.</citation>
+                <citation>Rigueiro-Rodrı´guez A, McAdam J, Mosquera-Losada MR, Eds. 2009. Agroforestry in Europe: current status and future prospects. Dordrecht: Springer.</citation>
+                <citation>Triplehorn, C. H. &amp; Johnson, N. F. (2005). Borror and DeLong’s Introduction to the study of insects: 864 pp. Thomson Brooks/Cole, Gainesville.</citation>
+                <citation>Vandermeer J, Perfecto I. 2007. The agricultural matrix and a future paradigm for conservation. Conserv Biol 21:274–7.</citation>
+                </bibliography>
+                <resourceLogoUrl>https://raw.githubusercontent.com/SIB-Colombia/logos/main/socio-SiB-udes.png</resourceLogoUrl>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
+    </eml:eml>

@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="https://eml.ecoinformatics.org/eml-2.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://eml.ecoinformatics.org/eml-2.2.0 https://rs.gbif.org/schema/eml-gbif-profile/1.3/eml.xsd"
+packageId="50cf53ad-5115-445f-ac3f-c4d676a2d480"  system="http://gbif.org" scope="system"
+xml:lang="en">
+    <dataset>
+        <alternateIdentifier>10.15468/xr4fmx</alternateIdentifier>
+        <alternateIdentifier>50cf53ad-5115-445f-ac3f-c4d676a2d480</alternateIdentifier>
+        <shortName>Monitoring environnemental GPMG - 2019</shortName>
+        <title>Extension du quai 12 et confortement des quais 7 et 8 - Monitoring environnemental GPMG - 2019</title>
+        <creator>
+            <individualName>
+                <surName>Inventaire National du Patrimoine Naturel</surName>
+            </individualName>
+            <organizationName>PatriNat</organizationName>
+            <positionName>n/a</positionName>
+        </creator>
+        <metadataProvider>
+            <individualName>
+                <surName>Inventaire National du Patrimoine Naturel</surName>
+            </individualName>
+            <organizationName>PatriNat</organizationName>
+            <positionName>n/a</positionName>
+        </metadataProvider>
+        <associatedParty>
+            <individualName>
+                <surName>GBIF France</surName>
+            </individualName>
+            <organizationName>GBIF France</organizationName>
+            <positionName>IT support</positionName>
+            <address>
+                <deliveryPoint>GBIF France - MNHN Géologie CP48, 43 rue Buffon</deliveryPoint>
+                <city>Paris</city>
+                <administrativeArea>Île-de-France</administrativeArea>
+                <postalCode>75005</postalCode>
+                <country>FRANCE</country>
+            </address>
+            <phone>+33140798065</phone>
+            <electronicMailAddress>connexion@gbif.fr</electronicMailAddress>
+            <role>DISTRIBUTOR</role>
+        </associatedParty>
+        <pubDate>
+                2021-08-17
+        </pubDate>
+        <language>FRENCH</language>
+        <abstract>
+            Monitoring environnemental (Ornithologie &amp; Entomologie)
+        </abstract>
+        <keywordSet>
+            <keyword>Dépôt légal de données brutes de biodiversité</keyword>
+            <keyword>DEPOBIO</keyword>
+        </keywordSet>
+        <keywordSet>
+            <keyword>Inventaire pour étude impact</keyword>
+            <keywordThesaurus>Objectifs du jeu de données</keywordThesaurus>
+        </keywordSet>
+        <intellectualRights>
+            <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by/4.0/legalcode"><citetitle>Creative Commons Attribution (CC-BY) 4.0 License</citetitle></ulink>.</para>
+        </intellectualRights>
+        <licensed>
+            <licenseName>Creative Commons Attribution 4.0 International</licenseName>
+            <url>https://spdx.org/licenses/CC-BY-4.0.html</url>
+            <identifier>CC-BY-4.0</identifier>
+        </licensed>
+        <distribution scope="document">
+            <online>
+                <url function="download">https://apt-inpn.gbif.fr/dataset/C9AF78EE-E59C-4842-E053-3014A8C00A45</url>
+            </online>
+        </distribution>
+        <coverage>
+            <geographicCoverage>
+                <geographicDescription>La boundingBox est calculée à partir des données</geographicDescription>
+                <boundingCoordinates>
+                    <westBoundingCoordinate>-61.61571</westBoundingCoordinate>
+                    <eastBoundingCoordinate>-61.48443</eastBoundingCoordinate>
+                    <northBoundingCoordinate>16.27694</northBoundingCoordinate>
+                    <southBoundingCoordinate>16.09403</southBoundingCoordinate>
+                </boundingCoordinates>
+            </geographicCoverage>
+            <temporalCoverage>
+                <rangeOfDates>
+                    <beginDate>
+                        <calendarDate>                2018-11-11
+</calendarDate>
+                    </beginDate>
+                    <endDate>
+                        <calendarDate>                2019-03-06
+</calendarDate>
+                    </endDate>
+                </rangeOfDates>
+            </temporalCoverage>
+            <taxonomicCoverage>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Accipitriformes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Anseriformes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Anthoathecata</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Araneae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Charadriiformes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Coleoptera</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Columbiformes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Cuculiformes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Falconiformes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Hemiptera</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Hymenoptera</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Lepidoptera</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Odonata</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Orthoptera</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Passeriformes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Pelecaniformes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Stylommatophora</taxonRankValue>
+                </taxonomicClassification>
+            </taxonomicCoverage>
+        </coverage>
+        <contact>
+            <individualName>
+                <surName>AMAZONA</surName>
+            </individualName>
+            <organizationName>AMAZONA</organizationName>
+            <positionName>n/a</positionName>
+        </contact>
+
+            <project >
+                <title>Extension du quai 12 et confortement des quais 7 et 8</title>
+                <personnel>
+                    <individualName>
+                    <surName>None</surName>
+                    </individualName>
+                    <organizationName>None</organizationName>
+                    <positionName>n/a</positionName>
+                    <role>ADMINISTRATIVE_POINT_OF_CONTACT</role>
+                </personnel>
+                <personnel>
+                    <individualName>
+                    <surName>None</surName>
+                    </individualName>
+                    <organizationName>GRAND PORT MARITIME DE LA GUADELOUPE</organizationName>
+                    <positionName>n/a</positionName>
+                    <role>ADMINISTRATIVE_POINT_OF_CONTACT</role>
+                </personnel>
+                <personnel>
+                    <individualName>
+                    <surName>None</surName>
+                    </individualName>
+                    <organizationName>None</organizationName>
+                    <positionName>n/a</positionName>
+                    <role>ADMINISTRATIVE_POINT_OF_CONTACT</role>
+                </personnel>
+                <personnel>
+                    <individualName>
+                    <surName>None</surName>
+                    </individualName>
+                    <organizationName>GRAND PORT MARITIME DE LA GUADELOUPE</organizationName>
+                    <positionName>n/a</positionName>
+                    <role>ADMINISTRATIVE_POINT_OF_CONTACT</role>
+                </personnel>
+                <abstract>
+                    <para>Le GPMG envisage de réaliser une extension du quai n°12 situé sur le site portuaire de Jarry, à BAIE-MAHAULT. Ce projet s&apos;inscrit plus globalement dans le cadre du Grand Projet de Port de la Guadeloupe. Ce projet permettra d&apos;augmenter les capacités d&apos;accueil du quai dans un contexte d&apos;augmentation de la taille des navires. 
+
+Le GPMG prévoit également le confortement des quais 7 et 8 sur le site portuaire de Pointe-à-Pitre afin de supprimer le risque de ruine de ces ouvrages.
+
+Les projets sont soumis à étude d&apos;impact sur l&apos;environnement conformément à l&apos;article R122-2 du Code de l&apos;Environnement et à autorisation au titre des articles L214-1 et suivants du Code de l&apos;Environnement. Compte-tenu de la proximité d&apos;espèces protégées, le projet est aussi soumis à dérogation à l&apos;interdiction de perturbation d&apos;espèces protégées.</para>
+                </abstract>
+                <funding>
+                    <para></para>
+                </funding>
+            </project>
+    </dataset>
+
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2026-05-24T11:59:20Z</dateStamp>
+                <citation>Inventaire National du Patrimoine Naturel (2021). Extension du quai 12 et confortement des quais 7 et 8 - Monitoring environnemental GPMG - 2019. UAR PatriNat (OFB-MNHN-CNRS-IRD), Paris. Occurrence dataset https://doi.org/10.15468/xr4fmx accessed via GBIF.org on 2026-05-24.</citation>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
+    </eml:eml>

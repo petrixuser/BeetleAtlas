@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="https://eml.ecoinformatics.org/eml-2.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://eml.ecoinformatics.org/eml-2.2.0 https://rs.gbif.org/schema/eml-gbif-profile/1.3/eml.xsd"
+packageId="871d18ff-5591-443e-b9bf-56666875f586"  system="http://gbif.org" scope="system"
+xml:lang="en">
+    <dataset>
+        <alternateIdentifier>10.15468/dqntfk</alternateIdentifier>
+        <alternateIdentifier>871d18ff-5591-443e-b9bf-56666875f586</alternateIdentifier>
+        <shortName>Etude entomologique de la RBD Nord Grande Terre</shortName>
+        <title>Étude entomologique de la réserve biologique du Nord de la Grande Terre-Inventaire entomologique 2020-2022 de la réserve biologique dirigée du Nord Grande Terre, Guadeloupe (ONF)</title>
+        <creator>
+            <individualName>
+                <surName>Inventaire National du Patrimoine Naturel</surName>
+            </individualName>
+            <organizationName>PatriNat</organizationName>
+            <positionName>n/a</positionName>
+        </creator>
+        <metadataProvider>
+            <individualName>
+                <surName>Inventaire National du Patrimoine Naturel</surName>
+            </individualName>
+            <organizationName>PatriNat</organizationName>
+            <positionName>n/a</positionName>
+        </metadataProvider>
+        <associatedParty>
+            <individualName>
+                <surName>GBIF France</surName>
+            </individualName>
+            <organizationName>GBIF France</organizationName>
+            <positionName>IT support</positionName>
+            <address>
+                <deliveryPoint>GBIF France - MNHN Géologie CP48, 43 rue Buffon</deliveryPoint>
+                <city>Paris</city>
+                <administrativeArea>Île-de-France</administrativeArea>
+                <postalCode>75005</postalCode>
+                <country>FRANCE</country>
+            </address>
+            <phone>+33140798065</phone>
+            <electronicMailAddress>connexion@gbif.fr</electronicMailAddress>
+            <role>DISTRIBUTOR</role>
+        </associatedParty>
+        <pubDate>
+                2023-02-04
+        </pubDate>
+        <language>FRENCH</language>
+        <abstract>
+            Étude conduite par la SEAG (Eddy Poirier, Julien Touroult) et Toni Jourdan sur les îlots forestiers constitutifs de la Réserve Biologique Dirigée du Nord Grande Terre. L&amp;#39;objectif est de caractériser l&amp;#39;entomofaune de cette forêt sèche et morcélée, au niveau de six sites ; de pouvoir comparer l&amp;#39;intérêt des différents sites, afin d&amp;#39;alimenter le plan de gestion. Le protocole, déployé pendant deux sessions (saison des pluies 2020 et carême 2022), repose sur une prospection standardisée de six stations (1 pour chacun des secteur de la RBD : forêt de Poyen, Pouzzole, Deville, barre de Cadoue, forêt du littoral et Anse à la Barque). Pour chaque station : 1 piège lumineux, 1 piège PVB (LED bleue &amp;#43; Polytrap), 1 journée et un début de nuit de recherche à vue, 5 pièges aériens et un caisse de bois mort mise en émergence. Les groupes taxonomiques suivant étaient ciblés : Lépidoptères, Odonates, Phasmes, Coléoptères (notamment saproxyliques).
+        </abstract>
+        <keywordSet>
+            <keyword>4.4.2 - « Protection réglementaire ».</keyword>
+            <keyword>Coléoptères saproxyliques</keyword>
+            <keyword>forêt xérophile</keyword>
+        </keywordSet>
+        <keywordSet>
+            <keyword>Inventaire/Evaluation pour plans de gestion</keyword>
+            <keywordThesaurus>Objectifs du jeu de données</keywordThesaurus>
+        </keywordSet>
+        <intellectualRights>
+            <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by/4.0/legalcode"><citetitle>Creative Commons Attribution (CC-BY) 4.0 License</citetitle></ulink>.</para>
+        </intellectualRights>
+        <licensed>
+            <licenseName>Creative Commons Attribution 4.0 International</licenseName>
+            <url>https://spdx.org/licenses/CC-BY-4.0.html</url>
+            <identifier>CC-BY-4.0</identifier>
+        </licensed>
+        <distribution scope="document">
+            <online>
+                <url function="download">https://apt-inpn.gbif.fr/dataset/B18F9922-F5B1-10CC-E053-5014A8C08E2A</url>
+            </online>
+        </distribution>
+        <coverage>
+            <geographicCoverage>
+                <geographicDescription>La boundingBox est calculée à partir des données</geographicDescription>
+                <boundingCoordinates>
+                    <westBoundingCoordinate>-61.51826</westBoundingCoordinate>
+                    <eastBoundingCoordinate>-61.40366</eastBoundingCoordinate>
+                    <northBoundingCoordinate>16.51001</northBoundingCoordinate>
+                    <southBoundingCoordinate>16.37817</southBoundingCoordinate>
+                </boundingCoordinates>
+            </geographicCoverage>
+            <temporalCoverage>
+                <rangeOfDates>
+                    <beginDate>
+                        <calendarDate>                2020-01-23
+</calendarDate>
+                    </beginDate>
+                    <endDate>
+                        <calendarDate>                2022-06-30
+</calendarDate>
+                    </endDate>
+                </rangeOfDates>
+            </temporalCoverage>
+            <taxonomicCoverage>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Coleoptera</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Diptera</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Hemiptera</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Hymenoptera</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Lepidoptera</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Neuroptera</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Odonata</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Orthoptera</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Phasmida</taxonRankValue>
+                </taxonomicClassification>
+            </taxonomicCoverage>
+        </coverage>
+        <contact>
+            <individualName>
+                <surName>JOURDAN Toni</surName>
+            </individualName>
+            <organizationName>Toni Jourdan</organizationName>
+            <positionName>n/a</positionName>
+        </contact>
+        <contact>
+            <individualName>
+                <surName>TOUROULT Julien</surName>
+            </individualName>
+            <organizationName>SOCIETE ENTOMOLOGIQUE ANTILLES-GUYANE</organizationName>
+            <positionName>n/a</positionName>
+        </contact>
+        <contact>
+            <individualName>
+                <surName>POIRIER Eddy</surName>
+            </individualName>
+            <organizationName>SOCIETE ENTOMOLOGIQUE ANTILLES-GUYANE</organizationName>
+            <positionName>n/a</positionName>
+        </contact>
+
+            <project >
+                <title>Étude entomologique de la réserve biologique du Nord de la Grande Terre</title>
+                <personnel>
+                    <individualName>
+                    <surName>OFFICE NATIONAL DES FORETS</surName>
+                    </individualName>
+                    <organizationName>OFFICE NATIONAL DES FORETS</organizationName>
+                    <positionName>n/a</positionName>
+                    <role>ADMINISTRATIVE_POINT_OF_CONTACT</role>
+                </personnel>
+                <personnel>
+                    <individualName>
+                    <surName>Julien Touroult</surName>
+                    </individualName>
+                    <organizationName>SOCIETE ENTOMOLOGIQUE ANTILLES-GUYANE</organizationName>
+                    <positionName>n/a</positionName>
+                    <role>ADMINISTRATIVE_POINT_OF_CONTACT</role>
+                </personnel>
+                <personnel>
+                    <individualName>
+                    <surName>Julien Touroult</surName>
+                    </individualName>
+                    <organizationName>SOCIETE ENTOMOLOGIQUE ANTILLES-GUYANE</organizationName>
+                    <positionName>n/a</positionName>
+                    <role>ADMINISTRATIVE_POINT_OF_CONTACT</role>
+                </personnel>
+                <personnel>
+                    <individualName>
+                    <surName>OFFICE NATIONAL DES FORETS</surName>
+                    </individualName>
+                    <organizationName>OFFICE NATIONAL DES FORETS</organizationName>
+                    <positionName>n/a</positionName>
+                    <role>ADMINISTRATIVE_POINT_OF_CONTACT</role>
+                </personnel>
+                <abstract>
+                    <para>Inventaire standardisé des insectes dans plusieurs sites forestiers de la réserve biologique dirigée (RBD) du Nord Grande Terre, en Guadeloupe, réalisé à la demande du gestionnaire (ONF). Cet inventaire, avec des phases de terrain de 2020 à 2022, vise à estimer les enjeux de conservation des insectes dans les différents sites de cette réserve, et plus généralement à améliorer l&apos;inventaire des insectes dans ce secteur de forêts sèches de Guadeloupe.</para>
+                </abstract>
+                <funding>
+                    <para></para>
+                </funding>
+            </project>
+    </dataset>
+
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2026-05-24T11:59:16Z</dateStamp>
+                <citation>Inventaire National du Patrimoine Naturel (2023). Étude entomologique de la réserve biologique du Nord de la Grande Terre-Inventaire entomologique 2020-2022 de la réserve biologique dirigée du Nord Grande Terre, Guadeloupe (ONF). UAR PatriNat (OFB-MNHN-CNRS-IRD), Paris. Occurrence dataset https://doi.org/10.15468/dqntfk accessed via GBIF.org on 2026-05-24.</citation>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
+    </eml:eml>

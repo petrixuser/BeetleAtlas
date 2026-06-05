@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="https://eml.ecoinformatics.org/eml-2.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://eml.ecoinformatics.org/eml-2.2.0 https://rs.gbif.org/schema/eml-gbif-profile/1.3/eml.xsd"
+packageId="67418e29-005b-4021-9f78-4cf8e978a21a"  system="http://gbif.org" scope="system"
+xml:lang="en">
+    <dataset>
+        <title>GBIF Occurrence Download 0010031-260519110011954</title>
+        <creator>
+            <individualName>
+                <surName>GBIF Download Service</surName>
+            </individualName>
+            <electronicMailAddress>support@gbif.org</electronicMailAddress>
+        </creator>
+        <metadataProvider>
+            <individualName>
+                <surName>GBIF Download Service</surName>
+            </individualName>
+            <electronicMailAddress>support@gbif.org</electronicMailAddress>
+        </metadataProvider>
+        <pubDate>
+                2026-05-24
+        </pubDate>
+        <language>ENGLISH</language>
+        <abstract>
+            A dataset containing all occurrences available in GBIF matching the query:
+{
+  "and" : [
+    "BasisOfRecord is one of (Human Observation, Specimen, Machine Observation)",
+    "Continent is one of (South America, North America)",
+    "CoordinateUncertaintyInMeters 0.0-1000.0",
+    "Geometry POLYGON((-162.34758 25.9115,-103.01096 -61.1241,-27.50376 -59.84326,-30.19117 26.01082,-90.19833 26.51363,-119.39361 32.63775,-162.34758 25.9115))",
+    "HasCoordinate is true",
+    "OccurrenceStatus is Present",
+    "TaxonKey is Coleoptera",
+    "Year 2000-2026"
+  ]
+}
+The dataset includes records from the following constituent datasets. The full metadata for each constituent is also included in this archive:
+66 records from Estonian Museum of Natural History Department of Zoology
+1113 records from Samanta Orellana Research Collection
+657 records from Observation.org, Nature data from around the World
+61 records from Coleoptera World (Luomus) (CW)
+17132 records from Snow Entomological Museum Collection
+1 records from Biodiversity of intertidal invertebrates of Taraba Sound (Magellan Region, Chile)
+1181 records from Proyecto para compatibilizar el inventario de biota edáfica BGBD con el Sistema Nacional de Información sobre Biodiversidad
+1381 records from NEON Biorepository Benthic Macroinvertebrate Collection (Taxonomy Subsample)
+79 records from Registros de macroinvertebrados acuáticos en un bosque seco del municipio de Honda
+21 records from Occurrences of aquatic invertebrates in the Antarctic and Subantarctic regions
+6209 records from Études entomologiques pilotées par la Société entomologique Antilles-Guyane-Étude des insectes de la canopée (SEAG - Montagne des Chevaux)
+112 records from CardObs : Observations naturalistes issues de l'outil CardObs-Inventaire entomologique à la Forêt Inondée de Jarry, Guadeloupe
+25 records from Museum of Comparative Zoology, Harvard University
+1048 records from Étude entomologique de la réserve biologique du Nord de la Grande Terre-Inventaire entomologique 2020-2022 de la réserve biologique dirigée du Nord Grande Terre, Guadeloupe (ONF)
+211288 records from iNaturalist Research-grade Observations
+327 records from NEON Biorepository Carabid Collection (DNA Extracts)
+420 records from NABU|naturgucker
+121 records from Illinois Natural History Survey Insect Collection
+13 records from Registros de macroinvertebrados acuáticos tomados en el tramo medio del río Otún
+17 records from Registros de macroinvertebrados acuáticos en ríos alto andinos de la cuenca media del río Chicamocha
+1664 records from Metacomunidad de animales de charcos temporales de Rocha, Uruguay
+1 records from Cornell University Insect Collection (CUIC)
+1502 records from CardObs : Observations naturalistes issues de l'outil CardObs-Observations naturalistes de Philippe RAVAT. Inventaire entomologique du Morne Bigot
+161 records from Estonian University of Life Sciences Institute of Agricultural and Environmental Sciences Entomological Collection
+203 records from Brigham Young University Arthropod Museum
+322 records from Colección de artrópodos del PNN Gorgona - Museo de Entomología de la Universidad del Valle (MUSENUV)
+1653 records from CardObs : Observations naturalistes issues de l'outil CardObs-Observations naturalistes et collection entomologique de Julien TOUROULT
+10685 records from Monitoreo Ambiental del Proyecto La Colosa
+1184 records from Colección entomológica del Museo de Historia Natural “Luis Gonzalo Andrade” de la UPTC
+9136 records from Colección Entomológica Universidad de Antioquia
+112 records from Colección Limnológica del Chocó
+64 records from Grupos faunísticos de la expedición Ocetá - Proyecto Boyacá BIO UPTC
+4297 records from Études entomologiques pilotées par la Société entomologique Antilles-Guyane-Étude des insectes du sous-bois de la Montagne des Chevaux (SEAG)
+139 records from CardObs : Observations naturalistes issues de l'outil CardObs-Étude entomologique des forêts publiques de Martinique, pour l'ONF
+1 records from CardObs : Observations naturalistes issues de l'outil CardObs-Données naturalistes de Vincent Prié
+3 records from CardObs : Observations naturalistes issues de l'outil CardObs-Données naturalistes de MOULIN Nicolas
+470 records from Registros de Escarabajos (Convención, Norte de Santander) asociados a la mejora de la sostenibilidad ambiental en el marco de la estrategia nacional para el cultivo de Cacao
+984 records from Colección Entomológica del Programa de Biología - Universidad de Caldas (CEBUC)
+7 records from Registros de macroinvertebrados acuáticos presentes en la Laguna La Virginia, páramo del Sumapaz
+12 records from Monitoreo hidrobiológico en el Río Aures para el tramo de influencia de la central Aures Bajo
+45 records from CardObs : Observations naturalistes issues de l'outil CardObs-Données naturalistes de Jean-Michel LEMAIRE
+13 records from Gestión para el Monitoreo Participativo de Biodiversidad en las cuencas del río Frío, Cartama y San Antonio del Municipio de Támesis, Antioquia
+1 records from CardObs : Observations naturalistes issues de l'outil CardObs-Inventaire naturaliste de la commune de Papaichton (Guyane) : mission 2018
+216 records from Salvatore S. Anzaldo Collection
+48 records from Entomology Division, Yale Peabody Museum
+339 records from Inventaire entomologique standardisé des ZNIEFF et autres sites naturels de Martinique-Étude entomologique massif forestier de Lépinay &amp; Montravail (2023)
+212 records from CardObs : Observations naturalistes issues de l'outil CardObs-Campagne de Piègeages lumineux en Guadeloupe
+148 records from Museum at Texas Tech University Invertebrate Zoology Collection
+3898 records from Scarabaeoidea y colección de tipos de la colección entomológica del Centro de Estudios en Zoología, Universidad de Guadalajara
+1 records from Museu de Ciències Naturals de Barcelona: MCNB-Art
+2362 records from Études entomologiques pilotées par la Société entomologique Antilles-Guyane - Inventaire par piégeage des Coléoptères Phanaeini de Guyane (SEAG)
+26 records from Escarabajos y moscas de los bosques de niebla del sureste mexicano (Coleoptera: Scarabaeoidea; Diptera: Syrphidae y Calliphoridae)
+1 records from Entomologische Sammlung (ETHZ-ENT) of Eidgenössische Technische Hochschule Zürich
+2 records from The Albert J. Cook Arthropod Research Collection
+25 records from CardObs : Observations naturalistes issues de l'outil CardObs-KARUHET : Hétéroptères de Guadeloupe
+1 records from First record of the species Macraspis phallocardia Bento, Jameson &amp; Seidel, 2022 (Scarabaeidae: Rutelinae: Rutelini) from Peru
+794 records from Inventaire entomologique standardisé des ZNIEFF et autres sites naturels de Martinique-Étude entomologique canopée et sous-bois de la Montagne Pelée, 2022
+59 records from CardObs : Observations naturalistes issues de l'outil CardObs-Étude de la Faune du sol de Guadeloupe - Projet de Thibault Ramage - Partie Coléoptères et Hémiptères
+9 records from Extension du quai 12 et confortement des quais 7 et 8 - Monitoring environnemental GPMG - 2019
+2 records from Museo Laboratorio de Entomología (MENT-UT)
+48 records from VIT-Coleopterotheca (The Natural History Museum of Álava)
+935 records from Artropofauna de las Reservas Distritales de Humedal de Bogotá, D.C.
+364 records from Artrópodos de los Parques Distritales Ecológicos de Montaña
+19 records from Caracterización de la biodiversidad de la cuenca del río Chipalo (quebrada Ambalá) para el diseño de un corredor urbano y periurbano que facilite la conectividad ecológica en el municipio de Ibagué , Fase II
+63 records from Denver Museum of Nature &amp; Science - Entomology
+278 records from CardObs : Observations naturalistes issues de l'outil CardObs-Inventaire des insectes de neuf stations au sud du Parc national de Guadeloupe, 25 ans après l'inventaire de C. Sautière.
+40 records from Données du Parc national de la Guadeloupe - Données de type contact en Guadeloupe (PNG-obsocc - Observations occasionnelles)
+282 records from Inventaire entomologique standardisé des ZNIEFF et autres sites naturels de Martinique-Observations diverses réalisées à l'occasion de l'inventaire entomologique des ZNIEFF de Martinique
+24 records from Insectos asociados a las sabanas de montañas altas de República Dominicana
+267 records from NEON Biorepository Carabid Collection (Pinned Vouchers)
+1 records from Biodiversidad marina de la Bahía Tukakas, Alta Guajira colombiana. Proyecto Colombia BIO: Expedición Lamuuna Neimalu’u.
+5 records from University of Tennessee at Chattanooga Insect Collection
+23 records from University of Hawaii Insect Museum
+30 records from First record in Colombia of Microscapus hymenaeae Costa Lima, 1950 (Coleoptera: Curculionidae: Cryptorhynchini)
+91 records from Fauna acuática de importancia ecológica (crustáceos, insectos y peces) de la cuenca del río Moctezuma Querétaro-Hidalgo
+4469 records from La Planète Revisitée - Guyane 2014/2015-La Planète Revisitée, massif du Mitaraka, mission principale (février-mars 2015)
+329 records from Coleópteros colectados mediante trampas de intercepción en el Valle Exploradores (Aysén, Chile)
+1 records from Línea base general derivada de sonidos unidireccionales (espectro audible) para el valle medio del Magdalena - VMM
+139 records from La Planète Revisitée - Îles de Guadeloupe-La Planète revisitée Îles de Guadeloupe : reconnaissances et observations connexes
+161 records from Evan Waite Invertebrate Collection
+274 records from Bibliographie de la faune, la flore et la fonge de France métropolitaine et outre-mer-Bibliographique de la faune, la flore et la fonge de France métropolitaine et outre-mer
+39 records from Invertebrados y aves playeras de la Laguna Madre de Tamaulipas, México (Insectos)
+51 records from Distribución potencial de plagas de Chrysomelidae (Insecta: Coleoptera)
+13 records from Distribución espacio-temporal de aves playeras y su relación con los invertebrados bentónicos en la Reserva de la Biósfera Marismas Nacionales, Nayarit, México
+47 records from Distribución potencial en taxones hiperdiversos y poco conocidos (Insecta:  Coleoptera: Scarabaeoidea): estimando la localización de nuevos taxones y el efecto de los cambios en los usos del suelo
+11 records from Computarización de la colección científica del proyecto de control biológico de malezas de CSIRO-Australia
+14185 records from Digitalización y Sistematización de las Colecciones Biológicas Nacionales del Instituto de Biología, UNAM (CNIN)
+67 records from Museo de Insectos, Centro de Investigaciones en Protección de Cultivos (CIPROC), Escuela de Agronomía, Universidad de Costa Rica
+3 records from Comunidades hidrobiológicas asociadas al Corredor Accesos Cali y Palmira Unidad Funcional 4
+107 records from Carábidos (Coleoptera: Carabidae) del Museo de Entomología de la Universidad del Valle (Cali, Colombia)
+1 records from CardObs : Observations naturalistes issues de l'outil CardObs-Données naturalistes de PIOLAIN Julien
+2339 records from Colección Entomológica de Piedras Blancas
+2120 records from Colección Zoológica de la Universidad del Tolima (CZUT) - Macroinvertebrados
+3996 records from Colección Entomológica de la Orinoquia (CEO)
+1443 records from Colección de Insectos de la Universidad del Quindío
+412 records from Colección de Entomología (CE-IRNAD), Instituto de Investigaciones en Recursos Naturales, Agroecología y Desarrollo Rural (IRNAD), Bariloche. Argentina
+62 records from Grupos faunístios de la expedición El Consuelo - Proyecto Boyacá BIO
+1 records from CardObs : Observations naturalistes issues de l'outil CardObs-Données naturalistes de Lilian LEONARD
+1 records from University of Michigan Museum of Zoology, Division of Insects
+118 records from Monitoreo participativo de biodiversidad, diagnóstico de viveros y turismo - Fase 3 de aceleración de la ruta Cartama Sostenible
+5620 records from Arizona State University Hasbrouck Insect Collection
+45 records from CardObs : Observations naturalistes issues de l'outil CardObs-Coléoptères collectés dans le cadre de l'Inventaire des Diptères de Martinique (Dipterological survey of Martinique (Marc Pollet) - captures annexes)
+138 records from Lund University Biological Museum - Insect collections Specimens
+1246 records from Inventaire des longicornes des Antilles - Inventaire des Coléoptères Longicornes des Antilles françaises
+5054 records from Fortalecimiento de las colecciones de ECOSUR. Primera fase (Entomologica Tapachula)
+612 records from Diagnóstico del estado actual de la invasión biológica por Aedes (Stegomyia) albopictus (Skuse) (Díptera: Culícidae) en las principales áreas naturales protegidas de la Península de Yucatán, México
+43 records from C.P. Gillette Museum of Arthropod Diversity
+1484 records from Colección del Laboratorio de Entomología Universidad de Caldas - LEUC
+49 records from Programme d'observation naturaliste participative avec l'application mobile INPN Espèces - Application INPN Espèces: Observations naturalistes, participatives et opportunistes, fondées sur des photographies
+66 records from Dung beetles (Scarabaeidae, Scarabaeinae) of the Foothills–Andean Forest strip of Villavicencio, Colombia
+3908 records from Línea base general de escarabajos para el valle medio del Magdalena - VMM
+406 records from Appel à projet PN Guadeloupe 2022 : Coléoptères endémiques ou méconnus-Recherche des Coléoptères endémiques ou peu connus de la Basse Terre, Guadeloupe
+3 records from University of Nebraska State Museum Entomology
+55 records from Registros de Eumolpinae y potencial planta hospedera del Parque Natural Chicaque
+96 records from Passalidae y Lucanidae (Coleoptera: Scarabaeoidae) de México
+6 records from Bibliographie de la faune, la flore et la fonge de France métropolitaine et outre-mer-Zootaxa
+170 records from University of Arizona Insect Collection
+1106 records from Arizona State University Charles W. O'Brien Collection
+899 records from La Planète Revisitée - Guyane 2014/2015-La Planète Revisitée, mission complémentaire entomologique, massif du Mitaraka, août 2015
+151 records from Diversidad de los coleópteros Scarabaeiodea del estado de Puebla (II)
+409 records from Caracterización de flora, edafofauna epígea, anfibios y aves del Complejo Páramos Chilí - Barragán, Tolima
+14 records from Santa Barbara Museum of Natural History Entomology Collection
+230 records from Escarabajos estercoleros asociados a sistemas de ganadería sostenible en diferentes regiones de Colombia
+14 records from Insectos en el municipio de San Juanito, Meta - Colombia BIO
+858 records from Registros biológicos asociados al monitoreo de la diversidad de escarabajos en paisajes ganaderos silvopastoriles - Unillanos 2019
+86 records from Monitoreo de flora y fauna en el proyecto de restauración ecológica: Reviva la Primavera (Pauto M)
+17244 records from Registros biológicos asociados al monitoreo de la diversidad de escarabajos en paisajes ganaderos de bosque 2013 - 2017
+1 records from CardObs : Observations naturalistes issues de l'outil de saisie et gestion CardObs mis en place par le Service du Patrimoine Naturel (MNHN) / UMS PatriNat (OFB - CNRS - MNHN) - Données naturalistes d'Olivier GARGOMINY saisies sous cardObs
+48 records from Ants from the Paraguayan dry Chaco
+229 records from NZCS Tafelberg Expeditions 2003/2005/2013
+55 records from CardObs : Observations naturalistes issues de l'outil CardObs-Observations naturalistes d'Hervé BRUSTEL
+125 records from macroinvertebrados recurso hídrico Selva de Florencia
+613 records from Inventaire entomologique standardisé des ZNIEFF et autres sites naturels de Martinique-Inventaire entomologique standardisé des ZNIEFF de Martinique, protocole utilisé en 2014 et 2015
+71 records from University of Georgia Collection of Arthropods
+91 records from Biodiversidad acuática del río Amacuzac, Morelos, México (Invert_recuperada)
+248 records from Actualización y computarización de la colección del Laboratorio de Análisis y Referencia en Sanidad Forestal
+896 records from Apoyo a las colecciones biológicas de la Facultad de Ciencias de la UNAM: Fase 1 (Coleóptera)
+161 records from Colección de Insectos del Jardín Botánico del Quindío (CIJBQ)
+7 records from Inventario florístico y faunístico del Parque Nacional Barranca del Cupatitzio, Michoacán
+1 records from University of Kentucky Insect Collection
+704 records from Colección Macroinvertebrados Acuáticos Universidad Católica de Oriente
+21 records from Macroinvertebrados acuáticos bioindicadores de calidad de agua utilizados en la calibración de los índices BMWP-RD e IBF-RD para ríos de República Dominicana
+2 records from Museums Victoria provider for OZCAM
+93 records from Bibliographie de la faune, la flore et la fonge de France métropolitaine et outre-mer-Le Coléoptériste (ACOREP-France)
+20 records from NEON Biorepository Benthic Macroinvertebrate Collection (Taxonomy Reference Collection)
+1 records from NEON Biorepository Carabid Collection (Trap Sorting)
+151 records from CardObs : Observations naturalistes issues de l'outil CardObs-Inventaire de l'entomofaune de Petite Terre (2021-2022)
+3 records from Tasmanian Museum and Art Gallery provider for OZCAM
+6 records from Macroinvertebrados de la cuenca alta del río Chicamocha
+6 records from Museum of Southwestern Biology Division of Arthropods
+5 records from Bibliographie de la faune, la flore et la fonge de France métropolitaine et outre-mer-Revues diverses et littérature grise.
+321 records from Universidad del Valle de Guatemala - Colección de Artrópodos (UVGC)
+1 records from Bibliographie de la faune, la flore et la fonge de France métropolitaine et outre-mer-L'Entomologiste [1944- ]
+1 records from University of North Texas Elm Fork Insect Collection
+17 records from Bases de datos de plantas, insectos, reptiles, anfibios, aves y mamíferos del “Arroyo la Junta, Una joya de biodiversidad en la Reserva de la Biosfera Sierra La Laguna” (Invertebrados)
+2 records from Caracterización de hidrobiológicos en fuentes ubicadas en el proyecto minero JDG16061
+2101 records from Essig Museum of Entomology
+220 records from Artrópodos de Bahía Exploradores (Chile: Región de Aysén)
+13866 records from Análisis de las relaciones entre las diversidades alfa, beta y gamma a distintos niveles de escala espacial: Procesos históricos y ecológicos que intervienen. V Etapa
+1263 records from Computarización de la Colección de Coleoptera (Insecta) del Centro de Investigaciones Biológicas, UAEH, Pachuca, Hidalgo, México
+1736 records from Naturalis Biodiversity Center (NL) - Coleoptera
+10 records from New Mexico State Collection of Arthropods
+18 records from Nouveau pont du Larivot sur la rivière de Cayenne et ses raccordements à la RN1 bidirectionnelle - Biotope_OISEAU_INV
+100 records from Inventaire entomologique des forêts de Saint-Martin-Étude entomologique des forêts de Saint-Martin (2021)
+190 records from Inventaire naturaliste des îlets de Martinique (OFB 2022)
+1 records from Field Museum of Natural History (Zoology) Insect, Arachnid and Myriapod Collection
+1 records from CardObs : Observations naturalistes issues de l'outil CardObs-Données naturalistes de Arnaud HORELLOU
+13 records from Chilean flower visitors
+46 records from Captura de datos de la Colección de Curculionoidea (Insecta: Coleoptera) de la Universidad Autónoma de Querétaro
+12 records from Incidencia de mineria a gran escala en el deterioro del Río Quimi en el Tramo comprendido entre la Reserva Biológica El Quimi y la parroquia Tundayme
+213 records from NEON Invertebrate Voucher Collection at Arizona State University
+4525 records from mel
+4564 records from Études entomologiques pilotées par la Société entomologique Antilles-Guyane-Observations naturalistes et collection entomologique en Guyane (SEAG, Julien Touroult)
+1 records from CardObs : Observations naturalistes issues de l'outil CardObs-Données naturalistes de Xavier JAPIOT
+601 records from M. Andrew Johnston Research Collection
+35 records from Universidad de San Carlos de Guatemala - Colección de Entomología
+14 records from University of Texas, Biodiversity Center, Entomology Collection (UTIC)
+316 records from Fortalecimiento de las colecciones de ECOSUR. Primera fase (Entomologica San cristóbal)
+4824 records from Computarización de la colección de insectos de la Universidad de Morelos, CIByC, UAEM
+6725 records from Diversidad de ocho grupos de insecta (Odonata, Lycidae, Phengodidae, Lampyridae, Cantharidae, Cerambycidae, Syrphidae y Vespidae) en tres regiones con bosque tropical caducifolio en México
+6413 records from Colección de artrópodos del Museo de Historia Natural de la Pontificia Universidad Javeriana
+37 records from Línea base biótica del proyecto de Restauración Ecológica Re-Viva La Primavera
+99 records from Grupos faunisticos de la expedición El Valle - Proyecto Boyacá BIO UPTC
+4308 records from Inventaire entomologique standardisé des ZNIEFF et autres sites naturels de Martinique-Inventaire entomologique standardisé des ZNIEFF de Martinique, protocole utilisé à partir de 2016
+3337 records from Escarabajos coprófagos (Scarabaeinae) a lo largo de un gradiente altitudinal andino en el valle de Kosñipata, Perú
+1 records from Inventaires naturalistes conduits par l'association Entomo Fauna-Inventaire naturaliste de la commune de Grand-Santi (Guyane) : mission 2017 Entomo Fauna
+1 records from Insect Occurrence Data from MIZA
+2185 records from Sistematización de la colección entomológica y actualización de la colección del herbario CHIP del Instituto de Historia Natural y Ecología (IHNE), Chiapas (Insectos)
+764 records from Inventaire entomologique standardisé des ZNIEFF et autres sites naturels de Martinique-Inventaire entomologique standardisé des ZNIEFF de Martinique, protocole utilisé de 2011 à 2013
+196 records from Angiospermas y Fauna presente en áreas de potrero de la Reserva Natural de la Sociedad Civil Fundo Palmarito Yopal, Casanare
+
+        </abstract>
+        <contact>
+            <individualName>
+                <surName>GBIF Download Service</surName>
+            </individualName>
+            <electronicMailAddress>support@gbif.org</electronicMailAddress>
+        </contact>
+
+    </dataset>
+
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2026-05-24T11:59:32Z</dateStamp>
+                <citation identifier="0010031-260519110011954">GBIF Occurrence Download 0010031-260519110011954</citation>
+                <physical>
+                    <objectName>Darwin Core Archive</objectName>
+                    <characterEncoding>UTF-8</characterEncoding>
+                    <dataFormat>
+                        <externallyDefinedFormat>
+                            <formatName>Darwin Core Archive</formatName>
+                        </externallyDefinedFormat>
+                    </dataFormat>
+                    <distribution>
+                        <online>
+                            <url function="download">https://api.gbif.org/v1/occurrence/download/request/0010031-260519110011954.zip</url>
+                        </online>
+                    </distribution>
+                </physical>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
+    </eml:eml>

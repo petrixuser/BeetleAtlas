@@ -1,0 +1,2108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="https://eml.ecoinformatics.org/eml-2.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://eml.ecoinformatics.org/eml-2.2.0 https://rs.gbif.org/schema/eml-gbif-profile/1.3/eml.xsd"
+packageId="038f4398-50d3-4643-86f3-a0dceba96125"  system="http://gbif.org" scope="system"
+xml:lang="es">
+    <dataset>
+        <alternateIdentifier>10.15472/b1w1ku</alternateIdentifier>
+        <alternateIdentifier>https://ipt.biodiversidad.co/sibm/resource?r=biomar_bio-tukakas</alternateIdentifier>
+        <title>Biodiversidad marina de la Bahía Tukakas, Alta Guajira colombiana. Proyecto Colombia BIO: Expedición Lamuuna Neimalu’u.</title>
+        <creator>
+            <individualName>
+                <givenName>Erika</givenName>
+                <surName>Montoya-Cadavid</surName>
+            </individualName>
+            <organizationName>Invemar</organizationName>
+            <positionName>Investigadora científica</positionName>
+            <address>
+                <deliveryPoint>Calle 25 No. 2-55, Playa Salguero - Rodadero Sur</deliveryPoint>
+                <city>Santa Marta</city>
+                <administrativeArea>Magdalena</administrativeArea>
+                <postalCode>470006</postalCode>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>cristina.cedeno@invemar.org.co</electronicMailAddress>
+            <userId directory="http://orcid.org/">0000-0002-9709-6787</userId>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Cristina María</givenName>
+                <surName>Cedeño-Posso</surName>
+            </individualName>
+            <organizationName>Invemar</organizationName>
+            <positionName>Investigadora científica</positionName>
+            <address>
+                <deliveryPoint>Calle 25 No. 2-55, Playa Salguero - Rodadero Sur</deliveryPoint>
+                <city>Santa Marta</city>
+                <administrativeArea>Magdalena</administrativeArea>
+                <postalCode>470006</postalCode>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>cristina.cedeno@invemar.org.co</electronicMailAddress>
+            <userId directory="http://orcid.org/">0000-0001-8622-2947</userId>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Eliana Marcela</givenName>
+                <surName>Barrios Vásquez</surName>
+            </individualName>
+            <organizationName>Invemar</organizationName>
+            <positionName>Investigadora científica</positionName>
+            <address>
+                <deliveryPoint>Calle 25 No. 2-55, Playa Salguero - Rodadero Sur</deliveryPoint>
+                <city>Santa Marta</city>
+                <administrativeArea>Magdalena</administrativeArea>
+                <postalCode>470006</postalCode>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>eliana.barrios@invemar.org.co</electronicMailAddress>
+            <userId directory="http://orcid.org/">0000-0003-1850-9043</userId>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Giomar Helena</givenName>
+                <surName>Borrero-Pérez</surName>
+            </individualName>
+            <organizationName>Independiente</organizationName>
+            <positionName>Consultora  científica</positionName>
+            <address>
+                <deliveryPoint>Calle 25 # 2-55 - Rodadero - Playa Salguero</deliveryPoint>
+                <city>Santa Marta</city>
+                <administrativeArea>Magdalena</administrativeArea>
+                <postalCode>470006</postalCode>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>giomarborrero@gmail.com</electronicMailAddress>
+            <userId directory="http://orcid.org/">0000-0003-3091-3938</userId>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Leonel José</givenName>
+                <surName>Fernández Gómez</surName>
+            </individualName>
+            <organizationName>Instituto de Investigaciones Marinas y Costeras - Invemar</organizationName>
+            <positionName>Investigador científico</positionName>
+            <address>
+                <deliveryPoint>Calle 25 # 2-55 - Rodadero - Playa Salguero</deliveryPoint>
+                <city>Santa Marta</city>
+                <administrativeArea>Magdalena</administrativeArea>
+                <postalCode>470006</postalCode>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>leonel.fernandez@invemar.org.co</electronicMailAddress>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Miller José</givenName>
+                <surName>Florian Sánchez</surName>
+            </individualName>
+            <organizationName>Instituto de Investigaciones Marinas y Costeras - Invemar</organizationName>
+            <positionName>Investigador científico</positionName>
+            <address>
+                <deliveryPoint>Calle 25 # 2-55 - Rodadero - Playa Salguero</deliveryPoint>
+                <city>Santa Marta</city>
+                <administrativeArea>Magdalena</administrativeArea>
+                <postalCode>470006</postalCode>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>miller.florian@invemar.org.co</electronicMailAddress>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Nicoll Paola</givenName>
+                <surName>Lizarazo Rodríguez</surName>
+            </individualName>
+            <organizationName>Instituto de Investigaciones Marinas y Costeras - Invemar</organizationName>
+            <positionName>Investigadora científica</positionName>
+            <address>
+                <deliveryPoint>Calle 25 # 2-55 - Rodadero - Playa Salguero</deliveryPoint>
+                <city>Santa Marta</city>
+                <administrativeArea>Magdalena</administrativeArea>
+                <postalCode>470006</postalCode>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>nicoll.lizarazo@invemar.org.co</electronicMailAddress>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Estefanía</givenName>
+                <surName>Marín Pulgarín</surName>
+            </individualName>
+            <organizationName>Invemar</organizationName>
+            <positionName>Investigadora científica</positionName>
+            <address>
+                <deliveryPoint>Calle 25 No. 2-55, Playa Salguero - Rodadero Sur</deliveryPoint>
+                <city>Santa Marta</city>
+                <administrativeArea>Magdalena</administrativeArea>
+                <postalCode>470006</postalCode>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>estefania.marin@invemar.org.co</electronicMailAddress>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Andrés</givenName>
+                <surName>Merchán-Cepeda</surName>
+            </individualName>
+            <organizationName>Independiente</organizationName>
+            <positionName>Consultor científico</positionName>
+            <address>
+                <city>Santa Marta</city>
+                <administrativeArea>Magdalena</administrativeArea>
+                <postalCode>470006</postalCode>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>andresmerchan@gmail.com</electronicMailAddress>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>María Alejandra</givenName>
+                <surName>Mutis Martínezguerra</surName>
+            </individualName>
+            <organizationName>Invemar</organizationName>
+            <positionName>Investigadora científica</positionName>
+            <address>
+                <deliveryPoint>Calle 25 No. 2-55, Playa Salguero - Rodadero Sur</deliveryPoint>
+                <city>Santa Marta</city>
+                <administrativeArea>Magdalena</administrativeArea>
+                <postalCode>470006</postalCode>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>maria.mutis@invemar.org.co</electronicMailAddress>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Adriana María</givenName>
+                <surName>Osorno Arango</surName>
+            </individualName>
+            <organizationName>Invemar</organizationName>
+            <positionName>Investigadora científica</positionName>
+            <address>
+                <deliveryPoint>Calle 25 No. 2-55, Playa Salguero - Rodadero Sur</deliveryPoint>
+                <city>Santa Marta</city>
+                <administrativeArea>Magdalena</administrativeArea>
+                <postalCode>470006</postalCode>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>adriana.osorno@invemar.org.co</electronicMailAddress>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Natalia</givenName>
+                <surName>Rivas Escobar</surName>
+            </individualName>
+            <organizationName>Invemar</organizationName>
+            <positionName>Investigadora científica</positionName>
+            <address>
+                <deliveryPoint>Calle 25 No. 2-55, Playa Salguero - Rodadero Sur</deliveryPoint>
+                <city>Santa Marta</city>
+                <administrativeArea>Magdalena</administrativeArea>
+                <postalCode>470006</postalCode>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>natalia.rivas@invemar.org.co</electronicMailAddress>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Juliana Valentina</givenName>
+                <surName>Sánchez Muñoz</surName>
+            </individualName>
+            <organizationName>Invemar</organizationName>
+            <positionName>Investigadora científica</positionName>
+            <address>
+                <deliveryPoint>Calle 25 No. 2-55, Playa Salguero - Rodadero Sur</deliveryPoint>
+                <city>Santa Marta</city>
+                <administrativeArea>Magdalena</administrativeArea>
+                <postalCode>470006</postalCode>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>juliana.sanchez@invemar.org.co</electronicMailAddress>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Vanessa</givenName>
+                <surName>Yepes-Narváez</surName>
+            </individualName>
+            <organizationName>Invemar</organizationName>
+            <positionName>Investigadora científica</positionName>
+            <address>
+                <deliveryPoint>Calle 25 No. 2-55, Playa Salguero - Rodadero Sur</deliveryPoint>
+                <city>Santa Marta</city>
+                <administrativeArea>Magdalena</administrativeArea>
+                <postalCode>470006</postalCode>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>vanessa.yepes@invemar.org.co</electronicMailAddress>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Andrés Felipe</givenName>
+                <surName>Acosta Chaparro</surName>
+            </individualName>
+            <organizationName>Invemar</organizationName>
+            <positionName>Investigador científico</positionName>
+            <address>
+                <deliveryPoint>Calle 25 No. 2-55, Playa Salguero - Rodadero Sur</deliveryPoint>
+                <city>Santa Marta</city>
+                <administrativeArea>Magdalena</administrativeArea>
+                <postalCode>470006</postalCode>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>andres.acosta@invemar.org.co</electronicMailAddress>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Manuel Adrian</givenName>
+                <surName>Garrido-Linares</surName>
+            </individualName>
+            <organizationName>Invemar</organizationName>
+            <positionName>Investigador científico</positionName>
+            <address>
+                <deliveryPoint>Calle 25 No. 2-55, Playa Salguero - Rodadero Sur</deliveryPoint>
+                <city>Santa Marta</city>
+                <administrativeArea>Magdalena</administrativeArea>
+                <postalCode>470006</postalCode>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>manuel.garrido@invemar.org.co</electronicMailAddress>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Sebastian</givenName>
+                <surName>Herrera Fajardo</surName>
+            </individualName>
+            <organizationName>Invemar</organizationName>
+            <positionName>Investigador científico</positionName>
+            <address>
+                <deliveryPoint>Calle 25 No. 2-55, Playa Salguero - Rodadero Sur</deliveryPoint>
+                <city>Santa Marta</city>
+                <administrativeArea>Magdalena</administrativeArea>
+                <postalCode>470006</postalCode>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>sebastian.herrera@invemar.org.co</electronicMailAddress>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Laura</givenName>
+                <surName>Sánchez Valencia</surName>
+            </individualName>
+            <organizationName>Invemar</organizationName>
+            <positionName>Investigadora científica</positionName>
+            <address>
+                <deliveryPoint>Calle 25 No. 2-55, Playa Salguero - Rodadero Sur</deliveryPoint>
+                <city>Santa Marta</city>
+                <administrativeArea>Magdalena</administrativeArea>
+                <postalCode>470006</postalCode>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>laura.sanchez@invemar.org.co</electronicMailAddress>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Catalina</givenName>
+                <surName>Arteaga Flórez</surName>
+            </individualName>
+            <organizationName>Invemar</organizationName>
+            <positionName>Curadora General MHNMC</positionName>
+            <address>
+                <deliveryPoint>Calle 25 No. 2-55, Playa Salguero - Rodadero Sur</deliveryPoint>
+                <city>Santa Marta</city>
+                <administrativeArea>Magdalena</administrativeArea>
+                <postalCode>470006</postalCode>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>catalina.arteaga@invemar.org.co</electronicMailAddress>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Yuberlis</givenName>
+                <surName>Gonzáles Ipuana</surName>
+            </individualName>
+            <organizationName>Invemar</organizationName>
+            <positionName>Auxiliar de Investigación</positionName>
+            <address>
+                <deliveryPoint>Calle 25 No. 2-55, Playa Salguero - Rodadero Sur</deliveryPoint>
+                <city>Santa Marta</city>
+                <administrativeArea>Magdalena</administrativeArea>
+                <postalCode>470006</postalCode>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>yuberlis.ipuana@invemar.org.co</electronicMailAddress>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Mayra Alejandra</givenName>
+                <surName>Atencia Galindo</surName>
+            </individualName>
+            <organizationName>Invemar</organizationName>
+            <positionName>Investigadora científica</positionName>
+            <address>
+                <deliveryPoint>Calle 25 No. 2-55, Playa Salguero - Rodadero Sur</deliveryPoint>
+                <city>Santa Marta</city>
+                <administrativeArea>Magdalena</administrativeArea>
+                <postalCode>470006</postalCode>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>mayra.atencia@invemar.org.co</electronicMailAddress>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>John Eric</givenName>
+                <surName>Alvarez Torres</surName>
+            </individualName>
+            <organizationName>Invemar</organizationName>
+            <positionName>Investigador científico</positionName>
+            <address>
+                <deliveryPoint>Calle 25 No. 2-55, Playa Salguero - Rodadero Sur</deliveryPoint>
+                <city>Santa Marta</city>
+                <administrativeArea>Magdalena</administrativeArea>
+                <postalCode>470006</postalCode>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>john.alvarez@invemar.org.co</electronicMailAddress>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Jesús Manuel</givenName>
+                <surName>Cujia Rosado</surName>
+            </individualName>
+            <organizationName>Invemar</organizationName>
+            <positionName>Investigador científico</positionName>
+            <address>
+                <deliveryPoint>Calle 25 No. 2-55, Playa Salguero - Rodadero Sur</deliveryPoint>
+                <city>Santa Marta</city>
+                <administrativeArea>Magdalena</administrativeArea>
+                <postalCode>470006</postalCode>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>jusus.cujia@invemar.org.co</electronicMailAddress>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Alejandro</givenName>
+                <surName>Rodríguez-Sánchez</surName>
+            </individualName>
+            <organizationName>Invemar</organizationName>
+            <positionName>Pasante</positionName>
+            <address>
+                <deliveryPoint>Calle 25 No. 2-55, Playa Salguero - Rodadero Sur</deliveryPoint>
+                <city>Santa Marta</city>
+                <administrativeArea>Magdalena</administrativeArea>
+                <postalCode>470006</postalCode>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>alejandro.rodriguez@invemar.org.co</electronicMailAddress>
+        </creator>
+        <metadataProvider>
+            <individualName>
+                <givenName>Erika</givenName>
+                <surName>Montoya-Cadavid</surName>
+            </individualName>
+            <organizationName>Invemar</organizationName>
+            <positionName>Investigadora científica</positionName>
+            <address>
+                <deliveryPoint>Calle 25 No. 2-55, Playa Salguero - Rodadero Sur</deliveryPoint>
+                <city>Santa Marta</city>
+                <administrativeArea>Magdalena</administrativeArea>
+                <postalCode>470006</postalCode>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>erika.montoya@invemar.org.co</electronicMailAddress>
+            <userId directory="http://orcid.org/">0000-0002-9709-6787</userId>
+        </metadataProvider>
+        <metadataProvider>
+            <individualName>
+                <givenName>Cristina María</givenName>
+                <surName>Cedeño-Posso</surName>
+            </individualName>
+            <organizationName>Invemar</organizationName>
+            <positionName>Investigadora científica</positionName>
+            <address>
+                <deliveryPoint>Calle 25 No. 2-55, Playa Salguero - Rodadero Sur</deliveryPoint>
+                <city>Santa Marta</city>
+                <administrativeArea>Magdalena</administrativeArea>
+                <postalCode>470006</postalCode>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>cristina.cedeno@invemar.org.co</electronicMailAddress>
+            <userId directory="http://orcid.org/">0000-0001-8622-2947</userId>
+        </metadataProvider>
+        <associatedParty>
+            <individualName>
+                <givenName>David Alejandro</givenName>
+                <surName>Alonso Carvajal</surName>
+            </individualName>
+            <organizationName>Instituto de Investigaciones Marinas y Costeras – Invemar</organizationName>
+            <positionName>Coordinador Programa Biodiversidad y Ecosistemas Marinos - BEM</positionName>
+            <address>
+                <deliveryPoint>Calle 25 # 2-55 - Rodadero - Playa Salguero</deliveryPoint>
+                <city>Santa Marta</city>
+                <administrativeArea>Magdalena</administrativeArea>
+                <postalCode>470006</postalCode>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>david.alonso@invemar.org.co</electronicMailAddress>
+            <role>POINT_OF_CONTACT</role>
+        </associatedParty>
+        <associatedParty>
+            <individualName>
+                <givenName>Ministerio de Ciencia</givenName>
+                <surName>Tecnología e Innovación</surName>
+            </individualName>
+            <organizationName>Gobierno de Colombia</organizationName>
+            <positionName>Ministerio</positionName>
+            <address>
+                <deliveryPoint>Avenida Calle 26 No. 57 - 83 Torre 8 - Pisos del 2 al 6</deliveryPoint>
+                <city>Santa Fé de Bogotá</city>
+                <administrativeArea>Cundinamarca</administrativeArea>
+                <postalCode>111321</postalCode>
+                <country>COLOMBIA</country>
+            </address>
+            <phone>(+57) (601) 6258480 ext. 2081</phone>
+            <electronicMailAddress>atencionalciudadano@minciencias.gov.co</electronicMailAddress>
+            <onlineUrl>https://minciencias.gov.co</onlineUrl>
+            <role>POINT_OF_CONTACT</role>
+        </associatedParty>
+        <associatedParty>
+            <individualName>
+                <givenName>Adriana</givenName>
+                <surName>Daza Suárez</surName>
+            </individualName>
+            <organizationName>Corporación Autónoma Regional de La Guajira - Corpoguajira</organizationName>
+            <positionName>Profesional Especializado, Grupo Marino Costero - Subdirección Gestión Ambiental</positionName>
+            <address>
+                <deliveryPoint>Cra. 7a No 12-15 Edificio Corpoguajira</deliveryPoint>
+                <city>Riohacha</city>
+                <administrativeArea>La Guajira</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <phone>(+57) (605) 727-5125</phone>
+            <electronicMailAddress>a.daza@corpoguajira.gov.co</electronicMailAddress>
+            <role>POINT_OF_CONTACT</role>
+        </associatedParty>
+        <associatedParty>
+            <individualName>
+                <givenName>Martha Patricia</givenName>
+                <surName>Vides Casado</surName>
+            </individualName>
+            <organizationName>Invemar</organizationName>
+            <positionName>Jefe Línea ITE - Programa BEM</positionName>
+            <address>
+                <deliveryPoint>Calle 25 No. 2-55, Playa Salguero - Rodadero Sur</deliveryPoint>
+                <city>Santa Marta</city>
+                <administrativeArea>Magdalena</administrativeArea>
+                <postalCode>470006</postalCode>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>martha.vides@invemar.org.co</electronicMailAddress>
+            <role>POINT_OF_CONTACT</role>
+        </associatedParty>
+        <associatedParty>
+            <individualName>
+                <givenName>Sven Eloy</givenName>
+                <surName>Zea Sjoberg</surName>
+            </individualName>
+            <organizationName>Universidad Nacional de Colombia, Instituto de Estudios en Ciencias del Mar-CECIMAR, Sede Caribe</organizationName>
+            <positionName>Profesor Titular</positionName>
+            <address>
+                <deliveryPoint>Calle 25 No. 2-55, Playa Salguero - Rodadero Sur</deliveryPoint>
+                <city>Santa Marta</city>
+                <administrativeArea>Magdalena</administrativeArea>
+                <postalCode>470006</postalCode>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>s.zea@unal.edu.co</electronicMailAddress>
+            <role>REVIEWER</role>
+        </associatedParty>
+        <associatedParty>
+            <individualName>
+                <givenName>Arturo</givenName>
+                <surName>Acero Pizarro</surName>
+            </individualName>
+            <organizationName>Universidad Nacional de Colombia, Instituto de Estudios en Ciencias del Mar-CECIMAR, Sede Caribe</organizationName>
+            <positionName>Profesor Titular</positionName>
+            <address>
+                <deliveryPoint>Calle 25 No. 2-55, Playa Salguero - Rodadero Sur</deliveryPoint>
+                <city>Santa Marta</city>
+                <administrativeArea>Magdalena</administrativeArea>
+                <postalCode>470006</postalCode>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>aacero@invemar.org.co</electronicMailAddress>
+            <role>REVIEWER</role>
+        </associatedParty>
+        <pubDate>
+                2024-05-31
+        </pubDate>
+        <language>SPANISH</language>
+        <abstract>
+            Con el propósito de generar conocimiento sobre la biodiversidad marina y costera de la Bahía Tukakas, el Instituto de Investigaciones Marinas y Costeras - INVEMAR, en asocio con la Corporación Autónoma Regional de La Guajira - CORPOGUAJIRA, diseñaron y ejecutaron la expedición científica Lamuuna Neimaluú, llevada a cabo entre el 19 y 28 de abril del 2023, en el marco de la estrategia Colombia BIO del Ministerio de Ciencia, Tecnología e Innovación. Este recurso presenta 539 registros biológicos obtenidos durante los muestreos realizados entre 0 y 17.5 m de profundidad, en los cinco ecosistemas estratégicos del área (praderas de pastos, formaciones coralinas, fondos  sedimentarios, litoral rocoso, y manglar). Dichos registros representan a 194 especies marinas de 17 fila, correspondientes a animales, plantas, cromistas y bacterias.
+
+Este conjunto de datos complementa al recurso titulado &amp;#34;Aves y mamíferos terrestres de la Bahía Tukakas, Alta Guajira colombiana. Proyecto Colombia BIO: Expedición Lamuuna Neimalu’u&amp;#34;, los cuales en suma presentan el inventario general de registros de biota generado por la expedición.
+        </abstract>
+        <keywordSet>
+            <keyword>Occurrence</keyword>
+            <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type_2015-07-10.xml</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+            <keyword>Expedición Colombia BIO</keyword>
+            <keyword>Bahía Tukakas</keyword>
+            <keyword>Biodiversidad marina</keyword>
+            <keyword>Caribe colombiano</keyword>
+            <keyword>La Guajira</keyword>
+            <keywordThesaurus>n/a</keywordThesaurus>
+        </keywordSet>
+        <intellectualRights>
+            <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by-nc/4.0/legalcode"><citetitle>Creative Commons Attribution Non Commercial (CC-BY-NC) 4.0 License</citetitle></ulink>.</para>
+        </intellectualRights>
+        <licensed>
+            <licenseName>Creative Commons Attribution Non Commercial 4.0 International</licenseName>
+            <url>https://spdx.org/licenses/CC-BY-NC-4.0.html</url>
+            <identifier>CC-BY-NC-4.0</identifier>
+        </licensed>
+        <distribution scope="document">
+            <online>
+                <url function="download">https://ipt.biodiversidad.co/sibm/archive.do?r=biomar_bio-tukakas</url>
+            </online>
+        </distribution>
+        <coverage>
+            <geographicCoverage>
+                <geographicDescription>Los registros corresponden a la Bahía Tukakas (Lamuuna Neimalu’u) e inmediaciones, localizada en municipio de Uribia en la Alta Guajira del Caribe colombiano; obtenidos mediante recorridos de avistamiento a través de las áreas costeras, particularmente en los ecosistemas de manglar, litoral rocoso, y playas.</geographicDescription>
+                <boundingCoordinates>
+                    <westBoundingCoordinate>-180</westBoundingCoordinate>
+                    <eastBoundingCoordinate>180</eastBoundingCoordinate>
+                    <northBoundingCoordinate>90</northBoundingCoordinate>
+                    <southBoundingCoordinate>-90</southBoundingCoordinate>
+                </boundingCoordinates>
+            </geographicCoverage>
+            <temporalCoverage>
+                <rangeOfDates>
+                    <beginDate>
+                        <calendarDate>                2023-04-20
+</calendarDate>
+                    </beginDate>
+                    <endDate>
+                        <calendarDate>                2024-05-27
+</calendarDate>
+                    </endDate>
+                </rangeOfDates>
+            </temporalCoverage>
+            <taxonomicCoverage>
+                <generalTaxonomicCoverage>El conjunto está representado por 539 registros biológicos marinos correspondientes a 4 reinos, 17 fila, 34 clases, 101 ordenes, 172 familias, 213 géneros, 192 especies, y 2 subespecies.  La identificación se alcanzó en un 63.3% hasta la categoría taxonómica de especie, en 19.5% hasta género, en 7.4% hasta subfilo, 5.2% hasta familia, 1.5% a orden, 1.1% subespecie, 0.9% hasta filo y clase, y 0.2% hasta subfamilia.</generalTaxonomicCoverage>
+                <taxonomicClassification>
+                    <taxonRankName>Kingdom</taxonRankName>
+                    <taxonRankValue>Animalia</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Phylum</taxonRankName>
+                    <taxonRankValue>Annelida</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Polychaeta</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Amphinomida</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Amphinomidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Eunicida</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Dorvilleidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Eunicidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Phyllodocida</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Hesionidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Phyllodocidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Glyceridae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Sabellida</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Sabellidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Spionida</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Spionidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Terebellida</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Terebellidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Clitellata</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Enchytraeida</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Enchytraeidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Sipuncula</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Aspidosiphonidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Phylum</taxonRankName>
+                    <taxonRankValue>Arthropoda</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Arachnida</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Chilopoda</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Scolopendromorpha</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Scolopendridae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Hexapoda</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Coleoptera</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Lepidoptera</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Hemiptera</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Malacostraca</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Amphipoda</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Lysianassidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Platyischnopidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Phoxocephalidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Megaluropidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Ischyroceridae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Cumacea</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Nannastacidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Pseudocumatidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Decapoda</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Alpheidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Calcinidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Diogenidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Epialtidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Grapsidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Hippolytidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Mithracidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Ocypodidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Paguridae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Panopeidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Penaeidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Portunidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Pseudorhombilidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Sesarmidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Upogebiidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Isopoda</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Aegidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Ancinidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Cirolanidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Thecostraca</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Balanomorpha</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Balanidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Phylum</taxonRankName>
+                    <taxonRankValue>Bryozoa</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Gymnolaemata</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Cheilostomatida</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Aeverrilliidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Antroporidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Bitectiporidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Bugulidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Calloporidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Epistomiidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Membraniporidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Pasytheidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Vesiculariidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Phylum</taxonRankName>
+                    <taxonRankValue>Cnidaria</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Anthozoa</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Malacalcyonacea</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Gorgoniidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Scleractinia</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Agariciidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Faviidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Poritidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Rhizangiidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Scleralcyonacea</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Erythropodiidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Zoantharia</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Zoanthidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Hexacorallia</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Scleractinia</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Poritidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Hydrozoa</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Anthoathecata</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Milleporidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Pennariidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Sertulariidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Syntheciidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Thyroscyphidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Scyphozoa</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Rhizostomeae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Mastigiidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Phylum</taxonRankName>
+                    <taxonRankValue>Echinodermata</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Echinoidea</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Arbacioida</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Arbaciidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Camarodonta</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Echinometridae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Holothuroidea</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Holothuriida</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Holothuriidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Ophiuroidea</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Amphilepidida</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Amphiuridae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Euryalida</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Gorgonocephalidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Phylum</taxonRankName>
+                    <taxonRankValue>Mollusca</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Bivalvia</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Myida</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Corbulidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Mytilida</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Mytilidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Nuculida</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Nuculidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Ostreida</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Isognomonidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Ostreidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Venerida</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Veneridae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Cephalopoda</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Octopoda</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Octopodidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Gastropoda</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Caenogastropoda</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Cerithiidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Modulidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Cephalaspidea</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Bullidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Haminoeidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Cycloneritida</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Neritidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Littorinimorpha</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Caecidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Littorinidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Neogastropoda</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Columbellidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Fasciolariidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Melongenidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Muricidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Nassariidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Olividae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Pisaniidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Vasidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Nudibranchia</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Aplysiidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Siphonariida</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Siphonariidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Trochida</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Turbinidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Polyplacophora</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Chitonida</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Chitonidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Phylum</taxonRankName>
+                    <taxonRankValue>Nemertea</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Phylum</taxonRankName>
+                    <taxonRankValue>Platyhelminthes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Polycladida</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Cestoplanidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Phylum</taxonRankName>
+                    <taxonRankValue>Porifera</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Demospongiae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Haplosclerida</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Chalinidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Niphatidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Petrosiidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Phloeodictyidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Poecilosclerida</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Coelosphaeridae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Suberitida</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Suberitidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Phylum</taxonRankName>
+                    <taxonRankValue>Chordata</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Subphylum</taxonRankName>
+                    <taxonRankValue>Tunicata</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Ascidiacea</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Aplousobranchia</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Didemnidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Polycitoridae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Stolidobranchia</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Molgulidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Actinopteri</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Atheriniformes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Atherinopsidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Batrachoidiformes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Batrachoididae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Blenniiformes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Labrisomidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Carangiformes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Carangidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Ephippidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Gadiformes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Bregmacerotidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Gobiiformes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Gobiidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Mugiliformes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Mugilidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Perciformes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Gerreidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Pleuronectiformes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Paralichthyidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Siluriformes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Ariidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Syngnathiformes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Syngnathidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Tetraodontiformes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Tetraodontidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Actinopterygii</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Atheriniformes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Atherinopsidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Beloniformes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Belonidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Blenniiformes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Labrisomidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Carangaria</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Centropomidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Carangiformes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Carangidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Clupeiformes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Elopidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Eupercaria</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Gerreidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Sciaenidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Stromateidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Gobiiformes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Eleotridae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Gobiidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Lutjaniformes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Lutjanidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Mugiliformes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Mugilidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Myliobatiformes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Rhinopteridae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Rajiformes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Rhinobatidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Scombriformes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Siluriformes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Ariidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Spariformes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Sparidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Tetraodontiformes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Tetraodontidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Elasmobranchii</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Carcharhiniformes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Carcharhinidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Mammalia</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Cetartiodactyla </taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Delphinidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Reptilia</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Testudines </taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Cheloniidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Kingdom</taxonRankName>
+                    <taxonRankValue>Bacteria</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Phylum</taxonRankName>
+                    <taxonRankValue>Cyanobacteria</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Cyanophyceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Oscillatoriales</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Microcoleaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Kingdom</taxonRankName>
+                    <taxonRankValue>Chromista</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Phylum</taxonRankName>
+                    <taxonRankValue>Foraminifera</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Globothalamea</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Rotaliida</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Amphisteginidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Nodosariata</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Vaginulinida</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Vaginulinidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Tubothalamea</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Miliolida</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Hauerinidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Phylum</taxonRankName>
+                    <taxonRankValue>Ochrophyta</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Phaeophyceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Dictyotales</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Dictyotaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Ectocarpales</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Scytosiphonaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Fucales</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Sargassaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Sphacelariales</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Sphacelariaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Kingdom</taxonRankName>
+                    <taxonRankValue>Plantae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Phylum</taxonRankName>
+                    <taxonRankValue>Chlorophyta</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Ulvophyceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Bryopsidales</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Caulerpaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Codiaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Halimedaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Cladophorales</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Anadyomenaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Cladophoraceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Siphonocladaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Dasycladales</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Polyphysaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Phylum</taxonRankName>
+                    <taxonRankValue>Rhodophyta</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Florideophyceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Acrosymphytales</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Acrosymphytaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Bonnemaisoniales</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Bonnemaisoniaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Ceramiales</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Callithamniaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Ceramiaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Delesseriaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Rhodomelaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Corallinales</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Corallinaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Lithophyllaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Gigartinales</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Subfamily</taxonRankName>
+                    <taxonRankValue>Solieriaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Gracilariales</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Gracilariaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Halymeniales</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Halymeniaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Rhodymeniales</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Rhodymeniaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Phylum</taxonRankName>
+                    <taxonRankValue>Tracheophyta</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Magnoliopsida</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Alismatales</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Cymodoceaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Hydrocharitaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Lamiales</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Acanthaceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Malpighiales</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Rhizophoraceae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Myrtales</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Combretaceae</taxonRankValue>
+                </taxonomicClassification>
+            </taxonomicCoverage>
+        </coverage>
+        <maintenance>
+            <description>
+                <para></para>
+            </description>
+            <maintenanceUpdateFrequency>asNeeded</maintenanceUpdateFrequency>
+        </maintenance>
+        <contact>
+            <individualName>
+                <givenName>Erika</givenName>
+                <surName>Montoya-Cadavid</surName>
+            </individualName>
+            <organizationName>Invemar</organizationName>
+            <positionName>Investigadora científica</positionName>
+            <address>
+                <deliveryPoint>Calle 25 No. 2-55, Playa Salguero - Rodadero Sur</deliveryPoint>
+                <city>Santa Marta</city>
+                <administrativeArea>Magdalena</administrativeArea>
+                <postalCode>470006</postalCode>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>erika.montoya@invemar.org.co</electronicMailAddress>
+            <userId directory="http://orcid.org/">0000-0002-9709-6787</userId>
+        </contact>
+        <contact>
+            <individualName>
+                <givenName>Cristina María</givenName>
+                <surName>Cedeño-Posso</surName>
+            </individualName>
+            <organizationName>Invemar</organizationName>
+            <positionName>Investigadora científica</positionName>
+            <address>
+                <deliveryPoint>Calle 25 No. 2-55, Playa Salguero - Rodadero Sur</deliveryPoint>
+                <city>Santa Marta</city>
+                <administrativeArea>Magdalena</administrativeArea>
+                <postalCode>470006</postalCode>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>cristina.cedeno@invemar.org.co</electronicMailAddress>
+            <userId directory="http://orcid.org/">0000-0001-8622-2947</userId>
+        </contact>
+        <methods>
+            <methodStep>
+                <description>
+                    <para>Muestreo de especímenes en estaciones predefinidas en los diferentes ecosistemas. Toma de ejemplares o muestras de forma manual, o registro de la observación de su presencia.</para>
+                </description>
+            </methodStep>
+            <methodStep>
+                <description>
+                    <para>Relajación de los ejemplares con una solución de cristales de menta disueltos en alcohol al 96% y agua de mar.</para>
+                </description>
+            </methodStep>
+            <methodStep>
+                <description>
+                    <para>Fijación, preservación y etiquetado de muestras y ejemplares.</para>
+                </description>
+            </methodStep>
+            <methodStep>
+                <description>
+                    <para>Traslado a laboratorios para análisis morfológico y molecular.</para>
+                </description>
+            </methodStep>
+            <methodStep>
+                <description>
+                    <para>Verificación física mediante chequeo cruzado con el inventario de muestras y su información asociada.</para>
+                </description>
+            </methodStep>
+            <methodStep>
+                <description>
+                    <para>Análisis de identificación para cada grupo biológico realizado por expertos o con la asesoría de estos.</para>
+                </description>
+            </methodStep>
+            <methodStep>
+                <description>
+                    <para>Análisis de Códigos de Barras del ADN - Barcoding realizados por personal del Laboratorio de Biología Molecular del Museo de Historia Natural Marina de Colombia - Makuriwa (MHNMC).</para>
+                </description>
+            </methodStep>
+            <methodStep>
+                <description>
+                    <para>Curaduría básica física (preservante, frascos, tapas, barreras de sellado).</para>
+                </description>
+            </methodStep>
+            <methodStep>
+                <description>
+                    <para>Documentación de información asociada a los lotes (voucher y muestras) generados para ingreso en las colecciones del MHNMC.</para>
+                </description>
+            </methodStep>
+            <methodStep>
+                <description>
+                    <para>Depósito oficial del material biológico en las colecciones del MHNMC.</para>
+                </description>
+            </methodStep>
+            <methodStep>
+                <description>
+                    <para>Digitalización de datos asociados a cada registro acorde al estándar DwC y los criterios indicados para datos marinos desde el Nodo OBiS Colombia y SiBM (Invemar).</para>
+                </description>
+            </methodStep>
+            <methodStep>
+                <description>
+                    <para>Validación de administrador de base de datos MHNMC. Control de calidad de los datos: QC banderas de OBiS y GBIF, uso de Open Refine, GBIF Data Validator, WoRMS, Marine Regions.</para>
+                </description>
+            </methodStep>
+            <methodStep>
+                <description>
+                    <para>Elaboración de metadatos del recurso &quot;Biodiversidad marina de la Bahía Tukakas, Alta Guajira colombiana. Proyecto Colombia BIO: Expedición Lamuuna Neimalu’u&quot;.</para>
+                </description>
+            </methodStep>
+            <methodStep>
+                <description>
+                    <para>Publicación en el IPT SiBM y movilización de datos a GBIF y OBiS.</para>
+                </description>
+            </methodStep>
+            <sampling>
+                <studyExtent>
+                    <description>
+                        <para>Bahía Tukakas también conocida como Lamuuna Neimalu&apos;u en lengua local, es una entrada de mar en la costa, ubicada en el corregimiento de Puerto López, municipio de Uribia, en la Alta Guajira del Caribe colombiano. La bahía tiene una extensión aproximada de 1000 ha y profundidades entre los 0.30 y 5.8 m. En ella confluyen ecosistemas estratégicos marinos que se han desarrollado de manera particular, debido a las condiciones extremas propias del zenobioma del desierto tropical de La Guajira. Entre estos se encuentran praderas de pastos marinos, manglar, formaciones coralinas, playas y fondos sedimentarios.</para>
+                    </description>
+                </studyExtent>
+                <samplingDescription>
+                    <para>Se muestreó el cuerpo de agua y los ecosistemas circundantes de praderas de pastos marinos, manglar, formaciones coralinas, playas y fondos sedimentarios, en profundidades entre los 0 y 17.5 m. Las recolectas de material se hicieron de forma manual, directa o mediante buceo. Los ejemplares fueron relajados previo al registro fotográfico, se tomaron muestras de tejidos, se realizó la fijación y preservación en alcohol al 96% y enfrío en los casos requeridos, siguiendo los protocolos establecidos para los diferentes fines (p.e. colecciones, análisis molecular). El material se etiquetó indicando los códigos predefinidos de estación, grupos biológicos, preservante, fecha, y ecosistema y posteriormente se trasladó a los laboratorios para su análisis.</para>
+                </samplingDescription>
+            </sampling>
+            <qualityControl>
+                <description>
+                    <para>Verificación física del material y chequeo cruzado contra el listado de muestras obtenidas. La separación e identificación mediante morfología y taxonomía clásica fue realizada por investigadores expertos en los diferentes grupos taxonómicos. Se realizaron análisis moleculares complementarios mediante Barcoding, con el objeto de corroborar las identificaciones o ampliar la detección de especies que no eran evidentes mediante morfología tradicional. Una vez identificado el material se ejecutaron distintos pasos como parte de las etapas de curaduría física y de la información de los lotes de la colección. Se tuvieron en cuenta cuatro criterios para el control de calidad: Criterios curatoriales (verificación física de lotes e información), Criterios taxonómicos (validaciones taxonómicas), Criterios espaciales (validaciones de georreferenciación), y Criterios documentales (estandarización DwC, siguiendo los lineamientos nacionales para datos marinos y costeros (OBiS Colombia y SiB Colombia) y los criterios requeridos por los sistemas globales (OBiS y GBIF). Durante la aplicación de cada uno de los criterios se utilizaron las herramientas recomendadas para optimizar los procesos de control de calidad (https://data.canadensys.net/tools/coordinates, https://www.marineregions.org/gazetteer.php?p=search, Google Earth Pro 2022, versión 7.3.6.9345, https://www.marinespecies.org, Open Refine, GBIF Data Validator). /</para>
+                </description>
+            </qualityControl>
+        </methods>
+
+            <project id="80740-092-22">
+                <title>Biodiversidad de la Bahía Tukakas, Alta Guajira colombiana, una frontera por descubrir.</title>
+                <personnel>
+                    <individualName>
+                    <givenName>Cristina María</givenName>
+                    <surName>Cedeño-Posso</surName>
+                    </individualName>
+            <userId directory="http://orcid.org/">0000-0001-8622-2947</userId>
+                    <role>PRINCIPAL_INVESTIGATOR</role>
+                </personnel>
+                <abstract>
+                    <para>El Instituto de Investigaciones Marinas y Costeras - INVEMAR y la Corporación Autónoma Regional de La Guajira - CORPOGUAJIRA, aunaron esfuerzos para el diseño y ejecución de la expedición científica Lamuuna Neimaluú, llevada a cabo entre el 19 y 28 de abril del 2023, en el marco de la estrategia Colombia BIO del Ministerio de Ciencia, Tecnología e Innovación. El objetivo de dicha expedición era realizar el inventario de flora y fauna en los ecosistemas marino y costeros de la Bahía Tukakas. Para lo cual se contó con la participación activa de cinco Autoridades tradicionales indígenas del corregimiento de Puerto López: Icheput, Shopoiki, Jichiipaa, Warruttamana y Warpana; así como también, con decenas de estudiantes de la Escuela Rural Mixta de Puerto López, y más de 30 miembros de la comunidad, quienes acompañaron y asistieron a los 11 investigadores a cargo de las actividades científicas. Se llevaron a cabo diferentes tipos de muestreo para recolectar y avistar la fauna y flora del área a través de 33 estaciones. Se realizaron un total de 240 avistamientos de vertebrados (mamíferos, aves y reptiles) y se obtuvieron 450 muestras y especímenes, los cuales se analizaron con base en taxonomía clásica y biología molecular y correspondieron a animales de los filo Porifera, Ctenophora, Cnidaria, Bryozoa, Mollusca, Platelminthes, Annelida, Nemertea, Arthropoda, Echinodermata y Chordata; cromistas de los filo Foraminifera y Ochrophyta; plantas de los filo Chlorophyta, Rodophyta y Traqueophyta; y bacterias del filo Cyanobacteria. Los ejemplares se depositaron en las colecciones del Museo de Historia Natural Marina de Colombia - Makuriwa y la información asociada a sus registros biológicos fue documentada en el Sistema de Información de Biodiversidad Marina - SIBM y compartida a través de este al SiB Colombia y a las redes internacionales OBIS y GBIF. Así mismo, la información molecular obtenida fue documentada en el sistema especializado Bold Systems. Producto del inventario generado, se elaboró una cartilla que fue entregada a la comunidad y se elaboraron documentos como instrumentos  para la investigación de la academia y de gestión para las instituciones locales y nacionales, que aportan al incremento del conocimiento de la biodiversidad de la región y del Caribe colombiano. Las Autoridades indígenas y la comunidad de Puerto López, no solo fueron parte de las actividades de muestreo de las expedición, sino que participaron de forma activa a lo largo del proyecto en otras actividades de intercambio de experiencias y conocimiento, tales como conversatorios, talleres y ejercicios lúdicos, que permitieron fortalecer la apropiación social del conocimiento sobre la biodiversidad marina de su entorno. Durante el proyecto también se entrenó en taxonomía de crustáceos marinos a una estudiante wayú del Programa de biología de la Universidad del Magdalena, con lo cual se apostó al fortalecimiento de capacidades de la región.</para>
+                </abstract>
+                <funding>
+                    <para>Contrato No. 092-2022
+1030-2021 Invitación para expediciones científicas y colecciones biológicas modalidad No. 1 “Expediciones científicas”.</para>
+                </funding>
+                <studyAreaDescription>
+                    <descriptor name="generic" citableClassificationSystem="false">
+                        <descriptorValue>Bahía Tukakas también conocida como Lamuuna Neimalu&apos;u en lengua local, es una entrada de mar en la costa, ubicada en el corregimiento de Puerto López, municipio de Uribia, en la Alta Guajira del Caribe colombiano. La bahía tiene una extensión aproximada de 1000 ha y profundidades entre los 0.30 y 5.8 m. En ella confluyen ecosistemas estratégicos marinos que se han desarrollado de manera particular, debido a las condiciones extremas propias del zenobioma del desierto tropical de La Guajira. Entre estos se encuentran praderas de pastos marinos, manglar, formaciones coralinas, playas y fondos sedimentarios.</descriptorValue>
+                    </descriptor>
+                </studyAreaDescription>
+                <designDescription>
+                    <description>
+                        <para>La Expedición contó con la participación de 11 expedicionarios, 10 investigadores del INVEMAR y un profesional de Corpoguajira, quienes tenían como base, la casa de un familiar de la autoridad Icheput. Además, se contó con la participación activa de 18 personas, 17 hombres y una mujer, pertenecientes a las comunidades Warpana, Warrutamana, Jichiipa, Icheput y Shopoiki, quienes participaron diariamente para realizar los distintos tipos de muestreos planeados por cada ecosistema estratégico.</para>
+                    </description>
+                </designDescription>
+            </project>
+    </dataset>
+
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2026-05-24T11:59:21Z</dateStamp>
+                <citation identifier="https://doi.org/10.15472/b1w1ku">Montoya-Cadavid E, Cedeño-Posso C M, Barrios Vásquez E M, Borrero-Pérez G H, Fernández Gómez L J, Florian Sánchez M J, Lizarazo Rodríguez N P, Marín Pulgarín E, Merchán-Cepeda A, Mutis Martínezguerra M A, Osorno Arango A M, Rivas Escobar N, Sánchez Muñoz J V, Yepes-Narváez V, Acosta Chaparro A F, Garrido-Linares M A, Herrera Fajardo S, Sánchez Valencia L, Arteaga Flórez C, Gonzáles Ipuana Y, Atencia Galindo M A, Alvarez Torres J E, Cujia Rosado J M, Rodríguez-Sánchez A (2024). Biodiversidad marina de la Bahía Tukakas, Alta Guajira colombiana. Proyecto Colombia BIO: Expedición Lamuuna Neimalu’u.. Instituto de Investigaciones Marinas y Costeras - Invemar. Occurrence dataset https://doi.org/10.15472/b1w1ku accessed via GBIF.org on 2026-05-24.</citation>
+                <physical>
+                    <objectName>Bahía Tukakas: Un tesoro vivo por descubrir / Lamuuna Neimalu&apos;u: Awashirüin kata&apos;a 0ü, antunüinjatu ana&apos; in. Ecosistemas y especies marinas de una costa árida.</objectName>
+                    <characterEncoding>UTF-8</characterEncoding>
+                    <dataFormat>
+                        <externallyDefinedFormat>
+                            <formatName>pdf</formatName>
+                        </externallyDefinedFormat>
+                    </dataFormat>
+                    <distribution>
+                        <online>
+                            <url function="download">https://alfresco.invemar.org.co/share/s/qWGsnp--SyC0Md8n6hTQEw</url>
+                        </online>
+                    </distribution>
+                </physical>
+                <resourceLogoUrl>https://ipt.biodiversidad.co/sibm/logo.do?r=coleccionsipmhnmc</resourceLogoUrl>
+                <collection>
+                    <parentCollectionIdentifier>MHNMC</parentCollectionIdentifier>
+                    <collectionIdentifier>https://www.gbif.org/grscicoll/collection/d35de0c2-7399-4707-9e0f-9285d662f2e0</collectionIdentifier>
+                    <collectionName>Museo de Historia Natural Marina de Colombia</collectionName>
+                </collection>
+                <specimenPreservationMethod>MICROSCOPIC_PREPARATION</specimenPreservationMethod>
+                <jgtiCuratorialUnit>
+                    <jgtiUnitType>Lotes</jgtiUnitType>
+                    <jgtiUnitRange>
+                        <beginRange>1</beginRange>
+                        <endRange>456</endRange>
+                    </jgtiUnitRange>
+                </jgtiCuratorialUnit>
+                <jgtiCuratorialUnit>
+                    <jgtiUnitType>Registros biológicos</jgtiUnitType>
+                    <jgtiUnitRange>
+                        <beginRange>1</beginRange>
+                        <endRange>539</endRange>
+                    </jgtiUnitRange>
+                </jgtiCuratorialUnit>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
+    </eml:eml>

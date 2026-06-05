@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="https://eml.ecoinformatics.org/eml-2.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://eml.ecoinformatics.org/eml-2.2.0 https://rs.gbif.org/schema/eml-gbif-profile/1.3/eml.xsd"
+packageId="e961d627-db44-4fbd-b9d4-dc150c20dcec"  system="http://gbif.org" scope="system"
+xml:lang="es">
+    <dataset>
+        <alternateIdentifier>10.15472/lgpfm7</alternateIdentifier>
+        <alternateIdentifier>e961d627-db44-4fbd-b9d4-dc150c20dcec</alternateIdentifier>
+        <alternateIdentifier>https://ipt.biodiversidad.co/iavh/resource?r=escarabajos_anh_2021</alternateIdentifier>
+        <title>Línea base general de escarabajos para el valle medio del Magdalena - VMM</title>
+        <creator>
+            <individualName>
+                <surName>Instituto de Investigación de Recursos Biológicos Alexander von Humboldt</surName>
+            </individualName>
+            <organizationName>Instituto de Investigación de Recursos Biológicos Alexander von Humboldt</organizationName>
+            <address>
+                <deliveryPoint>Avenida Paseo Bolívar # 16-20</deliveryPoint>
+                <city>Bogotá, D.C.</city>
+                <administrativeArea>Bogotá, D.C.</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <phone>3202767</phone>
+            <onlineUrl>http://www.humboldt.org.co</onlineUrl>
+        </creator>
+        <creator>
+            <individualName>
+                <surName>Agencia Nacional de Hidrocarburos</surName>
+            </individualName>
+            <organizationName>Agencia Nacional de Hidrocarburos</organizationName>
+            <address>
+                <city>Bogotá, D.C.</city>
+                <administrativeArea>Bogotá, D.C.</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+        </creator>
+        <metadataProvider>
+            <individualName>
+                <surName>Instituto de Investigación de Recursos Biológicos Alexander von Humboldt</surName>
+            </individualName>
+            <organizationName>Instituto de Investigación de Recursos Biológicos Alexander von Humboldt</organizationName>
+            <address>
+                <deliveryPoint>Avenida Paseo Bolívar # 16-20</deliveryPoint>
+                <city>Bogotá, D.C.</city>
+                <administrativeArea>Bogotá, D.C.</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <phone>3202767</phone>
+            <onlineUrl>http://www.humboldt.org.co</onlineUrl>
+        </metadataProvider>
+        <associatedParty>
+            <individualName>
+                <givenName>Rafael Mauricio</givenName>
+                <surName>Cobos Hernandez</surName>
+            </individualName>
+            <organizationName>Instituto de Investigación de Recursos Biológicos Alexander von Humboldt</organizationName>
+            <positionName>Contratista</positionName>
+            <address>
+                <deliveryPoint>Avenida Paseo Bolívar # 16-20</deliveryPoint>
+                <city>Bogotá, D.C.</city>
+                <administrativeArea>Bogotá, D.C.</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <phone>3202767</phone>
+            <electronicMailAddress>cobosmauricio90@gmail.com</electronicMailAddress>
+            <role>CONTENT_PROVIDER</role>
+        </associatedParty>
+        <associatedParty>
+            <individualName>
+                <givenName>David Andrés</givenName>
+                <surName>Vanegas Alarcón</surName>
+            </individualName>
+            <organizationName>Instituto de Investigación de Recursos Biológicos Alexander von Humboldt</organizationName>
+            <positionName>Contratista</positionName>
+            <address>
+                <deliveryPoint>Avenida Paseo Bolívar # 16-20</deliveryPoint>
+                <city>Bogotá, D.C.</city>
+                <administrativeArea>Bogotá, D.C.</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <phone>3202767</phone>
+            <electronicMailAddress>davidvaneal@gmail.com</electronicMailAddress>
+            <role>CONTENT_PROVIDER</role>
+        </associatedParty>
+        <associatedParty>
+            <individualName>
+                <givenName>Daniel Felipe</givenName>
+                <surName>Silva Tavera</surName>
+            </individualName>
+            <organizationName>Instituto de Investigación de Recursos Biológicos Alexander von Humboldt</organizationName>
+            <positionName>Contratista</positionName>
+            <address>
+                <deliveryPoint>Avenida Paseo Bolívar # 16-20</deliveryPoint>
+                <city>Bogotá, D.C.</city>
+                <administrativeArea>Bogotá, D.C.</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <phone>3202767</phone>
+            <electronicMailAddress>protoentomon@gmail.com</electronicMailAddress>
+            <role>CONTENT_PROVIDER</role>
+        </associatedParty>
+        <associatedParty>
+            <individualName>
+                <surName>Infraestructura Institucional de Datos</surName>
+            </individualName>
+            <organizationName>Instituto de Investigación de Recursos Biológicos Alexander Von Humboldt</organizationName>
+            <address>
+                <deliveryPoint>Avenida Paseo Bolívar # 16-20</deliveryPoint>
+                <city>Bogotá, D.C.</city>
+                <administrativeArea>Bogotá, D.C.</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <phone>3202767</phone>
+            <electronicMailAddress>i2d@humboldt.org.co</electronicMailAddress>
+            <onlineUrl>http://www.humboldt.org.co</onlineUrl>
+            <role>CUSTODIAN_STEWARD</role>
+        </associatedParty>
+        <associatedParty>
+            <individualName>
+                <givenName>Fabio Arturo</givenName>
+                <surName>González</surName>
+            </individualName>
+            <organizationName>Instituto de Investigación de Recursos Biológicos Alexander von Humboldt</organizationName>
+            <positionName>Profesional Senior</positionName>
+            <address>
+                <deliveryPoint>Carrera 8 # 15-08</deliveryPoint>
+                <city>Villa de Leyva</city>
+                <administrativeArea>Boyacá</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <phone>3202767</phone>
+            <electronicMailAddress>fgonzalez@humboldt.org.co</electronicMailAddress>
+            <onlineUrl>http://www.humboldt.org.co</onlineUrl>
+            <role>AUTHOR</role>
+        </associatedParty>
+        <associatedParty>
+            <individualName>
+                <givenName>David Camilo</givenName>
+                <surName>Martínez</surName>
+            </individualName>
+            <organizationName>Instituto de Investigación de Recursos Biológicos Alexander von Humboldt</organizationName>
+            <positionName>Contratista</positionName>
+            <address>
+                <deliveryPoint>Avenida Paseo Bolívar # 16-20</deliveryPoint>
+                <city>Bogotá, D.C.</city>
+                <administrativeArea>Bogotá, D.C.</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <phone>3202767</phone>
+            <onlineUrl>http://www.humboldt.org.co</onlineUrl>
+            <role>CONTENT_PROVIDER</role>
+        </associatedParty>
+        <pubDate>
+                2022-06-16
+        </pubDate>
+        <language>SPANISH</language>
+        <abstract>
+            Bajo los Convenios No. 21-095 y 21-450 suscritos con la Agencia Nacional de Hidrocarburos - ANH, se llevó a cabo el levantamiento de la línea base general de la biodiversidad y ecosistemas para el área de interés del Valle Medio del Magdalena. Se realizaron muestreos de biodiversidad de diferentes grupos biológicos, en este recurso se presentan los resultados de escarabajos coprófagos y larvas de Scarabaeidos. Se obtuvo un total de 3867 registros biológicos de escarabajos coprófagos (subfamilia Scarabaeinae) distribuidos en 26 especies, 13 morfoespecies y 16 géneros. Para larvas de Scarabaeidos se obtuvieron 37 registros biológicos distribuidos en 1 especie, 7 morfoespecies en 8 géneros, pertenecientes a las subfamilias Dynastinae, Melolonthinae, Rutelinae y Orphinae. Adicionalmente se obtuvieron 2 registros de Stenocrates bicarinatus (Dynastinae) adultos y 2 registros de Aegidinus candezei adultos (Orphinae). Para un total de 3908 registros distribuidos en 28 especies, 20 morfoespecies y 25 géneros.
+
+Para cada una de las temporadas climáticas (aguas medias-altas y aguas bajas), en cada uno de los puntos muestreados (40 en total) para la colecta de escarabajos coprófagos se instalaron 7 trampas tipo Pitfall cebadas con excremento humano, cada trampa separada por 50 metros. Los especímenes fueron colectados a las 24 horas y 48 horas. A las 24 horas las trampas fueron recebadas. Para la búsqueda de larvas de Scarabaeidos, se realizaron 4 excavaciones  de 1 metro cuadrado con 20 centímetros de profundidad, en las cuales manualmente se buscaron as larvas. El esfuerzo de muestreo fue de 560 trampas Pitfall cebadas con excremento humano y 320 búsquedas manuales.
+        </abstract>
+        <keywordSet>
+            <keyword>Occurrence</keyword>
+            <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type.xml</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+            <keyword>escarabajos coprófagos</keyword>
+            <keyword>Magdalena Medio</keyword>
+            <keyword>PPII</keyword>
+            <keyword>línea base general</keyword>
+            <keyword>registro biológico</keyword>
+            <keyword>larvas de Scarabaeidos</keyword>
+            <keyword>Santander</keyword>
+            <keywordThesaurus>N/A</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+            <keyword>Samplingevent</keyword>
+            <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type_2015-07-10.xml</keywordThesaurus>
+        </keywordSet>
+        <additionalInfo>
+            <para>Los informes asociados a este conjunto de datos se pueden encontrar en el siguiente link: ****completar****</para>
+        </additionalInfo>
+        <intellectualRights>
+            <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by-nc/4.0/legalcode"><citetitle>Creative Commons Attribution Non Commercial (CC-BY-NC) 4.0 License</citetitle></ulink>.</para>
+        </intellectualRights>
+        <licensed>
+            <licenseName>Creative Commons Attribution Non Commercial 4.0 International</licenseName>
+            <url>https://spdx.org/licenses/CC-BY-NC-4.0.html</url>
+            <identifier>CC-BY-NC-4.0</identifier>
+        </licensed>
+        <distribution scope="document">
+            <online>
+                <url function="information">http://ipt.biodiversidad.co/iavh/resource.do?r=escarabajos_anh_2021</url>
+            </online>
+        </distribution>
+        <distribution scope="document">
+            <online>
+                <url function="download">https://ipt.biodiversidad.co/iavh/archive.do?r=escarabajos_anh_2021</url>
+            </online>
+        </distribution>
+        <coverage>
+            <geographicCoverage>
+                <geographicDescription>El área de estudio propuesta para Guane-Kalypso y Platero, se encuentra ubicada principalmente en el departamento de Santander en los municipios de Puerto Wilches, Barrancabermeja, Sabana de Torres. Con influencia también en el departamento de Bolívar en los municipios de Cantagallo y San Pablo, así como en el departamento de Antioquia en el municipio de Yondó. Esta área de estudio es de aproximadamente 178.958 ha</geographicDescription>
+                <boundingCoordinates>
+                    <westBoundingCoordinate>-74.039</westBoundingCoordinate>
+                    <eastBoundingCoordinate>-73.659</eastBoundingCoordinate>
+                    <northBoundingCoordinate>7.698</northBoundingCoordinate>
+                    <southBoundingCoordinate>7.061</southBoundingCoordinate>
+                </boundingCoordinates>
+            </geographicCoverage>
+            <temporalCoverage>
+                <rangeOfDates>
+                    <beginDate>
+                        <calendarDate>                2021-07-01
+</calendarDate>
+                    </beginDate>
+                    <endDate>
+                        <calendarDate>                2021-08-31
+</calendarDate>
+                    </endDate>
+                </rangeOfDates>
+            </temporalCoverage>
+            <temporalCoverage>
+                <rangeOfDates>
+                    <beginDate>
+                        <calendarDate>                2022-03-17
+</calendarDate>
+                    </beginDate>
+                    <endDate>
+                        <calendarDate>                2022-04-09
+</calendarDate>
+                    </endDate>
+                </rangeOfDates>
+            </temporalCoverage>
+            <taxonomicCoverage>
+                <generalTaxonomicCoverage>Se obtuvo un total de 3908 registros biológicos de escarabajos coprófagos y larvas de Scarabaeidos distribuidos en 5 subfamilias, 25 géneros y  28 especies, 20 morfoespecies. La taxonomía propuesta sigue Bouchard et al. 2011; y para cada grupo a nivel genérico se emplearon claves o artículos científicos de Referencia.</generalTaxonomicCoverage>
+                <taxonomicClassification>
+                    <taxonRankName>Subfamily</taxonRankName>
+                    <taxonRankValue>Dynastinae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Subfamily</taxonRankName>
+                    <taxonRankValue>Melolonthinae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Subfamily</taxonRankName>
+                    <taxonRankValue>Rutelinae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Subfamily</taxonRankName>
+                    <taxonRankValue>Scarabaeinae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Scarabaeidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Coleoptera</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Subfamily</taxonRankName>
+                    <taxonRankValue>Orphinae</taxonRankValue>
+                </taxonomicClassification>
+            </taxonomicCoverage>
+        </coverage>
+        <purpose><para>La Línea Base Ambiental General de Ecosistemas y Biodiversidad hace referencia a las condiciones previas, en materia biodiversidad, a las intervenciones que se originen de los Proyectos Piloto de Investigación Integral (PPII) en el territorio (Decreto 328 del 2020). 
+
+El objetivo de la Línea Base General de Ecosistemas y Biodiversidad es caracterizar la composición y abundancia de anfibios, reptiles, aves, mamíferos, himenópteros terrestres, lepidópteros diurnos, coleópteros, colémbolos, plantas , microorganismos (bacterias y hongos), peces, plancton, macrófitas, macroinvertebrados acuáticos, perifiton y sonidos, durante dos temporadas climáticas (aguas altas y aguas bajas), en las coberturas vegetales, cuerpos de agua y tipos de suelo más representativos del área, durante la etapa de condiciones previas de los PPII. Esta información permitirá definir las variables e indicadores en biodiversidad para ser monitoreados durante la etapa concomitante de los PPII.</para></purpose>
+        <maintenance>
+            <description>
+                <para></para>
+            </description>
+            <maintenanceUpdateFrequency>unkown</maintenanceUpdateFrequency>
+        </maintenance>
+        <contact>
+            <individualName>
+                <givenName>Diana Lucia</givenName>
+                <surName>Díaz Gómez</surName>
+            </individualName>
+            <organizationName>Instituto de Investigación de Recursos Biológicos Alexander von Humboldt</organizationName>
+            <positionName>Profesional Senior</positionName>
+            <address>
+                <deliveryPoint>Avenida Paseo Bolívar # 16-20</deliveryPoint>
+                <city>Bogotá, D.C.</city>
+                <administrativeArea>Bogotá, D.C.</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <phone>3202767</phone>
+            <electronicMailAddress>ddiaz@humboldt.org.co</electronicMailAddress>
+            <onlineUrl>http://www.humboldt.org.co</onlineUrl>
+        </contact>
+        <contact>
+            <individualName>
+                <givenName>Fabio Arturo</givenName>
+                <surName>González</surName>
+            </individualName>
+            <organizationName>Instituto de Investigación de Recursos Biológicos Alexander von Humboldt</organizationName>
+            <positionName>Investigador</positionName>
+            <address>
+                <deliveryPoint>Carrera 8 # 15-08</deliveryPoint>
+                <city>Villa de Leyva</city>
+                <administrativeArea>Boyacá</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <phone>3202767</phone>
+            <electronicMailAddress>fgonzalez@humboldt.org.co</electronicMailAddress>
+            <onlineUrl>http://www.humboldt.org.co</onlineUrl>
+        </contact>
+        <methods>
+            <methodStep>
+                <description>
+                    <para>Toma de datos en campo e inclusión de los mismos en los informes diarios: Numero de la unidad muestreal, Municipio, Verededa, numero de la trampa con coordenadas, elevación, fecha, colector</para>
+                </description>
+            </methodStep>
+            <methodStep>
+                <description>
+                    <para>Verificación de las coordenadas geográficas de los informes diarios por parte de Francisco Nieto.</para>
+                </description>
+            </methodStep>
+            <methodStep>
+                <description>
+                    <para>Separación e identificación de los especímenes con la ayuda de literatura (Vaz-de-Mello  et al. 2011; Edmonds &amp; Zidek 2010; Génier 2009; Montoya-Molina &amp; Vaz-de-Mello 2021; Cupello &amp; Vaz-de-Mello 2018; González-Alvarado &amp; Vaz-de-Mello 2014), comparación con la colección de referencia de escarabajos coprófagos del Instituto Humboldt, además de la verificación realizada por Arturo González-Alvarado. Las identificaciones de las Larvas de Scarabaeidos fue realizada por Jhon Cesar Neita.</para>
+                </description>
+            </methodStep>
+            <methodStep>
+                <description>
+                    <para>Creación de los archivos de migración y DarwinCore basados en los archivos de informes diarios.</para>
+                </description>
+            </methodStep>
+            <sampling>
+                <studyExtent>
+                    <description>
+                        <para>Contempla el Municipio de Puerto Wilches (Santander) en la siguientes Veredas: Cayumba, Centro, El Pedral, Puente Sogamoso y San Claver. Las colectas fueron realizadas en dos temporadas climáticas, aguas medias-altas entre el 1 y el 24 de julio de 2021 y aguas bajas entre 17 de marzo y el 9 de abril de 2022.</para>
+                    </description>
+                </studyExtent>
+                <samplingDescription>
+                    <para>Para cada una de las temporadas climáticas (aguas medias-altas y aguas bajas), en cada uno de los puntos muestreados (40 en total) para la colecta de escarabajos coprófagos se instalaron 7 trampas tipo Pitfall cebadas con excremento humano, cada trampa separada por 50 metros. Los especímenes fueron colectados a las 24 horas y 48 horas. A las 24 horas las trampas fueron recebadas. Para la búsqueda de larvas de Scarabaeidos, se realizaron 4 excavaciones  de 1 metro cuadrado con 20 centímetros de profundidad, en las cuales manualmente se buscaron as larvas. El esfuerzo de muestreo fue de 560 trampas Pitfall cebadas con excremento humano y 320 búsquedas manuales.
+
+Cada día se completaron los formatos de eventos diarios. Estos formatos contenían la siguientes información: Numero de la unidad muestreal, Municipio, Vereda, numero de la trampa con coordenadas, elevación, fecha, colector.</para>
+                </samplingDescription>
+            </sampling>
+            <qualityControl>
+                <description>
+                    <para>Para el control de calidad de los datos geográficos, cada una de las coordenadas tomadas en campo (de cada evento de colecta) fue verificada por Francisco Nieto (SIG). 
+
+Para las identificación de los escarabajos coprófagos se utilizaron revisiones taxonómicas recientes (Vaz-de-Mello  et al. 2011; Edmonds &amp; Zidek 2010; Génier 2009; Montoya-Molina &amp; Vaz-de-Mello 2021; Cupello &amp; Vaz-de-Mello 2018; González-Alvarado &amp; Vaz-de-Mello 2014), comparación con la colección de referencia de escarabajos coprófagos del Instituto Humboldt, además de la verificación realizada por Arturo González-Alvarado. Las identificaciones de las Larvas de Scarabaeidos fue realizada por Jhon Cesar Neita. 
+
+Para las especies de escarabajos coprófagos que no es posible asignarles un epíteto especifico se siguió la codificación propuesta por Medina &amp; González-Alvarado (2014) y González-Alvarado et al. 2015.</para>
+                </description>
+            </qualityControl>
+        </methods>
+
+            <project id="ANH_MAGDALENA-MEDIO">
+                <title>Segunda y tercera fase de la línea base general de ecosistemas y biodiversidad para el valle medio del Magdalena - VMM</title>
+                <personnel>
+                    <individualName>
+                    <givenName>Diana Lucía</givenName>
+                    <surName>Díaz Gómez</surName>
+                    </individualName>
+                    <role>POINT_OF_CONTACT</role>
+                </personnel>
+                <abstract>
+                    <para></para>
+                </abstract>
+                <funding>
+                    <para>Convenio No. 21-095 suscrito con la Agencia Nacional de Hidrocarburos -ANH
+Convenio No. 21-450 suscrito con la Agencia Nacional de Hidrocarburos -ANH
+Convenio Marco No. 467 de 2020 (ANH)</para>
+                </funding>
+                <studyAreaDescription>
+                    <descriptor name="generic" citableClassificationSystem="false">
+                        <descriptorValue>El área de estudio propuesta para Guane-Kalypso y Platero, se encuentra ubicada principalmente en el departamento de Santander en los municipios de Puerto Wilches, Barrancabermeja, Sabana de Torres. Con influencia también en el departamento de Bolívar en los municipios de Cantagallo y San Pablo, así como en el departamento de Antioquia en el municipio de Yondó. Esta área de estudio es de aproximadamente 178.958 ha</descriptorValue>
+                    </descriptor>
+                </studyAreaDescription>
+                <designDescription>
+                    <description>
+                        <para>Aunar esfuerzos técnicos, financieros, jurídicos y administrativos para realizar la segunda fase del levantamiento de la línea base general de los ecosistemas y la biodiversidad para las áreas priorizadas de proyectos de hidrocarburos en la cuenca Valle Medio del Magdalena.
+1. Definir los métodos y protocolos para el levantamiento de información de flora, mamíferos, anfibios, reptiles, aves, colémbolos, himenópteros terrestres, lepidópteros diurnos, coleópteros escarabeidos y melolóntidos, e insectos estridulantes, microorganismos, ictiofauna, macrófitas, macroinvertebrados, perifiton, fitoplancton y zooplancton y los análisis a realizar en el área priorizada de Proyectos de hidrocarburos en la cuenca del Valle Medio del Magdalena denominada Guane-Kalypso y Platero.
+2. Llevar a cabo el evento de muestreo de aguas altas-medias: mamíferos, anfibios, reptiles, aves, colémbolos, himenópteros terrestres, lepidópteros diurnos, coleópteros escarabeidos y melolóntidos, microorganismos, ictiofauna, macrófitas, macroinvertebrados, perifiton, fitoplancton y zooplancton en el área priorizada de Proyectos de hidrocarburos en la cuenca del Valle Medio del Magdalena denominada Guane-Kalypso y Platero.
+3. Llevar a cabo el muestreo de plantas del área priorizada denominada Guane-Kalypso y Platero
+4. Procesar y analizar la información obtenida en el evento de muestreo de aguas altas-medias de: mamíferos, anfibios, reptiles,  aves, colémbolos, himenópteros terrestres, lepidópteros diurnos, coleópteros escarabeidos y melolóntidos, microorganismos, ictiofauna, macrófitas, macroinvertebrados, perifiton, fitoplancton y zooplancton en el área priorizada de proyectos de hidrocarburos en la cuenca del Valle Medio del Magdalena denominada Guane-Kalypso y Platero, que incluya un análisis específico asociado al proyecto Kalé, un análisis específico asociado al  proyecto Platero, y un análisis integrado para toda el área priorizada. 
+5. Llevar a cabo dos capacitaciones, una enfocada en paisaje sonoro y otra en análisis de microorganismos usando metabarcoding dirigidas a entidades del sector público y privado involucradas en el licenciamiento ambiental. Las entidades a capacitar y la modalidad (presencial o virtual) serán acordadas por el comité coordinador y operativo del convenio.
+6. Implementar la primera fase del módulo de capacitación para la apropiación social de la biodiversidad y los ecosistemas.</para>
+                    </description>
+                </designDescription>
+            </project>
+    </dataset>
+
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2026-05-24T11:59:24Z</dateStamp>
+                <citation identifier="https://doi.org/10.15472/lgpfm7">Instituto de Investigación de Recursos Biológicos Alexander von Humboldt, Agencia Nacional de Hidrocarburos (2022). Línea base general de escarabajos para el valle medio del Magdalena - VMM. Version 1.2. Instituto de Investigación de Recursos Biológicos Alexander von Humboldt. Sampling event dataset https://doi.org/10.15472/lgpfm7 accessed via GBIF.org on 2026-05-24.</citation>
+                <bibliography>
+                <citation identifier="Vaz-de-Mello et al. 2011">Vaz-de-Mello, F. Z., Edmonds, W. D., Ocampo, F. C. &amp; Schoolmeesters, P. (2011). A multilingual key to the genera and subgenera of the subfamily Scarabaeinae of the New World (Coleoptera: Scarabaeidae). Zootaxa, 2854(1), 1-73.</citation>
+                <citation identifier="Edmonds &amp; Zidek 2010">Edmonds, W. D. &amp; Zídek, J. (2010). 0129. A taxonomic review of the neotropical genus Coprophanaeus Olsoufieff, 1924 (Coleoptera: Scarabaeidae, Scarabaeinae). Insecta Mundi, 1-111.</citation>
+                <citation identifier="Génier 2009">Génier, F. (2009). Le genre Eurysternus Dalman, 1824 (Scarabaeidae: Scarabaeinae: Oniticellini): Révision taxonomique et clés de détermination illustrées (pp. 430-430). Sofia: Pensoft.</citation>
+                <citation identifier="Montoya-Molina &amp; Vaz-de-Mello 2021">Montoya-Molina, S. &amp; Vaz-de-Mello, F. Z. (2021). Taxonomic review of the Dichotomius (Luederwaldtinia) agenor species group (Coleoptera: Scarabaeidae: Scarabaeinae). European Journal of Taxonomy, 734, 1-64.</citation>
+                <citation identifier="Cupello &amp; Vaz-de-Mello 2018">Cupello, M. &amp; Vaz-de-Mello, F. Z. (2018). A monographic revision of the Neotropical dung beetle genus Sylvicanthon Halffter &amp; Martínez, 1977 (Coleoptera: Scarabaeidae: Scarabaeinae: Deltochilini), including a reappraisal of the taxonomic history of ‘Canthon sensu lato’. European Journal of Taxonomy, (467).</citation>
+                <citation identifier=" González-Alvarado &amp; Vaz-de-Mello 2014">González-Alvarado, A. &amp; Vaz-de-Mello, F. Z. (2014). Taxonomic review of the subgenus Hybomidium Shipp 1897 (Coleoptera: Scarabaeidae: Scarabaeinae: Deltochilum). In Annales de la Société entomologique de France (NS) (Vol. 50, No. 3-4, pp. 431-476). Taylor &amp; Francis.</citation>
+                <citation identifier=" Medina &amp; González-Alvarado 2014">Medina, C. A. &amp; González, A. (2014). Escarabajos coptófagos de la subfamilia Scarabaeinae. Pp: 195-213. En: Pizano, C. y H. García (Eds.). El bosque seco tropical en Colombia. Instituto de Investigación de  Recursos Biológicos Alexander von Humboldt, Bogotá, D. C., Colombia.</citation>
+                <citation identifier="González-Alvarado et al. 2015">González-Alvarado, A., E. Torres &amp; C. A. Medina. (2015). Escarabajos coprófagos (Coleoptera: Scarabaeidae: Scarabaeinae) de bosques secos Colombianos de la Colección Entomológica del Instituto Alexander von Humboldt. Biota Colombiana 16 (1): 88-95. doi:10.15468/hdfuql</citation>
+                <citation identifier="Bouchard et al. 2011">Bouchard, P., Bousquet, Y., Davies, A., Alonso-Zarazaga, M., Lawrence, J., Lyal, C., Newton, A., Reid, C., Schmitt, M., Slipinski, A. &amp; Smith, A. (2011). Family-Group Names In Coleoptera (Insecta). ZooKeys 88, 1–972.</citation>
+                </bibliography>
+                <physical>
+                    <objectName>Línea base general de escarabajos para el valle medio del Magdalena - VMM</objectName>
+                    <characterEncoding>utf-8</characterEncoding>
+                    <dataFormat>
+                        <externallyDefinedFormat>
+                            <formatName>txt</formatName>
+                        </externallyDefinedFormat>
+                    </dataFormat>
+                    <distribution>
+                        <online>
+                            <url function="download">http://i2d.humboldt.org.co/ceiba/resource.do?r=escarabajos_anh_2021</url>
+                        </online>
+                    </distribution>
+                </physical>
+                <resourceLogoUrl>https://statics.sibcolombia.net/sib-resources/images/logos-socios/500px/iavh.jpg</resourceLogoUrl>
+                <collection>
+                    <parentCollectionIdentifier>IAvH</parentCollectionIdentifier>
+                    <collectionIdentifier>IAvH-E</collectionIdentifier>
+                    <collectionName>Colección de Entomología del Instituto de Investigación de Recursos Biológicos Alexander von Humboldt</collectionName>
+                </collection>
+                <specimenPreservationMethod>PINNED</specimenPreservationMethod>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
+    </eml:eml>

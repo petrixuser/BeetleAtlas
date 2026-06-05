@@ -1,0 +1,31 @@
+services:
+  beetle-frontend:
+    build:
+      context: ..
+      dockerfile: docker/frontend/Dockerfile
+    container_name: beetle-frontend
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    environment:
+      - GMAPS_KEY=${GMAPS_KEY:-}
+      - API_BASE_URL=${API_BASE_URL:-http://localhost:8000}
+    depends_on:
+      - beetle-backend
+
+  beetle-backend:
+    build:
+      context: ..
+      dockerfile: docker/backend/Dockerfile
+    container_name: beetle-backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - DB_HOST=${DB_HOST:-host.docker.internal}
+      - DB_PORT=${DB_PORT:-3306}
+      - DB_USER=${DB_USER:-root}
+      - DB_PASSWORD=${DB_PASSWORD:-root123}
+      - DB_NAME=${DB_NAME:-beetle_db}
+      - API_HOST=0.0.0.0
+      - API_PORT=8000

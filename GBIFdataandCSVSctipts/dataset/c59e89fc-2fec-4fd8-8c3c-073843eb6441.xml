@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="https://eml.ecoinformatics.org/eml-2.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://eml.ecoinformatics.org/eml-2.2.0 https://rs.gbif.org/schema/eml-gbif-profile/1.3/eml.xsd"
+packageId="c59e89fc-2fec-4fd8-8c3c-073843eb6441"  system="http://gbif.org" scope="system"
+xml:lang="es">
+    <dataset>
+        <alternateIdentifier>10.15472/a0ugui</alternateIdentifier>
+        <alternateIdentifier>https://ipt.biodiversidad.co/sib/resource?r=uptc-001</alternateIdentifier>
+        <alternateIdentifier>http://ipt.biodiversidad.co/sib/resource?r=uptc-001</alternateIdentifier>
+        <alternateIdentifier>10.15468/klzmdn</alternateIdentifier>
+        <alternateIdentifier>http://data.biodiversidad.co/sib/resource?r=uptc-001</alternateIdentifier>
+        <alternateIdentifier>http://ipt.sibcolombia.net/sib/resource.do?r=uptc-001</alternateIdentifier>
+        <alternateIdentifier>c59e89fc-2fec-4fd8-8c3c-073843eb6441</alternateIdentifier>
+        <title>Colección entomológica del Museo de Historia Natural “Luis Gonzalo Andrade” de la UPTC</title>
+        <creator>
+            <individualName>
+                <givenName>Juan</givenName>
+                <surName>Carvajal Cogollo</surName>
+            </individualName>
+            <organizationName>Universidad Pedagógica y Tecnológica de Colombia</organizationName>
+            <positionName>Director</positionName>
+            <address>
+                <deliveryPoint>Avenida Central del Norte 39-115</deliveryPoint>
+                <city>Tunja</city>
+                <administrativeArea>Boyacá</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <phone>(57+8) 7405626 Ext. 2434</phone>
+            <electronicMailAddress>juan.carvajal03@uptc.edu.co</electronicMailAddress>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>María Isabel</givenName>
+                <surName>Castro Vargas</surName>
+            </individualName>
+            <organizationName>Universidad Pedagógica y Tecnológica de Colombia</organizationName>
+            <positionName>Investigadora</positionName>
+            <address>
+                <deliveryPoint>Avenida Central del Norte 39-115</deliveryPoint>
+                <city>Tunja</city>
+                <administrativeArea>Boyacá</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>maryssabellita@gmail.com</electronicMailAddress>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Silvia</givenName>
+                <surName>Patricia Mondragón</surName>
+            </individualName>
+            <organizationName>Universidad Pedagógica y Tecnológica de Colombia</organizationName>
+            <positionName>Investigadora</positionName>
+            <address>
+                <deliveryPoint>Avenida Central del Norte 39-115</deliveryPoint>
+                <city>Tunja</city>
+                <administrativeArea>Boyacá</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>patriciamondragon18@gmail.com</electronicMailAddress>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Irina</givenName>
+                <surName>Morales</surName>
+            </individualName>
+            <organizationName>Universidad Pedagógica y Tecnológica de Colombia</organizationName>
+            <positionName>Docente</positionName>
+            <address>
+                <deliveryPoint>Avenida Central del Norte 39-115</deliveryPoint>
+                <city>Tunja</city>
+                <administrativeArea>Boyacá</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <phone>(8) 7405626 ext. 2434</phone>
+            <electronicMailAddress>irina.morales@uptc.edu.co</electronicMailAddress>
+        </creator>
+        <metadataProvider>
+            <individualName>
+                <givenName>María Isabel</givenName>
+                <surName>Castro Vargas</surName>
+            </individualName>
+            <organizationName>Universidad Pedagógica y Tecnológica de Colombia</organizationName>
+            <positionName>Investigadora</positionName>
+            <address>
+                <deliveryPoint>Avenida Central del Norte 39-115</deliveryPoint>
+                <city>Tunja</city>
+                <administrativeArea>Boyacá</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>maryssabellita@gmail.com</electronicMailAddress>
+        </metadataProvider>
+        <metadataProvider>
+            <individualName>
+                <givenName>Silvia</givenName>
+                <surName>Patricia Mondragón</surName>
+            </individualName>
+            <organizationName>Universidad Pedagógica y Tecnológica de Colombia</organizationName>
+            <positionName>Investigadora</positionName>
+            <address>
+                <deliveryPoint>Avenida Central del Norte 39-115</deliveryPoint>
+                <city>Tunja</city>
+                <administrativeArea>Boyacá</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>patriciamondragon18@gmail.com</electronicMailAddress>
+        </metadataProvider>
+        <pubDate>
+                2025-11-10
+        </pubDate>
+        <language>SPANISH</language>
+        <abstract>
+            <para>El Museo de Historia Natural Luis Gonzalo Andrade, de la Universidad Pedagógica y Tecnológica de Colombia, se fundó en el año 1970 con el objetivo de brindar un espacio propicio para procesos de aprendizaje con información actualizada, gracias a la interacción con el conocimiento científico sobre investigaciones regionales o nacionales, que buscan acercar a la gente a la diversidad biológica y cultural de la región, al igual que hacer propuestas y crear expectativas a partir de procesos de enseñanza e investigación. Dentro de la fauna que reposa en el Museo se puede encontrar un grupo muy diverso perteneciente a la Clase Insecta del cual el Orden Coleoptera representa casi un 40% de los ejemplares.</para><para>A partir de la información presente en las etiquetas de ejemplares correspondiente al orden Coleoptera de la Colección entomológica del Museo de Historia Natural “Luis Gonzalo Andrade”, asociados a la Universidad Pedagógica y Tecnológica de Colombia, se realizó la sistematización, depuración taxonómica y verificación de la georreferenciación de 3.010 registros biológicos. Adicionalmente, contiene la información de 320 ejemplares correspondientes al orden Hemiptera.
+Los individuos registrados hacen parte de proyectos de investigación, prácticas docentes y donaciones por parte de otras instituciones. La colecta se realizó a partir de diferentes métodos de captura como trampas de caída, Malaise, colecta directa y red de golpe.</para><para>Los departamentos con mayor número de registros fueron Boyacá (1.508), Caquetá (351), Huila (188) y Santander (179); mientras que los departamentos con menos registros fueron Guaviare (1), Cesar (3), La Guajira (5) y Córdoba (6).
+Las familias más representativas fueron Scarabaeidae con 1.693 individuos, Chrysomelidae (406), Curculionidae (185), Melolonthidae (168) y Gerridae (112). Las familias con menor número de ejemplares fueron Mordelidae, Oedemeridae, Rhysodidae, Scydmaenidae, Tenebrionidae y Trogidae cada una con un individuo.
+Los ejemplares han sido colectados desde el año 1978 hasta el 2020.</para>
+        </abstract>
+        <keywordSet>
+            <keyword>Colombia</keyword>
+            <keyword>Taxonomía</keyword>
+            <keyword>Coleoptera</keyword>
+            <keyword>Insectos acuáticos</keyword>
+            <keyword>Insecta</keyword>
+            <keyword>Distribución</keyword>
+            <keyword>Hemiptera</keyword>
+            <keywordThesaurus>na</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+            <keyword>PERMISO_COLECTA</keyword>
+            <keywordThesaurus>SiB Colombia</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+            <keyword>Occurrence</keyword>
+            <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type.xml</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+            <keyword>Specimen</keyword>
+            <keywordThesaurus>GBIF Dataset Subtype Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_subtype.xml</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+            <keyword>Occurrence</keyword>
+            <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type_2015-07-10.xml</keywordThesaurus>
+        </keywordSet>
+        <additionalInfo>
+            <para>Coleóptera es el grupo de insectos más grande con cerca del 40% de las especies conocidas de hexapoda. Pueden encontrarse en casi todo tipo de hábitats y se alimentan de toda clase de material animal y vegetal. Muchos son fitófagos, predadores, frugívoros mientras otros son excavadores y algunos pocos son parásitos. Dentro de las familias con mas estudios para el país se pueden mencionar a Carabidae, Passalidae, Scarabaeidae y Staphylinidae.</para>
+        </additionalInfo>
+        <intellectualRights>
+            <para>To the extent possible under law, the publisher has waived all rights to these data and has dedicated them to the <ulink url="http://creativecommons.org/publicdomain/zero/1.0/legalcode"><citetitle>Public Domain (CC0 1.0)</citetitle></ulink>. Users may copy, modify, distribute and use the work, including for commercial purposes, without restriction.</para>
+        </intellectualRights>
+        <licensed>
+            <licenseName>Creative Commons Zero v1.0 Universal</licenseName>
+            <url>https://spdx.org/licenses/CC0-1.0.html</url>
+            <identifier>CC0-1.0</identifier>
+        </licensed>
+        <distribution scope="document">
+            <online>
+                <url function="download">https://ipt.biodiversidad.co/sib/archive.do?r=uptc-001</url>
+            </online>
+        </distribution>
+        <coverage>
+            <geographicCoverage>
+                <geographicDescription>Los datos proceden de 27 diferentes departamentos del territorio nacional: Amazonas, Antioquia, Arauca, Bolívar, Boyacá, Caquetá, Casanare, Cauca, Cesar, Chocó, Córdoba, Cundinamarca, Guaviare, Huila, La Guajira, Magdalena, Meta, Nariño, Norte de Santander, Putumayo, Quindío, Risaralda, Santander, Tolima, Valle del Cauca, Vaupés y Vichada. 
+
+Los departamentos con mayor número de registros fueron Boyacá (1.508) representados en 36 municipios (con mayor cantidad en Puerto Boyacá (328), Arcabuco (219), Villa de Leyva (176), Santana (156), Tunja (110) y menor cantidad con un solo registro en Labranzagrande, Pisba, San Miguel de Sema, Sutatenza y Tibaná); Caquetá (351) en cuatro municipios (con mayor cantidad en Solano (209), San Vicente de Caguán (85) y menor cantidad en San José del Fragua (38) y Florencia (19)); Huila (188) en seis municipios (con mayor cantidad en Palestina (60; San Agustín (53) y menor cantidad en Garzón (7)); y Santander (179) en 11 municipios (con mayor cantidad en San Vicente de Chucurí (52)); Piedecuesta (42) y menor cantidad en Jesús María (1) y Oiba (1). 
+
+Los departamentos con menos registros fueron Córdoba (6) en dos municipios (Los córdobas (3) y Monteria (1)); La Guajira (5) en el municipio de Urumita; Cesar (3) representados en tres municipios (Valledupar, Chimichagua y Manaure Balcón del Cesar); y Guaviare (1) registro.</geographicDescription>
+                <boundingCoordinates>
+                    <westBoundingCoordinate>-77.975</westBoundingCoordinate>
+                    <eastBoundingCoordinate>-68.361</eastBoundingCoordinate>
+                    <northBoundingCoordinate>9.943</northBoundingCoordinate>
+                    <southBoundingCoordinate>-0.117</southBoundingCoordinate>
+                </boundingCoordinates>
+            </geographicCoverage>
+            <temporalCoverage>
+                <rangeOfDates>
+                    <beginDate>
+                        <calendarDate>                1978-11-18
+</calendarDate>
+                    </beginDate>
+                    <endDate>
+                        <calendarDate>                2020-03-14
+</calendarDate>
+                    </endDate>
+                </rangeOfDates>
+            </temporalCoverage>
+            <taxonomicCoverage>
+                <generalTaxonomicCoverage>Se registran 3.330 ejemplares, de los cuales 1.203 están identificados hasta familia,  1.104 hasta nivel de especie, 995 hasta nivel de género y 28 a nivel de subespecie.
+
+Contiene la información de 5 familias, 69 géneros y 46 especies. Siendo las familias más representativas Scarabaeidae (1.693), Chrysomelidae (406), Curculionidae (185) y Melolonthidae (168). Las familias con menor número de ejemplares fueron Mordelidae, Oedemeridae, Rhysodidae, Scydmaenidae, Tenebrionidae y Trogidae cada una con un individuo.</generalTaxonomicCoverage>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Coleoptera</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Scarabaeidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Chrysomelidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Curculionidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Melolonthidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Coccinellidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Cerambycidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Elateridae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Lampyridae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Lycidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Staphylinidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Cantharidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Erotylidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Ptilodactilidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Nitidulidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Cleridae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Gyrinidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Meloidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Phengodidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Bostrichidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Brentidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Haliplidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Anobiidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Buprestidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Endomichydae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Geotrupidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Elmidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Leiodidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Platypodidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Psephenidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Mordelidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Oedemeridae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Rhysodidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Scydmaenidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Tenebrionidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Trogidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Belostomatidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Corixidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Gerridae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Hebridae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Hydrometridae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Mesoveliidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Notonectidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Naucoridae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Pleidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Veliidae</taxonRankValue>
+                </taxonomicClassification>
+            </taxonomicCoverage>
+        </coverage>
+        <purpose><para>Gracias a la interacción con el conocimiento científico sobre investigaciones regionales o nacionales, que buscan acercar a la gente a la diversidad biológica y cultural de la región, al igual que hacer propuestas y crear expectativas a partir de procesos de enseñanza e investigación, este recurso espera dar a conocer los registros biológicos de escarabajos que reposan en el Museo de Historia Natural Luis Gonzalo Andrade, de la Universidad Pedagógica y Tecnológica de Colombia.</para></purpose>
+        <maintenance>
+            <description>
+                <para></para>
+            </description>
+            <maintenanceUpdateFrequency>unkown</maintenanceUpdateFrequency>
+        </maintenance>
+        <contact>
+            <individualName>
+                <givenName>Fredy</givenName>
+                <surName>Molano Rendón</surName>
+            </individualName>
+            <organizationName>Universidad Pedagógica y Tecnológica de Colombia</organizationName>
+            <positionName>Director Museo de Historia Natural  Luis Gonzalo Andrade UPTC</positionName>
+            <address>
+                <deliveryPoint>Avenida Central del Norte 39-115</deliveryPoint>
+                <city>Tunja</city>
+                <administrativeArea>Boyacá</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>museo.historianatural@uptc.edu.co</electronicMailAddress>
+        </contact>
+        <methods>
+            <methodStep>
+                <description>
+                    <para>Los métodos de captura utilizados para estos registros fueron trampas de caída, trampas de caída con excremento humano, Malaise, colecta directa, red de golpe, jamas, trampas de interceptación, trampas de luz y Trampas Winkler.</para>
+                </description>
+            </methodStep>
+            <methodStep>
+                <description>
+                    <para>Con la información presente en las etiquetas de colecta de cada uno de los individuos depositados en la colección se generó una base de datos de las localidades. Dicha información se organizó en una plantilla de registros biológicos bajo el estándar DwC la cual se componía de diferentes elementos. En cuanto a la georreferenciación de los registros, en algunos casos la información no estaba presente y se asignó la coordenada, para otros registros que estaban georreferenciados fue necesario reasignar las coordenadas, ya que la información no correspondía.</para>
+                </description>
+            </methodStep>
+            <methodStep>
+                <description>
+                    <para>Luego de incluir la información en la plantilla de registros biológicos se procedió a estandarizar la información teniendo en cuenta la gramática, la ortografía, la presencia de palabras duplicadas, unificación de inconsistencias y la correcta escritura de las localidades según la División Político-Administrativa de Colombia.</para>
+                </description>
+            </methodStep>
+            <sampling>
+                <studyExtent>
+                    <description>
+                        <para>Los registros proceden de diferentes hábitats como bordes de bosque y carreteras, Bosque Alto Andino, Bosque inundable, Bosque de galería, Bosque de Roble, Bosque seco, Cultivos, Pastizal,  Selva tropical húmeda y Zurales; ubicados en distintos departamentos del territorio nacional: Amazonas, Antioquia, Arauca, Bolívar, Boyacá, Caquetá, Casanare, Cauca, Cesar, Chocó, Córdoba, Cundinamarca, Guaviare, Huila, La Guajira, Magdalena, Meta, Nariño, Norte de Santander, Putumayo, Quindío, Risaralda, Santander, Tolima, Valle del Cauca, Vaupés y Vichada.</para>
+                    </description>
+                </studyExtent>
+                <samplingDescription>
+                    <para>La colecta de los ejemplares se ha realizado a partir de diferentes métodos de captura como trampas de caída, trampas de caída con excremento humano, Malaise, colecta directa, red de golpe, jamas, trampas de interceptación, trampas de luz y Trampas Winkler.</para>
+                </samplingDescription>
+            </sampling>
+            <qualityControl>
+                <description>
+                    <para>Para la determinación de los ejemplares de la familia Melolonthidae se contó con la colaboración de especialistas en el grupo: Jhon Cesar Neita-Moreno y Paola Delgado-Gómez. Los especímenes de la familia Scarabaeidae fueron determinados por los especialistas Fernando Vaz-de-Mello, Claudia Alejandra Medina-Uribe, Fredy Molano-Rendón, Jorge Armando Arias-Buriticá y Fabio Arturo González-Alvarado. Las demás familias se determinaron a través de claves taxonómicas (Triplehorn and Johnson, 2005).
+
+Los departamentos, municipios y centros poblados colombianos fueron estandarizados teniendo en cuenta la codificación de la división político-administrativa de Colombia 2014 (https://www.dane.gov.co/Divipola/archivos/Listado_2014.xls), suministrada por el DANE. Los datos se almacenan en una plantilla de excel y son estructurados de acuerdo a los estándares de la plantilla de Darwin-Core sugerida por el SiB –Colombia. Se verificó exhaustivamente la digitalización de los datos y formato adecuado de ellos.
+
+Ajuste de vocabularios controlados en:
+Elementos de registros: collection ID de acuerdo con el Registro Nacional de Colecciones Biológicas;
+Elementos geográficos: county;
+Elementos temporales: eventDate, se documentan elemento verbatimEventDate para las fechas que no coincidían con el formato DwC.</para>
+                </description>
+            </qualityControl>
+        </methods>
+
+            <project >
+                <title>Coleópteros de la Colección entomológica del Museo de Historia Natural “Luis Gonzalo Andrade” de la UPTC</title>
+                <personnel>
+                    <individualName>
+                    <givenName>Fredy</givenName>
+                    <surName>Molano Rendón</surName>
+                    </individualName>
+                    <role>CURATOR</role>
+                </personnel>
+                <abstract>
+                    <para></para>
+                </abstract>
+                <funding>
+                    <para>Convenio de Cooperación No. 13-13-014-297ce entre el Instituto de Investigación de Recursos Biológicos Alexander von Humboldt y la Universidad Pedagógica y Tecnológica de Colombia.</para>
+                </funding>
+                <designDescription>
+                    <description>
+                        <para>El objetivo de disponer la información referente a la colección biológica de la UPTC en el Sistema de Información de Biodiversidad de Colombia es la de aportar en la creación de capacidades para el manejo de la información para el inventario nacional de la biodiversidad, como insumo dentro de la estrategia ENIBIO y del proceso adelantado en el marco del convenio 13-014 suscrito con el Fondo de Adaptación.</para>
+                    </description>
+                </designDescription>
+            </project>
+    </dataset>
+
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2026-05-24T11:59:17Z</dateStamp>
+                <citation identifier="https://doi.org/10.15472/a0ugui">Carvajal Cogollo J, Castro Vargas M I, Patricia Mondragón S, Morales I (2025). Colección entomológica del Museo de Historia Natural “Luis Gonzalo Andrade” de la UPTC. Version 8.8. Universidad Pedagógica y Tecnológica de Colombia. Occurrence dataset https://doi.org/10.15472/a0ugui accessed via GBIF.org on 2026-05-24.</citation>
+                <bibliography>
+                <citation>Triplehorn, C.A. and N.F. Johnson. 2005. Borror and DeLong&apos;s Introduction to the Study of Insects, 7th Edition. Thompson Brooks/Cole. Belmont, California. 864 pp.</citation>
+                <citation>Moreira, F., Alecrim, V., Ribeiro J. y J. Nessimian. (2011). Identification key to the Gerridae (Insecta: Heteroptera: Gerromorpha) from the Amazon River floodplain, Brazil, with new records for the Brazilian Amazon. Zoologia 28(2): 269-279.</citation>
+                <citation>Molano-Rendón, F., Camacho-Pinzón, D. y C. Serrato-Hurtado. (2005). Gerridae (Heteróptera: Gerromorpha) de Colombia. Biota Colombiana. 6(2): 163-172.</citation>
+                </bibliography>
+                <physical>
+                    <objectName>724_uptcchichepalagu_20210209</objectName>
+                    <characterEncoding>UTF-8</characterEncoding>
+                    <dataFormat>
+                        <externallyDefinedFormat>
+                            <formatName>DWC-A</formatName>
+                            <formatVersion>1</formatVersion>
+                        </externallyDefinedFormat>
+                    </dataFormat>
+                    <distribution>
+                        <online>
+                            <url function="download">https://ipt.biodiversidad.co/cr-sib/resource.do?r=0724_uptcchichepalagu_20210209</url>
+                        </online>
+                    </distribution>
+                </physical>
+                <resourceLogoUrl>https://statics.sibcolombia.net/sib-resources/images/logos-socios/500px/uptc.jpg</resourceLogoUrl>
+                <collection>
+                    <parentCollectionIdentifier>UPTC-MHN</parentCollectionIdentifier>
+                    <collectionIdentifier>Registro Nacional de Colecciones Biológicas: 75</collectionIdentifier>
+                    <collectionName>Museo de Historia Natural &quot;Luis Gonzalo Andrade&quot;</collectionName>
+                </collection>
+                <specimenPreservationMethod>PINNED</specimenPreservationMethod>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
+    </eml:eml>

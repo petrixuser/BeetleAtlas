@@ -1,0 +1,674 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="https://eml.ecoinformatics.org/eml-2.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://eml.ecoinformatics.org/eml-2.2.0 https://rs.gbif.org/schema/eml-gbif-profile/1.3/eml.xsd"
+packageId="67e0bb75-1cc1-47d9-bcf2-813dc982a889"  system="http://gbif.org" scope="system"
+xml:lang="es">
+    <dataset>
+        <alternateIdentifier>10.15472/rnnj0h</alternateIdentifier>
+        <alternateIdentifier>67e0bb75-1cc1-47d9-bcf2-813dc982a889</alternateIdentifier>
+        <alternateIdentifier>https://ipt.biodiversidad.co/sib/resource?r=utadeo_macroinvertebrados-bosqueseco</alternateIdentifier>
+        <title>Registros de macroinvertebrados acuáticos en un bosque seco del municipio de Honda</title>
+        <creator>
+            <individualName>
+                <givenName>Laura</givenName>
+                <surName>Castañeda</surName>
+            </individualName>
+            <organizationName>Fundación Universidad de Bogotá Jorge Tadeo</organizationName>
+            <positionName>Tesista</positionName>
+            <address>
+                <deliveryPoint>Carrera 4 #22-61</deliveryPoint>
+                <city>Bogotá, D.C.</city>
+                <administrativeArea>Bogotá, D.C.</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>laurab.castanedal@utadeo.edu.co</electronicMailAddress>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Magnolia</givenName>
+                <surName>Longo</surName>
+            </individualName>
+            <organizationName>Fundación Universidad de Bogotá Jorge Tadeo</organizationName>
+            <positionName>Profesora Titular</positionName>
+            <address>
+                <deliveryPoint>Carrera 4 #22-61</deliveryPoint>
+                <city>Bogotá, D.C.</city>
+                <administrativeArea>Bogotá, D.C.</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <phone>2427030 ext 1438</phone>
+            <electronicMailAddress>magnoliac.longos@utadeo.edu.co</electronicMailAddress>
+            <userId directory="http://scholar.google.com/citations?user=">BvvwEcwAAAAJ&amp;hl=es&amp;oi=ao</userId>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>José Andrés</givenName>
+                <surName>Deosa</surName>
+            </individualName>
+            <organizationName>Universidad de Antioquia</organizationName>
+            <positionName>Tesista</positionName>
+            <address>
+                <deliveryPoint>Calle 70 No. 52 - 21</deliveryPoint>
+                <city>Medellín</city>
+                <administrativeArea>Antioquia</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>jose.deosa@udea.edu.co</electronicMailAddress>
+        </creator>
+        <metadataProvider>
+            <individualName>
+                <givenName>Laura Briyith</givenName>
+                <surName>Castañeda López</surName>
+            </individualName>
+            <organizationName>Fundación Universidad de Bogotá Jorge Tadeo</organizationName>
+            <positionName>Tesista</positionName>
+            <address>
+                <deliveryPoint>Carrera 4 #22-61</deliveryPoint>
+                <city>Bogotá, D.C.</city>
+                <administrativeArea>Bogotá, D.C.</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>laurab.castanedal@utadeo.edu.co</electronicMailAddress>
+        </metadataProvider>
+        <metadataProvider>
+            <individualName>
+                <givenName>José Andrés</givenName>
+                <surName>Deosa</surName>
+            </individualName>
+            <organizationName>Universidad de Antioquia</organizationName>
+            <positionName>Tesista</positionName>
+            <address>
+                <deliveryPoint>Calle 70 No. 52 - 21</deliveryPoint>
+                <city>Medellín</city>
+                <administrativeArea>Antioquia</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>jose.deosa@udea.edu.co</electronicMailAddress>
+        </metadataProvider>
+        <associatedParty>
+            <individualName>
+                <givenName>Esnedy</givenName>
+                <surName>Hernandez Atilano</surName>
+            </individualName>
+            <organizationName>Universidad de Antioquia</organizationName>
+            <positionName>Profesor titular</positionName>
+            <address>
+                <deliveryPoint>Calle 67 Nº 53-108</deliveryPoint>
+                <city>Medellín</city>
+                <administrativeArea>Antioquia</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>esnedy.hernandez@gmail.com</electronicMailAddress>
+            <role>AUTHOR</role>
+        </associatedParty>
+        <associatedParty>
+            <individualName>
+                <givenName>Hilda Maria</givenName>
+                <surName>Palacio Betancur</surName>
+            </individualName>
+            <organizationName>Universidad CES</organizationName>
+            <positionName>Profesor titular</positionName>
+            <address>
+                <deliveryPoint>Cl. 10a #22 - 04</deliveryPoint>
+                <city>Medellín</city>
+                <administrativeArea>Antioquia</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>hpalacio@ces.edu.co</electronicMailAddress>
+            <role>AUTHOR</role>
+        </associatedParty>
+        <associatedParty>
+            <individualName>
+                <surName>Universidad de Antioquia</surName>
+            </individualName>
+            <organizationName>Universidad de Antioquia</organizationName>
+            <positionName>Universidad</positionName>
+            <address>
+                <deliveryPoint>Calle 70 No. 52 - 21</deliveryPoint>
+                <city>Medellín</city>
+                <administrativeArea>Antioquia</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <phone>(57+4) 219 8332</phone>
+            <onlineUrl>http://www.udea.edu.co/</onlineUrl>
+            <role>AUTHOR</role>
+        </associatedParty>
+        <pubDate>
+                2021-02-05
+        </pubDate>
+        <language>SPANISH</language>
+        <abstract>
+            Base de datos de macroinvertebrados acuáticos colectados en dos quebradas intermitentes de un parche de bosque seco tropical en la vereda El Tambor, municipio de Honda - Tolima. Los datos aquí contenidos fueron recolectados entre septiembre de 2018 y marzo de 2019 para fines de investigación. Comprende 310 registros, abarcando artrópodos (300), moluscos (7), platelmitos (2) y anélidos (1). Con un 82 % clasificado a nivel de género, 15% a familia y 3% a subfamilia.
+        </abstract>
+        <keywordSet>
+            <keyword>Macroinvertebrados acuáticos</keyword>
+            <keyword>Sistemas lóticos intermitentes</keyword>
+            <keyword>Bosque seco tropical</keyword>
+            <keywordThesaurus>na</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+            <keyword>PERMISO_COLECTA</keyword>
+            <keywordThesaurus>SiB Colombia</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+            <keyword>Occurrence</keyword>
+            <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type.xml</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+            <keyword>Observation</keyword>
+            <keywordThesaurus>GBIF Dataset Subtype Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_subtype.xml</keywordThesaurus>
+        </keywordSet>
+        <intellectualRights>
+            <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by-nc/4.0/legalcode"><citetitle>Creative Commons Attribution Non Commercial (CC-BY-NC) 4.0 License</citetitle></ulink>.</para>
+        </intellectualRights>
+        <licensed>
+            <licenseName>Creative Commons Attribution Non Commercial 4.0 International</licenseName>
+            <url>https://spdx.org/licenses/CC-BY-NC-4.0.html</url>
+            <identifier>CC-BY-NC-4.0</identifier>
+        </licensed>
+        <distribution scope="document">
+            <online>
+                <url function="download">https://ipt.biodiversidad.co/sib/archive.do?r=utadeo_macroinvertebrados-bosqueseco</url>
+            </online>
+        </distribution>
+        <coverage>
+            <geographicCoverage>
+                <geographicDescription>Se muestrearon dos quebradas intermitentes, El Tambor y Caimital en la Reserva Natural de la Sociedad Civil El Tambor, en el municipio de Honda del departamento del Tolima.</geographicDescription>
+                <boundingCoordinates>
+                    <westBoundingCoordinate>-74.81</westBoundingCoordinate>
+                    <eastBoundingCoordinate>-74.791</eastBoundingCoordinate>
+                    <northBoundingCoordinate>5.184</northBoundingCoordinate>
+                    <southBoundingCoordinate>5.166</southBoundingCoordinate>
+                </boundingCoordinates>
+            </geographicCoverage>
+            <temporalCoverage>
+                <rangeOfDates>
+                    <beginDate>
+                        <calendarDate>                2018-09-01
+</calendarDate>
+                    </beginDate>
+                    <endDate>
+                        <calendarDate>                2019-03-10
+</calendarDate>
+                    </endDate>
+                </rangeOfDates>
+            </temporalCoverage>
+            <taxonomicCoverage>
+                <generalTaxonomicCoverage>Este recurso contiene 310 registros biológicos, abarcando artrópodos (300), moluscos (7), platelmitos (2) y anélidos (1). Con presencia de 4 clases, 11 ordenes, 51 familias y 79 géneros. Un 82 % esta clasificado a nivel de género, 15% a familia y 3% a subfamilia.</generalTaxonomicCoverage>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Allenhyphes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Alluaudomyia</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Ambrysus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Americabaetis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Anacroneuria</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Andesiops</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Anopheles</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Apobaetis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Argia</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Atrichopogon</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Baetodes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Berosus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Bidessus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Brachymetra</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Buenoa</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Cabecar</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Caenis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Camelobaetidius</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Chimarra</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Choroterpes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Chrysops</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Cloeodes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Copelatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Corydalus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Culex</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Cylloepus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Elodes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Gelastocoris</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Hagenulopsis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Halobatopsis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Hebrus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Helichus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Helicopsyche</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Hemerodromia</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Hemiosus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Hetaerina</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Heterelmis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Hexatoma</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Laccophilus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Leptohyphes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Leptonema</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Limnocoris</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Macrelmis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Marilia</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Maruina</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Mesovelia</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Microcylloepus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Mortoniella</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Neocylloepus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Nerthra</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Ovatametra</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Palaemnema</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Petrophila</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Phanocerus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Phylloicus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Physa</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Platyvelia</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Probezzia</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Psephenops</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Psychoda</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Ranatra</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Rhagovelia</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Simulium</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Stilobezzia</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Smicridea</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Tachygerris</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Telmatometra</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Terpides</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Thermonectus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Thraulodes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Traverhyphes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Trepobates</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Dugesia</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Tricorythodes</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Tropisternus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Vacupernius</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Xenelmis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Xiphocentron</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Genus</taxonRankName>
+                    <taxonRankValue>Zelusia</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Clitellata</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Gastropoda</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Insecta</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Trepaxonemata</taxonRankValue>
+                </taxonomicClassification>
+            </taxonomicCoverage>
+        </coverage>
+        <maintenance>
+            <description>
+                <para></para>
+            </description>
+            <maintenanceUpdateFrequency>unkown</maintenanceUpdateFrequency>
+        </maintenance>
+        <contact>
+            <individualName>
+                <givenName>Magnolia Constanza</givenName>
+                <surName>Longo Sánchez</surName>
+            </individualName>
+            <organizationName>Fundación Universidad de Bogotá Jorge Tadeo</organizationName>
+            <positionName>Profesora Titular</positionName>
+            <address>
+                <deliveryPoint>Carrera 4 #22-61</deliveryPoint>
+                <city>Bogotá, D.C.</city>
+                <administrativeArea>Bogotá, D.C.</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <phone>2427030 ext 1438</phone>
+            <electronicMailAddress>magnoliac.longos@utadeo.edu.co</electronicMailAddress>
+            <userId directory="http://scholar.google.com/citations?user=">BvvwEcwAAAAJ&amp;hl=es&amp;oi=ao</userId>
+        </contact>
+        <contact>
+            <individualName>
+                <givenName>Laura Briyith</givenName>
+                <surName>Castañeda López</surName>
+            </individualName>
+            <organizationName>Fundación Universidad de Bogotá Jorge Tadeo</organizationName>
+            <positionName>Tesista</positionName>
+            <address>
+                <deliveryPoint>Carrera 4 #22-61</deliveryPoint>
+                <city>Bogotá, D.C.</city>
+                <administrativeArea>Bogotá, D.C.</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>laurab.castanedal@utadeo.edu.co</electronicMailAddress>
+        </contact>
+        <methods>
+            <methodStep>
+                <description>
+                    <para>Para la colecta se considera la estructura y heterogeneidad de los hábitats y sustratos, por lo cual los métodos empleados para la toma de las muestras varían según la disponibilidad de agua y el tipo de sustrato.</para>
+                </description>
+            </methodStep>
+            <methodStep>
+                <description>
+                    <para>Los macroinvertebrados en la superficie de los pozos fueron recolectados con una red tipo D, mientras que en rápidos con sustratos arenosos y cantos se emplea una red Surber, además, se recolectaron muestras de hojarasca en bolsas, a la que se adiciona alcohol al 96%. Se considero siempre un área por repetición de 0.4 m2.</para>
+                </description>
+            </methodStep>
+            <methodStep>
+                <description>
+                    <para>En los meses de sequía, cuando el agua superficial en los sitios de potreros se secaba y el sustrato quedaba expuesto, se buscó manualmente organismos escarbando en el sustrato hasta encontrar el nivel freático.</para>
+                </description>
+            </methodStep>
+            <methodStep>
+                <description>
+                    <para>En cada estación de muestreo se realizaron tres repeticiones y el número de muestreos en total, fueron 5 (entre septiembre del 2018 y marzo del 2019), abarcando períodos de lluvias altas (noviembre de 2018 y marzo de 2019), lluvias ascendentes (octubre de 2018) y sequía (septiembre de 2018 y febrero de 2019).</para>
+                </description>
+            </methodStep>
+            <sampling>
+                <studyExtent>
+                    <description>
+                        <para>Se muestrearon dos quebradas intermitentes, El Tambor y Caimital en la Reserva Natural de la Sociedad Civil El Tambor, en Honda - Tolima. Se colectaron muestras en zonas de bosque y potreros dedicados principalmente a la actividad ganadera. El área geográfica es un remanente de bosque seco existente en el norte del departamento del Tolima, que se encuentra en un buen estado de conservación.</para>
+                    </description>
+                </studyExtent>
+                <samplingDescription>
+                    <para>Para la colecta se consideró la estructura y heterogeneidad de los hábitats y sustratos, por lo cual los métodos empleados variaron según la disponibilidad de agua y el tipo de sustrato. Los macroinvertebrados en la superficie de los pozos fueron recolectados con una red tipo D, mientras que en rápidos con sustratos arenosos y cantos se empleó una red Surber, además, se colectaron muestras de hojarasca en bolsas, a la que se adiciono alcohol al 96%. Los especímenes recolectados no fueron depositados en ninguna colección debido a que se utilizaron en el proceso de identificación.</para>
+                </samplingDescription>
+            </sampling>
+        </methods>
+
+            <project >
+                <title>Relaciones entre diversidad taxonómica y funcional de comunidades bióticas con condiciones hídricas contrastantes entre dos períodos hidrológicos en algunos ecosistemas lóticos intermitentes del Caribe</title>
+                <personnel>
+                    <individualName>
+                    <givenName>Laura</givenName>
+                    <surName>Castañeda</surName>
+                    </individualName>
+                    <role>PRINCIPAL_INVESTIGATOR</role>
+                </personnel>
+                <personnel>
+                    <individualName>
+                    <givenName>Magnolia</givenName>
+                    <surName>Longo</surName>
+                    </individualName>
+            <userId directory="http://scholar.google.com/citations?user=">BvvwEcwAAAAJ&amp;hl=es&amp;oi=ao</userId>
+                    <role>PRINCIPAL_INVESTIGATOR</role>
+                </personnel>
+                <personnel>
+                    <individualName>
+                    <givenName>José Andrés</givenName>
+                    <surName>Deosa</surName>
+                    </individualName>
+                    <role>AUTHOR</role>
+                </personnel>
+                <abstract>
+                    <para>Evaluación del efecto del uso del suelo y la estacionalidad de las lluvias en la diversidad funcional en comunidades de macroinvertebrados acuáticos (MIA) que habitan tramos de quebradas intermitentes con uso de suelo diferente (bosque primario, bosque secundario y potreros).</para>
+                </abstract>
+                <funding>
+                    <para>Fundación Universidad Jorge Tadeo Lozano</para>
+                </funding>
+                <studyAreaDescription>
+                    <descriptor name="generic" citableClassificationSystem="false">
+                        <descriptorValue>El estudio se realizo en dos quebradas intermitentes (El Tambor y Caimital) en la Reserva Natural de la Sociedad Civil, en el municipio de Honda - Tolima y no en el Caribe como se menciona en el título del proyecto. El área de estudio constituye uno de los pocos remanentes de bosque seco existente en el norte del departamento del Tolima y se encuentra en buen estado de conservación.</descriptorValue>
+                    </descriptor>
+                </studyAreaDescription>
+                <designDescription>
+                    <description>
+                        <para>Se muestrearon dos quebradas, El Tambor y Caimital. En cada una se delimito un tramo dentro de una zona de bosque y otro en zona de potrero. El bosque en la quebrada El Tambor es primario y en la quebrada Caimital es secundario. En ambos potreros no hay bosque ribereño, solo algunos árboles distantes están presentes. 
+
+Para la colecta se considero la estructura y heterogeneidad de los hábitats y sustratos, por lo cual los métodos empleados para la toma de las muestras variaron según la disponibilidad de agua y el tipo de sustrato. 
+
+En cada estación de muestreo se realizaron tres repeticiones y el número de muestreos en total, fueron 5 (entre septiembre del 2018 y marzo del 2019), abarcando períodos de lluvias altas (noviembre de 2018 y marzo de 2019), lluvias ascendentes (octubre de 2018) y sequía (septiembre de 2018 y febrero de 2019).</para>
+                    </description>
+                </designDescription>
+            </project>
+    </dataset>
+
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2026-05-24T11:59:16Z</dateStamp>
+                <citation identifier="https://doi.org/10.15472/rnnj0h">Castañeda L, Longo M, Deosa J A, Castañeda López L B (2021). Registros de macroinvertebrados acuáticos en un bosque seco del municipio de Honda. Version 1.1. Fundación Universidad de Bogotá Jorge Tadeo Lozano. Occurrence dataset https://doi.org/10.15472/rnnj0h accessed via GBIF.org on 2026-05-24.</citation>
+                <physical>
+                    <objectName>1271_macroinvbosqueseco_20200204</objectName>
+                    <characterEncoding>UTF-8</characterEncoding>
+                    <dataFormat>
+                        <externallyDefinedFormat>
+                            <formatName>DWC-A</formatName>
+                            <formatVersion>1</formatVersion>
+                        </externallyDefinedFormat>
+                    </dataFormat>
+                    <distribution>
+                        <online>
+                            <url function="download">https://ipt.biodiversidad.co/cr-sib/resource.do?r=1271_macroinvbosqueseco_20200204</url>
+                        </online>
+                    </distribution>
+                </physical>
+                <resourceLogoUrl>https://statics.sibcolombia.net/sib-resources/images/logos-socios/500px/utadeo.jpg</resourceLogoUrl>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
+    </eml:eml>

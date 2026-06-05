@@ -1,0 +1,1591 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="https://eml.ecoinformatics.org/eml-2.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://eml.ecoinformatics.org/eml-2.2.0 https://rs.gbif.org/schema/eml-gbif-profile/1.3/eml.xsd"
+packageId="8469143a-92d1-4434-8d2d-d94520d4a22c"  system="http://gbif.org" scope="system"
+xml:lang="es">
+    <dataset>
+        <alternateIdentifier>10.15472/jsb352</alternateIdentifier>
+        <alternateIdentifier>https://ipt.biodiversidad.co/iavh/resource?r=paramo_chillibarragan_2013</alternateIdentifier>
+        <alternateIdentifier>10.15468/xwta4x</alternateIdentifier>
+        <alternateIdentifier>http://ipt.biodiversidad.co/iavh/resource?r=paramo_chillibarragan_2013</alternateIdentifier>
+        <alternateIdentifier>http://ipt.sibcolombia.net/iavh/resource.do?r=paramo_chillibarragan_2013</alternateIdentifier>
+        <alternateIdentifier>8469143a-92d1-4434-8d2d-d94520d4a22c</alternateIdentifier>
+        <title>Caracterización de flora, edafofauna epígea, anfibios y aves del Complejo Páramos Chilí - Barragán, Tolima</title>
+        <creator>
+            <individualName>
+                <givenName>Francisco</givenName>
+                <surName>Villa-Navarro</surName>
+            </individualName>
+            <organizationName>Grupo de Investigación en Zoología - Universidad del Tolima</organizationName>
+            <positionName>Coordinador Proyecto Delimitación Páramos Tolima</positionName>
+            <address>
+                <deliveryPoint>Santa Elena, Parte alta</deliveryPoint>
+                <city>Ibagué</city>
+                <administrativeArea>Tolima</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <phone>(578) 2771212 Ext 9343</phone>
+            <electronicMailAddress>favilla@ut.edu.co</electronicMailAddress>
+        </creator>
+        <metadataProvider>
+            <individualName>
+                <givenName>Miguel</givenName>
+                <surName>Moreno-Palacios</surName>
+            </individualName>
+            <organizationName>Grupo de Investigación en Zoología - Universidad del Tolima</organizationName>
+            <positionName>Investigador</positionName>
+            <address>
+                <deliveryPoint>Santa Elena, Parte alta</deliveryPoint>
+                <city>Ibagué</city>
+                <administrativeArea>Tolima</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <phone>(578) 2771212 Ext 9343</phone>
+            <electronicMailAddress>mmorenop@ut.edu.co</electronicMailAddress>
+        </metadataProvider>
+        <associatedParty>
+            <individualName>
+                <givenName>Francisco Antonio</givenName>
+                <surName>Villa Navarro</surName>
+            </individualName>
+            <organizationName>Grupo de Investigación en Zoología - Universidad del Tolima</organizationName>
+            <positionName>Coordinador Proyecto Delimitación de Paramos Tolima</positionName>
+            <address>
+                <deliveryPoint>Santa Elena parte alta</deliveryPoint>
+                <city>Ibagué</city>
+                <administrativeArea>Tolima</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>favilla@ut.edu.co</electronicMailAddress>
+            <role>PUBLISHER</role>
+        </associatedParty>
+        <associatedParty>
+            <individualName>
+                <givenName>Miguel</givenName>
+                <surName>Moreno Palacios</surName>
+            </individualName>
+            <organizationName>Grupo de Investigación en Zoología - Universidad del Tolima</organizationName>
+            <positionName>Investigador Ornitología</positionName>
+            <address>
+                <deliveryPoint>Santa Elena parte alta</deliveryPoint>
+                <city>Ibagué</city>
+                <administrativeArea>Tolima</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>mmorenop@ut.edu.co</electronicMailAddress>
+            <role>AUTHOR</role>
+        </associatedParty>
+        <associatedParty>
+            <individualName>
+                <givenName>Jeyson</givenName>
+                <surName>Sanabria Mejía</surName>
+            </individualName>
+            <organizationName>Grupo de Investigación en Zoología - Universidad del Tolima</organizationName>
+            <positionName>Investigador Ornitología</positionName>
+            <address>
+                <deliveryPoint>Santa Elena parte alta</deliveryPoint>
+                <city>Ibagué</city>
+                <administrativeArea>Tolima</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>jeisonsanabria@yahoo.com.mx</electronicMailAddress>
+            <role>AUTHOR</role>
+        </associatedParty>
+        <associatedParty>
+            <individualName>
+                <givenName>Valentina</givenName>
+                <surName>Ortíz Buitrago</surName>
+            </individualName>
+            <organizationName>Grupo de Investigación en Zoología - Universidad del Tolima</organizationName>
+            <positionName>Investigador Ornitología</positionName>
+            <address>
+                <deliveryPoint>Santa Elena parte alta</deliveryPoint>
+                <city>Ibagué</city>
+                <administrativeArea>Tolima</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>valeorbuitro@hotmail.com</electronicMailAddress>
+            <role>AUTHOR</role>
+        </associatedParty>
+        <associatedParty>
+            <individualName>
+                <givenName>Gladys</givenName>
+                <surName>Reinoso Flores</surName>
+            </individualName>
+            <positionName>Coordinadora Edafofauna Epígea</positionName>
+            <address>
+                <deliveryPoint>Santa Elena parte alta</deliveryPoint>
+                <city>Ibagué</city>
+                <administrativeArea>Tolima</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>greinoso@ut.edu.co</electronicMailAddress>
+            <role>AUTHOR</role>
+        </associatedParty>
+        <associatedParty>
+            <individualName>
+                <givenName>Sergio</givenName>
+                <surName>Losada Prado</surName>
+            </individualName>
+            <organizationName>Grupo de Investigación en Zoología - Universidad del Tolima</organizationName>
+            <positionName>Coordinador Aves</positionName>
+            <address>
+                <deliveryPoint>Santa Elena parte alta</deliveryPoint>
+                <city>Ibagué</city>
+                <administrativeArea>Tolima</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>slosada@ut.edu.co</electronicMailAddress>
+            <role>AUTHOR</role>
+        </associatedParty>
+        <associatedParty>
+            <individualName>
+                <givenName>Manuel Hernando</givenName>
+                <surName>Bernal Bautista</surName>
+            </individualName>
+            <organizationName>Grupo de Investigación en Zoología - Universidad del Tolima</organizationName>
+            <positionName>Coordinador Herpetos</positionName>
+            <address>
+                <deliveryPoint>Santa Elena parte alta</deliveryPoint>
+                <city>Ibagué</city>
+                <administrativeArea>Tolima</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>mhbernal@ut.edu.co</electronicMailAddress>
+            <role>AUTHOR</role>
+        </associatedParty>
+        <associatedParty>
+            <individualName>
+                <givenName>Claudia Paola</givenName>
+                <surName>Beltrán Alfonso</surName>
+            </individualName>
+            <organizationName>Grupo de Investigación en Zoología - Universidad del Tolima</organizationName>
+            <positionName>Investigadora Edafofauna Epigea</positionName>
+            <address>
+                <deliveryPoint>Santa Elena parte alta</deliveryPoint>
+                <city>Ibagué</city>
+                <administrativeArea>Tolima</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>claum423@hotmail.com</electronicMailAddress>
+            <role>AUTHOR</role>
+        </associatedParty>
+        <associatedParty>
+            <individualName>
+                <givenName>Claudia Lorena</givenName>
+                <surName>Yara Ortiz</surName>
+            </individualName>
+            <organizationName>Grupo de Investigación en Zoología - Universidad del Tolima</organizationName>
+            <positionName>Investigadora Edafofauna Epigea</positionName>
+            <address>
+                <deliveryPoint>Santa Elena parte alta</deliveryPoint>
+                <city>Ibagué</city>
+                <administrativeArea>Tolima</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>claudiayarao@gmail.com</electronicMailAddress>
+            <role>AUTHOR</role>
+        </associatedParty>
+        <associatedParty>
+            <individualName>
+                <givenName>Jesús Manuel</givenName>
+                <surName>Vásquez Ramos</surName>
+            </individualName>
+            <organizationName>Grupo de Investigación en Zoología - Universidad del Tolima</organizationName>
+            <positionName>Investigador Edafofauna Epigea</positionName>
+            <address>
+                <deliveryPoint>Santa Elena parte alta</deliveryPoint>
+                <city>Ibagué</city>
+                <administrativeArea>Tolima</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>jmvasquezr@ut.edu.co</electronicMailAddress>
+            <role>AUTHOR</role>
+        </associatedParty>
+        <associatedParty>
+            <individualName>
+                <givenName>Verónica Alexandra</givenName>
+                <surName>Arango Cubillos</surName>
+            </individualName>
+            <organizationName>Grupo de Investigación en Zoología - Universidad del Tolima</organizationName>
+            <positionName>Investigadora Herpetofauna</positionName>
+            <address>
+                <deliveryPoint>Santa Elena parte alta</deliveryPoint>
+                <city>Ibagué</city>
+                <administrativeArea>Tolima</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>veroca61@hotmail.com</electronicMailAddress>
+            <role>AUTHOR</role>
+        </associatedParty>
+        <associatedParty>
+            <individualName>
+                <givenName>David Alfonso</givenName>
+                <surName>Bejarano Bonilla</surName>
+            </individualName>
+            <organizationName>Grupo de Investigación en Zoología - Universidad del Tolima</organizationName>
+            <positionName>Investigador Herpetofauna</positionName>
+            <address>
+                <deliveryPoint>Santa Elena parte alta</deliveryPoint>
+                <city>Ibagué</city>
+                <administrativeArea>Tolima</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>trumandavid01@gmail.com</electronicMailAddress>
+            <role>AUTHOR</role>
+        </associatedParty>
+        <associatedParty>
+            <individualName>
+                <surName>Infraestructura Institucional de Datos</surName>
+            </individualName>
+            <organizationName>Instituto de Investigación de Recursos Biológicos Alexander von Humboldt</organizationName>
+            <address>
+                <deliveryPoint>Calle 28A # 15-09</deliveryPoint>
+                <city>Bogotá, D.C.</city>
+                <administrativeArea>Bogotá, D.C.</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <phone>(57)(1) 3202767</phone>
+            <electronicMailAddress>i2d@humboldt.org.co</electronicMailAddress>
+            <onlineUrl>http://www.humboldt.org.co/iavh/</onlineUrl>
+            <role>CUSTODIAN_STEWARD</role>
+        </associatedParty>
+        <pubDate>
+                2021-09-28
+        </pubDate>
+        <language>SPANISH</language>
+        <abstract>
+            Se presentan 3919 registros biológicos, correspondientes a 983 registros de Plantas, 71 registros de Anfibios, 1790 registros de Edafofauna Epígea y 1075 registros de Aves, encontrados en la franja altitudinal de 3100 m a 3600 m, en tres localidades pertenecientes al complejo de Páramos Chilí-Barragán (páramos de Anaime, Chilí y Las Nieves-Estambul), en el departamento del Tolima, Colombia.
+
+Los especímenes de Flora, Edafofauna Epígea, Anfibios y Aves que fueron colectados durante el estudio, fueron depositados en siguientes Colecciones de Referencia: Colección de Zoología de la Universidad del Tolima (CZUT) y Colección de Referencia del Herbario TOLI de la Universidad del Tolima. Algunos ejemplares se encuentran a la espera de la asignación del Número de Catálogo oficial en las respectivas colecciones.
+
+El análisis de estos datos permitió la delimitación biológica de la franja altitudinal de transición entre el Bosque altoandino-Subpáramo, en  el departamento del Tolima.
+        </abstract>
+        <keywordSet>
+            <keyword>complejo de páramos Chilí-Barragán</keyword>
+            <keyword>Colombia</keyword>
+            <keyword>aves</keyword>
+            <keyword>Páramo de Las Nieves-Estambul</keyword>
+            <keyword>Páramo de Chilí</keyword>
+            <keyword>municipio de Roncesvalles</keyword>
+            <keyword>departamento del Tolima</keyword>
+            <keyword>Edafofauna epígea</keyword>
+            <keyword>anfibios</keyword>
+            <keyword>vegetación</keyword>
+            <keyword>Páramo de Anaime</keyword>
+            <keyword>municipio de Cajamarca</keyword>
+            <keyword>municipio de Ibagué</keyword>
+            <keywordThesaurus>n/a</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+            <keyword>Occurrence</keyword>
+            <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type.xml</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+            <keyword>Observation</keyword>
+            <keywordThesaurus>GBIF Dataset Subtype Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_subtype.xml</keywordThesaurus>
+        </keywordSet>
+        <additionalInfo>
+            <para>Asociado al recurso, se incorporó dentro de la Infraestructura Institucional de Datos del Instituto Humboldt, el informe final de actividades relacionado al conjunto de datos.</para>
+        </additionalInfo>
+        <intellectualRights>
+            <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by-nc/4.0/legalcode"><citetitle>Creative Commons Attribution Non Commercial (CC-BY-NC) 4.0 License</citetitle></ulink>.</para>
+        </intellectualRights>
+        <licensed>
+            <licenseName>Creative Commons Attribution Non Commercial 4.0 International</licenseName>
+            <url>https://spdx.org/licenses/CC-BY-NC-4.0.html</url>
+            <identifier>CC-BY-NC-4.0</identifier>
+        </licensed>
+        <distribution scope="document">
+            <online>
+                <url function="information">http://ipt.biodiversidad.co/iavh/resource.do?r=paramo_chillibarragan_2013</url>
+            </online>
+        </distribution>
+        <distribution scope="document">
+            <online>
+                <url function="download">https://ipt.biodiversidad.co/iavh/archive.do?r=paramo_chillibarragan_2013</url>
+            </online>
+        </distribution>
+        <coverage>
+            <geographicCoverage>
+                <geographicDescription>Complejo de páramos Chili-Barragán. Localidades estudiadas: Páramo de Chilí (Roncesvalles), Páramo de Las Nieves-Estambul (Ibagué), Páramo de Anaime (Cajamarca). Las estaciones de muestreo en las tres localidades fueron ubicadas en la franja altitudinal de 3100 m a 3600 m.</geographicDescription>
+                <boundingCoordinates>
+                    <westBoundingCoordinate>-75.61</westBoundingCoordinate>
+                    <eastBoundingCoordinate>-75.27</eastBoundingCoordinate>
+                    <northBoundingCoordinate>4.6</northBoundingCoordinate>
+                    <southBoundingCoordinate>4.15</southBoundingCoordinate>
+                </boundingCoordinates>
+            </geographicCoverage>
+            <temporalCoverage>
+                <rangeOfDates>
+                    <beginDate>
+                        <calendarDate>                2013-07-07
+</calendarDate>
+                    </beginDate>
+                    <endDate>
+                        <calendarDate>                2013-07-18
+</calendarDate>
+                    </endDate>
+                </rangeOfDates>
+            </temporalCoverage>
+            <taxonomicCoverage>
+                <generalTaxonomicCoverage>Se registraron 1075 individuos de Aves, correspondientes a 24 familias, 63 géneros y 89 especies. Se sigue la taxonomía de Remsen et al. (2013).</generalTaxonomicCoverage>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Acropternis orthonyx</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Amblycercus holosericeus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Andigena hypoglauca</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Andigena nigrirostris</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Anisognathus igniventris</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Anisognathus lacrymosus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Arremon torquatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Atlapetes pallidinucha</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Atlapetes schistaceus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Basileuterus nigrocristatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Buthraupis eximia</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Buthraupis montana</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Cacicus chrysonotus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Catamenia inornata</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Chalcostigma herrani</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Chlorornis riefferii</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Cinnycerthia unirufa</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Cistothorus platensis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Coeligena coeligena</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Coeligena lutetiae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Conirostrum sitticolor</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Cyanolyca armillata</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Diglossa albilatera</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Diglossa cyanea</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Diglossa humeralis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Diglossa lafresnayii</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Diglossa sittoides</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Dubusia taeniata</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Elaenia frantzii</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Ensifera ensifera</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Eriocnemis derbyi</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Eriocnemis mosquera</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Gallinago nobilis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Geranoaetus melanoleucus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Grallaria nuchalis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Grallaria quitensis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Grallaria rufula</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Grallaria squamigera</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Grallaricula lineifrons</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Grallaricula nana</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Haplospiza rustica</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Heliangelus exortis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Hellmayrea gularis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Hemispingus atropileus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Hemispingus frontalis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Hemispingus superciliaris</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Hemispingus verticalis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Iridosornis rufivertex</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Lafresnaya lafresnayi</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Leptasthenura andicola</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Leptosittaca branickii</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Margarornis squamiger</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Mecocerculus leucophrys</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Mecocerculus stictopterus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Metallura tyrianthina</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Metallura williami</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Myioborus ornatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Myiotheretes fumigatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Myornis senilis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Nothocercus julius</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Ochthoeca cinnamomeiventris</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Ochthoeca diadema</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Ochthoeca frontalis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Ochthoeca fumicolor</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Ochthoeca rufipectoralis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Opisthoprora euryptera</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Orochelidon murina</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Patagioenas fasciata</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Penelope montagnii</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Phalcoboenus carunculatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Phyllomyias nigrocapillus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Phyllomyias uropygialis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Pseudocolaptes boissonneautii</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Pseudotriccus ruficeps</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Pygochelidon cyanoleuca</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Pyrrhomyias cinnamomeus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Ramphomicron microrhynchum</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Scytalopus latrans</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Scytalopus spillmanni</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Sporagra spinescens</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Streptoprocne zonaris</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Synallaxis azarae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Synallaxis unirufa</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Syndactyla subalaris</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Troglodytes solstitialis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Trogon personatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Turdus fuscater</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Uromyias agilis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Zonotrichia capensis</taxonRankValue>
+                </taxonomicClassification>
+            </taxonomicCoverage>
+            <taxonomicCoverage>
+                <generalTaxonomicCoverage>Se encontraron 71 individuos de Anfibios, correspondientes a 2 familias, 2 géneros y 7 especies.
+
+Para la determinación de las especies se utilizó la guía de Rueda-Almonacid (2004) y la comparación directa con ejemplares de la Colección de Referencia de Anfibios de la Universidad del Tolima.</generalTaxonomicCoverage>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Osornophryne percrassa</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Pristimantis permixtus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Pristimantis piceus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Pristimantis scopaeus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Pristimantis simoteriscus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Pristimantis simoterus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Pristimantis uranobates</taxonRankValue>
+                </taxonomicClassification>
+            </taxonomicCoverage>
+            <taxonomicCoverage>
+                <generalTaxonomicCoverage>Se encontraron 1790 registros de organismos de Edafofauna Epígea, correspondientes a 31 órdenes y 91 familias.
+
+Para la determinación a nivel de familia se siguieron las claves de Coto-Alfaro (1998) Adis (2002), Ospina et al. (2003), Barrientos (2004), Fernández &amp; Sharkey (2006), Guzmán (2008), OCW (2009), Ospina et al. (2009), Pérez-Schultheiss (2010).</generalTaxonomicCoverage>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Agelenidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Anisopodidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Anthomyiidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Anyphaenidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Aphelidesmidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Araneidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Ballophilidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Bathytropidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Brachystomellidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Braconidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Carabidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Cecidomyiidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Cerambycidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Ceraphronidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Ceratopogonidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Chironomidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Chyromyidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Cryptodesmidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Cryptopidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Crysomelidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Culicidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Curculionidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Cyrtodesmidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Detonidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Diapriidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Dipluridae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Dolichopodidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Drosophilidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Dryinidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Dryopidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Dycirtomidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Dytiscidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Elateridae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Empididae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Entomobryidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Ephydridae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Formicidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Glomeridesmidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Gyrinidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Haplodesmidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Hydrophilidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Ichneumonidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Isotomidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Julidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Lampyridae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Lauxaniidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Limnichidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Limoniidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Linyphiidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Liocranidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Lycosidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Monotomidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Muscidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Mymaridae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Neanuridae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Nitidulidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Odontellidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Oniscidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Oniscodesmidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Paronellidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Passalidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Philosciidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Pholcidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Phoridae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Platypodidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Polydesmidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Proctotrupidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Psychodidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Ptylodactilidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Pyrgodesmidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Rachodesmidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Rhinocricidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Salticidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Sarcophagidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Scarabaeidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Scarabidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Scelionidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Sciaridae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Siphonotidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Sminthurididae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Spirostreptidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Staphylinidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Stemmiulidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Tabanidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Tachinidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Tenebrionidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Tetragnathidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Theridiidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Tipulidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Trichoniscidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Trigoniulidae</taxonRankValue>
+                </taxonomicClassification>
+            </taxonomicCoverage>
+            <taxonomicCoverage>
+                <generalTaxonomicCoverage>Se encontraron 983 registros de plantas, correspondientes 48 familias. 674 registros se encuentran a nivel de especie, 244 a nivel de género, 39 a nivel de familia, 6 a nivel de orden y 20 a nivel de clase. A continuación se presentan los registros a nivel de especie.
+
+Las especies fueron determinadas con el uso de las guías de Gentry (1996)  y Vargas (2002) y la comparación con ejemplares de la colección botánica del Herbario TOLI de la Universidad del Tolima.</generalTaxonomicCoverage>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Acaena elongata</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Ageratina tinifolia</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Baccharis latifolia</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Baccharis tricuneata</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Blechnum loxense</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Brachyotum ledifolium</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Buddleja bullata</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Buddleja incana</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Calceolaria perfoliata</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Castilleja integrifolia</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Chusquea tessellata</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Clethra ovalifolia</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Clethra revoluta</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Cortaderia nitida</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Cyperus rotundus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Diplostephium schultzii</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Diplostephium sp</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Disterigma empetrifolium</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Drymis granadensis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Duchesnea indica</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Equisetum bogotense</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Erigeron bonariensis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Escallonia myrtilioides</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Escallonia myrtilloides</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Espeletia hartwegiana</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Fuchsia caucana</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Gaultheria sp</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Gnaphalium spicatum</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Gynoxys cf.tolimensis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Hedyosmum bonplandianum</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Hesperomeles ferruginea</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Holcus lanatus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Hydrocotyle umbellata</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Hypericum juniperinun</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Hypericum laricifolium</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Juncus effusus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Lachemilla orbiculata</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Leandra melanodesma</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Leandra sp</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Lolium hybridum</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Macleania cf. rupestris</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Miconia salicifolia</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Miosotis sp</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankValue>Monnina</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Oreopanax discolor</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Oreopanax tolimanus</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Oritrophium peruvianum</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Pedicularis incurva</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Pentacalia vaccinioides</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Pernettya prostrata</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Plantago lanceolata</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Rhynchospora cf. caucana</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Rumex acetosella</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Saracha quitensis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Saurauia ursina</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Symplocos cundinamarcensis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Vallea stipularis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Weinmannia pubescens</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Weinmannia rollottii</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Weinmannia tolimensis</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Species</taxonRankName>
+                    <taxonRankValue>Xyris subulata</taxonRankValue>
+                </taxonomicClassification>
+            </taxonomicCoverage>
+        </coverage>
+        <purpose><para>El análisis de los registros biológicos permitió la delimitación de la franja altitudinal de transición entre el Bosque altoandino-Subpáramo, en  el Complejo de Páramos CHilí-Barragán, en departamento del Tolima.</para></purpose>
+        <maintenance>
+            <description>
+                <para></para>
+            </description>
+            <maintenanceUpdateFrequency>unkown</maintenanceUpdateFrequency>
+        </maintenance>
+        <contact>
+            <individualName>
+                <givenName>María Victoria</givenName>
+                <surName>Sarmiento Giraldo</surName>
+            </individualName>
+            <organizationName>Instituto de Investigación de Recursos Biológicos Alexander von Humboldt</organizationName>
+            <positionName>Investigadora- Unidad Coordinadora Páramos-Fondo Adaptación</positionName>
+            <address>
+                <deliveryPoint>Calle 72 # 12- 65, Piso 7</deliveryPoint>
+                <city>Bogotá, D.C.</city>
+                <administrativeArea>Bogotá, D.C.</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <phone>(571) 3202767 Ext 1262</phone>
+            <electronicMailAddress>msarmiento@humboldt.org.co</electronicMailAddress>
+        </contact>
+        <methods>
+            <methodStep>
+                <description>
+                    <para>FLORA
+
+En cada estación de muestreo se evaluó la vegetación registrando todos los individuos de diámetro basal ≥ 2 cm a 30 cm del suelo, a través de parcelas transitorias. De igual manera, en cada una de las estaciones se registraron los datos de altitud, azimut, inclinación y exposición orográfica. Además, en cada parcela se registró el número de especies y de individuos, su cobertura y hábito de crecimiento, siguiendo a Vallejo et al. (2005). En el establecimiento y medición de las parcelas en Herbazal y Arbustal se estableció una réplica en cada una de ellas, con el fin de aumentar la rigurosidad de los datos y tener mayor representatividad de la flora presente.
+
+El trazado de las parcelas transitorias se llevó a cabo a partir de la propuesta de Marín (2013) 
+
+En el caso de arbustales y bosques, una vez demarcadas las subparcelas, para cada morfoespecie con un diámetro basal ≥ 2 cm a 30 cm del suelo se tomaron los datos de diámetro basal, altura total, altura de ramificación y cobertura de copa. Se ubicaron puntos de coordenadas (x, y) estimadas en metros, por cada subparcela, con el fin de ubicar el o los individuos en los perfiles de vegetación.
+
+Para herbazales, en cada subparcela demarcada se tomaron los datos de altura total, cobertura de copa y porcentaje de cobertura, en caso de macollas y otras especies cuya individualización fuera difícil. De igual forma, se ubicaron puntos de coordenadas (x, y) estimadas en metros, por cada subparcela, con el fin de ubicar el o los individuos en los perfiles de vegetación.
+
+Para cada uno de los individuos de especies diferentes, se recolectaron entre tres y cuatro ejemplares botánicos de acuerdo a las metodologías propuestas por Forero (1977) y Alexiades (1996). Cada ejemplar se preparó y se montó en papel periódico y luego se preservó con alcohol etílico al 75%. Adicionalmente, se registraron observaciones como el color de las flores y frutos, presencia de látex, olor, pubescencia y otras características. Para la descripción, se utilizó la terminología propuesta por Font-Quer (1982).
+
+El material colectado fue llevado a secado en horno durante 72h a 80°C, posteriormente se confinó en una nevera a -16°C, para su limpieza y desinfestación. Posterior a ello, las especies fueron determinadascon el uso de guías de Gentry (1996) y Vargas (2002), entre otras guías nacionales sobre flora andina. 
+
+El número de colección del material vegetal se realizó bajo el consecutivo de los investigadores, y las muestras fueron depositadas en el Herbario TOLI de la Universidad del Tolima, una vez terminado el proceso de etiquetado y determinación taxonómica. 
+
+Se registró el grado de intervención humana y otros aspectos que se consideraron importantes para establecer el estado de conservación, asegurando la representatividad del gradiente altitudinal, de condiciones topográficas, microclimáticas, alteración y transformación.</para>
+                </description>
+            </methodStep>
+            <methodStep>
+                <description>
+                    <para>EDAFOFAUNA EPIGEA
+
+En cada estación  se estableció un transecto lineal de 100 m, perpendicular a la línea del transecto altitudinal. Sobre los transectos de 100 m se ubicaron puntos separados 20 m uno de otro, en los que se emplearon tres métodos de captura: procesamiento de hojarasca mediante sacos mini-Winkler, trampas de caída y búsqueda manual. En cada punto dentro del transecto, se recolectó la hojarasca hallada en 1m2 de suelo, se tamizó con un cernidor de 1cm2 de poro, y se deposító la muestra resultante en bolsas de malla suspendidas al interior de un saco de color negro (mini-Winkler), durante 48 h los organismos que componen la edafofauna epigea, cayeron en el frasco colector que contenía alcohol al 70%, una vez finalizado este tiempo la muestra obtenida en el frasco colector se almacenó en boslas de seguridad
+
+Las trampas de caída consistieron en un vaso plástico de 12 Oz de capacidad, enterrados a ras del suelo, cada uno contenía una solución de 1/3 de etanol al 70%, 2/3 de agua y una gota de jabón (Villarreal et al. 2004). Estas trampas se recogieron después de 48 horas de su instalación. Finalmente, en cada punto dentro del transecto, se colectaron los organismos epígeos (macro y mesofauna), observados sobre el suelo y la hojarasca, bajo rocas y troncos, y se depositaron en tubos Falcon con etanol al 70%.
+
+Las muestras se almacenaron en bolsas plásticas de cierre hermético, etiquetadas con datos de estación, fecha, punto dentro del transecto y método de captura, se almacenaron y trasladaron al Laboratorio de Investigación en Zoología (LABINZO) de la Universidad del Tolima para su procesamiento.
+
+En cada estación, se diligenció una ficha de campo con información relacionada con la fecha, hora de inicio, hora de finalización, coordenadas del transecto, altitud, temperatura del suelo y ambiente, tipo de hábitat y cobertura vegetal, luminosidad y altura de la capa de hojarasca.</para>
+                </description>
+            </methodStep>
+            <methodStep>
+                <description>
+                    <para>ANFIBIOS
+
+Para el muestreo de anfibios se utilizó el Muestreo de Encuentro Visual y Acústico (MEVA), realizando recorridos entre las 7:00 y las 11:00 y las 17:00 hasta las 22:00 horas.Esto incluyó diferentes microhábitats y aquellos lugarespotenciales para el encuentro de anfibios como las fuentes hídricas lénticas Así mismo, se realizó una descripción general del lugar de encuentro, acompañado de datos medioambientales como temperatura y humedad relativa.
+
+Una vez capturados, los individuos fueron fotografiados, para luego realizar la descripción morfológica externa basados en la presencia, ausencia, forma, tamaño y color de estructuras tales como glándulas, membranas timpánicas, tipos de discos y almohadillas en dedos, escudetes, tipos de pliegues, tubérculos, rebordes cutáneos, membranas interdigitales manuales y pediales, los cuales fueron consignados en las fichas y libretas de campo junto con algunos caracteres morfométricos tales como la longitud rostro-cloaca (LRC). 
+
+Los individuos fueron sacrificados con una inmersión en alcohol al 10%, hasta evidenciar paro del ritmo cardiaco, se fijaron en su posición natural en una bandeja con formol al 10% de acuerdo con el protocolo propuesto por Simmons (1987).
+
+Los individuos fijadoas se transportados al Laboratorio de Zoologia de la Universidad Del Tolima, .La determinación taxonómica se realizó con la ayuda de las diagnosis descriptivas para cada una de las especies de anuros, la clave para la identificación de anfibios amenazados de Colombia (Rueda-Almonacid et al. 2004) y la comparación directa con los individuos presentes en la Colección de Referencia de la Universidad del Tolima (CZUT-A).</para>
+                </description>
+            </methodStep>
+            <methodStep>
+                <description>
+                    <para>AVES
+
+Redes de niebla
+
+En cada una de las cinco estaciones de muestreo se instalaron siete redes de niebla de 12x2 m (Figura 18), las cuales se operaron de las 06:00-17:00 horas, durante un día, garantizando un esfuerzo total de 77 h/red/estación.
+
+Las aves capturadas fueron identificadas a nivel de especie y se les registraron atributos de porcentaje de osificación, cantidad de grasa en la fúrcula y flancos, condición del músculo pectoral, desgaste en las plumas en ala y cola, protuberancia cloacal, parche de incubación, sexo y edad. También se registró la longitud del ala, culmen total, rictus, tarso, cola, longitud total y peso. Todos los individuos fueron manipulados, procesados y liberados siguiendo protocolos internacionales reconocidos (NABC, 2001; Villarreal et al.,2004) (Figura 19). Esta información será utilizada en estudios posteriores sobre la ecología de las aves de los páramos del Tolima
+
+A las aves colectadas en campo además de que se les tomaron todos los datos descritos anteriormente, se les describió  el color de las partes blandas (iris, tarsos, mandíbula superior e inferior). Los datos obtenidos fueron recolectados en formatos de campo.
+
+El esfuerzo de captura con redes de niebla se midió en horas-red, donde una hora-red equivale a una red de 12 x 2 metros, abierta durante una hora. Para calcular el esfuerzo de muestreo se anotó el número total de metros de redes y el número total de horas durante las cuales permanecieron abiertas; este último se calculó teniendo en cuenta la hora de apertura y cierre de las mismas. Se colectaron especies de interés en la zona según criterio del investigador.
+
+Conteo por puntos
+
+Se realizaron conteos de aves en cada estación de muestreo, en 14 puntos separados 100 m entre sí, lo que permitió tener un radio de observación de 50 m por punto. Cada punto tuvo una duración de 10 min de observación, con una repetición de igual duración.Los muestreos visuales se realizaron con binoculares Bushnell 8x40 y las diferentes especies fueron determinadas con ayuda de la guía de aves de Colombia (Hilty y Brown, 1986) y la guía de las aves del norte de sur América (Restallet al., 2007).El esfuerzo de observación se midió en horas/observador.
+
+La lista general de especies registradas en las localidades de muestreo siguió el orden taxonómico de Remsenet al. (2011). Para cada especie se indicaron algunos aspectos como tipo de registro, endémica, casi endémica (Stiles, 1998; Salaman et al., 2007), migratoria (Salaman et al., 2007) e introducida (Restall et al. 2007). 
+
+Para la categoría de amenaza se tuvo en cuenta el grado de amenaza a nivel mundial (IUCN 2006) y nacional, según el Libro Rojo de Aves de Colombia (Renjifoet al, 2002). Además, se revisó la Ley 17 de 1981 que trata sobre la Convención sobre el Comercio Internacional de Especies Amenazadas de Fauna y Flora Silvestres CITES (Roda et al., 2003). 
+
+Las especies colectadas durante la captura con redes de niebla, fueron preparadas según los estándares requeridos para la preservación de pieles de estudio en aves (Villarreal et al. 2004). Adicionalmente, se tomó el porcentaje de osificación del cráneo y se determinó el sexo a través de la observación de las gónadas y su dimensión (Testis en machos, ovario y folículos en hembras).</para>
+                </description>
+            </methodStep>
+            <sampling>
+                <studyExtent>
+                    <description>
+                        <para>En el presente estudio, por sus condiciones de acceso y seguridad, se eligieron los páramos de Anaime (Cajamarca), Chilí (Roncesvalles) y Las Nieves-Estambul (Ibagué), representantes del complejo de páramos Chilí-Barragan.
+
+Los muestreos se efectuaron entre la primera y segunda semana de Julio de 2013, en la época de bajas lluvias, con una duración de 10 días de muestreo efectivo, tiempo en el cual se realizó el levantamiento de la información de Flora y Fauna.</para>
+                    </description>
+                </studyExtent>
+                <samplingDescription>
+                    <para>El estudio se desarrolló en tres páramos pertenecientes al complejo de páramos Chilí-Barragan (Anaime, Chilí y Las Nieves-Estambul), en cada uno de los cuales se estableció un transecto en el gradiente altitudinal entre 3100 m a 3600 m.
+
+Los transectos fueron diseñados inicialmente utilizando la cartografía oficial (IGAC, 2012)e imágenes de satélite, proporcionadas por el IAvH, quien tomó como referencia la actualización cartográfica del Atlas de Páramos de Colombia, a escala 1:100.000. 
+
+En cada uno de los páramos se llevó a cabo un premuestreo,siguiendo el gradiente altitudinal mencionado, con el objetivo de ubicar cinco (5) estaciones de muestreo. El criterio utilizado fue buscar la franja de transición entre el bosque alto andino y el páramo, identificando la presencia de elementos arbóreos y/o arbustivos propios del subpáramo al interior del bosque altoandino. Una vez hallada esta franja (donde se inicia un cambio en los tipos de formación), se ubicó la estación de muestreo más baja (de 100 a 200 m por debajo de la ecoclina observada), a partir de la cual se dispusieron las demás estaciones, distantes entre sí cada 100 m altitudinales.
+
+Para las caracterizaciones biológicas de Flora y Fauna, se procuró ubicar cada estación de muestreo en áreas conservadas o con poco disturbio y evitar abarcar cañadas, quebradas, senderos, vías y otras condiciones que aportaran factores de variabilidad.  Sin embargo en los casos en que las zonas tenían cierto grado de disturbio (presión por ganadería o presencia de alguna vía transitable) se realizaron los levantamientos en áreas adyacentes mejor conservadas y a una distancia considerable de las zonas perturbadas, para disminuir el efecto de borde
+
+Paralelamente, se buscó y recopiló información secundaria correspondiente a registros biológicos de los grupos de Flora y Fauna, registrados para las zonas de páramo en el Tolima, con el fin de construir una lista de especies potencialmente presentes en ésta área. Para ello se tuvo en cuenta tanto trabajos de investigación como artículos publicados y la base de datos pública de la herramienta GeoSiB(http://hermes.humboldt.org.co/visoruniversal2010/bin/Visor.html#).Para el caso del páramo de Anaime se revisaron los trabajos deRodríguez&amp; Salazar (1997) y Romero-Araujo (1998); adicionalmente, se revisaron otros estudios realizados en páramos de Colombia, Venezuela y Ecuador (Mena-Vasconez,2001; Morales y Sarmiento, 2002, Moret, 2003; Alzate, 2010; Gómez, 2011).</para>
+                </samplingDescription>
+            </sampling>
+            <qualityControl>
+                <description>
+                    <para>Véase métodos de muestreo.
+
+Ajuste de vocabularios controlados en:
+Elementos de registros: basisOfRecord, type y collectionID  de acuerdo a la naturaleza de los datos;
+Elementos geográficos: county, municipality;</para>
+                </description>
+            </qualityControl>
+        </methods>
+
+            <project >
+                <title>Atlas de Páramos de Colombia</title>
+                <personnel>
+                    <individualName>
+                    <givenName>Francisco</givenName>
+                    <surName>Villa Navarro</surName>
+                    </individualName>
+                    <role>PRINCIPAL_INVESTIGATOR</role>
+                </personnel>
+                <abstract>
+                    <para></para>
+                </abstract>
+                <funding>
+                    <para>Instituto de Investigación de Recursos Biológicos Alexander von Humboldt. Convenio de Cooperación No. 13-12-092-044CE, Instituto de Investigación de Recursos Biológicos Alexander von Humboldt – Universidad del Tolima</para>
+                </funding>
+                <studyAreaDescription>
+                    <descriptor name="generic" citableClassificationSystem="false">
+                        <descriptorValue>En el presente estudio, se eligieron los páramos de Anaime (Cajamarca), Chilí (Roncesvalles) y Las Nieves-Estambul (Ibagué), representantes del complejo de páramos Chilí-Barragan, Cordillera Central de los Andes de Colombia.</descriptorValue>
+                    </descriptor>
+                </studyAreaDescription>
+                <designDescription>
+                    <description>
+                        <para>OBJETIVO GENERAL
+
+Caracterizar las comunidades de Flora, Edafofauna Epígea, Anfibios y Avesque habitan en el área de interés y aportar un criterio biótico relacionado con la fauna y flora para identificar la franja de transición entre bosque y páramo en el complejo de páramos Chilí-Barragán, en el departamento del Tolima.
+
+
+OBJETIVOS ESPECÍFICOS 
+
+Identificar la franja de transición entre el páramo y el bosque alto andino de modo que contribuya en la delimitación de esta zona de vida. 
+
+Determinar la composición y estructura de las comunidades de Flora, Edafofauna Epígea, Anfibios y Aves presentes en el área de interés, haciendo especial énfasis en el reconocimiento de especies  endémicas y con distribución restringida que se encuentran en el gradiente altitudinal.
+
+Identificar las especies de flora y fauna que se encuentran en alguna categoría de amenaza o restricción comercial, según CITES, UICN y Libros Rojos de especies amenazadas de Colombia.
+
+Analizar los patrones de distribución de la riqueza de especies de Flora, Edafofauna Epígea, Anfibios y Aves presentes en el área de interés, dentro de un gradiente de condiciones ecológicas relacionadas con la altitud.</para>
+                    </description>
+                </designDescription>
+            </project>
+    </dataset>
+
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2026-05-24T11:59:25Z</dateStamp>
+                <citation identifier="http://doi.org/10.15472/jsb352">Villa-Navarro F, Moreno-Palacios M (2021). Caracterización de flora, edafofauna epígea, anfibios y aves del Complejo Páramos Chilí - Barragán, Tolima. Version 4.4. Instituto de Investigación de Recursos Biológicos Alexander von Humboldt. Occurrence dataset https://doi.org/10.15472/jsb352 accessed via GBIF.org on 2026-05-24.</citation>
+                <bibliography>
+                <citation>Vargas, W. 2002. Guía ilustrada de las plantas de las montañas del Quindío y de los andes centrales. Universidad de caldas. Caldas, 813 pp.</citation>
+                <citation>Villareal, H., M. Alvarez., S. Córdoba., F. Escobar., G. Fagua., F. Gast., H. Mendoza., M. Ospina y A. M. Umaña. 2004. Manual de métodos para el desarrollo de inventarios de biodiversidad. Instituto de Investigaciones de Recursos Biológicos Alexander von Humboldt. Bogotá, 236 pp.</citation>
+                <citation>Vallejo, M.I., A. Londoño, R. López, G. Galeano, E. Álvarez, W. Devia. 2005. Establecimiento de parcelas permanentes en bosques de Colombia volumen I. Serie: Métodos para Estudios Ecológicos a largo plazo. Instituto de Investigación de Recursos Biológicos Alexander von Humboldt. Bogotá D.C., Colombia.</citation>
+                <citation>Rueda-Almonacid, J. V., J. D. Lynch y A. Amézquita. 2004. Libro rojo de los anfibios de Colombia. Serie libros rojos de especies amenazadas de Colombia. Conservación internacional Colombia, Instituto de Ciencias Naturales Universidad de Colombia, Ministerio del Medio Ambiente. Bogotá, 384 pp.</citation>
+                <citation>Pérez-Schultheiss, J. 2010.Familias de isópodos terrestres (Crustacea: Isopoda: Oniscidea) de chile: sinopsis y clave de identificación. Boletín de Biodiversidad de Chile 4: 63-82.</citation>
+                <citation>Ospina, C., Serna, F., Peñaranda, M., y Serna, S. 2003. Colémbolos asociados con cultivos de pastos en tres zonas de vida de Holdridge en Antioquia (Colombia). Agronomía Colombiana, 21 (3): 129-141.</citation>
+                <citation>Ospina, M., J. Rodríguez y D. C. Peck. 2009. Clave para la identificación de géneros de Collembola en agroecosistemas de Colombia. Revista colombiana de entomología, 35(1): 57–61.</citation>
+                <citation>OCW. 2009. Clave para la identificación de familias de crustáceos. En Bassedas, M. 1947. Clasificación de los Crustáceos. Serie Taxonómica III. Consejo Superior de Investigaciones Científicas. Publicaciones del Instituto de Biología Aplicada. Barcelona. 51pp.</citation>
+                <citation>Moreno, C. E. 2001. Métodos para medir la biodiversidad. M&amp;T–manuales y tesis sea, vol. 1. Zaragoza, 84 pp.</citation>
+                <citation>Hilty, S. L y W. L. Brown.1986. A guide to the birds of Colombia. Princeton university Press. Princeton, new jersey, 836 pp.</citation>
+                <citation>Hammer, O., D. A. Harper y P. D. Ryan. 2001.paleontological statistics software package for education and data analysis. Paleontologia Electronica 4(1). Http://folk.uio.no/ohammer/past.</citation>
+                <citation>Guzmán, C. 2008. Biodiversidad de colémbolos en un sistema silvopastoril de tres edades de establecimiento multiestrato y un área arrocera del bosque seco tropical, en el municipio de piedras. Tolima. Trabajo de grado. Facultad de Ciencias. Universidad del Tolima.</citation>
+                <citation>Gentry, A. H. 1996. A field guide to the families and genera of woody plants of northwest South America (Colombia, Ecuador, Perú). University of chicago press. Chicago, 337 pp.</citation>
+                <citation>CORPOICA. 2009. Estudio del estado actual (EEA) y plan de manejo (PM) de los páramos del departamento del Tolima. Contrato de cooperación 408/08. Cortolima-Corpoica.</citation>
+                <citation>Colwell, R. K. 2006. Estimates statistical stimation of species richness and shared species from samples .versión 8.0.disponible en: http://viceroy.eeb.uconn.edu/estimates.[fecha revisión: 31 mayo 2008]</citation>
+                <citation>Bernal, M. H., Paez, C. A. y M. A. Vejarano. 2009. Composición y distribución de los anfibios cuenca del rio Coello (Tolima), Colombia. Actualidades Biologicas, 27(82): 87-92.</citation>
+                <citation>Barrientos, J.A. 2004. Curso Práctico De Entomología: Asociación Española de Entomología; Alicante: CIBIO.</citation>
+                <citation>Alexiades, M. N. 1996. Standard techniques for collecting and preparing herbarium specimens. Pp: 99-126. En: Alexiades, M (ed.). Selected guidelines for ethnobotanical research: a field manual. New york botanical garden, New york.</citation>
+                <citation>Adis, J. 2002. Amazonian Arachnida and Myriapoda: Identification Keys to All Classes, Orders, Families, Some Genera, and Lists of Known Terrestrial Species: Pensoft.</citation>
+                <citation>Alzate, N. F. 2010. Insectos asociados a la necromasa de frailejón (Espeletia Hartwegiana cuatrec), en un páramo de villamaría, Caldas. Agronomía, 18(1): 59-68.</citation>
+                <citation>Forero, E. 1977. Instrucciones para coleccionar plantas. Instituto de ciencias naturales museo de historia natural, facultad de ciencias, universidad nacional de colombia. Bogotá.Notas divulgativas, (7):1-29.</citation>
+                <citation>Gómez, M. 2011. Comparación de propiedades edáficas y procesos ecosistémicos entre plantaciones forestales y bosques secundarios subandinos. Trabajo de grado. Universidad nacional de colombia, Facultad de ciencias agropecuarias. Medellín,  109 pp</citation>
+                <citation>Gómez, M. R. 2011. La importancia de los microorganismos y la edafofauna en los páramos. Páramos, 92(1): 42–57.</citation>
+                <citation>Mena-Vásconez, P. 2001. La biodiversidad de los páramos en el Ecuador. Pp: 496-513. En: Mena-Vásconez, P. P. (Ed). Los páramos del Ecuador: particularidades, problemas y perspectivas. Proyecto páramo: Quito, Ecuador.</citation>
+                <citation>Morales, J y L. Sarmiento. 2002. Dinámica de los macroinvertebrados edaficos y su relación con la vegetación en una sucesión secundaria en el páramo venezolano. Ecotropicos, 15(1): 99–110.</citation>
+                <citation>Moret, P. 2003. Clave de identificación para los géneros de Carabidae (Coleoptera) presentes en los páramos del Ecuador y del sur de Colombia. Revista colombiana de entomología 29 (2): 185-190.</citation>
+                <citation>Roda, J., A. M. Franco., M. P. Baptiste., C. Múnera y D. M. Gómez. 2003. Manual de identificación cites de aves de Colombia. Instituto de Investigación de Recursos Biológicos Alexander von Humboldt, Ministerio de Ambiente, Vivienda y Desarrollo Territorial. Serie de manuales de identificación cites de Colombia. Bogotá, 352 pp.</citation>
+                <citation>Rodríguez, B y A. Salazar. 1997. Caracterización de la reserva natural semillas de agua en el páramo de Anaime municipio de Cajamarca-Tolima. Universidad del tolima.</citation>
+                <citation>Romero-Araujo, M. 1998. Entomofauna asociada a los pajonales en el páramo de los valles (Anaime-Cajamarca) Tolima. Tesis de grado. Facultad de Agronomía. Universidad del Tolima.</citation>
+                <citation>Stiles, F. G. y  C. I. Bohórquez. 2000. Evaluando el estado de la biodiversidad: el caso de la avifauna de la serranía de las quinchas, Boyacá, Colombia. Caldasia, 22(1): 61-92.</citation>
+                <citation>Stiles, F. G. 1997. Lista de aves de los páramos colombianos. Pp: 196-199. En: Cháves, M. E y N. Arango (eds.). Informe Nacional sobre el estado de la biodiversidad en Colombia (vol. I) Instituto de Investigación de Recursos Biológicos Alexander von Humboldt, PNUMA, Ministerio de Medio Ambiente. Bogotá.</citation>
+                <citation>NABC. 2001. The  Northamerican  Banders’  study  guide (p.  66). Point  Reyes Station, California: The North American Banding Council.</citation>
+                <citation>Restall, R., Rodner, C., &amp; Lentino, M. 2006. Birds of Northern South America. An Identification guide Vol. 1(p. 880). New Haven and London: Yale University 
+Press.</citation>
+                <citation>REMSEN, J. V., JR., C. D. CADENA, A. JARAMILLO, M. NORES, J. F. PACHECO, M. B. ROBBINS, T. S. SCHULENBERG, F. G. STILES, D. F. STOTZ, y K. J. ZIMMER. Version [2013]. A classification of the bird species of South America. American Ornithologists&apos; Union. http://www.museum.lsu.edu/~Remsen/SACCBaseline.html</citation>
+                <citation>Salaman, P., Donegan, T. y Caro, D. 2009. Listado de Aves de Colombia 2009. Conservación Colombiana 8: 1-89.</citation>
+                <citation>Renjifo, L. M., A. M. Franco-Maya, J. D. Amaya-Espinel, G. Kattan y B. López-Lanús (eds.). 2002. Libro rojo de aves de Colombia. Serie Libros Rojos de Especies Amenazadas de Colombia. Instituto de Investigación de Recursos Biológicos Alexander von Humboldt y Ministerio del Medio Ambiente. Bogotá, Colombia</citation>
+                </bibliography>
+                <physical>
+                    <objectName>Caracterización de flora, edafofauna epígea, anfibios y aves del Complejo Páramos Chilí - Barragán, Tolima</objectName>
+                    <characterEncoding>UTF-8</characterEncoding>
+                    <dataFormat>
+                        <externallyDefinedFormat>
+                            <formatName>txt</formatName>
+                        </externallyDefinedFormat>
+                    </dataFormat>
+                    <distribution>
+                        <online>
+                            <url function="download">http://i2d.humboldt.org.co/ceiba/resource.do?r=paramo_chillibarragan_2013</url>
+                        </online>
+                    </distribution>
+                </physical>
+                <resourceLogoUrl>https://statics.sibcolombia.net/sib-resources/images/logos-socios/500px/iavh.jpg</resourceLogoUrl>
+                <collection>
+                    
+                    <collectionIdentifier>CZUT</collectionIdentifier>
+                    <collectionName>Colección Zoológica de la Universidad del Tolima</collectionName>
+                </collection>
+                <collection>
+                    <parentCollectionIdentifier>IAvH</parentCollectionIdentifier>
+                    <collectionIdentifier>IAvH-Am</collectionIdentifier>
+                    <collectionName>Colección de Anfibios del Instituto de Investigación de Recursos Biológicos</collectionName>
+                </collection>
+                <collection>
+                    
+                    <collectionIdentifier>FMB</collectionIdentifier>
+                    <collectionName>Herbario Federico Meden Bogotá</collectionName>
+                </collection>
+                <collection>
+                    
+                    <collectionIdentifier>TOLI</collectionIdentifier>
+                    <collectionName>Herbario TOLI-Universidad del Tolima</collectionName>
+                </collection>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
+    </eml:eml>

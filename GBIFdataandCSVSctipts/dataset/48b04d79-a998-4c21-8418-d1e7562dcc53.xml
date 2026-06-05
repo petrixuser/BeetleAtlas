@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="https://eml.ecoinformatics.org/eml-2.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://eml.ecoinformatics.org/eml-2.2.0 https://rs.gbif.org/schema/eml-gbif-profile/1.3/eml.xsd"
+packageId="48b04d79-a998-4c21-8418-d1e7562dcc53"  system="http://gbif.org" scope="system"
+xml:lang="es">
+    <dataset>
+        <alternateIdentifier>10.15468/jkvygd</alternateIdentifier>
+        <alternateIdentifier>48b04d79-a998-4c21-8418-d1e7562dcc53</alternateIdentifier>
+        <alternateIdentifier>https://gbif-chile.mma.gob.cl/ipt/resource?r=trampeo_coleopteros_valle_exploradores</alternateIdentifier>
+        <shortName>trampeo_coleopteros_valle_exploradores</shortName>
+        <title>Coleópteros colectados mediante trampas de intercepción en el Valle Exploradores (Aysén, Chile)</title>
+        <creator>
+            <individualName>
+                <givenName>Carla</givenName>
+                <surName>Briones</surName>
+            </individualName>
+            <organizationName>Centro de Observación de la Tierra Hémera</organizationName>
+            <positionName>Asistente de investigación</positionName>
+            <address>
+                <deliveryPoint>Camino La Piramide, 5750</deliveryPoint>
+                <city>Huechuraba</city>
+                <administrativeArea>Metropolitana</administrativeArea>
+                <country>CHILE</country>
+            </address>
+            <userId directory="https://orcid.org/">0000-0003-2306-8502</userId>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Francisco</givenName>
+                <surName>Croxatto</surName>
+            </individualName>
+            <organizationName>El Puesto - Parque Exploradores</organizationName>
+            <positionName>Director</positionName>
+            <address>
+                <deliveryPoint>X- 728 Camino a Bahía Exploradores km52</deliveryPoint>
+                <city>Río Ibáñez</city>
+                <administrativeArea>Aysén</administrativeArea>
+                <postalCode>6000000</postalCode>
+            </address>
+            <onlineUrl>https://www.parquexploradores.cl/el-parque/</onlineUrl>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Mario</givenName>
+                <surName>Elgueta</surName>
+            </individualName>
+            <organizationName>Museo Nacional de Historia Natural de Chile</organizationName>
+            <positionName>Curador</positionName>
+            <address>
+                <deliveryPoint>Interior Parque Quinta Normal</deliveryPoint>
+                <city>Quinta Normal</city>
+                <administrativeArea>Metropolitana</administrativeArea>
+                <country>CHILE</country>
+            </address>
+        </creator>
+        <creator>
+            <individualName>
+                <givenName>Paul</givenName>
+                <surName>Amouroux</surName>
+            </individualName>
+            <organizationName>Centro de Observación de la Tierra Hémera</organizationName>
+            <positionName>Assitant professor</positionName>
+            <address>
+                <city>Huechuraba</city>
+                <administrativeArea>Metropolitana</administrativeArea>
+                <country>CHILE</country>
+            </address>
+            <electronicMailAddress>paul.amouroux@umayor.cl</electronicMailAddress>
+            <userId directory="https://orcid.org/">0000-0002-3321-7842</userId>
+        </creator>
+        <metadataProvider>
+            <individualName>
+                <givenName>Paul</givenName>
+                <surName>Amouroux</surName>
+            </individualName>
+            <organizationName>Centro de Observación de la Tierra Hémera</organizationName>
+            <positionName>Assitant professor</positionName>
+            <address>
+                <city>Huechuraba</city>
+                <administrativeArea>Metropolitana</administrativeArea>
+                <country>CHILE</country>
+            </address>
+            <electronicMailAddress>paul.amouroux@umayor.cl</electronicMailAddress>
+            <userId directory="https://orcid.org/">0000-0002-3321-7842</userId>
+        </metadataProvider>
+        <associatedParty>
+            <individualName>
+                <givenName>Francisco</givenName>
+                <surName>Croxatto</surName>
+            </individualName>
+            <organizationName>El Puesto - Parque Exploradores</organizationName>
+            <positionName>Director</positionName>
+            <address>
+                <deliveryPoint>X- 728 Camino a Bahía Exploradores km52</deliveryPoint>
+                <city>Río Ibáñez</city>
+                <administrativeArea>Aysén</administrativeArea>
+                <postalCode>6000000</postalCode>
+            </address>
+            <onlineUrl>https://www.parquexploradores.cl/el-parque/</onlineUrl>
+            <role>CONTENT_PROVIDER</role>
+        </associatedParty>
+        <associatedParty>
+            <individualName>
+                <givenName>Mario</givenName>
+                <surName>Elgueta</surName>
+            </individualName>
+            <organizationName>Museo Nacional de Historia Natural de Chile</organizationName>
+            <positionName>Curador</positionName>
+            <address>
+                <deliveryPoint>Interior Parque Quinta Normal</deliveryPoint>
+                <city>Quinta Normal</city>
+                <administrativeArea>Metropolitana</administrativeArea>
+                <country>CHILE</country>
+            </address>
+            <role>REVIEWER</role>
+        </associatedParty>
+        <pubDate>
+                2026-03-19
+        </pubDate>
+        <language>ENGLISH</language>
+        <abstract>
+            <para>La base de datos provee la identificación de los coleópteros colectados por trampas de intercepción transparente, negras y tipo Lindgren en 8 sitios del Valle Exploradores, cuatro ubicados en el Parque Exploradores y cuatro en la zona habitada del Valle. El muestreo fue realizado dos veces al mes entre noviembre 2022 y abril 2023. Los coleopterós fueron identificados en colaboración con el MNHN de Chile que recibió parte de los especimenes. </para>
+        </abstract>
+        <keywordSet>
+            <keyword>Samplingevent</keyword>
+            <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type_2015-07-10.xml</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+            <keyword>Specimen</keyword>
+            <keywordThesaurus>GBIF Dataset Subtype Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_subtype.xml</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+            <keyword>biodiversidad</keyword>
+            <keywordThesaurus>https://www.eionet.europa.eu/gemet/es/concept/827</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+            <keyword>biodiversidad forestal</keyword>
+            <keywordThesaurus>https://www.eionet.europa.eu/gemet/es/concept/15175</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+            <keyword>coleópteros</keyword>
+            <keywordThesaurus>https://www.eionet.europa.eu/gemet/es/concept/764</keywordThesaurus>
+        </keywordSet>
+        <intellectualRights>
+            <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by-nc/4.0/legalcode"><citetitle>Creative Commons Attribution Non Commercial (CC-BY-NC) 4.0 License</citetitle></ulink>.</para>
+        </intellectualRights>
+        <licensed>
+            <licenseName>Creative Commons Attribution Non Commercial 4.0 International</licenseName>
+            <url>https://spdx.org/licenses/CC-BY-NC-4.0.html</url>
+            <identifier>CC-BY-NC-4.0</identifier>
+        </licensed>
+        <distribution scope="document">
+            <online>
+                <url function="download">https://gbif-chile.mma.gob.cl/ipt/archive.do?r=trampeo_coleopteros_valle_exploradores</url>
+            </online>
+        </distribution>
+        <coverage>
+            <geographicCoverage>
+                <geographicDescription>El estudio se realizó dentro del Valle Exploradores de la Región de Aysén.</geographicDescription>
+                <boundingCoordinates>
+                    <westBoundingCoordinate>-73.19435</westBoundingCoordinate>
+                    <eastBoundingCoordinate>-72.83989</eastBoundingCoordinate>
+                    <northBoundingCoordinate>-46.484802</northBoundingCoordinate>
+                    <southBoundingCoordinate>-46.638584</southBoundingCoordinate>
+                </boundingCoordinates>
+            </geographicCoverage>
+            <temporalCoverage>
+                <rangeOfDates>
+                    <beginDate>
+                        <calendarDate>                2022-10-29
+</calendarDate>
+                    </beginDate>
+                    <endDate>
+                        <calendarDate>                2023-04-27
+</calendarDate>
+                    </endDate>
+                </rangeOfDates>
+            </temporalCoverage>
+            <taxonomicCoverage>
+                <generalTaxonomicCoverage>Se identificaron  hasta el nivel taxonómico de determinación posible (familia, género, especie) los coleópteros (Coleoptera) capturados.</generalTaxonomicCoverage>
+                <taxonomicClassification>
+                    <taxonRankName>Order</taxonRankName>
+                    <taxonRankValue>Coleoptera</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Salpingidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Phylum</taxonRankName>
+                    <taxonRankValue>Arthropoda</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Class</taxonRankName>
+                    <taxonRankValue>Insecta</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Zopheridae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Ptinidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Erotylidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Trogossitidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Cantharidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Lampyridae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Bentridae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Scarabaeidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Protocucujidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Oedemeridae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Cryptophagidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Pyrochroidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Kingdom</taxonRankName>
+                    <taxonRankValue>Animalia</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Promecheilidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Melyridae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Carabidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Biphyllidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Curculionidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Cerylonidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Ptiliidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Chrysomelidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Scirtidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Cerambycidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Tenebrionidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Latridiidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Nitidulidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Staphylinidae</taxonRankValue>
+                </taxonomicClassification>
+                <taxonomicClassification>
+                    <taxonRankName>Family</taxonRankName>
+                    <taxonRankValue>Elateridae</taxonRankValue>
+                </taxonomicClassification>
+            </taxonomicCoverage>
+        </coverage>
+        <purpose>El objetivo general fue evaluar la composición, riqueza y abundancia de las comunidades de coleópteros en bosques dominados por Nothofagus, sometidos a diferentes niveles de perturbación antrópica. Se comparó dos situaciones (i) bosques sin intervención reciente, de preferencia en una área protegida con (ii) bosques intervenidos con actividades humanas recientes (manejo forestal, incendio, extracción de madera, etc.). Se identificaron 1138 especimenes perteneciendo a 29 familias, 38 géneros y 37 especies  de Coleoptera.</purpose>
+        <introduction>En el Valle Exploradores, las actividades humanas asociadas a la colonización del territorio austral en los últimos 200 años, han profundamente alterado de manera directa (corte, plantaciones de especies introducidas, etc) e indirectamente (incendios, cambio climático, etc) los hábitats boscosos, lo que puede afectar el ciclaje de nutrientes, al alterar la composición y abundancia de los coleópteros saproxílicos, por lo que este estudio busca conocer en que medida la huella humana a afectado la estructura comunitaria de coleópteros asociados a la madera en ambientes con diferentes niveles de perturbación  humana.Un estudio previo sobre los artrópodos de Valle Exploradores comprobó que el orden Coleoptera era diverso y abundante. Además, cumple con los requisitos logísticos para ser un “buen bioindicador”: (i) el monitoreo es fiable y económico, (ii) las especies pueden ser identificadas con confianza y relativamente fácilmente, y (iii) suelen responder de manera significativa al cambio del habitat.El primer objetivo específico será identificar al nivel taxonómico más preciso posible (especie) los coleópteros colectados, cuantificar su abundancia y caracterizar las comunidades de coleópteros de cada nivel de perturbación (prístino vs intervenido). También se determinarán las especies que podrían ser utilizadas como indicadoras de cada tipo de hábitat.</introduction>
+        <gettingStarted>La base de datos incluye dos archivos: él de los eventos de muestreos y el segundo las especies colectadas.</gettingStarted>
+        <acknowledgements>Agradecemos a los guarda-parques del Parque Exploradores quienes participaron a la recuperación de las colectas de las trampas de intercepción. Agradecemos también a los estudiantes Javiera Astudillo y Sebastián García quienes participaron al procesamiento de las muestras en laboratorio. Parte de este trabajo fue desarrollado en el marco de la Estación Patagonia UC y del OHMi Patagonia-Bahia Exploradores y cofinanciado por el LabEx DRIIHM, programa francés “Investissements d'Avenir" (ANR-11-LABX-0010) que es manejado por the french Agency ANR.</acknowledgements>
+        <maintenance>
+            <description>
+                <para>Actualización de la identificación del nivel taxonómico de los especimenes</para>
+            </description>
+            <maintenanceUpdateFrequency>asNeeded</maintenanceUpdateFrequency>
+        </maintenance>
+        <contact>
+            <individualName>
+                <givenName>Paul</givenName>
+                <surName>Amouroux</surName>
+            </individualName>
+            <organizationName>Centro de Observación de la Tierra Hémera</organizationName>
+            <positionName>Assitant professor</positionName>
+            <address>
+                <city>Huechuraba</city>
+                <administrativeArea>Metropolitana</administrativeArea>
+                <country>CHILE</country>
+            </address>
+            <electronicMailAddress>paul.amouroux@umayor.cl</electronicMailAddress>
+            <userId directory="https://orcid.org/">0000-0002-3321-7842</userId>
+        </contact>
+        <contact>
+            <individualName>
+                <givenName>Carla</givenName>
+                <surName>Briones</surName>
+            </individualName>
+            <organizationName>Centro de Observación de la Tierra Hémera</organizationName>
+            <positionName>Asistente de investigación</positionName>
+            <address>
+                <deliveryPoint>Camino La Piramide, 5750</deliveryPoint>
+                <city>Huechuraba</city>
+                <administrativeArea>Metropolitana</administrativeArea>
+                <country>CHILE</country>
+            </address>
+            <userId directory="https://orcid.org/">0000-0003-2306-8502</userId>
+        </contact>
+        <methods>
+            <methodStep>
+                <description>
+                    <para>Las muestras (contenido de una trampa durante dos semanas de colecta) fue revisando en el laboratorio para separar los coleópteros de los otros insectos y materiales vegetales presentes en las muestras. Los coleópteros fueron clasificados en morfoespecies según características externas y un individuo representativo de cada morfoespecie fue montado. Esos individuos fueron identificados al nivel de familias y comparados con los especímenes de las colecciones del MNHN de Chile para su identificación hasta el nivel de especie, si posible. Después de la identificación, se verificó la correcta asignación de los otros especímenes de cada morfoespecie.</para>
+                </description>
+            </methodStep>
+            <sampling>
+                <studyExtent>
+                    <description>
+                        <para>El estudio se realizó en el Valle Exploradores, ubicado en la región de Aysén, Chile.</para>
+                    </description>
+                </studyExtent>
+                <samplingDescription>
+                    <para>El trampeo consistó en ocho estaciones de muestreo, cuatro en el Parque Exploradores una área protegida privada sin intervención humana durante al minimo los últimos 50 años y cuatro situadas en la zona habitada del Valle alrededor del km18. Cada estación de muestreo consistía en tres trampas de intercepción suspendidas a uno 1,50 a 2 m de altura. La primera trampa de intercepción era compuesta de dos paneles verticales transparente dispuesto en cruz, la segunda trampa era similar pero con paneles negros. La tercera trampa era de tipo Lindgren con cuatro embudos. El colector de las trampas era un frasco de medio litro relleno con una mezcla preservante de sal 510 g/ L) con unas gotas de detergente. El contenido de los frascos era cambiado cada dos semanas, filtrando el contenido con un malla fina y guardando todo el contenido en alcohol 96°.</para>
+                </samplingDescription>
+            </sampling>
+        </methods>
+
+            <project >
+                <title>Artrópodos de Bahía Exploradores (Chile: Aysén): los coleópteros, bioindicadores del nivel de perturbación en los bosques australes</title>
+                <personnel>
+                    <individualName>
+                    <givenName>Paul</givenName>
+                    <surName>Amouroux</surName>
+                    </individualName>
+            <userId directory="https://orcid.org/">0000-0002-3321-7842</userId>
+                    <role>PRINCIPAL_INVESTIGATOR</role>
+                </personnel>
+                <personnel>
+                    <individualName>
+                    <givenName>Carla</givenName>
+                    <surName>Briones</surName>
+                    </individualName>
+            <userId directory="https://orcid.org/">0000-0003-2306-8502</userId>
+                    <role>CURATOR</role>
+                </personnel>
+                <personnel>
+                    <individualName>
+                    <givenName>Francisco</givenName>
+                    <surName>Croxatto</surName>
+                    </individualName>
+                    <role>CONTENT_PROVIDER</role>
+                </personnel>
+                <personnel>
+                    <individualName>
+                    <givenName>Mario</givenName>
+                    <surName>Elgueta</surName>
+                    </individualName>
+                    <role>REVIEWER</role>
+                </personnel>
+                <abstract>
+                    <para></para>
+                </abstract>
+                <funding>
+                    <para>This work was carried out within the framework of the Estación Patagonia UC  and the OHMi Patagonia-Bahia Exploradores and cofunded by the LabEx DRIIHM, French programme “Investissements d&apos;Avenir&quot; (ANR-11-LABX-0010) which is managed by the ANR</para>
+                </funding>
+                <award>
+                    <funderName>Laboratory of Excellence Inter-Disciplinary Research Facility on Human-Environment Interactions - LabEx DRIIHM</funderName>
+                    <funderIdentifier>ANR-11-LABX-0010</funderIdentifier>
+                    <title>Research project 2022</title>
+                </award>
+            </project>
+    </dataset>
+
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2026-05-24T11:59:21Z</dateStamp>
+                <citation>Briones C, Croxatto F, Elgueta M, Amouroux P (2026). Coleópteros colectados mediante trampas de intercepción en el Valle Exploradores (Aysén, Chile). Version 1.2. Estación Patagonia de Investigaciones Interdisciplinarias UC. Sampling event dataset https://doi.org/10.15468/jkvygd accessed via GBIF.org on 2026-05-24.</citation>
+                <collection>
+                    <parentCollectionIdentifier>https://www.gbif.org/es/publisher/bc58af54-8ab4-40b1-80c9-7e632bc166f0</parentCollectionIdentifier>
+                    
+                    <collectionName>Colección de Entomología del Museo Nacional de Historia Natural de Chile</collectionName>
+                </collection>
+                <collection>
+                    
+                    <collectionIdentifier>https://www.gbif.org/es/publisher/0db05742-8c11-45d5-bf60-9142f1d4f2b3</collectionIdentifier>
+                    <collectionName>Colección de entomología del Centro Hémera</collectionName>
+                </collection>
+                <specimenPreservationMethod>PINNED</specimenPreservationMethod>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
+    </eml:eml>

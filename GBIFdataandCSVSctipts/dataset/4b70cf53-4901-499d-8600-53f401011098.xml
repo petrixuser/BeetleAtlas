@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="https://eml.ecoinformatics.org/eml-2.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://eml.ecoinformatics.org/eml-2.2.0 https://rs.gbif.org/schema/eml-gbif-profile/1.3/eml.xsd"
+packageId="4b70cf53-4901-499d-8600-53f401011098"  system="http://gbif.org" scope="system"
+xml:lang="es">
+    <dataset>
+        <alternateIdentifier>10.15472/cp1v2l</alternateIdentifier>
+        <alternateIdentifier>4b70cf53-4901-499d-8600-53f401011098</alternateIdentifier>
+        <alternateIdentifier>https://ipt.biodiversidad.co/sib/resource?r=coleopcol_registros-eumolpinae</alternateIdentifier>
+        <title>Registros de Eumolpinae y potencial planta hospedera del Parque Natural Chicaque</title>
+        <creator>
+            <individualName>
+                <givenName>Juan Sebastián</givenName>
+                <surName>Palacios Rodríguez</surName>
+            </individualName>
+            <organizationName>Grupo Coleóptera de Colombia</organizationName>
+            <positionName>Investigador asociado</positionName>
+            <address>
+                <city>Bogotá, D.C.</city>
+                <administrativeArea>Bogotá, D.C.</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>Sebbio97@hotmail.com</electronicMailAddress>
+            <userId directory="https://orcid.org/">0000-0001-5109-9520</userId>
+        </creator>
+        <metadataProvider>
+            <individualName>
+                <givenName>Juan Sebastián</givenName>
+                <surName>Palacios Rodríguez</surName>
+            </individualName>
+            <organizationName>Grupo Coleóptera de Colombia</organizationName>
+            <positionName>Investigador asociado</positionName>
+            <address>
+                <city>Bogotá, D.C.</city>
+                <administrativeArea>Bogotá, D.C.</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>Sebbio97@hotmail.com</electronicMailAddress>
+            <userId directory="https://orcid.org/">0000-0001-5109-9520</userId>
+        </metadataProvider>
+        <associatedParty>
+            <individualName>
+                <givenName>Parque Natural</givenName>
+                <surName>Chicaque</surName>
+            </individualName>
+            <organizationName>Parque Natural Chicaque</organizationName>
+            <address>
+                <city>San Antonio del Tequendama</city>
+                <administrativeArea>Cundinamarca</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <role>POINT_OF_CONTACT</role>
+        </associatedParty>
+        <associatedParty>
+            <individualName>
+                <givenName>Grupo de Investigación en Artrópodos</givenName>
+                <surName>Kumangui</surName>
+            </individualName>
+            <organizationName>Universidad Distrital Francisco José de Caldas</organizationName>
+            <address>
+                <city>Bogotá D.C.</city>
+                <administrativeArea>Bogotá D.C.</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <role>POINT_OF_CONTACT</role>
+        </associatedParty>
+        <pubDate>
+                2026-04-14
+        </pubDate>
+        <language>SPANISH</language>
+        <abstract>
+            <para>Los 55 registros biológicos corresponden a escarabajos eumolpinos (Coleoptera: Chrysomelidae: Eumolpinae) colectados en el marco de una investigación independiente bajo un permiso de colecta no comercial. La investigación consiste en identificar la composición taxonómica de Eumolpinos del Parque Natural Chicaque y las relaciones planta hospedera mediante observaciones en campo.</para><para>Esta publicación corresponde al informe final de los datos.</para>
+        </abstract>
+        <keywordSet>
+            <keyword>Occurrence</keyword>
+            <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type_2015-07-10.xml</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+            <keyword>Observation</keyword>
+            <keywordThesaurus>GBIF Dataset Subtype Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_subtype.xml</keywordThesaurus>
+        </keywordSet>
+        <keywordSet>
+            <keyword>Eumolpinae</keyword>
+            <keyword>Host-plant</keyword>
+            <keyword>Leafbeetles.</keyword>
+            <keyword>Taxonomicrecord</keyword>
+            <keywordThesaurus>n/a</keywordThesaurus>
+        </keywordSet>
+        <intellectualRights>
+            <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by-nc/4.0/legalcode"><citetitle>Creative Commons Attribution Non Commercial (CC-BY-NC) 4.0 License</citetitle></ulink>.</para>
+        </intellectualRights>
+        <licensed>
+            <licenseName>Creative Commons Attribution Non Commercial 4.0 International</licenseName>
+            <url>https://spdx.org/licenses/CC-BY-NC-4.0.html</url>
+            <identifier>CC-BY-NC-4.0</identifier>
+        </licensed>
+        <distribution scope="document">
+            <online>
+                <url function="download">https://ipt.biodiversidad.co/sib/archive.do?r=coleopcol_registros-eumolpinae</url>
+            </online>
+        </distribution>
+        <coverage>
+            <geographicCoverage>
+                <geographicDescription>Los eventos de muestreo han sido realizados hasta ahora entre los 2031 y 2605 msnm del Parque Natural Chicaque, en San Antonio del Tequendama, Cundinamarca, Colombia.</geographicDescription>
+                <boundingCoordinates>
+                    <westBoundingCoordinate>-74.315</westBoundingCoordinate>
+                    <eastBoundingCoordinate>-74.306</eastBoundingCoordinate>
+                    <northBoundingCoordinate>4.617</northBoundingCoordinate>
+                    <southBoundingCoordinate>4.604</southBoundingCoordinate>
+                </boundingCoordinates>
+            </geographicCoverage>
+            <temporalCoverage>
+                <rangeOfDates>
+                    <beginDate>
+                        <calendarDate>                2025-02-02
+</calendarDate>
+                    </beginDate>
+                    <endDate>
+                        <calendarDate>                2025-12-28
+</calendarDate>
+                    </endDate>
+                </rangeOfDates>
+            </temporalCoverage>
+            <taxonomicCoverage>
+                <generalTaxonomicCoverage>Únicamente se colectan de forma selectiva aquellos individuos pertenecientes a la subfamilia Eumolpinae de la familia Chrysomelidae.</generalTaxonomicCoverage>
+                <taxonomicClassification>
+                    <taxonRankName>Subfamily</taxonRankName>
+                    <taxonRankValue>Eumolpinae</taxonRankValue>
+                    <commonName>Escarabajos de las hojas/Eumolpinos</commonName>
+                </taxonomicClassification>
+            </taxonomicCoverage>
+        </coverage>
+        <purpose>Identificar la composición taxonómica de eumolpinos en el Parque Natural Chicaque y las potenciales relaciones planta hospedera.</purpose>
+        <introduction><para>Eumolpinae es una subfamilia de Chrysomelidae que cuenta con aproximadamente 7000 especies a nivel mundial (Jolivet y Verma, 2008); sin embargo, es un grupo que en general no ha sido muy trabajado en el Neotrópico, debido principalmente al desafío taxonómico que representa y la escasa información disponible (Riley, 2020). En Colombia, se han registrado 231 especies a partir de registros bibliográficos (Palacios-Rodríguez, 2022), pero se desconoce información relacionada con su biología, sumado a que la identificación taxonómica es particularmente problemática, en consecuencia de la escasez de trabajos, los numerosos cambios taxonómicos y la ambigüedad de las descripciones originales. </para><para>Este trabajo pretende ser una aproximación al conocimiento de los eumolpinos en la alta montaña colombiana, enfocado en reconocer potenciales relaciones planta hospedera de las especies presentes. Actualmente se han compilado datos de colecta y observación en campo a la par que se aborda el desafío taxonómico que representa la identificación de los grupos que pueden llegar a ampliar datos previos con nuevas distribuciones locales y registros.</para></introduction>
+        <gettingStarted>Los datos incluyen los registros de colecta realizados en campo para cada muestra. Se resalta nuevamente que los muestreos son selectivos, colectando únicamente los escarabajos pertenecientes al grupo problema y sus respectivos datos. Esto incluye la identificación de la planta en la que fue encontrado el organismo, el registro de su actividad, patrones alimenticios (si se observan), abundancia y georreferenciación. No se realizan análisis de diversidad debido a que, aunque el grupo es considerablemente diverso, en colectas no es muy abundante y la representatividad no permitiría resultados significativos. Sin embargo, a cada potencial planta hospedera se le asignó un puntaje en relación con la cantidad de individuos por planta, la actividad que se evidencia y las marcas de consumo según lo propuesto por Flowers y Janzen (1997).</gettingStarted>
+        <acknowledgements>Al Parque Natural Chicaque y a sus trabajadores por la gestión y las facilidades durante los eventos de colecta. Al grupo de Investigación en Artrópodos Kumangui de la Universidad Distrital y la Colección CAUD por el depósito de los especímenes. Al grupo Coleóptera de Colombia por el apoyo y acompañamiento.</acknowledgements>
+        <maintenance>
+            <description>
+                <para>El mantenimiento posterior se realizará si las identificaciones taxonómicas son realizadas a nivel de especie (actualmente se registran a nivel de género). Adicionalmente se harán modificaciones en relación a los registros de planta-hospedera, dado que es el objetivo principal de los registros.</para>
+            </description>
+            <maintenanceUpdateFrequency>asNeeded</maintenanceUpdateFrequency>
+        </maintenance>
+        <contact>
+            <individualName>
+                <givenName>Juan Sebastián</givenName>
+                <surName>Palacios Rodríguez</surName>
+            </individualName>
+            <organizationName>Grupo Coleóptera de Colombia</organizationName>
+            <positionName>Investigador asociado</positionName>
+            <address>
+                <city>Bogotá, D.C.</city>
+                <administrativeArea>Bogotá, D.C.</administrativeArea>
+                <country>COLOMBIA</country>
+            </address>
+            <electronicMailAddress>Sebbio97@hotmail.com</electronicMailAddress>
+            <userId directory="https://orcid.org/">0000-0001-5109-9520</userId>
+        </contact>
+        <methods>
+            <methodStep>
+                <description>
+                    <para>Se establece el área de colecta de la sesión de muestreo.</para>
+                </description>
+            </methodStep>
+            <methodStep>
+                <description>
+                    <para>Se identifican diferentes tipos de vegetación en los que se observa especie a especie la presencia de eumolpinos.</para>
+                </description>
+            </methodStep>
+            <methodStep>
+                <description>
+                    <para>Se da prioridad a la colecta manual y la observación de patrones alimenticios en el grupo.</para>
+                </description>
+            </methodStep>
+            <methodStep>
+                <description>
+                    <para>Se efectúan los métodos de muestreo mencionados previamente solo en una especie vegetal (esto incluye ejecutar los métodos tanto en un individuo de cada especie como en un conjunto de individuos vegetales de la misma especie).</para>
+                </description>
+            </methodStep>
+            <methodStep>
+                <description>
+                    <para>En caso de encontrarse uno o más individuos, se hace una revisión detallada de la planta y las plantas cercanas, en caso de hallarse algún individuo adicional, se realizan observaciones adicionales sobre su actividad.</para>
+                </description>
+            </methodStep>
+            <methodStep>
+                <description>
+                    <para>Caso contrario, el individuo es almacenado en un envase plástico con ventilación y una pequeña muestra de material vegetal para observar el consumo en confinamiento y confirmar su relación alimenticia con la especie vegetal.</para>
+                </description>
+            </methodStep>
+            <methodStep>
+                <description>
+                    <para>Se repite el proceso con otra especie o otro conjunto de individuos vegetales.</para>
+                </description>
+            </methodStep>
+            <sampling>
+                <studyExtent>
+                    <description>
+                        <para>Se establecen zonas de recolecta en un gradiente altitudinal acorde a las características de la vegetación dominante en el Parque Natural Chicaque. Siguiendo los transectos del parque se realizan las colectas en diferentes zonas de elevación entre los 2030 y los 2600 msnm. Se realizaron las recolectas o sesiones de muestreo una vez al mes, estando cada sesión conformada por 40 unidades de muestreo (20 por método de recolecta) con el fin de evaluar principalmente la composición taxonómica y relación planta-hospedero del grupo de estudio.</para>
+                    </description>
+                </studyExtent>
+                <samplingDescription>
+                    <para>Se emplean principalmente dos métodos de muestreo selectivo que serán realizados entre las 10:00 y las 16:00 por cada sesión de muestreo:
+Barrido con red entomológica. Utilizando una red entomológica de 30 cm de diámetro para realizar barridos consecutivos sobre la vegetación arbustiva y herbácea, donde 150 barridos constituyen una unidad de muestreo.
+Sabana de golpeo. Utilizando una sábana blanca de 150 cm x 150 cm o sombrilla japonesa, en la cual caerán los individuos luego de agitar la vegetación arbustiva-arbórea, y en donde todos los individuos obtenidos de la agitación de 5 árboles de la misma especie y zona constituyen una unidad de muestreo. En ambos métodos solo serán recolectados de forma selectiva los individuos pertenecientes al grupo de estudio y se tomarán datos biológicos relacionados con el lugar de muestreo, así como información sobre la vegetación (especie y parte de la planta) en la que fueron encontrados.</para>
+                </samplingDescription>
+            </sampling>
+        </methods>
+
+            <project >
+                <title>Potencial planta hospedera de los Eumolpinos (Coleoptera: Chrysomelidae) del bosque altoandino</title>
+                <personnel>
+                    <individualName>
+                    <givenName>Juan Sebastián</givenName>
+                    <surName>Palacios Rodríguez</surName>
+                    </individualName>
+            <userId directory="https://orcid.org/">0000-0001-5109-9520</userId>
+                    <role>AUTHOR</role>
+                </personnel>
+                <abstract>
+                    <para></para>
+                </abstract>
+                <funding>
+                    <para></para>
+                </funding>
+            </project>
+    </dataset>
+
+    <additionalMetadata>
+        <metadata>
+            <gbif>
+                <dateStamp>2026-05-24T11:59:25Z</dateStamp>
+                <citation identifier="https://doi.org/10.15472/cp1v2l">Palacios Rodríguez J S (2026). Registros de Eumolpinae y potencial planta hospedera del Parque Natural Chicaque. Version 2.1. Coleoptera de Colombia. Occurrence dataset https://doi.org/10.15472/cp1v2l accessed via GBIF.org on 2026-05-24.</citation>
+                <bibliography>
+                <citation>Jolivet, P., and Verma, K.K. 2008. Eumolpinae – a widely distributed and much diversified subfamily of leaf beetles (Coleoptera, Chrysomelidae). Terrestrial arthropod reviews1(1): 3–37. https://doi.org/10.1163/187498308X345424</citation>
+                <citation>Riley, E.G. 2020. A review of the Colaspis suilla species group, with description of three new species from Florida (Coleoptera: Chrysomelidae: Eumolpinae). InsectaMundi 0830: 1–21</citation>
+                <citation>Palacios-Rodríguez, J. S. (2022). Eumolpinae Hope, 1840 (Coleoptera: Chrysomelidae) in Colombia: A list of species. Dugesiana 30 (2) 85-103.</citation>
+                <citation>Flowers, R. W. &amp; Janzen, D. H. (1997). Feeding records of Costa Rican leaf beetles (Coleoptera: Chrysomelidae). Florida Entomologist, 80, 334-366.</citation>
+                </bibliography>
+                <resourceLogoUrl>https://gitlab.com/sib-colombia/logos/-/raw/main/socio-SiB-coleocol.png</resourceLogoUrl>
+                <collection>
+                    <parentCollectionIdentifier>No Aplica</parentCollectionIdentifier>
+                    <collectionIdentifier>RNC: 216</collectionIdentifier>
+                    <collectionName>Colección de Artrópodos y Otros Invertebrados de la Universidad Distrital Francisco José de Caldas (CAUD)</collectionName>
+                </collection>
+                <specimenPreservationMethod>ALCOHOL</specimenPreservationMethod>
+            </gbif>
+        </metadata>
+    </additionalMetadata>
+    </eml:eml>
