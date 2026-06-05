@@ -197,21 +197,19 @@ Kaeferliebe/
    - API-Key auf Maps JavaScript API beschraenken.
    - Budget-Alert setzen (z. B. 5 USD).
 
-2. Workflow Node.js-24-Migration: In `.github/workflows/build-and-deploy.yml` die Zeile
-   `FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true` unter `env:` ergaenzen (Pflicht ab Sept. 2026).
+2. Backend-Anbindung: kommt spaeter. Wenn Backend laeuft, `API_BASE_URL` als
+   Portainer-Umgebungsvariable eintragen — Entrypoint schreibt sie automatisch in config.local.js.
 
-3. Backend-Anbindung: wenn Backend laeuft, `API_BASE_URL` als Portainer-Umgebungsvariable
-   eintragen — der Entrypoint schreibt sie automatisch in config.local.js.
+3. Ameisenstrasse: dekoratives UI-Element, nach stabilem Layout umsetzen.
 
-4. Phase 5 (Performance): Bounding-Box-basiertes Nachladen, Clustering fuer grosse Datenmengen.
-
-5. Phase 6 (3D): erst nach SKU/Kosten-Pruefung.
-
-6. Ameisenstrasse: ganz am Ende, nach stabilem Layout.
-
-7. Aufraeumsachen (niedrige Prioritaet):
+4. Aufraeumsachen (niedrige Prioritaet):
    - map-elevation.png, map-climate.jpg, map-vegetation.png (veraltet, aus Docker ausgeschlossen)
    - frontend/vendor/leaflet/ (nicht mehr genutzt, aus Docker ausgeschlossen)
+
+Bewusst zurueckgestellt / gestrichen:
+
+- Clustering/Performance-Konzept: nicht benoetigt (Entscheidung 2026-06-05).
+- 3D-Kartenansicht: auf Eis gelegt (Entscheidung 2026-06-05).
 
 ### Bekannte Einschraenkungen
 
@@ -430,6 +428,113 @@ Diese Schritte wurden noch nicht verifiziert. Vor Phase 1 pruefen.
 
 Phase 1 starten: Google Maps 2D Grundkarte einbauen.
 Abhaengigkeit: Google Cloud Sicherheitscheck (s. o.) sollte vorher erledigt sein.
+
+---
+
+---
+
+## Handoff — Session 2026-06-05 (Ameisenstrasse + Ländergrenzen-Fix)
+
+### Was wurde gemacht
+
+**1. Ameisenstrasse implementiert** (`frontend/ants.js` neu, commits fbc05d0)
+
+- Canvas-basierte Ameisensimulation als eigenständiges IIFE-Modul.
+- `position: absolute` Canvas — läuft in Document-Space (volle Dokument-Höhe), nicht im Viewport.
+  Das heißt: Ameisen laufen auch unterhalb des sichtbaren Bereichs weiter; beim Scrollen sieht man den ganzen Weg.
+- Pfad: U-Form entlang der `.page`-Box-Ränder (links runter → Bogen unten → rechts hoch).
+  Pfad-Mittelpunkt liegt in der Mitte des Seitenrandes (zwischen `.page`-Box und Browserkante).
+  Sinusförmige Kurven (osc=26px, per=190px) für den wellenförmigen Look.
+- 80 Ameisen max., alle 310 ms spawnt eine neue am Pfadanfang (oben links), verschwinden am Ende (oben rechts).
+- Steering Behaviors: Pfad-Follow, Cursor-Flee (52px), Barrier-Flee, Separation.
+- Mouse-Cut: Maus 550 ms auf Pfad halten → persistenter Barrier; beide Seiten weichen aus.
+- 3 Äpfel spawnen zufällig entlang des Pfades; Ameisen riechen sie (65px), holen sie, tragen sie sichtbar weiter entlang der Straße (kein Rückweg mehr). Wenn alle gesammelt: neuer Spawn.
+- Ameisenkörper: Abdomen/Thorax/Kopf + 2 Antennen + 6 animierte Beine (~5px Gesamtlänge).
+
+**2. Ländergrenzen-Overlay entfernt** (`frontend/app.js`, commits 9cb6668 + 48cb984)
+
+- Problem: `initGeoJsonLayer()` renderte `window.LATIN_AMERICA_COUNTRIES` als `google.maps.Data`-Layer mit sichtbarem Stroke (`strokeColor: "#35463f"`, `strokeWeight: 0.9`) auf Google Maps.
+- Fix: Layer-Style auf `fillOpacity:0, strokeOpacity:0, strokeWeight:0` gesetzt → vollständig unsichtbar, aber klickbar für Sidebar-Interaktion.
+- Hover zeigt noch dezenten grünen Fill (`fillOpacity:0.15`) als Klick-Feedback.
+- `app.js` von `?v=2` auf `?v=3` gebumpt um Browser-Cache zu brechen.
+
+**3. Styling-Anpassung** (`frontend/styles.css`, commit fbc05d0)
+
+- `.page` erhält `position: relative; z-index: 1` damit der Ant-Canvas (`z-index: 0`) hinter dem Seiteninhalt liegt.
+
+### Geänderte Dateien (diese Session)
+
+| Datei | Änderung | Commit |
+|---|---|---|
+| `frontend/ants.js` | Neu — vollständige Ameisenstrassen-Simulation | fbc05d0 |
+| `frontend/styles.css` | `.page` → `position:relative; z-index:1` | fbc05d0 |
+| `frontend/index.html` | `<script src="ants.js">` + `app.js?v=3` | fbc05d0, 48cb984 |
+| `frontend/app.js` | GeoJSON-Layer unsichtbar + strokeOpacity:0 | 9cb6668, 48cb984 |
+
+### Offener Punkt — Ländergrenzen noch sichtbar (unklar ob gelöst)
+
+Der User hat nach dem zweiten Fix gemeldet, dass die alten Ländergrenzen noch sichtbar sind.
+Der Fix (`strokeOpacity:0, strokeWeight:0, fillOpacity:0`) ist im Code korrekt umgesetzt und gepusht.
+
+**Mögliche Ursachen (in Reihenfolge der Wahrscheinlichkeit):**
+
+1. **Browser-Cache** — Browser hat alte `app.js?v=2` gecacht. Fix: `Cmd+Shift+R` (Hard Refresh). Dies wurde dem User empfohlen, aber nicht bestätigt ob er es gemacht hat.
+2. **SVG-Fallback sichtbar** — `#svgFallback` hat `style="display:none"` im HTML, wird aber von `renderAtlasMap()` im Init-IIFE immer befüllt. Theoretisch unsichtbar, in der Praxis könnte ein Rendering-Edge-Case die SVG-Grenzen zeigen.
+3. **initGeoJsonLayer noch aktiv** — Fix ist korrekt, aber Google Maps könnte Default-Styles überschreiben. Nukleare Option: `initGeoJsonLayer()` komplett entfernen (verliert dann aber Klick→Sidebar auf der Karte).
+
+**Empfohlener nächster Debug-Schritt:**
+
+Prüfen ob `renderAtlasMap()` in der IIFE Bedingung übersprungen wird wenn Google Maps geladen ist:
+
+```javascript
+// In der IIFE am Ende von app.js, Zeile ~676:
+if (!googleMapInstance && window.LATIN_AMERICA_COUNTRIES) {  // nur wenn Google Maps NICHT lädt
+  renderAtlasMap(window.LATIN_AMERICA_COUNTRIES);
+```
+
+Aktuell fehlt das `!googleMapInstance`. Das bedeutet: der SVG-Layer wird immer befüllt, egal ob Google Maps aktiv ist. Ob das visuell sichtbar ist, ist unklar — `#svgFallback` ist `display:none`.
+
+### Annahmen
+
+- Die Ameisen-Canvas mit `position:absolute` sollte beim Scrollen mit der Seite mitbewegen — Ameisen laufen den gesamten Document-Pfad ab, nicht nur den sichtbaren Viewport.
+- Die Pfad-X-Koordinaten werden aus `getBoundingClientRect()` gelesen. Da `.page` horizontal zentriert ist und sich beim Scrollen nicht verschiebt, bleiben die X-Positionen beim Scrollen stabil. Korrekt.
+- `strokeOpacity:0` + `strokeWeight:0` zusammen sollten alle Google Maps Data Layer Borders vollständig unterdrücken.
+
+### Risiken
+
+- Wenn der User die Seite neu startet (Portainer/CI redeployt) ohne Hard-Refresh im Browser, sieht er möglicherweise noch die alte Version. App.js?v=3 löst das.
+- Der Ant-Canvas clearRect-Mechanismus clearst nur die Rand-Streifen (nicht das ganze Canvas). Wenn Ameisen bei Cursor-Flee weit in den Page-Content wandern, könnten stale Pixel entstehen. Sind aber durch `.page z-index:1` verdeckt.
+- Auf sehr schmalen Viewports (< 400px) ist der Seitenrand minimal (~8px), Ameisenoszillation wird automatisch auf 2px begrenzt. Ameisen sind dann kaum sichtbar.
+
+---
+
+### Ready-to-use Prompt für nächsten Agent
+
+```
+Du übernimmst die Arbeit am Projekt BeetleAtlas (Repo: https://github.com/petrixuser/BeetleAtlas).
+Lies zuerst: docs/WORKLOG.md (vollständiger Kontext) und docs/PFLICHTENHEFT.md.
+Lokaler Server: cd frontend && python3 -m http.server 4175, dann http://localhost:4175
+
+OFFENER BUG ZU PRÜFEN:
+Der User sieht in Google Maps noch alte Ländergrenzen obwohl app.js (v3) sie unsichtbar setzen sollte.
+
+Debugging-Schritte:
+1. Hard-Refresh im Browser testen (Cmd+Shift+R) — könnte reiner Cache-Effekt sein.
+2. Falls immer noch sichtbar: in app.js die Init-IIFE (~Zeile 676) anpassen:
+   if (!googleMapInstance && window.LATIN_AMERICA_COUNTRIES) {
+   Das verhindert, dass renderAtlasMap() läuft wenn Google Maps aktiv ist.
+3. Falls immer noch sichtbar: initGeoJsonLayer() in initMap() auskommentieren.
+   Konsequenz: Klick auf Land in Google Maps öffnet keine Sidebar mehr.
+   Alternative: google.maps.Data Layer leeren statt zu stylen.
+
+MODIFIED FILES THIS SESSION:
+- frontend/ants.js (new) — ant trail simulation
+- frontend/styles.css — .page z-index:1
+- frontend/index.html — ants.js script tag, app.js?v=3
+- frontend/app.js — GeoJSON layer invisible (strokeOpacity:0, strokeWeight:0, fillOpacity:0)
+
+Alles auf main gepusht, letzter Commit: 48cb984
+```
 
 ---
 
