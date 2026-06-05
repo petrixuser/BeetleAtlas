@@ -25,7 +25,7 @@ Datum: 2026-06-05
 
 Projektname:
 
-- Beetle Box
+- Beetle Box (Frontend-Name) / BeetleAtlas (GitHub-Repo-Name)
 
 Frontend-Pfad:
 
@@ -39,7 +39,20 @@ Dokumentation:
 
 Aktueller lokaler Server:
 
-- `http://localhost:4173/`
+- `http://localhost:4175/`
+- Starten: `cd frontend && python3 -m http.server 4175`
+
+GitHub-Repository:
+
+- https://github.com/petrixuser/BeetleAtlas
+
+Live-URL (nach Portainer/NPM-Setup):
+
+- https://kafer.server-work.de
+
+Docker-Image:
+
+- `ghcr.io/petrixuser/beetleatlas:latest`
 
 ## Bisher umgesetzt
 
@@ -116,7 +129,7 @@ Warum beide Dateien existieren:
 
 Phase 0 bis Phase 3 vollstaendig abgeschlossen.
 Phase 4 (Themenebenen) vollstaendig neu implementiert — echte Geodaten statt statischer Bilder.
-Projekt wird als naechsten Schritt nach GitHub gepusht.
+CI/CD-Pipeline eingerichtet, getestet und vollstaendig funktionsfaehig.
 
 ### Aktueller lokaler Server
 
@@ -179,32 +192,86 @@ Kaeferliebe/
 
 ### Noch offen / naechste Schritte
 
-1. GitHub-Repository einrichten und Projekt pushen.
+1. Google Cloud Sicherheitscheck (manuell im Google Cloud Console):
+   - API-Key HTTP-Referrer auf `localhost:4175/*` und `kafer.server-work.de/*` einschraenken.
+   - API-Key auf Maps JavaScript API beschraenken.
+   - Budget-Alert setzen (z. B. 5 USD).
 
-2. Google Cloud Sicherheitscheck (manuell im Google Cloud Console):
-   - API-Key auf HTTP Referrers einschraenken (localhost:4175/*, spaeter produktive URL)
-   - API-Key auf Maps JavaScript API beschraenken
-   - Budget-Alert setzen (z. B. 5 USD)
+2. Workflow Node.js-24-Migration: In `.github/workflows/build-and-deploy.yml` die Zeile
+   `FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true` unter `env:` ergaenzen (Pflicht ab Sept. 2026).
 
-3. Backend-Anbindung: wenn Backend laeuft, `window.API_BASE_URL = "http://localhost:8080"`
-   in config.local.js eintragen — fertig.
+3. Backend-Anbindung: wenn Backend laeuft, `API_BASE_URL` als Portainer-Umgebungsvariable
+   eintragen — der Entrypoint schreibt sie automatisch in config.local.js.
 
-4. Phase 4 (Performance): Bounding-Box-basiertes Nachladen, Clustering fuer grosse Datenmengen.
+4. Phase 5 (Performance): Bounding-Box-basiertes Nachladen, Clustering fuer grosse Datenmengen.
 
-5. Phase 5 (3D): erst nach SKU/Kosten-Pruefung.
+5. Phase 6 (3D): erst nach SKU/Kosten-Pruefung.
 
 6. Ameisenstrasse: ganz am Ende, nach stabilem Layout.
 
-7. Veraltete Dateien aufraeumen: map-elevation.png, map-climate.jpg, map-vegetation.png,
-   vendor/leaflet/ koennen entfernt werden.
+7. Aufraeumsachen (niedrige Prioritaet):
+   - map-elevation.png, map-climate.jpg, map-vegetation.png (veraltet, aus Docker ausgeschlossen)
+   - frontend/vendor/leaflet/ (nicht mehr genutzt, aus Docker ausgeschlossen)
 
 ### Bekannte Einschraenkungen
 
 - Sidebar zeigt noch Platzhaltertext — spaeter mit echten Laenderdaten befuellen.
 - Laendernamen auf Google Maps kommen von Google selbst (Englisch je nach Spracheinstellung).
-  Sidebar-Interaktion laeuft ueber den GeoJSON-Layer, das funktioniert unabhaengig davon.
-- vendor/leaflet/ und alte map-*.png/jpg sind nicht mehr aktiv, aber noch im Repo.
 - Koeppen- und Vegetation-Layer werden beim ersten Klick geladen (~1-2s), danach gecacht.
+- GMAPS_KEY muss in Portainer als Umgebungsvariable gesetzt sein, sonst laedt die Karte nicht.
+
+---
+
+## CI/CD & Deployment — Abgeschlossen (2026-06-05)
+
+### GitHub Repository, Docker, GitHub Actions, Portainer
+
+Neue Dateien im Repo:
+
+- `Dockerfile`: nginx:alpine, kein Build-Schritt (statische App).
+  Kopiert `frontend/` nach `/usr/share/nginx/html/`.
+  Startet ueber `docker-entrypoint.sh`.
+- `docker-entrypoint.sh`: Schreibt `config.local.js` zur Laufzeit aus Umgebungsvariablen.
+  Injiziert `GMAPS_KEY` und `API_BASE_URL` — keine Secrets im Image.
+- `docker-compose.yml`: Portainer-Stack-Vorlage.
+  Image: `ghcr.io/petrixuser/beetleatlas:latest`.
+  Netzwerk: `npm_proxy` (extern, geteilt mit Nginx Proxy Manager).
+  Kein Host-Port-Mapping.
+- `.dockerignore`: Schliessst `.git`, `docs/`, `vendor/`, alte Karten-PNGs aus dem Image aus.
+- `.github/workflows/build-and-deploy.yml`: Vollstaendige CI/CD-Pipeline.
+  Trigger: Push auf `main` oder `workflow_dispatch`.
+  Jobs: `build` (Docker-Image bauen + nach GHCR pushen) → `deploy` (Portainer Webhook aufrufen).
+  GHCR-Auth: `secrets.GITHUB_TOKEN` (automatisch, kein manuelles Secret noetig).
+  Portainer-Webhook: `secrets.PORTAINER_WEBHOOK_URL` (manuell als GitHub Secret gesetzt).
+- `README.md`: Vollstaendige Deployment-Dokumentation (Architektur, Portainer-Setup,
+  NPM-Konfiguration, Rollback-Anleitung, Datensatz-Quellen).
+- `.gitignore`: Ergaenzt um `.claude/`, `node_modules/`, `.env.*`.
+
+Wichtige Entscheidungen:
+
+- Kein SSH-Deployment. NAS baut nicht selbst — zieht nur fertiges Image aus GHCR.
+- `GMAPS_KEY` wird niemals in das Image gebacken, sondern per Entrypoint injiziert.
+- Portainer-Webhook-Step laueft durch (skipped) wenn Secret nicht gesetzt — kein Pipeline-Fehler.
+- Image-Name lowercase `beetleatlas` (GHCR-Anforderung), Repository-Name `BeetleAtlas`.
+
+Testergebnis (workflow_dispatch, Run 27017661063):
+
+- Build and push image: ✅ 17s
+- GHCR Image: ✅ `ghcr.io/petrixuser/beetleatlas:latest` + `sha-06f67a8`
+- Portainer webhook: ✅ HTTP 2xx, "Portainer webhook triggered."
+- Deploy job: ✅ 5s
+
+GitHub Secret gesetzt:
+
+- `PORTAINER_WEBHOOK_URL`: gesetzt (Wert vertraulich).
+
+Offene manuelle Schritte nach diesem Schritt — alle erledigt:
+
+- [x] GitHub Repo BeetleAtlas angelegt (public)
+- [x] Portainer Stack BeetleAtlas erstellt
+- [x] `GMAPS_KEY` in Portainer Stack-Umgebung eingetragen
+- [x] Portainer Webhook aktiviert und URL als GitHub Secret gesetzt
+- [x] Nginx Proxy Manager: kafer.server-work.de → BeetleAtlas:80
 
 ---
 

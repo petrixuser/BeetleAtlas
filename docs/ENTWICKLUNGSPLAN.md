@@ -95,30 +95,44 @@ Ergebnis:
 - Alle Layer werden lazy geladen (nur bei erstem Klick) und danach gecacht.
 - Legenden fuer alle drei Ansichten vorhanden.
 
-### Phase 5: Performance fuer grosse Datenmengen
+### Phase 5 (Vorgezogen): CI/CD & Deployment-Infrastruktur — ABGESCHLOSSEN (2026-06-05)
+
+Ergebnis:
+
+- GitHub-Repository: https://github.com/petrixuser/BeetleAtlas (public)
+- Docker-Image: ghcr.io/petrixuser/beetleatlas:latest
+- Deployment: NAS (server-work.de) via Portainer + Nginx Proxy Manager
+- Live-URL: https://kafer.server-work.de
+- Pipeline getestet: Build 17s + Webhook 5s, beides HTTP 2xx
+- Secrets sicher: GMAPS_KEY nie im Image, PORTAINER_WEBHOOK_URL nur als GitHub Secret
+
+Architektur:
+GitHub Push (main) → Actions → Docker Build → ghcr.io → Portainer Webhook → NAS Pull
+
+### Phase 6: Performance fuer grosse Datenmengen
 
 Ziel:
 
 - Die Anwendung wird fuer mehrere Millionen Datensaetze vorbereitet.
 
-Ergebnis:
+Ergebnis (ausstehend):
 
 - Keine ungefilterte Anzeige aller Rohpunkte.
 - Backend liefert aggregierte/limitierte Daten.
 - Karte nutzt Cluster, Raster oder ausschnittsbasiertes Nachladen.
 
-### Phase 6: 3D-Kartenansicht
+### Phase 7: 3D-Kartenansicht
 
 Ziel:
 
 - 3D-Prototyp nur nach Kosten-/SKU-Pruefung.
 
-Ergebnis:
+Ergebnis (ausstehend):
 
 - 2D-Standardkarte bleibt immer verfuegbar.
 - 3D erst nach dokumentierter Kostenfreigabe.
 
-### Phase 6: UI-Feinschliff und Ameisenstrasse
+### Phase 8: UI-Feinschliff und Ameisenstrasse
 
 Ziel:
 
