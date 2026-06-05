@@ -29,3 +29,7 @@ __pycache__/
 *.py[cod]
 .venv/
 venv/
+
+# Sehr grosse Rohdaten (GitHub Limit 100 MB)
+GBIFdataandCSVSctipts/occurrence.txt
+GBIFdataandCSVSctipts/verbatim.txt
