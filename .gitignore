@@ -30,6 +30,4 @@ __pycache__/
 .venv/
 venv/
 
-# Sehr grosse Rohdaten (GitHub Limit 100 MB)
-GBIFdataandCSVSctipts/occurrence.txt
-GBIFdataandCSVSctipts/verbatim.txt
+# Sehr grosse Rohdaten werden per Git LFS versioniert
