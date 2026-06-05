@@ -55,11 +55,11 @@ jobs:
       - name: Trigger Portainer stack webhook
         env:
           WEBHOOK_URL: ${{ secrets.PORTAINER_WEBHOOK_URL }}
-        if: env.WEBHOOK_URL != ''
         run: |
-          curl --fail --silent --show-error -X POST "$WEBHOOK_URL"
-          echo "Portainer webhook triggered."
-
-      - name: Webhook not configured
-        if: ${{ secrets.PORTAINER_WEBHOOK_URL == '' }}
-        run: echo "PORTAINER_WEBHOOK_URL not set — skipping redeploy. Add the secret once the Portainer stack is created."
+          if [ -n "$WEBHOOK_URL" ]; then
+            curl --fail --silent --show-error -X POST "$WEBHOOK_URL"
+            echo "Portainer webhook triggered."
+          else
+            echo "PORTAINER_WEBHOOK_URL not set — skipping redeploy."
+            echo "Add the secret once the Portainer stack is created."
+          fi
