@@ -1,0 +1,49 @@
+services:
+  beetle-db:
+    image: mysql:8.0
+    container_name: beetle-db
+    restart: unless-stopped
+    network_mode: host
+    command: ["--default-authentication-plugin=mysql_native_password"]
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD:-root123}
+      - MYSQL_DATABASE=${DB_NAME:-beetle_db}
+    volumes:
+      - beetle_db_data:/var/lib/mysql
+      - ../Backend/SQL/DatabseShema.sql:/docker-entrypoint-initdb.d/01_schema.sql:ro
+      - ../Backend/SQL/AddMapQueryIndexes.sql:/docker-entrypoint-initdb.d/02_indexes.sql:ro
+      - ../Backend/SQL/LoadGBIFCSVToDB.sql:/docker-entrypoint-initdb.d/03_seed_gbif.sql:ro
+      - ../Backend/SQL/LoadClimateSnapshot.sql:/docker-entrypoint-initdb.d/04_seed_climate.sql:ro
+      - ../Backend/SQL/RecordQualityReportSnapshot.sql:/docker-entrypoint-initdb.d/05_quality_snapshot.sql:ro
+      - ../Backend/Data:/var/lib/mysql-files
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-p${DB_PASSWORD:-root123}"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+
+  beetle-backend:
+    build:
+      context: ..
+      dockerfile: Docker/backend/Dockerfile
+      network: host
+    container_name: beetle-backend
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      - DB_HOST=127.0.0.1
+      - DB_PORT=3306
+      - DB_USER=${DB_USER:-root}
+      - DB_PASSWORD=${DB_PASSWORD:-root123}
+      - DB_NAME=${DB_NAME:-beetle_db}
+      - API_HOST=127.0.0.1
+      - API_PORT=8000
+      - API_APP_MODULE=Database.Backend.App.core.main:app
+      - ENABLE_SLOW_QUERY_LOGGING=${ENABLE_SLOW_QUERY_LOGGING:-true}
+      - SLOW_QUERY_MS=${SLOW_QUERY_MS:-300}
+    depends_on:
+      beetle-db:
+        condition: service_healthy
+
+volumes:
+  beetle_db_data:
