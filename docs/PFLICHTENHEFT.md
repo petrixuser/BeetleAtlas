@@ -6,7 +6,8 @@ als verbindliche Grundlage und muss zuerst aktualisiert werden.
 
 Projektordner:
 
-- `Käferliebe/`
+- `Käferliebe/frontend/`
+- `Käferliebe/backend/`
 
 ## 1. Projektziel
 
@@ -57,10 +58,20 @@ Aktuell umgesetzt:
 - Rechte Seitenleiste fuer Laenderinformationen
 - Kleine Popups fuer Kaeferpunkte auf der Karte
 
+Zusaetzlich vorhanden (lokal, noch nicht im Produktions-Deployment):
+
+- Backend in `Käferliebe/backend/` mit FastAPI und MySQL-Anbindung
+- Verfuegbare API-Endpunkte: `/health`, `/stats/overview`, `/species`, `/observations`,
+  `/climate/location/{location_id}`
+- Frontend-nahe API-Endpunkte: `/api/beetles`, `/api/beetles/:id`, `/api/beetles/:id/media`,
+  `/api/countries/:countryCode`, `/api/map/points`, `/api/map/points/geojson`,
+  `/api/filters`, `/api/field-mappings`
+- Lokales Dev-Setup ueber `docker-compose.dev.yml` (DB + Backend + Frontend), getestet mit
+  echten GBIF-Daten
+
 Noch nicht final umgesetzt:
 
-- Echte Backend-Anbindung
-- Echte Datenbankdaten
+- Backend-Anbindung im Produktions-Deployment (Portainer/NAS)
 - Vollstaendige Laenderinformationen
 - Echte Punktinformationen fuer Kaeferfundorte
 - Themenkarten fuer Hoehe, Vegetation und Klimazonen
@@ -112,6 +123,24 @@ Aktuelle Hoehenlagen:
 - 500-1500 m
 - 1500-3000 m
 - ueber 3000 m
+
+Aktuelle Backend-Filter auf `/api/beetles`:
+
+- `q`, `climate`, `vegetation`, `elevation`
+- `temperature_band`, `precipitation_band`, `soil_moisture_band`, `ndvi_band`
+- `humidity_band`, `pressure_band`, `light_pollution_band`, `slope_band`
+- `water_distance_band`, `human_impact_band`, `landcover_group`
+- `coordinate_uncertainty_band`, `soil_ph_band`, `soil_carbon_band`
+- `worldclim_temp_band`, `worldclim_precip_band`
+- `event_date_quality`, `basis_of_record_class`, `taxon_resolution`
+- `media_coverage`, `license_class`
+- `limit`, `offset`
+
+Hinweis zur Harmonisierung:
+
+- Frontend-UI arbeitet aktuell mit deutschsprachigen Hauptkategorien (z. B. `Tropisch`),
+  Backend-Filteroptionen aus `/api/filters` enthalten zusaetzlich englisch codierte
+  Band-Klassen. Diese Vokabular-Mischung muss vor Finalisierung vereinheitlicht werden.
 
 ## 7. Karte
 
@@ -233,6 +262,25 @@ Das Backend ist verantwortlich fuer:
 - Bereitstellung der fachlichen Attribute fuer Marker/Popups, z. B. Hoehe, Vegetation,
   Klimazone und Beobachtungsdaten
 
+Im lokalen Dev-Setup bereits vorhanden (`Käferliebe/backend/`):
+
+- `/api/beetles` (inkl. breitem Filterset und Pagination ueber `limit`/`offset`)
+- `/api/beetles/:id`
+- `/api/beetles/:id/media` (paginierte Bild-/Medienliste)
+- `/api/countries/:countryCode`
+- `/api/map/points` (Bounding-Box, Zoom-basiertes Clustering, Pagination)
+- `/api/map/points/geojson`
+- `/api/filters`
+- `/api/field-mappings`
+- Basis-Endpunkte fuer Datenanalyse und Betrieb (`/health`, `/stats/overview`, `/species`,
+  `/observations`, `/climate/location/{location_id}`)
+
+Noch offen:
+
+- Anbindung dieser Endpunkte an das Frontend (aktuell laeuft das Frontend im Demo-Modus)
+- `API_BASE_URL` im Produktions-Deployment (Portainer) setzen, sobald Backend dort verfuegbar ist
+- Kanonische Vereinheitlichung der Filter-Vokabulare (siehe Abschnitt 6)
+
 ## 12. Umgang mit grossen Datenmengen
 
 Da perspektivisch ueber 2 Millionen Insekten-Datensaetze existieren koennen, darf das Frontend
@@ -260,6 +308,11 @@ Spaeter benoetigt:
 - Welche technische Umsetzung fuer Klima- und Vegetationszonen verwendet wird:
   eigene Overlays, Backend-generierte Polygone, Rasterdaten oder Google-Maps-Datenebenen.
 - Ob die Ameisenstrasse rein dekorativ bleibt oder spaeter Interaktionen/Zustaende anzeigen soll.
+- Kanonische Feld- und Klassenbezeichner zwischen Frontend und Backend:
+  deutschsprachige Labels vs. englisch codierte Band-Klassen.
+- Verbindliches einheitliches API-Response-Format fuer Listenendpunkte
+  (`Array` vs. `items/total/page/page_size`).
+- Wie und wann das Backend ins Produktions-Deployment (Portainer/NAS) aufgenommen wird.
 
 ## 14. Arbeitsregel
 

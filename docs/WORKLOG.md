@@ -538,6 +538,147 @@ Alles auf main gepusht, letzter Commit: 48cb984
 
 ---
 
+## Integration Backend (Basti) — Session 2026-06-12
+
+### Ausgangslage
+
+- Basti hat in einem eigenstaendigen Branch `backend-clean-push-20260610` (kein gemeinsamer
+  Merge-Base mit `main`) ein FastAPI-Backend gebaut: Router -> Controller -> Repository,
+  MySQL-Anbindung, Tests (6/6 gruen laut Basti), Docker-Setup, aufbereitete CSV-Daten.
+- Sein Frontend-Code ist 1:1 identisch zu `main` (per Hash-Vergleich verifiziert).
+- Seine Compose-/Dockerfile-Pfade enthalten Case-Bugs (`Backend`/`backend`, `Docker`/`docker`)
+  und Python-Importe nutzen `Database.Backend.App...` (Grossschreibung) — laeuft auf
+  Linux/Docker (case-sensitiv) nicht ohne Korrektur.
+
+### Entscheidung
+
+- CSV-Daten bleiben im Repo (Entscheidung Perry, 2026-06-12).
+- Bastis Backend wird nach `backend/App/...` uebernommen (nicht `Database/backend/...`),
+  Importe werden auf `backend.App...` umgeschrieben.
+- Production-Deployment (Portainer/NAS, Image `ghcr.io/petrixuser/beetleatlas`) bleibt
+  zunaechst unangetastet. Neue lokale Dev-Compose (`docker-compose.dev.yml`) zusaetzlich
+  zur bestehenden `docker-compose.yml`.
+- Erweiterung des Produktionsdeployments (Backend-Image, Portainer-Stack) ist ein
+  **separater, spaeterer Schritt** mit eigener Freigabe (betrifft Live-Seite).
+
+Vollstaendiger Plan: siehe Implementierungsplan "Integration: Bastis Backend in
+Käferliebe-Repo übernehmen" (Schritte 1-8).
+
+### Fortschritt
+
+- [x] Schritt 1: Branch `integrate-backend` angelegt, dieser Worklog-Eintrag.
+- [x] Schritt 2: Backend-Code (`App/`, `SQL/`) nach `backend/` uebernommen, alle
+      `Database.Backend.App...`-Importe auf `backend.App...` umgeschrieben (22 Code-Dateien
+      + 12 SQL/Skript-Dateien). `db.py` ist Env-Var-basiert, `LoadGBIFCSVToDB.sql` /
+      `LoadClimateSnapshot.sql` referenzieren `/var/lib/mysql-files/*.csv` (Container-Mount,
+      wird in Schritt 5 ueber Compose-Volume aus `backend/Data/` gemappt). Hinweis:
+      `LoadGBIFCSVToDB.sql` erwartet `media.csv`, Bastis Datenordner hat `media_clean.csv`
+      — in Schritt 3 pruefen.
+- [x] Schritt 3: CSV-Daten nach `backend/Data/` uebernommen (`beetle_species.csv`,
+      `climate_snapshot_import.csv`, `location.csv`, `media.csv`, `observation.csv`,
+      zusammen ca. 215 MB). `media_clean.csv` (87 MB, identisch zu `media.csv`, byte-gleicher
+      Blob) bewusst NICHT uebernommen — wird von keinem Skript referenziert, reiner
+      Duplikat-Ballast.
+- [x] Schritt 4: Backend-Docker (`backend/docker/Dockerfile`, `backend/docker/entrypoint.sh`)
+      angelegt. Erwarteter Build-Context = Repo-Root (`.`), `dockerfile: backend/docker/Dockerfile`.
+      Kopiert `backend/App/core/requirements.txt` und `backend/` nach `/app/backend`, Default
+      fuer `API_APP_MODULE` auf `backend.App.core.main:app` korrigiert.
+- [x] Schritt 5: `docker-compose.dev.yml` (Repo-Root) angelegt mit `beetle-db` (MySQL 8,
+      Init-Skripte + Data-Mount aus `backend/SQL` und `backend/Data`), `beetle-backend`
+      (Build aus `backend/docker/Dockerfile`, Context = Repo-Root) und `beetle-frontend`
+      (Build aus bestehendem Root-`Dockerfile`, unveraendert). Production-`docker-compose.yml`
+      bleibt unberuehrt.
+- [x] Schritt 6: Lokal getestet mit `docker compose -f docker-compose.dev.yml up --build`
+      (macOS: `DOCKER_BUILDKIT=0 COMPOSE_DOCKER_CLI_BUILD=0` wegen Buildx-Bug bei
+      Nicht-ASCII-Pfaden, siehe "Bekannte Einschraenkungen" unten).
+      - Alle 3 Container starten, `beetle-db` wird healthy.
+      - Datenimport: `beetle_species` 21.018, `location` 191.388, `observation` 417.581,
+        `media` 378.021 Zeilen erfolgreich geladen.
+      - `/health` -> 200 OK. `/api/beetles`, `/api/map/points`, `/api/map/points/geojson`
+        liefern echte Daten (200 OK, korrektes Schema).
+      - Frontend (`http://localhost:8080`) laedt.
+      - `pytest`: 6/11 gruen. 5 Tests (`beetles_list`, `beetle_detail`, `beetle_media`,
+        `map_points`, `map_geojson`) ueberschreiten den 15s-Timeout der Tests — Endpunkte
+        liefern korrekt 200 mit gueltigem Payload, brauchen aber 21-33s auf dieser
+        Docker-Desktop-VM (nur 3.8 GB RAM). Vermutlich Performance-/Ressourcenproblem
+        dieser lokalen Umgebung, kein Integrationsfehler.
+
+### Bekannte Einschraenkungen (Schritt 6)
+
+1. **`climate_snapshot` bleibt leer (0 Zeilen):** `04_seed_climate.sql` bricht beim Laden mit
+   `ERROR 3819: Check constraint 'chk_climate_relative_humidity' is violated` ab.
+   `DatabseShema.sql` legt den Constraint direkt beim `CREATE TABLE` an, aber die CSV-Daten
+   enthalten Out-of-Range-Werte, die laut Bastis eigener Migration
+   `MigrateClimateValidationNormalization.sql` erst normalisiert werden sollen, BEVOR der
+   Constraint aktiv ist. Auf einer frischen DB (wie hier) ist der Constraint aber von Anfang
+   an aktiv -> Seed schlaegt fehl. Das ist Teil von Bastis "Sprint 6 (in Arbeit)" und sollte
+   mit ihm besprochen werden (z. B. Constraint erst per Migration nach Normalisierung
+   hinzufuegen, oder `LoadClimateSnapshot.sql` normalisiert beim Insert).
+2. **macOS Buildx-Bug:** `docker compose build` schlaegt mit
+   `x-docker-expose-session-sharedkey contains value with non-printable ASCII characters` fehl,
+   wenn der Repo-Pfad Nicht-ASCII-Zeichen enthaelt (hier: "Käferliebe"). Workaround:
+   `DOCKER_BUILDKIT=0 COMPOSE_DOCKER_CLI_BUILD=0` vor `docker compose build/up` setzen
+   (legacy Builder).
+3. **Pytest-Timeout 15s zu knapp** fuer diese lokale Umgebung bei kalten/grossen Queries
+   (21-33s gemessen). Funktional kein Fehler (200 OK, korrektes Schema).
+4. **Frontend zeigt leere Ergebnisliste/Karte, wenn `API_BASE_URL` auf das echte Backend
+   zeigt (gefunden 2026-06-12 beim manuellen Test von `docker-compose.dev.yml`):**
+   `frontend/app.js:10` setzt `beetles = await res.json()` und erwartet damit ein Array.
+   Das Backend liefert fuer `GET /api/beetles` aber ein paginiertes Objekt
+   `{"items": [...], "total": ..., "page": ..., "page_size": ...}`. Dadurch ist `beetles`
+   ein Objekt statt eines Arrays, alle folgenden `.filter()`/`.map()`-Aufrufe in `render()`
+   schlagen fehl, und sowohl die "Gefundene Arten"-Liste als auch die Kartenmarker bleiben
+   leer. Dies ist der bereits in `docs/PFLICHTENHEFT.md` (Abschnitt 13, "Verbindliches
+   einheitliches API-Response-Format") als offene Entscheidung dokumentierte Konflikt —
+   jetzt durch einen echten Testlauf bestaetigt. Noch nicht behoben (Entscheidung
+   2026-06-12: erstmal nur dokumentieren, kein Code-Fix). Betrifft nur das lokale
+   Dev-Setup (`docker-compose.dev.yml` setzt `API_BASE_URL=http://localhost:8000`);
+   im Produktions-Deployment ist `API_BASE_URL` nicht gesetzt, daher Demo-Modus aktiv,
+   nicht betroffen.
+   Zusaetzlich: `GMAPS_KEY` ist im Dev-Setup standardmaessig leer -> Google Maps laedt
+   lokal nicht, ohne dass ein eigener Dev-Key per `GMAPS_KEY`-Umgebungsvariable gesetzt wird.
+   Moegliche Fixes fuer spaeter (Schritt 8 oder eigene Aufgabe):
+   - `loadBeetles()` auf `const data = await res.json(); beetles = data.items ?? [];` anpassen
+   - oder Backend-Response-Format vereinheitlichen (Array statt `items/total/...`)
+
+### Re-Test (2026-06-12, gleicher laufender Stack, kein Rebuild)
+
+- Container liefen bereits 38-39 Min., RAM-Auslastung unkritisch
+  (`beetle-db` 636MB, `beetle-backend` 50MB, `beetle-frontend` 8MB von je 3.8GB Limit) —
+  Tests liefen daher mit den vollen Daten, keine Daten reduziert.
+- `python -m pytest /app/backend/App/tests -v` im `beetle-backend`-Container:
+  **6 von 11 Tests bestanden, 5 fehlgeschlagen** — identisches Ergebnis wie beim ersten
+  Lauf in Schritt 6.
+- Fehlgeschlagen (alle mit `TimeoutError` beim Lesen der HTTP-Antwort, NICHT mit
+  HTTP-Fehlercode):
+  - `test_beetles_list_contract`
+  - `test_beetle_detail_contract`
+  - `test_beetle_media_contract`
+  - `test_map_points_contract`
+  - `test_map_geojson_contract`
+- Ursache unveraendert: diese Endpunkte antworten korrekt mit 200 und gueltigem JSON
+  (manuell mit `curl -m 60` verifiziert), brauchen auf dieser Maschine aber 21-33s,
+  waehrend `test_api_contract.py` einen `urlopen(..., timeout=15)` verwendet. Reproduzierbar,
+  unveraendert gegenueber Schritt 6 (siehe Einschraenkung 3 oben).
+- [x] Schritt 7: PFLICHTENHEFT/WORKLOG/ENTWICKLUNGSPLAN konsolidieren.
+  - `docs/PFLICHTENHEFT.md`: Projektordner um `Käferliebe/backend/` ergaenzt; Abschnitt 4
+    (Aktueller Scope) um Backend-Status und verfuegbare Endpunkte ergaenzt; Abschnitt 6
+    (Filter) um Bastis erweitertes Backend-Filterset und den DE/EN-Vokabular-Hinweis
+    ergaenzt; Abschnitt 11 (Backend-Anbindung) um die vollstaendige Endpunktliste und
+    offene Punkte ergaenzt; Abschnitt 13 (Offene Entscheidungen) um Feld-/Response-Format-
+    Fragen und Produktions-Rollout des Backends ergaenzt. Pfade durchgehend als
+    `Käferliebe/frontend/` + `Käferliebe/backend/` (nicht `Database/...`).
+  - `docs/ENTWICKLUNGSPLAN.md`: Phase 6 ("Backend-Anbindung") von "ausstehend" auf den
+    tatsaechlichen Stand aktualisiert — lokale Integration (Schritte 1-6 dieses Plans)
+    ist erledigt, Frontend-Umstellung auf Backend-Daten und Produktions-Rollout bleiben
+    offen.
+  - `docs/WORKLOG.md`: Bastis Backend-Sprint-Historie (Phase A, Sprint 1-6) unten unter
+    "Backend-Historie (Basti, bis 2026-06-10)" angehaengt, damit der Kontext aus seinem
+    Branch erhalten bleibt.
+- [ ] Schritt 8 (spaeter, eigene Freigabe): Production-Deployment erweitern.
+
+---
+
 ## Letzte Aenderung
 
 2026-06-05 — Phase 0:
@@ -572,3 +713,80 @@ Alles auf main gepusht, letzter Commit: 48cb984
 - Dokumentation liegt jetzt unter `Käferliebe/docs/`.
 - Frontend liegt jetzt unter `Käferliebe/frontend/`.
 - Rover-/CE-Projektdateien bleiben im Repository-Root und sind dadurch sauber getrennt.
+
+---
+
+## Backend-Historie (Basti, bis 2026-06-10)
+
+Diese Sektion fasst Bastis Arbeit am Backend aus seinem separaten Branch
+(`origin/backend-clean-push-20260610`) zusammen, damit der Kontext erhalten bleibt. Die
+Integration dieses Backends in dieses Repo ist unter "Integration Backend (Basti) — Session
+2026-06-12" oben dokumentiert.
+
+### Backend Phase A (2026-06-08)
+
+- Backend lag bei Basti unter `Database/backend/` (FastAPI + MySQL-Anbindung).
+- Einheitliches Fehlerformat eingefuehrt: `{"error": "...", "message": "..."}`.
+- `GET /api/beetles` liefert paginierte Listenstruktur (`items`, `total`, `page`, `page_size`).
+- `GET /api/beetles/{beetle_id}` hinzugefuegt (akzeptiert `occ-<id>` und `<id>`).
+- `GET /api/countries/{country_code}` hinzugefuegt (liefert `code`, `name`, `speciesCount`,
+  `topClimates`, `topVegetations`, `elevationRange`).
+- `/api/filters` liefert `core|extended` (Standard `core`, `extended` = Core + Extended).
+- `GET /api/map/points` (Bounding-Box-Filter, Zoom-basiertes Clustering) und
+  `GET /api/map/points/geojson` ergaenzt.
+- Einheitliche Pagination auf weiteren Listenendpunkten (`/species`, `/observations`).
+- SQL-Indexskript fuer Kartenabfragen angelegt (`AddMapQueryIndexes.sql`).
+
+### Backend Session 2026-06-10 — Sprints 1-6
+
+**Sprint 1: Stabilisieren und messen (abgeschlossen)**
+
+- DB-Fehlerhandling vereinheitlicht (strukturierte API-Fehler).
+- CORS-Parsing/Config zentralisiert.
+- Sort-Whitelist und Pagination-Guards in Controller-Helpern.
+- Slow-Query-Logging konfigurierbar (`ENABLE_SLOW_QUERY_LOGGING`, `SLOW_QUERY_MS`).
+- EXPLAIN-Baseline dokumentiert.
+
+**Sprint 2: Performance verbessern (abgeschlossen)**
+
+- Relevante Indizes fuer Map-/Join-Lasten eingezogen.
+- EXPLAIN Vorher/Nachher mit realen Daten dokumentiert.
+- Climate-Join auf event_date-as-of umgestellt und erneut gemessen.
+
+**Sprint 3: Architektur aufraeumen (abgeschlossen)**
+
+- Schichtung Router -> Controller -> Repository umgesetzt.
+- `main.py` auf Router-Binding reduziert.
+- DB-/Env-/Settings-Logik in Core/Config zentralisiert.
+- Query-Parameter fuer Beetle/Map zentral in Router-Helfern gebuendelt.
+
+**Sprint 4: Betrieb reproduzierbar machen (abgeschlossen)**
+
+- Docker-Setup fuer Backend + DB konsolidiert.
+- Wait-for-DB und Init-Mechanik dokumentiert und eingebunden.
+- Start-/Betriebsablauf inkl. CSV-Mount-Konzept im Runbook festgehalten.
+
+**Sprint 5: Qualitaet und Abgabevorbereitung (abgeschlossen)**
+
+- API-Vertragstests fuer Kernendpunkte (`test_api_contract.py`).
+- Testkonfiguration (`pytest.ini`, `requirements-test.txt`).
+- OpenAPI-Beispiele fuer Vertragsendpunkte ergaenzt, zentralisiert in
+  `core/openapi_examples.py`.
+- Testlauf bei Basti: `python -m pytest` -> `6 passed in 18.95s`.
+- Quality-Endpoint umgesetzt: `GET /quality/report` (Nullraten Observation/Location/
+  ClimateSnapshot, EE-Coverage-Quote).
+
+**Sprint 6: Datenmodell und Medien (in Arbeit)**
+
+- Event-Date-Normalisierung gestartet (`event_date_parsed`) inkl. Schema-/Load-/
+  Migrationsskript.
+- Bildfelder im Beetle-Response erweitert (`imageUrl`, `meta.media.items`).
+- Neuer Medien-Endpoint: `GET /api/beetles/{id}/media` (paginiert).
+- API-Vertrag aktualisiert fuer paginierte `/api/beetles`-Antwort, Bildfelder und den neuen
+  Medien-Endpoint.
+- **Offen (siehe "Bekannte Einschraenkungen (Schritt 6)" oben):** Die
+  `MigrateClimateValidationNormalization.sql`-Logik setzt voraus, dass der
+  `chk_climate_relative_humidity`-Constraint erst NACH der Normalisierung aktiv wird. Auf
+  einer frischen DB (wie im lokalen Dev-Setup) ist der Constraint aber von Anfang an in
+  `DatabseShema.sql` aktiv, wodurch `climate_snapshot` beim Seed leer bleibt. Mit Basti
+  klaeren.

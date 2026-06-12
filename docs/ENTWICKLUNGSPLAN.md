@@ -109,30 +109,35 @@ Ergebnis:
 Architektur:
 GitHub Push (main) → Actions → Docker Build → ghcr.io → Portainer Webhook → NAS Pull
 
-### Phase 6: Performance fuer grosse Datenmengen
+### Phase 6: Backend-Anbindung
 
 Ziel:
 
-- Die Anwendung wird fuer mehrere Millionen Datensaetze vorbereitet.
+- Frontend mit echtem Backend verbinden.
+
+Ergebnis (Stand 2026-06-12):
+
+- Bastis FastAPI-/MySQL-Backend wurde nach `Käferliebe/backend/` integriert
+  (Branch `integrate-backend`), Importpfade und Docker-Setup an die neue Repo-Struktur
+  angepasst.
+- Lokales Dev-Setup `docker-compose.dev.yml` (DB + Backend + Frontend) laeuft mit echten
+  GBIF-Daten; Backend-Endpunkte (`/health`, `/api/beetles`, `/api/map/points`,
+  `/api/map/points/geojson`, ...) liefern verifiziert Daten.
+- Details und offene Punkte siehe `docs/WORKLOG.md`, Abschnitt
+  "Integration Backend (Basti) — Session 2026-06-12".
 
 Ergebnis (ausstehend):
 
-- Keine ungefilterte Anzeige aller Rohpunkte.
-- Backend liefert aggregierte/limitierte Daten.
-- Karte nutzt Cluster, Raster oder ausschnittsbasiertes Nachladen.
+- Frontend tatsaechlich auf Backend-Daten umstellen (aktuell laeuft das Frontend weiterhin
+  im Demo-Modus, `window.API_BASE_URL` ist nicht gesetzt).
+- Filterparameter werden ans Backend uebergeben.
+- Backend + DB ins Produktions-Deployment aufnehmen: `API_BASE_URL` in Portainer-Stack als
+  Umgebungsvariable setzen, CI-Workflow/Portainer-Stack um Backend-Image + DB erweitern
+  (eigene, spaeter freizugebende Phase, betrifft die Live-Seite).
+- Bekannte offene Probleme aus dem lokalen Testlauf (climate_snapshot-Migrationsreihenfolge,
+  pytest-Timeouts bei begrenztem RAM) mit Basti klaeren.
 
-### Phase 7: 3D-Kartenansicht
-
-Ziel:
-
-- 3D-Prototyp nur nach Kosten-/SKU-Pruefung.
-
-Ergebnis (ausstehend):
-
-- 2D-Standardkarte bleibt immer verfuegbar.
-- 3D erst nach dokumentierter Kostenfreigabe.
-
-### Phase 8: UI-Feinschliff und Ameisenstrasse
+### Phase 7: UI-Feinschliff und Ameisenstrasse
 
 Ziel:
 
