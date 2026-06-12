@@ -2,20 +2,61 @@
 // loadBeetles() wechselt automatisch auf Backend, wenn window.API_BASE_URL gesetzt ist.
 let beetles = [];
 
+let totalBeetles = 0;
+
+// Wie viele Treffer maximal vom Backend geholt werden. Das Backend filtert
+// serverseitig ueber den gesamten Datenbestand; geliefert wird ein gekapptes
+// Fenster fuer Liste und Karte.
+const BEETLE_FETCH_LIMIT = 200;
+
+function buildBeetleQuery() {
+  const params = new URLSearchParams();
+  const search = searchInput.value.trim();
+  if (search) params.set("q", search);
+  if (climateFilter.value !== "all") params.set("climate", climateFilter.value);
+  if (vegetationFilter.value !== "all") params.set("vegetation", vegetationFilter.value);
+  if (elevationFilter.value !== "all") params.set("elevation", elevationFilter.value);
+  params.set("limit", String(BEETLE_FETCH_LIMIT));
+  return params.toString();
+}
+
 async function loadBeetles() {
   try {
     if (window.API_BASE_URL) {
-      const res = await fetch(`${window.API_BASE_URL}/api/beetles`);
+      // Serverseitige Filterung: aktuelle Filter werden als Query mitgeschickt.
+      const res = await fetch(`${window.API_BASE_URL}/api/beetles?${buildBeetleQuery()}`);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
       beetles = data.items ?? [];
+      totalBeetles = data.total ?? beetles.length;
     } else {
       // Mock-Modus: Demo-Daten aus demo-beetles.js
       beetles = window.DEMO_BEETLES ?? [];
+      totalBeetles = beetles.length;
     }
   } catch (error) {
     console.error("Kaeferdaten konnten nicht geladen werden:", error);
     beetles = window.DEMO_BEETLES ?? [];
+    totalBeetles = beetles.length;
+  }
+}
+
+function showLoadingState() {
+  resultHeading.textContent = "Kaeferdaten werden geladen …";
+  resultList.innerHTML = `
+    <div class="empty-state">Kaeferdaten werden geladen …</div>
+  `;
+}
+
+// Wird bei jeder Filteraenderung aufgerufen. Im Backend-Modus wird neu geladen
+// (serverseitige Filterung), im Demo-Modus reicht ein erneutes Rendern.
+async function applyFilters() {
+  if (window.API_BASE_URL) {
+    showLoadingState();
+    await loadBeetles();
+    render();
+  } else {
+    render();
   }
 }
 
@@ -134,6 +175,11 @@ function getElevationGroup(elevation) {
 }
 
 function getFilteredBeetles() {
+  // Im Backend-Modus hat der Server bereits gefiltert -> Daten direkt verwenden.
+  if (window.API_BASE_URL) {
+    return beetles;
+  }
+
   const search = searchInput.value.trim().toLowerCase();
   const climate = climateFilter.value;
   const vegetation = vegetationFilter.value;
@@ -299,11 +345,16 @@ function resetMapView() {
 function render() {
   const filteredBeetles = getFilteredBeetles();
 
-  if (!filteredBeetles.some((beetle) => beetle.id === selectedId)) {
+  if (!filteredBeetles.some((beetle) => String(beetle.id) === String(selectedId))) {
     selectedId = filteredBeetles[0]?.id ?? null;
   }
 
-  resultHeading.textContent = `${filteredBeetles.length} gefundene Arten`;
+  const shown = filteredBeetles.length;
+  if (window.API_BASE_URL && totalBeetles > shown) {
+    resultHeading.textContent = `${shown} von ${totalBeetles} Treffern`;
+  } else {
+    resultHeading.textContent = `${shown} gefundene Arten`;
+  }
 
   if (filteredBeetles.length === 0) {
     resultList.innerHTML = `
@@ -319,7 +370,7 @@ function render() {
   resultList.innerHTML = filteredBeetles
     .map(
       (beetle) => `
-        <button class="species-card ${beetle.id === selectedId ? "is-active" : ""}" data-id="${beetle.id}" type="button">
+        <button class="species-card ${String(beetle.id) === String(selectedId) ? "is-active" : ""}" data-id="${beetle.id}" type="button">
           <h3>${beetle.name}</h3>
           <p>${beetle.family} - ${beetle.location}</p>
           <div class="meta-row">
@@ -332,7 +383,7 @@ function render() {
     )
     .join("");
 
-  renderDetails(beetles.find((beetle) => beetle.id === selectedId));
+  renderDetails(beetles.find((beetle) => String(beetle.id) === String(selectedId)));
   renderMapPoints();
 }
 
@@ -399,7 +450,7 @@ resultList.addEventListener("click", (event) => {
   const card = event.target.closest(".species-card");
   if (!card) return;
 
-  selectedId = Number(card.dataset.id);
+  selectedId = card.dataset.id;
   render();
 });
 
@@ -426,7 +477,7 @@ beetleLayer.addEventListener("click", (event) => {
   const point = event.target.closest(".beetle-point");
   if (!point) return;
 
-  const beetle = beetles.find((item) => item.id === Number(point.dataset.id));
+  const beetle = beetles.find((item) => String(item.id) === point.dataset.id);
   if (!beetle) return;
 
   closeCountrySidebar();
@@ -435,8 +486,15 @@ beetleLayer.addEventListener("click", (event) => {
 
 closeSidebarButton.addEventListener("click", closeCountrySidebar);
 
-[searchInput, climateFilter, vegetationFilter, elevationFilter].forEach((element) => {
-  element.addEventListener("input", render);
+// Sucheingabe entprellt (Backend-Abfragen koennen einige Sekunden dauern),
+// Dropdowns loesen sofort aus.
+let filterDebounce;
+searchInput.addEventListener("input", () => {
+  clearTimeout(filterDebounce);
+  filterDebounce = setTimeout(applyFilters, 500);
+});
+[climateFilter, vegetationFilter, elevationFilter].forEach((element) => {
+  element.addEventListener("change", applyFilters);
 });
 
 zoomInButton.addEventListener("click", () => setZoom(zoom * 1.25));
@@ -482,8 +540,8 @@ resetButton.addEventListener("click", () => {
   climateFilter.value = "all";
   vegetationFilter.value = "all";
   elevationFilter.value = "all";
-  selectedId = beetles[0]?.id ?? null;
-  render();
+  selectedId = null;
+  applyFilters();
 });
 
 // ─── Kartenansichten ──────────────────────────────────────────────────────────
@@ -710,10 +768,7 @@ document.querySelectorAll(".toggle-btn").forEach((btn) => {
 (async () => {
   // Ladezustand anzeigen, solange die Kaeferdaten geholt werden.
   // Bei Backend-Anbindung kann die erste Abfrage einige Sekunden dauern.
-  resultHeading.textContent = "Kaeferdaten werden geladen …";
-  resultList.innerHTML = `
-    <div class="empty-state">Kaeferdaten werden geladen …</div>
-  `;
+  showLoadingState();
 
   await loadBeetles();
 

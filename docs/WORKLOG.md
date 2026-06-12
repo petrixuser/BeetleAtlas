@@ -694,15 +694,41 @@ Erste echte Verdrahtung Frontend <-> Backend (Branch direkt auf `main` getestet 
    - Verifiziert: Backend-Filter `?climate=hot` liefert 143.134 Treffer mit `climate: "hot"`;
      Dropdown-Werte und Demo-Codes im Container korrekt ausgeliefert.
 
-**Hinweis zur Frontend-Filterung:** Aktuell filtert das Frontend clientseitig ueber die
-ersten geladenen Kaefer (Default-Limit der `/api/beetles`-Abfrage), nicht serverseitig.
-Filter wirken jetzt korrekt auf die geladene Teilmenge. Echte serverseitige Filterung
-(Filterparameter an `/api/beetles` durchreichen) + Kartenanbindung an `/api/map/points`
-sind die naechsten offenen Schritte.
-
 **Produktionssicherheit:** Alle drei Aenderungen sind fuer die Live-Seite ungefaehrlich —
 ohne gesetztes `API_BASE_URL` laeuft das Frontend weiter im Demo-Modus (jetzt mit
 englischen Codes + deutschen Labels, optisch identisch).
+
+### Frontend-Anbindung Schritt B (2026-06-12) — serverseitige Filterung
+
+Vorher filterte das Frontend nur clientseitig ueber die ersten ~100 geladenen Kaefer
+(Default-Limit) — Suche/Filter ignorierten also faktisch 99,9 % der 417k Datensaetze.
+Jetzt echte serverseitige Filterung:
+
+- `frontend/app.js`:
+  - `buildBeetleQuery()` baut aus den aktuellen Filter-Werten (`q`, `climate`,
+    `vegetation`, `elevation`) eine Query und haengt `limit=200` an.
+  - `loadBeetles()` schickt diese Query an `/api/beetles`, speichert `items` + `total`.
+  - `applyFilters()`: bei Filteraenderung wird im Backend-Modus neu geladen (mit
+    Ladeanzeige), im Demo-Modus nur neu gerendert.
+  - `getFilteredBeetles()` ueberspringt im Backend-Modus die clientseitige Filterung
+    (Server hat bereits gefiltert); im Demo-Modus weiterhin clientseitig.
+  - Ergebnis-Ueberschrift zeigt im Backend-Modus `"<angezeigt> von <total> Treffern"`.
+  - Sucheingabe entprellt (500 ms), Dropdowns lösen sofort aus (`change`).
+  - Reset-Button laeuft jetzt ueber `applyFilters()` (laedt im Backend-Modus neu).
+- **ID-Handling-Bugfix (Nebenbefund):** Karten-/Punkt-Klicks nutzten `Number(dataset.id)`,
+  was bei Backend-IDs wie `"occ-123"` `NaN` ergab -> Detailauswahl waere im Backend-Modus
+  kaputt gewesen. Vergleiche jetzt durchgaengig via `String(id)`.
+- Cache-Bust: `app.js?v=6`.
+- Verifiziert: kombinierte Query `?climate=hot&vegetation=tree_cover&limit=200` liefert
+  95.186 Treffer (200 zurueck), alle Eintraege matchen beide Filter. `node --check` der
+  `app.js` ohne Syntaxfehler.
+
+**Bekannte UX-Einschraenkung:** Jede Filteraenderung loest im Backend-Modus eine Abfrage
+aus, die auf dieser Maschine 20-30s dauert (bekanntes Performance-/RAM-Thema). Funktional
+korrekt, aber traege. Mildernd: Sucheingabe ist entprellt, Ladeanzeige sichtbar.
+
+**Noch offen:** Kartenpunkte an `/api/map/points` (mit Clustering) anbinden — Karte zeigt
+aktuell nur die geladene Liste als Marker, nicht den vollen gefilterten Bestand.
 
 - [x] Schritt 7: PFLICHTENHEFT/WORKLOG/ENTWICKLUNGSPLAN konsolidieren.
   - `docs/PFLICHTENHEFT.md`: Projektordner um `Käferliebe/backend/` ergaenzt; Abschnitt 4
