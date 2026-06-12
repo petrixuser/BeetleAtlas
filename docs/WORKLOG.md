@@ -892,3 +892,93 @@ Integration dieses Backends in dieses Repo ist unter "Integration Backend (Basti
   einer frischen DB (wie im lokalen Dev-Setup) ist der Constraint aber von Anfang an in
   `DatabseShema.sql` aktiv, wodurch `climate_snapshot` beim Seed leer bleibt. Mit Basti
   klaeren.
+
+---
+
+# >>> HANDOFF / NAECHSTE SESSION — Stand 2026-06-12 <<<
+
+Dieser Abschnitt ist der zentrale Einstieg fuer die naechste Session. Zuerst hier lesen,
+dann oben in die Detail-Abschnitte springen.
+
+## Wo stehen wir gerade?
+
+Bastis Backend ist vollstaendig in `main` integriert UND das Frontend ist lokal komplett
+ans Backend angebunden (Liste + Filter + Karte). Alles ist auf `main` committet und
+gepusht. Die Live-Seite laeuft aber bewusst noch unveraendert im **Demo-Modus** — auf der
+NAS laeuft weiterhin nur das Frontend, NICHT das Backend.
+
+**Aktueller Branch:** `main` (alles gemerged). Letzter Commit: `df96e36`.
+**Backup vor Integration:** Branch `backup/main-before-backend-integration-20260612`
+(auf GitHub) — Rueckfallpunkt, falls noetig.
+
+## Was wurde in dieser Session gemacht? (chronologisch)
+
+1. **Integration Schritte 1-7** (Details in den Abschnitten oben):
+   - Bastis Backend nach `backend/` uebernommen (Importe `Database.Backend.App` ->
+     `backend.App`, Docker-Pfade gefixt). CSVs (~215MB) liegen in `backend/Data/`.
+   - `docker-compose.dev.yml` (lokales DB+Backend+Frontend-Setup) neu, Produktions-
+     `docker-compose.yml`/`Dockerfile`/CI **unangetastet**.
+   - Doku konsolidiert (PFLICHTENHEFT, ENTWICKLUNGSPLAN, WORKLOG).
+   - Nach `main` gemerged + gepusht (Commit `23ac669`), CI lief gruen, Live-Seite ok.
+2. **Frontend-Anbindung Schritt A** (Commit `8742098`): Response-Format-Fix
+   (`data.items`), Ladezustand, DE/EN-Sprache vereinheitlicht (englische Codes in den
+   Daten, deutsche Labels in der UI).
+3. **Frontend-Anbindung Schritt B** (Commit `a608250`): serverseitige Filterung
+   (Filter gehen an `/api/beetles`, nicht mehr nur clientseitig ueber 100 geladene),
+   plus ID-Handling-Bugfix (`String(id)` statt `Number(id)`).
+4. **Frontend-Anbindung Schritt C** (Commit `df96e36`): Karte an `/api/map/points`
+   gebunden (bbox/zoom-basiert, Clustering, laedt bei Pan/Zoom + Filteraenderung).
+5. **Nachrichten formuliert** an Basti (3 offene Punkte) und an den NAS-Kumpel
+   (Ressourcen/Backup/Netzwerk-Abstimmung) — siehe "Offene Abstimmungen" unten.
+
+## Was funktioniert (verifiziert)?
+
+- Lokales Setup `docker-compose.dev.yml` startet DB + Backend + Frontend.
+  Start (wegen Nicht-ASCII-Pfad "Käferliebe"):
+  `DOCKER_BUILDKIT=0 COMPOSE_DOCKER_CLI_BUILD=0 docker compose -f docker-compose.dev.yml up --build`
+- Backend liefert echte Daten: `/health`, `/api/beetles` (paginiert), `/api/map/points`
+  (Cluster/Punkte), Filter `q/climate/vegetation/elevation` greifen serverseitig.
+- Frontend (im Backend-Modus, also mit gesetztem `API_BASE_URL`): Liste, Filter und Karte
+  ziehen echte Daten. Datenpfad headless verifiziert (siehe Schritte A-C oben).
+- pytest: **6/11 gruen**, 5 Timeouts (kein Funktionsfehler, nur 15s-Limit zu knapp auf
+  dieser Maschine — Endpunkte antworten korrekt in 20-38s).
+
+## Was ist NOCH NICHT gemacht / offen?
+
+### A) Offene Abstimmungen (blockieren Schritt 8)
+- **Mit Basti:** (1) climate_snapshot-Constraint-Bug (Seed bleibt leer — Migrations-
+  Reihenfolge), (2) CSVs im Repo lassen oder DB-Dump, (3) DB-Zugangsdaten/Secrets.
+- **Mit NAS-Kumpel:** (1) Darf DB dauerhaft laufen? (2) Speicher/RAM-Reserven
+  (DB ~1-2GB Platte, RAM-hungrig), (3) Backup des DB-Volumes, (4) Netzwerk/Subdomain
+  (`npm_proxy`, evtl. `api.kafer.server-work.de` via Nginx Proxy Manager).
+
+### B) Schritt 8 — Produktionsdeployment (NOCH NICHT BEGONNEN, eigene Freigabe noetig!)
+Betrifft die Live-Seite. Erst nach den Abstimmungen unter A starten. Aufgaben:
+- Backend-Image im CI-Workflow `.github/workflows/build-and-deploy.yml` zusaetzlich bauen
+  + nach ghcr.io pushen (z. B. `ghcr.io/petrixuser/beetleatlas-backend`).
+- Produktions-`docker-compose.yml` um `beetle-db` (MySQL) + `beetle-backend` erweitern
+  (analog `docker-compose.dev.yml`), inkl. DB-Volume, Init-Skripte, CSV-Mount.
+- DB-Zugangsdaten als Portainer-Secrets/Env (nicht ins Repo).
+- `API_BASE_URL` als Portainer-Env fuers Frontend setzen (z. B. interne Backend-URL) —
+  erst dann verlaesst die Live-Seite den Demo-Modus.
+- Live testen, Rollback-Plan (Backup-Branch + altes Image) bereithalten.
+
+### C) Wichtige Vorab-Frage zu Schritt 8 (vor dem Aufwand klaeren!)
+Abfragen dauern 10-38s (RAM-/Performance-Thema, auf der NAS evtl. aehnlich/langsamer).
+Eine Live-Seite mit 30s pro Filteraenderung ist fuer Besucher kaum brauchbar.
+**Klaeren: Ist das fuer Abgabe/Praesentation (dann reicht evtl. lokal vorfuehren) oder
+fuer echten Dauerbetrieb?** Ggf. zuerst Performance (Indizes, weniger Joins, Caching).
+
+### D) Kleinere offene UX-/Code-Punkte
+- Filteraenderung im Backend-Modus dauert spuerbar (20-30s) — nur Ladeanzeige + Debounce
+  als Milderung. Echte Loesung = Backend-Performance.
+- pytest-Timeout (15s) ggf. auf ~60s erhoehen, damit die Tests auf dieser Maschine gruen
+  werden (in `backend/App/tests/test_api_contract.py`).
+- Karte braucht `GMAPS_KEY` zum Anzeigen — lokal nicht gesetzt; visuelles Karten-Rendering
+  wurde daher noch nicht im Browser final gegengecheckt (nur Datenpfad headless).
+
+## Wie weitermachen (empfohlene Reihenfolge naechste Session)?
+1. Antworten von Basti + Kumpel abwarten/einsammeln (Abstimmungen A).
+2. Entscheidung zu C treffen (Abgabe vs. Dauerbetrieb).
+3. Falls Dauerbetrieb gewollt UND Abstimmungen ok: Schritt 8 umsetzen.
+4. Optional vorher: climate-Constraint-Bug fixen, pytest-Timeout anheben.
