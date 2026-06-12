@@ -24,11 +24,11 @@
           Klimazone
           <select id="climateFilter">
             <option value="all">Alle</option>
-            <option value="Tropisch">Tropisch</option>
-            <option value="Subtropisch">Subtropisch</option>
-            <option value="Trocken">Trocken</option>
-            <option value="Gebirge">Gebirge</option>
-            <option value="Gemaessigt">Gemaessigt</option>
+            <option value="cold">Kalt</option>
+            <option value="mild">Mild</option>
+            <option value="warm">Warm</option>
+            <option value="hot">Heiss</option>
+            <option value="unknown">Unbekannt</option>
           </select>
         </label>
 
@@ -36,12 +36,18 @@
           Vegetation
           <select id="vegetationFilter">
             <option value="all">Alle</option>
-            <option value="Regenwald">Regenwald</option>
-            <option value="Savanne">Savanne</option>
-            <option value="Trockenwald">Trockenwald</option>
-            <option value="Gebirgsvegetation">Gebirgsvegetation</option>
-            <option value="Grasland">Grasland</option>
-            <option value="Mangroven">Mangroven</option>
+            <option value="tree_cover">Wald</option>
+            <option value="shrubland">Buschland</option>
+            <option value="grassland">Grasland</option>
+            <option value="cropland">Ackerland</option>
+            <option value="built_up">Bebaut</option>
+            <option value="bare_sparse">Vegetationsarm</option>
+            <option value="wetland">Feuchtgebiet</option>
+            <option value="mangroves">Mangroven</option>
+            <option value="water">Wasser</option>
+            <option value="snow_ice">Schnee/Eis</option>
+            <option value="moss_lichen">Moos/Flechten</option>
+            <option value="unknown">Unbekannt</option>
           </select>
         </label>
 
@@ -227,9 +233,9 @@
     </main>
 
     <script src="config.local.js"></script>
-    <script src="data/demo-beetles.js"></script>
+    <script src="data/demo-beetles.js?v=2"></script>
     <script src="assets/latin-america-countries.js?v=2"></script>
-    <script src="app.js?v=3"></script>
+    <script src="app.js?v=5"></script>
     <script src="ants.js"></script>
   </body>
 </html>

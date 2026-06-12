@@ -7,7 +7,8 @@ async function loadBeetles() {
     if (window.API_BASE_URL) {
       const res = await fetch(`${window.API_BASE_URL}/api/beetles`);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      beetles = await res.json();
+      const data = await res.json();
+      beetles = data.items ?? [];
     } else {
       // Mock-Modus: Demo-Daten aus demo-beetles.js
       beetles = window.DEMO_BEETLES ?? [];
@@ -16,6 +17,39 @@ async function loadBeetles() {
     console.error("Kaeferdaten konnten nicht geladen werden:", error);
     beetles = window.DEMO_BEETLES ?? [];
   }
+}
+
+// Kanonisches Vokabular: Daten (Backend + Demo) nutzen die englischen Codes,
+// die UI zeigt deutsche Labels. So wirken Filter in beiden Modi identisch.
+const CLIMATE_LABELS = {
+  cold: "Kalt",
+  mild: "Mild",
+  warm: "Warm",
+  hot: "Heiss",
+  unknown: "Unbekannt",
+};
+
+const VEGETATION_LABELS = {
+  tree_cover: "Wald",
+  shrubland: "Buschland",
+  grassland: "Grasland",
+  cropland: "Ackerland",
+  built_up: "Bebaut",
+  bare_sparse: "Vegetationsarm",
+  snow_ice: "Schnee/Eis",
+  water: "Wasser",
+  wetland: "Feuchtgebiet",
+  mangroves: "Mangroven",
+  moss_lichen: "Moos/Flechten",
+  unknown: "Unbekannt",
+};
+
+function climateLabel(code) {
+  return CLIMATE_LABELS[code] ?? code ?? "Unbekannt";
+}
+
+function vegetationLabel(code) {
+  return VEGETATION_LABELS[code] ?? code ?? "Unbekannt";
 }
 
 const labelPositions = {
@@ -289,8 +323,8 @@ function render() {
           <h3>${beetle.name}</h3>
           <p>${beetle.family} - ${beetle.location}</p>
           <div class="meta-row">
-            <span class="tag">${beetle.climate}</span>
-            <span class="tag">${beetle.vegetation}</span>
+            <span class="tag">${climateLabel(beetle.climate)}</span>
+            <span class="tag">${vegetationLabel(beetle.vegetation)}</span>
             <span class="tag">${beetle.elevation} m</span>
           </div>
         </button>
@@ -316,8 +350,8 @@ function renderDetails(beetle) {
     <p>${beetle.family}</p>
     <ul class="detail-list">
       <li><strong>Fundort</strong>${beetle.location}</li>
-      <li><strong>Klimazone</strong>${beetle.climate}</li>
-      <li><strong>Vegetation</strong>${beetle.vegetation}</li>
+      <li><strong>Klimazone</strong>${climateLabel(beetle.climate)}</li>
+      <li><strong>Vegetation</strong>${vegetationLabel(beetle.vegetation)}</li>
       <li><strong>Hoehenlage</strong>${beetle.elevation} m</li>
       <li><strong>Temperatur</strong>${beetle.temperature} C</li>
       <li><strong>Boden</strong>${beetle.soil}</li>
@@ -638,8 +672,8 @@ function renderGoogleMapMarkers() {
           <hr style="margin:0.5rem 0;border:none;border-top:1px solid #d9ded8">
           <div><strong>Fundort:</strong> ${beetle.location}</div>
           <div><strong>Höhe:</strong> ${beetle.elevation} m</div>
-          <div><strong>Klima:</strong> ${beetle.climate}</div>
-          <div><strong>Vegetation:</strong> ${beetle.vegetation}</div>
+          <div><strong>Klima:</strong> ${climateLabel(beetle.climate)}</div>
+          <div><strong>Vegetation:</strong> ${vegetationLabel(beetle.vegetation)}</div>
         </div>
       `);
       activeInfoWindow.open(googleMapInstance, marker);
@@ -674,6 +708,13 @@ document.querySelectorAll(".toggle-btn").forEach((btn) => {
 // ─── Initialisierung ──────────────────────────────────────────────────────────
 
 (async () => {
+  // Ladezustand anzeigen, solange die Kaeferdaten geholt werden.
+  // Bei Backend-Anbindung kann die erste Abfrage einige Sekunden dauern.
+  resultHeading.textContent = "Kaeferdaten werden geladen …";
+  resultList.innerHTML = `
+    <div class="empty-state">Kaeferdaten werden geladen …</div>
+  `;
+
   await loadBeetles();
 
   // SVG-Fallback (nur aktiv wenn Google Maps nicht laedt)

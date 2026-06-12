@@ -660,6 +660,50 @@ Käferliebe-Repo übernehmen" (Schritte 1-8).
   (manuell mit `curl -m 60` verifiziert), brauchen auf dieser Maschine aber 21-33s,
   waehrend `test_api_contract.py` einen `urlopen(..., timeout=15)` verwendet. Reproduzierbar,
   unveraendert gegenueber Schritt 6 (siehe Einschraenkung 3 oben).
+
+### Frontend-Anbindung Schritt A (2026-06-12) — Response-Format, Ladezustand, Sprache
+
+Erste echte Verdrahtung Frontend <-> Backend (Branch direkt auf `main` getestet ueber
+`docker-compose.dev.yml`). Drei Aufgaben umgesetzt:
+
+1. **Response-Format-Fix (Einschraenkung 4 oben behoben):**
+   `frontend/app.js` `loadBeetles()` liest jetzt `const data = await res.json();
+   beetles = data.items ?? [];` statt das ganze Objekt als Array zu behandeln. Damit
+   erscheinen echte Backend-Kaefer in der Ergebnisliste. Verifiziert: Liste fuellt sich
+   nach ~20-30s (langsame Erstabfrage, bekanntes Performance-Thema).
+
+2. **Ladezustand:** Vor `await loadBeetles()` zeigt die IIFE jetzt
+   "Kaeferdaten werden geladen …" in Ueberschrift und Liste, statt faelschlich
+   "Keine passenden Arten gefunden". Wichtig, weil die Backend-Erstabfrage einige
+   Sekunden dauert.
+
+3. **Sprach-Vereinheitlichung (Pflichtenheft Abschnitt 6, DE/EN-Konflikt — geloest;
+   Perry uebernimmt das laut Absprache mit Basti):**
+   - Kanonisches Vokabular = **englische Codes des Backends** in der Datenebene,
+     **deutsche Labels nur in der UI**.
+   - `frontend/app.js`: `CLIMATE_LABELS` / `VEGETATION_LABELS` + Helfer `climateLabel()`,
+     `vegetationLabel()`. Verwendet in Ergebniskarten, Detailansicht und Google-Maps-
+     InfoWindow.
+   - `frontend/index.html`: Filter-Dropdowns Klima/Vegetation nutzen jetzt die Backend-Codes
+     als `value` (`cold/mild/warm/hot/unknown` bzw. `tree_cover/shrubland/...`) mit
+     deutschen Anzeige-Labels. Vorher deutsche Werte (`Tropisch`, `Regenwald`), die nie
+     auf die Backend-Daten matchten -> Filter lieferten 0 Treffer.
+   - `frontend/data/demo-beetles.js`: climate/vegetation der Demo-Kaefer auf dieselben
+     englischen Codes umgestellt, damit Filter im Demo-Modus identisch funktionieren.
+   - Cache-Bust: `app.js?v=5`, `data/demo-beetles.js?v=2`.
+   - Verifiziert: Backend-Filter `?climate=hot` liefert 143.134 Treffer mit `climate: "hot"`;
+     Dropdown-Werte und Demo-Codes im Container korrekt ausgeliefert.
+
+**Hinweis zur Frontend-Filterung:** Aktuell filtert das Frontend clientseitig ueber die
+ersten geladenen Kaefer (Default-Limit der `/api/beetles`-Abfrage), nicht serverseitig.
+Filter wirken jetzt korrekt auf die geladene Teilmenge. Echte serverseitige Filterung
+(Filterparameter an `/api/beetles` durchreichen) + Kartenanbindung an `/api/map/points`
+sind die naechsten offenen Schritte.
+
+**Produktionssicherheit:** Alle drei Aenderungen sind fuer die Live-Seite ungefaehrlich —
+ohne gesetztes `API_BASE_URL` laeuft das Frontend weiter im Demo-Modus (jetzt mit
+englischen Codes + deutschen Labels, optisch identisch).
+
 - [x] Schritt 7: PFLICHTENHEFT/WORKLOG/ENTWICKLUNGSPLAN konsolidieren.
   - `docs/PFLICHTENHEFT.md`: Projektordner um `Käferliebe/backend/` ergaenzt; Abschnitt 4
     (Aktueller Scope) um Backend-Status und verfuegbare Endpunkte ergaenzt; Abschnitt 6

@@ -1,6 +1,9 @@
 // Demo-Daten fuer Beetle Box
 // Werden im Mock-Modus verwendet, solange kein Backend verfuegbar ist.
 // Spaeter ersetzt durch echte Backend-Daten ueber loadBeetles() in app.js.
+//
+// Hinweis: climate/vegetation nutzen dieselben englischen Codes wie das Backend
+// (siehe CLIMATE_LABELS / VEGETATION_LABELS in app.js). Die UI zeigt deutsche Labels.
 
 window.DEMO_BEETLES = [
   {
@@ -9,8 +12,8 @@ window.DEMO_BEETLES = [
     family: "Scarabaeidae",
     location: "Amazonas, Ecuador",
     coordinates: [-78.2, -1.4],
-    climate: "Tropisch",
-    vegetation: "Regenwald",
+    climate: "hot",
+    vegetation: "tree_cover",
     elevation: 450,
     temperature: 27,
     soil: "Lehmiger Waldboden"
@@ -21,8 +24,8 @@ window.DEMO_BEETLES = [
     family: "Lucanidae",
     location: "Anden, Chile",
     coordinates: [-72.6, -39.8],
-    climate: "Gebirge",
-    vegetation: "Gebirgsvegetation",
+    climate: "mild",
+    vegetation: "shrubland",
     elevation: 1700,
     temperature: 14,
     soil: "Humusreicher Gebirgsboden"
@@ -33,8 +36,8 @@ window.DEMO_BEETLES = [
     family: "Scarabaeidae",
     location: "Guayana-Schild",
     coordinates: [-61.1, 5.1],
-    climate: "Trocken",
-    vegetation: "Savanne",
+    climate: "warm",
+    vegetation: "grassland",
     elevation: 700,
     temperature: 25,
     soil: "Sandiger Boden"
@@ -45,8 +48,8 @@ window.DEMO_BEETLES = [
     family: "Buprestidae",
     location: "Mata Atlantica, Brasilien",
     coordinates: [-43.2, -22.9],
-    climate: "Subtropisch",
-    vegetation: "Trockenwald",
+    climate: "warm",
+    vegetation: "tree_cover",
     elevation: 250,
     temperature: 26,
     soil: "Roter Lateritboden"
