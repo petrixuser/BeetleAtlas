@@ -389,7 +389,13 @@ function render() {
 
 function renderMapPoints() {
   if (googleMapInstance) {
-    renderGoogleMapMarkers();
+    if (window.API_BASE_URL) {
+      // Backend-Modus: bbox-/zoom-basierte Punkte mit Clustering nachladen.
+      scheduleMapPoints();
+    } else {
+      // Demo-Modus: die geladene Liste als Marker zeichnen.
+      renderGoogleMapMarkers();
+    }
   } else {
     renderBeetlePoints();
   }
@@ -629,6 +635,116 @@ let googleMapInstance = null;
 let activeMarkers = [];
 let activeInfoWindow = null;
 
+// Kartenpunkte aus dem Backend (bbox-/zoom-basiert, mit Clustering).
+let mapPointsDebounce;
+let mapPointsRequestId = 0;
+const MAP_POINTS_LIMIT = 1000;
+
+// Entprellt das Nachladen der Kartenpunkte (Pan/Zoom/Filter loesen es aus;
+// Backend-Abfragen koennen einige Sekunden dauern).
+function scheduleMapPoints() {
+  clearTimeout(mapPointsDebounce);
+  mapPointsDebounce = setTimeout(loadMapPoints, 400);
+}
+
+async function loadMapPoints() {
+  if (!googleMapInstance || !window.API_BASE_URL) return;
+
+  const bounds = googleMapInstance.getBounds();
+  if (!bounds) return;
+
+  const ne = bounds.getNorthEast();
+  const sw = bounds.getSouthWest();
+  const params = new URLSearchParams();
+  // bbox = minLng,minLat,maxLng,maxLat (West,Sued,Ost,Nord)
+  params.set("bbox", [sw.lng(), sw.lat(), ne.lng(), ne.lat()].join(","));
+  params.set("zoom", String(Math.round(googleMapInstance.getZoom())));
+
+  const search = searchInput.value.trim();
+  if (search) params.set("q", search);
+  if (climateFilter.value !== "all") params.set("climate", climateFilter.value);
+  if (vegetationFilter.value !== "all") params.set("vegetation", vegetationFilter.value);
+  if (elevationFilter.value !== "all") params.set("elevation", elevationFilter.value);
+  params.set("limit", String(MAP_POINTS_LIMIT));
+
+  // Race-Schutz: nur die jeweils neueste Antwort darf rendern, da langsame
+  // Abfragen sich sonst gegenseitig ueberholen koennen.
+  const reqId = ++mapPointsRequestId;
+  try {
+    const res = await fetch(`${window.API_BASE_URL}/api/map/points?${params}`);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    if (reqId !== mapPointsRequestId) return;
+    renderMapMarkersFromPoints(data.items ?? []);
+  } catch (error) {
+    console.error("Kartenpunkte konnten nicht geladen werden:", error);
+  }
+}
+
+function renderMapMarkersFromPoints(points) {
+  activeMarkers.forEach((marker) => marker.setMap(null));
+  activeMarkers = [];
+
+  points.forEach((point) => {
+    if (point.isCluster) {
+      const scale = Math.min(24, 11 + Math.log10(Math.max(point.count, 1)) * 6);
+      const marker = new google.maps.Marker({
+        position: { lat: point.lat, lng: point.lng },
+        map: googleMapInstance,
+        label: {
+          text: String(point.count),
+          color: "#ffffff",
+          fontSize: "11px",
+          fontWeight: "bold"
+        },
+        icon: {
+          path: google.maps.SymbolPath.CIRCLE,
+          scale,
+          fillColor: "#c0392b",
+          fillOpacity: 0.85,
+          strokeColor: "#ffd1d1",
+          strokeWeight: 1.5
+        }
+      });
+      // Klick auf Cluster: hineinzoomen, dann laedt das idle-Event neue Punkte.
+      marker.addListener("click", () => {
+        googleMapInstance.panTo({ lat: point.lat, lng: point.lng });
+        googleMapInstance.setZoom(Math.min(Math.round(googleMapInstance.getZoom()) + 3, 18));
+      });
+      activeMarkers.push(marker);
+    } else {
+      const marker = new google.maps.Marker({
+        position: { lat: point.lat, lng: point.lng },
+        map: googleMapInstance,
+        title: point.speciesName,
+        icon: {
+          path: google.maps.SymbolPath.CIRCLE,
+          scale: 6,
+          fillColor: "#ff2b2b",
+          fillOpacity: 0.9,
+          strokeColor: "#ffd1d1",
+          strokeWeight: 1.2
+        }
+      });
+      marker.addListener("click", () => {
+        closeCountrySidebar();
+        activeInfoWindow.setContent(`
+          <div style="font-family:Arial,sans-serif;font-size:0.88rem;min-width:160px">
+            <strong style="font-size:1rem">${point.speciesName}</strong>
+            <hr style="margin:0.5rem 0;border:none;border-top:1px solid #d9ded8">
+            <div><strong>Höhe:</strong> ${point.elevation ?? "?"} m</div>
+            <div><strong>Klima:</strong> ${climateLabel(point.climate)}</div>
+            <div><strong>Vegetation:</strong> ${vegetationLabel(point.vegetation)}</div>
+            <div><strong>Beobachtet:</strong> ${point.observedAt ?? "?"}</div>
+          </div>
+        `);
+        activeInfoWindow.open(googleMapInstance, marker);
+      });
+      activeMarkers.push(marker);
+    }
+  });
+}
+
 const mapLoadingState = document.querySelector("#mapLoadingState");
 const mapErrorState = document.querySelector("#mapErrorState");
 const googleMapEl = document.querySelector("#googleMap");
@@ -657,7 +773,13 @@ window.initMap = function () {
   // Ländergrenzen als klickbarer GeoJSON-Layer
   initGeoJsonLayer();
 
-  renderGoogleMapMarkers();
+  if (window.API_BASE_URL) {
+    // Backend-Modus: Punkte nach Kartenausschnitt/Zoom laden. Das idle-Event
+    // feuert nach Init und nach jedem Pan/Zoom (entprellt via scheduleMapPoints).
+    googleMapInstance.addListener("idle", scheduleMapPoints);
+  } else {
+    renderGoogleMapMarkers();
+  }
 };
 
 // Wird von Google Maps aufgerufen, wenn der Key ungueltig ist

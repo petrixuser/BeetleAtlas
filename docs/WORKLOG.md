@@ -727,8 +727,40 @@ Jetzt echte serverseitige Filterung:
 aus, die auf dieser Maschine 20-30s dauert (bekanntes Performance-/RAM-Thema). Funktional
 korrekt, aber traege. Mildernd: Sucheingabe ist entprellt, Ladeanzeige sichtbar.
 
-**Noch offen:** Kartenpunkte an `/api/map/points` (mit Clustering) anbinden — Karte zeigt
-aktuell nur die geladene Liste als Marker, nicht den vollen gefilterten Bestand.
+### Frontend-Anbindung Schritt C (2026-06-12) — Karte an /api/map/points
+
+Vorher zeichnete die Google-Karte im Backend-Modus nur die geladene Liste (max. 200
+Marker) und reagierte nicht auf Pan/Zoom. Jetzt bbox-/zoom-basierte Punkte mit
+serverseitigem Clustering ueber den gesamten gefilterten Bestand:
+
+- `frontend/app.js`:
+  - `loadMapPoints()`: liest `googleMapInstance.getBounds()` + `getZoom()`, baut
+    `bbox=minLng,minLat,maxLng,maxLat` + `zoom` + aktuelle Filter (`q/climate/vegetation/
+    elevation`) + `limit=1000`, fragt `/api/map/points` ab.
+  - `renderMapMarkersFromPoints()`: rendert `isCluster:true` als roten Kreis mit
+    Anzahl-Label (Klick zoomt hinein) und `isCluster:false` als kleinen Punkt mit
+    InfoWindow (Art, Hoehe, Klima, Vegetation, Beobachtungsdatum).
+  - `scheduleMapPoints()`: entprellt (400 ms); Race-Schutz via `mapPointsRequestId`,
+    damit veraltete (langsame) Antworten keine neueren ueberschreiben.
+  - `initMap()`: im Backend-Modus `idle`-Listener auf der Karte -> laedt Punkte nach
+    Init und nach jedem Pan/Zoom. Demo-Modus weiterhin `renderGoogleMapMarkers()`.
+  - `renderMapPoints()`: im Backend+Google-Modus -> `scheduleMapPoints()`, sonst wie bisher.
+- Cache-Bust: `app.js?v=7`. `node --check` ok.
+- Verifiziert (Requests wie das Frontend sie baut):
+  - LatAm, zoom 4: 57 Cluster ueber 417.553 Punkte (`clustered:true`).
+  - Guatemala-Ausschnitt, zoom 12: 1000 Einzelpunkte (`clustered:false`).
+  - LatAm zoom 4 + `climate=hot`: 94 Cluster ueber 143.129 Punkte.
+  - LatAm zoom 5 + `q=Dynastes`: 106 Cluster ueber 589 Treffer.
+
+**Voraussetzung zum Sehen:** Karte braucht `GMAPS_KEY` (lokal im Dev-Setup nicht gesetzt;
+in Produktion via Portainer vorhanden). Daten-/Request-Pfad ist headless verifiziert.
+
+**UX-Einschraenkung:** Niedrige Zoomstufen ueber ganz LatAm sind die teuersten Abfragen
+(~38s), da ueber 417k Punkte geclustert werden. Reingezoomt deutlich schneller (~5s).
+Pan/Zoom ist entprellt; Race-Schutz verhindert flackernde Altdaten.
+
+Damit sind **Liste, Filter und Karte** vollstaendig ans Backend angebunden. Frontend-
+Anbindung (Schritte A-C) abgeschlossen.
 
 - [x] Schritt 7: PFLICHTENHEFT/WORKLOG/ENTWICKLUNGSPLAN konsolidieren.
   - `docs/PFLICHTENHEFT.md`: Projektordner um `Käferliebe/backend/` ergaenzt; Abschnitt 4
