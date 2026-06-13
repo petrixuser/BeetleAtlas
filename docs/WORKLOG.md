@@ -1007,8 +1007,45 @@ ausstehen):
    verlieren (per Env-Var weiter justierbar). Noch nicht gegen den laufenden Stack
    gegengetestet — beim naechsten `docker-compose.dev.yml`-Lauf bestaetigen.
 
+## Scope-Entscheidung (2026-06-13, Perry) — nur lokale Praesentation, KEIN Dauerbetrieb
+
+Perry hat die offene Grundsatzfrage (Abschnitt C: Abgabe vs. Dauerbetrieb) entschieden:
+**Das ist ein Uni-Projekt. Es wird nur einmal live in der Praesentation vorgefuehrt und
+laeuft danach nicht weiter.** Daraus folgen bewusst minimal gehaltene Entscheidungen:
+
+1. **CSV-Daten (~214 MB) bleiben im Git-Repo.** Kein DB-Dump, kein Auslagern (GitHub-
+   Release/LFS), kein History-Rewrite.
+   - *Warum:* Das Repo ist nicht zum Clonen gedacht, sondern wird lokal vorgefuehrt. Die
+     GitHub-Groessenwarnung ist folgenlos (groesste Dateien `media.csv` 83 MB,
+     `observation.csv` 79 MB — beide unter dem 100-MB-Hardlimit). Auslagern waere Aufwand
+     ohne Mehrwert fuer eine einmalige Demo.
+   - *Trade-off bewusst akzeptiert:* aufgeblaehte Git-Historie. Egal, da Wegwerf-Projekt.
+   - *Spaeter aenderbar:* Falls je Dauerbetrieb gewollt -> komprimierter `mysqldump` als
+     GitHub-Release-Asset (grob 40-70 MB) statt Roh-CSVs, CSVs aus dem Tree nehmen.
+
+2. **DB-Zugangsdaten bleiben simpel (`root123`).** Kein Produktions-Secrets-Setup, kein
+   dedizierter DB-User.
+   - *Warum:* `db.py` liest die Creds ohnehin aus Env-Vars (`DB_USER`/`DB_PASSWORD`/...),
+     die Defaults reichen fuer eine rein lokale Demo. Unbedenklich, **solange die DB nicht
+     oeffentlich erreichbar ist** — bei lokaler Vorfuehrung ist sie das nicht.
+   - *Spaeter aenderbar:* Bei oeffentlichem Deployment -> starkes Passwort + eigener
+     App-User, beides als Portainer Stack-Env (wie `GMAPS_KEY`), nie ins Repo.
+
+3. **Produktions-Rollout (Schritt 8) entfaellt** fuer den aktuellen Scope. Das Backend
+   muss NICHT auf die NAS. Vorfuehrung laeuft lokal ueber `docker-compose.dev.yml` mit
+   echten Daten. Damit entfallen auch: NAS-Kumpel-Abstimmung (Abschnitt A), DB-Volume/
+   Backup/Subdomain, und die Performance-Sorge (Abschnitt C) ist in einer Demo handhabbar
+   (vorab warmlaufen lassen, reinzoomen = schneller, Filter nicht hammern).
+   - **Live-Seite `kafer.server-work.de` bleibt unveraendert im Demo-Modus** — wer die
+     echten Daten sehen will, sieht sie in der lokalen Vorfuehrung.
+
 ## Wie weitermachen (empfohlene Reihenfolge naechste Session)?
-1. Antworten von Basti + Kumpel abwarten/einsammeln (Abstimmungen A).
-2. Entscheidung zu C treffen (Abgabe vs. Dauerbetrieb).
-3. Falls Dauerbetrieb gewollt UND Abstimmungen ok: Schritt 8 umsetzen.
-4. Optional vorher: climate-Constraint-Bug fixen, pytest-Timeout anheben.
+Scope ist jetzt "nur lokale Praesentation" (s. o.). Damit verkuerzt sich die Liste:
+1. Basti die FYI-Nachricht schicken (`docs/NACHRICHTEN-2026-06-12.md`) — keine offenen
+   Entscheidungen mehr, nur Stand mitteilen. NAS-Kumpel-Nachricht entfaellt.
+2. **Demo lokal end-to-end gegenchecken** mit gesetztem `GMAPS_KEY` (lokal noch nicht
+   gesetzt -> Karte sonst leer): `GMAPS_KEY=<dev-key> DOCKER_BUILDKIT=0
+   COMPOSE_DOCKER_CLI_BUILD=0 docker compose -f docker-compose.dev.yml up --build`,
+   dann im Browser Liste + Filter + Karte einmal durchklicken. Das ist der letzte offene
+   Schritt zum "praesentationsfertig".
+3. (Entfaellt) Schritt 8 Produktionsdeployment — fuer diesen Scope nicht noetig.

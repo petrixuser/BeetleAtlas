@@ -14,9 +14,11 @@ Filter und Karte (`/api/map/points` mit Clustering) ziehen echte Daten. Die DE/E
 Vokabular-Sache hab ich geloest: Daten nutzen deine englischen Codes, UI zeigt deutsche
 Labels.
 
-Ein Punkt nur zur Info, zwei muss ich noch mit dir klaeren:
+Da das Ganze ein Uni-Projekt ist, das wir nur live in der Praesentation vorzeigen und
+danach nicht weiterbetreiben, halte ich die offenen Punkte bewusst simpel — alles nur
+zur Info, nichts, was dich blockiert:
 
-1. **climate_snapshot-Seed (nur FYI, schon gefixt):** Auf einer frischen DB bracht der
+1. **climate_snapshot-Seed (FYI, schon gefixt):** Auf einer frischen DB brach der
    Climate-Seed ab (0 Zeilen) — `DatabseShema.sql` legt den
    `chk_climate_relative_humidity`-Constraint direkt beim CREATE TABLE an, aber deine
    `MigrateClimateValidationNormalization.sql` setzt voraus, dass erst normalisiert und der
@@ -26,10 +28,13 @@ Ein Punkt nur zur Info, zwei muss ich noch mit dir klaeren:
    erfuellt. Dein Schema-Endzustand bleibt unveraendert, deine Migration wird damit zum
    No-op. Sag Bescheid, falls du es lieber anders haben willst (z. B. Werte korrigieren
    statt verwerfen) — laeuft aber lokal jetzt sauber durch.
-2. **CSV-Daten (~215MB)** liegen aktuell im Git-Repo (GitHub meckert wegen Groesse). So
-   lassen oder lieber DB-Dump statt CSVs fuer die Produktion?
-3. **DB-Zugangsdaten** fuer die Produktion — wer legt die fest (kommen als
-   Portainer-Secrets, nicht ins Repo)?
+2. **CSV-Daten (~215MB) bleiben im Repo (FYI):** GitHub meckert zwar wegen der Groesse,
+   aber das Repo ist nicht zum Clonen gedacht, sondern wir fuehren lokal vor. Daher kein
+   DB-Dump/Auslagern — zu viel Aufwand fuer eine einmalige Demo. Falls es spaeter doch mal
+   dauerhaft laufen soll, holen wir das nach.
+3. **DB-Zugangsdaten bleiben simpel (FYI):** `root123` bleibt fuer die lokale Demo, kein
+   Produktions-Secrets-Setup. Unbedenklich, solange die DB nicht oeffentlich erreichbar
+   ist (ist sie lokal nicht). Auch das aendern wir, falls es jemals online geht.
 
 Voll dokumentiert im `docs/WORKLOG.md`.
 
