@@ -14,14 +14,18 @@ Filter und Karte (`/api/map/points` mit Clustering) ziehen echte Daten. Die DE/E
 Vokabular-Sache hab ich geloest: Daten nutzen deine englischen Codes, UI zeigt deutsche
 Labels.
 
-Drei Punkte, die ich mit dir klaeren muss, bevor das produktiv geht:
+Ein Punkt nur zur Info, zwei muss ich noch mit dir klaeren:
 
-1. **climate_snapshot bleibt beim Seed leer** — `DatabseShema.sql` legt den
+1. **climate_snapshot-Seed (nur FYI, schon gefixt):** Auf einer frischen DB bracht der
+   Climate-Seed ab (0 Zeilen) — `DatabseShema.sql` legt den
    `chk_climate_relative_humidity`-Constraint direkt beim CREATE TABLE an, aber deine
    `MigrateClimateValidationNormalization.sql` setzt voraus, dass erst normalisiert und der
-   Constraint danach gesetzt wird. Auf einer frischen DB bricht der Climate-Seed deshalb ab
-   (0 Zeilen). Wie willst du das loesen — Constraint erst per Migration nach der
-   Normalisierung?
+   Constraint danach gesetzt wird. Ich hab's so geloest: `LoadClimateSnapshot.sql`
+   normalisiert die Out-of-Range-Werte (soil_moisture, ndvi, relative_humidity,
+   nighttime_lights) jetzt direkt beim INSERT auf NULL, damit der Seed die Constraints
+   erfuellt. Dein Schema-Endzustand bleibt unveraendert, deine Migration wird damit zum
+   No-op. Sag Bescheid, falls du es lieber anders haben willst (z. B. Werte korrigieren
+   statt verwerfen) — laeuft aber lokal jetzt sauber durch.
 2. **CSV-Daten (~215MB)** liegen aktuell im Git-Repo (GitHub meckert wegen Groesse). So
    lassen oder lieber DB-Dump statt CSVs fuer die Produktion?
 3. **DB-Zugangsdaten** fuer die Produktion — wer legt die fest (kommen als
