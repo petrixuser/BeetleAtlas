@@ -895,7 +895,56 @@ Integration dieses Backends in dieses Repo ist unter "Integration Backend (Basti
 
 ---
 
-# >>> HANDOFF / NAECHSTE SESSION — Stand 2026-06-12 <<<
+# >>> AKTUELLER EINSTIEG — Stand 2026-06-13 (Ende der Session) <<<
+
+Zuerst das hier lesen. Aeltere Handoffs (2026-06-12 usw.) stehen darunter als Historie.
+
+## Stand 2026-06-13 — wo genau weitermachen
+
+**Scope ist geklaert:** Voller Stack (Frontend + Backend + MySQL) soll live auf die NAS des
+Kumpels (Portainer). Uni-Projekt, wird live vorgefuehrt. Details: Abschnitt
+"Scope-Entscheidung (2026-06-13)" weiter oben.
+
+**Heute erledigt (alles auf `main` gepusht, letzter Commit `4c77c40`):**
+1. Wartungsfixes: climate-Seed-Bug behoben (`LoadClimateSnapshot.sql` normalisiert
+   Out-of-Range-Werte beim Insert, verifiziert) + pytest-Timeout 15s->60s.
+2. Doku konsolidiert: Scope-/Daten-/Secrets-Entscheidungen, Karten-Performance-Analyse
+   (Entwicklungsplan Modul 12 + Pflichtenheft §12.1).
+3. **Schritt 8 Teil 1 (Code) fertig + verifiziert:**
+   - CI baut jetzt **zwei** Images -> GHCR. **`beetleatlas-backend:latest` ist live in
+     GHCR** (verifiziert, Tag `sha-4c77c40`). Frontend-Image unveraendert.
+   - **`docker-compose.prod.yml`** (voller Stack) neu angelegt, Syntax valide.
+     Datenimport-Variante (a) = Portainer Git-Repo-Stack. Details: Abschnitt
+     "Schritt 8 — Teil 1 UMGESETZT (2026-06-13)" oben.
+
+**WICHTIG — Blocker beim Weitermachen:** Die **NAS/der Server des Kumpels ist aktuell
+offline** (2026-06-13): `https://kafer.server-work.de` liefert **Cloudflare 523 (Origin
+Unreachable)**, die bestehende Live-Seite ist also gerade selbst nicht erreichbar. Deshalb
+scheitert auch der Portainer-Webhook-Schritt der CI (rotes X im Deploy-Job) — **nicht durch
+unsere Code-Aenderungen verursacht** (Image-Bauen ist gruen; nur der Deploy-Trigger zur NAS
+schlaegt fehl, weil die NAS nicht erreichbar ist). Webhook scheitert seit dem ersten
+Push heute, zeitgleich mit dem NAS-Ausfall.
+
+**Naechste Schritte (Reihenfolge):**
+1. **Kumpel fragen, ob sein Server wieder laeuft** (aktuell 523). Solange die NAS down ist,
+   geht beim Deployment nichts.
+2. Wenn NAS oben: Kumpel richtet ein (versandfertige Nachricht in
+   `docs/NACHRICHTEN-2026-06-12.md`, Abschnitt "An den NAS-Kumpel"): Git-Repo-Stack auf
+   `docker-compose.prod.yml`, Env-Vars (`GMAPS_KEY`, `API_BASE_URL`, `FRONTEND_ORIGINS`),
+   NPM-Routen inkl. **neu** `api.kafer.server-work.de` -> `beetle-backend:8000`, RAM/SSD-Info.
+3. Erststart: DB importiert ~417k Datensaetze (dauert Minuten), dann im Volume.
+4. Live testen (Liste/Filter/Karte mit echten Daten). Rollback: Backup-Branch
+   `backup/main-before-backend-integration-20260612` + alter Frontend-only-Stack.
+5. **Optional/parallel (unabhaengig von der NAS):** kleine Demo-Subset-Variante als
+   schneller Fallback bauen (Entwicklungsplan Modul 12, "Zwei-Varianten-Strategie").
+   Perry wurde gefragt, ob ich das schon vorbereiten soll — Antwort steht noch aus.
+
+**Offene Nachrichten zum Verschicken:** Basti (FYI, alle Punkte geklaert) + NAS-Kumpel
+(Setup-Schritte) — beide in `docs/NACHRICHTEN-2026-06-12.md`.
+
+---
+
+# >>> HANDOFF / NAECHSTE SESSION — Stand 2026-06-12 (Historie) <<<
 
 Dieser Abschnitt ist der zentrale Einstieg fuer die naechste Session. Zuerst hier lesen,
 dann oben in die Detail-Abschnitte springen.
