@@ -1038,24 +1038,45 @@ Entscheidungen (bewusst simpel gehalten, da Uni-Projekt):
    MySQL-DB auf die NAS, alles ueber Portainer. **Live-Seite verlaesst damit den
    Demo-Modus** (sobald `API_BASE_URL` aufs Backend zeigt).
 
-### Schritt 8 — was dafuer konkret noetig ist
-- **CI:** Backend-Image im Workflow `.github/workflows/build-and-deploy.yml` zusaetzlich
-  bauen + nach GHCR pushen (analog Frontend).
-- **Prod-`docker-compose.yml`** erweitern um `beetle-db` (MySQL, DB-Volume, Init-Skripte)
-  + `beetle-backend` (GHCR-Image). Vorlage existiert: `docker-compose.dev.yml`.
-- **`API_BASE_URL`** als Portainer-Env fuers Frontend setzen (interne Backend-URL) — erst
-  dann zeigt die Live-Seite echte Daten.
-- **Offene Designfrage Datenimport:** Wie bekommt der MySQL-Container auf der NAS die
-  Init-SQL + ~214 MB CSV? Optionen: (a) Portainer-Stack direkt aus dem Git-Repo deployen
-  (Portainer klont Repo inkl. Daten, mountet `backend/SQL` + `backend/Data` wie in der
-  Dev-Compose) — am naechsten am Dev-Setup; (b) custom DB-Image mit eingebackenen
-  Init-Skripten + Daten nach GHCR (passt zum image-basierten Flow, aber 214 MB im Image);
-  (c) Daten einmalig manuell ins DB-Volume seeden. **Empfehlung: (a)**, weil es 1:1 die
-  bereits getestete Dev-Compose wiederverwendet.
-- **Mit dem NAS-Kumpel zu klaeren:** RAM/Platz-Reserve (DB ~1-2 GB Platte, beim Abfragen
-  RAM-hungrig), DB-Volume in Backups?, Subdomain `api.kafer.server-work.de` im Nginx
-  Proxy Manager auf das Backend. (Die vorformulierte Kumpel-Nachricht in
-  `docs/NACHRICHTEN-2026-06-12.md` ist dafuer da — bleibt relevant.)
+### Schritt 8 — Teil 1 UMGESETZT (2026-06-13)
+
+Code-Teil des Produktions-Rollouts ist fertig und verifiziert. Datenimport-Designfrage
+entschieden: **Variante (a) — Portainer Git-Repository-Stack** (klont das Repo inkl.
+`backend/Data`, Bind-Mounts wie in der Dev-Compose). Gewaehlt, weil es 1:1 die bereits
+getestete Dev-Compose wiederverwendet und keine zusaetzliche DB-Image-Pipeline braucht.
+
+Umgesetzt:
+- **CI** (`.github/workflows/build-and-deploy.yml`): Build-Job auf eine **Matrix**
+  umgestellt — baut + pusht jetzt **zwei** Images nach GHCR: `beetleatlas` (Frontend, wie
+  bisher) und **`beetleatlas-backend`** (neu, aus `backend/docker/Dockerfile`). Deploy-Job
+  (Portainer-Webhook) unveraendert. Lokal verifiziert: Backend-Image baut sauber (290 MB,
+  ohne die CSVs — `backend/Data` ist per `.dockerignore` ausgeschlossen; SQL-Skripte sind
+  drin), `docker compose -f docker-compose.prod.yml config` ist valide, Workflow-YAML
+  valide.
+- **`docker-compose.prod.yml`** (NEU, Repo-Root): voller Produktions-Stack —
+  `beetle-db` (mysql:8.0, Init-Skripte + `backend/Data` als Bind-Mount, Volume
+  `beetle_db_data`, **kein** veroeffentlichter Port, nur internes Netz `beetle_internal`),
+  `beetle-backend` (GHCR-Image, Netze `beetle_internal` + `npm_proxy`, kein Host-Port,
+  `FRONTEND_ORIGINS` default `https://kafer.server-work.de`), `beetle-frontend`
+  (GHCR-Image, `npm_proxy`, `API_BASE_URL` default `https://api.kafer.server-work.de`).
+  Die bestehende `docker-compose.yml` (aktueller Frontend-only-Live-Stack) bleibt
+  **unangetastet** — nichts an der Live-Seite aendert sich automatisch.
+- Wichtige Erkenntnis im Code verankert: `API_BASE_URL` wird vom **Browser** aufgerufen,
+  muss also eine **oeffentliche** URL sein (api-Subdomain via NPM), kein interner
+  Docker-Hostname. Darum Backend auf `npm_proxy` + CORS `FRONTEND_ORIGINS`.
+
+Noch offen fuer den Go-Live (kein Code mehr, sondern Push + Kumpel):
+- [ ] Nach `main` pushen -> CI baut/pusht das Backend-Image nach GHCR (erster Lauf der
+      neuen Matrix). **Pruefen, dass beide Images erscheinen.**
+- [ ] **NAS-Kumpel** richtet ein (siehe Nachricht in `docs/NACHRICHTEN-2026-06-12.md`):
+      Git-Repo-Stack auf `docker-compose.prod.yml`, Env-Vars (`GMAPS_KEY`, `API_BASE_URL`,
+      `FRONTEND_ORIGINS`), NPM-Routen `kafer...` -> `beetle-frontend:80` und
+      **`api.kafer...` -> `beetle-backend:8000`**, RAM/SSD-Auskunft.
+- [ ] Erststart: DB importiert ~417k Datensaetze (dauert Minuten), danach im Volume.
+- [ ] Live testen (Liste/Filter/Karte mit echten Daten), Rollback-Plan: Backup-Branch
+      `backup/main-before-backend-integration-20260612` + alter Frontend-only-Stack.
+
+### Performance-Kontext fuer Schritt 8
 - **Performance-Hinweis:** Abfragen dauern 10-38 s (RAM-/Datenmenge-Thema; Indizes aus
   `AddMapQueryIndexes.sql` sind bereits aktiv). Auf einer Live-Seite spuerbar langsam.
   Fuer eine gefuehrte Praesentation handhabbar (vorab warmlaufen, reinzoomen = schneller).

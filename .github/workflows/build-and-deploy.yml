@@ -11,13 +11,23 @@ permissions:
   packages: write
 
 env:
-  IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/beetleatlas
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   build:
-    name: Build and push image
+    name: Build and push images
     runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # Frontend (static nginx site) — the existing live image.
+          - image: beetleatlas
+            dockerfile: Dockerfile
+          # Backend (FastAPI). New: needed for the full-stack production rollout.
+          - image: beetleatlas-backend
+            dockerfile: backend/docker/Dockerfile
 
     steps:
       - name: Checkout repository
@@ -34,7 +44,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.IMAGE_NAME }}
+          images: ghcr.io/${{ github.repository_owner }}/${{ matrix.image }}
           tags: |
             type=raw,value=latest
             type=sha,prefix=sha-
@@ -43,6 +53,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
+          file: ${{ matrix.dockerfile }}
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}

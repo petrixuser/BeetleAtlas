@@ -44,17 +44,31 @@ Voll dokumentiert im `docs/WORKLOG.md`.
 
 ## An den NAS-Kumpel (Server-Besitzer)
 
-Hey, ich wuerde gerne das Kaefer-Projekt erweitern: Aktuell laeuft bei dir nur das statische
-Frontend (nginx). Damit echte Daten angezeigt werden, muessten ein **Backend
-(Python/FastAPI)** und eine **MySQL-Datenbank** dazukommen. Bevor ich da was anfasse, ein
-paar Fragen:
+Hey, ich moechte das Kaefer-Projekt erweitern: Aktuell laeuft bei dir nur das statische
+Frontend (nginx). Damit echte Daten angezeigt werden, kommen ein **Backend
+(Python/FastAPI)** und eine **MySQL-Datenbank** dazu. Ich hab alles vorbereitet (Images
+bauen automatisch via GitHub Actions nach GHCR, Compose liegt im Repo als
+`docker-compose.prod.yml`). Was ich von dir braeuchte:
 
-1. **Ist das ok fuer dich** — eine dauerhaft laufende DB ist ressourcenintensiver als der
-   jetzige statische Container.
-2. **Speicher/RAM**: Die DB braucht grob 1-2GB Plattenplatz und ist beim Abfragen
-   RAM-hungrig. Hat die NAS dafuer Reserven?
-3. **Backups**: Soll das DB-Volume in deine Backups rein? Was passiert bei NAS-Neustart?
-4. **Netzwerk**: Backend soll intern erreichbar sein (`npm_proxy`), evtl. als Subdomain
-   `api.kafer.server-work.de` ueber den Nginx Proxy Manager — koenntest du das einrichten?
+1. **Ressourcen ok?** Eine dauerhaft laufende DB ist schwerer als der statische Container:
+   grob **1-2 GB Plattenplatz**, und beim Abfragen **RAM-hungrig**. Sag mir, wie viel **RAM**
+   die NAS frei hat und ob die Daten auf **SSD oder HDD** liegen — davon haengt ab, wie
+   schnell die Karte laedt (aktuell 10-40s pro Abfrage auf einer schwachen Test-VM).
+2. **Backups**: Soll das DB-Volume (`beetle_db_data`) in deine Backups? Was passiert bei
+   NAS-Neustart (Volume bleibt erhalten, DB muss nur wieder starten).
+3. **Stack in Portainer**: Am einfachsten als **Git-Repository-Stack** anlegen (Repo
+   `https://github.com/petrixuser/BeetleAtlas`, Compose-Pfad `docker-compose.prod.yml`).
+   Dann zieht Portainer das Repo inkl. der Seed-Daten selbst. Folgende **Environment-
+   Variablen** im Stack setzen:
+   - `GMAPS_KEY` = (derselbe Google-Maps-Key wie bisher)
+   - `API_BASE_URL` = `https://api.kafer.server-work.de`
+   - `FRONTEND_ORIGINS` = `https://kafer.server-work.de`
+   - (`DB_PASSWORD` optional — Default `root123` reicht, die DB ist nur intern erreichbar)
+4. **Netzwerk / Nginx Proxy Manager**: Bitte zwei Routen einrichten:
+   - `kafer.server-work.de` → `beetle-frontend:80` (wie bisher, nur evtl. Containername neu)
+   - **neu:** `api.kafer.server-work.de` → `beetle-backend:8000`
+   Die DB wird NICHT nach aussen veroeffentlicht, laeuft nur im internen Docker-Netz.
 
-Kein Stress, das ist erstmal nur zum Abstimmen. Lokal laeuft schon alles.
+Beim allerersten Start importiert die DB die Daten selbst (~417k Datensaetze, dauert ein
+paar Minuten) — danach liegt alles im Volume und der Start ist schnell. Kein Stress, sag
+einfach, was an Ressourcen geht, dann stimmen wir den Rest ab.

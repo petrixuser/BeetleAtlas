@@ -1,0 +1,95 @@
+# Production full-stack deployment for the friend's NAS (Portainer).
+#
+# Deploy this in Portainer as a GIT REPOSITORY stack (not web editor), so the
+# repository — including backend/SQL (init scripts) and backend/Data (the ~214MB
+# seed CSVs) — is checked out on the NAS and the bind mounts below resolve.
+#
+# Images (frontend + backend) are pulled from GHCR (built by GitHub Actions).
+# The database uses the stock mysql:8.0 image and seeds itself once from the
+# bind-mounted SQL + CSV on first start; the named volume persists afterwards.
+#
+# Required Portainer stack environment variables:
+#   GMAPS_KEY          Google Maps JS API key (already used by the live frontend)
+#   API_BASE_URL       public URL of the backend, e.g. https://api.kafer.server-work.de
+#   FRONTEND_ORIGINS   public origin of the frontend, e.g. https://kafer.server-work.de
+#   DB_PASSWORD        optional; defaults to root123 (DB is internal-only, see WORKLOG)
+#
+# Nginx Proxy Manager (friend) must route:
+#   kafer.server-work.de      -> beetle-frontend:80
+#   api.kafer.server-work.de  -> beetle-backend:8000
+#
+# The DB is NOT published and lives only on the internal network.
+
+services:
+  beetle-db:
+    image: mysql:8.0
+    container_name: beetle-db
+    restart: unless-stopped
+    command: ["--default-authentication-plugin=mysql_native_password"]
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD:-root123}
+      - MYSQL_DATABASE=${DB_NAME:-beetle_db}
+    volumes:
+      - beetle_db_data:/var/lib/mysql
+      - ./backend/SQL/DatabseShema.sql:/docker-entrypoint-initdb.d/01_schema.sql:ro
+      - ./backend/SQL/AddMapQueryIndexes.sql:/docker-entrypoint-initdb.d/02_indexes.sql:ro
+      - ./backend/SQL/LoadGBIFCSVToDB.sql:/docker-entrypoint-initdb.d/03_seed_gbif.sql:ro
+      - ./backend/SQL/LoadClimateSnapshot.sql:/docker-entrypoint-initdb.d/04_seed_climate.sql:ro
+      - ./backend/SQL/RecordQualityReportSnapshot.sql:/docker-entrypoint-initdb.d/05_quality_snapshot.sql:ro
+      - ./backend/Data:/var/lib/mysql-files
+    networks:
+      - beetle_internal
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-p${DB_PASSWORD:-root123}"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+
+  beetle-backend:
+    image: ghcr.io/petrixuser/beetleatlas-backend:latest
+    container_name: beetle-backend
+    restart: unless-stopped
+    environment:
+      - DB_HOST=beetle-db
+      - DB_PORT=3306
+      - DB_USER=${DB_USER:-root}
+      - DB_PASSWORD=${DB_PASSWORD:-root123}
+      - DB_NAME=${DB_NAME:-beetle_db}
+      - API_HOST=0.0.0.0
+      - API_PORT=8000
+      - API_APP_MODULE=backend.App.core.main:app
+      - ENABLE_SLOW_QUERY_LOGGING=${ENABLE_SLOW_QUERY_LOGGING:-true}
+      - SLOW_QUERY_MS=${SLOW_QUERY_MS:-300}
+      # CORS: the browser loads the site from the frontend origin and calls the
+      # backend on the api subdomain, so the frontend origin must be allowed.
+      - FRONTEND_ORIGINS=${FRONTEND_ORIGINS:-https://kafer.server-work.de}
+    networks:
+      - beetle_internal
+      - npm_proxy
+    depends_on:
+      beetle-db:
+        condition: service_healthy
+
+  beetle-frontend:
+    image: ghcr.io/petrixuser/beetleatlas:latest
+    container_name: beetle-frontend
+    restart: unless-stopped
+    environment:
+      - GMAPS_KEY=${GMAPS_KEY}
+      # Public backend URL the browser calls. Without it the frontend stays in
+      # demo mode. Point this at the api subdomain served by Nginx Proxy Manager.
+      - API_BASE_URL=${API_BASE_URL:-https://api.kafer.server-work.de}
+    networks:
+      - npm_proxy
+    depends_on:
+      beetle-backend:
+        condition: service_started
+
+networks:
+  npm_proxy:
+    external: true
+  beetle_internal:
+    driver: bridge
+
+volumes:
+  beetle_db_data:
