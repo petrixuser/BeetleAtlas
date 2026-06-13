@@ -666,6 +666,80 @@ Die Anwendung funktioniert perspektivisch mit mehr als 2 Millionen Insekten-Date
 - Marker-Rendering kann Browser stark belasten.
 - Google Maps kann bei zu vielen Overlays langsam werden.
 
+### Befund 2026-06-13: Warum die Karte aktuell langsam ist (10-40s)
+
+Bei der echten Integration (Datensatz: ~417k Beobachtungen, ~191k Orte, ~378k Medien)
+dauern Kartenabfragen 10-40s, am langsamsten beim Rauszoomen ueber ganz Lateinamerika
+(~38s), reingezoomt deutlich schneller (~5s). Ursache ist NICHT primaer die Datenmenge,
+sondern die Architektur der aktuellen Abfrage (`backend/App/repositories/beetle_repository.py`,
+`fetch_beetles_list_rows_total`), die der Karten-Endpunkt ueber den Beetle-Listen-Controller
+mitbenutzt:
+
+1. **Die Karte fuehrt die komplette "grosse" Listen-Abfrage aus**, obwohl sie nur lat/lng
+   (+ wenige Felder) braucht: Medien-Aggregation (`GROUP BY` ueber 378k Medienzeilen),
+   dutzende berechnete CASE-Spalten (Klima, Vegetation, Boden, Baender …) und eine
+   **korrelierte Unterabfrage pro Beobachtung** fuer den passenden `climate_snapshot`
+   (`SELECT MAX(snapshot_date) ... WHERE cs2.location_id = ...`) — laeuft ~417k Mal.
+2. **Der Bounding-Box-Filter wird erst ganz am Ende** (`{where_sql}` nach der `enriched`-CTE)
+   angewendet — also NACHDEM alle Zeilen voll angereichert wurden. Das `LIMIT` kann nichts
+   einsparen, weil die teure Materialisierung vorher passiert. Der bbox-Filter kann so auch
+   keinen Index nutzen.
+3. **Die Gesamtzahl wird zusaetzlich ermittelt**, indem die gesamte Monster-Abfrage erneut
+   als `SELECT COUNT(*) FROM (<ganze Query>)` laeuft — also faktisch doppelte Arbeit pro
+   Kartenbewegung.
+4. Das Python-Clustering (`map_repository.cluster_map_points`) ist NICHT der Flaschenhals
+   (es laeuft nur ueber die `limit` geladenen Zeilen). Nebenbefund: dadurch clustert es
+   aktuell nur eine Stichprobe der ersten `limit` Punkte, meldet aber `source_total_points`
+   = Gesamtzahl — visuell plausibel, aber nicht ueber alle Punkte gerechnet.
+
+### Optimierungsweg (Modul-12-Arbeitspaket, optional/Stufe 4)
+
+Eine **eigene, schlanke Karten-Abfrage** statt der Listen-Abfrage wuerde die Karte von
+~38s auf voraussichtlich unter 1s bringen:
+
+- Nur `observation` JOIN `location` mit `SELECT l.latitude, l.longitude` (kein Medien-Join,
+  keine `climate_snapshot`-Unterabfrage, keine CASE-Spalten).
+- **Bounding-Box-Filter zuerst** anwenden, gestuetzt auf einen Index auf
+  `location(latitude, longitude)` (vgl. `AddMapQueryIndexes.sql` — pruefen/ergaenzen).
+- **Clustering direkt in SQL**: `GROUP BY FLOOR(lat/cell), FLOOR(lng/cell)` mit
+  `COUNT(*)`, `AVG(lat)`, `AVG(lng)` — gibt nur die wenigen Clusterzellen zurueck (winzige
+  Antwort) und clustert korrekt ueber ALLE Punkte im Ausschnitt statt ueber eine Stichprobe.
+- Fuer die Karte die teure `COUNT(*)`-Gesamtzaehlung weglassen oder billig schaetzen.
+- Filter (climate/vegetation/elevation) muessen weiterhin greifen — entweder auf
+  vorberechneten/denormalisierten Spalten oder einer schlanken gefilterten Variante.
+
+Aufwand: echte Programmierarbeit (neue Repository-Methode, Indizes, Tests), fasst Bastis
+Code an. Hoher Effekt, aber bewusst als spaetere Stufe eingeplant (s. u.).
+
+### Zwei-Varianten-Strategie (Entscheidung 2026-06-13, Perry)
+
+Statt (oder zusaetzlich zu) tiefer Query-Optimierung wird eine **reduzierte Demo-Variante**
+gebaut: gleiches Frontend/Backend, gleicher Schema-Code, nur **deutlich weniger Daten**
+(z. B. Teilmenge nach Laendern/Arten oder Stichprobe ~5-10 %). Ergebnis: ~20-40k statt
+417k Datensaetze -> Abfragen unter 1-2s, laeuft fluessig auch lokal.
+
+- **Grosse Variante (voller Datensatz):** Hauptdeliverable auf der NAS; belegt, dass der
+  komplette GBIF-Datensatz verarbeitet wurde. "Funktioniert, aber langsam" ist akzeptabel.
+- **Kleine Variante (Subset):** garantiert schnelle, klickbare Live-Demo UND lokaler
+  Notfall-Fallback fuer die Praesentation (falls NAS/Netz am Tag X zicken).
+- Die Subset-Variante ist der pragmatische 90-%-Performance-Gewinn fuer ~10 % Aufwand; die
+  tiefe Query-Optimierung oben ist der saubere, aber optionale Profi-Weg.
+
+### Empfohlene Reihenfolge (Begruendung)
+
+Prinzip "erst zum Laufen bringen, dann richtig, dann schnell":
+
+1. **Grosse Variante auf die NAS, end-to-end lauffaehig** (Hauptdeliverable; langsam ok).
+2. **Auf der echten NAS messen** — ist es ertraeglich, entfaellt evtl. weitere Optimierung.
+   Performance haengt stark an NAS-RAM/SSD; ohne Messung auf der Zielmaschine ist
+   Optimierung Blindflug.
+3. **Kleine Subset-Variante als garantierten Fallback** bauen (geringer Aufwand,
+   entschaerft das Performance-Risiko komplett). Muss VOR der Praesentation fertig sein.
+4. **Nur falls noetig/Zeit: Karten-Abfrage optimieren** (Optimierungsweg oben).
+
+Reihenfolge gross-vor-klein ist auch dependency-bedingt: die kleine Variante ist eine
+Teilmenge der grossen — sie laesst sich erst "abschneiden", wenn das grosse Setup steht.
+
 ## Modul 13: UI-Layout und Designsystem
 
 ### Ziel

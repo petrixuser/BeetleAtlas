@@ -1059,8 +1059,14 @@ Entscheidungen (bewusst simpel gehalten, da Uni-Projekt):
 - **Performance-Hinweis:** Abfragen dauern 10-38 s (RAM-/Datenmenge-Thema; Indizes aus
   `AddMapQueryIndexes.sql` sind bereits aktiv). Auf einer Live-Seite spuerbar langsam.
   Fuer eine gefuehrte Praesentation handhabbar (vorab warmlaufen, reinzoomen = schneller).
-  Echte Beschleunigung waere ein eigenes Folge-Thema (weitere Indizes, weniger Joins,
-  Caching) — fuer die Abgabe vermutlich nicht noetig.
+  **Ausfuehrliche Ursachenanalyse (warum 10-40s) + Optimierungsweg + Zwei-Varianten-
+  Strategie (grosse + kleine Demo-Variante) + empfohlene Reihenfolge: jetzt dokumentiert
+  in `docs/ENTWICKLUNGSPLAN.md` Modul 12 ("Befund 2026-06-13") und `docs/PFLICHTENHEFT.md`
+  §12.1.** Kurzfassung: die Karte nutzt die schwere Listen-Abfrage (Medien-Join +
+  korrelierte climate-Unterabfrage pro Zeile, bbox-Filter erst am Ende, Count laeuft die
+  ganze Query nochmal). Eine schlanke Karten-Query mit bbox-Filter zuerst + SQL-Clustering
+  braechte ~38s -> unter 1s. Reihenfolge: erst grosse Variante deployen, dann messen, dann
+  kleine Subset-Variante als Fallback, optional danach Query-Optimierung.
 
 ## Wie weitermachen (empfohlene Reihenfolge naechste Session)?
 Scope ist jetzt "Deployment auf die NAS" (s. o.).

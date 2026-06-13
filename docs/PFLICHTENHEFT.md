@@ -294,6 +294,22 @@ Spaeter benoetigt:
 - Pagination oder limitierte Ergebnislisten
 - Nachladen je nach Zoomstufe und Kartenausschnitt
 
+### 12.1 Performance-Anforderung und Zwei-Varianten-Strategie (Entscheidung 2026-06-13)
+
+Mit dem echten Datensatz (~417k Beobachtungen) dauern Kartenabfragen aktuell 10-40s
+(rausgezoomt am langsamsten). Anforderung: Die in der Praesentation gezeigte Variante
+muss **fluessig bedienbar** sein. Dazu gilt verbindlich:
+
+- **Zwei Varianten:** (a) **grosse Variante** mit vollem Datensatz auf der NAS
+  (Hauptdeliverable, "funktioniert aber langsam" akzeptabel) und (b) **kleine
+  Demo-Variante** mit reduziertem Datensatz (gleicher Code, ~20-40k statt 417k Saetze) als
+  schnelle Live-Demo und lokaler Notfall-Fallback.
+- **Vorgehen:** erst grosse Variante lauffaehig, dann auf der NAS messen, dann kleine
+  Variante als Fallback, optional danach Karten-Query optimieren.
+- Technische Ursachenanalyse der Langsamkeit und der Optimierungsweg stehen im
+  **Entwicklungsplan, Modul 12** ("Befund 2026-06-13" + "Optimierungsweg"). Diese Details
+  bewusst dort, nicht hier (Pflichtenheft = Anforderungen, Entwicklungsplan = Umsetzung).
+
 ## 13. Offene Entscheidungen
 
 - Welche Laender genau als Lateinamerika gelten sollen.
@@ -312,7 +328,13 @@ Spaeter benoetigt:
   deutschsprachige Labels vs. englisch codierte Band-Klassen.
 - Verbindliches einheitliches API-Response-Format fuer Listenendpunkte
   (`Array` vs. `items/total/page/page_size`).
-- Wie und wann das Backend ins Produktions-Deployment (Portainer/NAS) aufgenommen wird.
+- ~~Wie und wann das Backend ins Produktions-Deployment (Portainer/NAS) aufgenommen wird.~~
+  **Entschieden 2026-06-13:** Backend + MySQL-DB werden auf die NAS des Kumpels (Portainer)
+  deployt; Frontend laeuft dort bereits. CSV-Daten bleiben im Repo, DB-Creds bleiben simpel
+  (`root123`), da die DB nur im internen Docker-Netz laeuft. Details + Aufgabenliste:
+  Worklog "Scope-Entscheidung (2026-06-13)" und Entwicklungsplan Phase 6.
+- ~~Karten-Performance / zwei Varianten~~ **Entschieden 2026-06-13:** s. §12.1 oben und
+  Entwicklungsplan Modul 12.
 
 ## 14. Arbeitsregel
 
