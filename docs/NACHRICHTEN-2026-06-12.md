@@ -14,9 +14,10 @@ Filter und Karte (`/api/map/points` mit Clustering) ziehen echte Daten. Die DE/E
 Vokabular-Sache hab ich geloest: Daten nutzen deine englischen Codes, UI zeigt deutsche
 Labels.
 
-Da das Ganze ein Uni-Projekt ist, das wir nur live in der Praesentation vorzeigen und
-danach nicht weiterbetreiben, halte ich die offenen Punkte bewusst simpel — alles nur
-zur Info, nichts, was dich blockiert:
+Wir betreiben das Ganze auf der NAS/dem Server von einem Kumpel (ueber Portainer, wie
+gehabt) — also Frontend + Backend + DB live ueber die echte URL, danach wird es nicht
+weiter dauerhaft betrieben. Da es ein Uni-Projekt ist, halte ich die offenen Punkte
+bewusst simpel — alles nur zur Info, nichts, was dich blockiert:
 
 1. **climate_snapshot-Seed (FYI, schon gefixt):** Auf einer frischen DB brach der
    Climate-Seed ab (0 Zeilen) — `DatabseShema.sql` legt den
@@ -29,12 +30,13 @@ zur Info, nichts, was dich blockiert:
    No-op. Sag Bescheid, falls du es lieber anders haben willst (z. B. Werte korrigieren
    statt verwerfen) — laeuft aber lokal jetzt sauber durch.
 2. **CSV-Daten (~215MB) bleiben im Repo (FYI):** GitHub meckert zwar wegen der Groesse,
-   aber das Repo ist nicht zum Clonen gedacht, sondern wir fuehren lokal vor. Daher kein
-   DB-Dump/Auslagern — zu viel Aufwand fuer eine einmalige Demo. Falls es spaeter doch mal
-   dauerhaft laufen soll, holen wir das nach.
-3. **DB-Zugangsdaten bleiben simpel (FYI):** `root123` bleibt fuer die lokale Demo, kein
-   Produktions-Secrets-Setup. Unbedenklich, solange die DB nicht oeffentlich erreichbar
-   ist (ist sie lokal nicht). Auch das aendern wir, falls es jemals online geht.
+   aber fuer ein Uni-Projekt reicht das. Kein DB-Dump/Auslagern — zu viel Aufwand. Auf
+   der NAS importieren wir die Daten ueber die Init-Skripte in die DB (wie in der
+   Dev-Compose). Falls spaeter mal sauberer gewuenscht, holen wir das nach.
+3. **DB-Zugangsdaten bleiben simpel (FYI):** `root123` bleibt, kein Produktions-Secrets-
+   Setup. Unbedenklich, weil die DB auf der NAS nur im internen Docker-Netz laeuft und
+   nicht aus dem Internet erreichbar ist (nur Frontend + API gehen ueber den Proxy nach
+   aussen). Auch das aendern wir, falls noetig.
 
 Voll dokumentiert im `docs/WORKLOG.md`.
 

@@ -1007,45 +1007,68 @@ ausstehen):
    verlieren (per Env-Var weiter justierbar). Noch nicht gegen den laufenden Stack
    gegengetestet — beim naechsten `docker-compose.dev.yml`-Lauf bestaetigen.
 
-## Scope-Entscheidung (2026-06-13, Perry) — nur lokale Praesentation, KEIN Dauerbetrieb
+## Scope-Entscheidung (2026-06-13, Perry) — Deployment auf die NAS des Kumpels
 
-Perry hat die offene Grundsatzfrage (Abschnitt C: Abgabe vs. Dauerbetrieb) entschieden:
-**Das ist ein Uni-Projekt. Es wird nur einmal live in der Praesentation vorgefuehrt und
-laeuft danach nicht weiter.** Daraus folgen bewusst minimal gehaltene Entscheidungen:
+KORREKTUR einer kurzzeitigen Fehlannahme: "live in der Praesentation vorfuehren" bedeutet
+**ueber die echte URL auf dem Server des Kumpels**, NICHT lokal vom Laptop. Perry will den
+bestehenden NAS/Portainer-Aufbau weiternutzen und das Backend + die DB dort live
+betreiben. Schritt 8 (Produktionsdeployment) ist also DOCH der Weg.
 
-1. **CSV-Daten (~214 MB) bleiben im Git-Repo.** Kein DB-Dump, kein Auslagern (GitHub-
-   Release/LFS), kein History-Rewrite.
-   - *Warum:* Das Repo ist nicht zum Clonen gedacht, sondern wird lokal vorgefuehrt. Die
-     GitHub-Groessenwarnung ist folgenlos (groesste Dateien `media.csv` 83 MB,
-     `observation.csv` 79 MB — beide unter dem 100-MB-Hardlimit). Auslagern waere Aufwand
-     ohne Mehrwert fuer eine einmalige Demo.
-   - *Trade-off bewusst akzeptiert:* aufgeblaehte Git-Historie. Egal, da Wegwerf-Projekt.
-   - *Spaeter aenderbar:* Falls je Dauerbetrieb gewollt -> komprimierter `mysqldump` als
-     GitHub-Release-Asset (grob 40-70 MB) statt Roh-CSVs, CSVs aus dem Tree nehmen.
+Entscheidungen (bewusst simpel gehalten, da Uni-Projekt):
+
+1. **CSV-Daten (~214 MB) bleiben im Git-Repo.** Kein DB-Dump, kein Auslagern, kein
+   History-Rewrite.
+   - *Warum:* GitHub-Groessenwarnung ist folgenlos (groesste Dateien `media.csv` 83 MB,
+     `observation.csv` 79 MB — beide unter 100-MB-Hardlimit). Fuer ein Uni-Projekt
+     ausreichend; Auslagern waere unnoetiger Aufwand.
+   - *Offen fuer Schritt 8:* Wie kommen die CSVs auf der NAS in die DB? (s. u. "Schritt 8 –
+     offene Designfrage Datenimport").
+   - *Spaeter aenderbar:* Falls je sauberer gewuenscht -> komprimierter `mysqldump`.
 
 2. **DB-Zugangsdaten bleiben simpel (`root123`).** Kein Produktions-Secrets-Setup, kein
    dedizierter DB-User.
-   - *Warum:* `db.py` liest die Creds ohnehin aus Env-Vars (`DB_USER`/`DB_PASSWORD`/...),
-     die Defaults reichen fuer eine rein lokale Demo. Unbedenklich, **solange die DB nicht
-     oeffentlich erreichbar ist** — bei lokaler Vorfuehrung ist sie das nicht.
-   - *Spaeter aenderbar:* Bei oeffentlichem Deployment -> starkes Passwort + eigener
-     App-User, beides als Portainer Stack-Env (wie `GMAPS_KEY`), nie ins Repo.
+   - *Warum unbedenklich:* Die DB laeuft auf der NAS nur im **internen Docker-Netz**
+     (`npm_proxy`), **kein Host-Port-Mapping, nicht aus dem Internet erreichbar**. Nur
+     Frontend und (neu) die Backend-API gehen ueber den Nginx Proxy Manager nach aussen,
+     die DB nicht. `db.py` liest die Creds aus Env-Vars; die Defaults reichen.
+   - *Spaeter aenderbar:* Falls doch public/haerter gewuenscht -> starkes Passwort +
+     eigener App-User, als Portainer Stack-Env (wie `GMAPS_KEY`), nie ins Repo.
 
-3. **Produktions-Rollout (Schritt 8) entfaellt** fuer den aktuellen Scope. Das Backend
-   muss NICHT auf die NAS. Vorfuehrung laeuft lokal ueber `docker-compose.dev.yml` mit
-   echten Daten. Damit entfallen auch: NAS-Kumpel-Abstimmung (Abschnitt A), DB-Volume/
-   Backup/Subdomain, und die Performance-Sorge (Abschnitt C) ist in einer Demo handhabbar
-   (vorab warmlaufen lassen, reinzoomen = schneller, Filter nicht hammern).
-   - **Live-Seite `kafer.server-work.de` bleibt unveraendert im Demo-Modus** — wer die
-     echten Daten sehen will, sieht sie in der lokalen Vorfuehrung.
+3. **Produktions-Rollout (Schritt 8) IST der Weg** — Frontend (laeuft schon) + Backend +
+   MySQL-DB auf die NAS, alles ueber Portainer. **Live-Seite verlaesst damit den
+   Demo-Modus** (sobald `API_BASE_URL` aufs Backend zeigt).
+
+### Schritt 8 — was dafuer konkret noetig ist
+- **CI:** Backend-Image im Workflow `.github/workflows/build-and-deploy.yml` zusaetzlich
+  bauen + nach GHCR pushen (analog Frontend).
+- **Prod-`docker-compose.yml`** erweitern um `beetle-db` (MySQL, DB-Volume, Init-Skripte)
+  + `beetle-backend` (GHCR-Image). Vorlage existiert: `docker-compose.dev.yml`.
+- **`API_BASE_URL`** als Portainer-Env fuers Frontend setzen (interne Backend-URL) — erst
+  dann zeigt die Live-Seite echte Daten.
+- **Offene Designfrage Datenimport:** Wie bekommt der MySQL-Container auf der NAS die
+  Init-SQL + ~214 MB CSV? Optionen: (a) Portainer-Stack direkt aus dem Git-Repo deployen
+  (Portainer klont Repo inkl. Daten, mountet `backend/SQL` + `backend/Data` wie in der
+  Dev-Compose) — am naechsten am Dev-Setup; (b) custom DB-Image mit eingebackenen
+  Init-Skripten + Daten nach GHCR (passt zum image-basierten Flow, aber 214 MB im Image);
+  (c) Daten einmalig manuell ins DB-Volume seeden. **Empfehlung: (a)**, weil es 1:1 die
+  bereits getestete Dev-Compose wiederverwendet.
+- **Mit dem NAS-Kumpel zu klaeren:** RAM/Platz-Reserve (DB ~1-2 GB Platte, beim Abfragen
+  RAM-hungrig), DB-Volume in Backups?, Subdomain `api.kafer.server-work.de` im Nginx
+  Proxy Manager auf das Backend. (Die vorformulierte Kumpel-Nachricht in
+  `docs/NACHRICHTEN-2026-06-12.md` ist dafuer da — bleibt relevant.)
+- **Performance-Hinweis:** Abfragen dauern 10-38 s (RAM-/Datenmenge-Thema; Indizes aus
+  `AddMapQueryIndexes.sql` sind bereits aktiv). Auf einer Live-Seite spuerbar langsam.
+  Fuer eine gefuehrte Praesentation handhabbar (vorab warmlaufen, reinzoomen = schneller).
+  Echte Beschleunigung waere ein eigenes Folge-Thema (weitere Indizes, weniger Joins,
+  Caching) — fuer die Abgabe vermutlich nicht noetig.
 
 ## Wie weitermachen (empfohlene Reihenfolge naechste Session)?
-Scope ist jetzt "nur lokale Praesentation" (s. o.). Damit verkuerzt sich die Liste:
-1. Basti die FYI-Nachricht schicken (`docs/NACHRICHTEN-2026-06-12.md`) — keine offenen
-   Entscheidungen mehr, nur Stand mitteilen. NAS-Kumpel-Nachricht entfaellt.
-2. **Demo lokal end-to-end gegenchecken** mit gesetztem `GMAPS_KEY` (lokal noch nicht
-   gesetzt -> Karte sonst leer): `GMAPS_KEY=<dev-key> DOCKER_BUILDKIT=0
-   COMPOSE_DOCKER_CLI_BUILD=0 docker compose -f docker-compose.dev.yml up --build`,
-   dann im Browser Liste + Filter + Karte einmal durchklicken. Das ist der letzte offene
-   Schritt zum "praesentationsfertig".
-3. (Entfaellt) Schritt 8 Produktionsdeployment — fuer diesen Scope nicht noetig.
+Scope ist jetzt "Deployment auf die NAS" (s. o.).
+1. **NAS-Kumpel-Nachricht** schicken (`docs/NACHRICHTEN-2026-06-12.md`): RAM/Platz,
+   Backup, Subdomain `api.kafer.server-work.de`. Bleibt relevant.
+2. **Basti** die FYI-Nachricht schicken (alle Punkte nur noch FYI).
+3. **Schritt 8 umsetzen** (s. Aufgabenliste oben): Backend-Image im CI, Prod-Compose um
+   DB+Backend erweitern, Datenimport-Variante (a) waehlen, `API_BASE_URL` setzen, live
+   testen, Rollback-Plan (Backup-Branch + altes Image) bereithalten.
+4. Vor dem Live-Schalten: `GMAPS_KEY` ist in Portainer schon gesetzt (Frontend) — pruefen,
+   dass die Karte mit Backend-Daten rendert.
