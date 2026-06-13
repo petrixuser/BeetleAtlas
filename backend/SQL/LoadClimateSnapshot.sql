@@ -42,11 +42,16 @@ SELECT
   s.snapshot_date,
   s.avg_temperature,
   s.precipitation,
-  s.soil_moisture,
-  s.ndvi,
-  s.relative_humidity,
+  -- Normalize out-of-range values to NULL on insert so the CHECK constraints
+  -- defined in DatabseShema.sql are satisfied on a fresh DB. The schema already
+  -- creates climate_snapshot WITH these constraints, so the legacy approach of
+  -- "load first, normalize + add constraints later" (see
+  -- MigrateClimateValidationNormalization.sql) cannot run before the seed here.
+  CASE WHEN s.soil_moisture BETWEEN 0 AND 1 THEN s.soil_moisture ELSE NULL END AS soil_moisture,
+  CASE WHEN s.ndvi BETWEEN -1 AND 1 THEN s.ndvi ELSE NULL END AS ndvi,
+  CASE WHEN s.relative_humidity BETWEEN 0 AND 100 THEN s.relative_humidity ELSE NULL END AS relative_humidity,
   s.surface_pressure_hpa,
-  s.nighttime_lights
+  CASE WHEN s.nighttime_lights >= 0 THEN s.nighttime_lights ELSE NULL END AS nighttime_lights
 FROM climate_snapshot_stage s
 INNER JOIN location l ON l.location_id = s.location_id
 ON DUPLICATE KEY UPDATE

@@ -9,17 +9,20 @@ import pytest
 
 
 BASE_URL = os.getenv("API_BASE_URL", "http://127.0.0.1:8000")
+# Cold/large queries on resource-constrained dev machines can take 20-38s.
+# Override with API_TEST_TIMEOUT if needed.
+REQUEST_TIMEOUT = float(os.getenv("API_TEST_TIMEOUT", "60"))
 
 
 def _get_json(path: str):
-    with urlopen(f"{BASE_URL}{path}", timeout=15) as response:
+    with urlopen(f"{BASE_URL}{path}", timeout=REQUEST_TIMEOUT) as response:
         payload = response.read().decode("utf-8")
         return response.status, json.loads(payload)
 
 
 def _post_json(path: str):
     req = Request(f"{BASE_URL}{path}", method="POST")
-    with urlopen(req, timeout=15) as response:
+    with urlopen(req, timeout=REQUEST_TIMEOUT) as response:
         payload = response.read().decode("utf-8")
         return response.status, json.loads(payload)
 

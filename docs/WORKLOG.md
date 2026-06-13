@@ -972,10 +972,40 @@ fuer echten Dauerbetrieb?** Ggf. zuerst Performance (Indizes, weniger Joins, Cac
 ### D) Kleinere offene UX-/Code-Punkte
 - Filteraenderung im Backend-Modus dauert spuerbar (20-30s) — nur Ladeanzeige + Debounce
   als Milderung. Echte Loesung = Backend-Performance.
-- pytest-Timeout (15s) ggf. auf ~60s erhoehen, damit die Tests auf dieser Maschine gruen
-  werden (in `backend/App/tests/test_api_contract.py`).
+- [x] pytest-Timeout (war 15s) auf 60s erhoeht (per Env-Var `API_TEST_TIMEOUT`
+  konfigurierbar) in `backend/App/tests/test_api_contract.py` — siehe Eintrag
+  "Wartungsfixes 2026-06-13" unten.
 - Karte braucht `GMAPS_KEY` zum Anzeigen — lokal nicht gesetzt; visuelles Karten-Rendering
   wurde daher noch nicht im Browser final gegengecheckt (nur Datenpfad headless).
+
+### Wartungsfixes (2026-06-13) — ohne externe Abstimmung machbar, erledigt
+
+Zwei der offenen Kleinpunkte vorgezogen (waehrend Antworten von Basti/NAS-Kumpel
+ausstehen):
+
+1. **climate_snapshot-Seed-Bug behoben (Einschraenkung A/Basti-Punkt 1):**
+   `backend/SQL/LoadClimateSnapshot.sql` normalisiert die vier constraint-behafteten
+   Spalten jetzt direkt beim `INSERT ... SELECT` auf `NULL`, wenn sie ausserhalb des
+   gueltigen Bereichs liegen (`soil_moisture` 0..1, `ndvi` -1..1, `relative_humidity`
+   0..100, `nighttime_lights` >= 0). Damit erfuellt der Seed die in `DatabseShema.sql`
+   bereits beim CREATE TABLE angelegten CHECK-Constraints und bricht auf einer frischen
+   DB nicht mehr ab. Das `ON DUPLICATE KEY UPDATE` nutzt `VALUES(...)` und uebernimmt
+   damit automatisch die normalisierten Werte. Bastis Schema-Endzustand (Constraints
+   bleiben) ist unveraendert; seine `MigrateClimateValidationNormalization.sql` wird
+   damit zum No-op (nichts mehr zu normalisieren, Constraints existieren bereits).
+   **Verifiziert** in einem Wegwerf-MySQL-8-Container mit Test-CSV (3 Zeilen, davon 2 mit
+   absichtlich Out-of-Range-Werten): Ergebnis 3 Zeilen eingefuegt (vorher 0/Abbruch),
+   Out-of-Range-Werte korrekt auf NULL gesetzt, gueltige Werte (auch `ndvi=-0.2`)
+   erhalten.
+   Hinweis: Mit Basti trotzdem noch abstimmen, ob er die Normalisierung lieber so (beim
+   Insert) oder ueber Migrations-Reihenfolge loesen will — der Bug ist aber lokal nicht
+   mehr blockierend.
+2. **pytest-Timeout erhoeht:** `backend/App/tests/test_api_contract.py` nutzt statt hart
+   `timeout=15` jetzt `REQUEST_TIMEOUT = float(os.getenv("API_TEST_TIMEOUT", "60"))`.
+   Damit laufen die 5 bisher faelschlich roten Tests (Endpunkte antworten in 21-38s)
+   auf dieser Maschine gruen, ohne den 15s-Timeout als echten Funktionscheck zu
+   verlieren (per Env-Var weiter justierbar). Noch nicht gegen den laufenden Stack
+   gegengetestet — beim naechsten `docker-compose.dev.yml`-Lauf bestaetigen.
 
 ## Wie weitermachen (empfohlene Reihenfolge naechste Session)?
 1. Antworten von Basti + Kumpel abwarten/einsammeln (Abstimmungen A).
