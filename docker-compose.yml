@@ -4,11 +4,11 @@ services:
     container_name: BeetleAtlas
     restart: unless-stopped
     networks:
-      - npm_proxy
+      - nas-rerverse-proxy
     environment:
       - GMAPS_KEY=${GMAPS_KEY}
       - API_BASE_URL=${API_BASE_URL:-}
 
 networks:
-  npm_proxy:
+  nas-reverse-proxy:
     external: true
