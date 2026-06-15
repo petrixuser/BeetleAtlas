@@ -895,9 +895,38 @@ Integration dieses Backends in dieses Repo ist unter "Integration Backend (Basti
 
 ---
 
-# >>> AKTUELLER EINSTIEG — Stand 2026-06-13 (Ende der Session) <<<
+# >>> AKTUELLER EINSTIEG — Stand 2026-06-15 <<<
 
-Zuerst das hier lesen. Aeltere Handoffs (2026-06-12 usw.) stehen darunter als Historie.
+Zuerst das hier lesen. Aeltere Handoffs (2026-06-13, 2026-06-12 usw.) stehen darunter als Historie.
+
+## Stand 2026-06-15 — NAS wieder online, Paul hat zugesagt
+
+- **NAS ist wieder erreichbar** (`https://kafer.server-work.de` -> HTTP 200, Frontend-only-
+  Demo-Modus laeuft wieder). Der 523-Blocker vom 13.06. ist weg. `api.kafer.server-work.de`
+  antwortet noch nicht (Backend-Stack/Subdomain beim Kumpel Paul noch nicht eingerichtet).
+- **Paul (NAS-Kumpel) hat auf die Setup-Nachricht geantwortet** und gibt gruenes Licht. Seine
+  Punkte + meine Antwort:
+  1. Compose: **eine** Datei `docker-compose.prod.yml` deckt Frontend+Backend+DB ab. Muss als
+     **Portainer Git-Repository-Stack** laufen (nicht Web-Editor-Paste), damit `backend/SQL`
+     + `backend/Data` (214 MB CSVs) zum DB-Init da sind. Repo: petrixuser/BeetleAtlas, Root.
+  2. NPM zeigt **nur** auf Frontend+Backend, **nicht** auf die DB:
+     `kafer.server-work.de -> beetle-frontend:80`, `api.kafer.server-work.de -> beetle-backend:8000`.
+     DB (`beetle-db:3306`) ist intern, Backend erreicht sie selbst.
+  3. Volume: Paul bietet Host-Pfad `/volume1/docker/beetlejuice`. **Umgesetzt + gepusht**
+     (Commit auf `main`): DB-Daten liegen jetzt als Bind-Mount auf
+     `/volume1/docker/beetlejuice/mysql` (statt anonymem Named Volume) -> backup-faehig.
+     Das alte `beetle_db_data`-Volume aus der Compose entfernt.
+- Stack-Env-Vars, die Paul in Portainer setzen muss: `GMAPS_KEY`, `API_BASE_URL=
+  https://api.kafer.server-work.de`, `FRONTEND_ORIGINS=https://kafer.server-work.de`
+  (`DB_PASSWORD` optional, default `root123`).
+- **Offene Info von Paul erbeten:** freier RAM der NAS (Abfragen sind RAM-hungrig).
+
+**Naechster Schritt:** Auf Pauls Stack-/NPM-Einrichtung warten -> Erststart (DB-Import ~417k
+Saetze, dauert Minuten) -> live testen (Liste/Filter/Karte). Rollback: Backup-Branch
+`backup/main-before-backend-integration-20260612` + alter Frontend-only-Stack.
+
+---
+
 
 ## Stand 2026-06-13 — wo genau weitermachen
 
