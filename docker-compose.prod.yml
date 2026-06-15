@@ -30,7 +30,9 @@ services:
       - MYSQL_ROOT_PASSWORD=${DB_PASSWORD:-root123}
       - MYSQL_DATABASE=${DB_NAME:-beetle_db}
     volumes:
-      - beetle_db_data:/var/lib/mysql
+      # Persistent MySQL data on the NAS host (Paul: /volume1/docker/beetlejuice).
+      # Living on a real host path makes it trivial to include in the NAS backups.
+      - /volume1/docker/beetlejuice/mysql:/var/lib/mysql
       - ./backend/SQL/DatabseShema.sql:/docker-entrypoint-initdb.d/01_schema.sql:ro
       - ./backend/SQL/AddMapQueryIndexes.sql:/docker-entrypoint-initdb.d/02_indexes.sql:ro
       - ./backend/SQL/LoadGBIFCSVToDB.sql:/docker-entrypoint-initdb.d/03_seed_gbif.sql:ro
@@ -90,6 +92,3 @@ networks:
     external: true
   beetle_internal:
     driver: bridge
-
-volumes:
-  beetle_db_data:
