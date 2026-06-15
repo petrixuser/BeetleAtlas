@@ -899,6 +899,33 @@ Integration dieses Backends in dieses Repo ist unter "Integration Backend (Basti
 
 Zuerst das hier lesen. Aeltere Handoffs (2026-06-13, 2026-06-12 usw.) stehen darunter als Historie.
 
+## Stand 2026-06-15 (spaeter) — NPM-Netzwerkname gefixt, bereit fuer NAS-Deploy
+
+- **Pauls Rueckmeldung:** In der Compose muss das externe NPM-Netzwerk `nas-reverse-proxy`
+  heissen (ohne Unterstrich), nicht `npm_proxy` — das ist der real existierende Docker-Netz-
+  Name auf seiner NAS.
+- **Umgesetzt + gepusht** (Commit `6a6e0d8` auf `main`): in `docker-compose.prod.yml` an
+  3 Stellen `npm_proxy` -> `nas-reverse-proxy` (backend, frontend, `networks:`-Block,
+  bleibt `external: true`). Lokal `docker compose -f docker-compose.prod.yml config` = OK.
+- **Noch NICHT getestet gegen echte NAS** — `external`-Netzwerke prueft Docker erst beim
+  `up`. Das ist Pauls Part (nur er hat NAS/Portainer/NPM-Zugriff).
+
+**Naechster Schritt = NAS-Deploy-Test (Paul, per SSH/Portainer):**
+1. `docker network ls | grep reverse-proxy` -> muss `nas-reverse-proxy` exakt zeigen.
+   Weicht der Name ab -> mir den echten Namen geben, ich passe Compose an.
+2. `git pull` + `docker compose -f docker-compose.prod.yml pull` +
+   `... up -d` (bzw. Portainer-Stack neu pullen/deployen).
+3. `docker compose -f docker-compose.prod.yml ps` -> alle 3 (db/backend/frontend) `Up`.
+   Falls Netz falsch: `up` scheitert mit "network nas-reverse-proxy ... could not be found".
+4. `docker inspect beetle-frontend -f '{{json .NetworkSettings.Networks}}'` (+ backend) ->
+   muss `nas-reverse-proxy` listen (backend zusaetzlich `beetle_internal`).
+5. Browser: `https://kafer.server-work.de` (Frontend) + `https://api.kafer.server-work.de`
+   (Backend, kein 502). 502 = NPM erreicht Container im Netz nicht -> Netzname oder
+   NPM-Proxy-Host-Hostname/Port pruefen.
+
+(Die uebrigen Paul-Punkte — Git-Repo-Stack, Env-Vars, NPM-Routen, DB-Volume-Pfad — stehen
+unveraendert im Abschnitt darunter.)
+
 ## Stand 2026-06-15 — NAS wieder online, Paul hat zugesagt
 
 - **NAS ist wieder erreichbar** (`https://kafer.server-work.de` -> HTTP 200, Frontend-only-
