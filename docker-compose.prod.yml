@@ -67,7 +67,7 @@ services:
       - FRONTEND_ORIGINS=${FRONTEND_ORIGINS:-https://kafer.server-work.de}
     networks:
       - beetle_internal
-      - npm_proxy
+      - nas-reverse-proxy
     depends_on:
       beetle-db:
         condition: service_healthy
@@ -82,13 +82,13 @@ services:
       # demo mode. Point this at the api subdomain served by Nginx Proxy Manager.
       - API_BASE_URL=${API_BASE_URL:-https://api.kafer.server-work.de}
     networks:
-      - npm_proxy
+      - nas-reverse-proxy
     depends_on:
       beetle-backend:
         condition: service_started
 
 networks:
-  npm_proxy:
+  nas-reverse-proxy:
     external: true
   beetle_internal:
     driver: bridge
