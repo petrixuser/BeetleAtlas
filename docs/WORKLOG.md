@@ -925,6 +925,34 @@ Zuerst das hier lesen. Aeltere Handoffs (2026-06-13, 2026-06-12 usw.) stehen dar
 Saetze, dauert Minuten) -> live testen (Liste/Filter/Karte). Rollback: Backup-Branch
 `backup/main-before-backend-integration-20260612` + alter Frontend-only-Stack.
 
+## >>> SESSION-ENDE 2026-06-15: WIR WARTEN AUF PAUL <<<
+
+Status: **BLOCKIERT — alles Noetige von unserer Seite ist erledigt und gepusht.** Der
+Go-Live haengt jetzt allein an Paul (NAS-Kumpel), weil nur er Zugriff auf NAS/Portainer/NPM
+hat. **Naechste Session hier ansetzen.**
+
+Die fertige Setup-Nachricht wurde Paul am 2026-06-15 geschickt. Was Paul auf seiner NAS tun
+muss (und warum):
+1. **Portainer-Stack als „Git Repository"** anlegen (NICHT Web-Editor-Paste):
+   Repo `https://github.com/petrixuser/BeetleAtlas`, Branch `main`, Compose-Pfad
+   `docker-compose.prod.yml`. Grund: DB-Init braucht `backend/SQL` + `backend/Data`
+   (214 MB CSVs) aus dem Repo-Checkout; bei Copy-Paste fehlen die Bind-Mount-Pfade.
+2. **Env-Vars im Stack:** `GMAPS_KEY` (wie Frontend bisher),
+   `API_BASE_URL=https://api.kafer.server-work.de`,
+   `FRONTEND_ORIGINS=https://kafer.server-work.de` (`DB_PASSWORD` optional, default root123).
+3. **NPM-Routen:** `kafer.server-work.de -> beetle-frontend:80` (besteht),
+   **neu** `api.kafer.server-work.de -> beetle-backend:8000` + SSL-Cert. DB NICHT im NPM.
+4. **Offene Antwort von Paul:** freier RAM der NAS (Abfragen RAM-hungrig).
+
+Wenn Paul meldet „Stack laeuft" -> Erststart abwarten (DB-Import ~417k Saetze, Minuten) ->
+**Live-Seite gegen echtes Backend testen** (Liste/Filter/Karte; pruefen ob `GMAPS_KEY`
+greift und die Karte mit Backend-Daten rendert). Rollback-Anker: Backup-Branch oben.
+
+Bewusst NICHT vorgezogen (Perry, 2026-06-15): die kleine Demo-Subset-Variante (Performance-
+Fallback, Entwicklungsplan Modul 12) — erst nach dem ersten Live-Test entscheiden, ob noetig.
+
+Letzter Commit: siehe `git log` (Volume-Pfad-Fix + dieser Worklog-Eintrag, beide auf `main`).
+
 ---
 
 
