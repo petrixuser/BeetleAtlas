@@ -446,8 +446,12 @@ function render() {
 
 function renderMapPoints() {
   if (googleMapInstance) {
-    if (window.API_BASE_URL) {
-      // Backend-Modus: bbox-/zoom-basierte Punkte mit Clustering nachladen.
+    if (featuredMode) {
+      // Startseite: nur die kuratierten Featured-Kaefer als Marker (nicht den
+      // gesamten Datenbestand als Cluster laden).
+      renderGoogleMapMarkers();
+    } else if (window.API_BASE_URL) {
+      // Suche/Filter: bbox-/zoom-basierte Punkte mit Clustering nachladen.
       scheduleMapPoints();
     } else {
       // Demo-Modus: die geladene Liste als Marker zeichnen.
@@ -700,7 +704,9 @@ function scheduleMapPoints() {
 }
 
 async function loadMapPoints() {
-  if (!googleMapInstance || !window.API_BASE_URL) return;
+  // Im Featured-Start keine bbox-Cluster laden (das idle-Event feuert trotzdem
+  // bei Pan/Zoom -> hier no-op, die Featured-Marker bleiben stehen).
+  if (!googleMapInstance || !window.API_BASE_URL || featuredMode) return;
 
   const bounds = googleMapInstance.getBounds();
   if (!bounds) return;
@@ -826,12 +832,13 @@ window.initMap = function () {
   initGeoJsonLayer();
 
   if (window.API_BASE_URL) {
-    // Backend-Modus: Punkte nach Kartenausschnitt/Zoom laden. Das idle-Event
-    // feuert nach Init und nach jedem Pan/Zoom (entprellt via scheduleMapPoints).
+    // Suche/Filter: Punkte nach Kartenausschnitt/Zoom laden (entprellt). Das
+    // idle-Event feuert auch im Featured-Start, ist dort aber ein No-op.
     googleMapInstance.addListener("idle", scheduleMapPoints);
-  } else {
-    renderGoogleMapMarkers();
   }
+  // Initiale Marker zeichnen: Featured-Marker (Start) bzw. Cluster (Suche/Filter)
+  // bzw. Demo-Marker. renderMapPoints entscheidet anhand des Modus.
+  renderMapPoints();
 };
 
 // Wird von Google Maps aufgerufen, wenn der Key ungueltig ist

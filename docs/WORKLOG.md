@@ -899,6 +899,19 @@ Integration dieses Backends in dieses Repo ist unter "Integration Backend (Basti
 
 Zuerst das hier lesen. Aeltere Handoffs (2026-06-15, 2026-06-13, 2026-06-12 usw.) stehen darunter als Historie.
 
+## Stand 2026-06-16 (Karte: Featured-Marker auf Startseite)
+
+Auf der Startseite (Featured, keine Suche/Filter) zeigt die Karte jetzt **nur die ~18
+Featured-Kaefer als Marker** statt aller bbox-Cluster ueber den gesamten Bestand. Erst bei
+Suche/Filter laedt sie wieder die vollen Cluster.
+- `frontend/app.js`: `renderMapPoints()` -> im `featuredMode` `renderGoogleMapMarkers()`
+  (zeichnet die Featured-Liste), sonst wie bisher (`scheduleMapPoints` bei Suche/Filter,
+  Demo-Marker im Demo-Modus). `loadMapPoints()` ist im `featuredMode` ein No-op (das
+  idle-Event feuert bei Pan/Zoom weiter, laedt aber nichts nach). `initMap()` ruft am Ende
+  `renderMapPoints()` (initiale Marker je Modus). Cache-Bust `app.js?v=9`.
+- Lokal (headless Chrome) verifiziert: Startseite zeigt einzelne Featured-Marker, keine
+  Cluster.
+
 ## Stand 2026-06-16 (Deploy live + Lean-Listen-Query) — Karte schnell, Liste gefixt
 
 **Paul hat deployt + Auto-Deploy ist eingerichtet.** Webhook-Secret `PORTAINER_WEBHOOK_URL`
