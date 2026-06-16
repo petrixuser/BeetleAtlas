@@ -899,6 +899,19 @@ Integration dieses Backends in dieses Repo ist unter "Integration Backend (Basti
 
 Zuerst das hier lesen. Aeltere Handoffs (2026-06-15, 2026-06-13, 2026-06-12 usw.) stehen darunter als Historie.
 
+## Betriebs-Hinweis (Cloudflare-Cache) — WICHTIG fuer Deploy-Verifikation
+
+`kafer.server-work.de` haengt hinter **Cloudflare**, das statische Assets cached
+(`cache-control: max-age=14400` = 4 h). **Versionierte Asset-URLs (`app.js?v=N`,
+`styles.css?v=N`) NICHT abfragen, solange der neue Container noch nicht live ist** — sonst
+cached Cloudflare den ALTEN Inhalt unter dem NEUEN Versions-Key (Cache-Poisoning), und echte
+Nutzer bekommen 4 h lang neue `index.html` + alte JS/CSS. Passiert am 2026-06-16 mit
+`app.js?v=10`/`styles.css?v=4`; Fix war ein erneuter Versions-Bump (v=11/v=5) NACH dem
+Redeploy. Verifikation kuenftig: Deploy-Stand ueber einen **zufaelligen Wegwerf-Key**
+(`?v=<random>`, trifft immer den Origin) pruefen oder einfach `index.html` ansehen (HTML wird
+nicht gecached) — erst die echten Versions-Keys abfragen, wenn `index.html` sie referenziert.
+Alternativ kann Paul den Cloudflare-Cache purgen (sofortiger Fix).
+
 ## Stand 2026-06-16 (Karten-InfoWindow -> volle Detailkarte + Heading-Label)
 
 **Karten-Pin -> volle Detailkarte unter der Karte.** Das InfoWindow beim Klick auf einen
