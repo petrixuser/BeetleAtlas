@@ -6,18 +6,33 @@
   --border: #d9ded8;
   --accent: #2f6b47;
   --accent-soft: #edf5ee;
+  --soil: #836a4b;
 }
 
 * {
   box-sizing: border-box;
 }
 
+/* Waldboden hinter allem: warmer Erd-Grundton + sanfte Licht-/Schatten-Flecken
+   (viewport-fix, fuer Tiefe ohne sichtbare Kacheln) + dezente, gekachelte
+   Blaetter-/Zweig-/Kiesel-Streu (scrollt mit dem Dokument, damit die Ameisen
+   ueber denselben Boden laufen). Mittlerer Braunton -> dunkle Ameisen + rote
+   Aepfel (auf dem transparenten Ameisen-Canvas darueber) bleiben klar sichtbar.
+   Die weissen Inhaltskarten liegen wie Fundkaertchen oben drauf. */
 body {
   margin: 0;
   min-height: 100vh;
   color: var(--text);
   font-family: Arial, sans-serif;
-  background: var(--background);
+  background-color: var(--soil);
+  background-image:
+    radial-gradient(circle at 18% 20%, rgba(255, 244, 214, 0.10), transparent 42%),
+    radial-gradient(circle at 82% 14%, rgba(35, 22, 10, 0.20), transparent 44%),
+    radial-gradient(circle at 28% 78%, rgba(35, 22, 10, 0.22), transparent 46%),
+    radial-gradient(circle at 88% 70%, rgba(255, 244, 214, 0.08), transparent 42%),
+    url("assets/forest-floor.svg?v=2");
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, repeat;
+  background-attachment: fixed, fixed, fixed, fixed, scroll;
 }
 
 button,

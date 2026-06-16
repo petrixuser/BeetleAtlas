@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="420" viewBox="0 0 420 420">
+  <!-- Kachelbarer Waldboden: feine Koernung (Rauschen) + Specks + Kiesel +
+       Zweige + kleine Erd-Blaetter + grosse, kraeftig gruene Waldblaetter.
+       Transparenter Hintergrund -> der Erd-Verlauf aus styles.css scheint durch.
+       Die Ameisen + Aepfel laufen (auf dem Canvas darueber) ueber alles, auch
+       ueber die grossen Blaetter. -->
+
+  <defs>
+    <filter id="ff-grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch" result="n"/>
+      <feColorMatrix in="n" type="matrix"
+        values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.1 0.55"/>
+    </filter>
+    <filter id="ff-grain-light" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="2" stitchTiles="stitch" result="n"/>
+      <feColorMatrix in="n" type="matrix"
+        values="0 0 0 0 1  0 0 0 0 0.95  0 0 0 0 0.8  0 0 0 -1.2 0.55"/>
+    </filter>
+  </defs>
+
+  <!-- feinkoernige Bodentextur (nahtlos via stitchTiles) -->
+  <rect width="420" height="420" filter="url(#ff-grain)" opacity="0.22"/>
+  <rect width="420" height="420" filter="url(#ff-grain-light)" opacity="0.10"/>
+
+  <!-- groebere Specks -->
+  <g fill="#2f2114" opacity="0.13">
+    <circle cx="30" cy="50" r="1.6"/><circle cx="70" cy="120" r="1.3"/>
+    <circle cx="140" cy="40" r="1.5"/><circle cx="200" cy="90" r="1.2"/>
+    <circle cx="260" cy="55" r="1.6"/><circle cx="330" cy="140" r="1.3"/>
+    <circle cx="380" cy="60" r="1.4"/><circle cx="400" cy="200" r="1.3"/>
+    <circle cx="55" cy="210" r="1.4"/><circle cx="110" cy="300" r="1.6"/>
+    <circle cx="180" cy="360" r="1.2"/><circle cx="240" cy="330" r="1.5"/>
+    <circle cx="300" cy="390" r="1.3"/><circle cx="360" cy="300" r="1.5"/>
+    <circle cx="20" cy="360" r="1.3"/><circle cx="160" cy="200" r="1.3"/>
+    <circle cx="120" cy="250" r="1.1"/><circle cx="215" cy="250" r="1.4"/>
+    <circle cx="290" cy="220" r="1.2"/><circle cx="85" cy="160" r="1.1"/>
+    <circle cx="400" cy="380" r="1.4"/><circle cx="350" cy="200" r="1.2"/>
+  </g>
+  <g fill="#efe3cb" opacity="0.09">
+    <circle cx="48" cy="95" r="1.2"/><circle cx="175" cy="70" r="1.1"/>
+    <circle cx="250" cy="130" r="1.3"/><circle cx="95" cy="335" r="1.1"/>
+    <circle cx="205" cy="345" r="1.2"/><circle cx="320" cy="280" r="1.1"/>
+    <circle cx="135" cy="150" r="1.0"/><circle cx="40" cy="280" r="1.1"/>
+    <circle cx="385" cy="150" r="1.1"/><circle cx="270" cy="370" r="1.0"/>
+  </g>
+
+  <!-- kleine Kiesel -->
+  <g opacity="0.14">
+    <ellipse cx="120" cy="85" rx="8" ry="5.5" fill="#5a5147" transform="rotate(-18 120 85)"/>
+    <ellipse cx="350" cy="265" rx="7" ry="5" fill="#6b6055" transform="rotate(22 350 265)"/>
+    <ellipse cx="45" cy="240" rx="6.5" ry="4.5" fill="#544b40" transform="rotate(10 45 240)"/>
+    <ellipse cx="250" cy="385" rx="7.5" ry="5" fill="#635a4d" transform="rotate(-12 250 385)"/>
+    <ellipse cx="395" cy="95" rx="6" ry="4.5" fill="#5f564a" transform="rotate(30 395 95)"/>
+  </g>
+
+  <!-- Zweige -->
+  <g stroke="#5e4126" fill="none" opacity="0.32" stroke-linecap="round">
+    <path d="M190,300 q30,-16 62,-8" stroke-width="2.6"/>
+    <path d="M244,294 l12,9" stroke-width="1.9"/>
+    <path d="M20,140 q24,10 46,3" stroke-width="2.2"/>
+    <path d="M330,40 q18,16 40,13" stroke-width="2.4"/>
+    <path d="M70,390 q26,-10 50,-3" stroke-width="2.1"/>
+  </g>
+
+  <!-- kleine Erd-Blaetter -->
+  <g opacity="0.42">
+    <g transform="translate(80,95) rotate(28)">
+      <path d="M0,-14 C7,-8 7,8 0,14 C-7,8 -7,-8 0,-14 Z" fill="#9a6a2e"/>
+      <path d="M0,-12 L0,12" stroke="#6f4a1e" stroke-width="1"/>
+    </g>
+    <g transform="translate(300,80) rotate(-42) scale(0.9)">
+      <path d="M0,-14 C7,-8 7,8 0,14 C-7,8 -7,-8 0,-14 Z" fill="#8a5a2b"/>
+      <path d="M0,-12 L0,12" stroke="#653f1c" stroke-width="1"/>
+    </g>
+    <g transform="translate(390,330) rotate(15) scale(1.05)">
+      <path d="M0,-14 C7,-8 7,8 0,14 C-7,8 -7,-8 0,-14 Z" fill="#a9682f"/>
+      <path d="M0,-12 L0,12" stroke="#7a481f" stroke-width="1"/>
+    </g>
+    <g transform="translate(70,330) rotate(48)">
+      <path d="M0,-14 C7,-8 7,8 0,14 C-7,8 -7,-8 0,-14 Z" fill="#94883c"/>
+      <path d="M0,-12 L0,12" stroke="#5f5526" stroke-width="1"/>
+    </g>
+    <g transform="translate(230,160) rotate(-8) scale(0.95)">
+      <path d="M0,-14 C7,-8 7,8 0,14 C-7,8 -7,-8 0,-14 Z" fill="#8f5f29"/>
+      <path d="M0,-12 L0,12" stroke="#67431c" stroke-width="1"/>
+    </g>
+  </g>
+
+  <!-- GROSSE, kraeftig gruene Waldblaetter mit Adern -->
+  <g opacity="0.72">
+    <!-- Blatt 1 -->
+    <g transform="translate(150,210) rotate(24)">
+      <path d="M0,-46 C22,-30 22,32 0,46 C-22,32 -22,-30 0,-46 Z" fill="#3f8f2d"/>
+      <g stroke="#2c6a1f" stroke-width="1.4" fill="none" stroke-linecap="round" opacity="0.85">
+        <path d="M0,-44 L0,45"/>
+        <path d="M0,-28 Q12,-26 18,-16"/><path d="M0,-28 Q-12,-26 -18,-16"/>
+        <path d="M0,-10 Q14,-8 20,4"/><path d="M0,-10 Q-14,-8 -20,4"/>
+        <path d="M0,10 Q12,12 16,24"/><path d="M0,10 Q-12,12 -16,24"/>
+      </g>
+    </g>
+    <!-- Blatt 2 -->
+    <g transform="translate(345,170) rotate(-38) scale(0.92)">
+      <path d="M0,-46 C22,-30 22,32 0,46 C-22,32 -22,-30 0,-46 Z" fill="#4ca33a"/>
+      <g stroke="#2f7424" stroke-width="1.4" fill="none" stroke-linecap="round" opacity="0.85">
+        <path d="M0,-44 L0,45"/>
+        <path d="M0,-28 Q12,-26 18,-16"/><path d="M0,-28 Q-12,-26 -18,-16"/>
+        <path d="M0,-10 Q14,-8 20,4"/><path d="M0,-10 Q-14,-8 -20,4"/>
+        <path d="M0,10 Q12,12 16,24"/><path d="M0,10 Q-12,12 -16,24"/>
+      </g>
+    </g>
+    <!-- Blatt 3 -->
+    <g transform="translate(110,370) rotate(58) scale(0.85)">
+      <path d="M0,-46 C22,-30 22,32 0,46 C-22,32 -22,-30 0,-46 Z" fill="#34801f"/>
+      <g stroke="#235713" stroke-width="1.4" fill="none" stroke-linecap="round" opacity="0.85">
+        <path d="M0,-44 L0,45"/>
+        <path d="M0,-28 Q12,-26 18,-16"/><path d="M0,-28 Q-12,-26 -18,-16"/>
+        <path d="M0,-10 Q14,-8 20,4"/><path d="M0,-10 Q-14,-8 -20,4"/>
+        <path d="M0,10 Q12,12 16,24"/><path d="M0,10 Q-12,12 -16,24"/>
+      </g>
+    </g>
+    <!-- Blatt 4 (oben rechts, etwas heller) -->
+    <g transform="translate(380,400) rotate(-12) scale(0.8)">
+      <path d="M0,-46 C22,-30 22,32 0,46 C-22,32 -22,-30 0,-46 Z" fill="#57b043"/>
+      <g stroke="#357f28" stroke-width="1.4" fill="none" stroke-linecap="round" opacity="0.85">
+        <path d="M0,-44 L0,45"/>
+        <path d="M0,-28 Q12,-26 18,-16"/><path d="M0,-28 Q-12,-26 -18,-16"/>
+        <path d="M0,-10 Q14,-8 20,4"/><path d="M0,-10 Q-14,-8 -20,4"/>
+        <path d="M0,10 Q12,12 16,24"/><path d="M0,10 Q-12,12 -16,24"/>
+      </g>
+    </g>
+  </g>
+</svg>

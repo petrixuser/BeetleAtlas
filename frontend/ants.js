@@ -88,30 +88,38 @@
 
     draw(ctx, t) {
       if (this.collected) return;
-      const bob = Math.sin(t * 0.002 + this.wobble) * 1;
+      const bob = Math.sin(t * 0.002 + this.wobble) * 1.2;
       ctx.save();
       ctx.translate(this.pos.x, this.pos.y + bob);
 
-      ctx.fillStyle = '#c0392b';
+      // Koerper (groesser + kraeftigeres Rot, damit er auf dem Waldboden auffaellt)
+      ctx.fillStyle = '#e23b2e';
       ctx.beginPath();
-      ctx.ellipse(0, 0.4, 2.2, 2.6, 0, 0, Math.PI * 2);
+      ctx.ellipse(0, 0.6, 3.6, 4.3, 0, 0, Math.PI * 2);
       ctx.fill();
-
-      ctx.fillStyle = 'rgba(255,255,255,0.2)';
-      ctx.beginPath();
-      ctx.ellipse(-0.7, -0.5, 0.75, 1.1, -0.4, 0, Math.PI * 2);
-      ctx.fill();
-
-      ctx.strokeStyle = '#5a3000';
-      ctx.lineWidth   = 0.6;
-      ctx.beginPath();
-      ctx.moveTo(0, -2.2);
-      ctx.quadraticCurveTo(1.2, -3.8, 1.8, -4.5);
+      // dunkler Rand fuer Kontrast auf hellen Blaettern wie dunkler Erde
+      ctx.strokeStyle = 'rgba(60,12,8,0.55)';
+      ctx.lineWidth   = 0.8;
       ctx.stroke();
 
+      // Glanzlicht
+      ctx.fillStyle = 'rgba(255,255,255,0.45)';
+      ctx.beginPath();
+      ctx.ellipse(-1.2, -0.9, 1.2, 1.7, -0.4, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Stiel
+      ctx.strokeStyle = '#5a3000';
+      ctx.lineWidth   = 1.0;
+      ctx.beginPath();
+      ctx.moveTo(0, -3.6);
+      ctx.quadraticCurveTo(2.0, -6.2, 3.0, -7.4);
+      ctx.stroke();
+
+      // Blatt
       ctx.fillStyle = '#2e7d32';
       ctx.beginPath();
-      ctx.ellipse(1.1, -3.6, 1.2, 0.6, 0.7, 0, Math.PI * 2);
+      ctx.ellipse(1.9, -6.0, 2.0, 1.0, 0.7, 0, Math.PI * 2);
       ctx.fill();
 
       ctx.restore();
@@ -267,10 +275,13 @@
 
       // Carried apple
       if (this.apple) {
-        ctx.fillStyle = '#c0392b';
+        ctx.fillStyle = '#e23b2e';
         ctx.beginPath();
-        ctx.ellipse(-1.8, -2.5, 1.3, 1.6, 0, 0, Math.PI * 2);
+        ctx.ellipse(-1.8, -2.7, 1.7, 2.1, 0, 0, Math.PI * 2);
         ctx.fill();
+        ctx.strokeStyle = 'rgba(60,12,8,0.5)';
+        ctx.lineWidth   = 0.35;
+        ctx.stroke();
       }
 
       ctx.restore();

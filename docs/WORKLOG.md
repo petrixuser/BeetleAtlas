@@ -899,6 +899,24 @@ Integration dieses Backends in dieses Repo ist unter "Integration Backend (Basti
 
 Zuerst das hier lesen. Aeltere Handoffs (2026-06-15, 2026-06-13, 2026-06-12 usw.) stehen darunter als Historie.
 
+## Stand 2026-06-16 (Deko: Waldboden-Hintergrund + groessere Aepfel)
+
+Hintergrund hinter allen Boxen sieht jetzt wie ein Waldboden aus; die bestehende
+Ameisenstrasse + Aepfel laufen darueber (Ameisen-Canvas ist `position:absolute; z-index:0`
+und transparent -> der `body`-Hintergrund scheint durch, `.page` liegt mit z-index:1 oben).
+- `frontend/assets/forest-floor.svg` (neu): kachelbares 420x420-Tile — feine Bodenkoernung
+  via `feTurbulence` (nahtlos, `stitchTiles="stitch"`), Specks/Kiesel/Zweige, kleine
+  Erd-Blaetter und **grosse, kraeftig gruene Waldblaetter mit Adern**.
+- `frontend/styles.css`: `--soil` (#836a4b) + `body`-Hintergrund = Erd-Grundton + 4 sanfte
+  Licht-/Schatten-Verlaeufe (viewport-fix) + das gekachelte SVG (scrollt mit). Mittlerer
+  Braunton, damit dunkle Ameisen + rote Aepfel sichtbar bleiben. Inhalts-Karten bleiben weiss.
+- `frontend/ants.js`: Aepfel ~1.6x groesser, kraeftigeres Rot (#e23b2e) + dunkler Rand +
+  groesseres Glanzlicht (vorher 5px, gingen auf dem bunten Boden unter); getragener Apfel
+  analog angepasst.
+- Cache-Bust: `styles.css?v=3`, `forest-floor.svg?v=2`, `ants.js?v=2`.
+- Lokal (headless Chrome) verifiziert: Erde texturiert, grosse gruene Blaetter in den
+  Raendern, Ameisen-Kolonne sichtbar. Vom Nutzer fuer die Live-Seite freigegeben.
+
 ## Stand 2026-06-16 (Karte: Featured-Marker auf Startseite)
 
 Auf der Startseite (Featured, keine Suche/Filter) zeigt die Karte jetzt **nur die ~18
