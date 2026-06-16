@@ -62,7 +62,7 @@ ee_coverage AS (
         WHERE cs.location_id = o.location_id
           AND cs.snapshot_date <= COALESCE(
             o.event_date_parsed,
-            STR_TO_DATE(LEFT(o.event_date, 10), '%Y-%m-%d'),
+            IF(LENGTH(o.event_date) >= 10, STR_TO_DATE(LEFT(o.event_date, 10), '%Y-%m-%d'), NULL),
             DATE('9999-12-31')
           )
       ) THEN 1 ELSE 0 END
@@ -74,7 +74,7 @@ ee_coverage AS (
         WHERE cs.location_id = o.location_id
           AND cs.snapshot_date <= COALESCE(
             o.event_date_parsed,
-            STR_TO_DATE(LEFT(o.event_date, 10), '%Y-%m-%d'),
+            IF(LENGTH(o.event_date) >= 10, STR_TO_DATE(LEFT(o.event_date, 10), '%Y-%m-%d'), NULL),
             DATE('9999-12-31')
           )
       ) THEN 1 ELSE 0 END

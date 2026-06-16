@@ -28,6 +28,10 @@ jobs:
           # Backend (FastAPI). New: needed for the full-stack production rollout.
           - image: beetleatlas-backend
             dockerfile: backend/docker/Dockerfile
+          # Database (MySQL + schema/seed scripts + CSV data baked in). Avoids
+          # Portainer's broken relative bind-mount path resolution on the NAS.
+          - image: beetleatlas-db
+            dockerfile: backend/docker/Dockerfile.db
 
     steps:
       - name: Checkout repository

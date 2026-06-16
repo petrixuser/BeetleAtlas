@@ -899,6 +899,113 @@ Integration dieses Backends in dieses Repo ist unter "Integration Backend (Basti
 
 Zuerst das hier lesen. Aeltere Handoffs (2026-06-15, 2026-06-13, 2026-06-12 usw.) stehen darunter als Historie.
 
+## Stand 2026-06-16 (noch spaeter) — Root-Cause gefunden (Paul) + Code-Fix umgesetzt: DB-Image mit SQL+CSV gebacken
+
+**Paul hat die Ursache gefunden und es laeuft jetzt** (mit manuellem Workaround); offen war
+nur noch der saubere Code-Fix. **Root-Cause:** Portainer laeuft selbst als Container und loest
+die **relativen Bind-Mount-Pfade** der Compose gegen seinen internen Repo-Checkout
+(`/data/compose/<id>/<commit>/`) auf. Dieser Pfad existiert auf dem **NAS-Host nicht**
+(dort `/volume1/docker/portainer/`) -> Docker legt **leere Verzeichnisse** an statt die
+Dateien zu mounten -> MySQL findet weder Init-Skripte noch CSVs -> DB bleibt leer ->
+Backend 503 (`database_unavailable`). Das deckt sich exakt mit unserer Diagnose oben
+(leere/nicht-initialisierte DB), nur war die Ursache nicht ein stale Datadir, sondern die
+fehlgeschlagenen Bind-Mounts.
+
+**Loesung (Pauls Plan, von mir umgesetzt + verifiziert auf `main`-Arbeitsstand):** SQL-Skripte
+**und** CSV-Daten direkt ins DB-Image backen -> keine Bind-Mounts mehr, die Portainer falsch
+aufloesen kann. Aenderung an CSV/SQL -> `git push` -> Actions baut neues Image -> Portainer
+zieht es.
+
+Umgesetzte Dateien:
+1. **`backend/docker/Dockerfile.db`** (NEU): `FROM mysql:8.0`, kopiert die 5 SQL-Skripte nach
+   `/docker-entrypoint-initdb.d/01..05` und `backend/Data/` nach `/var/lib/mysql-files/`,
+   `chown mysql:mysql` + `chmod 644` auf die CSVs.
+2. **`backend/docker/Dockerfile.db.dockerignore`** (NEU): das Root-`.dockerignore` schliesst
+   `backend/Data/` aus (korrekt fuer FE/BE-Images). BuildKit nutzt fuer diesen Build die
+   benachbarte Datei: `*` + `!backend/SQL/` + `!backend/Data/` -> CSVs kommen ins DB-Image.
+3. **`.github/workflows/build-and-deploy.yml`**: 3. Matrix-Eintrag `beetleatlas-db` ->
+   `backend/docker/Dockerfile.db`. CI baut/pusht jetzt **drei** Images nach GHCR.
+4. **`docker-compose.prod.yml`**: `beetle-db` nutzt `ghcr.io/petrixuser/beetleatlas-db:latest`
+   statt `mysql:8.0`; **alle Init-Bind-Mounts entfernt**, nur noch das Daten-Volume
+   `/volume1/docker/beetlejuice/mysql:/var/lib/mysql`. Kommentar-Tippfehler
+   `api.kafer` -> `api-kafer` korrigiert. `docker compose ... config` = OK.
+5. **`backend/SQL/RecordQualityReportSnapshot.sql`** (Z. 65 + 77): `STR_TO_DATE` abgesichert.
+   Manche `event_date` enthalten nur ein Jahr (`'2003'`); `STR_TO_DATE('2003','%Y-%m-%d')`
+   scheitert im strict mode. Jetzt:
+   `IF(LENGTH(o.event_date) >= 10, STR_TO_DATE(LEFT(o.event_date,10),'%Y-%m-%d'), NULL)`.
+
+**Ablauf nach `git push` auf `main`:** Actions baut `beetleatlas-db` (~5 min, ~380 MB wg. CSVs)
++ FE/BE -> Portainer-Webhook zieht alle Images -> `beetle-db` startet mit SQL+CSV im Image.
+Keine zusaetzlichen Env-Vars, keine manuellen Schritte bei Paul.
+
+**WICHTIGER HINWEIS fuer den ersten echten Lauf:** MySQL fuehrt die Init-Skripte **nur bei
+leerem Datadir** aus. Liegt in `/volume1/docker/beetlejuice/mysql` noch ein (evtl. leerer/
+halbfertiger) Datadir aus den frueheren Versuchen, wird **kein Re-Init** ausgeloest -> DB
+bliebe leer. Falls die DB nach dem Deploy nicht befuellt ist: Stack stoppen, Ordner
+`/volume1/docker/beetlejuice/mysql` leeren, neu deployen. (Wenn Pauls aktuell laufende DB
+schon korrekt befuellt ist, bleibt sie erhalten — dann nichts wipen.)
+
+**Noch zu tun:** `git push` (User/Perry gibt frei) -> pruefen, dass in GHCR alle **drei**
+Images erscheinen -> Live testen (Liste/Filter/Karte gegen echtes Backend).
+
+## Stand 2026-06-16 (spaeter) — FORTSCHRITT: Frontend->Backend laeuft, neuer Blocker = Backend<->DB-Query
+
+**Wichtige Statusaenderung — wir sind eine Ebene weiter.** Paul hat gemeldet, dass die
+NPM/Subdomain-Einrichtung bereits erledigt war ("da haengt er etwas hinterher"). Sein neuer
+Test liefert:
+
+```json
+{"error":"database_unavailable","message":"Database is currently unavailable. Please try again later."}
+```
+
+**Wie das zu lesen ist (entscheidend):**
+- Dieser JSON-Fehler ist eine **echte Antwort des Backends** (Handler in
+  `backend/App/core/main.py:41-49`, faengt jeden `SQLAlchemyError` ab -> HTTP 503). Kein
+  502/NPM-Fehler, kein Demo-Fallback (4 Kaefer) mehr.
+- **Damit ist die fruehere Frontend->Backend-Sache geloest:** der Request erreicht jetzt das
+  Backend ueber `api-kafer.server-work.de` (NPM-Route + api-Subdomain funktionieren).
+- **Neuer Blocker liegt eine Schicht tiefer: Backend kann die DB nicht abfragen.**
+
+**"Database is reachable" (Pauls aelteres Log) widerspricht dem NICHT.** Das stammt aus
+`backend/docker/entrypoint.sh:37` und ist nur ein **TCP-Port-Check** (Socket-Connect auf
+`beetle-db:3306`). Es beweist nur, dass der MySQL-Port offen ist — **nicht**, dass die
+Datenbank `beetle_db` existiert, Tabellen/Daten geladen sind oder die Query klappt.
+`database_unavailable` dagegen kommt erst **zur Query-Zeit**, wenn die echte SQL-Abfrage
+scheitert. Zwei verschiedene Checks.
+
+**Wahrscheinlichste Ursache (Analyse):** Backend ist hoch (Healthcheck `mysqladmin ping` muss
+gruen gewesen sein, sonst startet das Backend wegen `depends_on: service_healthy` gar nicht
+-> dann waere es 502, nicht 503). Server + Port + Root-Auth also ok, aber die **Query
+scheitert** -> hoechstwahrscheinlich **fehlende Tabellen/Daten**, weil die MySQL-Init-Skripte
+nicht (vollstaendig) liefen. Klassische Falle: der **Bind-Mount-Datadir**
+`/volume1/docker/beetlejuice/mysql` war bei einem frueheren Deploy-Versuch schon
+nicht-leer -> MySQL **ueberspringt dann ALLE** `docker-entrypoint-initdb.d/*.sql` ->
+leere/schemalose DB -> jede Query 503. (Unsere Repo-Seite ist verifiziert sauber: Schema legt
+`beetle_db` an, Seed-Pfade `/var/lib/mysql-files/*.csv`, CSVs vorhanden, `DB_NAME=beetle_db`
+durchgaengig konsistent.)
+
+**Naechster Schritt = Paul, Diagnose direkt am DB-Container (von schnell nach gruendlich):**
+1. **Was ist wirklich in der DB?**
+   `docker exec beetle-db mysql -uroot -proot123 -e "SHOW DATABASES; USE beetle_db; SHOW TABLES; SELECT COUNT(*) FROM observation;"`
+   - "Unknown database 'beetle_db'" / keine Tabellen -> Init lief nie (stale Datadir) ->
+     **Fix:** Stack stoppen, `/volume1/docker/beetlejuice/mysql` **leeren**, neu deployen,
+     Erst-Init vollstaendig abwarten (`docker logs -f beetle-db`).
+   - Tabellen da, aber COUNT = 0 -> Seed lief nicht -> DB-Init-Logs pruefen.
+   - "Access denied" -> Passwort passt nicht zum Datadir (alter `DB_PASSWORD`).
+   - Liefert echte Zahlen -> Ursache liegt woanders (dann Backend-Env/DNS pruefen).
+2. **Logs:** `docker logs beetle-backend --tail 80` und `docker logs beetle-db --tail 100`.
+3. **Backend-Sicht auf die DB:**
+   `docker exec beetle-backend env | grep DB_` (muss `DB_HOST=beetle-db`, `DB_NAME=beetle_db`,
+   `DB_PASSWORD` = das der DB zeigen).
+
+**Code-Limitierung fuer die Diagnose:** Der 503-Handler in `main.py:42` verwirft die echte
+Exception (`__: SQLAlchemyError`) — sie wird **nicht geloggt**. Darum ist die Ursache aus
+den Backend-Logs aktuell nicht direkt sichtbar. **Offen / Angebot:** Handler auf
+`exc: SQLAlchemyError` + `logger.exception(...)` aendern, damit `docker logs beetle-backend`
+den wahren Fehler (access denied / unknown database / table doesn't exist) zeigt. Kostet
+einen CI-Rebuild + Redeploy-Zyklus -> Pauls Direkt-Query (Schritt 1 oben) ist schneller,
+darum erst danach entscheiden.
+
 ## Stand 2026-06-16 — api-Subdomain gefixt (`api-kafer`), Frontend->Backend diagnostiziert
 
 **Paul hat deployt und Rueckmeldung gegeben.** Erster Befund: Live-Seite zeigt nur **4 Arten**

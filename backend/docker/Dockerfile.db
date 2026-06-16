@@ -1,0 +1,24 @@
+# MySQL image with schema, seed scripts AND the CSV seed data baked in.
+#
+# Why a dedicated image instead of bind-mounting backend/SQL + backend/Data:
+# Portainer runs as a container and resolves the relative compose paths against
+# its own internal repo checkout (/data/compose/...), a path that does not exist
+# on the NAS host. Docker then creates empty directories instead of mounting the
+# files -> MySQL finds no init scripts / no CSVs -> empty DB -> backend 503.
+# Baking everything into the image removes the bind mounts entirely; a git push
+# rebuilds this image via GitHub Actions and Portainer pulls it.
+#
+# Build context = repo root, dockerfile = backend/docker/Dockerfile.db.
+# The root .dockerignore excludes backend/Data/, so this build uses the adjacent
+# Dockerfile.db.dockerignore to re-include SQL + Data.
+FROM mysql:8.0
+
+COPY backend/SQL/DatabseShema.sql /docker-entrypoint-initdb.d/01_schema.sql
+COPY backend/SQL/AddMapQueryIndexes.sql /docker-entrypoint-initdb.d/02_indexes.sql
+COPY backend/SQL/LoadGBIFCSVToDB.sql /docker-entrypoint-initdb.d/03_seed_gbif.sql
+COPY backend/SQL/LoadClimateSnapshot.sql /docker-entrypoint-initdb.d/04_seed_climate.sql
+COPY backend/SQL/RecordQualityReportSnapshot.sql /docker-entrypoint-initdb.d/05_quality_snapshot.sql
+COPY backend/Data/ /var/lib/mysql-files/
+
+RUN chown -R mysql:mysql /var/lib/mysql-files/ && \
+    find /var/lib/mysql-files/ -name "*.csv" -exec chmod 644 {} \;
