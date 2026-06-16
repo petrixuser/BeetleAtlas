@@ -899,6 +899,43 @@ Integration dieses Backends in dieses Repo ist unter "Integration Backend (Basti
 
 Zuerst das hier lesen. Aeltere Handoffs (2026-06-15, 2026-06-13, 2026-06-12 usw.) stehen darunter als Historie.
 
+## >>> AKTUELLER BLOCKER 2026-06-16 — CI-Deploy haengt: Portainer-Webhook scheitert (Stale Secret) <<<
+
+**Symptom:** Live-Seite laedt weiterhin lange (~32s fuer die Karten-Startansicht). Nachgemessen
+am Live-Backend nach allen Pushes von heute:
+- `GET /api/map/points?bbox=-118,-56,-34,33&zoom=4&limit=1000` -> **47s (kalt) / 32s (warm)**.
+- `GET /api/beetles?limit=50` -> 13,7s.
+
+**Befund (eindeutig): Der neue Code ist nie auf der NAS angekommen.** Beweis:
+- Cluster-Antwort der Live-Karte: 58 Cluster, **Summe der Cluster-Counts = exakt 1000**
+  (= die alte 1000-Zeilen-Python-Stichprobe), `source_total_points=417430`. Der neue
+  Lean-Code wuerde ueber **alle** bbox-Treffer clustern (Summe ~417k). -> **Live laeuft noch
+  der ALTE Code.**
+- GitHub-Actions-Runs (public API geprueft): die letzten Runs (`63de9cd`, `dbabe7b`,
+  `72591f0`, `69779a2`) stehen alle auf **failure** — aber **NUR der Deploy-Job**. Die drei
+  Build-Jobs (`beetleatlas`, `beetleatlas-backend`, `beetleatlas-db`) sind **success**, d.h.
+  **alle Images liegen frisch in GHCR**. Der Schritt **„Trigger Portainer stack webhook"**
+  scheitert (`curl --fail -X POST "$WEBHOOK_URL"` bekommt HTTP-Fehler zurueck) ->
+  Portainer wird nie zum Neu-Ziehen aufgefordert -> NAS behaelt die alten Container.
+
+**Wahrscheinliche Ursache:** Paul hat den Stack beim manuellen DB-Fix **neu angelegt** ->
+die **Portainer-Webhook-URL hat sich geaendert**, aber das GitHub-Secret
+`PORTAINER_WEBHOOK_URL` zeigt noch auf den alten Webhook -> 404/Fehler. (Unabhaengig von
+unserem Code; die Images sind fertig gebaut.)
+
+**Naechster Schritt = Paul (zwei Dinge):**
+1. **Sofort:** Stack in Portainer **einmal manuell neu deployen** — „Pull and redeploy" /
+   „Update the stack" mit **„Re-pull image"** aktiviert. Holt `beetleatlas-backend:latest`
+   (schnelle Karten-Query) neu; DB-Volume bleibt erhalten.
+2. **Dauerhaft:** aktuelle **Webhook-URL** des Stacks schicken -> GitHub-Secret
+   `PORTAINER_WEBHOOK_URL` aktualisieren (per `gh secret set` oder Repo-Settings ->
+   Secrets and variables -> Actions), dann deployt jeder `git push` wieder automatisch.
+
+**Verifikation nach Pauls Redeploy (selbst per curl machbar):**
+- `…/api/map/points?bbox=-118,-56,-34,33&zoom=4&limit=1000` sollte statt ~32s nur noch
+  **wenige Sekunden** brauchen.
+- In derselben Antwort: **Summe der Cluster-Counts ~417k** (nicht mehr 1000) = neuer Code aktiv.
+
 ## Stand 2026-06-16 (Performance) — schlanke Karten-Query (Map-Endpoint von ~33s auf wenige Sekunden)
 
 **Kontext:** Seite ist live im Backend-Modus (verifiziert per curl: `/api/beetles` +
