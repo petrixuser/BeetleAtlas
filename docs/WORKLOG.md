@@ -899,6 +899,53 @@ Integration dieses Backends in dieses Repo ist unter "Integration Backend (Basti
 
 Zuerst das hier lesen. Aeltere Handoffs (2026-06-15, 2026-06-13, 2026-06-12 usw.) stehen darunter als Historie.
 
+## Stand 2026-06-16 (Performance) — schlanke Karten-Query (Map-Endpoint von ~33s auf wenige Sekunden)
+
+**Kontext:** Seite ist live im Backend-Modus (verifiziert per curl: `/api/beetles` +
+`/api/map/points` liefern echte Daten). Einziges echtes Restproblem war die **Ladezeit**:
+gemessen am Live-Backend `GET /api/map/points` ganz LatAm zoom 4 = **32,6s** (= genau die
+Start-Ansicht), Liste limit 50 = 12,9s, reingezoomt (zoom 12) = 3,9s. Perry: **richtiger Fix
+gewaehlt** (schlanke Karten-Query, nicht Workaround/Subset).
+
+**Ursache (bestaetigt im Code):** Der Map-Controller rief 1:1 `list_beetles_controller` (die
+schwere Listen-Query) und clusterte dann in Python. Diese Query macht pro Request: `media_agg`
+(volle Aggregation ueber die ganze media-Tabelle, 378k Zeilen) + korrelierte
+`climate_snapshot`-Subquery (MAX snapshot_date pro Zeile) + 25+ CASE-Klassifikationen +
+ein `COUNT(*)`, das die ganze Query nochmal laeuft. Die Karte braucht davon **nichts**:
+`climate` = `CLIMATE_CASE_SQL` haengt nur an `location.worldclim_bio01`, `vegetation` an
+`location.landcover_class`, `elevation/lat/lng` an `location`, `name` an `beetle_species`.
+
+**Umgesetzt (Backend, nur lesend — keine Schema-/Daten-Aenderung):**
+- `backend/App/repositories/map_repository.py`: neue schlanke Funktionen
+  `fetch_map_clusters_lean` (Clustering **in SQL** via `GROUP BY FLOOR(lat/cell),
+  FLOOR(lng/cell)` + `AVG`/`COUNT`) und `fetch_map_points_lean`. Gemeinsame Basis `_map_base_cte`:
+  joint nur `observation`⋈`location`⋈`beetle_species`, **kein** media_agg, **keine**
+  climate_snapshot-Subquery, bbox-Filter zuerst (Index `idx_location_lat_lng` vorhanden).
+  Aliase `b.*`/`e.*` spiegeln die schwere Query, damit dieselben WHERE-Fragmente passen.
+- `backend/App/controllers/map_controller.py`: `map_points_controller` nimmt den **Lean-Pfad**
+  fuer den vom Frontend genutzten Filtersatz (`q/climate/vegetation/elevation` + bbox + zoom).
+  Sobald ein **erweiterter Band-Filter** (temperature_band, ndvi_band, … 21 Stueck) gesetzt
+  ist, **Fallback auf die volle Query** (Korrektheit bleibt). Response-Schema unveraendert
+  (`items/total/page/page_size/clustered` + `source_total_points` bei Clustern).
+- **Nebenfix:** Clustering laeuft jetzt ueber **alle** Treffer im bbox (SQL-GROUP BY) statt
+  ueber eine 1000-Zeilen-Python-Stichprobe -> Cluster-Counts sind jetzt echt;
+  `source_total_points` = Summe der Cluster-Counts.
+
+**Verifiziert (lokal, Wegwerf-MySQL mit synthetischem Datensatz):** beide Lean-Queries laufen
+korrekt — bbox-Filter schliesst Out-of-bbox-Punkte aus, `>80 -> /10`-worldclim-Korrektur greift
+(270 -> 27 -> 'hot'), Clustering mittelt Koordinaten + zaehlt korrekt, climate/vegetation/
+elevation-CASE stimmen, `id`=`occ-<gbif_id>`, `observedAt` roh. Die Lean-Query enthaelt **kein
+`STR_TO_DATE`** mehr -> immun gegen den Jahr-only-Date-Bug. `py_compile` + `docker compose
+config` ok.
+
+**NICHT verifiziert:** die echte Latenz gegen die 417k-Live-DB (kein direkter DB-Zugriff von
+hier). Strukturell muss sie deutlich unter 32s liegen (media_agg + korrelierte Subquery weg,
+bbox-indexiert). **Nach dem Redeploy live nachmessen** (`/api/map/points?bbox=-118,-56,-34,33&zoom=4&limit=1000`).
+
+**Naechster Schritt:** Push -> CI baut Backend-Image neu -> Portainer redeployt -> Live
+nachmessen. Falls noch zu langsam: naechste Stufe waere eine vorberechnete Cluster-/
+Aggregat-Tabelle oder ein Demo-Subset (Modul 12), aber erst messen.
+
 ## Stand 2026-06-16 (noch spaeter) — Root-Cause gefunden (Paul) + Code-Fix umgesetzt: DB-Image mit SQL+CSV gebacken
 
 **Paul hat die Ursache gefunden und es laeuft jetzt** (mit manuellem Workaround); offen war
