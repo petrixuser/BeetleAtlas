@@ -80,7 +80,7 @@ services:
       - GMAPS_KEY=${GMAPS_KEY}
       # Public backend URL the browser calls. Without it the frontend stays in
       # demo mode. Point this at the api subdomain served by Nginx Proxy Manager.
-      - API_BASE_URL=${API_BASE_URL:-https://api.kafer.server-work.de}
+      - API_BASE_URL=${API_BASE_URL:-https://api-kafer.server-work.de}
     networks:
       - nas-reverse-proxy
     depends_on:
