@@ -899,6 +899,48 @@ Integration dieses Backends in dieses Repo ist unter "Integration Backend (Basti
 
 Zuerst das hier lesen. Aeltere Handoffs (2026-06-15, 2026-06-13, 2026-06-12 usw.) stehen darunter als Historie.
 
+## >>> SESSION-ENDE 2026-06-16 — alles live, Stand & naechste Schritte <<<
+
+**Die App laeuft vollstaendig live unter https://kafer.server-work.de** (Full-Stack auf Pauls
+NAS via Portainer; Auto-Deploy aktiv). Working tree clean, letzter Commit `67a6f5c`.
+
+**Heute erreicht (alles live verifiziert):**
+1. **Go-Live des Full-Stacks** — DB-Image mit gebackenen SQL+CSV (Portainer-Bind-Mount-Bug
+   umgangen), Backend+DB+Frontend laufen. Auto-Deploy via Portainer-Webhook eingerichtet
+   (GitHub-Secret `PORTAINER_WEBHOOK_URL` vom Nutzer gesetzt) -> jeder Push deployt.
+2. **Performance** — Karte (`/api/map/points`) 32s -> ~2s (Lean-Query, SQL-Clustering);
+   Liste (`/api/beetles`) 504/Timeout -> ~2s (Lean-Query, ohne media-Voll-Aggregation +
+   climate-Subquery). Ursache der Verlangsamung war u.a. das jetzt befuellte climate_snapshot.
+3. **Frontend-UX** — kuratierte **Featured-Startseite** (18 beruehmte Grosskaefer, echter
+   Backend-Snapshot, laedt sofort); **Inline-Aufklappen** statt rechter Box (mehrere
+   gleichzeitig); **Bilder** zeigen ganzen Kaefer + unscharfer Hintergrund; Startseiten-Karte
+   zeigt nur Featured-Marker (Suche/Filter laedt volle Cluster).
+4. **Deko** — **Waldboden-Hintergrund** (Erd-Textur via feTurbulence + grosse gruene
+   Aderblaetter), Ameisen + (groessere, kraeftig rote) Aepfel laufen drueber.
+5. **Karten-Pin -> Detail** — kompaktes InfoWindow mit "▼ Alle Infos" -> Kaefer wird erste
+   aufgeklappte Karte (Bild + alle DB-Infos), Seite scrollt hin; im Backend-Modus werden die
+   vollen Details per `/api/beetles/{id}` nachgeladen.
+6. **Lesbarkeit** — "Bekannte Käfer Lateinamerikas" als weisses Karten-Label.
+7. **Aufraeumen** — altes `docker-compose.yml` geloescht, README auf `docker-compose.prod.yml`
+   (Git-Repo-Stack) aktualisiert, `__pycache__` ignoriert.
+
+**Offen / moegliche naechste Schritte (nichts blockierend):**
+- **Detail-Endpunkt `/api/beetles/{id}` verschlanken** (~2s -> <1s): Bild per indiziertem
+  media-Lookup statt Voll-Aggregation. Nur noetig, falls "▼ Alle Infos" zu traege wirkt.
+- Optional: Such-/Filter-UX weiter verfeinern; ggf. weitere Kaefer in die Featured-Liste.
+- Detaildaten-Genauigkeit: im Lean-Pfad kommt "Temperatur" aus worldclim-Jahresmittel statt
+  climate_snapshot (bewusster Tradeoff fuer Tempo).
+
+**Wichtige Betriebs-Notizen:**
+- **Cloudflare-Cache** (siehe Abschnitt direkt darunter): versionierte Asset-URLs NICHT vor
+  dem Redeploy abfragen (Cache-Poisoning). Aktuelle Asset-Versionen: `app.js?v=11`,
+  `styles.css?v=5`, `forest-floor.svg?v=2`, `ants.js?v=2`.
+- Deploy-Ablauf: `git push main` -> GitHub Actions baut 3 Images (frontend/backend/db) ->
+  Portainer-Webhook -> pull + recreate (~5-8 min gesamt). Live-Verifikation ueber
+  `index.html` (nicht gecached) oder Wegwerf-Key `?v=<random>`.
+
+---
+
 ## Betriebs-Hinweis (Cloudflare-Cache) — WICHTIG fuer Deploy-Verifikation
 
 `kafer.server-work.de` haengt hinter **Cloudflare**, das statische Assets cached
