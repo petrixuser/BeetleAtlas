@@ -895,9 +895,42 @@ Integration dieses Backends in dieses Repo ist unter "Integration Backend (Basti
 
 ---
 
-# >>> AKTUELLER EINSTIEG — Stand 2026-06-15 <<<
+# >>> AKTUELLER EINSTIEG — Stand 2026-06-16 <<<
 
-Zuerst das hier lesen. Aeltere Handoffs (2026-06-13, 2026-06-12 usw.) stehen darunter als Historie.
+Zuerst das hier lesen. Aeltere Handoffs (2026-06-15, 2026-06-13, 2026-06-12 usw.) stehen darunter als Historie.
+
+## Stand 2026-06-16 — api-Subdomain gefixt (`api-kafer`), Frontend->Backend diagnostiziert
+
+**Paul hat deployt und Rueckmeldung gegeben.** Erster Befund: Live-Seite zeigt nur **4 Arten**
+= die 4 **Demo-Kaefer** aus `frontend/data/demo-beetles.js`. Das ist der Fallback in
+`app.js:23-42`: wenn `API_BASE_URL` leer ist ODER der Backend-Fetch fehlschlaegt (catch),
+faellt das Frontend auf `DEMO_BEETLES` zurueck. -> **Das Frontend erreicht das Backend nicht.**
+(Backend<->DB ist ok: Pauls Log zeigt „Database is reachable.")
+
+**Fix 1 umgesetzt + gepusht** (Commit `5a3aba1` auf `main`): In `docker-compose.prod.yml`
+`API_BASE_URL`-Default von `https://api.kafer.server-work.de` -> **`https://api-kafer.server-work.de`**.
+Grund (Paul): NPM kann **keine Sub-Sub-Domain** anlegen, nur `api-kafer` (eine Ebene).
+
+**Pauls 2. Frage beantwortet — warum Frontend ueber externe URL statt internem Netz:**
+Das „Frontend" ist **kein Server, der das Backend aufruft** — nginx liefert nur statische
+HTML/JS aus. Die API-Calls macht der **JavaScript-Code im Browser des Besuchers**, und der
+Browser ist **nicht im Docker-Netz**. Fuer ihn existiert `beetle-backend:8000` nicht (nur
+interner Docker-DNS). Darum **muss** `API_BASE_URL` eine oeffentliche URL sein (via NPM).
+`beetle_internal` ist nur fuer Backend<->DB. Frontend<->Backend kann technisch NICHT intern laufen.
+
+**Naechster Schritt = Paul (NAS/Portainer/NPM):**
+1. **NPM-Proxy-Host** `api-kafer.server-work.de -> beetle-backend:8000` **mit SSL/HTTPS**
+   anlegen (Frontend-Host `kafer.server-work.de -> beetle-frontend:80` besteht). HTTPS ist
+   Pflicht, sonst blockt der Browser den Call als Mixed-Content (Seite ist https).
+2. **Stack-Env** in Portainer ggf. auf `API_BASE_URL=https://api-kafer.server-work.de`
+   setzen (sonst greift jetzt der neue Default) + **Stack neu deployen**, damit der Frontend-
+   Container per `docker-entrypoint.sh` die neue URL in `config.local.js` schreibt.
+3. **Schnelltest:** im Browser `https://api-kafer.server-work.de/api/beetles?limit=5` ->
+   JSON = NPM+Backend ok (dann nur Frontend neu deployen); 502/Fehler = NPM-Route stimmt nicht.
+4. CORS: `FRONTEND_ORIGINS=https://kafer.server-work.de` muss zur echten Frontend-URL passen.
+
+**ACHTUNG Altlasten in aelteren Worklog-Eintraegen unten:** dort steht noch ueberall
+`api.kafer.server-work.de` (alte Sub-Sub-Domain). Gilt nicht mehr — korrekt ist `api-kafer`.
 
 ## Stand 2026-06-15 (spaeter) — NPM-Netzwerkname gefixt, bereit fuer NAS-Deploy
 
