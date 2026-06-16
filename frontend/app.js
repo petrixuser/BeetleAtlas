@@ -75,6 +75,8 @@ function showLoadingState() {
 // Wird bei jeder Filteraenderung aufgerufen. Im Backend-Modus wird neu geladen
 // (serverseitige Filterung), im Demo-Modus reicht ein erneutes Rendern.
 async function applyFilters() {
+  // Neue Suche/Filterung -> die per Karten-Pin gewaehlte Karte oben zuruecksetzen.
+  pinnedBeetle = null;
   // Nur die echte Backend-Abfrage (Suche/Filter aktiv + Backend-Modus) braucht
   // einen Ladezustand; Startliste und Demo-Modus sind sofort da.
   if (hasActiveFilters() && window.API_BASE_URL) {
@@ -369,6 +371,10 @@ function resetMapView() {
 // der Zustand bleibt ueber Re-Renders hinweg erhalten.
 const expandedIds = new Set();
 
+// Per Karten-InfoWindow ("▼ Alle Infos") ausgewaehlter Kaefer -> erste,
+// aufgeklappte Detailkarte oben in der Liste. null = keiner gewaehlt.
+let pinnedBeetle = null;
+
 function formatTemperature(value) {
   if (value === null || value === undefined || value === "") return "—";
   const num = Number(value);
@@ -409,7 +415,13 @@ function render() {
     resultHeading.textContent = `${shown} gefundene Arten`;
   }
 
-  if (filteredBeetles.length === 0) {
+  // Ein per Karten-Pin gewaehlter Kaefer steht als erste Karte oben
+  // (dedupliziert, falls er ohnehin in der gefilterten Liste ist).
+  const displayBeetles = pinnedBeetle
+    ? [pinnedBeetle, ...filteredBeetles.filter((b) => String(b.id) !== String(pinnedBeetle.id))]
+    : filteredBeetles;
+
+  if (displayBeetles.length === 0) {
     resultList.innerHTML = `
       <div class="empty-state">Keine passenden Arten gefunden.</div>
     `;
@@ -417,21 +429,22 @@ function render() {
     return;
   }
 
-  resultList.innerHTML = filteredBeetles
+  resultList.innerHTML = displayBeetles
     .map((beetle) => {
       const expanded = expandedIds.has(String(beetle.id));
       const commonName = beetle.commonName
         ? ` <span class="common-name">${beetle.commonName}</span>`
         : "";
+      const sub = [beetle.family, beetle.location].filter(Boolean).join(" - ");
       return `
         <article class="species-card ${expanded ? "is-expanded" : ""}" data-id="${beetle.id}">
           <button class="species-card-head" type="button" aria-expanded="${expanded}">
             <h3>${beetle.name}${commonName}</h3>
-            <p>${beetle.family} - ${beetle.location}</p>
+            <p>${sub || "…"}</p>
             <div class="meta-row">
               <span class="tag">${climateLabel(beetle.climate)}</span>
               <span class="tag">${vegetationLabel(beetle.vegetation)}</span>
-              <span class="tag">${beetle.elevation} m</span>
+              <span class="tag">${beetle.elevation ?? 0} m</span>
             </div>
             <span class="expand-hint" aria-hidden="true"></span>
           </button>
@@ -442,6 +455,56 @@ function render() {
     .join("");
 
   renderMapPoints();
+}
+
+function scrollToList() {
+  resultHeading.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+// Vom Karten-InfoWindow ("▼ Alle Infos"): Kaefer als erste, aufgeklappte
+// Detailkarte unter die Karte holen und dorthin scrollen. needsFetch=true
+// (Backend-Pins liefern nur Kurzdaten) -> volle DB-Details + Bild nachladen.
+async function selectBeetleFromMap(beetle, needsFetch) {
+  pinnedBeetle = beetle;
+  expandedIds.add(String(beetle.id));
+  if (activeInfoWindow) activeInfoWindow.close();
+  render();
+  scrollToList();
+
+  if (needsFetch && window.API_BASE_URL) {
+    try {
+      const res = await fetch(`${window.API_BASE_URL}/api/beetles/${beetle.id}`);
+      if (!res.ok) return;
+      const full = await res.json();
+      // Nur uebernehmen, wenn inzwischen kein anderer Pin gewaehlt wurde.
+      if (!pinnedBeetle || String(pinnedBeetle.id) !== String(beetle.id)) return;
+      pinnedBeetle = full;
+      expandedIds.add(String(full.id));
+      render();
+    } catch (error) {
+      console.error("Detaildaten konnten nicht geladen werden:", error);
+    }
+  }
+}
+
+// Kompaktes Karten-InfoWindow: Name + Familie + "Alle Infos"-Link (kein Bild).
+function openBeetleInfoWindow(marker, beetle, needsFetch) {
+  closeCountrySidebar();
+  const fam = beetle.family
+    ? `<div style="color:#66736b;font-size:0.82rem;margin-top:0.1rem">${beetle.family}</div>`
+    : "";
+  activeInfoWindow.setContent(`
+    <div style="font-family:Arial,sans-serif;min-width:120px;max-width:210px">
+      <strong style="font-size:0.95rem">${beetle.name}</strong>
+      ${fam}
+      <button type="button" class="iw-more" style="margin-top:0.55rem;background:none;border:0;color:#2f6b47;font-weight:700;cursor:pointer;padding:0;font-size:0.85rem">▼ Alle Infos</button>
+    </div>
+  `);
+  activeInfoWindow.open(googleMapInstance, marker);
+  google.maps.event.addListenerOnce(activeInfoWindow, "domready", () => {
+    const btn = document.querySelector(".iw-more");
+    if (btn) btn.addEventListener("click", () => selectBeetleFromMap(beetle, needsFetch));
+  });
 }
 
 function renderMapPoints() {
@@ -785,18 +848,22 @@ function renderMapMarkersFromPoints(points) {
         }
       });
       marker.addListener("click", () => {
-        closeCountrySidebar();
-        activeInfoWindow.setContent(`
-          <div style="font-family:Arial,sans-serif;font-size:0.88rem;min-width:160px">
-            <strong style="font-size:1rem">${point.speciesName}</strong>
-            <hr style="margin:0.5rem 0;border:none;border-top:1px solid #d9ded8">
-            <div><strong>Höhe:</strong> ${point.elevation ?? "?"} m</div>
-            <div><strong>Klima:</strong> ${climateLabel(point.climate)}</div>
-            <div><strong>Vegetation:</strong> ${vegetationLabel(point.vegetation)}</div>
-            <div><strong>Beobachtet:</strong> ${point.observedAt ?? "?"}</div>
-          </div>
-        `);
-        activeInfoWindow.open(googleMapInstance, marker);
+        // Pin traegt zunaechst nur die Kurzdaten des Punkts; die vollen DB-Infos
+        // + Bild werden beim Klick auf "Alle Infos" per /api/beetles/{id} geladen.
+        const partial = {
+          id: point.id,
+          name: point.speciesName,
+          family: "",
+          location: "",
+          climate: point.climate,
+          vegetation: point.vegetation,
+          elevation: point.elevation,
+          temperature: null,
+          soil: null,
+          imageUrl: null,
+          observedAt: point.observedAt,
+        };
+        openBeetleInfoWindow(marker, partial, true);
       });
       activeMarkers.push(marker);
     }
@@ -902,20 +969,9 @@ function renderGoogleMapMarkers() {
       }
     });
 
+    // Featured/Demo-Marker tragen schon alle Daten -> kein Nachladen noetig.
     marker.addListener("click", () => {
-      closeCountrySidebar();
-      activeInfoWindow.setContent(`
-        <div style="font-family:Arial,sans-serif;font-size:0.88rem;min-width:160px">
-          <strong style="font-size:1rem">${beetle.name}</strong><br>
-          <span style="color:#66736b">${beetle.family}</span>
-          <hr style="margin:0.5rem 0;border:none;border-top:1px solid #d9ded8">
-          <div><strong>Fundort:</strong> ${beetle.location}</div>
-          <div><strong>Höhe:</strong> ${beetle.elevation} m</div>
-          <div><strong>Klima:</strong> ${climateLabel(beetle.climate)}</div>
-          <div><strong>Vegetation:</strong> ${vegetationLabel(beetle.vegetation)}</div>
-        </div>
-      `);
-      activeInfoWindow.open(googleMapInstance, marker);
+      openBeetleInfoWindow(marker, beetle, false);
     });
 
     activeMarkers.push(marker);

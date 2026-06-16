@@ -899,6 +899,30 @@ Integration dieses Backends in dieses Repo ist unter "Integration Backend (Basti
 
 Zuerst das hier lesen. Aeltere Handoffs (2026-06-15, 2026-06-13, 2026-06-12 usw.) stehen darunter als Historie.
 
+## Stand 2026-06-16 (Karten-InfoWindow -> volle Detailkarte + Heading-Label)
+
+**Karten-Pin -> volle Detailkarte unter der Karte.** Das InfoWindow beim Klick auf einen
+Karten-Marker ist jetzt **kompakt** (Name + Familie + Link "▼ Alle Infos", kein Bild). Klick
+auf den Link -> der Kaefer wird als **erste, aufgeklappte Karte** oben in der Liste angepinnt
+(mit Bild + allen DB-Infos), und die Seite scrollt dorthin.
+- `frontend/app.js`: `pinnedBeetle`-State; `render()` stellt ihn dedupliziert als erste Karte
+  voran. `selectBeetleFromMap(beetle, needsFetch)`: pinnt sofort mit den vorhandenen Daten
+  und laedt im Backend-Modus die vollen Details per `/api/beetles/{id}` nach (Bild kommt aus
+  den Medien) -> fuehlt sich sofort an, auch wenn der Fetch ~2 s braucht. Featured-Pins haben
+  schon alle Daten (Snapshot) -> kein Nachladen. `openBeetleInfoWindow()` baut das kompakte
+  Fenster + verdrahtet den Link via `domready`. Pin wird bei jeder Filteraenderung
+  (`applyFilters`) zurueckgesetzt. Karten-Marker-Klick (Punkt + Featured) nutzen jetzt beide
+  dieses InfoWindow. Card-Untertitel robust gegen fehlende Felder (`family - location` ->
+  gefiltert). Cache-Bust `app.js?v=10`.
+- **Spaetere Optimierung moeglich (falls ~2 s zu langsam):** Detail-Endpunkt analog zur Liste
+  verschlanken (Bild per indiziertem media-Lookup statt Voll-Aggregation) -> < 1 s.
+
+**Heading-Lesbarkeit.** "Bekannte Käfer Lateinamerikas" stand als einzige Ueberschrift direkt
+auf dem Waldboden und ging unter. Loesung (aesthetischste + konsistent zu den Karten):
+`#resultHeading` als kleines weisses Label im Karten-Stil (inline-block, weisser Grund,
+Rahmen, Radius, leichter Schatten, accent-gruene Schrift). Cache-Bust `styles.css?v=4`.
+Lokal verifiziert.
+
 ## Stand 2026-06-16 (Deko: Waldboden-Hintergrund + groessere Aepfel)
 
 Hintergrund hinter allen Boxen sieht jetzt wie ein Waldboden aus; die bestehende
