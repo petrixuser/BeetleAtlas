@@ -899,6 +899,91 @@ Integration dieses Backends in dieses Repo ist unter "Integration Backend (Basti
 
 Zuerst das hier lesen. Aeltere Handoffs (2026-06-15, 2026-06-13, 2026-06-12 usw.) stehen darunter als Historie.
 
+## Stand 2026-06-16 (Deploy live + Lean-Listen-Query) — Karte schnell, Liste gefixt
+
+**Paul hat deployt + Auto-Deploy ist eingerichtet.** Webhook-Secret `PORTAINER_WEBHOOK_URL`
+wurde vom Nutzer in GitHub aktualisiert -> kuenftige Pushes deployen automatisch (CI baut
+3 Images -> Webhook -> Portainer zieht + recreate).
+
+**Live verifiziert nach dem Deploy (per curl):**
+- ✅ Karte (Lean-Query live): `GET /api/map/points?...zoom=4` = **2,2 s** (vorher 32 s),
+  Summe Cluster-Counts = 417.430 (echter neuer Code).
+- ❌ `GET /api/beetles` lief in **504** (>90s, auch limit=1). Der Detail-Endpunkt (1 Zeile
+  inkl. climate-Subquery) ist mit 2 s schnell -> der Killer ist die **Listen-Query selbst**
+  (volle media-Aggregation ueber 378k + `COUNT(*)`, der die ganze schwere Query nochmal
+  ueber alle 417k Zeilen laufen laesst). Tippte ueber den Timeout, seit `climate_snapshot`
+  jetzt befuellt ist. -> das war die Ursache der "4 gefundenen Arten" (Demo-Fallback, weil
+  der Browser die Liste nicht erreicht).
+
+**Fix: Lean-Listen-Query (`/api/beetles`)** — analog zur Karte.
+- `backend/App/repositories/beetle_repository.py`: neue `fetch_beetles_list_lean`. Joint nur
+  `observation`⋈`beetle_species`⋈`location`, **keine** media-Voll-Aggregation, **keine**
+  climate_snapshot-Subquery. climate/vegetation/elevation/soil aus location-Spalten;
+  `temperature` aus worldclim-Jahresmittel (derselbe Fallback, den die volle Query bei
+  fehlendem Snapshot eh nutzt). Bild pro Zeile via korreliertem Subselect, das **nur fuer
+  die <=limit zurueckgegebenen Zeilen** laeuft (media ist per gbif_id indiziert). Schlanker
+  Count ueber dieselbe gefilterte Basis.
+- `backend/App/controllers/beetle_controller.py`: nimmt den Lean-Pfad fuer den ueblichen
+  Filtersatz (q/climate/vegetation/elevation + bbox); bei **erweiterten Band-Filtern**
+  Fallback auf die volle Query. Payload-Schema unveraendert (`to_beetle_payload` nutzt
+  ueberall `.get()`, nur `gbif_id` Pflicht).
+- **Verifiziert** lokal (Wegwerf-MySQL, synthetische Daten inkl. **befuelltem**
+  climate_snapshot): `temperature` kommt aus worldclim (26/27/15), NICHT aus dem Snapshot
+  (99/88) -> Snapshot wird ignoriert; worldclim >80 ->/10-Korrektur, soil aus soil_ph,
+  Bild nur fuer Zeilen mit Medien, Count korrekt. `py_compile` ok.
+
+**Tradeoff (bewusst):** angezeigte "Temperatur" in Liste/Detail kommt im schnellen Pfad aus
+dem worldclim-Jahresmittel statt aus dem climate_snapshot-Monatswert (visuell ~gleich).
+
+**Aufraeumen:** `docker-compose.yml` (alter Frontend-only-Stack) geloescht — Produktion nutzt
+`docker-compose.prod.yml`. README-Verweise darauf auf `docker-compose.prod.yml` (Git-Repo-
+Stack) umgestellt. CSS-Cache-Bust `styles.css?v=2`.
+
+Dieser Stand wird als **ein** Push live geschoben (Auto-Deploy): Featured-Start + Inline-
+Aufklappen + Bilddarstellung + Lean-Listen-Query + Compose-Aufraeumung. Danach ist
+Start/Suche/Karte schnell.
+
+## Stand 2026-06-16 (Frontend-UX) — kuratierte Startseite + Inline-Detail-Aufklappen
+
+Zwei vom Nutzer gewuenschte UX-Aenderungen, beide **rein Frontend**, lokal im Browser
+(headless Chrome) verifiziert. Geht live mit dem naechsten Deploy (CI baut das Frontend-Image;
+haengt am selben Webhook-Blocker wie unten).
+
+**1. Detailansicht klappt jetzt INLINE in der Karte auf (rechte Box entfaellt).**
+Vorher: feste Detailbox rechts (`aside.details`) — beim Klick weiter unten musste man
+hochscrollen. Jetzt: Klick auf eine Ergebniskarte klappt sie auf und zeigt Foto (falls
+vorhanden), Kurzbeschreibung, Fundort/Klima/Vegetation/Hoehe/Temperatur/Boden direkt darin.
+**Mehrere Karten gleichzeitig offen** (Nutzerwunsch; reines DOM-Toggle, kostet nichts).
+Zustand (`expandedIds`-Set) bleibt ueber Re-Renders erhalten. Gilt fuer Featured- UND
+Backend-Karten (die Backend-Listen-Items enthalten bereits alle Detailfelder -> kein
+Extra-Fetch). `aside.details` aus HTML entfernt, `.details` per CSS aus.
+
+**2. Startseite zeigt ~18 kuratierte beruehmte Grosskaefer statt 200 Beobachtungen.**
+- Neue Datei `frontend/data/featured-beetles.js` (`window.FEATURED_BEETLES`): **Snapshot
+  echter Repraesentanten aus dem Backend** (gezogen 2026-06-16 per `/api/beetles?q=...`),
+  plus kuratierte deutsche Trivialnamen + Kurzbeschreibung. Arten u.a.: Titanus giganteus
+  (groesster Kaefer der Welt), Dynastes hercules (Herkuleskaefer), Megasoma elephas/actaeon/mars,
+  Acrocinus longimanus (Harlekin), Macrodontia cervicornis, Strategus aloeus, Golofa porteri,
+  Chrysina macropus, Phanaeus adonis, Coprophanaeus lancifer, Chiasognathus grantii u.a.
+  (Goliathus/Chalcosoma bewusst weg — nicht neotropisch; Euchroma gigantea nicht im Datensatz.)
+  Mehrere Eintraege haben echte `imageUrl` aus den GBIF-Medien.
+- **Bilddarstellung im Detail:** ganzer Kaefer immer sichtbar (kein Beschnitt) ueber
+  `object-fit: contain`; die seitlichen/oberen Reste werden mit einer **unscharfen,
+  abgedunkelten Version desselben Fotos** gefuellt (`.detail-figure` + `.detail-bg`,
+  `blur(26px)`), statt mit grellem weissem Rand. Hoehe auf 460px gedeckelt. Lokal
+  (headless Chrome) verifiziert an Titanus giganteus + Dynastes neptunus.
+- `frontend/app.js`: `hasActiveFilters()` + `featuredMode`. **Ohne** Suche/Filter ->
+  Featured-Liste sofort (KEIN Backend-Call -> Startseite laedt sofort, umgeht das ~13s-
+  Listen-Problem). **Sobald** gesucht/gefiltert wird -> normale Backend-Abfrage wie bisher.
+  Snapshot also nur fuer die Startseite (so vom Nutzer gewuenscht).
+- Cache-Bust: `app.js?v=8`, neue `featured-beetles.js?v=1`.
+
+**Wichtig (Nutzerfrage):** Nach Pauls Deploy wird nur die **Karte** schnell (Lean-Query
+betrifft `/api/map/points`). Die **Such-/Filter-Liste (`/api/beetles`) bleibt ~13s** — die
+Listen-Query ist NICHT verschlankt. Durch den Featured-Start trifft das aber nur noch bei
+aktiver Suche/Filterung, nicht beim Seitenaufruf. Optionaler Folgeschritt: Listen-Query
+analog verschlanken (media-Join raus, Count optimieren) — noch offen, eigene Aufgabe.
+
 ## >>> AKTUELLER BLOCKER 2026-06-16 — CI-Deploy haengt: Portainer-Webhook scheitert (Stale Secret) <<<
 
 **Symptom:** Live-Seite laedt weiterhin lange (~32s fuer die Karten-Startansicht). Nachgemessen

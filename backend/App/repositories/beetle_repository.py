@@ -290,6 +290,162 @@ def fetch_beetles_list_rows_total(
     return rows, int(total)
 
 
+# --- Lean list query --------------------------------------------------------
+#
+# The full query above does a full-table media aggregation + a per-row correlated
+# climate_snapshot subquery, and the COUNT(*) re-runs all of it over every row.
+# Once climate_snapshot is populated that tips past the gateway timeout (504).
+#
+# The list view only needs id/name/family/location/coords/climate/vegetation/
+# elevation/temperature/soil/observedAt/image. climate/vegetation/elevation/soil
+# derive from location columns; temperature uses the worldclim annual-mean
+# (same COALESCE fallback the full query already uses when no snapshot matches).
+# So we drop the climate_snapshot subquery entirely, and fetch the one image per
+# returned row via a correlated subquery that only runs for the <=limit rows
+# actually returned (media is indexed by gbif_id). Used for the common filter set
+# (q/climate/vegetation/elevation + bbox); advanced band filters fall back to the
+# full query. Aliases mirror the full query (b.* raw, e.* classified).
+def fetch_beetles_list_lean(
+    *,
+    where_sql: str,
+    base_where_sql: str,
+    order_by_sql: str,
+    limit: int,
+    offset: int,
+    params: Dict[str, Any],
+) -> Tuple[list, int]:
+    cte_sql = f"""
+        WITH base AS (
+            SELECT
+                o.gbif_id,
+                o.event_date,
+                o.basis_of_record,
+                o.dataset_name,
+                o.institution_code,
+                o.image_available,
+                o.taxon_id,
+                bs.scientific_name,
+                bs.family,
+                bs.genus,
+                bs.specific_epithet,
+                l.latitude,
+                l.longitude,
+                l.city,
+                l.region,
+                l.country,
+                l.verbatim_locality,
+                l.coordinate_uncertainty,
+                l.elevation,
+                l.landcover_class,
+                l.biome_id,
+                l.ecoregion_id,
+                CASE
+                    WHEN l.soil_ph IS NULL OR l.soil_ph = -9999 THEN NULL
+                    WHEN l.soil_ph > 14 THEN l.soil_ph / 10
+                    ELSE l.soil_ph
+                END AS soil_ph,
+                CASE
+                    WHEN l.soil_organic_carbon IS NULL OR l.soil_organic_carbon = -9999 THEN NULL
+                    WHEN l.soil_organic_carbon > 60 THEN l.soil_organic_carbon / 5
+                    ELSE l.soil_organic_carbon
+                END AS soil_organic_carbon,
+                CASE
+                    WHEN l.worldclim_bio01 IS NULL OR l.worldclim_bio01 = -9999 THEN NULL
+                    WHEN l.worldclim_bio01 > 80 THEN l.worldclim_bio01 / 10
+                    ELSE l.worldclim_bio01
+                END AS worldclim_bio01,
+                l.worldclim_bio12
+            FROM observation o
+            JOIN beetle_species bs ON bs.beetle_id = o.beetle_id
+            JOIN location l ON l.location_id = o.location_id
+            {base_where_sql}
+        ),
+        enriched AS (
+            SELECT
+                b.gbif_id,
+                b.event_date AS observedAt,
+                b.scientific_name AS name,
+                b.family,
+                b.latitude AS lat,
+                b.longitude AS lng,
+                COALESCE(
+                    NULLIF(b.verbatim_locality, ''),
+                    NULLIF(CONCAT_WS(', ', b.city, b.region, b.country), ''),
+                    NULLIF(CONCAT_WS(', ', b.region, b.country), ''),
+                    b.country,
+                    'Unbekannt'
+                ) AS location,
+                {CLIMATE_CASE_SQL} AS climate,
+                {VEGETATION_CASE_SQL} AS vegetation,
+                {ELEVATION_GROUP_CASE_SQL} AS elevationGroup,
+                b.elevation,
+                b.worldclim_bio01 AS temperature,
+                {SOIL_CASE_SQL} AS soil,
+                b.genus,
+                b.specific_epithet,
+                b.taxon_id,
+                b.basis_of_record,
+                b.dataset_name,
+                b.institution_code,
+                b.image_available,
+                b.coordinate_uncertainty,
+                b.country,
+                b.region,
+                b.city,
+                b.soil_ph,
+                b.soil_organic_carbon,
+                b.worldclim_bio01,
+                b.worldclim_bio12,
+                b.landcover_class,
+                b.ecoregion_id,
+                b.biome_id
+            FROM base b
+        )
+    """
+
+    sql = text(
+        f"""
+        {cte_sql}
+        SELECT
+            e.*,
+            (
+                SELECT MIN(m.image_url)
+                FROM media m
+                WHERE m.gbif_id = e.gbif_id
+                  AND m.image_url IS NOT NULL
+                  AND TRIM(m.image_url) <> ''
+            ) AS image_url_sample,
+            (
+                SELECT COUNT(*) FROM media m WHERE m.gbif_id = e.gbif_id
+            ) AS media_count
+        FROM enriched e
+        {where_sql}
+        ORDER BY {order_by_sql}
+        LIMIT :limit OFFSET :offset
+        """
+    )
+
+    count_sql = text(
+        f"""
+        {cte_sql}
+        SELECT COUNT(*) AS total
+        FROM enriched e
+        {where_sql}
+        """
+    )
+
+    exec_params = dict(params)
+    exec_params["limit"] = limit
+    exec_params["offset"] = offset
+
+    with get_connection() as conn:
+        rows = conn.execute(sql, exec_params).mappings().all()
+        count_params = {k: v for k, v in exec_params.items() if k not in {"limit", "offset"}}
+        total = conn.execute(count_sql, count_params).scalar_one()
+
+    return rows, int(total)
+
+
 def fetch_beetle_detail_row(gbif_id: int) -> Optional[Dict[str, Any]]:
     sql = text(
         f"""

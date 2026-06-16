@@ -12,6 +12,7 @@ from backend.App.repositories.beetle_repository import (
     fetch_beetle_detail_row,
     fetch_beetle_media_rows,
     fetch_beetle_media_rows_total,
+    fetch_beetles_list_lean,
     fetch_beetles_list_rows_total,
     fetch_country_detail_rows,
 )
@@ -191,7 +192,36 @@ def list_beetles_controller(
     base_where_sql = ""
     if base_filters:
         base_where_sql = "WHERE " + " AND ".join(base_filters)
-    rows, total = fetch_beetles_list_rows_total(
+
+    # Only the common filters (q/climate/vegetation/elevation + bbox) need the
+    # location/species columns. If no advanced band filter (which requires the
+    # climate_snapshot / media-aggregation enrichment) is set, take the lean path
+    # that drops those heavy joins and avoids the 504 timeout.
+    advanced_filters = (
+        temperature_band,
+        precipitation_band,
+        soil_moisture_band,
+        ndvi_band,
+        humidity_band,
+        pressure_band,
+        light_pollution_band,
+        slope_band,
+        water_distance_band,
+        human_impact_band,
+        landcover_group,
+        coordinate_uncertainty_band,
+        soil_ph_band,
+        soil_carbon_band,
+        worldclim_temp_band,
+        worldclim_precip_band,
+        event_date_quality,
+        basis_of_record_class,
+        taxon_resolution,
+        media_coverage,
+        license_class,
+    )
+    fetch = fetch_beetles_list_rows_total if any(advanced_filters) else fetch_beetles_list_lean
+    rows, total = fetch(
         where_sql=where_sql,
         base_where_sql=base_where_sql,
         order_by_sql=order_by_sql,

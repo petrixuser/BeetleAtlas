@@ -20,7 +20,31 @@ function buildBeetleQuery() {
   return params.toString();
 }
 
+// True, sobald der Nutzer sucht oder filtert. Ohne aktive Filter zeigen wir die
+// kuratierte Startliste (FEATURED_BEETLES) statt einer Backend-Abfrage.
+function hasActiveFilters() {
+  return (
+    searchInput.value.trim() !== "" ||
+    climateFilter.value !== "all" ||
+    vegetationFilter.value !== "all" ||
+    elevationFilter.value !== "all"
+  );
+}
+
+// True, wenn aktuell die kuratierte Startliste angezeigt wird.
+let featuredMode = false;
+
 async function loadBeetles() {
+  // Startseite (keine Suche/Filter): kuratierte beruehmte Grosskaefer aus dem
+  // gebackenen Snapshot. Laedt sofort, keine (langsame) Backend-Abfrage.
+  if (!hasActiveFilters() && (window.FEATURED_BEETLES?.length)) {
+    featuredMode = true;
+    beetles = window.FEATURED_BEETLES;
+    totalBeetles = beetles.length;
+    return;
+  }
+
+  featuredMode = false;
   try {
     if (window.API_BASE_URL) {
       // Serverseitige Filterung: aktuelle Filter werden als Query mitgeschickt.
@@ -51,13 +75,13 @@ function showLoadingState() {
 // Wird bei jeder Filteraenderung aufgerufen. Im Backend-Modus wird neu geladen
 // (serverseitige Filterung), im Demo-Modus reicht ein erneutes Rendern.
 async function applyFilters() {
-  if (window.API_BASE_URL) {
+  // Nur die echte Backend-Abfrage (Suche/Filter aktiv + Backend-Modus) braucht
+  // einen Ladezustand; Startliste und Demo-Modus sind sofort da.
+  if (hasActiveFilters() && window.API_BASE_URL) {
     showLoadingState();
-    await loadBeetles();
-    render();
-  } else {
-    render();
   }
+  await loadBeetles();
+  render();
 }
 
 // Kanonisches Vokabular: Daten (Backend + Demo) nutzen die englischen Codes,
@@ -137,7 +161,6 @@ const tinyLabels = new Set([
   "Uruguay"
 ]);
 
-let selectedId = null;
 let geoBounds;
 let zoom = 1;
 let panX = 0;
@@ -151,7 +174,6 @@ const elevationFilter = document.querySelector("#elevationFilter");
 const resetButton = document.querySelector("#resetButton");
 const resultHeading = document.querySelector("#resultHeading");
 const resultList = document.querySelector("#resultList");
-const detailContent = document.querySelector("#detailContent");
 const atlasSvg = document.querySelector("#atlasSvg");
 const mapViewport = document.querySelector("#mapViewport");
 const baseLayer = document.querySelector("#baseLayer");
@@ -175,8 +197,9 @@ function getElevationGroup(elevation) {
 }
 
 function getFilteredBeetles() {
-  // Im Backend-Modus hat der Server bereits gefiltert -> Daten direkt verwenden.
-  if (window.API_BASE_URL) {
+  // Startliste (kuratierte Featured-Kaefer) und Backend-Modus (Server hat bereits
+  // gefiltert) -> Daten direkt verwenden, keine clientseitige Filterung.
+  if (featuredMode || window.API_BASE_URL) {
     return beetles;
   }
 
@@ -342,15 +365,45 @@ function resetMapView() {
   updateMapTransform();
 }
 
+// IDs der aktuell aufgeklappten Karten. Mehrere koennen gleichzeitig offen sein;
+// der Zustand bleibt ueber Re-Renders hinweg erhalten.
+const expandedIds = new Set();
+
+function formatTemperature(value) {
+  if (value === null || value === undefined || value === "") return "—";
+  const num = Number(value);
+  return Number.isFinite(num) ? `${num.toFixed(1)} °C` : "—";
+}
+
+function beetleDetailHtml(beetle) {
+  const image = beetle.imageUrl
+    ? `<figure class="detail-figure">
+         <img class="detail-bg" src="${beetle.imageUrl}" alt="" aria-hidden="true" loading="lazy" />
+         <img class="detail-image" src="${beetle.imageUrl}" alt="${beetle.name}" loading="lazy" />
+       </figure>`
+    : "";
+  const note = beetle.note ? `<p class="detail-note">${beetle.note}</p>` : "";
+  return `
+    ${image}
+    ${note}
+    <ul class="detail-list">
+      <li><strong>Fundort</strong>${beetle.location}</li>
+      <li><strong>Klimazone</strong>${climateLabel(beetle.climate)}</li>
+      <li><strong>Vegetation</strong>${vegetationLabel(beetle.vegetation)}</li>
+      <li><strong>Hoehenlage</strong>${beetle.elevation} m</li>
+      <li><strong>Temperatur</strong>${formatTemperature(beetle.temperature)}</li>
+      <li><strong>Boden</strong>${beetle.soil ?? "unbekannt"}</li>
+    </ul>
+  `;
+}
+
 function render() {
   const filteredBeetles = getFilteredBeetles();
-
-  if (!filteredBeetles.some((beetle) => String(beetle.id) === String(selectedId))) {
-    selectedId = filteredBeetles[0]?.id ?? null;
-  }
-
   const shown = filteredBeetles.length;
-  if (window.API_BASE_URL && totalBeetles > shown) {
+
+  if (featuredMode) {
+    resultHeading.textContent = "Bekannte Käfer Lateinamerikas";
+  } else if (window.API_BASE_URL && totalBeetles > shown) {
     resultHeading.textContent = `${shown} von ${totalBeetles} Treffern`;
   } else {
     resultHeading.textContent = `${shown} gefundene Arten`;
@@ -360,30 +413,34 @@ function render() {
     resultList.innerHTML = `
       <div class="empty-state">Keine passenden Arten gefunden.</div>
     `;
-    detailContent.innerHTML = `
-      <div class="empty-state">Keine Detaildaten vorhanden.</div>
-    `;
     renderMapPoints();
     return;
   }
 
   resultList.innerHTML = filteredBeetles
-    .map(
-      (beetle) => `
-        <button class="species-card ${String(beetle.id) === String(selectedId) ? "is-active" : ""}" data-id="${beetle.id}" type="button">
-          <h3>${beetle.name}</h3>
-          <p>${beetle.family} - ${beetle.location}</p>
-          <div class="meta-row">
-            <span class="tag">${climateLabel(beetle.climate)}</span>
-            <span class="tag">${vegetationLabel(beetle.vegetation)}</span>
-            <span class="tag">${beetle.elevation} m</span>
-          </div>
-        </button>
-      `
-    )
+    .map((beetle) => {
+      const expanded = expandedIds.has(String(beetle.id));
+      const commonName = beetle.commonName
+        ? ` <span class="common-name">${beetle.commonName}</span>`
+        : "";
+      return `
+        <article class="species-card ${expanded ? "is-expanded" : ""}" data-id="${beetle.id}">
+          <button class="species-card-head" type="button" aria-expanded="${expanded}">
+            <h3>${beetle.name}${commonName}</h3>
+            <p>${beetle.family} - ${beetle.location}</p>
+            <div class="meta-row">
+              <span class="tag">${climateLabel(beetle.climate)}</span>
+              <span class="tag">${vegetationLabel(beetle.vegetation)}</span>
+              <span class="tag">${beetle.elevation} m</span>
+            </div>
+            <span class="expand-hint" aria-hidden="true"></span>
+          </button>
+          <div class="species-card-detail">${beetleDetailHtml(beetle)}</div>
+        </article>
+      `;
+    })
     .join("");
 
-  renderDetails(beetles.find((beetle) => String(beetle.id) === String(selectedId)));
   renderMapPoints();
 }
 
@@ -399,21 +456,6 @@ function renderMapPoints() {
   } else {
     renderBeetlePoints();
   }
-}
-
-function renderDetails(beetle) {
-  detailContent.innerHTML = `
-    <h2>${beetle.name}</h2>
-    <p>${beetle.family}</p>
-    <ul class="detail-list">
-      <li><strong>Fundort</strong>${beetle.location}</li>
-      <li><strong>Klimazone</strong>${climateLabel(beetle.climate)}</li>
-      <li><strong>Vegetation</strong>${vegetationLabel(beetle.vegetation)}</li>
-      <li><strong>Hoehenlage</strong>${beetle.elevation} m</li>
-      <li><strong>Temperatur</strong>${beetle.temperature} C</li>
-      <li><strong>Boden</strong>${beetle.soil}</li>
-    </ul>
-  `;
 }
 
 function openCountrySidebar(countryName) {
@@ -453,11 +495,21 @@ function closePointPopup() {
 }
 
 resultList.addEventListener("click", (event) => {
-  const card = event.target.closest(".species-card");
-  if (!card) return;
+  const head = event.target.closest(".species-card-head");
+  if (!head) return;
 
-  selectedId = card.dataset.id;
-  render();
+  const card = head.closest(".species-card");
+  const id = String(card.dataset.id);
+
+  // Mehrere Karten duerfen gleichzeitig offen sein -> nur diese Karte umschalten.
+  const willExpand = !expandedIds.has(id);
+  if (willExpand) {
+    expandedIds.add(id);
+  } else {
+    expandedIds.delete(id);
+  }
+  card.classList.toggle("is-expanded", willExpand);
+  head.setAttribute("aria-expanded", String(willExpand));
 });
 
 labelLayer.addEventListener("click", (event) => {
@@ -546,7 +598,7 @@ resetButton.addEventListener("click", () => {
   climateFilter.value = "all";
   vegetationFilter.value = "all";
   elevationFilter.value = "all";
-  selectedId = null;
+  expandedIds.clear();
   applyFilters();
 });
 

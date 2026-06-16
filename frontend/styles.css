@@ -441,9 +441,7 @@ button:hover {
 }
 
 .content {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 340px;
-  gap: 1rem;
+  display: block;
 }
 
 .result-list {
@@ -451,18 +449,108 @@ button:hover {
   gap: 0.75rem;
 }
 
+/* Karten klappen inline auf -> kein Padding auf der Karte selbst, sondern auf
+   Kopf und Detailbereich, damit der Detailteil sauber abschliesst. */
 .species-card {
+  width: 100%;
+  overflow: hidden;
+  color: inherit;
+}
+
+.species-card-head {
+  display: block;
   width: 100%;
   padding: 1rem;
   text-align: left;
   color: inherit;
+  background: transparent;
+  border: 0;
+  border-radius: inherit;
+  cursor: pointer;
+  position: relative;
 }
 
 .species-card:hover,
-.species-card.is-active {
+.species-card.is-expanded {
   color: inherit;
-  background: var(--accent-soft);
   border-color: var(--accent);
+}
+
+.species-card.is-expanded {
+  background: var(--accent-soft);
+}
+
+.common-name {
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* Aufklapp-Pfeil oben rechts im Kartenkopf. */
+.expand-hint {
+  position: absolute;
+  top: 1.1rem;
+  right: 1rem;
+  width: 0.6rem;
+  height: 0.6rem;
+  border-right: 2px solid var(--muted);
+  border-bottom: 2px solid var(--muted);
+  transform: rotate(45deg);
+  transition: transform 0.18s ease;
+}
+
+.species-card.is-expanded .expand-hint {
+  transform: rotate(-135deg);
+}
+
+/* Detailbereich: standardmaessig eingeklappt. */
+.species-card-detail {
+  display: none;
+  padding: 0 1rem 1rem;
+}
+
+.species-card.is-expanded .species-card-detail {
+  display: block;
+}
+
+/* Bildbuehne: ganzer Kaefer scharf in der Mitte (object-fit: contain), die
+   seitlichen/oberen Reste werden mit einer unscharfen, leicht abgedunkelten
+   Version desselben Fotos gefuellt -> kein greller weisser Rand. */
+.detail-figure {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  max-height: 460px;
+  margin: 0 0 0.75rem;
+  border-radius: 8px;
+  background: #111813;
+}
+
+.detail-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(26px) brightness(0.78);
+  transform: scale(1.2);
+}
+
+.detail-image {
+  position: relative;
+  display: block;
+  max-width: 100%;
+  max-height: 460px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.detail-note {
+  margin: 0 0 0.75rem;
+  font-style: italic;
 }
 
 .meta-row {
@@ -481,9 +569,9 @@ button:hover {
   font-size: 0.8rem;
 }
 
+/* Rechte Detailbox entfaellt -> Infos klappen jetzt in der Karte auf. */
 .details {
-  align-self: start;
-  padding: 1rem;
+  display: none;
 }
 
 .detail-list {

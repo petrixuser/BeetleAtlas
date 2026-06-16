@@ -31,7 +31,9 @@ ghcr.io/petrixuser/beetleatlas:sha-<commit>   # for rollback
 
 ## Portainer Stack
 
-Use the `docker-compose.yml` in this repository as the stack definition.
+Use `docker-compose.prod.yml` in this repository as the stack definition
+(full stack: frontend + backend + MySQL). Deploy it as a Portainer **Git
+repository** stack so the repo's SQL/CSV seed data is available on first start.
 
 | Setting          | Value                                   |
 |------------------|-----------------------------------------|
@@ -74,11 +76,10 @@ Use the `docker-compose.yml` in this repository as the stack definition.
 
 ### 1. Portainer — Create Stack
 
-1. Open Portainer → Stacks → Add Stack
-2. Name: `BeetleAtlas`
-3. Paste contents of `docker-compose.yml`
-4. Add environment variable `GMAPS_KEY` with your Google Maps API key
-5. Deploy the stack
+1. Open Portainer → Stacks → Add Stack → **Git repository**
+2. Name: `BeetleAtlas`, repo `https://github.com/petrixuser/BeetleAtlas`, compose path `docker-compose.prod.yml`
+3. Add environment variables (`GMAPS_KEY`, `API_BASE_URL`, `FRONTEND_ORIGINS`)
+4. Deploy the stack
 
 ### 2. Portainer — Get Webhook URL
 
