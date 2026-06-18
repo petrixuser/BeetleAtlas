@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Beetle Box</title>
-    <link rel="stylesheet" href="styles.css?v=8" />
+    <link rel="stylesheet" href="styles.css?v=9" />
   </head>
   <body>
     <main class="page">
@@ -42,7 +42,8 @@
             <span class="auth-avatar" aria-hidden="true">&#128100;</span>
             <p class="auth-email" id="authEmail"></p>
             <span class="role-badge" id="authRole"></span>
-            <button type="button" id="logoutButton" class="auth-primary">Abmelden</button>
+            <button type="button" id="addBeetleButton" class="auth-primary is-hidden">+ K&auml;fer eintragen</button>
+            <button type="button" id="logoutButton" class="auth-secondary">Abmelden</button>
           </div>
         </section>
       </div>
@@ -81,6 +82,25 @@
             </label>
             <p class="auth-error is-hidden" id="registerError" role="alert"></p>
             <button type="submit" id="registerSubmit">Registrieren</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Kaefer-eintragen-Modal (Felder werden von beetle-ui.js gerendert) -->
+      <div class="auth-modal beetle-modal is-hidden" id="beetleModal" role="dialog" aria-modal="true" aria-label="Käfer eintragen">
+        <div class="auth-modal-backdrop" data-beetle-close></div>
+        <div class="auth-modal-card beetle-modal-card">
+          <button type="button" class="auth-modal-close" id="beetleModalClose" aria-label="Schliessen" data-beetle-close>&times;</button>
+          <h2 class="beetle-modal-title">K&auml;fer eintragen</h2>
+          <form class="beetle-form" id="beetleForm" novalidate>
+            <div class="beetle-fields" id="beetleFieldsCore"></div>
+            <details class="beetle-advanced">
+              <summary>Erweiterte Felder</summary>
+              <div class="beetle-fields" id="beetleFieldsAdvanced"></div>
+            </details>
+            <p class="auth-error is-hidden" id="beetleError" role="alert"></p>
+            <p class="beetle-success is-hidden" id="beetleSuccess" role="status"></p>
+            <button type="submit" id="beetleSubmit">K&auml;fer speichern</button>
           </form>
         </div>
       </div>
@@ -306,6 +326,7 @@
     <script src="assets/latin-america-countries.js?v=2"></script>
     <script src="auth.js?v=1"></script>
     <script src="auth-ui.js?v=1"></script>
+    <script src="beetle-ui.js?v=1"></script>
     <script src="app.js?v=13"></script>
     <script src="ants.js?v=3"></script>
   </body>
