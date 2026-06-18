@@ -727,20 +727,14 @@ def fetch_country_detail_rows(country_code: str):
                 b.beetle_id,
                 b.country,
                 b.elevation,
-                b.temperature_value,
-                b.precipitation_value,
                 {CLIMATE_CASE_SQL} AS climate,
                 {VEGETATION_CASE_SQL} AS vegetation
             FROM base b
         )
         SELECT
             COUNT(DISTINCT beetle_id) AS species_count,
-            COUNT(*) AS observation_count,
             MIN(elevation) AS min_elevation,
-            AVG(elevation) AS avg_elevation,
             MAX(elevation) AS max_elevation,
-            AVG(temperature_value) AS avg_temperature,
-            AVG(precipitation_value) AS avg_precipitation,
             MIN(country) AS country_name
         FROM enriched
         """
@@ -788,7 +782,7 @@ def fetch_country_detail_rows(country_code: str):
         FROM enriched
         GROUP BY climate
         ORDER BY cnt DESC, climate ASC
-        LIMIT 3
+        LIMIT 2
         """
     )
 
@@ -807,24 +801,7 @@ def fetch_country_detail_rows(country_code: str):
         FROM enriched
         GROUP BY vegetation
         ORDER BY cnt DESC, vegetation ASC
-        LIMIT 3
-        """
-    )
-
-    # Top-3 Kaeferarten des Landes: haeufigste Arten nach Fundzahl.
-    top_beetles_sql = text(
-        """
-        SELECT
-            bs.scientific_name AS name,
-            bs.family AS family,
-            COUNT(*) AS cnt
-        FROM observation o
-        JOIN location l ON l.location_id = o.location_id
-        JOIN beetle_species bs ON bs.beetle_id = o.beetle_id
-        WHERE UPPER(COALESCE(l.country, '')) = :country_code
-        GROUP BY o.beetle_id, bs.scientific_name, bs.family
-        ORDER BY cnt DESC, name ASC
-        LIMIT 3
+        LIMIT 2
         """
     )
 
@@ -833,6 +810,5 @@ def fetch_country_detail_rows(country_code: str):
         overview = conn.execute(base_sql, params).mappings().first()
         climates = conn.execute(top_climates_sql, params).mappings().all()
         vegetations = conn.execute(top_vegetation_sql, params).mappings().all()
-        top_beetles = conn.execute(top_beetles_sql, params).mappings().all()
 
-    return overview, climates, vegetations, top_beetles
+    return overview, climates, vegetations
