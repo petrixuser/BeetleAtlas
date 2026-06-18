@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Beetle Box</title>
-    <link rel="stylesheet" href="styles.css?v=9" />
+    <link rel="stylesheet" href="styles.css?v=11" />
   </head>
   <body>
     <main class="page">
@@ -18,32 +18,27 @@
         <section class="auth-box" id="authBox" aria-label="Konto">
           <!-- Ausgeloggter Zustand -->
           <div class="auth-state" id="authAnon">
-            <div class="auth-heading">
-              <p class="auth-greeting">Forscher?</p>
-              <svg class="auth-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-                <defs>
-                  <clipPath id="netHoop"><circle cx="31" cy="17" r="11" /></clipPath>
-                </defs>
-                <g clip-path="url(#netHoop)" stroke-width="1.1" opacity="0.5">
-                  <line x1="20" y1="8" x2="43" y2="24" />
-                  <line x1="43" y1="9" x2="19" y2="25" />
-                  <line x1="31" y1="4" x2="31" y2="30" />
-                  <line x1="18" y1="17" x2="44" y2="17" />
-                </g>
-                <circle cx="31" cy="17" r="12" />
-                <line x1="22.6" y1="25.4" x2="10" y2="40" />
-              </svg>
+            <div class="auth-band">
+              <span class="auth-band-dot" aria-hidden="true"></span>
+              <span class="auth-band-label">Forscher-Zugang</span>
             </div>
-            <button type="button" id="loginButton" class="auth-primary">Anmelden</button>
-            <button type="button" id="registerButton" class="auth-secondary">Registrieren</button>
+            <div class="auth-body">
+              <p class="auth-title">Mitforschen</p>
+              <button type="button" id="loginButton" class="auth-primary">Anmelden</button>
+              <button type="button" id="registerButton" class="auth-secondary">Registrieren</button>
+            </div>
           </div>
           <!-- Eingeloggter Zustand -->
           <div class="auth-state is-hidden" id="authUser">
-            <span class="auth-avatar" aria-hidden="true">&#128100;</span>
-            <p class="auth-email" id="authEmail"></p>
-            <span class="role-badge" id="authRole"></span>
-            <button type="button" id="addBeetleButton" class="auth-primary is-hidden">+ K&auml;fer eintragen</button>
-            <button type="button" id="logoutButton" class="auth-secondary">Abmelden</button>
+            <div class="auth-band">
+              <span class="auth-band-dot" aria-hidden="true"></span>
+              <span class="auth-band-label" id="authRole">Konto</span>
+            </div>
+            <div class="auth-body">
+              <p class="auth-email" id="authEmail"></p>
+              <button type="button" id="addBeetleButton" class="auth-primary is-hidden">+ K&auml;fer eintragen</button>
+              <button type="button" id="logoutButton" class="auth-secondary">Abmelden</button>
+            </div>
           </div>
         </section>
       </div>

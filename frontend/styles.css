@@ -73,7 +73,26 @@ select {
 }
 
 .header {
-  padding: 1.5rem;
+  padding: 1.75rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Groesser gesetzt, damit der Titel die hoehere Box (Hoehe = Auth-Box) fuellt. */
+.header h1 {
+  margin-bottom: 0.5rem;
+  font-size: clamp(2.4rem, 3.4vw, 3.1rem);
+  line-height: 1.05;
+}
+
+.header .subtitle {
+  margin-bottom: 0.4rem;
+  font-size: 1.35rem;
+}
+
+.header p:last-child {
+  font-size: 1.05rem;
 }
 
 h1,
@@ -796,60 +815,76 @@ button:hover {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 8px;
-  padding: 1.25rem 1rem;
+  overflow: hidden; /* damit das Band bis an die abgerundeten Ecken reicht */
   display: flex;
   flex-direction: column;
-  justify-content: center;
 }
 
 .auth-state {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  text-align: center;
+  height: 100%;
 }
 
-.auth-avatar {
-  font-size: 1.6rem;
-  line-height: 1;
-}
-
-/* "Forscher?" + Kescher nebeneinander in einer Zeile. */
-.auth-heading {
+/* Signatur: solides gruenes Kopfband wie der farbige Rand eines
+   entomologischen Sammlungs-Etiketts (statt Netz-Klischee). */
+.auth-band {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  background: var(--accent);
 }
 
-/* Forscher-Kescher (Insektennetz) im ausgeloggten Zustand. */
-.auth-icon {
-  width: 1.9rem;
-  height: 1.9rem;
+.auth-band-dot {
+  width: 0.45rem;
+  height: 0.45rem;
   flex-shrink: 0;
-  color: var(--accent);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
 }
 
-.auth-greeting {
+.auth-band-label {
   margin: 0;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* Inhalt unter dem Band, vertikal mittig im restlichen Kartenraum. */
+.auth-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 1.1rem 1rem 1.2rem;
+}
+
+.auth-title {
+  margin: 0 0 0.15rem;
   color: var(--text);
-  font-size: 1.15rem;
+  font-size: 1.2rem;
   font-weight: 800;
+  letter-spacing: -0.01em;
 }
 
 .auth-email {
-  margin: 0;
-  font-size: 0.85rem;
+  margin: 0 0 0.15rem;
+  color: var(--muted);
+  font-size: 0.82rem;
   font-weight: 700;
   word-break: break-all;
 }
 
 .auth-box .auth-state button {
   width: 100%;
+  transition: background 0.15s ease, color 0.15s ease;
 }
 
-/* Registrieren = sekundaerer Button (Outline) unter dem gefuellten "Anmelden". */
+/* Registrieren/Abmelden = sekundaerer Button (Outline) unter dem gefuellten Primaer-Button. */
 .auth-secondary {
   color: var(--accent);
   background: var(--surface);
@@ -859,31 +894,6 @@ button:hover {
 .auth-secondary:hover {
   color: var(--accent);
   background: var(--accent-soft);
-}
-
-/* Rollen-Badge. */
-.role-badge {
-  display: inline-block;
-  padding: 0.15rem 0.6rem;
-  border-radius: 999px;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  color: var(--accent);
-  background: var(--accent-soft);
-  border: 1px solid var(--accent);
-}
-
-.role-badge.role-admin {
-  color: #fff;
-  background: var(--accent);
-}
-
-.role-badge.role-viewer {
-  color: var(--muted);
-  background: var(--background);
-  border-color: var(--border);
 }
 
 /* ---- Modal ---- */

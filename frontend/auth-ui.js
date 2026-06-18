@@ -51,7 +51,7 @@
       if (user) {
         emailEl.textContent = user.email;
         roleEl.textContent = ROLE_LABELS[user.role] || user.role;
-        roleEl.className = "role-badge role-" + user.role;
+        roleEl.className = "auth-band-label";
         hide(anon);
         show(userState);
       } else {
