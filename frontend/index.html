@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Beetle Box</title>
-    <link rel="stylesheet" href="styles.css?v=11" />
+    <link rel="stylesheet" href="styles.css?v=13" />
   </head>
   <body>
     <main class="page">
@@ -101,13 +101,31 @@
       </div>
 
       <section class="search-box" aria-label="Suche und Filter">
-        <label>
-          Art suchen
-          <input id="searchInput" type="search" placeholder="z. B. Dynastes" />
-        </label>
+        <div class="search-row">
+          <label class="search-field">
+            <span class="search-label">
+              Art suchen
+              <span class="search-lupe" aria-hidden="true">&#128269;</span>
+            </span>
+            <input id="searchInput" type="search" placeholder="z. B. Dynastes" />
+          </label>
+          <button id="filterToggle" type="button" class="filter-toggle" aria-expanded="false" aria-controls="filterPanel">
+            Filter<span class="filter-badge is-hidden" id="filterBadge">0</span>
+          </button>
+        </div>
 
-        <label>
-          Klimazone
+        <div class="filter-chips" id="activeFilters" aria-label="Aktive Filter"></div>
+
+        <div class="filter-panel is-collapsed" id="filterPanel">
+          <label>
+            Land
+            <select id="countryFilter">
+              <option value="all">Alle L&auml;nder</option>
+            </select>
+          </label>
+
+          <label>
+            Klimazone
           <select id="climateFilter">
             <option value="all">Alle</option>
             <option value="cold">Kalt</option>
@@ -148,14 +166,15 @@
           </select>
         </label>
 
-        <button id="resetButton" type="button">Zuruecksetzen</button>
+          <button id="resetButton" type="button" class="filter-reset">Zur&uuml;cksetzen</button>
+        </div>
       </section>
 
       <section class="map-section" aria-label="Karten">
         <div class="map-header">
           <div>
             <h2>Atlas Karte</h2>
-            <p>Lateinamerika mit klaren Umrissen, Laendergrenzen und Laendernamen.</p>
+            <p>Hier werden dir die Fundorte deiner gesuchten K&auml;fer angezeigt :)</p>
           </div>
           <div class="map-view-toggle" role="group" aria-label="Kartenansicht">
             <button class="toggle-btn is-active" data-view="normal" type="button">Normal</button>
@@ -322,7 +341,7 @@
     <script src="auth.js?v=1"></script>
     <script src="auth-ui.js?v=1"></script>
     <script src="beetle-ui.js?v=1"></script>
-    <script src="app.js?v=13"></script>
+    <script src="app.js?v=14"></script>
     <script src="ants.js?v=3"></script>
   </body>
 </html>

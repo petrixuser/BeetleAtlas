@@ -13,6 +13,7 @@ function buildBeetleQuery() {
   const params = new URLSearchParams();
   const search = searchInput.value.trim();
   if (search) params.set("q", search);
+  if (countryFilter.value !== "all") params.set("country", countryFilter.value);
   if (climateFilter.value !== "all") params.set("climate", climateFilter.value);
   if (vegetationFilter.value !== "all") params.set("vegetation", vegetationFilter.value);
   if (elevationFilter.value !== "all") params.set("elevation", elevationFilter.value);
@@ -25,6 +26,7 @@ function buildBeetleQuery() {
 function hasActiveFilters() {
   return (
     searchInput.value.trim() !== "" ||
+    countryFilter.value !== "all" ||
     climateFilter.value !== "all" ||
     vegetationFilter.value !== "all" ||
     elevationFilter.value !== "all"
@@ -89,6 +91,7 @@ function showLoadingState() {
 async function applyFilters() {
   // Neue Suche/Filterung -> die per Karten-Pin gewaehlte Karte oben zuruecksetzen.
   pinnedBeetle = null;
+  updateFilterUI();
   // Nur die echte Backend-Abfrage (Suche/Filter aktiv + Backend-Modus) braucht
   // einen Ladezustand; Startliste und Demo-Modus sind sofort da.
   if (hasActiveFilters() && window.API_BASE_URL) {
@@ -182,12 +185,33 @@ let panY = 0;
 let dragStart = null;
 
 const searchInput = document.querySelector("#searchInput");
+const countryFilter = document.querySelector("#countryFilter");
 const climateFilter = document.querySelector("#climateFilter");
 const vegetationFilter = document.querySelector("#vegetationFilter");
 const elevationFilter = document.querySelector("#elevationFilter");
 const resetButton = document.querySelector("#resetButton");
+const filterToggle = document.querySelector("#filterToggle");
+const filterPanel = document.querySelector("#filterPanel");
+const filterBadge = document.querySelector("#filterBadge");
+const activeFilters = document.querySelector("#activeFilters");
 const resultHeading = document.querySelector("#resultHeading");
 const resultList = document.querySelector("#resultList");
+
+// Laender-Dropdown alphabetisch aus dem vorberechneten Snapshot fuellen.
+// option.value = COUNTRY_STATS.code (= DB-Wert, den der Backend-Filter erwartet),
+// option.text = Anzeigename.
+(function populateCountryFilter() {
+  if (!countryFilter || !window.COUNTRY_STATS) return;
+  Object.values(window.COUNTRY_STATS)
+    .map((c) => ({ code: c.code, name: c.name }))
+    .sort((a, b) => a.name.localeCompare(b.name, "de"))
+    .forEach((c) => {
+      const opt = document.createElement("option");
+      opt.value = c.code;
+      opt.textContent = c.name;
+      countryFilter.appendChild(opt);
+    });
+})();
 const atlasSvg = document.querySelector("#atlasSvg");
 const mapViewport = document.querySelector("#mapViewport");
 const baseLayer = document.querySelector("#baseLayer");
@@ -218,6 +242,8 @@ function getFilteredBeetles() {
   }
 
   const search = searchInput.value.trim().toLowerCase();
+  const country = countryFilter.value;
+  const countryName = country === "all" ? "" : countryFilter.selectedOptions[0].text.toLowerCase();
   const climate = climateFilter.value;
   const vegetation = vegetationFilter.value;
   const elevation = elevationFilter.value;
@@ -227,11 +253,13 @@ function getFilteredBeetles() {
       beetle.name.toLowerCase().includes(search) ||
       beetle.family.toLowerCase().includes(search) ||
       beetle.location.toLowerCase().includes(search);
+    // Demo-Daten haben keinen Laendercode -> Best-effort gegen den Ortstext.
+    const matchesCountry = country === "all" || (beetle.location || "").toLowerCase().includes(countryName);
     const matchesClimate = climate === "all" || beetle.climate === climate;
     const matchesVegetation = vegetation === "all" || beetle.vegetation === vegetation;
     const matchesElevation = elevation === "all" || getElevationGroup(beetle.elevation) === elevation;
 
-    return matchesSearch && matchesClimate && matchesVegetation && matchesElevation;
+    return matchesSearch && matchesCountry && matchesClimate && matchesVegetation && matchesElevation;
   });
 }
 
@@ -704,9 +732,64 @@ searchInput.addEventListener("input", () => {
   clearTimeout(filterDebounce);
   filterDebounce = setTimeout(applyFilters, 500);
 });
-[climateFilter, vegetationFilter, elevationFilter].forEach((element) => {
+[countryFilter, climateFilter, vegetationFilter, elevationFilter].forEach((element) => {
   element.addEventListener("change", applyFilters);
 });
+
+// ─── Filterpanel ein-/ausklappen + aktive Filter als Chips ──────────────────────
+
+filterToggle.addEventListener("click", () => {
+  const collapsed = filterPanel.classList.toggle("is-collapsed");
+  filterToggle.setAttribute("aria-expanded", String(!collapsed));
+});
+
+// Die im Panel versteckten Filter (Suche bleibt separat sichtbar). Jeder Eintrag
+// liefert deutschen Labeltext + Anzeigwert + ein Zuruecksetzen.
+function panelFilterState() {
+  return [
+    { label: "Land", el: countryFilter },
+    { label: "Klima", el: climateFilter },
+    { label: "Vegetation", el: vegetationFilter },
+    { label: "Hoehe", el: elevationFilter },
+  ].map((f) => ({
+    label: f.label,
+    el: f.el,
+    active: f.el.value !== "all",
+    text: f.el.selectedOptions[0] ? f.el.selectedOptions[0].text : f.el.value,
+  }));
+}
+
+// Badge-Zahl + Chips nach jeder Filteraenderung aktualisieren.
+function updateFilterUI() {
+  const filters = panelFilterState();
+  const active = filters.filter((f) => f.active);
+
+  filterBadge.textContent = String(active.length);
+  filterBadge.classList.toggle("is-hidden", active.length === 0);
+
+  activeFilters.innerHTML = "";
+  active.forEach((f) => {
+    const chip = document.createElement("span");
+    chip.className = "filter-chip";
+
+    const text = document.createElement("span");
+    text.textContent = `${f.label}: ${f.text}`;
+    chip.appendChild(text);
+
+    const remove = document.createElement("button");
+    remove.type = "button";
+    remove.className = "filter-chip-remove";
+    remove.setAttribute("aria-label", `${f.label}-Filter entfernen`);
+    remove.textContent = "×";
+    remove.addEventListener("click", () => {
+      f.el.value = "all";
+      applyFilters();
+    });
+    chip.appendChild(remove);
+
+    activeFilters.appendChild(chip);
+  });
+}
 
 zoomInButton.addEventListener("click", () => setZoom(zoom * 1.25));
 zoomOutButton.addEventListener("click", () => setZoom(zoom / 1.25));
@@ -748,6 +831,7 @@ atlasSvg.addEventListener("pointerleave", () => {
 
 resetButton.addEventListener("click", () => {
   searchInput.value = "";
+  countryFilter.value = "all";
   climateFilter.value = "all";
   vegetationFilter.value = "all";
   elevationFilter.value = "all";
@@ -873,6 +957,7 @@ async function loadMapPoints() {
 
   const search = searchInput.value.trim();
   if (search) params.set("q", search);
+  if (countryFilter.value !== "all") params.set("country", countryFilter.value);
   if (climateFilter.value !== "all") params.set("climate", climateFilter.value);
   if (vegetationFilter.value !== "all") params.set("vegetation", vegetationFilter.value);
   if (elevationFilter.value !== "all") params.set("elevation", elevationFilter.value);
