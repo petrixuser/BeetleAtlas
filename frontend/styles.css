@@ -73,7 +73,6 @@ select {
 }
 
 .header {
-  margin-bottom: 1.5rem;
   padding: 1.5rem;
 }
 
@@ -766,5 +765,241 @@ button:hover {
   .search-box,
   .content {
     grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================================
+   Auth: Topbar (Header 3/4 + Konto-Box 1/4), Box, Modal
+   ============================================================ */
+
+/* Allgemeines Sichtbarkeits-Toggle (vom Auth-JS genutzt). */
+.is-hidden {
+  display: none !important;
+}
+
+/* Header + Auth-Box nebeneinander; die gap zeigt den braunen Waldboden
+   (--soil) zwischen den beiden weissen Karten. */
+.topbar {
+  display: flex;
+  gap: 1.5rem;
+  align-items: stretch;
+  margin-bottom: 1.5rem;
+}
+
+.topbar .header {
+  flex: 3;
+}
+
+.auth-box {
+  flex: 1;
+  min-width: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.25rem 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.auth-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: center;
+}
+
+.auth-avatar {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+/* "Forscher?" + Kescher nebeneinander in einer Zeile. */
+.auth-heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+/* Forscher-Kescher (Insektennetz) im ausgeloggten Zustand. */
+.auth-icon {
+  width: 1.9rem;
+  height: 1.9rem;
+  flex-shrink: 0;
+  color: var(--accent);
+}
+
+.auth-greeting {
+  margin: 0;
+  color: var(--text);
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+.auth-email {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 700;
+  word-break: break-all;
+}
+
+.auth-box .auth-state button {
+  width: 100%;
+}
+
+/* Registrieren = sekundaerer Button (Outline) unter dem gefuellten "Anmelden". */
+.auth-secondary {
+  color: var(--accent);
+  background: var(--surface);
+  border-color: var(--accent);
+}
+
+.auth-secondary:hover {
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+/* Rollen-Badge. */
+.role-badge {
+  display: inline-block;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+}
+
+.role-badge.role-admin {
+  color: #fff;
+  background: var(--accent);
+}
+
+.role-badge.role-viewer {
+  color: var(--muted);
+  background: var(--background);
+  border-color: var(--border);
+}
+
+/* ---- Modal ---- */
+.auth-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.auth-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(31, 42, 36, 0.55);
+}
+
+.auth-modal-card {
+  position: relative;
+  z-index: 1;
+  width: min(380px, 100%);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 12px 40px rgba(31, 42, 36, 0.3);
+}
+
+.auth-modal-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  min-height: 0;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  font-size: 1.3rem;
+  line-height: 1;
+  color: var(--muted);
+  background: none;
+  border: none;
+}
+
+.auth-modal-close:hover {
+  color: var(--text);
+  background: none;
+}
+
+.auth-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 1.25rem;
+}
+
+.auth-tab {
+  flex: 1;
+  min-height: 2.25rem;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.auth-tab:first-child {
+  border-radius: 6px 0 0 6px;
+}
+
+.auth-tab:last-child {
+  border-radius: 0 6px 6px 0;
+}
+
+.auth-tab + .auth-tab {
+  margin-left: -1px;
+}
+
+.auth-tab:hover {
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.auth-tab.is-active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.auth-form {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.auth-form button[type="submit"] {
+  width: 100%;
+  margin-top: 0.25rem;
+}
+
+.auth-hint {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.auth-error {
+  margin: 0;
+  color: #b3261e;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 720px) {
+  .topbar {
+    flex-direction: column;
   }
 }

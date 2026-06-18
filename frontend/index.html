@@ -4,15 +4,86 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Beetle Box</title>
-    <link rel="stylesheet" href="styles.css?v=7" />
+    <link rel="stylesheet" href="styles.css?v=8" />
   </head>
   <body>
     <main class="page">
-      <header class="header">
-        <h1>Beetle Box</h1>
-        <p class="subtitle">Latin Americas Beetle Atlas</p>
-        <p>Find your favorite Beetles</p>
-      </header>
+      <div class="topbar">
+        <header class="header">
+          <h1>Beetle Box</h1>
+          <p class="subtitle">Latin Americas Beetle Atlas</p>
+          <p>Find your favorite Beetles</p>
+        </header>
+
+        <section class="auth-box" id="authBox" aria-label="Konto">
+          <!-- Ausgeloggter Zustand -->
+          <div class="auth-state" id="authAnon">
+            <div class="auth-heading">
+              <p class="auth-greeting">Forscher?</p>
+              <svg class="auth-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <defs>
+                  <clipPath id="netHoop"><circle cx="31" cy="17" r="11" /></clipPath>
+                </defs>
+                <g clip-path="url(#netHoop)" stroke-width="1.1" opacity="0.5">
+                  <line x1="20" y1="8" x2="43" y2="24" />
+                  <line x1="43" y1="9" x2="19" y2="25" />
+                  <line x1="31" y1="4" x2="31" y2="30" />
+                  <line x1="18" y1="17" x2="44" y2="17" />
+                </g>
+                <circle cx="31" cy="17" r="12" />
+                <line x1="22.6" y1="25.4" x2="10" y2="40" />
+              </svg>
+            </div>
+            <button type="button" id="loginButton" class="auth-primary">Anmelden</button>
+            <button type="button" id="registerButton" class="auth-secondary">Registrieren</button>
+          </div>
+          <!-- Eingeloggter Zustand -->
+          <div class="auth-state is-hidden" id="authUser">
+            <span class="auth-avatar" aria-hidden="true">&#128100;</span>
+            <p class="auth-email" id="authEmail"></p>
+            <span class="role-badge" id="authRole"></span>
+            <button type="button" id="logoutButton" class="auth-primary">Abmelden</button>
+          </div>
+        </section>
+      </div>
+
+      <!-- Anmelden/Registrieren-Modal -->
+      <div class="auth-modal is-hidden" id="authModal" role="dialog" aria-modal="true" aria-label="Anmelden oder Registrieren">
+        <div class="auth-modal-backdrop" data-auth-close></div>
+        <div class="auth-modal-card">
+          <button type="button" class="auth-modal-close" id="authModalClose" aria-label="Schliessen" data-auth-close>&times;</button>
+          <div class="auth-tabs" role="tablist">
+            <button type="button" class="auth-tab is-active" data-tab="login" role="tab">Anmelden</button>
+            <button type="button" class="auth-tab" data-tab="register" role="tab">Registrieren</button>
+          </div>
+
+          <form class="auth-form" id="loginForm" data-panel="login">
+            <label>E-Mail
+              <input type="email" id="loginEmail" autocomplete="email" required />
+            </label>
+            <label>Passwort
+              <input type="password" id="loginPassword" autocomplete="current-password" required />
+            </label>
+            <p class="auth-error is-hidden" id="loginError" role="alert"></p>
+            <button type="submit" id="loginSubmit">Anmelden</button>
+          </form>
+
+          <form class="auth-form is-hidden" id="registerForm" data-panel="register">
+            <p class="auth-hint">Als Researcher registrieren &ndash; du brauchst den Einladungs-Code.</p>
+            <label>E-Mail
+              <input type="email" id="registerEmail" autocomplete="email" required />
+            </label>
+            <label>Passwort (min. 12 Zeichen)
+              <input type="password" id="registerPassword" autocomplete="new-password" minlength="12" required />
+            </label>
+            <label>Researcher-Code
+              <input type="text" id="registerCode" autocomplete="off" required />
+            </label>
+            <p class="auth-error is-hidden" id="registerError" role="alert"></p>
+            <button type="submit" id="registerSubmit">Registrieren</button>
+          </form>
+        </div>
+      </div>
 
       <section class="search-box" aria-label="Suche und Filter">
         <label>
@@ -233,6 +304,8 @@
     <script src="data/featured-beetles.js?v=1"></script>
     <script src="data/country-stats.js?v=1"></script>
     <script src="assets/latin-america-countries.js?v=2"></script>
+    <script src="auth.js?v=1"></script>
+    <script src="auth-ui.js?v=1"></script>
     <script src="app.js?v=13"></script>
     <script src="ants.js?v=3"></script>
   </body>
