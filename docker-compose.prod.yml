@@ -11,10 +11,19 @@
 # under Portainer, which resolves relative paths against a path absent on the host.)
 #
 # Required Portainer stack environment variables:
-#   GMAPS_KEY          Google Maps JS API key (already used by the live frontend)
-#   API_BASE_URL       public URL of the backend, e.g. https://api.kafer.server-work.de
-#   FRONTEND_ORIGINS   public origin of the frontend, e.g. https://kafer.server-work.de
-#   DB_PASSWORD        optional; defaults to root123 (DB is internal-only, see WORKLOG)
+#   GMAPS_KEY             Google Maps JS API key (already used by the live frontend)
+#   API_BASE_URL          public URL of the backend, e.g. https://api.kafer.server-work.de
+#   FRONTEND_ORIGINS      public origin of the frontend, e.g. https://kafer.server-work.de
+#   DB_PASSWORD           optional; defaults to root123 (DB is internal-only, see WORKLOG)
+#   JWT_SECRET            REQUIRED for real auth — set a long random secret (NOT "change-me")
+#   ADMIN_BOOTSTRAP_TOKEN shared secret to create the first admin via the bootstrap endpoint
+#   RESEARCHER_SIGNUP_CODE code researchers must enter to register (else nobody can sign up)
+#   ALLOW_ADMIN_BOOTSTRAP  "true" to enable the one-time admin bootstrap endpoint (default true)
+#
+# NOTE: New DB schema (auth/researcher tables, migrations) is baked into the db
+# image. The persisted volume only re-seeds on an EMPTY data dir, so to apply the
+# new schema delete the host volume (/volume1/docker/beetlejuice/mysql) before
+# restarting the stack — it then rebuilds the full DB from the new image.
 #
 # Nginx Proxy Manager (friend) must route:
 #   kafer.server-work.de      -> beetle-frontend:80
@@ -62,6 +71,12 @@ services:
       - SLOW_QUERY_MS=${SLOW_QUERY_MS:-300}
       - REDIS_URL=${REDIS_URL:-redis://beetle-redis:6379/0}
       - RESEARCHER_SIGNUP_CODE=${RESEARCHER_SIGNUP_CODE}
+      # Auth: set real values in Portainer. JWT_SECRET MUST NOT stay "change-me"
+      # in production. ADMIN_BOOTSTRAP_TOKEN + ALLOW_ADMIN_BOOTSTRAP let Basti
+      # create the first admin via the bootstrap endpoint after deploy.
+      - JWT_SECRET=${JWT_SECRET:-change-me}
+      - ADMIN_BOOTSTRAP_TOKEN=${ADMIN_BOOTSTRAP_TOKEN}
+      - ALLOW_ADMIN_BOOTSTRAP=${ALLOW_ADMIN_BOOTSTRAP:-true}
       # CORS: the browser loads the site from the frontend origin and calls the
       # backend on the api subdomain, so the frontend origin must be allowed.
       - FRONTEND_ORIGINS=${FRONTEND_ORIGINS:-https://kafer.server-work.de}

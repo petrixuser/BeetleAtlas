@@ -1,6 +1,6 @@
-# MySQL image with schema, seed scripts AND the CSV seed data baked in.
+# MySQL image with schema, ALL migrations, seed scripts AND the CSV seed data baked in.
 #
-# Why a dedicated image instead of bind-mounting backend/SQL + backend/Data:
+# Why a dedicated image instead of bind-mounting backend/sql + backend/data:
 # Portainer runs as a container and resolves the relative compose paths against
 # its own internal repo checkout (/data/compose/...), a path that does not exist
 # on the NAS host. Docker then creates empty directories instead of mounting the
@@ -8,17 +8,45 @@
 # Baking everything into the image removes the bind mounts entirely; a git push
 # rebuilds this image via GitHub Actions and Portainer pulls it.
 #
+# A fresh DB (empty data dir) runs every /docker-entrypoint-initdb.d/*.sql once,
+# in alphabetical order, so the numeric prefixes below define the run order. We
+# bake in the full set so that wiping the volume + restarting yields a COMPLETE
+# database (base schema + seed data + every migration), with no manual step.
+#
+# Order matters:
+#   - seed (02/03) runs before the migrations that backfill/constrain seeded data
+#     (05 backfills observation.event_date_parsed; 10 records a quality snapshot
+#     into the quality_report_history table created by 05).
+#   - auth/write tables (06-08) follow their FK dependencies (app_user first).
+# The admin account is intentionally NOT seeded here; it is bootstrapped after
+# deploy via the admin bootstrap endpoint (ADMIN_BOOTSTRAP_TOKEN).
+#
 # Build context = repo root, dockerfile = backend/docker/Dockerfile.db.
-# The root .dockerignore excludes backend/Data/, so this build uses the adjacent
-# Dockerfile.db.dockerignore to re-include SQL + Data.
+# The root .dockerignore excludes backend/data/, so this build uses the adjacent
+# Dockerfile.db.dockerignore to re-include backend/sql + backend/data.
 FROM mysql:8.0
 
-COPY backend/SQL/schema/DatabseShema.sql /docker-entrypoint-initdb.d/01_schema.sql
-COPY backend/SQL/ops/AddMapQueryIndexes.sql /docker-entrypoint-initdb.d/02_indexes.sql
-COPY backend/SQL/seed/LoadGBIFCSVToDB.sql /docker-entrypoint-initdb.d/03_seed_gbif.sql
-COPY backend/SQL/seed/LoadClimateSnapshot.sql /docker-entrypoint-initdb.d/04_seed_climate.sql
-COPY backend/SQL/seed/RecordQualityReportSnapshot.sql /docker-entrypoint-initdb.d/05_quality_snapshot.sql
-COPY backend/Data/ /var/lib/mysql-files/
+# 1) Base schema
+COPY backend/sql/schema/DatabseShema.sql            /docker-entrypoint-initdb.d/01_schema.sql
+# 2) Seed data (CSV load) -- must precede the backfill/constraint migrations
+COPY backend/sql/seed/LoadGBIFCSVToDB.sql           /docker-entrypoint-initdb.d/02_seed_gbif.sql
+COPY backend/sql/seed/LoadClimateSnapshot.sql       /docker-entrypoint-initdb.d/03_seed_climate.sql
+# 3) Migration bookkeeping table
+COPY backend/sql/schema/MigrateSchemaMigrations.sql /docker-entrypoint-initdb.d/04_schema_migrations.sql
+# 4) Data-quality migration: adds + backfills observation.event_date_parsed,
+#    indexes, CHECK constraints, and creates quality_report_history (needs seeded data)
+COPY backend/sql/ops/MigrateDataQualityAndHistory.sql /docker-entrypoint-initdb.d/05_dataquality.sql
+# 5) Auth + manual-beetle tables (app_user first -> FK targets)
+COPY backend/sql/ops/MigrateAuthAndManualBeetles.sql  /docker-entrypoint-initdb.d/06_auth.sql
+COPY backend/sql/ops/MigrateAuthRefreshTokens.sql     /docker-entrypoint-initdb.d/07_refresh.sql
+COPY backend/sql/ops/MigrateBeetleWrite.sql           /docker-entrypoint-initdb.d/08_beetlewrite.sql
+# 6) Map query indexes
+COPY backend/sql/ops/AddMapQueryIndexes.sql           /docker-entrypoint-initdb.d/09_indexes.sql
+# 7) Quality snapshot row (needs quality_report_history from step 05 + seeded data)
+COPY backend/sql/seed/RecordQualityReportSnapshot.sql /docker-entrypoint-initdb.d/10_quality_snapshot.sql
+
+# CSV seed files referenced by the LOAD DATA statements above
+COPY backend/data/ /var/lib/mysql-files/
 
 RUN chown -R mysql:mysql /var/lib/mysql-files/ && \
     find /var/lib/mysql-files/ -name "*.csv" -exec chmod 644 {} \;

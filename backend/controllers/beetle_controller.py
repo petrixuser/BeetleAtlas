@@ -191,25 +191,55 @@ def get_country_detail_controller(country_code: str):
 
     lookup_value = COUNTRY_CODE_TO_LOCATION_NAME.get(normalized, normalized)
 
-    overview, climates, vegetations = fetch_country_detail_rows(lookup_value)
+    overview, climates, vegetations, top_beetles = fetch_country_detail_rows(lookup_value)
 
     if overview is None or (overview.get("species_count") or 0) == 0:
         raise_api_error(404, "not_found", "No data found for this country code.")
 
+    observation_count = int(overview.get("observation_count") or 0)
+
+    def _round_int(value):
+        return int(round(value)) if value is not None else None
+
+    def _share_rows(rows, key):
+        # Label + Fundzahl + Anteil (an allen Funden des Landes) fuer Balken/Prozent.
+        out = []
+        for row in rows:
+            cnt = int(row["cnt"] or 0)
+            out.append({
+                key: row[key],
+                "count": cnt,
+                "share": round(cnt / observation_count, 4) if observation_count else None,
+            })
+        return out
+
     min_elev = overview.get("min_elevation")
     max_elev = overview.get("max_elevation")
-    elevation_range = [
-        int(round(min_elev)) if min_elev is not None else None,
-        int(round(max_elev)) if max_elev is not None else None,
-    ]
+    avg_temp = overview.get("avg_temperature")
 
     return {
         "code": normalized,
         "name": overview.get("country_name") or lookup_value,
         "speciesCount": int(overview.get("species_count") or 0),
+        "observationCount": observation_count,
+        # Bestehende Felder unveraendert (Rueckwaerts-Kompatibilitaet):
         "topClimates": [row["climate"] for row in climates],
         "topVegetations": [row["vegetation"] for row in vegetations],
-        "elevationRange": elevation_range,
+        "elevationRange": [_round_int(min_elev), _round_int(max_elev)],
+        # Neue, angereicherte Felder:
+        "avgElevation": _round_int(overview.get("avg_elevation")),
+        "avgTemperature": round(float(avg_temp), 1) if avg_temp is not None else None,
+        "avgPrecipitation": _round_int(overview.get("avg_precipitation")),
+        "climates": _share_rows(climates, "climate"),
+        "vegetations": _share_rows(vegetations, "vegetation"),
+        "topBeetles": [
+            {
+                "name": row["name"],
+                "family": row["family"],
+                "count": int(row["cnt"] or 0),
+            }
+            for row in top_beetles
+        ],
     }
 
 def get_beetle_media_controller(beetle_id: str, limit: int, offset: int):

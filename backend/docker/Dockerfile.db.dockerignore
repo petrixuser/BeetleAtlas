@@ -1,7 +1,7 @@
 # Per-Dockerfile ignore for the DB image build (BuildKit picks up
 # <dockerfile>.dockerignore before the root .dockerignore).
-# The root .dockerignore excludes backend/Data/; the DB image needs it, so we
+# The root .dockerignore excludes backend/data/; the DB image needs it, so we
 # start from "ignore everything" and re-include only the SQL + CSV seed data.
 *
-!backend/SQL/
-!backend/Data/
+!backend/sql/
+!backend/data/

@@ -4,6 +4,36 @@ Dieser Worklog haelt den aktiven Arbeitsstand fest. Er soll nach jeder relevante
 aktualisiert werden, damit die Arbeit bei einer neuen Session ohne Kontextverlust fortgesetzt
 werden kann.
 
+## Stand 2026-06-18 (Integration Basti-Backend-Refactor + Frontend/Country-Feature)
+
+Bastis kompletter Backend-Refactor (`main-new`, eigenstaendige Historie: Auth/RBAC,
+Rate-Limiting, Write-Endpunkte, Contract-Tests, neue `backend/`-Struktur) wird die neue
+Basis. Darauf integriert (Branch `integrate-country`):
+- **Frontend** (Perf-Fixes Scroll/Filter + Laender-Panel + `data/country-stats.js`, 26 Laender).
+  Basti hatte das Frontend nicht angefasst -> kein Verlust.
+- **`/api/countries`-Erweiterung** an Bastis Struktur angepasst (topBeetles, avgElevation,
+  avg Temp/Niederschlag, climates/vegetations mit count+share) in
+  `backend/repositories/beetle_repository.py` + `backend/controllers/beetle_controller.py`.
+- **DB-Image vervollstaendigt** (`backend/docker/Dockerfile.db` + `.dockerignore`): Pfade auf
+  Kleinschreibung gefixt UND ALLE Migrationen in Abhaengigkeitsreihenfolge ins Init eingebacken
+  (Schema -> Seed -> SchemaMigrations -> DataQuality(Backfill) -> Auth -> Refresh -> BeetleWrite
+  -> Indizes -> QualitySnapshot). Admin-Seed BEWUSST nicht eingebacken.
+- **Compose**: `JWT_SECRET`, `ADMIN_BOOTSTRAP_TOKEN`, `ALLOW_ADMIN_BOOTSTRAP` verdrahtet
+  + Volume-Wipe-Hinweis im Header.
+
+**Lokal verifiziert:** DB-Image gebaut+gestartet -> frische DB vollstaendig (alle Tabellen,
+observation=417581 davon 147879 mit event_date_parsed-Backfill, app_user leer wie gewollt).
+Backend-Image gebaut, lief gegen die frische DB: `/api/countries/BR` liefert die Erweiterung,
+Lese-Endpunkte 200. (Lokaler MySQL brauchte `--default-authentication-plugin=mysql_native_password`
+wie in der Prod-Compose; reines Test-Artefakt.)
+
+**Go-Live (Reihenfolge):** `main` per Backup-Tag sichern -> `integrate-country` als `main`
+pushen -> CI baut 3 Images + Portainer-Webhook -> **Paul loescht DB-Volume + Stack neu** ->
+**Basti** setzt Secrets (`JWT_SECRET` echt!) + bootstrappt Admin -> live verifizieren
+(Cloudflare-Regel beachten). Offen/Follow-up: French Guiana (Bastis `country_mappings` mappt
+GF->"FRENCH GUIANA", DB speichert "GF"; aktueller Snapshot hat FG bereits, Fix nur bei kuenftiger
+Neugenerierung noetig).
+
 ## Arbeitsregel
 
 Bei jeder neuen Session zuerst lesen:

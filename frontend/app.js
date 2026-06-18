@@ -34,6 +34,9 @@ function hasActiveFilters() {
 // True, wenn aktuell die kuratierte Startliste angezeigt wird.
 let featuredMode = false;
 
+// Session-Cache fuer Backend-Listenabfragen (Key = Query-String der Filter).
+const beetlesCache = new Map();
+
 async function loadBeetles() {
   // Startseite (keine Suche/Filter): kuratierte beruehmte Grosskaefer aus dem
   // gebackenen Snapshot. Laedt sofort, keine (langsame) Backend-Abfrage.
@@ -48,11 +51,20 @@ async function loadBeetles() {
   try {
     if (window.API_BASE_URL) {
       // Serverseitige Filterung: aktuelle Filter werden als Query mitgeschickt.
-      const res = await fetch(`${window.API_BASE_URL}/api/beetles?${buildBeetleQuery()}`);
+      const query = buildBeetleQuery();
+      // Session-Cache: schon einmal abgefragte Filterkombination -> instant.
+      const cached = beetlesCache.get(query);
+      if (cached) {
+        beetles = cached.items;
+        totalBeetles = cached.total;
+        return;
+      }
+      const res = await fetch(`${window.API_BASE_URL}/api/beetles?${query}`);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
       beetles = data.items ?? [];
       totalBeetles = data.total ?? beetles.length;
+      beetlesCache.set(query, { items: beetles, total: totalBeetles });
     } else {
       // Mock-Modus: Demo-Daten aus demo-beetles.js
       beetles = window.DEMO_BEETLES ?? [];
@@ -525,11 +537,85 @@ function renderMapPoints() {
   }
 }
 
+function escapeHtml(value) {
+  return String(value ?? "").replace(
+    /[&<>"']/g,
+    (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])
+  );
+}
+
+// Kleine Anteils-Zeile (Label + Balken + Prozent) fuer Klima/Vegetation.
+function countryShareRow(label, share) {
+  const pct = share != null ? Math.round(share * 100) : null;
+  const width = pct != null ? Math.max(4, Math.min(100, pct)) : 0;
+  return `
+    <li class="ci-share">
+      <span class="ci-share-label">${escapeHtml(label)}</span>
+      <span class="ci-share-bar"><span style="width:${width}%"></span></span>
+      <span class="ci-share-pct">${pct != null ? pct + " %" : "—"}</span>
+    </li>`;
+}
+
+// Baut das Laender-Panel aus dem vorberechneten Snapshot (window.COUNTRY_STATS).
+// Keine Netzwerk-/DB-Abfrage zur Laufzeit -> rendert instant.
+function renderCountryInfo(countryName) {
+  const stats = window.COUNTRY_STATS && window.COUNTRY_STATS[countryName];
+  if (!stats) {
+    return `<p>Für dieses Land sind noch keine aufbereiteten Daten verfügbar.</p>`;
+  }
+
+  const num = (n) => (n == null ? "—" : Number(n).toLocaleString("de-DE"));
+  const [minE, maxE] = stats.elevationRange || [null, null];
+
+  const beetles = (stats.topBeetles || [])
+    .map(
+      (b, i) => `
+      <li>
+        <span class="ci-rank">${i + 1}</span>
+        <span class="ci-beetle">
+          <em>${escapeHtml(b.name || "—")}</em>
+          ${b.family ? `<span class="ci-beetle-fam">${escapeHtml(b.family)}</span>` : ""}
+        </span>
+        <span class="ci-count">${num(b.count)}</span>
+      </li>`
+    )
+    .join("");
+
+  const climateRows = (stats.climates || [])
+    .map((c) => countryShareRow(climateLabel(c.climate), c.share))
+    .join("");
+  const vegRows = (stats.vegetations || [])
+    .map((v) => countryShareRow(vegetationLabel(v.vegetation), v.share))
+    .join("");
+
+  const tempLine = stats.avgTemperature != null ? `${stats.avgTemperature} °C` : "—";
+  const precipLine = stats.avgPrecipitation != null ? `${num(stats.avgPrecipitation)} mm` : "—";
+
+  return `
+    <div class="ci">
+      <div class="ci-metrics">
+        <div class="ci-metric"><span class="ci-metric-num">${num(stats.speciesCount)}</span><span class="ci-metric-lbl">Arten</span></div>
+        <div class="ci-metric"><span class="ci-metric-num">${num(stats.observationCount)}</span><span class="ci-metric-lbl">Funde</span></div>
+      </div>
+
+      ${beetles ? `<h3 class="ci-h">Häufigste Käfer</h3><ol class="ci-beetles">${beetles}</ol>` : ""}
+
+      <h3 class="ci-h">Höhe</h3>
+      <p class="ci-kv">min ${num(minE)} m · Ø ${num(stats.avgElevation)} m · max ${num(maxE)} m</p>
+
+      <h3 class="ci-h">Klima</h3>
+      <p class="ci-kv">Ø Temperatur: ${tempLine}</p>
+      <p class="ci-kv">Ø Niederschlag: ${precipLine}</p>
+      ${climateRows ? `<ul class="ci-shares">${climateRows}</ul>` : ""}
+
+      <h3 class="ci-h">Vegetation</h3>
+      ${vegRows ? `<ul class="ci-shares">${vegRows}</ul>` : `<p class="ci-kv">—</p>`}
+    </div>`;
+}
+
 function openCountrySidebar(countryName) {
   countrySidebarTitle.textContent = countryName;
-  countrySidebarContent.innerHTML = `
-    <p>Noch keine Informationen eingetragen.</p>
-  `;
+  countrySidebarContent.innerHTML = renderCountryInfo(countryName);
   countrySidebar.classList.add("is-open");
   countrySidebar.setAttribute("aria-hidden", "false");
 }
@@ -763,8 +849,12 @@ const MAP_POINTS_LIMIT = 1000;
 // Backend-Abfragen koennen einige Sekunden dauern).
 function scheduleMapPoints() {
   clearTimeout(mapPointsDebounce);
-  mapPointsDebounce = setTimeout(loadMapPoints, 400);
+  mapPointsDebounce = setTimeout(loadMapPoints, 150);
 }
+
+// Session-Cache: gleiche Karten-Abfrage (bbox+zoom+Filter) wird nicht erneut
+// ans Backend geschickt -> Zurueckwechseln auf eine bekannte Ansicht ist instant.
+const mapPointsCache = new Map();
 
 async function loadMapPoints() {
   // Im Featured-Start keine bbox-Cluster laden (das idle-Event feuert trotzdem
@@ -791,12 +881,19 @@ async function loadMapPoints() {
   // Race-Schutz: nur die jeweils neueste Antwort darf rendern, da langsame
   // Abfragen sich sonst gegenseitig ueberholen koennen.
   const reqId = ++mapPointsRequestId;
+  const cacheKey = params.toString();
+  if (mapPointsCache.has(cacheKey)) {
+    renderMapMarkersFromPoints(mapPointsCache.get(cacheKey));
+    return;
+  }
   try {
     const res = await fetch(`${window.API_BASE_URL}/api/map/points?${params}`);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
+    const items = data.items ?? [];
+    mapPointsCache.set(cacheKey, items);
     if (reqId !== mapPointsRequestId) return;
-    renderMapMarkersFromPoints(data.items ?? []);
+    renderMapMarkersFromPoints(items);
   } catch (error) {
     console.error("Kartenpunkte konnten nicht geladen werden:", error);
   }
