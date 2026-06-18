@@ -329,7 +329,11 @@
       this.resize();
       this.spawnApples();
       this.bindEvents();
-      this.loop();
+
+      // Barrierefreiheit + Performance: bei "Bewegung reduzieren" gar nicht animieren.
+      const reduce = window.matchMedia &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!reduce) this.loop();
     }
 
     resize() {
@@ -437,14 +441,26 @@
       const { left, right } = getPageEdges();
       const buf  = 55; // osc(26) + body(5) + safety buffer
 
-      // Performance: clear only the narrow edge strips where ants actually run.
-      // The page content (z-index:1) hides any stale pixels that slip inward.
-      ctx.clearRect(0,         0, left  + buf, H);
-      ctx.clearRect(right - buf, 0, W - (right - buf), H);
-      ctx.clearRect(0, H - 80, W, 80);
+      // Performance: das Canvas ist so hoch wie das ganze Dokument, aber pro Frame
+      // muss nur das aktuell sichtbare Band bearbeitet werden. Frueher wurden die
+      // beiden Seitenstreifen ueber die volle Dokumenthoehe geleert+neu gezeichnet
+      // -> auf langen Seiten dauerhaft teuer. Jetzt auf den Viewport begrenzt.
+      const vTop = Math.max(0, (window.scrollY || 0) - 40);
+      const vH   = Math.min(H - vTop, window.innerHeight + 80);
 
-      for (const a of this.apples) a.draw(ctx, this.t);
-      for (const ant of this.ants)  ant.draw(ctx);
+      // Clear only the narrow edge strips where ants run, within the visible band.
+      // The page content (z-index:1) hides any stale pixels that slip inward.
+      ctx.clearRect(0,          vTop, left  + buf,        vH);
+      ctx.clearRect(right - buf, vTop, W - (right - buf), vH);
+      ctx.clearRect(0, H - 80, W, 80); // bottom path strip (cheap: 80px tall)
+
+      const top = vTop - 20, bot = vTop + vH + 20;
+      for (const a of this.apples) {
+        if (a.pos.y >= top && a.pos.y <= bot) a.draw(ctx, this.t);
+      }
+      for (const ant of this.ants) {
+        if (ant.pos.y >= top && ant.pos.y <= bot) ant.draw(ctx);
+      }
     }
 
     loop() {
@@ -452,8 +468,11 @@
       const tick = (now) => {
         const dt = Math.min(now - last, 50);
         last = now;
-        this.update(dt);
-        this.draw();
+        // Im Hintergrund-Tab nicht rechnen/zeichnen (spart CPU).
+        if (!document.hidden) {
+          this.update(dt);
+          this.draw();
+        }
         requestAnimationFrame(tick);
       };
       requestAnimationFrame(tick);

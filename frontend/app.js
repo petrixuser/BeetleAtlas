@@ -34,6 +34,9 @@ function hasActiveFilters() {
 // True, wenn aktuell die kuratierte Startliste angezeigt wird.
 let featuredMode = false;
 
+// Session-Cache fuer Backend-Listenabfragen (Key = Query-String der Filter).
+const beetlesCache = new Map();
+
 async function loadBeetles() {
   // Startseite (keine Suche/Filter): kuratierte beruehmte Grosskaefer aus dem
   // gebackenen Snapshot. Laedt sofort, keine (langsame) Backend-Abfrage.
@@ -48,11 +51,20 @@ async function loadBeetles() {
   try {
     if (window.API_BASE_URL) {
       // Serverseitige Filterung: aktuelle Filter werden als Query mitgeschickt.
-      const res = await fetch(`${window.API_BASE_URL}/api/beetles?${buildBeetleQuery()}`);
+      const query = buildBeetleQuery();
+      // Session-Cache: schon einmal abgefragte Filterkombination -> instant.
+      const cached = beetlesCache.get(query);
+      if (cached) {
+        beetles = cached.items;
+        totalBeetles = cached.total;
+        return;
+      }
+      const res = await fetch(`${window.API_BASE_URL}/api/beetles?${query}`);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
       beetles = data.items ?? [];
       totalBeetles = data.total ?? beetles.length;
+      beetlesCache.set(query, { items: beetles, total: totalBeetles });
     } else {
       // Mock-Modus: Demo-Daten aus demo-beetles.js
       beetles = window.DEMO_BEETLES ?? [];
@@ -763,8 +775,12 @@ const MAP_POINTS_LIMIT = 1000;
 // Backend-Abfragen koennen einige Sekunden dauern).
 function scheduleMapPoints() {
   clearTimeout(mapPointsDebounce);
-  mapPointsDebounce = setTimeout(loadMapPoints, 400);
+  mapPointsDebounce = setTimeout(loadMapPoints, 150);
 }
+
+// Session-Cache: gleiche Karten-Abfrage (bbox+zoom+Filter) wird nicht erneut
+// ans Backend geschickt -> Zurueckwechseln auf eine bekannte Ansicht ist instant.
+const mapPointsCache = new Map();
 
 async function loadMapPoints() {
   // Im Featured-Start keine bbox-Cluster laden (das idle-Event feuert trotzdem
@@ -791,12 +807,19 @@ async function loadMapPoints() {
   // Race-Schutz: nur die jeweils neueste Antwort darf rendern, da langsame
   // Abfragen sich sonst gegenseitig ueberholen koennen.
   const reqId = ++mapPointsRequestId;
+  const cacheKey = params.toString();
+  if (mapPointsCache.has(cacheKey)) {
+    renderMapMarkersFromPoints(mapPointsCache.get(cacheKey));
+    return;
+  }
   try {
     const res = await fetch(`${window.API_BASE_URL}/api/map/points?${params}`);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
+    const items = data.items ?? [];
+    mapPointsCache.set(cacheKey, items);
     if (reqId !== mapPointsRequestId) return;
-    renderMapMarkersFromPoints(data.items ?? []);
+    renderMapMarkersFromPoints(items);
   } catch (error) {
     console.error("Kartenpunkte konnten nicht geladen werden:", error);
   }

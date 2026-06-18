@@ -25,6 +25,19 @@ body {
   color: var(--text);
   font-family: Arial, sans-serif;
   background-color: var(--soil);
+}
+
+/* Waldboden + Lichtverlaeufe liegen auf einer eigenen, fixierten Ebene.
+   Frueher: background-attachment: fixed direkt auf <body> -> der Browser musste
+   den texturierten Hintergrund bei JEDEM Scroll-Frame neu zeichnen (Scroll-Ruckler).
+   Jetzt: ein position:fixed-Pseudoelement bekommt eine eigene Compositing-Ebene,
+   wird einmal gezeichnet und beim Scrollen nur verschoben (kein Repaint). */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-color: var(--soil);
   background-image:
     radial-gradient(circle at 18% 20%, rgba(255, 244, 214, 0.10), transparent 42%),
     radial-gradient(circle at 82% 14%, rgba(35, 22, 10, 0.20), transparent 44%),
@@ -32,7 +45,6 @@ body {
     radial-gradient(circle at 88% 70%, rgba(255, 244, 214, 0.08), transparent 42%),
     url("assets/forest-floor.svg?v=2");
   background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, repeat;
-  background-attachment: fixed, fixed, fixed, fixed, scroll;
 }
 
 button,
