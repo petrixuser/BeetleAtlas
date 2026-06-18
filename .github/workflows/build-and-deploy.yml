@@ -1,0 +1,81 @@
+name: Build and Deploy Docker Image
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  build:
+    name: Build and push images
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # Frontend (static nginx site) — the existing live image.
+          - image: beetleatlas
+            dockerfile: Dockerfile
+          # Backend (FastAPI). New: needed for the full-stack production rollout.
+          - image: beetleatlas-backend
+            dockerfile: backend/docker/Dockerfile
+          # Database (MySQL + schema/seed scripts + CSV data baked in). Avoids
+          # Portainer's broken relative bind-mount path resolution on the NAS.
+          - image: beetleatlas-db
+            dockerfile: backend/docker/Dockerfile.db
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Generate Docker metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository_owner }}/${{ matrix.image }}
+          tags: |
+            type=raw,value=latest
+            type=sha,prefix=sha-
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ${{ matrix.dockerfile }}
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+
+  deploy:
+    name: Trigger Portainer redeploy
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Trigger Portainer stack webhook
+        env:
+          WEBHOOK_URL: ${{ secrets.PORTAINER_WEBHOOK_URL }}
+        run: |
+          if [ -n "$WEBHOOK_URL" ]; then
+            curl --fail --silent --show-error -X POST "$WEBHOOK_URL"
+            echo "Portainer webhook triggered."
+          else
+            echo "PORTAINER_WEBHOOK_URL not set — skipping redeploy."
+            echo "Add the secret once the Portainer stack is created."
+          fi
