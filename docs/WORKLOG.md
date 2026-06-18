@@ -899,6 +899,30 @@ Integration dieses Backends in dieses Repo ist unter "Integration Backend (Basti
 
 Zuerst das hier lesen. Aeltere Handoffs (2026-06-15, 2026-06-13, 2026-06-12 usw.) stehen darunter als Historie.
 
+## Stand 2026-06-18 (Frontend-Performance) — Scroll fluessiger + Filter schneller
+
+Nutzer meldete: Live-Seite traege geworden, Filter (Klima/Vegetation/Hoehe) nicht mehr
+instant, Scroll-Lags. Diagnose (live gemessen): **Backend ist nicht der Engpass**
+(`/api/beetles` ~1 s, gefilterte `/api/map/points` ~0,4-1,0 s). Ursachen lagen im Frontend:
+- `styles.css`: `background-attachment: fixed` (Waldboden + 4 Verlaeufe) -> Repaint des
+  texturierten Hintergrunds bei JEDEM Scroll-Frame = Haupt-Ruckler. **Fix:** Hintergrund auf
+  ein `position:fixed` `body::before` (eigene Compositing-Ebene, wird nur verschoben).
+  Optische Mini-Aenderung: Boden-Textur jetzt am Viewport fixiert statt mitscrollend.
+- `ants.js`: Canvas ist dokumenthoch und wurde pro Frame ueber die volle Hoehe geleert+neu
+  gezeichnet. **Fix:** nur noch das sichtbare Viewport-Band; Pause im Hintergrund-Tab; respektiert
+  `prefers-reduced-motion`.
+- `app.js`: Karten-Debounce 400 -> 150 ms; Session-Caches fuer Liste (`beetlesCache`) und
+  Kartenpunkte (`mapPointsCache`) -> Zurueckwechseln auf eine bekannte Filterkombination instant.
+- Asset-Versionen: `styles.css?v=6`, `app.js?v=12`, `ants.js?v=3`.
+- Commit `b17a4d1`, gepusht, **live verifiziert** (10:55, ~3,5 min Deploy; neue Assets bestaetigt).
+
+**Backlog / VIELLEICHT (kein fester Plan):**
+- **Englischer Modus.** Perry moechte ggf. eine EN-Variante. ABER: Browser-Translate (Google)
+  uebersetzt die Seite ohnehin -> echtes natives i18n nur, falls noetig. Wenn doch: ganz am
+  ENDE machen (UI-Strings sind ueber `index.html` + `app.js` verstreut, erst sammeln wenn UI
+  steht). Offene Frage dann: nur UI-Bedienelemente oder auch DB-Inhaltsdaten uebersetzen
+  (Letzteres = grosses Thema). Ab jetzt moeglichst keine neuen deutschen Texte hart verdrahten.
+
 ## >>> SESSION-ENDE 2026-06-16 — alles live, Stand & naechste Schritte <<<
 
 **Die App laeuft vollstaendig live unter https://kafer.server-work.de** (Full-Stack auf Pauls

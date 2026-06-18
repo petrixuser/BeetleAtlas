@@ -465,6 +465,129 @@ button:hover {
   padding-top: 1rem;
   color: var(--muted);
   line-height: 1.5;
+  overflow-y: auto;
+  max-height: calc(100vh - 6.5rem);
+}
+
+/* Laender-Info-Panel (gefuellt aus dem vorberechneten Snapshot) */
+.ci-metrics {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 0.4rem;
+}
+.ci-metric {
+  flex: 1;
+  padding: 0.5rem 0.6rem;
+  background: var(--accent-soft);
+  border-radius: 8px;
+  text-align: center;
+}
+.ci-metric-num {
+  display: block;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+.ci-metric-lbl {
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+.ci-h {
+  margin: 1rem 0 0.35rem;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+}
+.ci-kv {
+  margin: 0.1rem 0;
+  color: var(--text);
+  font-size: 0.92rem;
+}
+.ci-beetles {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+.ci-beetles li {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+.ci-rank {
+  flex: 0 0 auto;
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ci-beetle {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+.ci-beetle em {
+  color: var(--text);
+  font-size: 0.92rem;
+}
+.ci-beetle-fam {
+  color: var(--muted);
+  font-size: 0.76rem;
+}
+.ci-count {
+  flex: 0 0 auto;
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+}
+.ci-shares {
+  list-style: none;
+  margin: 0.2rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.ci-share {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+}
+.ci-share-label {
+  flex: 0 0 38%;
+  color: var(--text);
+}
+.ci-share-bar {
+  flex: 1;
+  height: 0.55rem;
+  background: var(--accent-soft);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.ci-share-bar > span {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  border-radius: 99px;
+}
+.ci-share-pct {
+  flex: 0 0 auto;
+  width: 2.6rem;
+  text-align: right;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
 }
 
 .content {

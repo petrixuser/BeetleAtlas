@@ -72,7 +72,19 @@ OUTPUT = Path(__file__).resolve().parents[2] / "frontend" / "data" / "country-st
 
 def fetch_country(base: str, lookup: str):
     url = f"{base}/api/countries/{urllib.parse.quote(lookup)}"
-    req = urllib.request.Request(url, headers={"Accept": "application/json"})
+    # Cloudflare (vor der api-Subdomain) blockt den Default-urllib-User-Agent (403).
+    # Ein normaler Browser-UA wird durchgelassen.
+    req = urllib.request.Request(
+        url,
+        headers={
+            "Accept": "application/json",
+            "User-Agent": (
+                "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+                "AppleWebKit/537.36 (KHTML, like Gecko) "
+                "Chrome/126.0 Safari/537.36"
+            ),
+        },
+    )
     try:
         with urllib.request.urlopen(req, timeout=30) as resp:
             if resp.status != 200:
