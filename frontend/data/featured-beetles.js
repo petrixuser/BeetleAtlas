@@ -3,7 +3,6 @@
 // kuratierte deutsche Trivialnamen + Kurzbeschreibung. Wird angezeigt, solange
 // keine Suche/Filter aktiv ist (siehe app.js hasActiveFilters/loadBeetles).
 // Bei Suche/Filter laeuft die normale Backend-Abfrage.
-
 window.FEATURED_BEETLES = [
   {
     "id": "featured-1",

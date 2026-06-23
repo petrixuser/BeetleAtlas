@@ -1,10 +1,5 @@
-﻿from collections import OrderedDict
-import json
-from pathlib import Path
-from threading import Lock
-from typing import Any, Dict, List, Optional, Tuple
+﻿from typing import Any, Dict, List, Optional
 
-from backend.config.climate_subtypes import is_climate_subtype_code, parent_climate_code
 from backend.controllers.beetle_controller import list_beetles_controller
 from backend.controllers.core_controller import parse_bbox_or_error
 from backend.repositories.map_repository import (
@@ -17,387 +12,45 @@ from backend.repositories.map_repository import (
     map_sort_to_beetles_sort,
 )
 
-
-_MAP_RESPONSE_CACHE_MAX_ITEMS = 512
-_map_response_cache: "OrderedDict[Tuple[Any, ...], Dict[str, Any]]" = OrderedDict()
-_map_response_cache_lock = Lock()
-_MAP_POINTS_MAX_PAGE_SIZE = 200
-
-_subtype_geometries_lock = Lock()
-_subtype_geometries_loaded = False
-_subtype_geometries: Dict[str, List[Dict[str, Any]]] = {}
-
-
-def _freeze_params(value: Any) -> Any:
-    if isinstance(value, dict):
-        return tuple(sorted((k, _freeze_params(v)) for k, v in value.items()))
-    if isinstance(value, list):
-        return tuple(_freeze_params(v) for v in value)
-    return value
-
-
-def _cache_key_from_lean_args(**kwargs: Any) -> Tuple[Any, ...]:
-    return tuple(sorted((k, _freeze_params(v)) for k, v in kwargs.items()))
-
-
-def _cache_get(key: Tuple[Any, ...]) -> Optional[Dict[str, Any]]:
-    with _map_response_cache_lock:
-        value = _map_response_cache.get(key)
-        if value is None:
-            return None
-        _map_response_cache.move_to_end(key)
-        return value
-
-
-def _cache_set(key: Tuple[Any, ...], value: Dict[str, Any]) -> None:
-    with _map_response_cache_lock:
-        _map_response_cache[key] = value
-        _map_response_cache.move_to_end(key)
-        while len(_map_response_cache) > _MAP_RESPONSE_CACHE_MAX_ITEMS:
-            _map_response_cache.popitem(last=False)
-
-
-def _append_exact_or_in_filter(
-    filters: List[str],
-    params: Dict[str, Any],
-    column: str,
-    key: str,
-    raw_value: Optional[str],
-) -> None:
-    """Append exact or IN filter for optional comma-separated query params."""
-    if not raw_value:
-        return
-    values = [part.strip() for part in str(raw_value).split(",") if part.strip()]
-    if not values:
-        return
-    if len(values) == 1:
-        filters.append(f"{column} = :{key}")
-        params[key] = values[0]
-        return
-
-    placeholders: List[str] = []
-    for idx, value in enumerate(values):
-        param_key = f"{key}_{idx}"
-        placeholders.append(f":{param_key}")
-        params[param_key] = value
-    filters.append(f"{column} IN ({', '.join(placeholders)})")
-
-
-def _point_on_segment(px: float, py: float, x1: float, y1: float, x2: float, y2: float) -> bool:
-    cross = (px - x1) * (y2 - y1) - (py - y1) * (x2 - x1)
-    if abs(cross) > 1e-12:
-        return False
-    dot = (px - x1) * (px - x2) + (py - y1) * (py - y2)
-    return dot <= 1e-12
-
-
-def _point_in_ring(px: float, py: float, ring: List[Tuple[float, float]]) -> bool:
-    inside = False
-    j = len(ring) - 1
-    for i in range(len(ring)):
-        xi, yi = ring[i]
-        xj, yj = ring[j]
-
-        if _point_on_segment(px, py, xi, yi, xj, yj):
-            return True
-
-        intersects = ((yi > py) != (yj > py)) and (
-            px < ((xj - xi) * (py - yi) / ((yj - yi) or 1e-15) + xi)
-        )
-        if intersects:
-            inside = not inside
-        j = i
-    return inside
-
-
-def _normalize_ring(raw_ring: Any) -> List[Tuple[float, float]]:
-    ring: List[Tuple[float, float]] = []
-    if not isinstance(raw_ring, list):
-        return ring
-
-    for point in raw_ring:
-        if not isinstance(point, list) or len(point) < 2:
-            continue
-        try:
-            lng = float(point[0])
-            lat = float(point[1])
-        except (TypeError, ValueError):
-            continue
-        ring.append((lng, lat))
-    return ring
-
-
-def _build_polygon_geometry(raw_polygon: Any) -> Optional[Dict[str, Any]]:
-    if not isinstance(raw_polygon, list) or not raw_polygon:
-        return None
-
-    rings: List[List[Tuple[float, float]]] = []
-    for raw_ring in raw_polygon:
-        ring = _normalize_ring(raw_ring)
-        if len(ring) >= 3:
-            rings.append(ring)
-
-    if not rings:
-        return None
-
-    outer = rings[0]
-    holes = rings[1:]
-    lngs = [p[0] for p in outer]
-    lats = [p[1] for p in outer]
-
-    return {
-        "outer": outer,
-        "holes": holes,
-        "bbox": (min(lngs), min(lats), max(lngs), max(lats)),
-    }
-
-
-def _load_climate_subtype_geometries() -> None:
-    global _subtype_geometries_loaded
-
-    if _subtype_geometries_loaded:
-        return
-
-    with _subtype_geometries_lock:
-        if _subtype_geometries_loaded:
-            return
-
-        geojson_path = Path(__file__).resolve().parents[2] / "frontend" / "assets" / "koppen-latam.geojson"
-        if not geojson_path.exists():
-            _subtype_geometries_loaded = True
-            return
-
-        with geojson_path.open("r", encoding="utf-8") as f:
-            payload = json.load(f)
-
-        for feature in payload.get("features", []):
-            props = feature.get("properties") or {}
-            code = props.get("code")
-            if not isinstance(code, str) or not is_climate_subtype_code(code):
-                continue
-            _subtype_geometries.setdefault(code, [])
-
-            geometry = feature.get("geometry") or {}
-            geom_type = geometry.get("type")
-            coords = geometry.get("coordinates")
-            if not isinstance(coords, list):
-                continue
-
-            if geom_type == "Polygon":
-                polygon = _build_polygon_geometry(coords)
-                if polygon is not None:
-                    _subtype_geometries[code].append(polygon)
-            elif geom_type == "MultiPolygon":
-                for raw_polygon in coords:
-                    polygon = _build_polygon_geometry(raw_polygon)
-                    if polygon is not None:
-                        _subtype_geometries[code].append(polygon)
-
-        _subtype_geometries_loaded = True
-
-
-def _point_in_polygon(lng: float, lat: float, polygon: Dict[str, Any]) -> bool:
-    min_lng, min_lat, max_lng, max_lat = polygon["bbox"]
-    if lng < min_lng or lng > max_lng or lat < min_lat or lat > max_lat:
-        return False
-
-    if not _point_in_ring(lng, lat, polygon["outer"]):
-        return False
-
-    for hole in polygon["holes"]:
-        if _point_in_ring(lng, lat, hole):
-            return False
-    return True
-
-
-def _matches_any_subtype(point: Dict[str, Any], subtypes: List[str]) -> bool:
-    lng = point.get("lng")
-    lat = point.get("lat")
-    if lng is None or lat is None:
-        return False
-
-    try:
-        lng_f = float(lng)
-        lat_f = float(lat)
-    except (TypeError, ValueError):
-        return False
-
-    for subtype in subtypes:
-        for polygon in _subtype_geometries.get(subtype, []):
-            if _point_in_polygon(lng_f, lat_f, polygon):
-                return True
-    return False
-
-
-def _parse_climate_filter(raw_climate: Optional[str]) -> Tuple[Optional[str], List[str]]:
-    if not raw_climate:
-        return None, []
-
-    raw_values = [part.strip() for part in str(raw_climate).split(",") if part.strip()]
-    if not raw_values:
-        return None, []
-
-    majors: List[str] = []
-    subtypes: List[str] = []
-
-    for value in raw_values:
-        if is_climate_subtype_code(value):
-            subtypes.append(value)
-            parent = parent_climate_code(value)
-            if parent and parent not in majors:
-                majors.append(parent)
-            continue
-        if value not in majors:
-            majors.append(value)
-
-    major_climate = ",".join(majors) if majors else None
-    return major_climate, subtypes
-
-
-def _fetch_all_points_lean(
-    *,
-    base_where_sql: str,
-    where_sql: str,
-    params: Dict[str, Any],
-    page_size: int = 5000,
-) -> List[Dict[str, Any]]:
-    all_points: List[Dict[str, Any]] = []
-    offset = 0
-
-    while True:
-        page_points, total_points = fetch_map_points_lean(
-            base_where_sql=base_where_sql,
-            where_sql=where_sql,
-            limit=page_size,
-            offset=offset,
-            params=params,
-        )
-        if not page_points:
-            break
-
-        all_points.extend(page_points)
-        offset += len(page_points)
-        if len(all_points) >= total_points:
-            break
-
-    return all_points
-
-
-def _build_lean_where_and_params(
-    *,
-    bbox: str,
-    q: Optional[str],
-    country: Optional[str],
-    normalized_climate: Optional[str],
-    vegetation: Optional[str],
-    elevation: Optional[str],
-) -> Tuple[str, str, Dict[str, Any]]:
-    base_filters: List[str] = []
-    filters: List[str] = []
-    params: Dict[str, Any] = {}
-
-    if q:
-        base_filters.append("(b.name LIKE :q OR b.family LIKE :q OR b.location LIKE :q)")
-        params["q"] = f"%{q.strip()}%"
-    _append_exact_or_in_filter(filters, params, "e.climate", "climate", normalized_climate)
-    if country:
-        base_filters.append("b.country = :country")
-        params["country"] = country
-    _append_exact_or_in_filter(filters, params, "e.vegetation", "vegetation", vegetation)
-    _append_exact_or_in_filter(filters, params, "e.elevationGroup", "elevation", elevation)
-
-    if bbox:
-        params.update(parse_bbox_or_error(bbox))
-        base_filters.append("(b.lng BETWEEN :min_lng AND :max_lng AND b.lat BETWEEN :min_lat AND :max_lat)")
-
-    where_sql = ("WHERE " + " AND ".join(filters)) if filters else ""
-    base_where_sql = ("WHERE " + " AND ".join(base_filters)) if base_filters else ""
-    return where_sql, base_where_sql, params
-
-
-def _build_subtype_filtered_result(
-    *,
-    zoom: int,
-    limit: int,
-    offset: int,
-    subtype_climates: List[str],
-    base_where_sql: str,
-    where_sql: str,
-    params: Dict[str, Any],
-) -> Dict[str, Any]:
-    effective_limit = max(1, min(int(limit), _MAP_POINTS_MAX_PAGE_SIZE))
-    _load_climate_subtype_geometries()
-    points = _fetch_all_points_lean(
-        base_where_sql=base_where_sql,
-        where_sql=where_sql,
-        params=params,
-        page_size=5000,
-    )
-    filtered_points = [p for p in points if _matches_any_subtype(p, subtype_climates)]
-
-    if zoom < 7:
-        clusters = cluster_map_points(filtered_points, zoom)
-        return {
-            "items": clusters,
-            "total": len(clusters),
-            "page": 1,
-            "page_size": len(clusters),
-            "source_total_points": len(filtered_points),
-            "clustered": True,
-        }
-
-    page_items = filtered_points[offset : offset + effective_limit]
-    return {
-        "items": page_items,
-        "total": len(filtered_points),
-        "page": 1,
-        "page_size": effective_limit,
-        "clustered": False,
-    }
-
 def _map_points_controller_lean(
     bbox: str,
     zoom: int,
     q: Optional[str],
-    country: Optional[str],
     climate: Optional[str],
     vegetation: Optional[str],
     elevation: Optional[str],
     limit: int,
-    offset: int,
 ) -> Dict[str, Any]:
     """Fast map-point path for bbox and base filters only.
 
     Uses lean SQL queries and returns either clusters (zoom < 7) or points.
     """
 
-    effective_limit = max(1, min(int(limit), _MAP_POINTS_MAX_PAGE_SIZE))
-    normalized_climate, subtype_climates = _parse_climate_filter(climate)
-    where_sql, base_where_sql, params = _build_lean_where_and_params(
-        bbox=bbox,
-        q=q,
-        country=country,
-        normalized_climate=normalized_climate,
-        vegetation=vegetation,
-        elevation=elevation,
-    )
+    filters: List[str] = []
+    base_filters: List[str] = []
+    params: Dict[str, Any] = {}
 
-    cache_key = _cache_key_from_lean_args(
-        bbox=bbox,
-        zoom=zoom,
-        q=q,
-        country=country,
-        climate=climate,
-        normalized_climate=normalized_climate,
-        subtype_climates=subtype_climates,
-        vegetation=vegetation,
-        elevation=elevation,
-        limit=effective_limit,
-        offset=offset,
-    )
-    cached = _cache_get(cache_key)
-    if cached is not None:
-        return cached
+    if q:
+        filters.append("(e.name LIKE :q OR e.family LIKE :q OR e.location LIKE :q)")
+        params["q"] = f"%{q.strip()}%"
+    if climate:
+        filters.append("e.climate = :climate")
+        params["climate"] = climate
+    if vegetation:
+        filters.append("e.vegetation = :vegetation")
+        params["vegetation"] = vegetation
+    if elevation:
+        filters.append("e.elevationGroup = :elevation")
+        params["elevation"] = elevation
+
+    if bbox:
+        params.update(parse_bbox_or_error(bbox))
+        base_filters.append(
+            "(l.longitude BETWEEN :min_lng AND :max_lng AND l.latitude BETWEEN :min_lat AND :max_lat)"
+        )
+
+    where_sql = ("WHERE " + " AND ".join(filters)) if filters else ""
+    base_where_sql = ("WHERE " + " AND ".join(base_filters)) if base_filters else ""
 
     if zoom < 7:
         clusters = fetch_map_clusters_lean(
@@ -406,7 +59,7 @@ def _map_points_controller_lean(
             cell=_cluster_cell_size(zoom),
             params=params,
         )
-        result = {
+        return {
             "items": clusters,
             "total": len(clusters),
             "page": 1,
@@ -414,52 +67,25 @@ def _map_points_controller_lean(
             "source_total_points": sum(cluster["count"] for cluster in clusters),
             "clustered": True,
         }
-        _cache_set(cache_key, result)
-        return result
 
-    points, total_points = fetch_map_points_lean(
+    points = fetch_map_points_lean(
         base_where_sql=base_where_sql,
         where_sql=where_sql,
-        limit=effective_limit,
-        offset=offset,
+        limit=limit,
         params=params,
     )
-    result = {
+    return {
         "items": points,
-        "total": total_points,
+        "total": len(points),
         "page": 1,
-        "page_size": effective_limit,
+        "page_size": limit,
         "clustered": False,
     }
-    _cache_set(cache_key, result)
-    return result
-
-
-def warm_map_points_cache() -> None:
-    """Precompute frequent climate-group map queries at startup for faster first use."""
-    latam_bbox = "-120,-60,-30,35"
-    for climate_code in ["A", "B", "C", "D", "E"]:
-        try:
-            _map_points_controller_lean(
-                bbox=latam_bbox,
-                zoom=7,
-                q=None,
-                country=None,
-                climate=climate_code,
-                vegetation=None,
-                elevation=None,
-                limit=5000,
-                offset=0,
-            )
-        except Exception:
-            # Best-effort warmup: runtime requests still work if a warmup query fails.
-            continue
 
 def map_points_controller(
     bbox: str,
     zoom: int,
     q: Optional[str],
-    country: Optional[str],
     climate: Optional[str],
     vegetation: Optional[str],
     elevation: Optional[str],
@@ -480,11 +106,9 @@ def map_points_controller(
     worldclim_temp_band: Optional[str],
     worldclim_precip_band: Optional[str],
     event_date_quality: Optional[str],
-    observed_year: Optional[int],
     basis_of_record_class: Optional[str],
     taxon_resolution: Optional[str],
     media_coverage: Optional[str],
-    has_image: Optional[bool],
     license_class: Optional[str],
     limit: int,
     offset: int,
@@ -496,7 +120,6 @@ def map_points_controller(
     Delegates to the lean path when no advanced filters are set; otherwise
     reuses beetle list filtering and transforms results into map points.
     """
-    effective_limit = max(1, min(int(limit), _MAP_POINTS_MAX_PAGE_SIZE))
     advanced_filters = (
         temperature_band,
         precipitation_band,
@@ -515,11 +138,9 @@ def map_points_controller(
         worldclim_temp_band,
         worldclim_precip_band,
         event_date_quality,
-        observed_year,
         basis_of_record_class,
         taxon_resolution,
         media_coverage,
-        has_image,
         license_class,
     )
     if not any(advanced_filters):
@@ -527,19 +148,16 @@ def map_points_controller(
             bbox=bbox,
             zoom=zoom,
             q=q,
-            country=country,
             climate=climate,
             vegetation=vegetation,
             elevation=elevation,
-            limit=effective_limit,
-            offset=offset,
+            limit=limit,
         )
 
     beetles_sort_by = map_sort_to_beetles_sort(sort_by)
 
     beetles_result = list_beetles_controller(
         q=q,
-        country=country,
         climate=climate,
         vegetation=vegetation,
         elevation=elevation,
@@ -560,14 +178,12 @@ def map_points_controller(
         worldclim_temp_band=worldclim_temp_band,
         worldclim_precip_band=worldclim_precip_band,
         event_date_quality=event_date_quality,
-        observed_year=observed_year,
         basis_of_record_class=basis_of_record_class,
         taxon_resolution=taxon_resolution,
         media_coverage=media_coverage,
-        has_image=has_image,
         license_class=license_class,
         bbox=bbox,
-        limit=effective_limit,
+        limit=limit,
         offset=offset,
         sort_by=beetles_sort_by,
         sort_dir=sort_dir,

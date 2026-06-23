@@ -3,18 +3,19 @@ from typing import Literal, Optional
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
-from backend.config.beetle_validation import (
-    GBIF_BASIS_OF_RECORD,
-    LATAM_MAX_LAT,
-    LATAM_MAX_LON,
-    LATAM_MIN_LAT,
-    LATAM_MIN_LON,
-    coordinates_in_latam_bounds,
-    country_in_latam,
-)
-
 
 BeetleRecordStatus = Literal["active", "deleted"]
+
+GBIF_BASIS_OF_RECORD = {
+    "MATERIAL_CITATION",
+    "HUMAN_OBSERVATION",
+    "MACHINE_OBSERVATION",
+    "PRESERVED_SPECIMEN",
+    "FOSSIL_SPECIMEN",
+    "LIVING_SPECIMEN",
+    "MATERIAL_SAMPLE",
+    "OCCURRENCE",
+}
 
 
 def _normalize_optional_text(value: Optional[str]) -> Optional[str]:
@@ -106,15 +107,6 @@ class BeetleCreateRequest(BaseModel):
             raise ValueError(f"basis_of_record must be one of: {allowed}")
         return normalized
 
-    @field_validator("country")
-    @classmethod
-    def validate_country(cls, value: Optional[str]) -> Optional[str]:
-        if value is None:
-            return None
-        if not country_in_latam(value):
-            raise ValueError("country must be a Latin America country code or name")
-        return value
-
     @field_validator("event_date")
     @classmethod
     def validate_event_date(cls, value: Optional[str]) -> Optional[str]:
@@ -136,12 +128,6 @@ class BeetleCreateRequest(BaseModel):
     def validate_coordinate_pair(self):
         if (self.latitude is None) != (self.longitude is None):
             raise ValueError("latitude and longitude must be provided together")
-        if self.latitude is not None and self.longitude is not None:
-            if not coordinates_in_latam_bounds(self.latitude, self.longitude):
-                raise ValueError(
-                    "latitude/longitude must be within Latin America bounds "
-                    f"(lat {LATAM_MIN_LAT}..{LATAM_MAX_LAT}, lon {LATAM_MIN_LON}..{LATAM_MAX_LON})"
-                )
         return self
 
 
@@ -227,15 +213,6 @@ class BeetleUpdateRequest(BaseModel):
             raise ValueError(f"basis_of_record must be one of: {allowed}")
         return normalized
 
-    @field_validator("country")
-    @classmethod
-    def validate_country(cls, value: Optional[str]) -> Optional[str]:
-        if value is None:
-            return None
-        if not country_in_latam(value):
-            raise ValueError("country must be a Latin America country code or name")
-        return value
-
     @field_validator("event_date")
     @classmethod
     def validate_event_date(cls, value: Optional[str]) -> Optional[str]:
@@ -257,12 +234,6 @@ class BeetleUpdateRequest(BaseModel):
     def validate_coordinate_pair(self):
         if (self.latitude is None) != (self.longitude is None):
             raise ValueError("latitude and longitude must be provided together")
-        if self.latitude is not None and self.longitude is not None:
-            if not coordinates_in_latam_bounds(self.latitude, self.longitude):
-                raise ValueError(
-                    "latitude/longitude must be within Latin America bounds "
-                    f"(lat {LATAM_MIN_LAT}..{LATAM_MAX_LAT}, lon {LATAM_MIN_LON}..{LATAM_MAX_LON})"
-                )
         return self
 
 

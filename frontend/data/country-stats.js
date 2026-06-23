@@ -1,4 +1,4 @@
-// AUTO-GENERIERT von backend/scripts/gen_country_stats.py - NICHT von Hand editiert.
+// AUTO-GENERIERT von backend/scripts/gen_country_stats.py - NICHT von Hand editieren.
 // Quelle: https://api-kafer.server-work.de/api/countries/  |  Laender: 26
 window.COUNTRY_STATS = {
   "Argentina": {

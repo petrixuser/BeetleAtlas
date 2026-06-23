@@ -127,10 +127,8 @@ def test_register_defaults_to_viewer_role_contract():
     )
 
     assert status == 200
-    assert payload["status"] == "pending_verification"
     assert payload["email"] == email
-    assert isinstance(payload.get("verification_token"), str)
-    assert int(payload.get("verification_expires_in") or 0) > 0
+    assert payload["role"] == "viewer"
 
 
 def test_researcher_register_requires_valid_signup_code_contract():

@@ -1,29 +1,24 @@
 services:
   beetle-db:
-    # Build the same full-pipeline image used in production (Dockerfile.db) so
-    # dev exercises the exact server DB artifact. The image bakes schema + seed +
-    # all consolidated migrations + read models + CSV data in the correct order,
-    # so a fresh volume yields a COMPLETE DB. (Previously this bind-mounted only a
-    # partial set of init scripts in a broken order — beetle_record was seeded
-    # before it was created — and relied on a runtime migration step that cannot
-    # execute the migrations' DELIMITER/procedure blocks.)
-    build:
-      context: .
-      dockerfile: backend/docker/Dockerfile.db
+    image: mysql:8.0
     container_name: beetle-db
     restart: unless-stopped
     command: ["--default-authentication-plugin=mysql_native_password"]
     environment:
-      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD:-root123}
       - MYSQL_DATABASE=${DB_NAME:-beetle_db}
-      - MYSQL_USER=${DB_APP_USER:-beetle_app}
-      - MYSQL_PASSWORD=${DB_APP_PASSWORD}
     ports:
       - "3306:3306"
     volumes:
       - beetle_db_data:/var/lib/mysql
+      - ./backend/SQL/schema/DatabseShema.sql:/docker-entrypoint-initdb.d/01_schema.sql:ro
+      - ./backend/SQL/ops/AddMapQueryIndexes.sql:/docker-entrypoint-initdb.d/02_indexes.sql:ro
+      - ./backend/SQL/seed/LoadGBIFCSVToDB.sql:/docker-entrypoint-initdb.d/03_seed_gbif.sql:ro
+      - ./backend/SQL/seed/LoadClimateSnapshot.sql:/docker-entrypoint-initdb.d/04_seed_climate.sql:ro
+      - ./backend/SQL/seed/RecordQualityReportSnapshot.sql:/docker-entrypoint-initdb.d/05_quality_snapshot.sql:ro
+      - ./backend/Data:/var/lib/mysql-files
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-u${DB_APP_USER:-beetle_app}", "-p${DB_APP_PASSWORD}"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-p${DB_PASSWORD:-root123}"]
       interval: 10s
       timeout: 5s
       retries: 20
@@ -39,8 +34,8 @@ services:
     environment:
       - DB_HOST=${DB_HOST:-beetle-db}
       - DB_PORT=${DB_PORT:-3306}
-      - DB_USER=${DB_APP_USER:-beetle_app}
-      - DB_PASSWORD=${DB_APP_PASSWORD}
+      - DB_USER=${DB_USER:-root}
+      - DB_PASSWORD=${DB_PASSWORD:-root123}
       - DB_NAME=${DB_NAME:-beetle_db}
       - API_HOST=0.0.0.0
       - API_PORT=8000
@@ -49,9 +44,9 @@ services:
       - SLOW_QUERY_MS=${SLOW_QUERY_MS:-300}
       - FRONTEND_ORIGINS=${FRONTEND_ORIGINS:-http://localhost:8080}
       - ALLOW_ADMIN_BOOTSTRAP=${ALLOW_ADMIN_BOOTSTRAP:-true}
-      - ADMIN_BOOTSTRAP_TOKEN=${ADMIN_BOOTSTRAP_TOKEN}
-      - RESEARCHER_SIGNUP_CODE=${RESEARCHER_SIGNUP_CODE}
-      - JWT_SECRET=${JWT_SECRET}
+      - ADMIN_BOOTSTRAP_TOKEN=${ADMIN_BOOTSTRAP_TOKEN:-dev-bootstrap-token}
+      - RESEARCHER_SIGNUP_CODE=${RESEARCHER_SIGNUP_CODE:-dev-researcher-code}
+      - JWT_SECRET=${JWT_SECRET:-dev-jwt-secret}
       - JWT_ALGORITHM=${JWT_ALGORITHM:-HS256}
       - JWT_ACCESS_TTL_MINUTES=${JWT_ACCESS_TTL_MINUTES:-30}
       - JWT_REFRESH_TTL_DAYS=${JWT_REFRESH_TTL_DAYS:-14}

@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Beetle Box</title>
+    <link rel="stylesheet" href="styles.css?v=13" />
+  </head>
+  <body>
+    <main class="page">
+      <div class="topbar">
+        <header class="header">
+          <h1>Beetle Box</h1>
+          <p class="subtitle">Latin Americas Beetle Atlas</p>
+          <p>Find your favorite Beetles</p>
+        </header>
+
+        <section class="auth-box" id="authBox" aria-label="Konto">
+          <!-- Ausgeloggter Zustand -->
+          <div class="auth-state" id="authAnon">
+            <div class="auth-band">
+              <span class="auth-band-dot" aria-hidden="true"></span>
+              <span class="auth-band-label">Forscher-Zugang</span>
+            </div>
+            <div class="auth-body">
+              <p class="auth-title">Mitforschen</p>
+              <button type="button" id="loginButton" class="auth-primary">Anmelden</button>
+              <button type="button" id="registerButton" class="auth-secondary">Registrieren</button>
+            </div>
+          </div>
+          <!-- Eingeloggter Zustand -->
+          <div class="auth-state is-hidden" id="authUser">
+            <div class="auth-band">
+              <span class="auth-band-dot" aria-hidden="true"></span>
+              <span class="auth-band-label" id="authRole">Konto</span>
+            </div>
+            <div class="auth-body">
+              <p class="auth-email" id="authEmail"></p>
+              <button type="button" id="addBeetleButton" class="auth-primary is-hidden">+ K&auml;fer eintragen</button>
+              <button type="button" id="logoutButton" class="auth-secondary">Abmelden</button>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Anmelden/Registrieren-Modal -->
+      <div class="auth-modal is-hidden" id="authModal" role="dialog" aria-modal="true" aria-label="Anmelden oder Registrieren">
+        <div class="auth-modal-backdrop" data-auth-close></div>
+        <div class="auth-modal-card">
+          <button type="button" class="auth-modal-close" id="authModalClose" aria-label="Schliessen" data-auth-close>&times;</button>
+          <div class="auth-tabs" role="tablist">
+            <button type="button" class="auth-tab is-active" data-tab="login" role="tab">Anmelden</button>
+            <button type="button" class="auth-tab" data-tab="register" role="tab">Registrieren</button>
+          </div>
+
+          <form class="auth-form" id="loginForm" data-panel="login">
+            <label>E-Mail
+              <input type="email" id="loginEmail" autocomplete="email" required />
+            </label>
+            <label>Passwort
+              <input type="password" id="loginPassword" autocomplete="current-password" required />
+            </label>
+            <p class="auth-error is-hidden" id="loginError" role="alert"></p>
+            <button type="submit" id="loginSubmit">Anmelden</button>
+          </form>
+
+          <form class="auth-form is-hidden" id="registerForm" data-panel="register">
+            <p class="auth-hint">Als Researcher registrieren &ndash; du brauchst den Einladungs-Code.</p>
+            <label>E-Mail
+              <input type="email" id="registerEmail" autocomplete="email" required />
+            </label>
+            <label>Passwort (min. 12 Zeichen)
+              <input type="password" id="registerPassword" autocomplete="new-password" minlength="12" required />
+            </label>
+            <label>Researcher-Code
+              <input type="text" id="registerCode" autocomplete="off" required />
+            </label>
+            <p class="auth-error is-hidden" id="registerError" role="alert"></p>
+            <button type="submit" id="registerSubmit">Registrieren</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Kaefer-eintragen-Modal (Felder werden von beetle-ui.js gerendert) -->
+      <div class="auth-modal beetle-modal is-hidden" id="beetleModal" role="dialog" aria-modal="true" aria-label="Käfer eintragen">
+        <div class="auth-modal-backdrop" data-beetle-close></div>
+        <div class="auth-modal-card beetle-modal-card">
+          <button type="button" class="auth-modal-close" id="beetleModalClose" aria-label="Schliessen" data-beetle-close>&times;</button>
+          <h2 class="beetle-modal-title">K&auml;fer eintragen</h2>
+          <form class="beetle-form" id="beetleForm" novalidate>
+            <div class="beetle-fields" id="beetleFieldsCore"></div>
+            <details class="beetle-advanced">
+              <summary>Erweiterte Felder</summary>
+              <div class="beetle-fields" id="beetleFieldsAdvanced"></div>
+            </details>
+            <p class="auth-error is-hidden" id="beetleError" role="alert"></p>
+            <p class="beetle-success is-hidden" id="beetleSuccess" role="status"></p>
+            <button type="submit" id="beetleSubmit">K&auml;fer speichern</button>
+          </form>
+        </div>
+      </div>
+
+      <section class="search-box" aria-label="Suche und Filter">
+        <div class="search-row">
+          <label class="search-field">
+            <span class="search-label">
+              Art suchen
+              <span class="search-lupe" aria-hidden="true">&#128269;</span>
+            </span>
+            <input id="searchInput" type="search" placeholder="z. B. Dynastes" />
+          </label>
+          <button id="filterToggle" type="button" class="filter-toggle" aria-expanded="false" aria-controls="filterPanel">
+            Filter<span class="filter-badge is-hidden" id="filterBadge">0</span>
+          </button>
+        </div>
+
+        <div class="filter-chips" id="activeFilters" aria-label="Aktive Filter"></div>
+
+        <div class="filter-panel is-collapsed" id="filterPanel">
+          <label>
+            Land
+            <select id="countryFilter">
+              <option value="all">Alle L&auml;nder</option>
+            </select>
+          </label>
+
+          <label>
+            Klimazone
+          <select id="climateFilter">
+            <option value="all">Alle</option>
+            <option value="cold">Kalt</option>
+            <option value="mild">Mild</option>
+            <option value="warm">Warm</option>
+            <option value="hot">Heiss</option>
+            <option value="unknown">Unbekannt</option>
+          </select>
+        </label>
+
+        <label>
+          Vegetation
+          <select id="vegetationFilter">
+            <option value="all">Alle</option>
+            <option value="tree_cover">Wald</option>
+            <option value="shrubland">Buschland</option>
+            <option value="grassland">Grasland</option>
+            <option value="cropland">Ackerland</option>
+            <option value="built_up">Bebaut</option>
+            <option value="bare_sparse">Vegetationsarm</option>
+            <option value="wetland">Feuchtgebiet</option>
+            <option value="mangroves">Mangroven</option>
+            <option value="water">Wasser</option>
+            <option value="snow_ice">Schnee/Eis</option>
+            <option value="moss_lichen">Moos/Flechten</option>
+            <option value="unknown">Unbekannt</option>
+          </select>
+        </label>
+
+        <label>
+          Hoehenlage
+          <select id="elevationFilter">
+            <option value="all">Alle</option>
+            <option value="low">0-500 m</option>
+            <option value="mid">500-1500 m</option>
+            <option value="high">1500-3000 m</option>
+            <option value="veryHigh">ueber 3000 m</option>
+          </select>
+        </label>
+
+          <button id="resetButton" type="button" class="filter-reset">Zur&uuml;cksetzen</button>
+        </div>
+      </section>
+
+      <section class="map-section" aria-label="Karten">
+        <div class="map-header">
+          <div>
+            <h2>Atlas Karte</h2>
+            <p>Hier werden dir die Fundorte deiner gesuchten K&auml;fer angezeigt :)</p>
+          </div>
+          <div class="map-view-toggle" role="group" aria-label="Kartenansicht">
+            <button class="toggle-btn is-active" data-view="normal" type="button">Normal</button>
+            <button class="toggle-btn" data-view="elevation" type="button">Höhe</button>
+            <button class="toggle-btn" data-view="climate" type="button">Klima</button>
+            <button class="toggle-btn" data-view="vegetation" type="button">Vegetation</button>
+          </div>
+        </div>
+
+        <div class="map-view">
+          <div class="map-canvas">
+            <!-- Ladezustand -->
+            <div id="mapLoadingState" class="map-state-overlay">
+              <p>Karte wird geladen …</p>
+            </div>
+
+            <!-- Fehlerzustand -->
+            <div id="mapErrorState" class="map-state-overlay is-hidden">
+              <p>Karte konnte nicht geladen werden.<br>Lokale Konfiguration (<code>config.local.js</code>) fehlt oder API-Key ist ungültig.</p>
+            </div>
+
+            <!-- Google Maps Container -->
+            <div id="googleMap"></div>
+
+            <!-- Höhenlegende (OpenTopoMap) -->
+            <div id="elevationLegend" class="map-legend is-hidden" aria-label="Höhenlegende">
+              <p class="legend-title">Höhe ü. NN</p>
+              <ul class="legend-list">
+                <li><span class="legend-swatch" style="background:#c4c5cc"></span> &gt; 4500 m</li>
+                <li><span class="legend-swatch" style="background:#b89e7e"></span> 3000–4500 m</li>
+                <li><span class="legend-swatch" style="background:#c1a27c"></span> 2000–3000 m</li>
+                <li><span class="legend-swatch" style="background:#d8c8a4"></span> 1000–2000 m</li>
+                <li><span class="legend-swatch" style="background:#e7e5c9"></span> 500–1000 m</li>
+                <li><span class="legend-swatch" style="background:#cee5b9"></span> 100–500 m</li>
+                <li><span class="legend-swatch" style="background:#aecfa4"></span> 0–100 m</li>
+              </ul>
+              <p style="font-size:0.7rem;color:#888;margin-top:0.4rem">© OpenTopoMap (CC-BY-SA)</p>
+            </div>
+
+            <!-- Klimazonen-Legende (Köppen-Geiger 1991–2020) -->
+            <div id="climateLegend" class="map-legend is-hidden" aria-label="Klimazonen-Legende">
+              <p class="legend-title">Köppen-Geiger Klimazonen</p>
+              <div class="legend-group">
+                <p class="legend-group-title">A — Tropisch</p>
+                <ul class="legend-list">
+                  <li><span class="legend-swatch" style="background:#006400"></span> Af Regenwald</li>
+                  <li><span class="legend-swatch" style="background:#228B22"></span> Am Monsun</li>
+                  <li><span class="legend-swatch" style="background:#96D26C"></span> Aw Savanne</li>
+                </ul>
+              </div>
+              <div class="legend-group">
+                <p class="legend-group-title">B — Arid</p>
+                <ul class="legend-list">
+                  <li><span class="legend-swatch" style="background:#FF4500"></span> BWh Wüste heiß</li>
+                  <li><span class="legend-swatch" style="background:#FF8C69"></span> BWk Wüste kalt</li>
+                  <li><span class="legend-swatch" style="background:#F5A623"></span> BSh Steppe heiß</li>
+                  <li><span class="legend-swatch" style="background:#F5DCA0"></span> BSk Steppe kalt</li>
+                </ul>
+              </div>
+              <div class="legend-group">
+                <p class="legend-group-title">C — Gemäßigt</p>
+                <ul class="legend-list">
+                  <li><span class="legend-swatch" style="background:#FFFF00"></span> Csa tr. Sommer, heiß</li>
+                  <li><span class="legend-swatch" style="background:#D4D400"></span> Csb tr. Sommer, warm</li>
+                  <li><span class="legend-swatch" style="background:#AAAA00"></span> Csc tr. Sommer, kühl</li>
+                  <li><span class="legend-swatch" style="background:#AAFFAA"></span> Cwa tr. Winter, heiß</li>
+                  <li><span class="legend-swatch" style="background:#78C878"></span> Cwb tr. Winter, warm</li>
+                  <li><span class="legend-swatch" style="background:#449944"></span> Cwc tr. Winter, kühl</li>
+                  <li><span class="legend-swatch" style="background:#C8FF50"></span> Cfa feucht, heiß</li>
+                  <li><span class="legend-swatch" style="background:#78FF50"></span> Cfb feucht, warm</li>
+                  <li><span class="legend-swatch" style="background:#40C800"></span> Cfc feucht, kühl</li>
+                </ul>
+              </div>
+              <div class="legend-group">
+                <p class="legend-group-title">D — Kalt</p>
+                <ul class="legend-list">
+                  <li><span class="legend-swatch" style="background:#CC00CC"></span> Dsb tr. Sommer, warm</li>
+                  <li><span class="legend-swatch" style="background:#990099"></span> Dsc tr. Sommer, kühl</li>
+                  <li><span class="legend-swatch" style="background:#38CCFF"></span> Dfb feucht, warm</li>
+                  <li><span class="legend-swatch" style="background:#0088AA"></span> Dfc feucht, kühl</li>
+                </ul>
+              </div>
+              <div class="legend-group">
+                <p class="legend-group-title">E — Polar</p>
+                <ul class="legend-list">
+                  <li><span class="legend-swatch" style="background:#B0B0B0"></span> ET Tundra</li>
+                  <li><span class="legend-swatch" style="background:#808080"></span> EF Eis</li>
+                </ul>
+              </div>
+              <p style="font-size:0.7rem;color:#888;margin-top:0.4rem">Beck et al. (2023), CC-BY 4.0</p>
+            </div>
+
+            <!-- Vegetations-Legende (WWF Ecoregions) -->
+            <div id="vegetationLegend" class="map-legend is-hidden" aria-label="Vegetations-Legende">
+              <p class="legend-title">Vegetationszonen</p>
+              <ul class="legend-list">
+                <li><span class="legend-swatch" style="background:#006400"></span> Tropischer Regenwald</li>
+                <li><span class="legend-swatch" style="background:#55A857"></span> Tropischer Trockenwald</li>
+                <li><span class="legend-swatch" style="background:#2E8B57"></span> Tropischer Nadelwald</li>
+                <li><span class="legend-swatch" style="background:#8B9B2E"></span> Gemäßigter Laubwald</li>
+                <li><span class="legend-swatch" style="background:#556B2F"></span> Gemäßigter Nadelwald</li>
+                <li><span class="legend-swatch" style="background:#1E5C3A"></span> Borealer Wald / Taiga</li>
+                <li><span class="legend-swatch" style="background:#C8B400"></span> Tropisches Grasland / Savanne</li>
+                <li><span class="legend-swatch" style="background:#C8D250"></span> Gemäßigtes Grasland</li>
+                <li><span class="legend-swatch" style="background:#00CED1"></span> Überschwemmtes Grasland</li>
+                <li><span class="legend-swatch" style="background:#8B7355"></span> Gebirgs-Grasland</li>
+                <li><span class="legend-swatch" style="background:#B0C4DE"></span> Tundra</li>
+                <li><span class="legend-swatch" style="background:#D4A84B"></span> Mittelmeervegetation</li>
+                <li><span class="legend-swatch" style="background:#F5DEB3"></span> Wüste / Trockengebiete</li>
+                <li><span class="legend-swatch" style="background:#20B2AA"></span> Mangroven</li>
+              </ul>
+              <p style="font-size:0.7rem;color:#888;margin-top:0.4rem">WWF Terrestrial Ecoregions</p>
+            </div>
+
+            <!-- SVG-Fallback (ausgeblendet, bleibt als Reserve) -->
+            <div id="svgFallback" style="display:none">
+              <div class="map-tools" aria-label="Kartensteuerung">
+                <button id="zoomInButton" type="button">+</button>
+                <button id="zoomOutButton" type="button">-</button>
+                <button id="resetMapButton" type="button">Reset</button>
+              </div>
+              <div id="pointPopup" class="point-popup is-hidden" role="dialog" aria-label="Punktinformationen"></div>
+              <svg id="atlasSvg" viewBox="0 0 1000 980" role="img" aria-label="Interaktive Karte Lateinamerikas">
+                <rect class="ocean" width="1000" height="980"></rect>
+                <g id="mapViewport">
+                  <g id="baseLayer"></g>
+                  <g id="zoneLayer"></g>
+                  <g id="countryLineLayer"></g>
+                  <g id="labelLayer"></g>
+                  <g id="beetleLayer"></g>
+                </g>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <aside id="countrySidebar" class="country-sidebar" aria-label="Laenderinformationen" aria-hidden="true">
+        <div class="sidebar-header">
+          <div>
+            <p class="sidebar-label">Laenderinformationen</p>
+            <h2 id="countrySidebarTitle">Land</h2>
+          </div>
+          <button id="closeSidebarButton" type="button" aria-label="Seitenleiste schliessen">x</button>
+        </div>
+        <div id="countrySidebarContent" class="sidebar-content">
+          <p>Noch keine Informationen eingetragen.</p>
+        </div>
+      </aside>
+
+      <section class="content">
+        <section aria-label="Suchergebnisse">
+          <h2 id="resultHeading">Gefundene Arten</h2>
+          <div id="resultList" class="result-list"></div>
+        </section>
+      </section>
+    </main>
+
+    <script src="config.local.js"></script>
+    <script src="data/demo-beetles.js?v=2"></script>
+    <script src="data/featured-beetles.js?v=1"></script>
+    <script src="data/country-stats.js?v=1"></script>
+    <script src="assets/latin-america-countries.js?v=2"></script>
+    <script src="auth.js?v=1"></script>
+    <script src="auth-ui.js?v=1"></script>
+    <script src="beetle-ui.js?v=1"></script>
+    <script src="app.js?v=14"></script>
+    <script src="ants.js?v=3"></script>
+  </body>
+</html>

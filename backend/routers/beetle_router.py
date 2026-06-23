@@ -2,7 +2,6 @@ from fastapi import APIRouter, Depends, Query
 
 from backend.controllers.beetle_controller import (
     get_beetle_by_id_controller,
-    get_environment_ranges_controller,
     get_beetle_media_controller,
     get_country_detail_controller,
     list_beetles_controller,
@@ -13,7 +12,7 @@ from backend.tests.openapi_examples import (
     BEETLES_LIST_EXAMPLE,
     COUNTRY_DETAIL_EXAMPLE,
 )
-from backend.config.query_params import beetle_query_params
+from backend.routers.query_params import beetle_query_params
 
 
 router = APIRouter()
@@ -30,19 +29,6 @@ router = APIRouter()
 def list_beetles(params: dict = Depends(beetle_query_params)):
     """Return a paginated beetle list for the given query/filter parameters."""
     return list_beetles_controller(**params)
-
-
-@router.get(
-    "/api/beetles/ranges/environment",
-    responses={
-        200: {
-            "description": "Global min/max ranges for environmental quicklook metrics.",
-        }
-    },
-)
-def get_environment_ranges():
-    """Return global min/max ranges used for relative quicklook bar scaling."""
-    return get_environment_ranges_controller()
 
 @router.get(
     "/api/beetles/{beetle_id}",
