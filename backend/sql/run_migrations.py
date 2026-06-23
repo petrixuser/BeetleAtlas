@@ -28,28 +28,11 @@ def _required_env(name: str) -> str:
     return value
 
 
-def _migration_credentials() -> tuple[str, str]:
-    """Return the (user, password) used to RUN MIGRATIONS.
-
-    Migrations are DDL (CREATE TABLE/PROCEDURE, ALTER, ...) and must run as a
-    privileged DB account. The application's runtime user (DB_USER) is often a
-    least-privilege account that lacks CREATE/CREATE ROUTINE — running migrations
-    as it fails (e.g. "CREATE command denied"). So prefer dedicated migration
-    credentials when provided, and only fall back to the app user otherwise (dev
-    convenience). In production set DB_MIGRATION_USER=root and
-    DB_MIGRATION_PASSWORD to the existing root password.
-    """
-    migration_user = os.getenv("DB_MIGRATION_USER", "").strip()
-    migration_password = os.getenv("DB_MIGRATION_PASSWORD", "")
-    if migration_user:
-        return migration_user, migration_password
-    return _required_env("DB_USER"), _required_env("DB_PASSWORD")
-
-
 def _connect() -> pymysql.connections.Connection:
     host = os.getenv("DB_HOST", "127.0.0.1")
     port = int(os.getenv("DB_PORT", "3306"))
-    user, password = _migration_credentials()
+    user = _required_env("DB_USER")
+    password = _required_env("DB_PASSWORD")
     database = os.getenv("DB_NAME", "beetle_db")
 
     return pymysql.connect(
