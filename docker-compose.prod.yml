@@ -68,6 +68,12 @@ services:
       - DB_USER=${DB_APP_USER:-beetle_app}
       - DB_PASSWORD=${DB_APP_PASSWORD}
       - DB_NAME=${DB_NAME:-beetle_db}
+      # Migrations run as a privileged user (DDL/CREATE ROUTINE) so an in-place
+      # upgrade works even when the app user (DB_USER) is least-privilege. Reuses
+      # the existing DB_ROOT_PASSWORD Portainer var — no new secret needed. The
+      # app runtime keeps using DB_USER above.
+      - DB_MIGRATION_USER=${DB_MIGRATION_USER:-root}
+      - DB_MIGRATION_PASSWORD=${DB_ROOT_PASSWORD}
       - API_HOST=0.0.0.0
       - API_PORT=8000
       - API_APP_MODULE=backend.core.main:app
