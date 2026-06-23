@@ -49,13 +49,60 @@ def _connect() -> pymysql.connections.Connection:
 
 def _read_sql(relative_path: str) -> str:
     sql_path = SCRIPT_DIR / relative_path
-    return sql_path.read_text(encoding="utf-8")
+    # utf-8-sig strips a leading BOM if present. The mysql CLI tolerates a BOM
+    # (so initdb works), but pymysql passes it through as invalid SQL syntax.
+    return sql_path.read_text(encoding="utf-8-sig")
+
+
+def _split_sql_statements(sql_text: str) -> list[str]:
+    """Split a SQL script into individual statements, honouring `DELIMITER`
+    directives. pymysql cannot execute `DELIMITER`/`CREATE PROCEDURE ... $$`
+    blocks as one blob (DELIMITER is a client-side directive, not server SQL),
+    so we replicate the mysql CLI behaviour: track the active delimiter and emit
+    one statement each time a line ends with it. Statements that are only
+    comments/whitespace are skipped.
+    """
+    statements: list[str] = []
+    delimiter = ";"
+    buffer: list[str] = []
+
+    def _flush() -> None:
+        stmt = "\n".join(buffer).strip()
+        if stmt and any(
+            line.strip() and not line.strip().startswith("--")
+            for line in stmt.splitlines()
+        ):
+            statements.append(stmt)
+        buffer.clear()
+
+    for raw_line in sql_text.splitlines():
+        stripped = raw_line.strip()
+        if stripped.upper().startswith("DELIMITER"):
+            _flush()
+            parts = stripped.split(None, 1)
+            delimiter = parts[1].strip() if len(parts) > 1 else ";"
+            continue
+
+        buffer.append(raw_line)
+        if raw_line.rstrip().endswith(delimiter):
+            joined = "\n".join(buffer).rstrip()
+            joined = joined[: -len(delimiter)].rstrip()
+            buffer.clear()
+            if joined.strip() and any(
+                line.strip() and not line.strip().startswith("--")
+                for line in joined.splitlines()
+            ):
+                statements.append(joined)
+
+    _flush()
+    return statements
 
 
 def _execute_sql_script(cursor: pymysql.cursors.Cursor, sql_text: str) -> None:
-    cursor.execute(sql_text)
-    while cursor.nextset():
-        pass
+    for statement in _split_sql_statements(sql_text):
+        cursor.execute(statement)
+        while cursor.nextset():
+            pass
 
 
 def _apply_schema_migrations_table(cursor: pymysql.cursors.Cursor) -> None:

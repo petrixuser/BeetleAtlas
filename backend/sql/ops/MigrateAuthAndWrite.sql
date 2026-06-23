@@ -223,7 +223,19 @@ CREATE TABLE IF NOT EXISTS beetle_record (
   CONSTRAINT fk_beetle_record_deleted_by FOREIGN KEY (deleted_by) REFERENCES app_user(user_id)
 ) ENGINE=InnoDB;
 
-ALTER TABLE beetle_record
+-- Idempotent guard: the original (separate) MigrateBeetleWrite migration may
+-- have already added these columns on an existing volume, so only run the plain
+-- multi-column ALTER when the sentinel column (gbif_id) is still missing.
+SET @addcols_core_sql = IF(
+  EXISTS (
+    SELECT 1
+    FROM information_schema.columns
+    WHERE table_schema = DATABASE()
+      AND table_name = 'beetle_record'
+      AND column_name = 'gbif_id'
+  ),
+  'SELECT "beetle_record core extended columns already present"',
+  'ALTER TABLE beetle_record
   ADD COLUMN gbif_id BIGINT NULL AFTER record_id,
   ADD COLUMN taxon_id VARCHAR(128) NULL AFTER gbif_id,
   ADD COLUMN scientific_name_authorship VARCHAR(512) NULL AFTER scientific_name,
@@ -248,7 +260,11 @@ ALTER TABLE beetle_record
   ADD COLUMN coordinate_uncertainty VARCHAR(128) NULL AFTER longitude,
   ADD COLUMN region VARCHAR(255) NULL AFTER country,
   ADD COLUMN city VARCHAR(255) NULL AFTER region,
-  ADD COLUMN verbatim_locality TEXT NULL AFTER city;
+  ADD COLUMN verbatim_locality TEXT NULL AFTER city'
+);
+PREPARE addcols_core_stmt FROM @addcols_core_sql;
+EXECUTE addcols_core_stmt;
+DEALLOCATE PREPARE addcols_core_stmt;
 
 SET @idx_gbif_sql = IF(
   EXISTS (
@@ -487,7 +503,18 @@ ORDER BY column_name;
 
 USE beetle_db;
 
-ALTER TABLE beetle_record
+-- Idempotent guard: only add the EE/environment columns when the sentinel
+-- column (elevation) is still missing (already present on upgraded volumes).
+SET @addcols_ee_sql = IF(
+  EXISTS (
+    SELECT 1
+    FROM information_schema.columns
+    WHERE table_schema = DATABASE()
+      AND table_name = 'beetle_record'
+      AND column_name = 'elevation'
+  ),
+  'SELECT "beetle_record EE/environment columns already present"',
+  'ALTER TABLE beetle_record
   ADD COLUMN elevation DOUBLE NULL AFTER coordinate_uncertainty,
   ADD COLUMN temperature DOUBLE NULL AFTER elevation,
   ADD COLUMN precipitation DOUBLE NULL AFTER temperature,
@@ -505,7 +532,11 @@ ALTER TABLE beetle_record
   ADD COLUMN soil_ph DOUBLE NULL AFTER biome_id,
   ADD COLUMN soil_organic_carbon DOUBLE NULL AFTER soil_ph,
   ADD COLUMN worldclim_bio01 DOUBLE NULL AFTER soil_organic_carbon,
-  ADD COLUMN worldclim_bio12 DOUBLE NULL AFTER worldclim_bio01;
+  ADD COLUMN worldclim_bio12 DOUBLE NULL AFTER worldclim_bio01'
+);
+PREPARE addcols_ee_stmt FROM @addcols_ee_sql;
+EXECUTE addcols_ee_stmt;
+DEALLOCATE PREPARE addcols_ee_stmt;
 
 
 -- END backend/sql/ops/MigrateManualBeetleEEFields.sql
