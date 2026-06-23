@@ -156,8 +156,8 @@ def _create_record(token: str) -> int:
             "scientific_name": "Testus contractus",
             "family": "Contractidae",
             "genus": "Testus",
-            "country": "DE",
-            "location": "Berlin",
+            "country": "GT",
+            "location": "Guatemala City",
             "notes": "created by contract test",
         },
     )

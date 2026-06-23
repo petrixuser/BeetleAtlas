@@ -556,7 +556,7 @@ def _country_base_with_snapshot_cte_sql(base_columns_sql: str) -> str:
 def country_overview_sql() -> str:
     """Return SQL for country-level overview metrics."""
     return f"""
-        {_country_base_with_snapshot_cte_sql("o.beetle_id, l.country, l.elevation, l.landcover_class")},
+        {_country_base_with_snapshot_cte_sql("o.beetle_id, l.country, l.elevation, l.landcover_class, l.biome_id")},
         enriched AS (
             SELECT
                 b.beetle_id,
@@ -600,7 +600,7 @@ def country_top_vegetation_sql() -> str:
     """Return SQL for top vegetation buckets per country."""
     return f"""
         WITH base AS (
-            SELECT l.country, l.landcover_class
+            SELECT l.country, l.landcover_class, l.biome_id
             FROM observation o
             JOIN location l ON l.location_id = o.location_id
             WHERE UPPER(COALESCE(l.country, '')) = :country_code

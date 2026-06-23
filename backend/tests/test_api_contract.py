@@ -235,7 +235,7 @@ def test_quality_report_history_compare_contract():
 
 def test_auth_refresh_and_logout_contract():
     email = f"contract_refresh_{uuid.uuid4().hex[:10]}@example.com"
-    password = "StrongPassword!"
+    password = "StrongPassw0rd!"
     test_headers = {"X-Forwarded-For": f"198.18.0.{int(uuid.uuid4().hex[:2], 16) or 1}"}
 
     try:
