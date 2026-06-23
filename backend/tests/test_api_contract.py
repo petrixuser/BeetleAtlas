@@ -110,11 +110,11 @@ def test_beetle_detail_contract():
     _, listing = _get_json("/api/beetles?limit=1&offset=0&sort_by=name&sort_dir=asc")
     assert listing["items"], "Expected at least one beetle item"
 
-    beetle_id = listing["items"][0]["id"]
+    beetle_id = listing["items"][0]["id"].replace("occ-", "")
     status, payload = _get_json(f"/api/beetles/{beetle_id}")
 
     assert status == 200
-    assert payload["id"].startswith(("occ-", "rec-"))
+    assert payload["id"].startswith("occ-")
     assert "name" in payload
     assert "family" in payload
     assert "observedAt" in payload
@@ -128,7 +128,7 @@ def test_beetle_media_contract():
     _, listing = _get_json("/api/beetles?limit=1&offset=0&sort_by=name&sort_dir=asc")
     assert listing["items"], "Expected at least one beetle item"
 
-    beetle_id = listing["items"][0]["id"]
+    beetle_id = listing["items"][0]["id"].replace("occ-", "")
     try:
         status, payload = _get_json(f"/api/beetles/{beetle_id}/media?limit=5&offset=0")
     except HTTPError as exc:
@@ -137,7 +137,7 @@ def test_beetle_media_contract():
         raise
 
     assert status == 200
-    assert payload["id"].startswith(("occ-", "rec-"))
+    assert payload["id"].startswith("occ-")
     assert set(["items", "total", "page", "page_size"]).issubset(payload.keys())
     assert isinstance(payload["items"], list)
     if payload["items"]:
@@ -235,18 +235,14 @@ def test_quality_report_history_compare_contract():
 
 def test_auth_refresh_and_logout_contract():
     email = f"contract_refresh_{uuid.uuid4().hex[:10]}@example.com"
-    password = "StrongPassw0rd!"
+    password = "StrongPassword!"
     test_headers = {"X-Forwarded-For": f"198.18.0.{int(uuid.uuid4().hex[:2], 16) or 1}"}
 
     try:
-        _, register_payload = _post_json_with_body(
+        _post_json_with_body(
             "/auth/register",
             {"email": email, "password": password},
             headers=test_headers,
-        )
-        _post_json_with_body(
-            "/auth/verify-email",
-            {"verification_token": register_payload["verification_token"]},
         )
     except HTTPError as exc:
         if exc.code != 409:

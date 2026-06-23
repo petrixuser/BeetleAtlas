@@ -1,4 +1,0 @@
-﻿/* app.css als Entry-Point fuer modulare Teile. */
-@import url("app-parts/base-map-results.css");
-@import url("app-parts/auth.css");
-@import url("app-parts/beetle-form.css");

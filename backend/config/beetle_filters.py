@@ -1,5 +1,4 @@
 FILTER_COLUMN_MAP = {
-    "country": "e.country",
     "climate": "e.climate",
     "vegetation": "e.vegetation",
     "elevation": "e.elevationGroup",
@@ -49,23 +48,3 @@ ADVANCED_FILTER_KEYS = (
     "media_coverage",
     "license_class",
 )
-
-COMPACT_FAST_ADVANCED_FILTER_KEYS = frozenset(
-    {
-        "soil_ph_band",
-        "temperature_band",
-        "precipitation_band",
-        "event_date_quality",
-    }
-)
-
-COMPACT_PRECOMPUTED_DIM_FILTER_MAP = {
-    "country": "country",
-    "climate": "climate",
-    "vegetation": "vegetation",
-    "elevation": "elevation_group",
-    "soil_ph_band": "soil_ph_band",
-    "temperature_band": "temperature_band",
-    "precipitation_band": "precipitation_band",
-    "event_date_quality": "event_date_quality",
-}

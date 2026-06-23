@@ -6,11 +6,9 @@ from backend.contracts.auth_contracts import (
     LoginRequest,
     LogoutRequest,
     LogoutResponse,
-    RegisterPendingResponse,
     RefreshRequest,
     RegisterRequest,
     TokenResponse,
-    VerifyEmailRequest,
 )
 from backend.controllers.auth_controller import (
     bootstrap_admin_controller,
@@ -18,7 +16,6 @@ from backend.controllers.auth_controller import (
     logout_controller,
     refresh_controller,
     register_controller,
-    verify_email_controller,
 )
 from backend.core.auth import get_current_user
 from backend.core.rate_limit import (
@@ -32,16 +29,10 @@ from backend.core.rate_limit import (
 router = APIRouter()
 
 
-@router.post("/auth/register", response_model=RegisterPendingResponse)
+@router.post("/auth/register", response_model=AuthUserResponse)
 def register(payload: RegisterRequest, _: None = Depends(auth_register_rate_limit)):
-    """Start registration and return verification payload."""
+    """Register one user account."""
     return register_controller(payload)
-
-
-@router.post("/auth/verify-email", response_model=AuthUserResponse)
-def verify_email(payload: VerifyEmailRequest):
-    """Verify registration token and create one active user account."""
-    return verify_email_controller(payload)
 
 
 @router.post("/auth/login", response_model=TokenResponse)

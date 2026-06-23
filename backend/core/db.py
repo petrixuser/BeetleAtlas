@@ -13,18 +13,11 @@ load_dotenv()
 
 DB_HOST = os.getenv("DB_HOST", "127.0.0.1")
 DB_PORT = int(os.getenv("DB_PORT", "3306"))
-DB_USER = os.getenv("DB_USER", "").strip()
-DB_PASSWORD = os.getenv("DB_PASSWORD", "").strip()
+DB_USER = os.getenv("DB_USER", "root")
+DB_PASSWORD = os.getenv("DB_PASSWORD", "root123")
 DB_NAME = os.getenv("DB_NAME", "beetle_db")
 SLOW_QUERY_MS = int(os.getenv("SLOW_QUERY_MS", "300"))
 ENABLE_SLOW_QUERY_LOGGING = os.getenv("ENABLE_SLOW_QUERY_LOGGING", "true").lower() == "true"
-
-if not DB_USER:
-    raise RuntimeError("Missing required environment variable DB_USER.")
-if not DB_PASSWORD:
-    raise RuntimeError("Missing required environment variable DB_PASSWORD.")
-if DB_USER.lower() == "root":
-    raise RuntimeError("DB_USER must not be root. Use a dedicated least-privilege app user.")
 
 logger = logging.getLogger("beetle.backend.db")
 

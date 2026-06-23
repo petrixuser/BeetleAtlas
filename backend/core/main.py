@@ -1,47 +1,23 @@
-import asyncio
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from sqlalchemy.exc import SQLAlchemyError
 from starlette.exceptions import HTTPException as StarletteHTTPException
-import logging
-from backend.config.settings import parse_allowed_origins, validate_runtime_security
-from backend.controllers.beetle_controller import warm_environment_ranges_cache
-from backend.controllers.map_controller import warm_map_points_cache
+from backend.config.settings import parse_allowed_origins
 from backend.routers import auth_router, beetle_router, beetle_write_router, core_router, map_router
 
 """This module initializes the FastAPI application, sets up CORS middleware, and defines global exception handlers"""
-validate_runtime_security()
 app = FastAPI(title="Beetle API", version="1.0.0")
-logger = logging.getLogger("beetle.backend.api")
 
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=parse_allowed_origins(),
-    allow_origin_regex=r"^https?://(localhost|127\.0\.0\.1)(:\d+)?$",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-
-@app.on_event("startup")
-async def warm_environment_ranges_on_startup():
-    """Run expensive cache warmups in background so API can answer health checks immediately."""
-
-    async def _warm_caches_background() -> None:
-        try:
-            await asyncio.to_thread(warm_environment_ranges_cache, force=True)
-        except Exception:
-            logger.exception("Background warm_environment_ranges_cache failed")
-        try:
-            await asyncio.to_thread(warm_map_points_cache)
-        except Exception:
-            logger.exception("Background warm_map_points_cache failed")
-
-    asyncio.create_task(_warm_caches_background())
 
 @app.exception_handler(HTTPException)
 async def http_exception_handler(_: Request, exc: HTTPException):
@@ -63,9 +39,8 @@ async def validation_exception_handler(_: Request, __: RequestValidationError):
     )
 
 @app.exception_handler(SQLAlchemyError)
-async def sqlalchemy_exception_handler(_: Request, exc: SQLAlchemyError):
+async def sqlalchemy_exception_handler(_: Request, __: SQLAlchemyError):
     """Return a 503 response when database operations fail."""
-    logger.exception("Database error handled as 503: %s", exc)
     return JSONResponse(
         status_code=503,
         content={

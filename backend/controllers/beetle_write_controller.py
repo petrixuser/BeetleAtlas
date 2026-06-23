@@ -4,7 +4,6 @@ from backend.contracts.beetle_write_contracts import (
     BeetleRecordResponse,
     BeetleUpdateRequest,
 )
-from backend.config.error_codes import ERR
 from backend.controllers.core_controller import raise_api_error
 from backend.repositories.beetle_write_repository import (
     fetch_beetle_record_by_gbif_id,
@@ -61,40 +60,16 @@ def _to_response(row: dict) -> BeetleRecordResponse:
     )
 
 
-def _validate_gbif_assignment_or_error(
-    *,
-    gbif_id: int | None,
-    current_user: AuthUserResponse,
-    current_record_id: int | None = None,
-) -> None:
-    """Validate role and uniqueness constraints for assigning gbif_id."""
-    if gbif_id is None:
-        return
-
-    if current_user.role == "researcher":
-        raise_api_error(
-            403,
-            ERR.COMMON.FORBIDDEN,
-            "Researchers are not allowed to set gbif_id.",
-        )
-
-    existing_by_gbif = fetch_beetle_record_by_gbif_id(int(gbif_id))
-    if existing_by_gbif is None:
-        return
-
-    if current_record_id is not None and int(existing_by_gbif["record_id"]) == int(current_record_id):
-        return
-
-    raise_api_error(409, ERR.BEETLE_WRITE.GBIF_ID_EXISTS, "A beetle record with this GBIF ID already exists.")
-
-
 def create_beetle_record_controller(payload: BeetleCreateRequest, current_user: AuthUserResponse) -> BeetleRecordResponse:
     """Create one manual beetle record for researcher/admin."""
-    _validate_gbif_assignment_or_error(gbif_id=payload.gbif_id, current_user=current_user)
+    if payload.gbif_id is not None:
+        existing_by_gbif = fetch_beetle_record_by_gbif_id(int(payload.gbif_id))
+        if existing_by_gbif is not None:
+            raise_api_error(409, "gbif_id_exists", "A beetle record with this GBIF ID already exists.")
 
     row = insert_beetle_record(payload.model_dump(), created_by=current_user.id)
     if row is None:
-        raise_api_error(500, ERR.BEETLE_WRITE.CREATE_FAILED, "Could not create beetle record.")
+        raise_api_error(500, "create_failed", "Could not create beetle record.")
 
     insert_beetle_record_audit(
         record_id=int(row["record_id"]),
@@ -115,22 +90,21 @@ def update_beetle_record_controller(
     """Patch one active beetle record as admin or as its creator."""
     existing = fetch_beetle_record_by_id(record_id)
     if existing is None or existing.get("status") == "deleted":
-        raise_api_error(404, ERR.COMMON.NOT_FOUND, "Beetle record not found.")
+        raise_api_error(404, "not_found", "Beetle record not found.")
 
     created_by = int(existing.get("created_by") or 0)
     if current_user.role != "admin" and current_user.id != created_by:
-        raise_api_error(403, ERR.COMMON.FORBIDDEN, "Insufficient permissions.")
+        raise_api_error(403, "forbidden", "Insufficient permissions.")
 
     patch_payload = payload.model_dump(exclude_unset=True)
-    _validate_gbif_assignment_or_error(
-        gbif_id=patch_payload.get("gbif_id"),
-        current_user=current_user,
-        current_record_id=record_id,
-    )
+    if patch_payload.get("gbif_id") is not None:
+        existing_by_gbif = fetch_beetle_record_by_gbif_id(int(patch_payload["gbif_id"]))
+        if existing_by_gbif is not None and int(existing_by_gbif["record_id"]) != int(record_id):
+            raise_api_error(409, "gbif_id_exists", "A beetle record with this GBIF ID already exists.")
 
     updated = update_beetle_record(record_id, patch_payload, updated_by=current_user.id)
     if updated is None:
-        raise_api_error(404, ERR.COMMON.NOT_FOUND, "Beetle record not found.")
+        raise_api_error(404, "not_found", "Beetle record not found.")
 
     insert_beetle_record_audit(
         record_id=record_id,
@@ -147,11 +121,11 @@ def delete_beetle_record_controller(record_id: int, current_user: AuthUserRespon
     """Soft delete one active beetle record (admin only at router level)."""
     existing = fetch_beetle_record_by_id(record_id)
     if existing is None or existing.get("status") == "deleted":
-        raise_api_error(404, ERR.COMMON.NOT_FOUND, "Beetle record not found.")
+        raise_api_error(404, "not_found", "Beetle record not found.")
 
     deleted = soft_delete_beetle_record(record_id, deleted_by=current_user.id)
     if deleted is None:
-        raise_api_error(404, ERR.COMMON.NOT_FOUND, "Beetle record not found.")
+        raise_api_error(404, "not_found", "Beetle record not found.")
 
     insert_beetle_record_audit(
         record_id=record_id,
