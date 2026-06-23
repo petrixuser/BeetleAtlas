@@ -1,4 +1,7 @@
 # Lokale Konfiguration — enthaelt API-Keys, darf nie ins Repository
+frontend/config/config.local.js
+# Alter Pfad (vor der Frontend-Umstrukturierung) — weiter ignorieren, damit eine
+# zurueckgebliebene Datei mit echtem API-Key nicht versehentlich committet wird.
 frontend/config.local.js
 
 # Claude Code memory — nur lokal
@@ -18,6 +21,15 @@ node_modules/
 # Python
 __pycache__/
 *.pyc
+.venv/
+.venv-wsl/
+.wsl-ee-venv/
+
+# Lokale Shell-/CLI-Artefakte
+*; done
+no-http; done
+8000
+exit; done
 
 # Build-Output
 dist/
@@ -26,3 +38,6 @@ build/
 # Umgebungsvariablen
 .env
 .env.*
+
+# GBIF Arbeitsordner lokal halten
+GBIFdataandCSVSctipts/

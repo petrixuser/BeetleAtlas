@@ -1,6 +1,14 @@
 
 VEGETATION_CASE_SQL = """
 CASE
+    -- Prefer map-area biome classification so DB output matches the vegetation map.
+    WHEN b.biome_id IN (1, 2, 3, 4, 5, 6) THEN 'tree_cover'
+    WHEN b.biome_id IN (7, 8, 10) THEN 'grassland'
+    WHEN b.biome_id = 9 THEN 'wetland'
+    WHEN b.biome_id = 11 THEN 'moss_lichen'
+    WHEN b.biome_id = 12 THEN 'shrubland'
+    WHEN b.biome_id = 13 THEN 'bare_sparse'
+    WHEN b.biome_id = 14 THEN 'mangroves'
     WHEN b.landcover_class = 10 THEN 'tree_cover'
     WHEN b.landcover_class = 20 THEN 'shrubland'
     WHEN b.landcover_class = 30 THEN 'grassland'
@@ -54,11 +62,14 @@ END
 
 ELEVATION_GROUP_CASE_SQL = """
 CASE
-    WHEN b.elevation IS NULL THEN 'low'
-    WHEN b.elevation < 500 THEN 'low'
-    WHEN b.elevation < 1500 THEN 'mid'
-    WHEN b.elevation < 3000 THEN 'high'
-    ELSE 'veryHigh'
+    WHEN b.elevation IS NULL THEN '0_100'
+    WHEN b.elevation < 100 THEN '0_100'
+    WHEN b.elevation < 500 THEN '100_500'
+    WHEN b.elevation < 1000 THEN '500_1000'
+    WHEN b.elevation < 2000 THEN '1000_2000'
+    WHEN b.elevation < 3000 THEN '2000_3000'
+    WHEN b.elevation < 4500 THEN '3000_4500'
+    ELSE '4500_plus'
 END
 """
 
@@ -223,7 +234,22 @@ CASE
 END
 """
 
-CLIMATE_CASE_SQL = WORLCLIM_TEMP_BAND_CASE_SQL
+CLIMATE_CASE_SQL = """
+CASE
+    WHEN (b.temperature_value IS NULL OR b.temperature_value = -9999)
+         AND (b.precipitation_value IS NULL OR b.precipitation_value = -9999) THEN 'unknown'
+    -- E: Polar climates
+    WHEN b.temperature_value IS NOT NULL AND b.temperature_value <> -9999 AND b.temperature_value < 0 THEN 'E'
+    -- B: Arid climates (Koppen major group)
+    WHEN b.precipitation_value IS NOT NULL AND b.precipitation_value <> -9999 AND b.precipitation_value < 500 THEN 'B'
+    -- A: Tropical climates
+    WHEN b.temperature_value IS NOT NULL AND b.temperature_value <> -9999 AND b.temperature_value >= 18 THEN 'A'
+    -- D: Continental/cold climates
+    WHEN b.temperature_value IS NOT NULL AND b.temperature_value <> -9999 AND b.temperature_value < 10 THEN 'D'
+    -- C: Temperate climates
+    ELSE 'C'
+END
+"""
 
 PRECIPITATION_BAND_CASE_SQL = """
 CASE

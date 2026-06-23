@@ -39,5 +39,8 @@ PY
 
 wait_for_db
 
+echo "Running DB migrations..."
+python -m backend.sql.run_migrations
+
 echo "Starting API ${APP_MODULE} on ${API_HOST}:${API_PORT}"
 exec uvicorn "$APP_MODULE" --host "$API_HOST" --port "$API_PORT"

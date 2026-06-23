@@ -14,8 +14,10 @@
 #   GMAPS_KEY             Google Maps JS API key (already used by the live frontend)
 #   API_BASE_URL          public URL of the backend, e.g. https://api.kafer.server-work.de
 #   FRONTEND_ORIGINS      public origin of the frontend, e.g. https://kafer.server-work.de
-#   DB_PASSWORD           optional; defaults to root123 (DB is internal-only, see WORKLOG)
-#   JWT_SECRET            REQUIRED for real auth — set a long random secret (NOT "change-me")
+#   DB_ROOT_PASSWORD      REQUIRED strong DB root password for internal MySQL
+#   DB_APP_USER           REQUIRED dedicated DB username for backend app access
+#   DB_APP_PASSWORD       REQUIRED strong DB password for backend app access
+#   JWT_SECRET            REQUIRED long random secret for signing JWTs
 #   ADMIN_BOOTSTRAP_TOKEN shared secret to create the first admin via the bootstrap endpoint
 #   RESEARCHER_SIGNUP_CODE code researchers must enter to register (else nobody can sign up)
 #   ALLOW_ADMIN_BOOTSTRAP  "true" to enable the one-time admin bootstrap endpoint (default true)
@@ -38,8 +40,10 @@ services:
     restart: unless-stopped
     command: ["--default-authentication-plugin=mysql_native_password"]
     environment:
-      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD:-root123}
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
       - MYSQL_DATABASE=${DB_NAME:-beetle_db}
+      - MYSQL_USER=${DB_APP_USER:-beetle_app}
+      - MYSQL_PASSWORD=${DB_APP_PASSWORD}
     volumes:
       # Persistent MySQL data on the NAS host (Paul: /volume1/docker/beetlejuice).
       # Living on a real host path makes it trivial to include in the NAS backups.
@@ -49,7 +53,7 @@ services:
     networks:
       - beetle_internal
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-p${DB_PASSWORD:-root123}"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-u${DB_APP_USER:-beetle_app}", "-p${DB_APP_PASSWORD}"]
       interval: 10s
       timeout: 5s
       retries: 30
@@ -61,8 +65,8 @@ services:
     environment:
       - DB_HOST=beetle-db
       - DB_PORT=3306
-      - DB_USER=${DB_USER:-root}
-      - DB_PASSWORD=${DB_PASSWORD:-root123}
+      - DB_USER=${DB_APP_USER:-beetle_app}
+      - DB_PASSWORD=${DB_APP_PASSWORD}
       - DB_NAME=${DB_NAME:-beetle_db}
       - API_HOST=0.0.0.0
       - API_PORT=8000
@@ -74,7 +78,7 @@ services:
       # Auth: set real values in Portainer. JWT_SECRET MUST NOT stay "change-me"
       # in production. ADMIN_BOOTSTRAP_TOKEN + ALLOW_ADMIN_BOOTSTRAP let Basti
       # create the first admin via the bootstrap endpoint after deploy.
-      - JWT_SECRET=${JWT_SECRET:-change-me}
+      - JWT_SECRET=${JWT_SECRET}
       - ADMIN_BOOTSTRAP_TOKEN=${ADMIN_BOOTSTRAP_TOKEN}
       - ALLOW_ADMIN_BOOTSTRAP=${ALLOW_ADMIN_BOOTSTRAP:-true}
       # CORS: the browser loads the site from the frontend origin and calls the
