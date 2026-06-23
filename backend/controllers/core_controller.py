@@ -4,6 +4,7 @@ from datetime import datetime, timezone
 import json
 
 from fastapi import HTTPException
+from backend.config.error_codes import ERR
 
 from backend.repositories.core_repository import (
     fetch_climate_by_location,
@@ -27,7 +28,7 @@ def validate_pagination_or_error(limit: int, offset: int, max_offset: int = 2000
     Checks only that offset does not exceed max_offset.
     """
     if offset > max_offset:
-        raise_api_error(400, "invalid_pagination", f"offset must be <= {max_offset}")
+        raise_api_error(400, ERR.CORE.INVALID_PAGINATION, f"offset must be <= {max_offset}")
 
 def resolve_order_clause_or_error(sort_by: str, sort_dir: str, allowed_columns: Dict[str, str]) -> str:
     """Build a safe ORDER BY clause from an allowlist of sortable columns.
@@ -36,7 +37,7 @@ def resolve_order_clause_or_error(sort_by: str, sort_dir: str, allowed_columns: 
     """
     column = allowed_columns.get(sort_by)
     if column is None:
-        raise_api_error(400, "invalid_sort", f"sort_by must be one of: {', '.join(allowed_columns.keys())}")
+        raise_api_error(400, ERR.CORE.INVALID_SORT, f"sort_by must be one of: {', '.join(allowed_columns.keys())}")
 
     direction = "ASC" if sort_dir == "asc" else "DESC"
     return f"{column} {direction}"
@@ -45,15 +46,15 @@ def parse_bbox_or_error(bbox: str) -> Dict[str, float]:
     """Parses a bounding box string in the format "minLng,minLat,maxLng,maxLat" and returns a dictionary with the corresponding float values. Raises an API error if the input is invalid."""
     parts = [p.strip() for p in bbox.split(",")]
     if len(parts) != 4:
-        raise_api_error(400, "invalid_bbox", "bbox must be minLng,minLat,maxLng,maxLat")
+        raise_api_error(400, ERR.CORE.INVALID_BBOX, "bbox must be minLng,minLat,maxLng,maxLat")
 
     try:
         min_lng, min_lat, max_lng, max_lat = [float(p) for p in parts]
     except ValueError:
-        raise_api_error(400, "invalid_bbox", "bbox must contain numeric values")
+        raise_api_error(400, ERR.CORE.INVALID_BBOX, "bbox must contain numeric values")
 
     if min_lng >= max_lng or min_lat >= max_lat:
-        raise_api_error(400, "invalid_bbox", "bbox min values must be smaller than max values")
+        raise_api_error(400, ERR.CORE.INVALID_BBOX, "bbox min values must be smaller than max values")
 
     return {
         "min_lng": min_lng,
@@ -249,9 +250,9 @@ def compare_quality_report_history_controller(from_id: int, to_id: int):
     to_row = fetch_quality_report_history_row(to_id)
 
     if from_row is None:
-        raise_api_error(404, "not_found", f"Quality snapshot with id {from_id} was not found")
+        raise_api_error(404, ERR.COMMON.NOT_FOUND, f"Quality snapshot with id {from_id} was not found")
     if to_row is None:
-        raise_api_error(404, "not_found", f"Quality snapshot with id {to_id} was not found")
+        raise_api_error(404, ERR.COMMON.NOT_FOUND, f"Quality snapshot with id {to_id} was not found")
 
     from_payload = _history_row_to_payload(from_row)
     to_payload = _history_row_to_payload(to_row)

@@ -58,7 +58,7 @@ def _register_and_login_researcher() -> str:
     password = "StrongPassw0rd!"
     test_headers = {"X-Forwarded-For": f"198.51.100.{int(uuid.uuid4().hex[:2], 16) or 1}"}
 
-    status_reg, _ = _request_json(
+    status_reg, register_payload = _request_json(
         "/auth/register",
         method="POST",
         data={
@@ -70,6 +70,14 @@ def _register_and_login_researcher() -> str:
         extra_headers=test_headers,
     )
     assert status_reg == 200
+
+    status_verify, _ = _request_json(
+        "/auth/verify-email",
+        method="POST",
+        data={"verification_token": register_payload["verification_token"]},
+        extra_headers=test_headers,
+    )
+    assert status_verify == 200
 
     status_login, login_payload = _request_json(
         "/auth/login",
@@ -87,13 +95,21 @@ def _register_and_login_viewer() -> str:
     password = "StrongPassw0rd!"
     test_headers = {"X-Forwarded-For": f"203.0.113.{int(uuid.uuid4().hex[:2], 16) or 1}"}
 
-    status_reg, _ = _request_json(
+    status_reg, register_payload = _request_json(
         "/auth/register",
         method="POST",
         data={"email": email, "password": password, "role": "viewer"},
         extra_headers=test_headers,
     )
     assert status_reg == 200
+
+    status_verify, _ = _request_json(
+        "/auth/verify-email",
+        method="POST",
+        data={"verification_token": register_payload["verification_token"]},
+        extra_headers=test_headers,
+    )
+    assert status_verify == 200
 
     status_login, login_payload = _request_json(
         "/auth/login",
@@ -156,6 +172,77 @@ def test_researcher_can_create_beetle_record_contract():
     assert record_id > 0
 
 
+def test_researcher_created_record_has_public_rec_detail_contract():
+    researcher_token = _register_and_login_researcher()
+    record_id = _create_record(researcher_token)
+
+    status, payload = _request_json(f"/api/beetles/rec-{record_id}")
+    assert status == 200
+    assert payload["id"] == f"rec-{record_id}"
+    assert payload["name"] == "Testus contractus"
+
+
+def test_researcher_created_record_has_rec_media_contract():
+    researcher_token = _register_and_login_researcher()
+
+    status_create, created = _request_json(
+        "/api/beetles",
+        method="POST",
+        token=researcher_token,
+        data={
+            "scientific_name": "Rec media contractus",
+            "family": "Contractidae",
+            "image_url": "https://example.org/beetle.jpg",
+            "media_license": "CC-BY-4.0",
+            "media_creator": "Contract Tester",
+            "media_publisher": "QA",
+            "media_rights_holder": "QA Team",
+            "media_references": "https://example.org/reference",
+        },
+    )
+    assert status_create == 200
+    record_id = int(created["id"])
+
+    status_media, media_payload = _request_json(f"/api/beetles/rec-{record_id}/media?limit=5&offset=0")
+    assert status_media == 200
+    assert media_payload["id"] == f"rec-{record_id}"
+    assert media_payload["total"] == 1
+    assert len(media_payload["items"]) == 1
+
+    first = media_payload["items"][0]
+    assert first["mediaId"] == f"manual-{record_id}"
+    assert first["url"] == "https://example.org/beetle.jpg"
+    assert first["license"] == "CC-BY-4.0"
+    assert first["creator"] == "Contract Tester"
+    assert first["publisher"] == "QA"
+    assert first["rightsHolder"] == "QA Team"
+    assert first["references"] == "https://example.org/reference"
+
+
+def test_researcher_cannot_set_gbif_id_on_create_contract():
+    researcher_token = _register_and_login_researcher()
+
+    try:
+        _request_json(
+            "/api/beetles",
+            method="POST",
+            token=researcher_token,
+            data={
+                "gbif_id": 987654321,
+                "scientific_name": "GBIF blocked create",
+                "family": "Contractidae",
+            },
+        )
+        pytest.fail("Expected 403 when researcher sets gbif_id on create")
+    except HTTPError as exc:
+        assert exc.code == 403
+        payload = json.loads(exc.read().decode("utf-8"))
+        assert payload == {
+            "error": "forbidden",
+            "message": "Researchers are not allowed to set gbif_id.",
+        }
+
+
 def test_researcher_can_update_own_beetle_record_contract():
     researcher_token = _register_and_login_researcher()
     record_id = _create_record(researcher_token)
@@ -169,6 +256,27 @@ def test_researcher_can_update_own_beetle_record_contract():
     assert status_patch == 200
     assert patched["id"] == record_id
     assert patched["notes"] == "patched by creator"
+
+
+def test_researcher_cannot_set_gbif_id_on_update_contract():
+    researcher_token = _register_and_login_researcher()
+    record_id = _create_record(researcher_token)
+
+    try:
+        _request_json(
+            f"/api/beetles/{record_id}",
+            method="PATCH",
+            token=researcher_token,
+            data={"gbif_id": 123456789},
+        )
+        pytest.fail("Expected 403 when researcher sets gbif_id on update")
+    except HTTPError as exc:
+        assert exc.code == 403
+        payload = json.loads(exc.read().decode("utf-8"))
+        assert payload == {
+            "error": "forbidden",
+            "message": "Researchers are not allowed to set gbif_id.",
+        }
 
 
 def test_researcher_cannot_update_foreign_beetle_record_contract():
