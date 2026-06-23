@@ -8,7 +8,7 @@ from backend.tests.openapi_examples import (
     MAP_POINTS_EXAMPLE,
     MAP_POINTS_GEOJSON_EXAMPLE,
 )
-from backend.routers.query_params import map_query_params
+from backend.config.query_params import map_query_params
 
 
 router = APIRouter()

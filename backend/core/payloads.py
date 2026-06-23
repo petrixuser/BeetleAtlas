@@ -1,9 +1,34 @@
 from typing import Any, Dict
 
+
+def to_beetle_payload_compact(row: Dict[str, Any]) -> Dict[str, Any]:
+    """Transform row into a compact list payload for fast index rendering."""
+    gbif_id = row.get("gbif_id")
+    payload_id = row.get("entity_id") or (f"occ-{gbif_id}" if gbif_id is not None else None)
+    return {
+        "id": payload_id,
+        "name": row.get("name") or "Unbekannt",
+        "family": row.get("family") or "Unbekannt",
+        "location": row.get("location") or "Unbekannt",
+        "coordinates": [
+            float(row["lng"]) if row.get("lng") is not None else None,
+            float(row["lat"]) if row.get("lat") is not None else None,
+        ],
+        "climate": row.get("climate") or "unknown",
+        "vegetation": row.get("vegetation") or "unknown",
+        "elevation": int(round(row["elevation"])) if row.get("elevation") is not None else 0,
+        "temperature": float(row["temperature"]) if row.get("temperature") is not None else None,
+        "soil": row.get("soil") or "unknown",
+        "observedAt": row.get("observedAt"),
+        "imageUrl": row.get("image_url_sample"),
+    }
+
 def to_beetle_payload(row: Dict[str, Any]) -> Dict[str, Any]:
     """Transform a denormalized DB row into the beetle API response payload."""
+    gbif_id = row.get("gbif_id")
+    payload_id = row.get("entity_id") or (f"occ-{gbif_id}" if gbif_id is not None else None)
     return {
-        "id": f"occ-{row['gbif_id']}",
+        "id": payload_id,
         "name": row.get("name") or "Unbekannt",
         "family": row.get("family") or "Unbekannt",
         "location": row.get("location") or "Unbekannt",

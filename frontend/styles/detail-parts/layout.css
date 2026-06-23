@@ -1,0 +1,245 @@
+﻿/* ============================================================
+   Beetle-Detailseite
+   ============================================================ */
+
+/* ============================================================
+  Seitenrahmen und Top-Bereich
+  ============================================================ */
+
+.detail-page {
+  width: min(1200px, calc(100% - 2rem));
+}
+
+.detail-top {
+  margin-bottom: 1rem;
+}
+
+.detail-sticky {
+  position: sticky;
+  top: 0.5rem;
+  z-index: 1400;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+  padding: 0.65rem 0.9rem;
+  color: #f4f8f4;
+  background: rgba(24, 42, 30, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  backdrop-filter: blur(4px);
+}
+
+.detail-sticky strong {
+  display: block;
+  font-size: 0.95rem;
+}
+
+.detail-sticky span {
+  color: rgba(244, 248, 244, 0.9);
+  font-size: 0.82rem;
+}
+
+.detail-sticky-metrics {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.7rem;
+}
+
+.detail-back {
+  display: inline-block;
+  margin-bottom: 0.4rem;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.detail-back:hover {
+  text-decoration: underline;
+}
+
+.detail-kicker {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   Hauptlayout: Split, Panels, EE-Bereich
+   ============================================================ */
+
+.detail-layout {
+  display: grid;
+  gap: 1rem;
+}
+
+.detail-split {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 1rem;
+}
+
+.detail-ee-layout {
+  padding: 1.05rem 1.05rem 1.15rem;
+}
+
+.detail-ee-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  align-items: start;
+}
+
+.detail-ee-main,
+.detail-ee-side {
+  min-width: 0;
+}
+
+.detail-ee-main h2,
+.detail-ee-side h2 {
+  margin-bottom: 0.8rem;
+}
+
+.detail-subheading {
+  margin: 1rem 0 0.8rem;
+  font-size: 1.02rem;
+}
+
+.detail-ee-side {
+  padding-left: 0;
+  border-left: none;
+}
+
+.detail-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.detail-subtitle,
+.detail-muted {
+  color: var(--muted);
+}
+
+/* ============================================================
+   Hero-Bereich und Key-Value-Listen
+   ============================================================ */
+
+.detail-hero {
+  display: grid;
+  grid-template-columns: minmax(240px, 420px) 1fr;
+  gap: 1rem;
+}
+
+.detail-hero-image {
+  margin: 0;
+  min-height: 240px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #111813;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.detail-hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.detail-kv {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: 0.55rem 1.2rem;
+  margin: 0;
+}
+
+.detail-kv dt {
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.detail-kv dd {
+  margin: 0;
+  color: var(--muted);
+  word-break: break-word;
+}
+
+/* ============================================================
+   Mediengalerie
+   ============================================================ */
+
+.detail-media-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 0.8rem;
+}
+
+.detail-media-card {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.detail-media-card img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+}
+
+.detail-media-caption {
+  padding: 0.6rem 0.65rem;
+  border-top: 1px solid var(--border);
+}
+
+.detail-media-caption p {
+  margin: 0 0 0.25rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.detail-media-caption p:last-child {
+  margin-bottom: 0;
+}
+
+/* ============================================================
+   Kartenbereich auf der Detailseite
+   ============================================================ */
+
+.detail-map-wrap {
+  position: relative;
+  z-index: 1;
+  border: 2px solid #6f8f7b;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #eef2ee;
+  box-shadow: 0 0 0 2px rgba(47, 107, 71, 0.12), 0 10px 24px rgba(31, 42, 36, 0.14);
+}
+
+.detail-map-frame {
+  width: 100%;
+  height: 520px;
+  border: 0;
+  display: block;
+  background: #dfe8df;
+}
+
+.leaflet-control-layers-toggle {
+  background-image: url("../vendor/leaflet/images/layers.png");
+}
+
+#detailMapWrap + p {
+  margin-top: 0.9rem;
+}
+

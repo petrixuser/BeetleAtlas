@@ -7,6 +7,7 @@ from backend.config.map_repository_sql import (
     MAX_CLUSTERS,
     map_clusters_sql,
     map_points_sql,
+    map_points_total_sql,
 )
 from backend.core.db import get_connection
 
@@ -152,20 +153,25 @@ def fetch_map_points_lean(
     base_where_sql: str,
     where_sql: str,
     limit: int,
+    offset: int,
     params: Dict[str, Any],
-) -> List[Dict[str, Any]]:
+) -> tuple[List[Dict[str, Any]], int]:
     """This function executes a SQL query to fetch individual map points based on the provided base WHERE clause, additional WHERE clause, limit, and query parameters."""
     sql = text(map_points_sql(base_where_sql, where_sql))
+    total_sql = text(map_points_total_sql(base_where_sql, where_sql))
 
     exec_params = dict(params)
     exec_params["limit"] = limit
+    exec_params["offset"] = offset
 
     with get_connection() as conn:
+        total_row = conn.execute(total_sql, params).mappings().first()
+        total = int(total_row["total"]) if total_row and total_row.get("total") is not None else 0
         rows = conn.execute(sql, exec_params).mappings().all()
 
-    return [
+    points = [
         {
-            "id": f"occ-{row['gbif_id']}",
+            "id": row.get("entity_id") or (f"occ-{row['gbif_id']}" if row.get("gbif_id") is not None else None),
             "speciesName": row["speciesName"],
             "lat": float(row["lat"]) if row["lat"] is not None else None,
             "lng": float(row["lng"]) if row["lng"] is not None else None,
@@ -177,3 +183,4 @@ def fetch_map_points_lean(
         }
         for row in rows
     ]
+    return points, total
