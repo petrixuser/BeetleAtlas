@@ -1277,3 +1277,268 @@ GROUP BY observed_year;
 
 -- END backend/sql/ops/MigrateBeetleListReadModelRetrofitBundle.sql
 
+
+
+-- ============================================================================
+-- Incremental single-record refresh of the precomputed read-models.
+-- Added so manually created/edited beetles appear on the map and the compact
+-- list IMMEDIATELY, without the multi-minute full TRUNCATE+rebuild. Reuses the
+-- exact transform logic of refresh_map_point_read and the beetle_list_read
+-- build, scoped to a single record. The write repository calls this after each
+-- create/update/soft-delete. On soft-delete (status<>'active') the DELETEs run
+-- and the INSERTs match nothing, so the record drops out of both read-models.
+-- ============================================================================
+DROP PROCEDURE IF EXISTS refresh_read_models_for_record;
+DELIMITER $$
+CREATE PROCEDURE refresh_read_models_for_record(IN pRecordId BIGINT)
+BEGIN
+  DECLARE vEntity VARCHAR(64);
+  SET vEntity = CONCAT('rec-', pRecordId);
+
+  -- map_point_read: replace this record's point (manual-source branch, scoped)
+  DELETE FROM map_point_read WHERE entity_id = vEntity;
+  INSERT INTO map_point_read (
+    entity_id,
+    source_type,
+    record_id,
+    gbif_id,
+    observed_at,
+    species_name,
+    family,
+    location,
+    country,
+    lat,
+    lng,
+    elevation,
+    climate,
+    vegetation,
+    elevation_group,
+    refreshed_at
+  )
+  SELECT
+    CONCAT('rec-', br.record_id) AS entity_id,
+    'manual' AS source_type,
+    br.record_id,
+    br.gbif_id,
+    br.event_date AS observed_at,
+    br.scientific_name AS species_name,
+    br.family,
+    COALESCE(
+      NULLIF(TRIM(br.location), ''),
+      NULLIF(TRIM(br.verbatim_locality), ''),
+      NULLIF(TRIM(CONCAT_WS(', ', br.city, br.region, br.country)), ''),
+      NULLIF(TRIM(CONCAT_WS(', ', br.region, br.country)), ''),
+      NULLIF(TRIM(br.country), ''),
+      'Unbekannt'
+    ) AS location,
+    br.country,
+    CAST(br.latitude AS DECIMAL(9,6)) AS lat,
+    CAST(br.longitude AS DECIMAL(9,6)) AS lng,
+    br.elevation,
+    CASE
+      WHEN COALESCE(br.temperature, br.worldclim_bio01) IS NULL
+      AND COALESCE(br.precipitation, br.worldclim_bio12) IS NULL THEN 'unknown'
+      WHEN COALESCE(br.temperature, br.worldclim_bio01) < 0 THEN 'E'
+      WHEN COALESCE(br.precipitation, br.worldclim_bio12) IS NOT NULL
+           AND COALESCE(br.precipitation, br.worldclim_bio12) < 500 THEN 'B'
+      WHEN COALESCE(br.temperature, br.worldclim_bio01) >= 18 THEN 'A'
+      WHEN COALESCE(br.temperature, br.worldclim_bio01) < 10 THEN 'D'
+      ELSE 'C'
+    END AS climate,
+    CASE
+      WHEN br.biome_id IN (1, 2, 3, 4, 5, 6) THEN 'tree_cover'
+      WHEN br.biome_id IN (7, 8, 10) THEN 'grassland'
+      WHEN br.biome_id = 9 THEN 'wetland'
+      WHEN br.biome_id = 11 THEN 'moss_lichen'
+      WHEN br.biome_id = 12 THEN 'shrubland'
+      WHEN br.biome_id = 13 THEN 'bare_sparse'
+      WHEN br.biome_id = 14 THEN 'mangroves'
+      WHEN br.landcover_class = 10 THEN 'tree_cover'
+      WHEN br.landcover_class = 20 THEN 'shrubland'
+      WHEN br.landcover_class = 30 THEN 'grassland'
+      WHEN br.landcover_class = 40 THEN 'cropland'
+      WHEN br.landcover_class = 50 THEN 'built_up'
+      WHEN br.landcover_class = 60 THEN 'bare_sparse'
+      WHEN br.landcover_class = 70 THEN 'snow_ice'
+      WHEN br.landcover_class = 80 THEN 'water'
+      WHEN br.landcover_class = 90 THEN 'wetland'
+      WHEN br.landcover_class = 95 THEN 'mangroves'
+      WHEN br.landcover_class = 100 THEN 'moss_lichen'
+      ELSE 'unknown'
+    END AS vegetation,
+    CASE
+      WHEN br.elevation IS NULL THEN '0_100'
+      WHEN br.elevation < 100 THEN '0_100'
+      WHEN br.elevation < 500 THEN '100_500'
+      WHEN br.elevation < 1000 THEN '500_1000'
+      WHEN br.elevation < 2000 THEN '1000_2000'
+      WHEN br.elevation < 3000 THEN '2000_3000'
+      WHEN br.elevation < 4500 THEN '3000_4500'
+      ELSE '4500_plus'
+    END AS elevation_group,
+    NOW() AS refreshed_at
+  FROM beetle_record br
+  WHERE br.record_id = pRecordId
+    AND br.status = 'active'
+    AND br.latitude IS NOT NULL
+    AND br.longitude IS NOT NULL;
+
+  -- beetle_list_read: replace this record's compact row (sourced from map_point_read, scoped)
+  DELETE FROM beetle_list_read WHERE entity_id = vEntity;
+INSERT INTO beetle_list_read (
+  entity_id,
+  gbif_id,
+  observed_at,
+  observed_year,
+  name,
+  family,
+  country,
+  location,
+  climate,
+  vegetation,
+  elevation,
+  elevation_group,
+  lat,
+  lng,
+  has_image,
+  soil_ph_band,
+  temperature_band,
+  precipitation_band,
+  event_date_quality,
+  refreshed_at
+)
+SELECT
+  m.entity_id,
+  m.gbif_id,
+  m.observed_at,
+  CASE
+    WHEN m.observed_at IS NULL THEN NULL
+    WHEN CHAR_LENGTH(m.observed_at) >= 4 THEN CAST(SUBSTRING(m.observed_at, 1, 4) AS UNSIGNED)
+    ELSE NULL
+  END AS observed_year,
+  m.species_name,
+  m.family,
+  m.country,
+  m.location,
+  m.climate,
+  m.vegetation,
+  m.elevation,
+  m.elevation_group,
+  m.lat,
+  m.lng,
+  CASE
+    WHEN EXISTS (
+      SELECT 1
+      FROM media md
+      WHERE md.gbif_id = m.gbif_id
+        AND md.image_url IS NOT NULL
+        AND TRIM(md.image_url) <> ''
+    ) THEN 1
+    ELSE 0
+  END AS has_image,
+  CASE
+    WHEN COALESCE(
+      br.soil_ph,
+      CASE
+        WHEN l.soil_ph IS NULL OR l.soil_ph = -9999 THEN NULL
+        WHEN l.soil_ph > 14 THEN l.soil_ph / 10
+        ELSE l.soil_ph
+      END
+    ) IS NULL THEN 'unknown'
+    WHEN COALESCE(
+      br.soil_ph,
+      CASE
+        WHEN l.soil_ph IS NULL OR l.soil_ph = -9999 THEN NULL
+        WHEN l.soil_ph > 14 THEN l.soil_ph / 10
+        ELSE l.soil_ph
+      END
+    ) < 5.5 THEN 'strongly_acidic'
+    WHEN COALESCE(
+      br.soil_ph,
+      CASE
+        WHEN l.soil_ph IS NULL OR l.soil_ph = -9999 THEN NULL
+        WHEN l.soil_ph > 14 THEN l.soil_ph / 10
+        ELSE l.soil_ph
+      END
+    ) < 6.5 THEN 'acidic'
+    WHEN COALESCE(
+      br.soil_ph,
+      CASE
+        WHEN l.soil_ph IS NULL OR l.soil_ph = -9999 THEN NULL
+        WHEN l.soil_ph > 14 THEN l.soil_ph / 10
+        ELSE l.soil_ph
+      END
+    ) <= 7.5 THEN 'neutral'
+    WHEN COALESCE(
+      br.soil_ph,
+      CASE
+        WHEN l.soil_ph IS NULL OR l.soil_ph = -9999 THEN NULL
+        WHEN l.soil_ph > 14 THEN l.soil_ph / 10
+        ELSE l.soil_ph
+      END
+    ) <= 8.5 THEN 'alkaline'
+    ELSE 'strongly_alkaline'
+  END AS soil_ph_band,
+  CASE
+    WHEN COALESCE(
+      br.temperature,
+      CASE
+        WHEN l.worldclim_bio01 IS NULL OR l.worldclim_bio01 = -9999 THEN NULL
+        WHEN l.worldclim_bio01 > 80 THEN l.worldclim_bio01 / 10
+        ELSE l.worldclim_bio01
+      END
+    ) IS NULL THEN 'unknown'
+    WHEN COALESCE(
+      br.temperature,
+      CASE
+        WHEN l.worldclim_bio01 IS NULL OR l.worldclim_bio01 = -9999 THEN NULL
+        WHEN l.worldclim_bio01 > 80 THEN l.worldclim_bio01 / 10
+        ELSE l.worldclim_bio01
+      END
+    ) < 5 THEN 'cold'
+    WHEN COALESCE(
+      br.temperature,
+      CASE
+        WHEN l.worldclim_bio01 IS NULL OR l.worldclim_bio01 = -9999 THEN NULL
+        WHEN l.worldclim_bio01 > 80 THEN l.worldclim_bio01 / 10
+        ELSE l.worldclim_bio01
+      END
+    ) < 15 THEN 'mild'
+    WHEN COALESCE(
+      br.temperature,
+      CASE
+        WHEN l.worldclim_bio01 IS NULL OR l.worldclim_bio01 = -9999 THEN NULL
+        WHEN l.worldclim_bio01 > 80 THEN l.worldclim_bio01 / 10
+        ELSE l.worldclim_bio01
+      END
+    ) < 25 THEN 'warm'
+    ELSE 'hot'
+  END AS temperature_band,
+  CASE
+    WHEN COALESCE(br.precipitation, l.worldclim_bio12) IS NULL THEN 'unknown'
+    WHEN COALESCE(br.precipitation, l.worldclim_bio12) < 250 THEN 'arid'
+    WHEN COALESCE(br.precipitation, l.worldclim_bio12) < 500 THEN 'semi_arid'
+    WHEN COALESCE(br.precipitation, l.worldclim_bio12) < 1000 THEN 'sub_humid'
+    WHEN COALESCE(br.precipitation, l.worldclim_bio12) < 2000 THEN 'humid'
+    ELSE 'per_humid'
+  END AS precipitation_band,
+  CASE
+    WHEN m.observed_at IS NULL OR TRIM(m.observed_at) = '' THEN 'unknown'
+    WHEN m.observed_at REGEXP '^[0-9]{4}-[0-9]{2}-[0-9]{2}$' THEN 'vollstaendig'
+    WHEN m.observed_at REGEXP '^[0-9]{4}-[0-9]{2}$' THEN 'jahr_monat'
+    WHEN m.observed_at REGEXP '^[0-9]{4}$' THEN 'nur_jahr'
+    ELSE 'frei_text'
+  END AS event_date_quality,
+  NOW()
+FROM map_point_read m
+LEFT JOIN observation o
+  ON m.source_type = 'observation'
+ AND o.gbif_id = m.gbif_id
+LEFT JOIN location l
+  ON l.location_id = o.location_id
+LEFT JOIN beetle_record br
+  ON m.source_type = 'manual'
+ AND br.record_id = m.record_id
+WHERE m.entity_id = vEntity;
+END$$
+DELIMITER ;

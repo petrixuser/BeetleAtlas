@@ -1,4 +1,5 @@
 import json
+import logging
 from datetime import datetime, timezone
 
 from sqlalchemy import text
@@ -15,6 +16,32 @@ from backend.config.beetle_write_repository_sql import (
     beetle_record_update_active_sql,
 )
 from backend.core.db import get_connection
+
+
+def refresh_read_models_for_record(record_id: int) -> None:
+    """Incrementally refresh the precomputed read-models (map_point_read and
+    beetle_list_read) for one manual beetle, so the write shows up on the map and
+    the compact list immediately instead of only after the next full rebuild.
+
+    Guarded on purpose: the write itself is already committed when this runs, so a
+    refresh failure (e.g. an older DB that predates the procedure) must never bubble
+    up and fail the request — it only means the map/compact list stays stale until
+    the next full refresh.
+    """
+    try:
+        with get_connection() as conn:
+            conn.execute(
+                text("CALL refresh_read_models_for_record(:record_id)"),
+                {"record_id": record_id},
+            )
+            conn.commit()
+    except Exception:
+        logging.getLogger(__name__).warning(
+            "refresh_read_models_for_record failed for record_id=%s; "
+            "map/compact list may be stale until the next full refresh",
+            record_id,
+            exc_info=True,
+        )
 
 
 def insert_beetle_record_audit(
@@ -73,6 +100,7 @@ def insert_beetle_record(payload: dict, created_by: int):
         conn.commit()
         created_id = int(result.lastrowid)
 
+    refresh_read_models_for_record(created_id)
     return fetch_beetle_record_by_id(created_id)
 
 
@@ -97,6 +125,7 @@ def update_beetle_record(record_id: int, payload: dict, updated_by: int):
         conn.execute(sql, params)
         conn.commit()
 
+    refresh_read_models_for_record(record_id)
     return fetch_beetle_record_by_id(record_id)
 
 
@@ -116,6 +145,7 @@ def soft_delete_beetle_record(record_id: int, deleted_by: int):
         )
         conn.commit()
 
+    refresh_read_models_for_record(record_id)
     return fetch_beetle_record_by_id(record_id)
 
 
@@ -146,4 +176,5 @@ def update_beetle_record_ee_fields(record_id: int, ee_payload: dict, updated_by:
         conn.execute(sql, params)
         conn.commit()
 
+    refresh_read_models_for_record(record_id)
     return fetch_beetle_record_by_id(record_id)

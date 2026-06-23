@@ -1,5 +1,8 @@
 # Lokale Konfiguration — enthaelt API-Keys, darf nie ins Repository
 frontend/config/config.local.js
+# Alter Pfad (vor der Frontend-Umstrukturierung) — weiter ignorieren, damit eine
+# zurueckgebliebene Datei mit echtem API-Key nicht versehentlich committet wird.
+frontend/config.local.js
 
 # Claude Code memory — nur lokal
 .claude/
