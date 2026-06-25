@@ -399,6 +399,69 @@ def _build_list_where_sql_and_params(
     return where_sql, params
 
 
+def build_read_model_where(
+    *,
+    q: Optional[str] = None,
+    country: Optional[str] = None,
+    climate: Optional[str] = None,
+    vegetation: Optional[str] = None,
+    elevation: Optional[str] = None,
+    soil_ph_band: Optional[str] = None,
+    temperature_band: Optional[str] = None,
+    precipitation_band: Optional[str] = None,
+    event_date_quality: Optional[str] = None,
+    observed_year: Optional[int] = None,
+    has_image: Optional[bool] = None,
+    bbox: Optional[str] = None,
+) -> tuple[str, Dict[str, Any]]:
+    """Build a compact (beetle_list_read, ``e`` alias) WHERE clause + params.
+
+    Reuses the list filter pipeline so callers (e.g. the map clustering path)
+    filter identically to /api/beetles. Only filters present on beetle_list_read
+    are accepted; live-only advanced bands are intentionally not parameters here.
+    """
+    normalized_climate = _normalize_climate_filter(climate)
+    expanded_event_date_quality = _expand_event_date_quality_filter(event_date_quality)
+    requested_filters = _build_requested_filters(
+        country=country,
+        climate=normalized_climate,
+        vegetation=vegetation,
+        elevation=elevation,
+        temperature_band=temperature_band,
+        precipitation_band=precipitation_band,
+        soil_moisture_band=None,
+        ndvi_band=None,
+        humidity_band=None,
+        pressure_band=None,
+        light_pollution_band=None,
+        slope_band=None,
+        water_distance_band=None,
+        human_impact_band=None,
+        landcover_group=None,
+        coordinate_uncertainty_band=None,
+        soil_ph_band=soil_ph_band,
+        soil_carbon_band=None,
+        worldclim_temp_band=None,
+        worldclim_precip_band=None,
+        event_date_quality=event_date_quality,
+        basis_of_record_class=None,
+        taxon_resolution=None,
+        media_coverage=None,
+        license_class=None,
+    )
+    return _build_list_where_sql_and_params(
+        q=q,
+        requested_filters=requested_filters,
+        elevation=elevation,
+        expanded_event_date_quality=expanded_event_date_quality,
+        observed_year=observed_year,
+        has_image=has_image,
+        bbox=bbox,
+        compact=True,
+        offset=0,
+    )
+
+
 def _has_advanced_filters(requested_filters: Dict[str, Optional[str]]) -> bool:
     return any(
         requested_filters.get(key)

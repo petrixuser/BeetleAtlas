@@ -5,14 +5,16 @@ from threading import Lock
 from typing import Any, Dict, List, Optional, Tuple
 
 from backend.config.climate_subtypes import is_climate_subtype_code, parent_climate_code
-from backend.controllers.beetle_controller import list_beetles_controller
+from backend.controllers.beetle_controller import build_read_model_where, list_beetles_controller
 from backend.controllers.core_controller import parse_bbox_or_error
 from backend.repositories.map_repository import (
     _cluster_cell_size,
     build_map_geojson,
     build_map_points,
     cluster_map_points,
+    fetch_map_clusters_from_list_read,
     fetch_map_clusters_lean,
+    fetch_map_points_from_list_read,
     fetch_map_points_lean,
     map_sort_to_beetles_sort,
 )
@@ -435,6 +437,79 @@ def _map_points_controller_lean(
     return result
 
 
+def _map_points_controller_from_list_read(
+    *,
+    bbox: str,
+    zoom: int,
+    q: Optional[str],
+    country: Optional[str],
+    climate: Optional[str],
+    vegetation: Optional[str],
+    elevation: Optional[str],
+    soil_ph_band: Optional[str],
+    temperature_band: Optional[str],
+    precipitation_band: Optional[str],
+    event_date_quality: Optional[str],
+    observed_year: Optional[int],
+    has_image: Optional[bool],
+    limit: int,
+    offset: int,
+) -> Dict[str, Any]:
+    """Map points/clusters for read-model-backed filters via full-dataset
+    aggregation over beetle_list_read.
+
+    map_point_read has no has_image/observed_year columns, so filters using them
+    previously fell back to a 200-point list sample (and has_image even errored).
+    beetle_list_read carries every column the compact list filters reference, so
+    we cluster over it for correct, complete results — identical filtering to
+    /api/beetles.
+    """
+    effective_limit = max(1, min(int(limit), _MAP_POINTS_MAX_PAGE_SIZE))
+    where_sql, params = build_read_model_where(
+        q=q,
+        country=country,
+        climate=climate,
+        vegetation=vegetation,
+        elevation=elevation,
+        soil_ph_band=soil_ph_band,
+        temperature_band=temperature_band,
+        precipitation_band=precipitation_band,
+        event_date_quality=event_date_quality,
+        observed_year=observed_year,
+        has_image=has_image,
+        bbox=bbox,
+    )
+
+    if zoom < 7:
+        clusters = fetch_map_clusters_from_list_read(
+            where_sql=where_sql,
+            cell=_cluster_cell_size(zoom),
+            params=params,
+        )
+        return {
+            "items": clusters,
+            "total": len(clusters),
+            "page": 1,
+            "page_size": len(clusters),
+            "source_total_points": sum(cluster["count"] for cluster in clusters),
+            "clustered": True,
+        }
+
+    points, total_points = fetch_map_points_from_list_read(
+        where_sql=where_sql,
+        limit=effective_limit,
+        offset=offset,
+        params=params,
+    )
+    return {
+        "items": points,
+        "total": total_points,
+        "page": (offset // effective_limit) + 1,
+        "page_size": effective_limit,
+        "clustered": False,
+    }
+
+
 def warm_map_points_cache() -> None:
     """Precompute frequent climate-group map queries at startup for faster first use."""
     latam_bbox = "-120,-60,-30,35"
@@ -531,6 +606,47 @@ def map_points_controller(
             climate=climate,
             vegetation=vegetation,
             elevation=elevation,
+            limit=effective_limit,
+            offset=offset,
+        )
+
+    # Filters backed by beetle_list_read (has_image, observed_year, compact bands)
+    # cluster over that read model for full, correct results. Only the live-only
+    # advanced bands — not present in beetle_list_read — still use the list path.
+    live_only_advanced = (
+        soil_moisture_band,
+        ndvi_band,
+        humidity_band,
+        pressure_band,
+        light_pollution_band,
+        slope_band,
+        water_distance_band,
+        human_impact_band,
+        landcover_group,
+        coordinate_uncertainty_band,
+        soil_carbon_band,
+        worldclim_temp_band,
+        worldclim_precip_band,
+        basis_of_record_class,
+        taxon_resolution,
+        media_coverage,
+        license_class,
+    )
+    if not any(live_only_advanced):
+        return _map_points_controller_from_list_read(
+            bbox=bbox,
+            zoom=zoom,
+            q=q,
+            country=country,
+            climate=climate,
+            vegetation=vegetation,
+            elevation=elevation,
+            soil_ph_band=soil_ph_band,
+            temperature_band=temperature_band,
+            precipitation_band=precipitation_band,
+            event_date_quality=event_date_quality,
+            observed_year=observed_year,
+            has_image=has_image,
             limit=effective_limit,
             offset=offset,
         )

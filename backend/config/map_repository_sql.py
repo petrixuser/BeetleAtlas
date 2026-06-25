@@ -99,3 +99,54 @@ def map_points_total_sql(base_where_sql: str, where_sql: str) -> str:
         FROM enriched e
         {where_sql}
     """
+
+
+# --- Clustering directly over the beetle_list_read read model ----------------
+# map_point_read lacks has_image/observed_year columns, so filtered map queries
+# that use those (or the compact bands) cluster over beetle_list_read instead,
+# which carries every column the compact list filters reference (e-alias). This
+# gives full-dataset clustering for image/year filters without a schema change.
+
+def list_read_map_clusters_sql(where_sql: str) -> str:
+    """Aggregate clusters over beetle_list_read for read-model-backed filters."""
+    return f"""
+        SELECT
+            AVG(e.lat) AS lat,
+            AVG(e.lng) AS lng,
+            COUNT(*) AS count
+        FROM beetle_list_read e
+        {where_sql}
+        GROUP BY FLOOR(e.lat / :cell), FLOOR(e.lng / :cell)
+        ORDER BY count DESC
+        LIMIT :max_clusters
+    """
+
+
+def list_read_map_points_sql(where_sql: str) -> str:
+    """Non-clustered map points over beetle_list_read for read-model filters."""
+    return f"""
+        SELECT
+            e.entity_id,
+            e.gbif_id,
+            e.name AS speciesName,
+            e.lat,
+            e.lng,
+            e.elevation,
+            e.climate,
+            e.vegetation,
+            e.observed_at AS observedAt
+        FROM beetle_list_read e
+        {where_sql}
+        ORDER BY e.entity_id
+        LIMIT :limit
+        OFFSET :offset
+    """
+
+
+def list_read_map_points_total_sql(where_sql: str) -> str:
+    """Total non-clustered map points over beetle_list_read for read-model filters."""
+    return f"""
+        SELECT COUNT(*) AS total
+        FROM beetle_list_read e
+        {where_sql}
+    """
