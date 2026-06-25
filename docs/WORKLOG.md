@@ -63,7 +63,27 @@ byte-identisch zur Vorher-Baseline.
   eine Ameise auf das Overlay-Canvas (`z-index:2`) -> sie lief UEBER Karte/Boxen. Diversion
   deaktiviert; Ameisen bleiben auf der Hintergrund-Ebene (`z-index:0`) hinter dem Inhalt.
 
+### 5. Karten-Filter „Bild"/„Fundjahr" + Ameisen (cache) (`cbd8de4`)
+- **Ameisen liefen weiter über Boxen:** `index.html` lud `ants.movement.js?v=1` — die Versions-
+  nummer wurde beim vorigen Fix nicht erhöht, also servierten Browser die gecachte Overlay-
+  Version. Cache-Bust `?v=2`/`?v=3` + Overlay-Canvas `z-index:2->0` (Absicherung).
+- **Karten-Filter „mit/ohne Bild" + „Fundjahr" wirkten nicht** (Bild=true warf sogar
+  `database_unavailable`). Ursache: `map_points_controller` schaltete bei diesen Filtern auf eine
+  Delegation an die Liste um, die nur ≤200 Punkte sampelte; `map_point_read` hat keine
+  `has_image`/`observed_year`-Spalten. Fix: `beetle_list_read` hat alle nötigen Spalten
+  (`has_image`, `observed_year`, `lat/lng`, Klima/Veg/Höhe + Bbox-Index) → neuer Cluster-/Punkte-
+  Pfad `_map_points_controller_from_list_read` über `beetle_list_read`, der WHERE via
+  `build_read_model_where()` (gleiche Logik wie `/api/beetles`) baut. Live-only Bänder
+  (ndvi/humidity/…, nicht in beetle_list_read) behalten den Listen-Fallback. **Keine Migration,
+  kein Read-Model-Rebuild.** Lokal + Prod verifiziert (Bild true/false ohne Fehler, Fundjahr
+  filtert, Klima/Veg/Höhe unverändert, Liste unverändert).
+  - Bewusste Mini-Einschränkung: Klima-**Subtyp** kombiniert mit Bild/Fundjahr filtert über das
+    Major-Klima (wie die Liste) statt der präzisen Subtyp-Geometrie; Subtyp allein bleibt auf dem
+    präzisen Lean-Pfad. Plan: `~/.claude/plans/misty-frolicking-crown.md`.
+
 ### Hinweise / offene Punkte
+- **Frontend-Cache:** Bei JS/CSS-Änderungen IMMER den `?v=`-Parameter in `index.html`/`detail.html`
+  erhöhen, sonst servieren Browser die alte Datei (war die Ursache des Ameisen-Reklamationen).
 - **Lokaler Build:** wegen `ä` im Projektpfad bricht der BuildKit-`bake` (gRPC-Header-Fehler) ->
   klassischen Builder erzwingen: `DOCKER_BUILDKIT=0 COMPOSE_DOCKER_CLI_BUILD=0 COMPOSE_BAKE=false`.
   CI nicht betroffen. (Docker-Disk lief beim Testen voll -> `docker system prune`.)
