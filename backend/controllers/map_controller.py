@@ -465,6 +465,28 @@ def _map_points_controller_from_list_read(
     /api/beetles.
     """
     effective_limit = max(1, min(int(limit), _MAP_POINTS_MAX_PAGE_SIZE))
+    cache_key = _cache_key_from_lean_args(
+        path="list_read",
+        bbox=bbox,
+        zoom=zoom,
+        q=q,
+        country=country,
+        climate=climate,
+        vegetation=vegetation,
+        elevation=elevation,
+        soil_ph_band=soil_ph_band,
+        temperature_band=temperature_band,
+        precipitation_band=precipitation_band,
+        event_date_quality=event_date_quality,
+        observed_year=observed_year,
+        has_image=has_image,
+        limit=effective_limit,
+        offset=offset,
+    )
+    cached = _cache_get(cache_key)
+    if cached is not None:
+        return cached
+
     where_sql, params = build_read_model_where(
         q=q,
         country=country,
@@ -486,7 +508,7 @@ def _map_points_controller_from_list_read(
             cell=_cluster_cell_size(zoom),
             params=params,
         )
-        return {
+        result = {
             "items": clusters,
             "total": len(clusters),
             "page": 1,
@@ -494,6 +516,8 @@ def _map_points_controller_from_list_read(
             "source_total_points": sum(cluster["count"] for cluster in clusters),
             "clustered": True,
         }
+        _cache_set(cache_key, result)
+        return result
 
     points, total_points = fetch_map_points_from_list_read(
         where_sql=where_sql,
@@ -501,13 +525,15 @@ def _map_points_controller_from_list_read(
         offset=offset,
         params=params,
     )
-    return {
+    result = {
         "items": points,
         "total": total_points,
         "page": (offset // effective_limit) + 1,
         "page_size": effective_limit,
         "clustered": False,
     }
+    _cache_set(cache_key, result)
+    return result
 
 
 def warm_map_points_cache() -> None:

@@ -554,7 +554,7 @@ def _country_base_with_snapshot_cte_sql(base_columns_sql: str) -> str:
             FROM observation o
             JOIN location l ON l.location_id = o.location_id
             {latest_snapshot_join_sql("l", "o")}
-            WHERE UPPER(COALESCE(l.country, '')) = :country_code
+            WHERE l.country = :country_code
         )
     """
 
@@ -609,7 +609,7 @@ def country_top_vegetation_sql() -> str:
             SELECT l.country, l.landcover_class, l.biome_id
             FROM observation o
             JOIN location l ON l.location_id = o.location_id
-            WHERE UPPER(COALESCE(l.country, '')) = :country_code
+            WHERE l.country = :country_code
         ),
         enriched AS (
             SELECT {VEGETATION_CASE_SQL} AS vegetation FROM base b
@@ -632,7 +632,7 @@ def country_top_beetles_sql() -> str:
         FROM observation o
         JOIN location l ON l.location_id = o.location_id
         JOIN beetle_species bs ON bs.beetle_id = o.beetle_id
-        WHERE UPPER(COALESCE(l.country, '')) = :country_code
+        WHERE l.country = :country_code
         GROUP BY o.beetle_id, bs.scientific_name, bs.family
         ORDER BY cnt DESC, name ASC
         LIMIT 3

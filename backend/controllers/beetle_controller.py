@@ -682,14 +682,28 @@ def get_beetle_by_id_controller(beetle_id: str):
 
     return payload
 
+_COUNTRY_DETAIL_CACHE: "OrderedDict[str, Dict[str, Any]]" = OrderedDict()
+_COUNTRY_DETAIL_CACHE_LOCK = Lock()
+_COUNTRY_DETAIL_CACHE_MAX = 64
+
+
 def get_country_detail_controller(country_code: str):
     """Return aggregated country details for a country code.
 
     Includes species count, top climates and vegetations, and elevation range.
+    The result is cached in-memory (≈26 countries) because it aggregates the
+    full observation/location join per country (heavy CASE/snapshot evaluation);
+    like the map response cache it lives until the backend restarts.
     """
     normalized = country_code.strip().upper()
     if not normalized:
         raise_api_error(400, ERR.BEETLE.INVALID_COUNTRY_CODE, "Country code must not be empty.")
+
+    with _COUNTRY_DETAIL_CACHE_LOCK:
+        cached = _COUNTRY_DETAIL_CACHE.get(normalized)
+        if cached is not None:
+            _COUNTRY_DETAIL_CACHE.move_to_end(normalized)
+            return cached
 
     lookup_value = COUNTRY_CODE_TO_LOCATION_NAME.get(normalized, normalized)
 
@@ -720,7 +734,7 @@ def get_country_detail_controller(country_code: str):
     max_elev = overview.get("max_elevation")
     avg_temp = overview.get("avg_temperature")
 
-    return {
+    result = {
         "code": normalized,
         "name": overview.get("country_name") or lookup_value,
         "speciesCount": int(overview.get("species_count") or 0),
@@ -744,6 +758,14 @@ def get_country_detail_controller(country_code: str):
             for row in top_beetles
         ],
     }
+
+    with _COUNTRY_DETAIL_CACHE_LOCK:
+        _COUNTRY_DETAIL_CACHE[normalized] = result
+        _COUNTRY_DETAIL_CACHE.move_to_end(normalized)
+        while len(_COUNTRY_DETAIL_CACHE) > _COUNTRY_DETAIL_CACHE_MAX:
+            _COUNTRY_DETAIL_CACHE.popitem(last=False)
+
+    return result
 
 def get_beetle_media_controller(beetle_id: str, limit: int, offset: int):
     """Retrieves a paginated list of media items associated with a specific beetle observation, identified by its ID, and returns them in a structured format."""

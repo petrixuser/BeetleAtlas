@@ -18,6 +18,11 @@ MIGRATIONS: list[tuple[str, str, str]] = [
         "consolidated read-model, index, and quality migrations",
         "ops/MigrateReadModelAndQuality.sql",
     ),
+    (
+        "20260625_03_location_country_index",
+        "index location.country for fast country-detail queries",
+        "ops/MigrateLocationCountryIndex.sql",
+    ),
 ]
 
 
