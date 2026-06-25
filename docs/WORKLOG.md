@@ -81,6 +81,24 @@ byte-identisch zur Vorher-Baseline.
     Major-Klima (wie die Liste) statt der präzisen Subtyp-Geometrie; Subtyp allein bleibt auf dem
     präzisen Lean-Pfad. Plan: `~/.claude/plans/misty-frolicking-crown.md`.
 
+### 6. Performance: Länder-Detail + Map-Filter-Cache (`43aa0a4`)
+Messung Prod: meiste Endpunkte ≤1 s; Ausreißer war `/api/countries/{code}` ~4,5–5,8 s.
+- **Ursache:** Filter `WHERE UPPER(COALESCE(l.country,'')) = :code` → non-sargable, KEIN Index auf
+  `location.country` → 4× Full-Scan über 417k.
+- **Fix:** sargable `WHERE l.country = :code` (Code kommt schon uppercase, MySQL case-insensitiv)
+  + neue idempotente Migration `idx_location_country` (läuft via `run_migrations` auch auf
+  Bestands-Volume; EXPLAIN nutzt jetzt Index, 1146 statt 417k Zeilen). PLUS In-Memory-Cache für
+  Länder-Detail (≈26 Länder, wie Map-Cache bis Backend-Neustart) → jedes Land nach 1. Zugriff
+  sofort. Prod: GT 4,5→0,3 s (kalt!), BR 2,4→0,16 s, MX 5,8→0,36 s (gecacht).
+- **Map:** neuer beetle_list_read-Filterpfad nutzt jetzt den Response-Cache (2,07→0,012 s).
+- Verifiziert: Migration in-place + idempotent, Antworten wertgleich zu Prod (GT/BR), Korrektheit
+  unverändert. Restliche Frontend-Idee (395 kB Länder-GeoJSON `latin-america-countries.js`
+  verkleinern/lazy) bewusst NICHT umgesetzt: Skripte stehen am Body-Ende (kein First-Paint-Block)
+  + Inline-Skript-Abhängigkeit macht pauschales `defer` riskant. Offen als separater Hebel:
+  GeoJSON-Geometrie via mapshaper vereinfachen (5–10× kleiner) und/oder Länder-Cache beim Start
+  vorwärmen (analog `warm_map_points_cache`), damit auch der kalte Erst-Zugriff großer Länder
+  schnell ist.
+
 ### Hinweise / offene Punkte
 - **Frontend-Cache:** Bei JS/CSS-Änderungen IMMER den `?v=`-Parameter in `index.html`/`detail.html`
   erhöhen, sonst servieren Browser die alte Datei (war die Ursache des Ameisen-Reklamationen).
