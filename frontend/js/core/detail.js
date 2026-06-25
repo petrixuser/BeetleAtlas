@@ -569,11 +569,13 @@
     return all;
   }
 
-  // Laedt Detaildaten und Medien ueber die Backend-API.
+  // Laedt Detaildaten und Medien ueber die Backend-API (parallel, da unabhaengig).
   async function loadFromApi(beetleId) {
-    var detail = await fetchJson("/api/beetles/" + encodeURIComponent(beetleId));
-    var media = await fetchAllMedia(beetleId);
-    return { detail: detail, media: media };
+    var results = await Promise.all([
+      fetchJson("/api/beetles/" + encodeURIComponent(beetleId)),
+      fetchAllMedia(beetleId),
+    ]);
+    return { detail: results[0], media: results[1] };
   }
 
   // Laedt Wertebereiche aus Cache/API fuer skalierte Umweltbalken.

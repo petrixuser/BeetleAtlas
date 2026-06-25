@@ -212,7 +212,23 @@ def fetch_beetle_detail_row(gbif_id: int) -> Optional[Dict[str, Any]]:
 
 def fetch_beetle_detail_row_by_entity(entity_id: str) -> Optional[Dict[str, Any]]:
     """Fetch one detailed beetle row by API entity id (occ-* or rec-*)."""
-    cte_sql = full_enriched_cte_sql("")
+    params: Dict[str, Any] = {"entity_id": entity_id}
+    base_where_sql = ""
+    media_where_sql = ""
+    # Fast path for GBIF observations (occ-<gbif_id>): push the id into the
+    # observation branch AND the media_agg CTE so we enrich a single row instead
+    # of scanning all 417k observations and aggregating the whole media table.
+    # gbif_id is observation's PRIMARY KEY and media has idx_media_gbif_id, so
+    # this turns a ~2s detail lookup into an index lookup. Manual records (rec-*)
+    # are few, so their branch stays unfiltered (still cheap).
+    if entity_id.startswith("occ-"):
+        suffix = entity_id[4:]
+        if suffix.isdigit():
+            base_where_sql = "WHERE o.gbif_id = :detail_gbif_id"
+            media_where_sql = "WHERE m.gbif_id = :detail_gbif_id"
+            params["detail_gbif_id"] = int(suffix)
+
+    cte_sql = full_enriched_cte_sql(base_where_sql, media_where_sql)
     sql = text(
         f"""
         {cte_sql}
@@ -224,7 +240,7 @@ def fetch_beetle_detail_row_by_entity(entity_id: str) -> Optional[Dict[str, Any]
     )
 
     with get_connection() as conn:
-        row = conn.execute(sql, {"entity_id": entity_id}).mappings().first()
+        row = conn.execute(sql, params).mappings().first()
 
     return dict(row) if row is not None else None
 

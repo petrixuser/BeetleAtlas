@@ -110,8 +110,13 @@ def location_fallback_sql(row_alias: str = "b", include_location_column: bool = 
     """
 
 
-def full_enriched_cte_sql(base_where_sql: str) -> str:
-    """Build full list/detail base+enriched CTE SQL with classifications."""
+def full_enriched_cte_sql(base_where_sql: str, media_where_sql: str = "") -> str:
+    """Build full list/detail base+enriched CTE SQL with classifications.
+
+    media_where_sql scopes the media_agg aggregation. For single-row detail
+    lookups pass a `WHERE m.gbif_id = :param` so we don't aggregate the entire
+    media table (a full scan of millions of rows) just to read one beetle.
+    """
     return f"""
         WITH media_agg AS (
             SELECT
@@ -120,6 +125,7 @@ def full_enriched_cte_sql(base_where_sql: str) -> str:
                 MIN(m.license) AS license_sample,
                 MIN(m.image_url) AS image_url_sample
             FROM media m
+            {media_where_sql}
             GROUP BY m.gbif_id
         ),
         base AS (
