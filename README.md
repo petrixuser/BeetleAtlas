@@ -49,6 +49,21 @@ repository** stack so the repo's SQL/CSV seed data is available on first start.
 | `GMAPS_KEY`   | Google Maps JavaScript API Key     |
 | `API_BASE_URL`| Backend URL (empty = demo mode)    |
 
+### Optional: E-Mail-Verifikation per SMTP
+
+| Variable | Beschreibung |
+|---|---|
+| `EMAIL_VERIFICATION_SEND_EMAIL` | `true` aktiviert SMTP-Versand (Default: `false`) |
+| `EMAIL_VERIFICATION_BASE_URL` | Basis-URL fuer Verifikationslink (z. B. `https://kafer.server-work.de`) |
+| `EMAIL_VERIFICATION_TTL_SECONDS` | Gueltigkeit des Verifikationstokens in Sekunden |
+| `SMTP_HOST` | SMTP-Server Hostname |
+| `SMTP_PORT` | SMTP-Port (z. B. `587` STARTTLS oder `465` SSL) |
+| `SMTP_USERNAME` | SMTP-Benutzername (optional) |
+| `SMTP_PASSWORD` | SMTP-Passwort (optional, falls Login noetig) |
+| `SMTP_FROM_EMAIL` | Absenderadresse |
+| `SMTP_USE_STARTTLS` | `true` fuer STARTTLS |
+| `SMTP_USE_SSL` | `true` fuer SMTPS |
+
 ---
 
 ## Nginx Proxy Manager
@@ -118,7 +133,7 @@ python3 -m http.server 4175
 # open http://localhost:4175
 ```
 
-Requires `frontend/config.local.js` with your `window.GMAPS_KEY`.
+Requires `frontend/config/config.local.js` with your `window.GMAPS_KEY`.
 
 ---
 
@@ -130,3 +145,20 @@ Requires `frontend/config.local.js` with your `window.GMAPS_KEY`.
 | Climate     | Beck et al. (2023) Köppen-Geiger 1991–2020  | CC-BY 4.0   |
 | Vegetation  | WWF Terrestrial Ecoregions                  | Non-commercial |
 | Countries   | Custom GeoJSON                              | —           |
+
+---
+
+## Produkt-Roadmap
+
+Filterkarten erweitern (ph / temp /Niederschlag)
+
+- Dschungel-Hintergrund verbessern
+  - UX-Feinschliff, aber mit Fokus auf Performance und Lesbarkeit
+- Jungle-Sounds (ausschaltbar)
+  - optionales Feature, nicht als Default
+  - mit klarem Audio-Toggle und gespeichertem Zustand in `localStorage`
+
+-Länder sollen auch map punkte nach auswahl filtern.
+-Stöber modus (Random einträge)
+
+- code aufräumen

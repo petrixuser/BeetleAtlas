@@ -73,6 +73,121 @@ def insert_user(email: str, password_hash: str, role: str):
     return fetch_user_by_id(created_id)
 
 
+def upsert_pending_registration(email: str, password_hash: str, role: str, token_hash: str, expires_at):
+    """Create or replace one pending registration by email."""
+    sql = text(
+        """
+        INSERT INTO app_pending_registration (
+            email,
+            password_hash,
+            role,
+            verification_token_hash,
+            expires_at,
+            consumed_at
+        )
+        VALUES (
+            :email,
+            :password_hash,
+            :role,
+            :verification_token_hash,
+            :expires_at,
+            NULL
+        )
+        ON DUPLICATE KEY UPDATE
+            password_hash = VALUES(password_hash),
+            role = VALUES(role),
+            verification_token_hash = VALUES(verification_token_hash),
+            expires_at = VALUES(expires_at),
+            consumed_at = NULL
+        """
+    )
+
+    with get_connection() as conn:
+        conn.execute(
+            sql,
+            {
+                "email": email,
+                "password_hash": password_hash,
+                "role": role,
+                "verification_token_hash": token_hash,
+                "expires_at": expires_at,
+            },
+        )
+        conn.commit()
+
+
+def fetch_active_pending_registration_by_token_hash(token_hash: str):
+    """Fetch one non-consumed, non-expired pending registration by token hash."""
+    sql = text(
+        """
+        SELECT
+            pending_registration_id,
+            email,
+            password_hash,
+            role,
+            verification_token_hash,
+            expires_at,
+            consumed_at,
+            created_at,
+            updated_at
+        FROM app_pending_registration
+        WHERE verification_token_hash = :verification_token_hash
+          AND consumed_at IS NULL
+          AND expires_at > UTC_TIMESTAMP()
+        LIMIT 1
+        """
+    )
+
+    with get_connection() as conn:
+        row = conn.execute(sql, {"verification_token_hash": token_hash}).mappings().first()
+
+    return dict(row) if row is not None else None
+
+
+def fetch_active_pending_registration_by_email(email: str):
+    """Fetch one non-consumed, non-expired pending registration by email."""
+    sql = text(
+        """
+        SELECT
+            pending_registration_id,
+            email,
+            password_hash,
+            role,
+            verification_token_hash,
+            expires_at,
+            consumed_at,
+            created_at,
+            updated_at
+        FROM app_pending_registration
+        WHERE email = :email
+          AND consumed_at IS NULL
+          AND expires_at > UTC_TIMESTAMP()
+        LIMIT 1
+        """
+    )
+
+    with get_connection() as conn:
+        row = conn.execute(sql, {"email": email}).mappings().first()
+
+    return dict(row) if row is not None else None
+
+
+def consume_pending_registration(pending_registration_id: int):
+    """Mark one pending registration as consumed."""
+    sql = text(
+        """
+        UPDATE app_pending_registration
+        SET consumed_at = UTC_TIMESTAMP()
+        WHERE pending_registration_id = :pending_registration_id
+          AND consumed_at IS NULL
+        """
+    )
+
+    with get_connection() as conn:
+        conn.execute(sql, {"pending_registration_id": pending_registration_id})
+        conn.commit()
+
+
 def fetch_active_admin_user():
     """Fetch one active admin user if present."""
     sql = text(

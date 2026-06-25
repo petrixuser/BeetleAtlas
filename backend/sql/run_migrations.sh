@@ -4,7 +4,12 @@ set -eu
 DB_CONTAINER="${DB_CONTAINER:-beetle-db}"
 DB_NAME="${DB_NAME:-beetle_db}"
 DB_USER="${DB_USER:-root}"
-DB_PASSWORD="${DB_PASSWORD:-root123}"
+DB_PASSWORD="${DB_PASSWORD:-}"
+
+if [ -z "$DB_PASSWORD" ]; then
+  echo "DB_PASSWORD must be set."
+  exit 1
+fi
 
 SCRIPT_DIR="$(CDPATH= cd -- "$(dirname "$0")" && pwd)"
 
@@ -41,10 +46,8 @@ apply_versioned_migration() {
 
 run_sql_file "$SCRIPT_DIR/schema/MigrateSchemaMigrations.sql"
 
-apply_versioned_migration "20260610_01_data_quality_and_history_bundle" "bundle: parsed event date, media index, quality history, validation checks, climate normalization" "ops/MigrateDataQualityAndHistory.sql"
-apply_versioned_migration "20260617_01_auth_manual_beetles" "users and manual beetle records tables for RBAC write flows" "ops/MigrateAuthAndManualBeetles.sql"
-apply_versioned_migration "20260617_02_auth_refresh_tokens" "refresh token persistence and rotation metadata" "ops/MigrateAuthRefreshTokens.sql"
-apply_versioned_migration "20260617_03_beetle_write_bundle" "audit table + GBIF write fields for manual beetle records (excluding EE climate fields)" "ops/MigrateBeetleWrite.sql"
+apply_versioned_migration "20260623_01_auth_and_write_consolidated" "consolidated auth and manual beetle write migrations" "ops/MigrateAuthAndWrite.sql"
+apply_versioned_migration "20260623_02_read_model_and_quality_consolidated" "consolidated read-model, index, and quality migrations" "ops/MigrateReadModelAndQuality.sql"
 
 echo "Done. Applied migrations registry:"
 mysql_query_scalar "SELECT CONCAT(version, ' | ', COALESCE(description, ''), ' | ', applied_at) FROM schema_migrations ORDER BY applied_at, version;"

@@ -14,7 +14,15 @@
 #   GMAPS_KEY             Google Maps JS API key (already used by the live frontend)
 #   API_BASE_URL          public URL of the backend, e.g. https://api.kafer.server-work.de
 #   FRONTEND_ORIGINS      public origin of the frontend, e.g. https://kafer.server-work.de
-#   DB_PASSWORD           optional; defaults to root123 (DB is internal-only, see WORKLOG)
+#   DB_PASSWORD           optional; defaults to root123. This is the MySQL ROOT password —
+#                         it is BOTH the existing prod volume's root password AND the
+#                         credential migrations use (root has DDL). Do NOT rename this var:
+#                         the persistent volume's root password was set from it at first init.
+#   DB_APP_PASSWORD       optional; defaults to a fixed internal value. Password of the
+#                         least-privilege app user (DB_APP_USER, default beetle_app) that the
+#                         backend connects as. run_migrations.py creates/refreshes this user
+#                         (as root) on every start, so it works on the existing prod volume
+#                         too — no manual user creation, no new required secret, no volume wipe.
 #   JWT_SECRET            REQUIRED for real auth — set a long random secret (NOT "change-me")
 #   ADMIN_BOOTSTRAP_TOKEN shared secret to create the first admin via the bootstrap endpoint
 #   RESEARCHER_SIGNUP_CODE code researchers must enter to register (else nobody can sign up)
@@ -40,6 +48,10 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=${DB_PASSWORD:-root123}
       - MYSQL_DATABASE=${DB_NAME:-beetle_db}
+      # On a FRESH volume MySQL creates this app user. On the existing prod volume
+      # these are ignored — run_migrations.py creates the same user instead.
+      - MYSQL_USER=${DB_APP_USER:-beetle_app}
+      - MYSQL_PASSWORD=${DB_APP_PASSWORD:-beetleapp123}
     volumes:
       # Persistent MySQL data on the NAS host (Paul: /volume1/docker/beetlejuice).
       # Living on a real host path makes it trivial to include in the NAS backups.
@@ -61,9 +73,16 @@ services:
     environment:
       - DB_HOST=beetle-db
       - DB_PORT=3306
-      - DB_USER=${DB_USER:-root}
-      - DB_PASSWORD=${DB_PASSWORD:-root123}
+      # App runs as a dedicated least-privilege user (NOT root — enforced by
+      # backend/core/db.py). run_migrations.py creates/refreshes this user.
+      - DB_USER=${DB_APP_USER:-beetle_app}
+      - DB_PASSWORD=${DB_APP_PASSWORD:-beetleapp123}
       - DB_NAME=${DB_NAME:-beetle_db}
+      # Migrations are DDL and run at startup as root, using the EXISTING volume
+      # root password (DB_PASSWORD env var below — NOT a new secret). root creates
+      # the app user above and applies the in-place schema upgrade.
+      - DB_MIGRATION_USER=${DB_MIGRATION_USER:-root}
+      - DB_MIGRATION_PASSWORD=${DB_PASSWORD:-root123}
       - API_HOST=0.0.0.0
       - API_PORT=8000
       - API_APP_MODULE=backend.core.main:app
@@ -74,7 +93,7 @@ services:
       # Auth: set real values in Portainer. JWT_SECRET MUST NOT stay "change-me"
       # in production. ADMIN_BOOTSTRAP_TOKEN + ALLOW_ADMIN_BOOTSTRAP let Basti
       # create the first admin via the bootstrap endpoint after deploy.
-      - JWT_SECRET=${JWT_SECRET:-change-me}
+      - JWT_SECRET=${JWT_SECRET}
       - ADMIN_BOOTSTRAP_TOKEN=${ADMIN_BOOTSTRAP_TOKEN}
       - ALLOW_ADMIN_BOOTSTRAP=${ALLOW_ADMIN_BOOTSTRAP:-true}
       # CORS: the browser loads the site from the frontend origin and calls the
