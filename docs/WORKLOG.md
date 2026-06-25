@@ -4,6 +4,75 @@ Dieser Worklog haelt den aktiven Arbeitsstand fest. Er soll nach jeder relevante
 aktualisiert werden, damit die Arbeit bei einer neuen Session ohne Kontextverlust fortgesetzt
 werden kann.
 
+## Stand 2026-06-25 (Integration erfolgreich auf Prod deployt + 4 Follow-up-Fixes)
+
+Nach zwei gescheiterten Deploy-Versuchen (2026-06-23, beide Backend-502, jeweils zurueckgerollt;
+Prod lag stabil auf dem alten `40c3180`-Stand) wurde Bastis Integration heute erfolgreich live
+gebracht. `main` steht auf **`6a85a84`**. Reihenfolge der Commits: `b9bd2ff` (Deploy) ->
+`66b71f4` (404-Fix) -> `bc36190` (Detail-Perf) -> `6a85a84` (Ameisen).
+
+### 1. Eigentliche 502-Ursache gefunden + Deploy (`b9bd2ff`)
+Die zwei Vorversuche scheiterten NICHT am vermuteten Migrations-Privileg, sondern **zweischichtig**:
+1. `backend/core/db.py` verweigert per Guard den Start als `root` -> der Code ERZWINGT einen
+   dedizierten Nicht-root-App-User (`beetle_app`).
+2. `beetle_app` existiert im persistenten Prod-Volume NICHT (MySQL legt `MYSQL_USER` nur bei
+   leerem Volume an; kein `CREATE USER` in irgendeinem SQL) UND die im Deploy-Compose neu
+   eingefuehrten Variablen `DB_ROOT_PASSWORD`/`DB_APP_PASSWORD` waren in Portainer nie gesetzt
+   -> leere Passwoerter -> App + Migration koennen sich nicht verbinden -> Crash-Loop -> 502.
+
+**Fix (respektiert das Least-Privilege-Design):**
+- `backend/sql/run_migrations.py`: neue `_maybe_bootstrap_app_user()` legt `beetle_app` als root
+  idempotent an (`CREATE USER IF NOT EXISTS` + `ALTER` Passwort + `GRANT ALL ON beetle_db.*`,
+  scoped/non-root) mit GENAU den Creds, die die App nutzt -> greift auch auf dem Bestands-Volume,
+  laeuft vor jeder Migration.
+- `docker-compose.{prod,dev}.yml`: App = `DB_APP_USER`(Default `beetle_app`)/`DB_APP_PASSWORD`;
+  Migration = `root` mit dem **bestehenden** Root-PW `${DB_PASSWORD}` (NICHT dem nie gesetzten
+  `DB_ROOT_PASSWORD`). **Kein neues Portainer-Secret, kein Volume-Wipe noetig.**
+- Schluessel-Lehre: Im Deploy-Compose nur Variablen referenzieren, die in Portainer bereits
+  gesetzt sind (bzw. Defaults haben). Das Umbenennen der DB-Zugangsvariablen war der ganze Fehler.
+
+Lokal end-to-end verifiziert (Dev-Stack bewusst ohne `MYSQL_USER` -> `beetle_app` fehlt vorab ->
+Bootstrap legt ihn an -> App connectet). Deploy lief **ohne 502-Delle** durch; Read-Model auf dem
+In-place-Volume korrekt aufgebaut (beetle_list_read=417599). Laenderfilter wirkt in Prod in Liste
+UND Karte, `/api/countries/GT`=200.
+
+### 2. Karten-Klick -> 404 (`66b71f4`)
+Klick auf einen Kaefer fuehrte zu 404. Ursache: Refactor verschob `detail.html` nach
+`frontend/html/`, aber der Link bleibt root-relativ `detail.html?id=...`; Nginx mappte nur `/`
+und `/index.html` auf `html/`, nicht `/detail.html`. Fix: `location = /detail.html ->
+try_files /html/detail.html` in `nginx/frontend-default.conf` (analog `index.html`; `detail.html`
+nutzt absolute `/js`,`/styles`-Pfade, laedt also korrekt gegen Root).
+
+### 3. Detailseite lud 3-5s -> jetzt <0,3s (`bc36190`)
+`fetch_beetle_detail_row_by_entity` baute den vollen enriched-CTE OHNE Filter: `media_agg`
+aggregierte die GANZE media-Tabelle (~378k Full-Scan) + observation-Zweig scannte alle 417k, nur
+um aussen auf 1 `entity_id` zu filtern (~2,1s). Der `/media`-Endpoint ruft dieselbe Funktion
+(Validierung) -> ebenfalls 2,1s. Fix: `full_enriched_cte_sql` nimmt optional `media_where_sql`;
+Detail fuer `occ-<gbif_id>` schiebt die gbif_id in observation-Zweig (PK) UND `media_agg`
+(`idx_media_gbif_id`) -> Index-Lookup statt Full-Scan; `rec-*` (manuell) unveraendert; Listen-/
+Karten-Pfade unberuehrt (Default-Param leer). Zudem `detail.js`: Detail + Medien parallel
+(`Promise.all`) statt seriell. Prod nachher: Detail ~0,25s, Media ~0,26s; Detail-JSON
+byte-identisch zur Vorher-Baseline.
+
+### 4. Admin-Login + Ameisen
+- **Admin-Login** ging nach dem Deploy nicht mehr (alter Admin passt nicht zum neuen Auth-Store).
+  Reset-Weg dokumentiert: `POST /auth/bootstrap-admin` (Header `X-Bootstrap-Token` =
+  `ADMIN_BOOTSTRAP_TOKEN` aus Portainer) macht ein Upsert (Passwort neu + `is_active=1`).
+  Passwort-Regeln: >=12 Zeichen, je Gross/Klein/Ziffer/Sonderzeichen. (Von Perry selbst geloest.)
+- **Ameisen** (`6a85a84`): Die Deko-Animation leitete per `scheduleOverlayDiversion` gelegentlich
+  eine Ameise auf das Overlay-Canvas (`z-index:2`) -> sie lief UEBER Karte/Boxen. Diversion
+  deaktiviert; Ameisen bleiben auf der Hintergrund-Ebene (`z-index:0`) hinter dem Inhalt.
+
+### Hinweise / offene Punkte
+- **Lokaler Build:** wegen `ä` im Projektpfad bricht der BuildKit-`bake` (gRPC-Header-Fehler) ->
+  klassischen Builder erzwingen: `DOCKER_BUILDKIT=0 COMPOSE_DOCKER_CLI_BUILD=0 COMPOSE_BAKE=false`.
+  CI nicht betroffen. (Docker-Disk lief beim Testen voll -> `docker system prune`.)
+- **Latent (nicht user-facing):** Der Non-compact-`lean`-Listenpfad (`/api/beetles` OHNE
+  `compact`) ist ungefiltert langsam; das Frontend sendet immer `compact=1`, daher kein
+  Handlungsbedarf. `/api/countries/{code}` war mit ~5s ebenfalls nicht schnell -> Kandidat fuers
+  naechste Perf-Thema.
+- Backup-Branches der Fix-Arbeit: `fix-deploy` (8be5d78), `fix-deploy-v2` (83722bf).
+
 ## Stand 2026-06-18 (Integration Basti-Backend-Refactor + Frontend/Country-Feature)
 
 Bastis kompletter Backend-Refactor (`main-new`, eigenstaendige Historie: Auth/RBAC,
