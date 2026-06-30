@@ -25,6 +25,12 @@ services:
       interval: 10s
       timeout: 5s
       retries: 20
+      # Der ALLERERSTE Start seedet ~215MB CSV + baut Indizes auf 417k Zeilen.
+      # Das dauert auf manchen Rechnern >3 Min. Ohne start_period zählen die
+      # fehlschlagenden Checks sofort als "unhealthy" und Compose bricht den
+      # Start ab (Backend/Frontend starten dann nie). start_period gibt dem
+      # Kalt-Seed bis zu 10 Min Zeit; spätere Starts sind ohnehin in Sekunden gesund.
+      start_period: 600s
 
   beetle-backend:
     build:

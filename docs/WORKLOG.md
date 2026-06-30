@@ -4,6 +4,157 @@ Dieser Worklog haelt den aktiven Arbeitsstand fest. Er soll nach jeder relevante
 aktualisiert werden, damit die Arbeit bei einer neuen Session ohne Kontextverlust fortgesetzt
 werden kann.
 
+## Stand 2026-06-30 (Lokale Backup-Version für den Live-Vortrag)
+
+**Ziel:** Perry stellt BeetleAtlas live in einem Vortrag vor (Live-Seite läuft auf dem NAS
+via Portainer). Als Absicherung gegen einen Server-/Deployment-Ausfall während der Präsentation
+sollte eine **vollständig eigenständige lokale Version** auf dem Laptop entstehen, die exakt
+dasselbe kann und den Server gar nicht braucht. Internet ist am Vortragsort vorhanden →
+die Karte (Google Maps + OpenTopoMap-Tiles) lädt normal, **keine** Offline-Karten nötig.
+Es geht rein um Unabhängigkeit vom Produktiv-Server. Die Live-Seite wird gezeigt; die lokale
+Version ist nur das Notfall-Netz. **Es wurde nichts am Live-Deployment geändert.**
+
+### 1. Erkenntnis: lokaler Stack existierte bereits
+- `docker-compose.dev.yml` baut den kompletten Stack lokal: Frontend (`:8080`), Backend
+  (`:8000`), MySQL (`:3306`, Seed-Daten ~215 MB im Image eingebacken), Redis. Secrets/Maps-Key
+  kommen aus `.env` (bereits vorhanden, nicht committet). Der Frontend-Entrypoint erzeugt zur
+  Laufzeit `config/config.local.js` mit `API_BASE_URL=http://localhost:8000` — derselbe
+  Mechanismus wie auf dem Server. Damit ist der lokale Stack inhaltsgleich zur Live-Seite.
+
+### 2. Build-Bug gefunden & gelöst: „ä" im Ordnernamen bricht Docker-Bake
+- **Symptom:** `docker compose build` schlägt fehl mit
+  `header key "x-docker-expose-session-sharedkey" contains value with non-printable ASCII characters`.
+- **Ursache:** Der Ordnername **„Käferliebe"** enthält ein Nicht-ASCII-Zeichen (ä). Der moderne
+  Compose-**Bake**-Build leitet daraus einen gRPC-Session-Key ab und stürzt ab.
+- **Workaround:** Services **einzeln** und mit **`COMPOSE_BAKE=false`** bauen
+  (`COMPOSE_BAKE=false docker compose -f docker-compose.dev.yml build <service>`). `up -d --no-build`
+  mit vorgebauten Images ist nicht betroffen. Alle drei Images wurden so sauber gebaut.
+- **Zweiter Effekt (NFC vs. NFD):** Je nach Aufrufweg kodiert macOS das „ä" unterschiedlich →
+  Compose-Projektname mal `kferliebe` (Aufruf via Shell/NFC), mal `kaferliebe` (Aufruf via
+  Finder/NFD). Das ergibt **getrennte Images & Volumes**. Die **maßgebliche** Variante ist die per
+  Finder gestartete (`kaferliebe-*` + Volume `kaferliebe_beetle_db_data`).
+
+### 3. Healthcheck-Fix gegen Kalt-Start-Abbruch (`docker-compose.dev.yml`)
+- **Problem:** Der allererste Start seedet ~215 MB CSV + baut Indizes auf 417k Zeilen. Das dauerte
+  auf dem Laptop **>200 s** und überschritt das DB-Healthcheck-Fenster (`interval 10s × retries 20`).
+  Compose markierte die DB als `unhealthy` und brach ab → Backend/Frontend (`depends_on:
+  service_healthy`) starteten nie, obwohl der Seed danach normal fertig wurde.
+- **Fix:** **`start_period: 600s`** zum DB-Healthcheck ergänzt. In dieser Frist zählen
+  fehlschlagende Checks nicht als unhealthy → der Kalt-Seed bekommt bis zu 10 Min Zeit. Spätere
+  Starts sind ohnehin in ~15 s gesund. (Die Erstbefüllung ist ein **einmaliges** Ereignis; danach
+  bleiben die Daten im Volume.)
+
+### 4. Neue Bedien-Werkzeuge (Doppelklick) + Anleitung
+- **`start-local.command`** (macOS, ausführbar): prüft/started Docker Desktop, startet den Stack
+  mit vorgebauten Images (baut bei Bedarf service-weise mit `COMPOSE_BAKE=false`), wartet auf
+  DB-Health + Frontend, öffnet automatisch http://localhost:8080. Hinweis, dass der erste Start
+  3–5 Min dauert.
+- **`stop-local.command`**: `docker compose -f docker-compose.dev.yml down` (Volume/Daten bleiben).
+- **`docs/VORTRAG-LOKAL.md`**: deutsche Schritt-für-Schritt-Anleitung (Vorbereitung am Vorabend,
+  Ablauf am Vortragstag, Fallback-Kaskade lokal → manuell → Live, Troubleshooting inkl. graue
+  Karte = Internet/Maps-Key).
+
+### 5. Verifiziert (end-to-end, getestet)
+- Alle 4 Container `Up`/`healthy`; Backend liefert **echte lokale DB-Daten**: 21.018 Arten,
+  191.388 Orte, 417.581 Beobachtungen, 378.021 Medien, 206.025 Klima-Snapshots.
+  `/observations`, `/species`, Frontend (HTTP 200) und Detailseite ok.
+- Stop→Start-Zyklus getestet: Daten persistieren (Volume `kaferliebe_beetle_db_data`), Neustart
+  ~15 s. Start per Finder-Skript von Perry erfolgreich getestet (Karte rendert).
+
+### 6. Aufgeräumt
+- Verwaiste Test-Reste der `kferliebe`-Variante entfernt (3 Images + Volume
+  `kferliebe_beetle_db_data`, ~3,4 GB frei). **Behalten:** `kaferliebe-*` Images, `redis:7-alpine`,
+  Volume `kaferliebe_beetle_db_data`. **Live-Seite unberührt** (läuft auf separatem NAS aus
+  GHCR-Images `ghcr.io/petrixuser/beetleatlas-*`; lokale Docker-Artefakte haben damit nichts zu tun).
+
+### Geänderte/neue Dateien
+- geändert: `docker-compose.dev.yml` (Healthcheck `start_period: 600s`).
+- neu: `start-local.command`, `stop-local.command`, `docs/VORTRAG-LOKAL.md`.
+
+---
+
+## Stand 2026-06-30 (Forscher-Seed, Perf/Bugfixes, Filter-Analyse)
+
+`main` steht auf **`9bd9893`**. Reihenfolge der Commits heute: `86d42e6` (Forscher-Testaccount)
+→ `586b3bc` (nginx gzip+Cache) → `9bd9893` (Cache-Invalidierung + timing-safe). Alle drei sind
+**über den automatischen Pfad** live gegangen: Push auf `main` → GitHub Actions baut Images →
+`deploy`-Job feuert den **Portainer-Webhook** (`PORTAINER_WEBHOOK_URL` ist gesetzt, Log zeigte
+„Portainer webhook triggered") → Portainer zieht + startet neu. **Kein manueller NAS-/Portainer-
+Schritt nötig.**
+
+### 1. Forscher-Account direkt in die Live-DB seeden, rein via git (`86d42e6`)
+- **Erkenntnis:** Die in `Dockerfile.db` gebackenen Init-Seeds (`/docker-entrypoint-initdb.d/*.sql`)
+  laufen bei MySQL **nur auf einem frischen, leeren Volume** — auf dem Bestands-Prod-Volume NIE.
+  Der Weg, der das Bestands-Volume erreicht, ist `backend/sql/run_migrations.py` (läuft bei jedem
+  Backend-Start, wendet neue, versionierte Migrationen idempotent an).
+- **Umsetzung:** Neue Migration `backend/sql/ops/MigrateSeedTestResearcher.sql` (idempotentes
+  `INSERT ... ON DUPLICATE KEY UPDATE` in `app_user`, role=researcher, is_active=1) + Registrierung
+  in der `MIGRATIONS`-Liste als `20260630_04_seed_test_researcher`. E-Mail **kleingeschrieben**
+  gespeichert (Login lowercased die Eingabe vor dem Lookup).
+- **WICHTIG / aufräumen:** Das ist ein **Wegwerf-Testaccount** (`testforscherdb2026@gmail.com`,
+  schwaches Passwort) — der bcrypt-Hash liegt dauerhaft in der Git-History. **Nach der Verifikation
+  löschen.** Für echte Forscher den `RESEARCHER_SIGNUP_CODE` (in Portainer) oder ein starkes
+  Passwort nutzen.
+
+### 2. nginx: gzip + Cache-Header für statische Assets (`586b3bc`)
+- **Problem:** `nginx/frontend-default.conf` hatte **kein** gzip und **keine** Cache-Header. Die
+  großen Assets gingen unkomprimiert und ohne Caching raus: `ecoregions-latam.geojson` (3,0 MB),
+  `koppen-latam.geojson` (1,7 MB), `latin-america-countries.js` (1,3 MB) ≈ 6 MB pro Session.
+- **Fix:** `gzip on` + `gzip_types` (json/js/css/svg); `.geojson` per `default_type application/json`
+  erzwungen (sonst `application/octet-stream` → gzip greift nicht); 30d-`immutable`-Cache für
+  versionierte Assets; HTML bewusst `no-cache` (damit `?v=`-Bumps sofort greifen). **Achtung-
+  Detail:** `try_files` für eine gefundene Datei bleibt in seiner `location` und matcht die Regex-
+  `.html`-Regel NICHT → `no-cache` direkt in die drei `location =`-HTML-Blöcke gesetzt.
+- **Prod verifiziert:** `Content-Encoding: gzip` + sauberer `Cache-Control`; ecoregions
+  3,02 MB → 0,99 MB (**−67 %**); HTML `no-cache`.
+
+### 3. Bugfix: In-Memory-Caches bei Käfer-Writes invalidieren + timing-safe (`9bd9893`)
+- **Bug (Korrektheit, user-sichtbar):** `insert/update/soft_delete_beetle_record`
+  (`beetle_write_repository.py`) refreshten das **DB**-Read-Model via
+  `refresh_read_models_for_record()`, ließen aber die **In-Memory-Caches** davor stehen → neuer/
+  geänderter/gelöschter Käfer erschien erst nach Backend-Neustart auf Karte (`_map_response_cache`)
+  und Länder-Detail (`_COUNTRY_DETAIL_CACHE`).
+- **Fix:** `clear_map_response_cache()` (map_controller) + `clear_read_caches()` (beetle_controller:
+  Länder + Listen-Total + Env-Ranges) gebündelt in `invalidate_read_caches()` (Repository, **lazy
+  import** gegen den Zyklus `beetle_controller`↔`beetle_write_repository`, best-effort gekapselt),
+  Aufruf nach jedem `refresh_read_models_for_record()` an **allen vier** Write-Stellen.
+- **Security-Mitnahme:** Forscher-Code (auth_controller.py:79) + Bootstrap-Token (:244) nutzen jetzt
+  `secrets.compare_digest` statt `!=` (timing-safe).
+- **Verifiziert (Unit, im Backend-Image):** alle Module importieren (kein Zyklus/Syntaxfehler);
+  `invalidate_read_caches()` leert alle vier Caches (`1/1/1/set → 0/0/0/None`). **Live-API-Check
+  ging NICHT von der Sandbox** (api.kafer.server-work.de scheitert am Cloudflare-TLS-Handshake) →
+  Endprüfung durch Perry (Käfer anlegen → sofort ohne Neustart sichtbar).
+
+### 4. Filter-Analyse (Ergebnis: KEIN echter Bug)
+Auf Wunsch geprüft, ob es Filter-Bugs gibt. **Fazit: kein user-sichtbarer Defekt.**
+- **Architektur (sauber):** Klima-/Vegetations-**Subtypen** werden **client-seitig polygonbasiert**
+  gefiltert (koppen/ecoregions-GeoJSON). Sobald ein Subtyp aktiv ist, erzwingt das Frontend
+  `effectiveZoom = max(7, zoom)` (`app.map.data.js:74`) → Backend liefert Einzelpunkte statt Cluster,
+  das Frontend filtert per Polygon und **re-clustert selbst** (`buildSubtypeMapListBeetles`,
+  `mergeClusterLists`) → Cluster-Zahlen bleiben auch bei niedrigem Zoom korrekt.
+- **Toter Code (Cleanup-Kandidat, ~150 Zeilen, KEIN Bug):** `map_controller.py` enthält einen nie
+  aufgerufenen Subtyp-Geometrie-Pfad — `_build_subtype_filtered_result`,
+  `_load_climate_subtype_geometries`, `_matches_any_subtype`, die `_point_in_*`-Helfer und die
+  `_subtype_geometries`-Globals. Per grep verifiziert: kein Aufrufer. `_map_points_controller_lean`
+  berechnet `subtype_climates` nur noch für den Cache-Key. Vom Frontend abgelöst. **Entfernen
+  möglich** (reiner Cleanup, kein Verhaltenswechsel) — noch offen, nur auf Wunsch.
+- **Bewusste Approximation (kein Defekt):** Die client-seitige Subtyp-Filterung sieht nur die pro
+  Viewport vom Backend gelieferten Punkte (Fetch-Limit) → in sehr dichten Regionen evtl. leicht
+  unvollständig. Systembedingt, im Worklog (Stand 2026-06-25, Punkt 5) als Mini-Einschränkung
+  dokumentiert.
+- **Geprüft & in Ordnung:** Map-vs-Liste-Filterabdeckung deckungsgleich (3-stufiges Routing
+  lean→from_list_read→voller Listen-Pfad); kein „toter Dropdown" (jeder Frontend-Filter mappt auf
+  `FILTER_COLUMN_MAP`); `event_date_quality` expandiert DE+EN-Aliase; `human_impact_band` →
+  `e.human_modification_band` korrekt.
+
+### Verbesserungs-Roadmap (Audit 2026-06-30)
+Voller Audit + Plan unter `~/.claude/plans/keen-popping-sifakis.md`. Erledigt: nginx (586b3bc),
+Cache-Bug + timing-safe (9bd9893). Offen (Verbesserungen, keine Defekte): Frontend-Politur
+(Bild-Alt-Texte=Artname, `img.onerror`-Fallback, Live-Passwort-Validierung, Fokus-Management),
+Country-GeoJSON via mapshaper verkleinern + Länder-Cache-Warming, Auth-Audit-Logging,
+JS-Bundling/`app.js`-Split fertigstellen. Verworfen als False Positive: „config.local.js fehlt"
+(wird vom `docker-entrypoint.sh` aus `GMAPS_KEY` erzeugt).
+
 ## Stand 2026-06-25 (Integration erfolgreich auf Prod deployt + 4 Follow-up-Fixes)
 
 Nach zwei gescheiterten Deploy-Versuchen (2026-06-23, beide Backend-502, jeweils zurueckgerollt;
