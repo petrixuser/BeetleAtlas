@@ -23,6 +23,11 @@ MIGRATIONS: list[tuple[str, str, str]] = [
         "index location.country for fast country-detail queries",
         "ops/MigrateLocationCountryIndex.sql",
     ),
+    (
+        "20260630_04_seed_test_researcher",
+        "seed throwaway test researcher account (delete after verifying)",
+        "ops/MigrateSeedTestResearcher.sql",
+    ),
 ]
 
 
