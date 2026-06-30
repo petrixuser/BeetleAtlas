@@ -1,3 +1,4 @@
+import secrets
 from datetime import datetime, timedelta, timezone
 from typing import cast
 
@@ -76,7 +77,7 @@ def register_controller(payload: RegisterRequest) -> RegisterPendingResponse:
         provided_code = (payload.researcher_signup_code or "").strip()
         if not expected_code:
             raise_api_error(503, ERR.AUTH.RESEARCHER_SIGNUP_UNAVAILABLE, "Researcher signup is not configured.")
-        if provided_code != expected_code:
+        if not secrets.compare_digest(provided_code.encode("utf-8"), expected_code.encode("utf-8")):
             raise_api_error(403, ERR.COMMON.FORBIDDEN, "Invalid researcher signup code.")
 
     password_hash = hash_password(payload.password)
@@ -241,7 +242,7 @@ def bootstrap_admin_controller(payload: BootstrapAdminRequest, bootstrap_token: 
         raise_api_error(503, ERR.AUTH.BOOTSTRAP_UNAVAILABLE, "Admin bootstrap is not configured.")
 
     provided = (bootstrap_token or "").strip()
-    if provided != expected_token:
+    if not secrets.compare_digest(provided.encode("utf-8"), expected_token.encode("utf-8")):
         raise_api_error(403, ERR.COMMON.FORBIDDEN, "Invalid bootstrap token.")
 
     email = payload.email.lower().strip()

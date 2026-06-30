@@ -44,6 +44,33 @@ def refresh_read_models_for_record(record_id: int) -> None:
         )
 
 
+def invalidate_read_caches() -> None:
+    """Drop the in-memory response caches after a manual beetle write.
+
+    refresh_read_models_for_record() updates the DB read-models, but the map,
+    country-detail and compact-list caches sit in front of those and would keep
+    serving the pre-write result until the backend restarts. Clearing them here
+    makes a created/updated/deleted beetle visible immediately.
+
+    Imports are done lazily inside the function on purpose: beetle_controller
+    imports from this module, so a top-level import of the controllers would be a
+    circular import. Best-effort: a cache-clear failure must never fail the write
+    (it is already committed), so we swallow and log.
+    """
+    try:
+        from backend.controllers.map_controller import clear_map_response_cache
+        from backend.controllers.beetle_controller import clear_read_caches
+
+        clear_map_response_cache()
+        clear_read_caches()
+    except Exception:
+        logging.getLogger(__name__).warning(
+            "invalidate_read_caches failed; map/country/list caches may be stale "
+            "until the backend restarts",
+            exc_info=True,
+        )
+
+
 def insert_beetle_record_audit(
     record_id: int,
     action: str,
@@ -101,6 +128,7 @@ def insert_beetle_record(payload: dict, created_by: int):
         created_id = int(result.lastrowid)
 
     refresh_read_models_for_record(created_id)
+    invalidate_read_caches()
     return fetch_beetle_record_by_id(created_id)
 
 
@@ -126,6 +154,7 @@ def update_beetle_record(record_id: int, payload: dict, updated_by: int):
         conn.commit()
 
     refresh_read_models_for_record(record_id)
+    invalidate_read_caches()
     return fetch_beetle_record_by_id(record_id)
 
 
@@ -146,6 +175,7 @@ def soft_delete_beetle_record(record_id: int, deleted_by: int):
         conn.commit()
 
     refresh_read_models_for_record(record_id)
+    invalidate_read_caches()
     return fetch_beetle_record_by_id(record_id)
 
 
@@ -177,4 +207,5 @@ def update_beetle_record_ee_fields(record_id: int, ee_payload: dict, updated_by:
         conn.commit()
 
     refresh_read_models_for_record(record_id)
+    invalidate_read_caches()
     return fetch_beetle_record_by_id(record_id)

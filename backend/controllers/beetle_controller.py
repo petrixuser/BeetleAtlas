@@ -687,6 +687,24 @@ _COUNTRY_DETAIL_CACHE_LOCK = Lock()
 _COUNTRY_DETAIL_CACHE_MAX = 64
 
 
+def clear_read_caches() -> None:
+    """Drop in-memory read caches owned by this module.
+
+    Called after a manual beetle write so country-detail and compact-list totals
+    reflect the change immediately. _COUNTRY_DETAIL_CACHE lives until restart (no
+    TTL), so without this a new beetle would not change a country's stats until the
+    backend restarts; _list_total_cache (60s) and ENV_RANGES_CACHE (30min) are
+    TTL-bounded but cleared too for consistency.
+    """
+    global ENV_RANGES_CACHE, ENV_RANGES_CACHE_TS
+    with _COUNTRY_DETAIL_CACHE_LOCK:
+        _COUNTRY_DETAIL_CACHE.clear()
+    with _list_total_cache_lock:
+        _list_total_cache.clear()
+    ENV_RANGES_CACHE = None
+    ENV_RANGES_CACHE_TS = None
+
+
 def get_country_detail_controller(country_code: str):
     """Return aggregated country details for a country code.
 

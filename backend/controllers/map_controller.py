@@ -59,6 +59,18 @@ def _cache_set(key: Tuple[Any, ...], value: Dict[str, Any]) -> None:
             _map_response_cache.popitem(last=False)
 
 
+def clear_map_response_cache() -> None:
+    """Drop all cached map responses.
+
+    Called after a manual beetle write so the map reflects the new/changed/deleted
+    record immediately instead of serving stale cached points/clusters until the
+    backend restarts. A full clear is intentional: the cache refills cheaply on the
+    next requests, and correctness beats fine-grained eviction here.
+    """
+    with _map_response_cache_lock:
+        _map_response_cache.clear()
+
+
 def _append_exact_or_in_filter(
     filters: List[str],
     params: Dict[str, Any],
