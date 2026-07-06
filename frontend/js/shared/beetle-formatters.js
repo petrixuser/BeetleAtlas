@@ -15,9 +15,10 @@
 
   // Formatiert den Wert fuer die Anzeige.
   function formatSoilPhFromRecord(record, labels) {
-    var phValue = record && record.meta && record.meta.location && record.meta.location.soilPh;
+    var loc = record && record.meta && record.meta.location;
+    var phValue = loc && loc.soilPh != null ? loc.soilPh : (record && record.soilPh);
     var phBand = soilBandLabel(
-      record && record.meta && record.meta.location && record.meta.location.soilPhBand, labels
+      (loc && loc.soilPhBand) || (record && record.soilPhBand), labels
     );
     var soilType = soilTypeLabel(record && record.soil, labels);
     var numeric = Number(phValue);

@@ -258,13 +258,60 @@
     show(successEl);
   }
 
+  // Prueft Format/Plausibilitaet weiterer Felder vor dem Absenden.
+  function validateExtraFields(errorEl, successEl) {
+    var dateEl = $(fieldId("event_date"));
+    var dateVal = dateEl ? dateEl.value.trim() : "";
+    if (dateVal) {
+      var m = dateVal.match(/^(\d{4})(?:-(\d{2})(?:-(\d{2}))?)?$/);
+      if (!m) {
+        showError(errorEl, successEl, "Funddatum bitte als JJJJ, JJJJ-MM oder JJJJ-MM-TT angeben.");
+        return false;
+      }
+      var year = Number(m[1]);
+      var month = m[2] ? Number(m[2]) : null;
+      var day = m[3] ? Number(m[3]) : null;
+      var nextYear = new Date().getFullYear() + 1;
+      if (year < 1700 || year > nextYear) {
+        showError(errorEl, successEl, "Funddatum-Jahr unplausibel (1700-" + nextYear + ").");
+        return false;
+      }
+      if (month !== null && (month < 1 || month > 12)) {
+        showError(errorEl, successEl, "Funddatum: Monat muss zwischen 01 und 12 liegen.");
+        return false;
+      }
+      if (day !== null && (day < 1 || day > 31)) {
+        showError(errorEl, successEl, "Funddatum: Tag muss zwischen 01 und 31 liegen.");
+        return false;
+      }
+    }
+
+    var urlEl = $(fieldId("image_url"));
+    var urlVal = urlEl ? urlEl.value.trim() : "";
+    if (urlVal && !/^https?:\/\/.+/i.test(urlVal)) {
+      showError(errorEl, successEl, "Bild-URL muss mit http:// oder https:// beginnen.");
+      return false;
+    }
+
+    var elevEl = $(fieldId("elevation"));
+    var elevVal = elevEl ? elevEl.value.trim() : "";
+    if (elevVal !== "") {
+      var elevNum = Number(elevVal);
+      if (!isFinite(elevNum) || elevNum < -500 || elevNum > 9000) {
+        showError(errorEl, successEl, "Hoehe muss zwischen -500 und 9000 m liegen.");
+        return false;
+      }
+    }
+    return true;
+  }
+
   // Fuehrt Vorab-Validierung vor dem API-Submit aus.
   function canSubmit(form, errorEl, successEl) {
     if (!form.checkValidity()) {
       showError(errorEl, successEl, "Bitte Wissenschaftlichen Namen und Familie ausfuellen.");
       return false;
     }
-    return validateCoordinates(errorEl, successEl);
+    return validateCoordinates(errorEl, successEl) && validateExtraFields(errorEl, successEl);
   }
 
   // Validiert und sendet das Formular als POST an die Beetle-API.

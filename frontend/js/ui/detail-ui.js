@@ -75,10 +75,13 @@
   }
 
   // Baut die Datensaetze fuer die Klima-/Standort-Chips auf.
-  function buildClimateChipRows(detail, bands, raw, formatCodeValue, chipPhText) {
+  function buildClimateChipRows(detail, bands, raw, formatCodeValue, chipPhText, landcoverText) {
+    var landcoverFn = typeof landcoverText === "function"
+      ? landcoverText
+      : function (group) { return formatCodeValue(group); };
     return [
       ["Klimazone", formatCodeValue(detail && detail.climate)], 
-      ["Vegetation", formatCodeValue(detail && detail.vegetation) || formatCodeValue(bands.landcoverGroup)],
+      ["Vegetation", formatCodeValue(detail && detail.vegetation)],
       ["Boden-pH", chipPhText],
       ["Temperatur", formatCodeValue(bands.temperature)],
       ["Niederschlag", formatCodeValue(bands.precipitation)],
@@ -90,7 +93,7 @@
       ["Hangneigung", formatCodeValue(bands.slope)],
       ["Distanz zu Wasser", formatCodeValue(bands.waterDistance)],
       ["Menschlicher Einfluss", formatCodeValue(bands.humanImpact)],
-      ["Landbedeckung", formatCodeValue(bands.landcoverGroup) || (raw.landcoverClass != null ? String(raw.landcoverClass) : null)],
+      ["Landbedeckung", landcoverFn(bands.landcoverGroup, raw.landcoverClass)],
     ];
   }
 
@@ -253,6 +256,7 @@
     var formatCodeValue = ctx && ctx.formatCodeValue;
     var formatOneDecimal = ctx && ctx.formatOneDecimal;
     var soilPhBandLabel = ctx && ctx.soilPhBandLabel;
+    var landcoverText = ctx && ctx.landcoverText;
 
     if (typeof formatCodeValue !== "function") return;
     if (typeof formatOneDecimal !== "function") return;
@@ -267,7 +271,7 @@
     var bands = ee.bands || {};
     var raw = ee.raw || {};
     var chipPhText = formatSoilPhText(location, formatOneDecimal, soilPhBandLabel, formatCodeValue, detail);
-    var chips = buildClimateChipRows(detail, bands, raw, formatCodeValue, chipPhText);
+    var chips = buildClimateChipRows(detail, bands, raw, formatCodeValue, chipPhText, landcoverText);
     renderChipElements(chipsEl, chips);
   }
 

@@ -41,3 +41,8 @@ build/
 
 # GBIF Arbeitsordner lokal halten
 GBIFdataandCSVSctipts/
+
+# Lokale Dev-Hilfsskripte (WSL-Setup/Diagnose, enthalten lokale Passwoerter) — nie committen
+scripts/*.sh
+scripts/*.sql
+scripts/serve-frontend.py

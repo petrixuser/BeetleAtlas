@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Beetle Box</title>
-    <link rel="stylesheet" href="/styles/app.css?v=5" />
+    <link rel="stylesheet" href="/styles/app.css?v=9" />
   </head>
   <body>
     <main class="page">
@@ -161,11 +161,43 @@
             Klimazone
           <select id="climateFilter">
             <option value="all">Alle</option>
-            <option value="A">A Tropisch</option>
-            <option value="B">B Arid</option>
-            <option value="C">C Gemaessigt</option>
-            <option value="D">D Kalt</option>
-            <option value="E">E Polar</option>
+            <optgroup label="A — Tropisch">
+              <option value="A">A — Tropisch (alle)</option>
+              <option value="Af">Af Regenwald</option>
+              <option value="Am">Am Monsun</option>
+              <option value="Aw">Aw Savanne</option>
+            </optgroup>
+            <optgroup label="B — Arid">
+              <option value="B">B — Arid (alle)</option>
+              <option value="BWh">BWh Wüste heiß</option>
+              <option value="BWk">BWk Wüste kalt</option>
+              <option value="BSh">BSh Steppe heiß</option>
+              <option value="BSk">BSk Steppe kalt</option>
+            </optgroup>
+            <optgroup label="C — Gemäßigt">
+              <option value="C">C — Gemäßigt (alle)</option>
+              <option value="Csa">Csa tr. Sommer, heiß</option>
+              <option value="Csb">Csb tr. Sommer, warm</option>
+              <option value="Csc">Csc tr. Sommer, kühl</option>
+              <option value="Cwa">Cwa tr. Winter, heiß</option>
+              <option value="Cwb">Cwb tr. Winter, warm</option>
+              <option value="Cwc">Cwc tr. Winter, kühl</option>
+              <option value="Cfa">Cfa feucht, heiß</option>
+              <option value="Cfb">Cfb feucht, warm</option>
+              <option value="Cfc">Cfc feucht, kühl</option>
+            </optgroup>
+            <optgroup label="D — Kalt">
+              <option value="D">D — Kalt (alle)</option>
+              <option value="Dsb">Dsb tr. Sommer, warm</option>
+              <option value="Dsc">Dsc tr. Sommer, kühl</option>
+              <option value="Dfb">Dfb feucht, warm</option>
+              <option value="Dfc">Dfc feucht, kühl</option>
+            </optgroup>
+            <optgroup label="E — Polar">
+              <option value="E">E — Polar (alle)</option>
+              <option value="ET">ET Tundra</option>
+              <option value="EF">EF Eis</option>
+            </optgroup>
             <option value="unknown">Unbekannt</option>
           </select>
         </label>
@@ -174,18 +206,20 @@
           Vegetation
           <select id="vegetationFilter">
             <option value="all">Alle</option>
-            <option value="tree_cover">Wald (tropisch-gemaessigt-boreal)</option>
-            <option value="shrubland">Buschland / trockene Vegetation</option>
-            <option value="grassland">Grasland / Savanne</option>
-            <option value="cropland">Ackerland / Kulturland</option>
-            <option value="built_up">Bebaut</option>
-            <option value="bare_sparse">Wueste / Trockengebiete</option>
-            <option value="wetland">Feuchtgebiet / Ueberschwemmung</option>
-            <option value="mangroves">Mangroven</option>
-            <option value="water">Wasser</option>
-            <option value="snow_ice">Schnee/Eis</option>
-            <option value="moss_lichen">Moos/Flechten</option>
-            <option value="unknown">Unbekannt</option>
+            <option value="Tropischer Regenwald">Tropischer Regenwald</option>
+            <option value="Tropischer Trockenwald">Tropischer Trockenwald</option>
+            <option value="Tropischer Nadelwald">Tropischer Nadelwald</option>
+            <option value="Gemäßigter Laubwald">Gemäßigter Laubwald</option>
+            <option value="Gemäßigter Nadelwald">Gemäßigter Nadelwald</option>
+            <option value="Borealer Wald / Taiga">Borealer Wald / Taiga</option>
+            <option value="Tropisches Grasland / Savanne">Tropisches Grasland / Savanne</option>
+            <option value="Gemäßigtes Grasland">Gemäßigtes Grasland</option>
+            <option value="Überschwemmtes Grasland">Überschwemmtes Grasland</option>
+            <option value="Gebirgs-Grasland">Gebirgs-Grasland</option>
+            <option value="Tundra">Tundra</option>
+            <option value="Mittelmeervegetation">Mittelmeervegetation</option>
+            <option value="Wüste / Trockengebiete">Wüste / Trockengebiete</option>
+            <option value="Mangroven">Mangroven</option>
           </select>
         </label>
 
@@ -255,7 +289,7 @@
 
         <label>
           Fundjahr
-          <input id="yearFilter" type="number" min="1800" max="2100" step="1" placeholder="z. B. 2020" />
+          <input id="yearFilter" type="number" min="2000" max="2026" step="1" placeholder="2000 - 2026" />
         </label>
 
         <label>
@@ -362,32 +396,32 @@
     <script src="/config/config.local.js"></script>
     <script src="/data/demo-beetles.js?v=2"></script>
     <script src="/data/featured-beetles.js?v=1"></script>
-    <script src="/data/country-stats.js?v=1"></script>
+    <script src="/data/country-stats.js?v=7"></script>
     <script src="/assets/latin-america-countries.js?v=2"></script>
-    <script src="/js/core/auth.js?v=1"></script>
-    <script src="/js/ui/auth-ui.js?v=4"></script>
+    <script src="/js/core/auth.js?v=2"></script>
+    <script src="/js/ui/auth-ui.js?v=5"></script>
     <script src="/js/ui/app-main-ui.js?v=1"></script>
     <script src="/js/shared/beetle-form.config.js?v=1"></script>
-    <script src="/js/ui/beetle-ui.js?v=3"></script>
-    <script src="/js/shared/app.catalog.js?v=2"></script>
-    <script src="/js/shared/map-legends.js?v=1"></script>
-    <script src="/js/shared/map-common.js?v=2"></script>
-    <script src="/js/shared/beetle-formatters.js?v=1"></script>
+    <script src="/js/ui/beetle-ui.js?v=4"></script>
+    <script src="/js/shared/app.catalog.js?v=4"></script>
+    <script src="/js/shared/map-legends.js?v=3"></script>
+    <script src="/js/shared/map-common.js?v=4"></script>
+    <script src="/js/shared/beetle-formatters.js?v=2"></script>
     <script src="/js/core-parts/app/app.spatial-filter.js?v=1"></script>
     <script>
       window.BEETLE_LEGENDS && window.BEETLE_LEGENDS.renderIndexLegends();
     </script>
-    <script src="/js/core-parts/app/app.utils.js?v=2"></script>
-    <script src="/js/ui/app.country-ui.js?v=2"></script>
+    <script src="/js/core-parts/app/app.utils.js?v=3"></script>
+    <script src="/js/ui/app.country-ui.js?v=8"></script>
     <script src="/js/ui/app.country-events.js?v=1"></script>
-    <script src="/js/core-parts/app/app.events.js?v=3"></script>
+    <script src="/js/core-parts/app/app.events.js?v=4"></script>
     <script src="/js/ui/app.filter-ui.js?v=2"></script>
     <script src="/js/core-parts/app/app.legend.helpers.js?v=1"></script>
-    <script src="/js/core-parts/app/app.legend.controller.js?v=1"></script>
+    <script src="/js/core-parts/app/app.legend.controller.js?v=2"></script>
     <script src="/js/ui/app-map-ui.js?v=2"></script>
-    <script src="/js/core/app.js?v=70"></script>
-    <script src="/js/core-parts/app/app.map.data.js?v=3"></script>
-    <script src="/js/core-parts/app/app.map.bootstrap.js?v=2"></script>
+    <script src="/js/core/app.js?v=77"></script>
+    <script src="/js/core-parts/app/app.map.data.js?v=5"></script>
+    <script src="/js/core-parts/app/app.map.bootstrap.js?v=4"></script>
     <script src="/js/ui/ants.movement.js?v=2"></script>
     <script src="/js/ui/ants.combat.js?v=1"></script>
     <script src="/js/ui/ants.core.js?v=3"></script>

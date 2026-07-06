@@ -318,11 +318,8 @@
 
       this.overlayCanvas = document.createElement('canvas');
       this.overlayCanvas.id = 'antsOverlayCanvas';
-      // Overlay-Ebene (Kreuzungen ueber Medien) ist deaktiviert (siehe
-      // ants.movement.js: scheduleOverlayDiversion). z-index:0 statt 2, damit
-      // selbst bei versehentlicher Reaktivierung nichts ueber dem Inhalt laeuft.
       this.overlayCanvas.style.cssText =
-        'position:absolute;top:0;left:0;pointer-events:none;z-index:0;';
+        'position:absolute;top:0;left:0;pointer-events:none;z-index:2;';
       document.body.appendChild(this.overlayCanvas);
       this.overlayCtx = this.overlayCanvas.getContext('2d');
 

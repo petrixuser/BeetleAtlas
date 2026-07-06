@@ -25,7 +25,7 @@ function scheduleMapPoints() {
 const mapPointsCache = new Map();
 const subtypeExactCache = new Map();
 const LATAM_BOUNDS = (window.MapCommon && window.MapCommon.LATAM_BOUNDS)
-  || { west: -120, south: -60, east: -30, north: 35 };
+  || { west: -160, south: -58, east: -32, north: 34 };
 
 // ===== Caching keys =====
 
@@ -81,7 +81,13 @@ function buildMapPointsBaseQuery(useFullSubtypeBounds) {
   if (temperatureBandFilter.value !== "all") params.set("temperature_band", temperatureBandFilter.value);
   if (precipitationBandFilter.value !== "all") params.set("precipitation_band", precipitationBandFilter.value);
   if (dataQualityFilter.value !== "all") params.set("event_date_quality", dataQualityFilter.value);
-  if (yearFilter.value.trim()) params.set("observed_year", yearFilter.value.trim());
+  // Fundjahr nur senden, wenn es der Backend-Validierung (2000-2026) entspricht,
+  // sonst antwortet /api/map/points mit 422 und die Karte bleibt leer.
+  const mapYearRaw = yearFilter.value.trim();
+  if (/^\d{4}$/.test(mapYearRaw)) {
+    const mapYear = Number(mapYearRaw);
+    if (mapYear >= 2000 && mapYear <= 2026) params.set("observed_year", mapYearRaw);
+  }
   if (imageFilter.value === "with_images") params.set("has_image", "true");
   if (imageFilter.value === "no_images") params.set("has_image", "false");
   params.set("limit", String(MAP_POINTS_LIMIT));
@@ -154,7 +160,9 @@ async function getMapPointsEntry(queryParams, signal) {
   return entry;
 }
 
-// Uebertraegt eine Filterkombination in die Query-Parameter.
+// Uebertraegt eine Filterkombination in die Query-Parameter. Klima-Subtypen (Af)
+// und Vegetationszonen werden roh gesendet; das Backend filtert exakt ueber die
+// vorberechneten Spalten koppen_code / vegetation_zone.
 function applyComboToParams(params, combo) {
   if (combo.climate !== "all") params.set("climate", combo.climate);
   if (combo.vegetation !== "all") params.set("vegetation", combo.vegetation);

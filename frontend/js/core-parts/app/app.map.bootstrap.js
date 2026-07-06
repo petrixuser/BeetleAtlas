@@ -3,7 +3,7 @@ const mapErrorState = document.querySelector("#mapErrorState");
 const googleMapEl = document.querySelector("#googleMap");
 const svgFallbackEl = document.querySelector("#svgFallback");
 const MAP_BOOTSTRAP_BOUNDS = (window.MapCommon && window.MapCommon.LATAM_BOUNDS)
-  || { west: -120, south: -60, east: -30, north: 35 };
+  || { west: -160, south: -58, east: -32, north: 34 };
 let mapBootstrapWatchdogId = null;
 
 // ===== Bootstrap helpers =====

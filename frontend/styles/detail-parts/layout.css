@@ -235,10 +235,6 @@
   background: #dfe8df;
 }
 
-.leaflet-control-layers-toggle {
-  background-image: url("../vendor/leaflet/images/layers.png");
-}
-
 #detailMapWrap + p {
   margin-top: 0.9rem;
 }

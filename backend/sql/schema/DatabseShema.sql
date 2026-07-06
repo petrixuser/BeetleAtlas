@@ -37,6 +37,9 @@ CREATE TABLE IF NOT EXISTS location (
   ecoregion_id INT NULL,
   biome_id INT NULL,
   human_modification FLOAT NULL,
+  koppen_code VARCHAR(8) NULL,
+  vegetation_zone VARCHAR(80) NULL,
+  country_derived VARCHAR(255) NULL,
   PRIMARY KEY (location_id),
   KEY idx_location_lat_lon (latitude, longitude),
   CONSTRAINT chk_location_lat_lng CHECK (latitude BETWEEN -90 AND 90 AND longitude BETWEEN -180 AND 180)

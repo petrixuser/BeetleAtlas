@@ -151,13 +151,19 @@
 
   // Registriert einen Researcher und loggt danach direkt ein.
   async function authRegisterResearcher(email, password, code) {
-    await postJson("/auth/register", {
+    var pending = await postJson("/auth/register", {
       email: email,
       password: password,
       role: "researcher",
       researcher_signup_code: code,
     });
-    return authLogin(email, password);
+
+    if (pending && pending.verification_token) {
+      await postJson("/auth/verify-email", { verification_token: pending.verification_token });
+      return authLogin(email, password);
+    }
+
+    return { status: "pending_verification", email: email, emailSent: Boolean(pending && pending.email_sent) };
   }
 
   // Holt per Refresh-Token einen neuen Access-Token.

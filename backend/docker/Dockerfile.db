@@ -51,6 +51,9 @@ COPY backend/sql/ops/MigrateAuthAndWrite.sql           /docker-entrypoint-initdb
 #     valid created_by; must precede SeedFeaturedData (FK beetle_record.created_by)
 COPY backend/sql/seed/SeedSystemUser.sql               /docker-entrypoint-initdb.d/04b_system_user.sql
 COPY backend/sql/seed/SeedFeaturedData.sql             /docker-entrypoint-initdb.d/05_seed_featured.sql
+# 5c) Vorberechnete Klima-/Vegetationszonen in location laden (aus location_zones.csv)
+#     -- MUSS vor dem Read-Model-Aufbau (06) laufen, damit die Zonen uebernommen werden
+COPY backend/sql/seed/SeedLocationZones.sql              /docker-entrypoint-initdb.d/05c_seed_location_zones.sql
 # 6) Read-model + quality (map_point_read/beetle_list_read from observation+beetle_record) -- needs 3+5
 COPY backend/sql/ops/MigrateReadModelAndQuality.sql    /docker-entrypoint-initdb.d/06_read_model_and_quality.sql
 # 7) Map query indexes

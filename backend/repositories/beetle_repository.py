@@ -7,7 +7,9 @@ from backend.config.beetle_repository_sql import (
     country_overview_sql,
     country_top_beetles_sql,
     country_top_climates_sql,
+    country_top_koppen_sql,
     country_top_vegetation_sql,
+    country_top_vegetation_zone_sql,
     full_enriched_cte_sql,
     full_result_projection_sql,
     lean_enriched_cte_sql,
@@ -312,9 +314,11 @@ def fetch_country_detail_rows(country_code: str):
         overview = conn.execute(text(country_overview_sql()), params).mappings().first()
         climates = conn.execute(text(country_top_climates_sql()), params).mappings().all()
         vegetations = conn.execute(text(country_top_vegetation_sql()), params).mappings().all()
+        koppen = conn.execute(text(country_top_koppen_sql()), params).mappings().all()
+        vegetation_zones = conn.execute(text(country_top_vegetation_zone_sql()), params).mappings().all()
         top_beetles = conn.execute(text(country_top_beetles_sql()), params).mappings().all()
 
-    return overview, climates, vegetations, top_beetles
+    return overview, climates, vegetations, koppen, vegetation_zones, top_beetles
 
 
 def fetch_environment_ranges() -> Dict[str, Optional[float]]:

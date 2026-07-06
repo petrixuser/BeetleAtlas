@@ -231,6 +231,7 @@
     if (ctx.googleMapInstance.overlayMapTypes.getLength() > 0) {
       ctx.googleMapInstance.overlayMapTypes.clear();
     }
+    ctx.googleMapInstance.setOptions({ maxZoom: null });
     if (ctx.climateDataLayer) ctx.climateDataLayer.setMap(null);
     if (ctx.vegetationDataLayer) ctx.vegetationDataLayer.setMap(null);
     document.querySelectorAll(".map-legend").forEach(function (el) { el.classList.add("is-hidden"); });

@@ -231,11 +231,12 @@
     });
   }
 
-  // Erstellt eine Zeile für die Länderanteile.
-  function countryShareRow(label, share) {
+  // Erstellt eine Zeile für die Länderanteile (mit optionaler Farbe).
+  function countryShareRow(label, share, color) {
     var pct = share != null ? Math.round(share * 100) : null;
     var width = pct != null ? Math.max(4, Math.min(100, pct)) : 0;
-    return "\n    <li class=\"ci-share\">\n      <span class=\"ci-share-label\">" + escapeHtml(label) + "</span>\n      <span class=\"ci-share-bar\"><span style=\"width:" + width + "%\"></span></span>\n      <span class=\"ci-share-pct\">" + (pct != null ? pct + " %" : "-") + "</span>\n    </li>";
+    var barStyle = "width:" + width + "%" + (color ? ";background:" + color : "");
+    return "\n    <li class=\"ci-share\">\n      <span class=\"ci-share-label\">" + escapeHtml(label) + "</span>\n      <span class=\"ci-share-bar\"><span style=\"" + barStyle + "\"></span></span>\n      <span class=\"ci-share-pct\">" + (pct != null ? pct + " %" : "-") + "</span>\n    </li>";
   }
 
   window.AppPageUtils = {

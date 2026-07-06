@@ -28,6 +28,16 @@
     var resultList = readElements(ctx).resultList;
     if (!resultList) return;
     resultList.addEventListener("click", function (event) {
+      var delBtn = event.target.closest(".beetle-delete");
+      if (delBtn) {
+        event.preventDefault();
+        event.stopPropagation();
+        if (ctx.actions && typeof ctx.actions.deleteBeetle === "function") {
+          ctx.actions.deleteBeetle(delBtn.getAttribute("data-delete-id"));
+        }
+        return;
+      }
+
       var head = event.target.closest(".species-card-head");
       if (!head) return;
 

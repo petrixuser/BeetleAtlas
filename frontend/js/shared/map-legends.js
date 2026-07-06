@@ -66,21 +66,24 @@
     },
   ];
 
+  // "zone" ist der exakte, vorberechnete Vegetationszonen-Name (Spalte
+  // vegetation_zone in der DB). Danach wird serverseitig gefiltert, damit die
+  // Auswahl exakt den farbigen Kartenpolygonen entspricht.
   var VEGETATION_ROWS = [
-    { key: "tree_cover", color: "#006400", label: "Tropischer Regenwald" },
-    { key: "tree_cover", color: "#55A857", label: "Tropischer Trockenwald" },
-    { key: "tree_cover", color: "#2E8B57", label: "Tropischer Nadelwald" },
-    { key: "tree_cover", color: "#8B9B2E", label: "Gem&auml;&szlig;igter Laubwald" },
-    { key: "tree_cover", color: "#556B2F", label: "Gem&auml;&szlig;igter Nadelwald" },
-    { key: "tree_cover", color: "#1E5C3A", label: "Borealer Wald / Taiga" },
-    { key: "grassland", color: "#C8B400", label: "Tropisches Grasland / Savanne" },
-    { key: "grassland", color: "#C8D250", label: "Gem&auml;&szlig;tes Grasland" },
-    { key: "wetland", color: "#00CED1", label: "&Uuml;berschwemmtes Grasland" },
-    { key: "grassland", color: "#8B7355", label: "Gebirgs-Grasland" },
-    { key: "moss_lichen", color: "#B0C4DE", label: "Tundra" },
-    { key: "shrubland", color: "#D4A84B", label: "Mittelmeervegetation" },
-    { key: "bare_sparse", color: "#F5DEB3", label: "W&uuml;ste / Trockengebiete" },
-    { key: "mangroves", color: "#20B2AA", label: "Mangroven" },
+    { zone: "Tropischer Regenwald", color: "#006400", label: "Tropischer Regenwald" },
+    { zone: "Tropischer Trockenwald", color: "#55A857", label: "Tropischer Trockenwald" },
+    { zone: "Tropischer Nadelwald", color: "#2E8B57", label: "Tropischer Nadelwald" },
+    { zone: "Gemäßigter Laubwald", color: "#8B9B2E", label: "Gem&auml;&szlig;igter Laubwald" },
+    { zone: "Gemäßigter Nadelwald", color: "#556B2F", label: "Gem&auml;&szlig;igter Nadelwald" },
+    { zone: "Borealer Wald / Taiga", color: "#1E5C3A", label: "Borealer Wald / Taiga" },
+    { zone: "Tropisches Grasland / Savanne", color: "#C8B400", label: "Tropisches Grasland / Savanne" },
+    { zone: "Gemäßigtes Grasland", color: "#C8D250", label: "Gem&auml;&szlig;igtes Grasland" },
+    { zone: "Überschwemmtes Grasland", color: "#00CED1", label: "&Uuml;berschwemmtes Grasland" },
+    { zone: "Gebirgs-Grasland", color: "#8B7355", label: "Gebirgs-Grasland" },
+    { zone: "Tundra", color: "#B0C4DE", label: "Tundra" },
+    { zone: "Mittelmeervegetation", color: "#D4A84B", label: "Mittelmeervegetation" },
+    { zone: "Wüste / Trockengebiete", color: "#F5DEB3", label: "W&uuml;ste / Trockengebiete" },
+    { zone: "Mangroven", color: "#20B2AA", label: "Mangroven" },
   ];
 
   // Holt ein DOM-Element per ID.
@@ -163,7 +166,7 @@
   // Baut die Vegetationslegende.
   function buildVegetationLegendHtml(interactive) {
     var items = VEGETATION_ROWS.map(function (row) {
-      var attrs = interactive ? 'data-filter-vegetation="' + row.key + '"' : "";
+      var attrs = interactive ? 'data-filter-vegetation="' + row.zone + '"' : "";
       return buildLegendItem(row.color, row.label, attrs);
     });
 
@@ -196,5 +199,42 @@
 
   window.BEETLE_LEGENDS = {
     renderIndexLegends: renderIndexLegends, renderDetailLegends: renderDetailLegends,
+  };
+
+  // ===== Farb-/Label-Lookups fuer das Laender-Panel (gleiche Farben wie Karte/Detail) =====
+
+  // Wandelt HTML-Entities in echten Text um (fuer saubere Labels im Panel).
+  function decodeEntities(text) {
+    var el = document.createElement("textarea");
+    el.innerHTML = String(text == null ? "" : text);
+    return el.value;
+  }
+
+  // Repraesentative Farbe je Koeppen-Hauptgruppe (A-E).
+  var CLIMATE_MAJOR_COLORS = {
+    A: "#228B22", B: "#F5A623", C: "#78FF50", D: "#38CCFF", E: "#B0B0B0",
+  };
+
+  var KOPPEN_COLORS = {};
+  var KOPPEN_LABELS = {};
+  CLIMATE_GROUPS.forEach(function (group) {
+    group.rows.forEach(function (row) {
+      KOPPEN_COLORS[row.code] = row.color;
+      KOPPEN_LABELS[row.code] = decodeEntities(row.label);
+    });
+  });
+
+  var VEGETATION_ZONE_COLORS = {};
+  VEGETATION_ROWS.forEach(function (row) {
+    VEGETATION_ZONE_COLORS[row.zone] = row.color;
+  });
+
+  window.BEETLE_LEGEND_COLORS = {
+    climateMajorColor: function (code) {
+      return CLIMATE_MAJOR_COLORS[String(code || "").charAt(0).toUpperCase()] || "#9bb59b";
+    },
+    koppenColor: function (code) { return KOPPEN_COLORS[code] || "#9bb59b"; },
+    koppenLabel: function (code) { return KOPPEN_LABELS[code] || code || "Unbekannt"; },
+    vegetationZoneColor: function (zone) { return VEGETATION_ZONE_COLORS[zone] || "#8ba86f"; },
   };
 })();

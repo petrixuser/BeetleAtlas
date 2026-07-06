@@ -687,6 +687,42 @@ button:hover {
   letter-spacing: 0.04em;
   color: var(--accent);
 }
+.ci-subh {
+  margin: 0.6rem 0 0.25rem;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--muted);
+}
+.ci-hint {
+  margin: 0 0 0.4rem;
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+
+/* Admin-only Aktionen (z. B. Kaefer loeschen) - nur sichtbar wenn eingeloggt als Admin */
+.admin-only {
+  display: none;
+}
+body.is-admin .admin-only {
+  display: block;
+}
+.beetle-admin-actions {
+  margin: 0.3rem 0 0.7rem;
+}
+.beetle-delete {
+  background: #b3261e;
+  color: #fff;
+  border: 0;
+  border-radius: 6px;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.beetle-delete:hover {
+  background: #9a2019;
+}
 .ci-kv {
   margin: 0.1rem 0;
   color: var(--text);
@@ -777,6 +813,55 @@ button:hover {
   font-variant-numeric: tabular-nums;
 }
 
+.ci-mlist {
+  list-style: none;
+  margin: 0.3rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.ci-mrow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.ci-mrow-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+}
+.ci-mrow-name {
+  color: var(--text);
+}
+.ci-mrow-avg {
+  color: var(--text);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.ci-mrow-bar {
+  height: 0.55rem;
+  background: var(--accent-soft);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.ci-mrow-bar > span {
+  display: block;
+  height: 100%;
+  border-radius: 99px;
+}
+.ci-mrow-mm {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: 0.7rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
 /* ============================================================
    Ergebnisliste und Detailkarten
    ============================================================ */
@@ -787,8 +872,10 @@ button:hover {
 }
 
 @media (min-width: 980px) {
-  body.country-sidebar-open .content {
-    padding-right: min(360px, calc(100vw - 2rem));
+  body.country-sidebar-open .content,
+  body.country-sidebar-open .map-header {
+
+    padding-right: max(0px, calc(372px - 50vw + min(550px, 50vw - 1rem)));
     transition: padding-right 180ms ease;
   }
 }
@@ -822,7 +909,8 @@ button:hover {
     padding-left: 0;
   }
 
-  body.country-sidebar-open .content {
+  body.country-sidebar-open .content,
+  body.country-sidebar-open .map-header {
     padding-right: 0;
   }
 }

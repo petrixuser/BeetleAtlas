@@ -98,6 +98,11 @@
   // Zentrale Uebersetzung technischer Klassen/Codes kommt aus dem Shared-Catalog.
   var CODE_VALUE_DE = APP_CATALOG.CODE_VALUE_DE || {};
 
+  // Uebersetzt einen numerischen Landbedeckungs-Code in eine deutsche Bezeichnung.
+  var landcoverClassLabelFn = typeof APP_CATALOG.landcoverClassLabel === "function"
+    ? APP_CATALOG.landcoverClassLabel
+    : function () { return null; };
+
   // ===== Domain formatting =====
 
   function formatCodeValue(value) {
@@ -111,6 +116,15 @@
     var text = key.replace(/_/g, " ").trim();
     if (!text) return null;
     return text.charAt(0).toUpperCase() + text.slice(1);
+  }
+
+  // Baut die Landbedeckungs-Anzeige: bevorzugt die deutsche Gruppenbezeichnung,
+  function landcoverText(landcoverGroup, landcoverClass) {
+    var groupText = formatCodeValue(landcoverGroup);
+    if (groupText && groupText !== "Unbekannt") return groupText;
+    var classText = landcoverClassLabelFn(landcoverClass);
+    if (classText) return classText;
+    return groupText || null;
   }
 
   // Kombiniert numerischen Wert und Klassenband in ein gemeinsames Label.
@@ -238,6 +252,7 @@
       formatCodeValue: formatCodeValue,
       formatOneDecimal: formatOneDecimal,
       soilPhBandLabel: soilPhBandLabel,
+      landcoverText: landcoverText,
     });
   }
 
@@ -508,7 +523,7 @@
       ["Region", location.region],
       ["Stadt", location.city],
       ["Hoehe", elevationText(detail)],
-      ["Vegetation", formatCodeValue(detail && detail.vegetation) || formatCodeValue(bands.landcoverGroup)],
+      ["Vegetation", formatCodeValue(detail && detail.vegetation)],
       ["Koordinaten-Unschaerfe", location.coordinateUncertainty != null ? location.coordinateUncertainty + " m" : null],
       ["Organischer Bodenkohlenstoff", location.soilOrganicCarbon != null ? formatThreeDecimals(location.soilOrganicCarbon) + " %" : null,],
       ["WorldClim Jahresmitteltemperatur", location.worldclimBio01 != null ? formatOneDecimal(location.worldclimBio01) + " °C" : null,],
@@ -523,7 +538,7 @@
       ["Hangneigung", raw.slope != null ? formatOneDecimal(raw.slope) + " °" : null],
       ["Distanz zu Wasser", raw.distanceToWaterM != null ? Math.round(Number(raw.distanceToWaterM)) + " m" : null,],
       ["Menschlicher Einfluss", raw.humanModification != null ? formatThreeDecimals(raw.humanModification) : null,],
-      ["Landbedeckung", raw.landcoverClass != null ? String(raw.landcoverClass) : null],
+      ["Landbedeckung", landcoverText(bands.landcoverGroup, raw.landcoverClass)],
     ];
   }
   // ===== Data loading =====

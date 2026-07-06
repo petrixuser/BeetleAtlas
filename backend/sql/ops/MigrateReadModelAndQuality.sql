@@ -315,11 +315,6 @@ WHERE table_schema = DATABASE()
 ORDER BY table_name, constraint_name;
 
 
--- END backend/sql/ops/MigrateDataQualityAndHistory.sql
-
-
--- BEGIN backend/sql/ops/MigrateMapPointReadModel.sql
-
 USE beetle_db;
 
 CREATE TABLE IF NOT EXISTS map_point_read (
@@ -337,6 +332,8 @@ CREATE TABLE IF NOT EXISTS map_point_read (
   elevation DOUBLE NULL,
   climate VARCHAR(32) NOT NULL,
   vegetation VARCHAR(32) NOT NULL,
+  koppen_code VARCHAR(8) NULL,
+  vegetation_zone VARCHAR(80) NULL,
   elevation_group VARCHAR(32) NOT NULL,
   refreshed_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (entity_id),
@@ -344,6 +341,8 @@ CREATE TABLE IF NOT EXISTS map_point_read (
   KEY idx_mpr_country_bbox (country, lng, lat),
   KEY idx_mpr_climate_bbox (climate, lng, lat),
   KEY idx_mpr_vegetation_bbox (vegetation, lng, lat),
+  KEY idx_mpr_koppen_bbox (koppen_code, lng, lat),
+  KEY idx_mpr_vegzone_bbox (vegetation_zone, lng, lat),
   KEY idx_mpr_elevation_group_bbox (elevation_group, lng, lat),
   KEY idx_mpr_filters_bbox (climate, vegetation, elevation_group, country, lng, lat),
   KEY idx_mpr_observed_at (observed_at),
@@ -371,6 +370,8 @@ BEGIN
     elevation,
     climate,
     vegetation,
+    koppen_code,
+    vegetation_zone,
     elevation_group,
     refreshed_at
   )
@@ -389,10 +390,12 @@ BEGIN
       NULLIF(TRIM(l.country), ''),
       'Unbekannt'
     ) AS location,
-    l.country,
+    COALESCE(l.country_derived, l.country) AS country,
     CAST(l.latitude AS DECIMAL(9,6)) AS lat,
     CAST(l.longitude AS DECIMAL(9,6)) AS lng,
     l.elevation,
+    COALESCE(
+    NULLIF(LEFT(l.koppen_code, 1), ''),
     CASE
       WHEN (
         CASE
@@ -425,7 +428,8 @@ BEGIN
         END
       ) < 10 THEN 'D'
       ELSE 'C'
-    END AS climate,
+    END
+    ) AS climate,
     CASE
       WHEN l.biome_id IN (1, 2, 3, 4, 5, 6) THEN 'tree_cover'
       WHEN l.biome_id IN (7, 8, 10) THEN 'grassland'
@@ -447,6 +451,8 @@ BEGIN
       WHEN l.landcover_class = 100 THEN 'moss_lichen'
       ELSE 'unknown'
     END AS vegetation,
+    l.koppen_code,
+    l.vegetation_zone,
     CASE
       WHEN l.elevation IS NULL THEN '0_100'
       WHEN l.elevation < 100 THEN '0_100'
@@ -517,6 +523,8 @@ BEGIN
       WHEN br.landcover_class = 100 THEN 'moss_lichen'
       ELSE 'unknown'
     END AS vegetation,
+    NULL AS koppen_code,
+    NULL AS vegetation_zone,
     CASE
       WHEN br.elevation IS NULL THEN '0_100'
       WHEN br.elevation < 100 THEN '0_100'
@@ -537,11 +545,6 @@ DELIMITER ;
 
 CALL refresh_map_point_read();
 
-
--- END backend/sql/ops/MigrateMapPointReadModel.sql
-
-
--- BEGIN backend/sql/ops/AddMapPointReadListIndexes.sql
 
 USE beetle_db;
 
@@ -650,12 +653,6 @@ PREPARE stmt FROM @sql;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
-
--- END backend/sql/ops/AddMapPointReadListIndexes.sql
-
-
--- BEGIN backend/sql/ops/MigrateBeetleListReadModel.sql
-
 USE beetle_db;
 
 -- Materialized read model for fast /api/beetles compact list responses.
@@ -670,11 +667,16 @@ CREATE TABLE IF NOT EXISTS beetle_list_read (
   location VARCHAR(1024) NULL,
   climate VARCHAR(32) NOT NULL,
   vegetation VARCHAR(32) NOT NULL,
+  koppen_code VARCHAR(8) NULL,
+  vegetation_zone VARCHAR(80) NULL,
   elevation DOUBLE NULL,
   elevation_group VARCHAR(32) NOT NULL,
   lat DECIMAL(9,6) NOT NULL,
   lng DECIMAL(9,6) NOT NULL,
   has_image TINYINT(1) NOT NULL DEFAULT 0,
+  temperature DOUBLE NULL,
+  precipitation DOUBLE NULL,
+  soil_ph DOUBLE NULL,
   soil_ph_band VARCHAR(32) NOT NULL DEFAULT 'unknown',
   temperature_band VARCHAR(32) NOT NULL DEFAULT 'unknown',
   precipitation_band VARCHAR(32) NOT NULL DEFAULT 'unknown',
@@ -685,6 +687,8 @@ CREATE TABLE IF NOT EXISTS beetle_list_read (
   KEY idx_blr_country_entity (country, entity_id),
   KEY idx_blr_climate_entity (climate, entity_id),
   KEY idx_blr_vegetation_entity (vegetation, entity_id),
+  KEY idx_blr_koppen_entity (koppen_code, entity_id),
+  KEY idx_blr_vegzone_entity (vegetation_zone, entity_id),
   KEY idx_blr_elevation_group_entity (elevation_group, entity_id),
   KEY idx_blr_bbox_lng_lat (lng, lat),
   KEY idx_blr_has_image_entity (has_image, entity_id),
@@ -710,6 +714,8 @@ CREATE TABLE IF NOT EXISTS beetle_list_filter_count_read (
   PRIMARY KEY (dim_name, dim_value)
 ) ENGINE=InnoDB;
 
+SET SESSION sql_mode = '';
+
 TRUNCATE TABLE beetle_list_read;
 
 INSERT INTO beetle_list_read (
@@ -728,6 +734,9 @@ INSERT INTO beetle_list_read (
   lat,
   lng,
   has_image,
+  temperature,
+  precipitation,
+  soil_ph,
   soil_ph_band,
   temperature_band,
   precipitation_band,
@@ -763,6 +772,24 @@ SELECT
     ) THEN 1
     ELSE 0
   END AS has_image,
+  COALESCE(
+    br.temperature,
+    lc.avg_temperature,
+    CASE
+      WHEN l.worldclim_bio01 IS NULL OR l.worldclim_bio01 = -9999 THEN NULL
+      WHEN l.worldclim_bio01 > 80 THEN l.worldclim_bio01 / 10
+      ELSE l.worldclim_bio01
+    END
+  ) AS temperature,
+  COALESCE(br.precipitation, lc.precipitation, l.worldclim_bio12) AS precipitation,
+  COALESCE(
+    br.soil_ph,
+    CASE
+      WHEN l.soil_ph IS NULL OR l.soil_ph = -9999 THEN NULL
+      WHEN l.soil_ph > 14 THEN l.soil_ph / 10
+      ELSE l.soil_ph
+    END
+  ) AS soil_ph,
   CASE
     WHEN COALESCE(
       br.soil_ph,
@@ -865,7 +892,24 @@ LEFT JOIN location l
   ON l.location_id = o.location_id
 LEFT JOIN beetle_record br
   ON m.source_type = 'manual'
- AND br.record_id = m.record_id;
+ AND br.record_id = m.record_id
+LEFT JOIN climate_snapshot lc
+  ON lc.location_id = l.location_id
+ AND lc.snapshot_date = (
+      SELECT MAX(cs2.snapshot_date)
+      FROM climate_snapshot cs2
+      WHERE cs2.location_id = l.location_id
+        AND cs2.snapshot_date <= COALESCE(
+              o.event_date_parsed,
+              STR_TO_DATE(LEFT(o.event_date, 10), '%Y-%m-%d'),
+              DATE('9999-12-31')
+            )
+    );
+
+UPDATE beetle_list_read e
+JOIN map_point_read m ON m.entity_id = e.entity_id
+SET e.koppen_code = m.koppen_code,
+    e.vegetation_zone = m.vegetation_zone;
 
 REPLACE INTO beetle_list_meta_read(metric_key, metric_value, refreshed_at)
 SELECT 'total_rows', COUNT(*), NOW() FROM beetle_list_read;
@@ -1401,6 +1445,9 @@ INSERT INTO beetle_list_read (
   lat,
   lng,
   has_image,
+  temperature,
+  precipitation,
+  soil_ph,
   soil_ph_band,
   temperature_band,
   precipitation_band,
@@ -1436,6 +1483,24 @@ SELECT
     ) THEN 1
     ELSE 0
   END AS has_image,
+  COALESCE(
+    br.temperature,
+    lc.avg_temperature,
+    CASE
+      WHEN l.worldclim_bio01 IS NULL OR l.worldclim_bio01 = -9999 THEN NULL
+      WHEN l.worldclim_bio01 > 80 THEN l.worldclim_bio01 / 10
+      ELSE l.worldclim_bio01
+    END
+  ) AS temperature,
+  COALESCE(br.precipitation, lc.precipitation, l.worldclim_bio12) AS precipitation,
+  COALESCE(
+    br.soil_ph,
+    CASE
+      WHEN l.soil_ph IS NULL OR l.soil_ph = -9999 THEN NULL
+      WHEN l.soil_ph > 14 THEN l.soil_ph / 10
+      ELSE l.soil_ph
+    END
+  ) AS soil_ph,
   CASE
     WHEN COALESCE(
       br.soil_ph,
@@ -1539,6 +1604,18 @@ LEFT JOIN location l
 LEFT JOIN beetle_record br
   ON m.source_type = 'manual'
  AND br.record_id = m.record_id
+LEFT JOIN climate_snapshot lc
+  ON lc.location_id = l.location_id
+ AND lc.snapshot_date = (
+      SELECT MAX(cs2.snapshot_date)
+      FROM climate_snapshot cs2
+      WHERE cs2.location_id = l.location_id
+        AND cs2.snapshot_date <= COALESCE(
+              o.event_date_parsed,
+              STR_TO_DATE(LEFT(o.event_date, 10), '%Y-%m-%d'),
+              DATE('9999-12-31')
+            )
+    )
 WHERE m.entity_id = vEntity;
 END$$
 DELIMITER ;

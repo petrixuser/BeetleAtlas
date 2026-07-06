@@ -42,12 +42,16 @@
     });
   }
 
-  // Overlay-Kreuzungen deaktiviert: Ameisen sollen NICHT ueber Karte/Boxen laufen.
-  // Sie bleiben damit ausschliesslich auf der Hintergrund-Ebene (z-index:0) hinter
-  // dem Seiteninhalt; das Overlay-Canvas (z-index:2) bleibt leer.
+  // Steuert das Intervall, in dem Ameisen in den Overlay-Stream umgeleitet werden
+  // (einzelne Ameisen laufen quer ueber die Seite und reihen sich rechts wieder ein).
   function scheduleOverlayDiversion(sim, dt) {
-    void sim;
-    void dt;
+    sim.overlaySpawnMs -= dt;
+    if (sim.overlaySpawnMs > 0) return;
+
+    var diverted = sim.divertTrailAntToOverlay();
+    sim.overlaySpawnMs = diverted
+      ? (3200 + Math.random() * 5200)
+      : (700 + Math.random() * 900);
   }
 
   // Bewegt Overlay-Ameisen frameunabhaengig mit Delta-Zeit.

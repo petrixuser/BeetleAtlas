@@ -110,6 +110,18 @@ def location_fallback_sql(row_alias: str = "b", include_location_column: bool = 
     """
 
 
+def climate_major_sql(koppen_expr: str, fallback_sql: str) -> str:
+    """Klima-Hauptgruppe (A-E): bevorzugt den vorberechneten Koeppen-Code
+    faellt nur bei fehlendem Code auf die alte Temperatur-/Niederschlags-Heuristik
+    zurueck. So sind Karte, Liste, Detail und Laenderpanel konsistent."""
+    return f"""
+        CASE
+            WHEN {koppen_expr} IS NOT NULL AND {koppen_expr} <> '' THEN LEFT({koppen_expr}, 1)
+            ELSE ({fallback_sql})
+        END
+    """
+
+
 def full_enriched_cte_sql(base_where_sql: str, media_where_sql: str = "") -> str:
     """Build full list/detail base+enriched CTE SQL with classifications.
 
@@ -155,6 +167,7 @@ def full_enriched_cte_sql(base_where_sql: str, media_where_sql: str = "") -> str
                 l.landcover_class,
                 l.biome_id,
                 l.ecoregion_id,
+                l.koppen_code,
                 l.distance_to_water_m,
                 l.human_modification,
                 l.slope,
@@ -208,6 +221,7 @@ def full_enriched_cte_sql(base_where_sql: str, media_where_sql: str = "") -> str
                 br.landcover_class,
                 br.biome_id,
                 br.ecoregion_id,
+                NULL AS koppen_code,
                 br.distance_to_water_m,
                 br.human_modification,
                 br.slope,
@@ -243,7 +257,7 @@ def full_enriched_cte_sql(base_where_sql: str, media_where_sql: str = "") -> str
                 b.latitude AS lat,
                 b.longitude AS lng,
                 {location_fallback_sql("b")} AS location,
-                {CLIMATE_CASE_SQL} AS climate,
+                {climate_major_sql("b.koppen_code", CLIMATE_CASE_SQL)} AS climate,
                 {VEGETATION_CASE_SQL} AS vegetation,
                 {ELEVATION_GROUP_CASE_SQL} AS elevationGroup,
                 {TEMPERATURE_BAND_CASE_SQL} AS temperature_band,
@@ -335,6 +349,7 @@ def lean_enriched_cte_sql(base_where_sql: str) -> str:
                 l.landcover_class,
                 l.biome_id,
                 l.ecoregion_id,
+                l.koppen_code,
                 {normalized_soil_ph_sql("l")} AS soil_ph,
                 {normalized_soil_organic_carbon_sql("l")} AS soil_organic_carbon,
                 {normalized_worldclim_bio01_sql("l")} AS worldclim_bio01,
@@ -376,6 +391,7 @@ def lean_enriched_cte_sql(base_where_sql: str) -> str:
                 br.landcover_class,
                 br.biome_id,
                 br.ecoregion_id,
+                NULL AS koppen_code,
                 br.soil_ph,
                 br.soil_organic_carbon,
                 br.worldclim_bio01,
@@ -397,7 +413,7 @@ def lean_enriched_cte_sql(base_where_sql: str) -> str:
                 b.latitude AS lat,
                 b.longitude AS lng,
                 {location_fallback_sql("b")} AS location,
-                {CLIMATE_CASE_SQL} AS climate,
+                {climate_major_sql("b.koppen_code", CLIMATE_CASE_SQL)} AS climate,
                 {VEGETATION_CASE_SQL} AS vegetation,
                 {ELEVATION_GROUP_CASE_SQL} AS elevationGroup,
                 b.elevation,
@@ -513,7 +529,10 @@ def compact_result_projection_sql(alias: str = "e") -> str:
             {alias}.climate,
             {alias}.vegetation,
             {alias}.elevation,
-            NULL AS temperature,
+            {alias}.temperature,
+            {alias}.precipitation,
+            {alias}.soil_ph AS soilPh,
+            {alias}.soil_ph_band AS soilPhBand,
             NULL AS soil,
             (
                 SELECT MIN(m.image_url)
@@ -550,7 +569,20 @@ def _country_base_with_snapshot_cte_sql(base_columns_sql: str) -> str:
                     lc.avg_temperature,
                     {normalized_worldclim_bio01_sql("l")}
                 ) AS temperature_value,
-                COALESCE(lc.precipitation, l.worldclim_bio12) AS precipitation_value
+                NULLIF(l.worldclim_bio12, -9999) AS precipitation_value,
+                NULLIF(lc.soil_moisture, -9999) AS soil_moisture_value,
+                NULLIF(lc.ndvi, -9999) AS ndvi_value,
+                NULLIF(NULLIF(lc.relative_humidity, -9999), 0) AS humidity_value,
+                NULLIF(NULLIF(lc.surface_pressure_hpa, -9999), 0) AS pressure_value,
+                NULLIF(lc.nighttime_lights, -9999) AS light_value,
+                NULLIF(l.slope, -9999) AS slope_value,
+                NULLIF(l.distance_to_water_m, -9999) AS water_distance_value,
+                NULLIF(l.human_modification, -9999) AS human_modification_value,
+                CASE
+                    WHEN l.soil_ph IS NULL OR l.soil_ph = -9999 OR l.soil_ph <= 0 THEN NULL
+                    WHEN l.soil_ph > 14 THEN l.soil_ph / 10
+                    ELSE l.soil_ph
+                END AS soil_ph_value
             FROM observation o
             JOIN location l ON l.location_id = o.location_id
             {latest_snapshot_join_sql("l", "o")}
@@ -570,6 +602,15 @@ def country_overview_sql() -> str:
                 b.elevation,
                 b.temperature_value,
                 b.precipitation_value,
+                b.soil_moisture_value,
+                b.ndvi_value,
+                b.humidity_value,
+                b.soil_ph_value,
+                b.pressure_value,
+                b.light_value,
+                b.slope_value,
+                b.water_distance_value,
+                b.human_modification_value,
                 {CLIMATE_CASE_SQL} AS climate,
                 {VEGETATION_CASE_SQL} AS vegetation
             FROM base b
@@ -580,25 +621,56 @@ def country_overview_sql() -> str:
             MIN(elevation) AS min_elevation,
             AVG(elevation) AS avg_elevation,
             MAX(elevation) AS max_elevation,
+            MIN(temperature_value) AS min_temperature,
             AVG(temperature_value) AS avg_temperature,
+            MAX(temperature_value) AS max_temperature,
+            MIN(precipitation_value) AS min_precipitation,
             AVG(precipitation_value) AS avg_precipitation,
+            MAX(precipitation_value) AS max_precipitation,
+            MIN(soil_moisture_value) AS min_soil_moisture,
+            AVG(soil_moisture_value) AS avg_soil_moisture,
+            MAX(soil_moisture_value) AS max_soil_moisture,
+            MIN(ndvi_value) AS min_ndvi,
+            AVG(ndvi_value) AS avg_ndvi,
+            MAX(ndvi_value) AS max_ndvi,
+            MIN(humidity_value) AS min_humidity,
+            AVG(humidity_value) AS avg_humidity,
+            MAX(humidity_value) AS max_humidity,
+            MIN(soil_ph_value) AS min_soil_ph,
+            AVG(soil_ph_value) AS avg_soil_ph,
+            MAX(soil_ph_value) AS max_soil_ph,
+            MIN(pressure_value) AS min_pressure,
+            AVG(pressure_value) AS avg_pressure,
+            MAX(pressure_value) AS max_pressure,
+            MIN(light_value) AS min_light,
+            AVG(light_value) AS avg_light,
+            MAX(light_value) AS max_light,
+            MIN(slope_value) AS min_slope,
+            AVG(slope_value) AS avg_slope,
+            MAX(slope_value) AS max_slope,
+            MIN(water_distance_value) AS min_water_distance,
+            AVG(water_distance_value) AS avg_water_distance,
+            MAX(water_distance_value) AS max_water_distance,
+            MIN(human_modification_value) AS min_human_modification,
+            AVG(human_modification_value) AS avg_human_modification,
+            MAX(human_modification_value) AS max_human_modification,
             MIN(country) AS country_name
         FROM enriched
     """
 
 
 def country_top_climates_sql() -> str:
-    """Return SQL for top climate buckets per country."""
-    return f"""
-        {_country_base_with_snapshot_cte_sql("l.country")},
-        enriched AS (
-            SELECT {CLIMATE_CASE_SQL} AS climate FROM base b
-        )
-        SELECT climate, COUNT(*) AS cnt
-        FROM enriched
-        GROUP BY climate
+    """Top Klima-Hauptgruppen (A-E) je Land, abgeleitet aus dem vorberechneten
+    Koeppen-Subtyp (koppen_code). So sind Hauptgruppen und Subtypen (country_top_koppen_sql)
+    konsistent und entsprechen den Kartenpolygonen (Standard Koeppen-Geiger)."""
+    return """
+        SELECT LEFT(l.koppen_code, 1) AS climate, COUNT(*) AS cnt
+        FROM observation o
+        JOIN location l ON l.location_id = o.location_id
+        WHERE l.country = :country_code AND l.koppen_code IS NOT NULL AND l.koppen_code <> ''
+        GROUP BY LEFT(l.koppen_code, 1)
         ORDER BY cnt DESC, climate ASC
-        LIMIT 3
+        LIMIT 5
     """
 
 
@@ -619,6 +691,32 @@ def country_top_vegetation_sql() -> str:
         GROUP BY vegetation
         ORDER BY cnt DESC, vegetation ASC
         LIMIT 3
+    """
+
+
+def country_top_koppen_sql() -> str:
+    """Top Koeppen-Subtypen (vorberechnete Kartenzonen) je Land."""
+    return """
+        SELECT l.koppen_code AS koppen, COUNT(*) AS cnt
+        FROM observation o
+        JOIN location l ON l.location_id = o.location_id
+        WHERE l.country = :country_code AND l.koppen_code IS NOT NULL AND l.koppen_code <> ''
+        GROUP BY l.koppen_code
+        ORDER BY cnt DESC, koppen ASC
+        LIMIT 6
+    """
+
+
+def country_top_vegetation_zone_sql() -> str:
+    """Top Vegetationszonen (vorberechnete Oekoregionen) je Land."""
+    return """
+        SELECT l.vegetation_zone AS zone, COUNT(*) AS cnt
+        FROM observation o
+        JOIN location l ON l.location_id = o.location_id
+        WHERE l.country = :country_code AND l.vegetation_zone IS NOT NULL AND l.vegetation_zone <> ''
+        GROUP BY l.vegetation_zone
+        ORDER BY cnt DESC, zone ASC
+        LIMIT 6
     """
 
 

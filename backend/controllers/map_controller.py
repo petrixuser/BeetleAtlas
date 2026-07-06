@@ -7,6 +7,7 @@ from typing import Any, Dict, List, Optional, Tuple
 from backend.config.climate_subtypes import is_climate_subtype_code, parent_climate_code
 from backend.controllers.beetle_controller import build_read_model_where, list_beetles_controller
 from backend.controllers.core_controller import parse_bbox_or_error
+from backend.core.beetle_filter_helpers import append_climate_filter, append_vegetation_filter
 from backend.repositories.map_repository import (
     _cluster_cell_size,
     build_map_geojson,
@@ -302,7 +303,7 @@ def _build_lean_where_and_params(
     bbox: str,
     q: Optional[str],
     country: Optional[str],
-    normalized_climate: Optional[str],
+    climate: Optional[str],
     vegetation: Optional[str],
     elevation: Optional[str],
 ) -> Tuple[str, str, Dict[str, Any]]:
@@ -313,11 +314,11 @@ def _build_lean_where_and_params(
     if q:
         base_filters.append("(b.name LIKE :q OR b.family LIKE :q OR b.location LIKE :q)")
         params["q"] = f"%{q.strip()}%"
-    _append_exact_or_in_filter(filters, params, "e.climate", "climate", normalized_climate)
+    append_climate_filter(filters, params, "e.climate", climate, "e.koppen_code")
     if country:
         base_filters.append("b.country = :country")
         params["country"] = country
-    _append_exact_or_in_filter(filters, params, "e.vegetation", "vegetation", vegetation)
+    append_vegetation_filter(filters, params, "e.vegetation", vegetation, "e.vegetation_zone")
     _append_exact_or_in_filter(filters, params, "e.elevationGroup", "elevation", elevation)
 
     if bbox:
@@ -391,7 +392,7 @@ def _map_points_controller_lean(
         bbox=bbox,
         q=q,
         country=country,
-        normalized_climate=normalized_climate,
+        climate=climate,
         vegetation=vegetation,
         elevation=elevation,
     )

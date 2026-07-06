@@ -95,16 +95,21 @@ def register_controller(payload: RegisterRequest) -> RegisterPendingResponse:
         expires_at=verification_expires_at,
     )
 
+    email_sent = False
     if should_send_verification_email():
         try:
             send_verification_email(email=email, verification_token=verification_token)
+            email_sent = True
         except Exception:
             raise_api_error(503, ERR.AUTH.EMAIL_DELIVERY_FAILED, "Could not deliver verification email.")
 
     return RegisterPendingResponse(
         status="pending_verification",
         email=email,
-        verification_token=verification_token,
+        # Bei echtem Mailversand den Token NICHT preisgeben -> Nutzer muss den
+        # Link in der E-Mail anklicken. Ohne Mailversand (Dev) direkt mitgeben.
+        verification_token=None if email_sent else verification_token,
+        email_sent=email_sent,
         verification_expires_in=verification_ttl_seconds,
     )
 

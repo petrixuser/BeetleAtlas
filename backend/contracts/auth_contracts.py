@@ -35,7 +35,8 @@ class RegisterRequest(BaseModel):
 class RegisterPendingResponse(BaseModel):
     status: Literal["pending_verification"] = "pending_verification"
     email: EmailStr
-    verification_token: str
+    verification_token: str | None = None
+    email_sent: bool = False
     verification_expires_in: int
 
 

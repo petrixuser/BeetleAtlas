@@ -243,7 +243,11 @@ function buildBeetleQuery(overrides = null) {
   if (temperatureBandFilter.value !== "all") params.set("temperature_band", temperatureBandFilter.value);
   if (precipitationBandFilter.value !== "all") params.set("precipitation_band", precipitationBandFilter.value);
   if (dataQualityFilter.value !== "all") params.set("event_date_quality", dataQualityFilter.value);
-  if (yearFilter.value.trim()) params.set("observed_year", yearFilter.value.trim());
+  const yearRaw = yearFilter.value.trim();
+  if (/^\d{4}$/.test(yearRaw)) {
+    const year = Number(yearRaw);
+    if (year >= 2000 && year <= 2026) params.set("observed_year", yearRaw);
+  }
   if (imageFilter.value === "with_images") params.set("has_image", "true");
   if (imageFilter.value === "no_images") params.set("has_image", "false");
   params.set("limit", String(BEETLE_FETCH_LIMIT));
@@ -275,6 +279,7 @@ function hasActiveFilters() {
 let featuredMode = false;
 const beetlesCache = new Map();
 let browseBeetlesCache = null;
+let listLoadError = false;
 
 function shuffleList(items) {
   const list = Array.isArray(items) ? items.slice() : [];
@@ -314,6 +319,7 @@ async function loadBrowseBeetles(forceRefresh, requestToken = 0) {
     } catch (error) {
       console.error("Stoeber-Modus konnte nicht aus dem Backend geladen werden:", error);
       // Do not silently switch to demo data when API mode is active.
+      listLoadError = true;
       beetles = Array.isArray(beetles) ? beetles : [];
       totalBeetles = Number.isFinite(totalBeetles) ? totalBeetles : beetles.length;
       return;
@@ -331,6 +337,7 @@ async function loadBeetles(options = {}) {
   const forceBrowseRefresh = !!options.forceBrowseRefresh;
   const requestToken = Number(options.requestToken || 0);
   const activeFilters = hasActiveFilters();
+  listLoadError = false;
 
   if (!activeFilters && selectedResultMode === RESULT_MODE_FEATURED && (window.FEATURED_BEETLES?.length)) {
     featuredMode = true;
@@ -403,6 +410,7 @@ async function loadBeetles(options = {}) {
   } catch (error) {
     console.error("Kaeferdaten konnten nicht geladen werden:", error);
     // Keep last server state; no demo fallback in API mode.
+    listLoadError = true;
     beetles = Array.isArray(beetles) ? beetles : [];
     totalBeetles = Number.isFinite(totalBeetles) ? totalBeetles : beetles.length;
   }
@@ -712,6 +720,10 @@ function activeFilterContextLabel() {
 
 // Aktualisiert den Ergebniskopf mit Trefferzahl und aktivem Filterkontext.
 function updateResultHeading(shown) {
+  if (listLoadError) {
+    resultHeading.textContent = "Fehler beim Laden neuer Kaefer - bitte Filter pruefen (z. B. Fundjahr 2000-2026) und erneut versuchen";
+    return;
+  }
   if (featuredMode) {
     resultHeading.textContent = "Bekannte Kaefer Lateinamerikas";
     return;
@@ -763,7 +775,7 @@ function updateResultPager(shown) {
   const page = Math.floor(listOffset / LIST_PAGE_SIZE) + 1;
   const pages = Math.max(1, Math.ceil(totalBeetles / LIST_PAGE_SIZE));
   const hasPrev = listOffset > 0;
-  const hasNext = listOffset + LIST_PAGE_SIZE < totalBeetles;
+  const hasNext = listOffset + LIST_PAGE_SIZE < totalBeetles && listOffset + LIST_PAGE_SIZE <= API_MAX_OFFSET;
 
   const pagerHtml = `
     <div class="result-pager-meta">Seite ${page}/${pages} | ${start}-${end} von ${totalBeetles}</div>
@@ -777,8 +789,14 @@ function updateResultPager(shown) {
     el.innerHTML = pagerHtml;
     const prevBtn = el.querySelector('[data-page="prev"]');
     const nextBtn = el.querySelector('[data-page="next"]');
+
+    const clearPinForPaging = () => {
+      pinnedBeetle = null;
+      pendingPinnedBeetleId = null;
+    };
     if (prevBtn) {
       prevBtn.addEventListener("click", () => {
+        clearPinForPaging();
         applyFilters({
           keepPage: true,
           pageOffset: Math.max(0, listOffset - LIST_PAGE_SIZE),
@@ -789,9 +807,10 @@ function updateResultPager(shown) {
     }
     if (nextBtn) {
       nextBtn.addEventListener("click", () => {
+        clearPinForPaging();
         applyFilters({
           keepPage: true,
-          pageOffset: listOffset + LIST_PAGE_SIZE,
+          pageOffset: Math.min(listOffset + LIST_PAGE_SIZE, API_MAX_OFFSET),
           forceBrowseRefresh: selectedResultMode === RESULT_MODE_BROWSE,
           suppressMapRefresh: selectedResultMode === RESULT_MODE_BROWSE,
         });
@@ -1016,6 +1035,13 @@ function formatTemperature(value) {
   return fn(value);
 }
 
+// Formatiert Niederschlagswerte (mm) fuer die Listenansicht.
+function formatPrecipitation(value) {
+  if (value === null || value === undefined || value === "") return "--";
+  const num = Number(value);
+  return Number.isFinite(num) ? Math.round(num) + " mm" : "--";
+}
+
 // Baut die URL zur Detailseite fuer einen Kaefer.
 function detailPageUrl(beetleId) {
   const fn = AppPageUtils.detailPageUrl;
@@ -1042,16 +1068,21 @@ function beetleDetailHtml(beetle) {
   const detailLink = beetle.id
     ? `<p><a class="detail-page-link" href="${detailPageUrl(beetle.id)}">Zur Detailseite mit allen Daten und Bildern</a></p>`
     : "";
+  const adminActions = (beetle.id && String(beetle.id).indexOf("rec-") === 0)
+    ? `<div class="admin-only beetle-admin-actions"><button type="button" class="beetle-delete" data-delete-id="${beetle.id}">Kaefer loeschen</button></div>`
+    : "";
   return `
     ${image}
     ${note}
     ${detailLink}
+    ${adminActions}
     <ul class="detail-list">
       <li><strong>Fundort</strong>${beetle.location}</li>
       <li><strong>Klimazone</strong>${climateLabel(beetle.climate)}</li>
       <li><strong>Vegetation</strong>${vegetationLabel(beetle.vegetation)}</li>
       <li><strong>Hoehenlage</strong>${beetle.elevation} m</li>
       <li><strong>Temperatur</strong>${formatTemperature(beetle.temperature)}</li>
+      <li><strong>Niederschlag</strong>${formatPrecipitation(beetle.precipitation)}</li>
       <li><strong>Boden-pH</strong>${formatSoilPh(beetle)}</li>
     </ul>
   `;
@@ -1288,6 +1319,37 @@ function initCountryEvents() {
   });
 }
 
+// Loescht einen manuell angelegten Kaefer (nur Admin, nur rec-*-Datensaetze).
+async function handleBeetleDelete(beetleId) {
+  const id = String(beetleId || "");
+  if (id.indexOf("rec-") !== 0) return;
+  const recordId = id.split("-")[1];
+  if (!recordId) return;
+  if (!window.confirm("Diesen Kaefer wirklich unwiderruflich loeschen?")) return;
+  try {
+    const res = await window.Auth.apiFetch(`/api/beetles/${recordId}`, { method: "DELETE" });
+    if (!res || !res.ok) {
+      window.alert("Loeschen fehlgeschlagen" + (res ? " (" + res.status + ")" : "") + ".");
+      return;
+    }
+    beetlesCache.clear();
+    browseBeetlesCache = null;
+    pinnedBeetle = null;
+    await applyFilters();
+  } catch (error) {
+    window.alert("Netzwerkfehler beim Loeschen - bitte erneut versuchen.");
+  }
+}
+
+// Setzt die body-Klasse is-admin, damit Admin-only-Elemente (Loeschen) erscheinen.
+function syncAdminBodyClass() {
+  const isAdmin = Boolean(window.Auth && typeof window.Auth.getRole === "function"
+    && window.Auth.getRole() === "admin");
+  document.body.classList.toggle("is-admin", isAdmin);
+}
+window.addEventListener("auth:changed", syncAdminBodyClass);
+syncAdminBodyClass();
+
 function initAppEvents() {
   const fn = window.AppEvents && window.AppEvents.init;
   if (typeof fn !== "function") return;
@@ -1323,6 +1385,7 @@ function initAppEvents() {
     actions: {
       saveMainState,
       applyFilters,
+      deleteBeetle: handleBeetleDelete,
       setSelectedClimateCodes,
       setSelectedVegetationCodes,
       setSelectedElevations,
@@ -1402,7 +1465,9 @@ let currentView = pendingMapView || "normal";
 let elevationTileType = null;
 let climateDataLayer = null;
 let vegetationDataLayer = null;
-const ENABLE_SUBTYPE_SPATIAL_FILTER = true;
+
+const ELEVATION_VIEW_MAX_ZOOM = 10;
+const ENABLE_SUBTYPE_SPATIAL_FILTER = false;
 const activeClimateLegendColors = new Set();
 const activeVegetationLegendColors = new Set();
 
@@ -1682,6 +1747,11 @@ function ensureElevationViewLayer() {
     });
   }
   mapInstance.overlayMapTypes.push(elevationTileType);
+
+  mapInstance.setOptions({ maxZoom: ELEVATION_VIEW_MAX_ZOOM });
+  if (mapInstance.getZoom() > ELEVATION_VIEW_MAX_ZOOM) {
+    mapInstance.setZoom(ELEVATION_VIEW_MAX_ZOOM);
+  }
   setElevationLegendActiveState();
   callMapUi("showLegendForView", undefined, { view: "elevation" });
 }

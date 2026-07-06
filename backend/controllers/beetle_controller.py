@@ -18,7 +18,13 @@ from backend.config.beetle_filters import (
 from backend.config.climate_subtypes import is_climate_subtype_code, parent_climate_code
 from backend.config.country_mappings import COUNTRY_CODE_TO_LOCATION_NAME
 from backend.config.error_codes import ERR
-from backend.core.beetle_filter_helpers import apply_exact_filters
+from backend.core.beetle_filter_helpers import (
+    append_climate_filter,
+    append_vegetation_filter,
+    apply_exact_filters,
+    raw_climate_has_subtype,
+    raw_vegetation_has_zone,
+)
 from backend.core.payloads import to_beetle_payload, to_beetle_payload_compact
 from backend.repositories.beetle_repository import (
     fetch_beetle_detail_row_by_entity,
@@ -83,9 +89,13 @@ def _compact_single_precomputed_dim(
     requested_filters: Dict[str, Optional[str]],
     observed_year: Optional[int],
     has_image: Optional[bool],
+    raw_climate: Optional[str] = None,
+    raw_vegetation: Optional[str] = None,
 ) -> Optional[tuple[str, str]]:
     # Precomputed totals are valid only for simple, single-dimension filters.
     if q or bbox:
+        return None
+    if raw_climate_has_subtype(raw_climate) or raw_vegetation_has_zone(raw_vegetation):
         return None
 
     active: list[tuple[str, str]] = []
@@ -334,6 +344,8 @@ def _build_list_where_sql_and_params(
     bbox: Optional[str],
     compact: bool,
     offset: int,
+    raw_climate: Optional[str] = None,
+    raw_vegetation: Optional[str] = None,
 ) -> tuple[str, Dict[str, Any]]:
     filters: List[str] = []
     params: Dict[str, Any] = {"offset": offset}
@@ -353,6 +365,11 @@ def _build_list_where_sql_and_params(
     requested_filters_for_exact = dict(requested_filters)
     requested_filters_for_exact["elevation"] = None
     requested_filters_for_exact["event_date_quality"] = None
+    if compact:
+        requested_filters_for_exact["climate"] = None
+        requested_filters_for_exact["vegetation"] = None
+        append_climate_filter(filters, params, "e.climate", raw_climate, "e.koppen_code")
+        append_vegetation_filter(filters, params, "e.vegetation", raw_vegetation, "e.vegetation_zone")
     apply_exact_filters(filters, params, requested_filters_for_exact)
 
     _append_exact_or_in_filter(
@@ -459,6 +476,8 @@ def build_read_model_where(
         bbox=bbox,
         compact=True,
         offset=0,
+        raw_climate=climate,
+        raw_vegetation=vegetation,
     )
 
 
@@ -484,6 +503,8 @@ def _fetch_list_rows_total_and_payload_builder(
     requested_filters: Dict[str, Optional[str]],
     observed_year: Optional[int],
     has_image: Optional[bool],
+    raw_climate: Optional[str] = None,
+    raw_vegetation: Optional[str] = None,
 ):
     payload_builder = to_beetle_payload
 
@@ -504,6 +525,8 @@ def _fetch_list_rows_total_and_payload_builder(
                 requested_filters=requested_filters,
                 observed_year=observed_year,
                 has_image=has_image,
+                raw_climate=raw_climate,
+                raw_vegetation=raw_vegetation,
             )
             precomputed_total = None
             if precomputed_dim is not None:
@@ -615,6 +638,8 @@ def list_beetles_controller(
         bbox=bbox,
         compact=compact,
         offset=offset,
+        raw_climate=climate,
+        raw_vegetation=vegetation,
     )
     has_advanced_filters = _has_advanced_filters(requested_filters)
     rows, total, payload_builder = _fetch_list_rows_total_and_payload_builder(
@@ -630,6 +655,8 @@ def list_beetles_controller(
         requested_filters=requested_filters,
         observed_year=observed_year,
         has_image=has_image,
+        raw_climate=climate,
+        raw_vegetation=vegetation,
     )
 
     page = (offset // limit) + 1
@@ -725,7 +752,7 @@ def get_country_detail_controller(country_code: str):
 
     lookup_value = COUNTRY_CODE_TO_LOCATION_NAME.get(normalized, normalized)
 
-    overview, climates, vegetations, top_beetles = fetch_country_detail_rows(lookup_value)
+    overview, climates, vegetations, koppen, vegetation_zones, top_beetles = fetch_country_detail_rows(lookup_value)
 
     if overview is None or (overview.get("species_count") or 0) == 0:
         raise_api_error(404, ERR.COMMON.NOT_FOUND, "No data found for this country code.")
@@ -752,6 +779,18 @@ def get_country_detail_controller(country_code: str):
     max_elev = overview.get("max_elevation")
     avg_temp = overview.get("avg_temperature")
 
+    def _round_or_none(value, digits):
+        return round(float(value), digits) if value is not None else None
+
+    def _metric_triplet(prefix, digits, as_int=False):
+        # Liefert min/avg/max fuer eine Metrik (as_int -> ganze Zahlen).
+        rounder = _round_int if as_int else (lambda v: _round_or_none(v, digits))
+        return {
+            "min": rounder(overview.get("min_" + prefix)),
+            "avg": rounder(overview.get("avg_" + prefix)),
+            "max": rounder(overview.get("max_" + prefix)),
+        }
+
     result = {
         "code": normalized,
         "name": overview.get("country_name") or lookup_value,
@@ -765,8 +804,34 @@ def get_country_detail_controller(country_code: str):
         "avgElevation": _round_int(overview.get("avg_elevation")),
         "avgTemperature": round(float(avg_temp), 1) if avg_temp is not None else None,
         "avgPrecipitation": _round_int(overview.get("avg_precipitation")),
+        "avgSoilMoisture": (round(float(overview.get("avg_soil_moisture")), 3)
+                            if overview.get("avg_soil_moisture") is not None else None),
+        "avgNdvi": (round(float(overview.get("avg_ndvi")), 3)
+                    if overview.get("avg_ndvi") is not None else None),
+        "avgHumidity": (round(float(overview.get("avg_humidity")), 1)
+                        if overview.get("avg_humidity") is not None else None),
+        "avgSoilPh": (round(float(overview.get("avg_soil_ph")), 1)
+                      if overview.get("avg_soil_ph") is not None else None),
+        # Metriken je Umweltgroesse als min/avg/max (fuer die Balken im Panel):
+        "metrics": {
+            "elevation": _metric_triplet("elevation", 0, as_int=True),
+            "temperature": _metric_triplet("temperature", 1),
+            "precipitation": _metric_triplet("precipitation", 0, as_int=True),
+            "soilMoisture": _metric_triplet("soil_moisture", 3),
+            "ndvi": _metric_triplet("ndvi", 3),
+            "humidity": _metric_triplet("humidity", 1),
+            "soilPh": _metric_triplet("soil_ph", 1),
+            "pressure": _metric_triplet("pressure", 0, as_int=True),
+            "light": _metric_triplet("light", 2),
+            "slope": _metric_triplet("slope", 1),
+            "waterDistance": _metric_triplet("water_distance", 0, as_int=True),
+            "humanModification": _metric_triplet("human_modification", 3),
+        },
         "climates": _share_rows(climates, "climate"),
         "vegetations": _share_rows(vegetations, "vegetation"),
+        # Feinere, vorberechnete Kartenzonen (Koeppen-Subtyp + Vegetationszone):
+        "topKoppen": _share_rows(koppen, "koppen"),
+        "topVegetationZones": _share_rows(vegetation_zones, "zone"),
         "topBeetles": [
             {
                 "name": row["name"],
