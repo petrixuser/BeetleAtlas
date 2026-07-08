@@ -1,3 +1,12 @@
+"""Fuehrt die dynamischen Earth-Engine-Export-CSVs zu einer Klima-Import-CSV zusammen.
+
+Alle CSV-Dateien aus dem Export-Ordner, die wie dynamische EE-Ausgaben aussehen
+(Spalten location_id + date/ym/snapshot_date), werden je (location_id,
+snapshot_date) zusammengefuehrt. Sentinel-/no-data-Werte (-9999) werden zu Leer
+normalisiert. Optional kann anhand einer Erwartungs-CSV die volle Abdeckung aller
+location/date-Kombinationen sichergestellt werden.
+"""
+
 import csv
 import argparse
 import re
@@ -5,6 +14,7 @@ from pathlib import Path
 
 
 def first_non_empty(row, keys):
+    """Liefert den ersten nicht-leeren Wert der angegebenen Schluessel aus der Zeile."""
     for key in keys:
         value = (row.get(key) or "").strip()
         if value != "":
@@ -13,6 +23,7 @@ def first_non_empty(row, keys):
 
 
 def normalize_measurement(raw_value):
+    """Normalisiert einen Messwert: leert nan/null/none und Sentinel-Werte (<= -9999)."""
     value = (raw_value or "").strip()
     if value == "":
         return ""
@@ -26,7 +37,7 @@ def normalize_measurement(raw_value):
     except ValueError:
         return value
 
-    # Earth Engine no-data values are often encoded as -9999.
+    # Earth-Engine-no-data-Werte sind oft als -9999 kodiert.
     if num <= -9999:
         return ""
 
@@ -34,19 +45,17 @@ def normalize_measurement(raw_value):
 
 
 def normalize_snapshot_date(raw_date):
+    """Normalisiert ein Datum (YYYY, YYYY-MM oder YYYY-MM-DD) auf 'YYYY-MM-DD'."""
     raw_date = (raw_date or "").strip()
     if not raw_date:
         return ""
 
-    # Accept YYYY-MM-DD
     if re.match(r"^\d{4}-\d{2}-\d{2}$", raw_date):
         return raw_date
 
-    # Accept YYYY-MM
     if re.match(r"^\d{4}-\d{2}$", raw_date):
         return f"{raw_date}-01"
 
-    # Accept YYYY
     if re.match(r"^\d{4}$", raw_date):
         return f"{raw_date}-01-01"
 
@@ -54,6 +63,7 @@ def normalize_snapshot_date(raw_date):
 
 
 def load_expected_keys(expected_keys_csv):
+    """Liest die Erwartungs-CSV und liefert die Menge der (location_id, snapshot_date)-Keys."""
     path = Path(expected_keys_csv)
     if not path.exists():
         return set(), False
@@ -73,6 +83,7 @@ def load_expected_keys(expected_keys_csv):
 
 
 def merge_dynamic_exports(input_dir, output_file, expected_keys_csv=None):
+    """Fuehrt alle dynamischen EE-CSVs eines Ordners zur Klima-Import-CSV zusammen."""
     input_path = Path(input_dir)
     output_path = Path(output_file)
 
@@ -93,7 +104,6 @@ def merge_dynamic_exports(input_dir, output_file, expected_keys_csv=None):
                 continue
 
             headers = set(reader.fieldnames)
-            # Keep only files that look like dynamic EE outputs.
             if "location_id" not in headers:
                 continue
             if not ({"date", "ym", "snapshot_date"} & headers):
@@ -208,6 +218,7 @@ def merge_dynamic_exports(input_dir, output_file, expected_keys_csv=None):
 
 
 def find_default_input_folder():
+    """Sucht den Standard-Eingabeordner mit Export-CSVs (beetle_exports oder ee_exports/dynamic)."""
     candidates = [
         Path("beetle_exports"),
         Path("ee_exports/dynamic"),

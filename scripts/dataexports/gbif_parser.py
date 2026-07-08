@@ -1,11 +1,14 @@
+"""Parst die GBIF-/DarwinCore-Rohdateien in normalisierte Import-CSVs.
+
+Aus occurrence.txt und multimedia.txt werden die Tabellen beetle_species,
+location, observation und media abgeleitet (dedupliziert ueber stabile Keys)
+sowie die Earth-Engine-Input-CSVs (statisch und dynamisch) erzeugt. Alle
+Ausgaben werden nach ./csv/ geschrieben.
+"""
+
 import csv
 import re
 from pathlib import Path
-
-# Input files must be in the same folder as this script:
-# - occurrence.txt
-# - multimedia.txt
-# Output CSVs are written to ./csv/
 
 BASE_DIR = Path(__file__).resolve().parent
 OUTPUT_DIR = BASE_DIR / "csv"
@@ -16,9 +19,11 @@ MULTIMEDIA_FILE = BASE_DIR / "multimedia.txt"
 
 
 def clean(value: str) -> str:
+    """Entfernt fuehrende/abschliessende Leerzeichen und behandelt None als leeren String."""
     return (value or "").strip()
 
 def norm(value: str) -> str:
+    """Wie clean(), zusaetzlich in Kleinbuchstaben (fuer Vergleiche/Deduplizierung)."""
     return clean(value).lower()
 
 
@@ -47,6 +52,7 @@ COUNTRY_CODE_TO_NAME = {
 
 
 def country_from_row(row: dict) -> str:
+    """Liefert den Laendernamen aus der Zeile (Feld country, sonst countryCode aufgeloest)."""
     country = clean(row.get("country"))
     if country:
         return country
@@ -59,6 +65,7 @@ def country_from_row(row: dict) -> str:
 
 
 def valid_coord(lat: str, lon: str) -> bool:
+    """Prueft, ob lat/lon parsebar und in gueltigen geographischen Grenzen liegen."""
     try:
         lat_f = float(lat)
         lon_f = float(lon)
@@ -68,12 +75,11 @@ def valid_coord(lat: str, lon: str) -> bool:
 
 
 def year_month_from_event_date(event_date: str) -> str:
-    """Return YYYY-MM from GBIF/DarwinCore eventDate if possible."""
+    """Liefert nach Moeglichkeit 'YYYY-MM' aus einem GBIF/DarwinCore eventDate."""
     event_date = clean(event_date)
     if not event_date:
         return ""
 
-    # Handles: 2021-05-13, 2021-05, 2021, 2021-05-01/2021-05-04
     match = re.search(r"(\d{4})(?:-(\d{2}))?", event_date)
     if not match:
         return ""
@@ -81,15 +87,15 @@ def year_month_from_event_date(event_date: str) -> str:
     year = match.group(1)
     month = match.group(2)
     if not month:
-        # Year-only dates are mapped to January for monthly climate joins.
         return f"{year}-01"
     return f"{year}-{month}"
 
 
 def location_key_from_row(row: dict) -> tuple:
     """
-    Dedupe locations by exact coordinates + locality fields.
-    Keep exact coordinate strings; do not round here unless you intentionally want coarser grouping.
+    Dedupliziert Fundorte anhand exakter Koordinaten + Ortsangaben.
+    Exakte Koordinaten-Strings werden beibehalten; hier NICHT runden, ausser man
+    will bewusst eine groebere Gruppierung.
     """
     city = clean(row.get("county")) or clean(row.get("municipality"))
     return (
@@ -103,6 +109,7 @@ def location_key_from_row(row: dict) -> tuple:
 
 
 def read_occurrences_and_build_tables():
+    """Liest occurrence.txt und baut die deduplizierten species-, location- und observation-Zeilen."""
     if not OCCURRENCE_FILE.exists():
         raise FileNotFoundError(f"Nicht gefunden: {OCCURRENCE_FILE}")
 
@@ -128,8 +135,6 @@ def read_occurrences_and_build_tables():
             taxon_id = clean(row.get("taxonID"))
             scientific_name = clean(row.get("scientificName"))
 
-            # Stable surrogate key for DB FK.
-            # Prefer taxon_id; fallback to scientific_name; last fallback uses gbif_id.
             species_key = taxon_id or scientific_name or f"missing_species_{gbif_id}"
 
             if species_key not in species_id_map:
@@ -164,7 +169,6 @@ def read_occurrences_and_build_tables():
                     "region": clean(row.get("stateProvince")),
                     "city": city,
                     "verbatim_locality": clean(row.get("verbatimLocality")),
-                    # Filled later by Earth Engine static export / SQL import
                     "elevation": "",
                     "slope": "",
                     "landcover_class": "",
@@ -202,6 +206,7 @@ def read_occurrences_and_build_tables():
 
 
 def read_media():
+    """Liest multimedia.txt und liefert die media-Zeilen sowie die Menge der gbif_ids mit Medien."""
     if not MULTIMEDIA_FILE.exists():
         print(f"Warnung: {MULTIMEDIA_FILE} nicht gefunden. media.csv wird leer erstellt.")
         return [], set()
@@ -214,7 +219,7 @@ def read_media():
         media_id = 1
         for row in reader:
             gbif_id = clean(row.get("gbifID"))
-            image_url = clean(row.get("identifier"))  # identifier is the actual media URL in GBIF multimedia.txt
+            image_url = clean(row.get("identifier"))  
             if not gbif_id or not image_url:
                 continue
 
@@ -235,6 +240,7 @@ def read_media():
 
 
 def write_csv(filename: str, rows: list, fieldnames: list):
+    """Schreibt die Zeilen mit den angegebenen Spalten als CSV nach ./csv/."""
     path = OUTPUT_DIR / filename
     with path.open("w", encoding="utf-8", newline="") as fout:
         writer = csv.DictWriter(fout, fieldnames=fieldnames)
@@ -244,7 +250,7 @@ def write_csv(filename: str, rows: list, fieldnames: list):
 
 
 def create_earth_engine_csvs(location_rows: list, observation_rows: list):
-    # Static: one row per unique location
+    """Erzeugt aus location/observation die statische und dynamische Earth-Engine-Input-CSV."""
     static_rows = [
         {
             "location_id": r["location_id"],
@@ -254,7 +260,6 @@ def create_earth_engine_csvs(location_rows: list, observation_rows: list):
         for r in location_rows
     ]
 
-    # Dynamic: one row per unique location_id + YYYY-MM
     loc_lookup = {r["location_id"]: (r["latitude"], r["longitude"]) for r in location_rows}
     dynamic_seen = set()
     dynamic_rows = []
@@ -283,10 +288,10 @@ def create_earth_engine_csvs(location_rows: list, observation_rows: list):
 
 
 def main():
+    """Fuehrt den kompletten Parse-Lauf aus und schreibt alle Ausgabe-CSVs."""
     species_rows, location_rows, observation_rows = read_occurrences_and_build_tables()
     media_rows, gbif_ids_with_media = read_media()
 
-    # Mark observations with at least one media row
     for obs in observation_rows:
         if obs["gbif_id"] in gbif_ids_with_media:
             obs["image_available"] = "1"

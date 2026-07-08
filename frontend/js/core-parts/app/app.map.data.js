@@ -1,6 +1,6 @@
 // Datenversorgung fuer Google Maps: Laden, Caching und Marker-Rendering.
 
-// ===== Map runtime state =====
+// ===== Laufzeitzustand der Karte =====
 
 let googleMapInstance = null;
 let activeMarkers = [];
@@ -13,7 +13,7 @@ let mapPointsRequestId = 0;
 let mapPointsAbortController = null;
 const MAP_POINTS_LIMIT = 200;
 
-// ===== Map point loading scheduler =====
+// ===== Ablaufsteuerung fuer das Nachladen der Kartenpunkte =====
 
 // Entprellt das Nachladen der Kartenpunkte (Pan/Zoom/Filter loesen es aus).
 function scheduleMapPoints() {

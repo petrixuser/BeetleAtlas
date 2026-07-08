@@ -1,11 +1,14 @@
-﻿-- Consolidated read-model/quality migrations
-
-
--- BEGIN backend/sql/ops/MigrateDataQualityAndHistory.sql
+﻿-- ============================================================================
+--  Ops-Migration: Zusammengefasste Read-Model- und Qualitaets-Migrationen
+--  Zweck: legt Qualitaets-Historie, Read-Model-Tabellen (map_point_read,
+--  beetle_list_read, ...) und die Refresh-Prozeduren an und befuellt sie.
+--  Rolle beim DB-Aufbau: Migrations-/Ops-Schritt nach dem Basis-Schema.
+--  Idempotent/mehrfach ausfuehrbar: Spalten, Indizes, Constraints und Tabellen
+--  werden ueber information_schema bzw. IF NOT EXISTS abgesichert.
+-- ============================================================================
 
 USE beetle_db;
 
--- 1) observation.event_date_parsed column + backfill + index
 SET @sql := (
   SELECT IF(
     EXISTS(
@@ -48,7 +51,6 @@ PREPARE stmt FROM @sql;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
--- 2) deterministic media pagination index
 SET @sql := (
   SELECT IF(
     EXISTS(
@@ -66,7 +68,6 @@ PREPARE stmt FROM @sql;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
--- 3) quality report history table
 SET @sql := (
   SELECT IF(
     EXISTS(
@@ -97,7 +98,6 @@ PREPARE stmt FROM @sql;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
--- 4) domain checks with legacy-data guards
 SET @constraint_exists := (
   SELECT COUNT(*)
   FROM information_schema.table_constraints
@@ -259,7 +259,6 @@ PREPARE stmt FROM @sql;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
--- 5) normalization fallback for legacy climate values and strict check enforcement
 UPDATE climate_snapshot
 SET relative_humidity = NULL
 WHERE relative_humidity IS NOT NULL
@@ -548,8 +547,6 @@ CALL refresh_map_point_read();
 
 USE beetle_db;
 
--- Additional indexes for compact /api/beetles list queries on map_point_read.
--- Focus: filter columns + stable pagination order by entity_id.
 
 SET @sql := (
   SELECT IF(
@@ -655,7 +652,6 @@ DEALLOCATE PREPARE stmt;
 
 USE beetle_db;
 
--- Materialized read model for fast /api/beetles compact list responses.
 CREATE TABLE IF NOT EXISTS beetle_list_read (
   entity_id VARCHAR(64) NOT NULL,
   gbif_id BIGINT NULL,
@@ -975,8 +971,6 @@ GROUP BY observed_year;
 
 USE beetle_db;
 
--- Retrofit bundle for databases that already had beetle_list_read before the
--- consolidated MigrateBeetleListReadModel.sql existed.
 
 SET @sql := (
   SELECT IF(
@@ -1318,19 +1312,16 @@ FROM beetle_list_read
 WHERE observed_year IS NOT NULL
 GROUP BY observed_year;
 
-
--- END backend/sql/ops/MigrateBeetleListReadModelRetrofitBundle.sql
-
-
-
 -- ============================================================================
--- Incremental single-record refresh of the precomputed read-models.
--- Added so manually created/edited beetles appear on the map and the compact
--- list IMMEDIATELY, without the multi-minute full TRUNCATE+rebuild. Reuses the
--- exact transform logic of refresh_map_point_read and the beetle_list_read
--- build, scoped to a single record. The write repository calls this after each
--- create/update/soft-delete. On soft-delete (status<>'active') the DELETEs run
--- and the INSERTs match nothing, so the record drops out of both read-models.
+-- Inkrementeller Refresh der vorberechneten Read-Models fuer einen einzelnen
+-- Datensatz. Eingefuehrt, damit manuell angelegte/bearbeitete Kaefer SOFORT auf
+-- der Karte und in der kompakten Liste erscheinen, ohne den minutenlangen
+-- vollstaendigen TRUNCATE+Neuaufbau. Nutzt exakt die Transformationslogik von
+-- refresh_map_point_read und den beetle_list_read-Aufbau, aber begrenzt auf
+-- einen Datensatz. Das Schreib-Repository ruft dies nach jedem
+-- create/update/soft-delete auf. Beim Soft-Delete (status<>'active') laufen die
+-- DELETEs, und die INSERTs treffen nichts mehr, sodass der Datensatz aus beiden
+-- Read-Models herausfaellt.
 -- ============================================================================
 DROP PROCEDURE IF EXISTS refresh_read_models_for_record;
 DELIMITER $$
@@ -1339,7 +1330,6 @@ BEGIN
   DECLARE vEntity VARCHAR(64);
   SET vEntity = CONCAT('rec-', pRecordId);
 
-  -- map_point_read: replace this record's point (manual-source branch, scoped)
   DELETE FROM map_point_read WHERE entity_id = vEntity;
   INSERT INTO map_point_read (
     entity_id,
@@ -1427,7 +1417,6 @@ BEGIN
     AND br.latitude IS NOT NULL
     AND br.longitude IS NOT NULL;
 
-  -- beetle_list_read: replace this record's compact row (sourced from map_point_read, scoped)
   DELETE FROM beetle_list_read WHERE entity_id = vEntity;
 INSERT INTO beetle_list_read (
   entity_id,

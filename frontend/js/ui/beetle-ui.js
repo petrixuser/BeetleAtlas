@@ -148,6 +148,14 @@
     return Number.isNaN(num) ? null : num;
   }
 
+  // Zerlegt einen Mehrzeilen-Text in eine Liste getrimmter, nicht-leerer Zeilen.
+  function splitLines(raw) {
+    return String(raw)
+      .split(/\r?\n/)
+      .map(function (line) { return line.trim(); })
+      .filter(function (line) { return line !== ""; });
+  }
+
   // Liest ausgefuellte Felder und erzeugt das API-Payload.
   function collectPayload() {
     var payload = {};
@@ -157,7 +165,25 @@
       var value = parsePayloadValue(spec.key, raw);
       if (value != null) payload[spec.key] = value;
     });
-    if (payload.image_url) payload.image_available = true;
+    // Mehrbild: eine Bild-URL pro Zeile -> media_items (1:N).
+    var imageRaw = payload.image_url;
+    delete payload.image_url;
+    if (imageRaw) {
+      var urls = splitLines(imageRaw);
+      if (urls.length) {
+        payload.media_items = urls.map(function (url) {
+          return {
+            image_url: url,
+            media_references: payload.media_references || null,
+            media_creator: payload.media_creator || null,
+            media_publisher: payload.media_publisher || null,
+            media_rights_holder: payload.media_rights_holder || null,
+            media_license: payload.media_license || null,
+          };
+        });
+        payload.image_available = true;
+      }
+    }
     return payload;
   }
 
@@ -288,9 +314,14 @@
 
     var urlEl = $(fieldId("image_url"));
     var urlVal = urlEl ? urlEl.value.trim() : "";
-    if (urlVal && !/^https?:\/\/.+/i.test(urlVal)) {
-      showError(errorEl, successEl, "Bild-URL muss mit http:// oder https:// beginnen.");
-      return false;
+    if (urlVal) {
+      var imageUrls = splitLines(urlVal);
+      for (var i = 0; i < imageUrls.length; i++) {
+        if (!/^https?:\/\/.+/i.test(imageUrls[i])) {
+          showError(errorEl, successEl, "Jede Bild-URL muss mit http:// oder https:// beginnen.");
+          return false;
+        }
+      }
     }
 
     var elevEl = $(fieldId("elevation"));

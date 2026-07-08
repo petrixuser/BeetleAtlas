@@ -115,11 +115,6 @@
   function vegetationSummaryHtml(vegRows) {
     return "\n      <h3 class=\"ci-h\">Vegetation</h3>\n      " + (vegRows ? "<ul class=\"ci-shares\">" + vegRows + "</ul>" : "<p class=\"ci-kv\">-</p>");
   }
-
-  // Umweltmetriken als Balken (wie Detailseite): Breite = O-Wert relativ zu allen
-  // Laendern; Farbverlauf hell->dunkel, dessen Dunkelheit ebenfalls mit dem Wert
-  // steigt (ein Land mit sehr hohem Wert wird dunkler als eines mit weniger).
-  // Jede Zeile zeigt zusaetzlich min/max des Landes.
   var METRIC_DEFS = [
     { key: "elevation", label: "Höhe", unit: " m", digits: 0, clampMin: 0, tone: { start: "#dcc9a3", end: "#7a5a2e" } },
     { key: "temperature", label: "Temperatur", unit: " °C", digits: 1, tone: { start: "#f3b087", end: "#bf4b1a" } },

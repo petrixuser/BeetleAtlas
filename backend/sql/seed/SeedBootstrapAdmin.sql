@@ -1,8 +1,14 @@
+-- ============================================================================
+--  Seed: Admin-Konto anlegen oder hochstufen (Bootstrap)
+--  Zweck: legt einen Admin-Benutzer an bzw. setzt fuer ein bestehendes Konto
+--  das Passwort und die Rolle 'admin'.
+--  Rolle beim DB-Aufbau: einmaliger Seed-Schritt fuer die Auth-Tabellen.
+--  Idempotent/mehrfach ausfuehrbar: ON DUPLICATE KEY UPDATE setzt denselben
+--  Zielzustand erneut.
+-- ============================================================================
+
 USE beetle_db;
 
--- One-time SQL seed to create or promote an admin account.
--- IMPORTANT: Generate a bcrypt hash first (e.g. via backend.core.auth.hash_password)
--- and set it below before running this script.
 
 SET @admin_email := 'admin@example.local';
 SET @admin_password_hash := '$2b$12$REPLACE_WITH_BCRYPT_HASH';

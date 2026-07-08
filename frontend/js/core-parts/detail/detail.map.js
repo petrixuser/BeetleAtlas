@@ -77,10 +77,9 @@
 
   // Platzhalter: Detail-Legenden sind derzeit nur informativ und nicht klickbar.
   function initDetailLegendFilters() {
-    // Detail legends are informational only (no click filtering).
   }
 
-  // ===== Google maps script and layer switching =====
+  // ===== Google-Maps-Skript und Ebenen-Umschaltung =====
 
   function loadGoogleMapsScriptForDetail() {
     var common = window.MapCommon;
@@ -243,7 +242,7 @@
     updateDetailMapToggleUI();
   }
 
-  // ===== Coordinate and map rendering =====
+  // ===== Koordinaten und Karten-Rendering =====
 
   function parseCoordinates(coords) {
     if (!Array.isArray(coords) || coords.length < 2) return null;

@@ -210,13 +210,58 @@ def test_researcher_created_record_has_rec_media_contract():
     assert len(media_payload["items"]) == 1
 
     first = media_payload["items"][0]
-    assert first["mediaId"] == f"manual-{record_id}"
+    assert first["mediaId"].startswith("manual-")
     assert first["url"] == "https://example.org/beetle.jpg"
     assert first["license"] == "CC-BY-4.0"
     assert first["creator"] == "Contract Tester"
     assert first["publisher"] == "QA"
     assert first["rightsHolder"] == "QA Team"
     assert first["references"] == "https://example.org/reference"
+
+
+def test_researcher_created_record_has_multi_image_media_contract():
+    researcher_token = _register_and_login_researcher()
+
+    status_create, created = _request_json(
+        "/api/beetles",
+        method="POST",
+        token=researcher_token,
+        data={
+            "scientific_name": "Multi imago contractus",
+            "family": "Contractidae",
+            "media_items": [
+                {
+                    "image_url": "https://example.org/multi-1.jpg",
+                    "media_license": "CC-BY-4.0",
+                    "media_creator": "Tester One",
+                },
+                {
+                    "image_url": "https://example.org/multi-2.jpg",
+                    "media_license": "CC0",
+                    "media_creator": "Tester Two",
+                },
+            ],
+        },
+    )
+    assert status_create == 200
+    record_id = int(created["id"])
+
+    status_media, media_payload = _request_json(
+        f"/api/beetles/rec-{record_id}/media?limit=5&offset=0"
+    )
+    assert status_media == 200
+    assert media_payload["id"] == f"rec-{record_id}"
+    assert media_payload["total"] == 2
+    assert len(media_payload["items"]) == 2
+
+    urls = {item["url"] for item in media_payload["items"]}
+    assert urls == {
+        "https://example.org/multi-1.jpg",
+        "https://example.org/multi-2.jpg",
+    }
+    for item in media_payload["items"]:
+        assert item["mediaId"].startswith("manual-")
+
 
 
 def test_researcher_cannot_set_gbif_id_on_create_contract():
@@ -239,7 +284,7 @@ def test_researcher_cannot_set_gbif_id_on_create_contract():
         payload = json.loads(exc.read().decode("utf-8"))
         assert payload == {
             "error": "forbidden",
-            "message": "Researchers are not allowed to set gbif_id.",
+            "message": "Researcher duerfen gbif_id nicht setzen.",
         }
 
 
@@ -275,7 +320,7 @@ def test_researcher_cannot_set_gbif_id_on_update_contract():
         payload = json.loads(exc.read().decode("utf-8"))
         assert payload == {
             "error": "forbidden",
-            "message": "Researchers are not allowed to set gbif_id.",
+            "message": "Researcher duerfen gbif_id nicht setzen.",
         }
 
 
@@ -295,7 +340,7 @@ def test_researcher_cannot_update_foreign_beetle_record_contract():
     except HTTPError as exc:
         assert exc.code == 403
         payload = json.loads(exc.read().decode("utf-8"))
-        assert payload == {"error": "forbidden", "message": "Insufficient permissions."}
+        assert payload == {"error": "forbidden", "message": "Unzureichende Berechtigungen."}
 
 
 def test_researcher_cannot_delete_beetle_record_contract():
@@ -308,7 +353,7 @@ def test_researcher_cannot_delete_beetle_record_contract():
     except HTTPError as exc:
         assert exc.code == 403
         payload = json.loads(exc.read().decode("utf-8"))
-        assert payload == {"error": "forbidden", "message": "Insufficient permissions."}
+        assert payload == {"error": "forbidden", "message": "Unzureichende Berechtigungen."}
 
 
 def test_admin_can_update_and_delete_beetle_record_contract():
@@ -345,7 +390,7 @@ def test_write_endpoints_require_auth_contract():
     except HTTPError as exc:
         assert exc.code == 401
         payload = json.loads(exc.read().decode("utf-8"))
-        assert payload == {"error": "unauthorized", "message": "Missing or invalid bearer token."}
+        assert payload == {"error": "unauthorized", "message": "Fehlender oder ungueltiger Bearer-Token."}
 
 
 def test_viewer_cannot_create_beetle_record_contract():
@@ -365,7 +410,7 @@ def test_viewer_cannot_create_beetle_record_contract():
     except HTTPError as exc:
         assert exc.code == 403
         payload = json.loads(exc.read().decode("utf-8"))
-        assert payload == {"error": "forbidden", "message": "Insufficient permissions."}
+        assert payload == {"error": "forbidden", "message": "Unzureichende Berechtigungen."}
 
 
 def test_viewer_cannot_update_beetle_record_contract():
@@ -384,4 +429,4 @@ def test_viewer_cannot_update_beetle_record_contract():
     except HTTPError as exc:
         assert exc.code == 403
         payload = json.loads(exc.read().decode("utf-8"))
-        assert payload == {"error": "forbidden", "message": "Insufficient permissions."}
+        assert payload == {"error": "forbidden", "message": "Unzureichende Berechtigungen."}

@@ -1,3 +1,5 @@
+// Legenden-Hilfsfunktionen: liest Farben und Codes aus Legendeneintraegen und
+// prueft, ob die aktive Subtyp-Auswahl genau einer Klima-Hauptgruppe entspricht.
 (function () {
   "use strict";
 

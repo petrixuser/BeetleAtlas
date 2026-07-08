@@ -1,3 +1,12 @@
+-- ============================================================================
+--  Seed: Technischer System-Benutzer (system@beetlebox.internal)
+--  Zweck: legt ein internes Viewer-Konto an, das als Standard-Akteur fuer
+--  automatische Vorgaenge dient.
+--  Rolle beim DB-Aufbau: Seed-Schritt fuer die Auth-Tabellen.
+--  Idempotent/mehrfach ausfuehrbar: ON DUPLICATE KEY UPDATE laesst ein bereits
+--  vorhandenes Konto unveraendert.
+-- ============================================================================
+
 USE beetle_db;
 
 INSERT INTO app_user (email, password_hash, role, is_active)

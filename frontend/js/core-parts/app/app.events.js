@@ -1,3 +1,5 @@
+// Event-Verdrahtung des Hauptscreens: bindet Ergebnisliste, Filtereingaben,
+// Karteninteraktionen (Zoom/Pan), Reset und den Ergebnismodus-Umschalter.
 (function () {
   "use strict";
 

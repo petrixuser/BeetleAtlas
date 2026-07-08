@@ -1,8 +1,11 @@
+"""Umwandlung denormalisierter DB-Zeilen in die Kaefer-API-Antwort-Payloads
+(kompakte Listen-Variante und vollstaendige Detail-Variante)."""
+
 from typing import Any, Dict
 
 
 def to_beetle_payload_compact(row: Dict[str, Any]) -> Dict[str, Any]:
-    """Transform row into a compact list payload for fast index rendering."""
+    """Wandelt eine Zeile in ein kompaktes Listen-Payload fuer schnelles Index-Rendering um."""
     gbif_id = row.get("gbif_id")
     payload_id = row.get("entity_id") or (f"occ-{gbif_id}" if gbif_id is not None else None)
     return {
@@ -27,7 +30,7 @@ def to_beetle_payload_compact(row: Dict[str, Any]) -> Dict[str, Any]:
     }
 
 def to_beetle_payload(row: Dict[str, Any]) -> Dict[str, Any]:
-    """Transform a denormalized DB row into the beetle API response payload."""
+    """Wandelt eine denormalisierte DB-Zeile in das Kaefer-API-Antwort-Payload um."""
     gbif_id = row.get("gbif_id")
     payload_id = row.get("entity_id") or (f"occ-{gbif_id}" if gbif_id is not None else None)
     return {

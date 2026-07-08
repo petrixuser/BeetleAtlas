@@ -71,9 +71,8 @@ OUTPUT = Path(__file__).resolve().parents[2] / "frontend" / "data" / "country-st
 
 
 def fetch_country(base: str, lookup: str):
+    """Fragt /api/countries/{lookup} ab und liefert das JSON als dict oder None."""
     url = f"{base}/api/countries/{urllib.parse.quote(lookup)}"
-    # Cloudflare (vor der api-Subdomain) blockt den Default-urllib-User-Agent (403).
-    # Ein normaler Browser-UA wird durchgelassen.
     req = urllib.request.Request(
         url,
         headers={
@@ -99,7 +98,7 @@ def fetch_country(base: str, lookup: str):
 
 
 def resolve_country(base: str, display_name: str, iso2: str):
-    # Kandidaten in Reihenfolge: Anzeigename, ISO2-Code. Erster mit Daten gewinnt.
+    """Versucht, Laenderdaten anhand des Anzeigenamens oder ISO2-Codes zu erhalten."""
     for candidate in (display_name, iso2):
         data = fetch_country(base, candidate)
         if data and (data.get("speciesCount") or 0) > 0:
@@ -108,6 +107,7 @@ def resolve_country(base: str, display_name: str, iso2: str):
 
 
 def main() -> int:
+    """Ruft pro klickbarem Land die API ab und schreibt frontend/data/country-stats.js."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--base", default=DEFAULT_BASE, help="Backend-Basis-URL")
     args = parser.parse_args()

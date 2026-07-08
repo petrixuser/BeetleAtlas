@@ -1,5 +1,10 @@
--- Performance indexes for map-related backend queries
--- Safe to run multiple times: each CREATE is guarded via information_schema.
+-- ============================================================================
+--  Ops: Performance-Indizes fuer kartenbezogene Backend-Abfragen
+--  Rolle beim DB-Aufbau: Optimierungs-/Migrationsschritt nach dem Basis-Schema.
+--  Mehrfach ausfuehrbar: jedes CREATE ist ueber information_schema abgesichert.
+-- ============================================================================
+
+USE beetle_db;
 
 SET @sql := (
   SELECT IF(
@@ -52,8 +57,6 @@ PREPARE stmt FROM @sql;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
--- Optional analysis checks (run manually while profiling)
--- EXPLAIN FORMAT=tree SELECT ... FROM observation o JOIN location l ... WHERE l.longitude BETWEEN ... AND ... AND l.latitude BETWEEN ... AND ...;
 
 SET @sql := (
   SELECT IF(

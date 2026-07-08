@@ -1,8 +1,10 @@
 #!/bin/sh
+# Container-Startskript des Frontends (nginx): injiziert die Laufzeit-Konfiguration
+# und startet danach nginx im Vordergrund.
 set -e
 
-# Inject runtime config so secrets never bake into the image.
-# Set GMAPS_KEY and optionally API_BASE_URL as container environment variables.
+# Laufzeit-Konfiguration injizieren, damit Secrets nie ins Image gebacken werden.
+# GMAPS_KEY und optional API_BASE_URL als Container-Umgebungsvariablen setzen.
 CONFIG_DIR=/usr/share/nginx/html/config
 CONFIG=$CONFIG_DIR/config.local.js
 

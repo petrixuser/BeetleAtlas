@@ -56,7 +56,7 @@ def test_validation_error_contract_for_invalid_beetles_sort_by():
     except HTTPError as exc:
         assert exc.code == 422
         payload = json.loads(exc.read().decode("utf-8"))
-        assert payload == {"error": "validation_error", "message": "Invalid request parameters."}
+        assert payload == {"error": "validation_error", "message": "Ungueltige Anfrageparameter."}
 
 
 def test_validation_error_contract_for_map_points_missing_bbox():
@@ -66,7 +66,7 @@ def test_validation_error_contract_for_map_points_missing_bbox():
     except HTTPError as exc:
         assert exc.code == 422
         payload = json.loads(exc.read().decode("utf-8"))
-        assert payload == {"error": "validation_error", "message": "Invalid request parameters."}
+        assert payload == {"error": "validation_error", "message": "Ungueltige Anfrageparameter."}
 
 
 def test_validation_error_contract_for_map_points_invalid_zoom():
@@ -76,7 +76,7 @@ def test_validation_error_contract_for_map_points_invalid_zoom():
     except HTTPError as exc:
         assert exc.code == 422
         payload = json.loads(exc.read().decode("utf-8"))
-        assert payload == {"error": "validation_error", "message": "Invalid request parameters."}
+        assert payload == {"error": "validation_error", "message": "Ungueltige Anfrageparameter."}
 
 
 def test_unknown_route_error_format_contract():
@@ -86,7 +86,7 @@ def test_unknown_route_error_format_contract():
     except HTTPError as exc:
         assert exc.code == 404
         payload = json.loads(exc.read().decode("utf-8"))
-        assert payload == {"error": "not_found", "message": "Route not found."}
+        assert payload == {"error": "not_found", "message": "Route nicht gefunden."}
 
 
 def test_login_rate_limit_contract():
@@ -107,7 +107,7 @@ def test_login_rate_limit_contract():
             if exc.code == 429:
                 assert payload == {
                     "error": "rate_limited",
-                    "message": "Too many requests. Please retry later.",
+                    "message": "Zu viele Anfragen. Bitte spaeter erneut versuchen.",
                 }
                 got_429 = True
                 break

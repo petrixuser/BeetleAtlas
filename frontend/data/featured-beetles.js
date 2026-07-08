@@ -1,7 +1,6 @@
-
 window.FEATURED_BEETLES = [
   {
-    "id": "rec-19",
+    "id": "rec-18",
     "name": "Titanus giganteus",
     "commonName": "Titanenbockkäfer",
     "note": "Größter Käfer der Welt – bis 17 cm",
@@ -21,7 +20,7 @@ window.FEATURED_BEETLES = [
     "isFeatured": true
   },
   {
-    "id": "rec-20",
+    "id": "rec-6",
     "name": "Dynastes hercules",
     "commonName": "Herkuleskäfer",
     "note": "Längster Käfer – riesiges Brusthorn",
@@ -41,7 +40,7 @@ window.FEATURED_BEETLES = [
     "isFeatured": true
   },
   {
-    "id": "rec-21",
+    "id": "rec-7",
     "name": "Dynastes neptunus",
     "commonName": "Neptunkäfer",
     "note": "Mächtige gebogene Hörner",
@@ -61,7 +60,7 @@ window.FEATURED_BEETLES = [
     "isFeatured": true
   },
   {
-    "id": "rec-22",
+    "id": "rec-13",
     "name": "Megasoma elephas",
     "commonName": "Elefantenkäfer",
     "note": "Einer der schwersten Käfer",
@@ -81,7 +80,7 @@ window.FEATURED_BEETLES = [
     "isFeatured": true
   },
   {
-    "id": "rec-23",
+    "id": "rec-12",
     "name": "Megasoma actaeon",
     "commonName": "Actaeon-Käfer",
     "note": "Massiger Nashornkäfer",
@@ -101,7 +100,7 @@ window.FEATURED_BEETLES = [
     "isFeatured": true
   },
   {
-    "id": "rec-24",
+    "id": "rec-14",
     "name": "Megasoma mars",
     "commonName": "Mars-Käfer",
     "note": "Seltener Riesen-Nashornkäfer",
@@ -121,7 +120,7 @@ window.FEATURED_BEETLES = [
     "isFeatured": true
   },
   {
-    "id": "rec-25",
+    "id": "rec-11",
     "name": "Macrodontia cervicornis",
     "commonName": "Säbelzahn-Bockkäfer",
     "note": "Gewaltige gezackte Mandibeln",
@@ -141,7 +140,7 @@ window.FEATURED_BEETLES = [
     "isFeatured": true
   },
   {
-    "id": "rec-26",
+    "id": "rec-1",
     "name": "Acrocinus longimanus",
     "commonName": "Harlekinkäfer",
     "note": "Farbenprächtig, extrem lange Vorderbeine",
@@ -161,7 +160,7 @@ window.FEATURED_BEETLES = [
     "isFeatured": true
   },
   {
-    "id": "rec-27",
+    "id": "rec-17",
     "name": "Strategus aloeus",
     "commonName": "Ochsenkäfer",
     "note": "Kräftiger dreihörniger Nashornkäfer",
@@ -181,7 +180,7 @@ window.FEATURED_BEETLES = [
     "isFeatured": true
   },
   {
-    "id": "rec-28",
+    "id": "rec-8",
     "name": "Enema pan",
     "commonName": "Pan-Nashornkäfer",
     "note": "Glänzend schwarz, langes Horn",
@@ -201,7 +200,7 @@ window.FEATURED_BEETLES = [
     "isFeatured": true
   },
   {
-    "id": "rec-29",
+    "id": "rec-9",
     "name": "Golofa porteri",
     "commonName": "Golofa-Käfer",
     "note": "Schlankes geschwungenes Horn",
@@ -221,7 +220,7 @@ window.FEATURED_BEETLES = [
     "isFeatured": true
   },
   {
-    "id": "rec-30",
+    "id": "rec-4",
     "name": "Chrysina macropus",
     "commonName": "Juwelenkäfer",
     "note": "Metallisch glänzender Prachtkäfer",
@@ -241,7 +240,7 @@ window.FEATURED_BEETLES = [
     "isFeatured": true
   },
   {
-    "id": "rec-31",
+    "id": "rec-16",
     "name": "Phanaeus adonis",
     "commonName": "Regenbogen-Mistkäfer",
     "note": "Schillernd metallisch gefärbt",
@@ -261,7 +260,7 @@ window.FEATURED_BEETLES = [
     "isFeatured": true
   },
   {
-    "id": "rec-32",
+    "id": "rec-5",
     "name": "Coprophanaeus lancifer",
     "commonName": "Riesen-Mistkäfer",
     "note": "Größter Mistkäfer, tiefblau",
@@ -281,7 +280,7 @@ window.FEATURED_BEETLES = [
     "isFeatured": true
   },
   {
-    "id": "rec-33",
+    "id": "rec-15",
     "name": "Pelidnota punctulata",
     "commonName": "Pelidnota",
     "note": "Glänzender Blatthornkäfer",
@@ -301,7 +300,7 @@ window.FEATURED_BEETLES = [
     "isFeatured": true
   },
   {
-    "id": "rec-34",
+    "id": "rec-2",
     "name": "Chalcolepidius porcatus",
     "commonName": "Riesen-Schnellkäfer",
     "note": "Metallischer Schnellkäfer",
@@ -321,7 +320,7 @@ window.FEATURED_BEETLES = [
     "isFeatured": true
   },
   {
-    "id": "rec-35",
+    "id": "rec-10",
     "name": "Heterogomphus dilaticollis",
     "commonName": "Nashornkäfer",
     "note": "Robuster gehörnter Käfer",
@@ -341,7 +340,7 @@ window.FEATURED_BEETLES = [
     "isFeatured": true
   },
   {
-    "id": "rec-36",
+    "id": "rec-3",
     "name": "Chiasognathus grantii",
     "commonName": "Darwin-Käfer",
     "note": "Riesige Mandibeln, Chile/Argentinien",

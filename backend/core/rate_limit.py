@@ -1,3 +1,6 @@
+"""Rate-Limiting fuer Auth-Endpunkte: verteiltes Fixed-Window ueber Redis
+(falls verfuegbar) mit In-Memory-Sliding-Window als Fallback."""
+
 import threading
 from collections import defaultdict, deque
 from threading import Lock
@@ -15,7 +18,7 @@ from backend.config.settings import (
 
 try:
     import redis
-except ImportError:  # pragma: no cover - optional dependency in some envs
+except ImportError:  
     redis = None
 
 
@@ -27,7 +30,7 @@ _REDIS_INITIALIZED = False
 
 
 def _client_identity(request: Request) -> str:
-    """Resolve best-effort client identity from headers or socket address."""
+    """Ermittelt bestmoeglich die Client-Identitaet aus Headern oder Socket-Adresse."""
     forwarded_for = request.headers.get("x-forwarded-for")
     if forwarded_for:
         return forwarded_for.split(",", 1)[0].strip()
@@ -39,7 +42,7 @@ def _client_identity(request: Request) -> str:
 
 
 def _get_redis_client():
-    """Lazily create and cache a Redis client for distributed limits."""
+    """Erstellt und cacht einen Redis-Client fuer verteilte Limits verzoegert (lazy)."""
     global _REDIS_CLIENT, _REDIS_INITIALIZED
     if _REDIS_INITIALIZED:
         return _REDIS_CLIENT
@@ -70,7 +73,7 @@ def _get_redis_client():
 
 
 def _redis_enforce_limit(bucket_key: str, max_requests: int, window_seconds: int) -> bool:
-    """Try Redis fixed-window limiting. Return True if handled, else False."""
+    """Versucht Redis-Fixed-Window-Limiting. Gibt True zurueck, wenn behandelt, sonst False."""
     client = _get_redis_client()
     if client is None:
         return False
@@ -89,7 +92,7 @@ def _redis_enforce_limit(bucket_key: str, max_requests: int, window_seconds: int
                 status_code=429,
                 detail={
                     "error": "rate_limited",
-                    "message": "Too many requests. Please retry later.",
+                    "message": "Zu viele Anfragen. Bitte spaeter erneut versuchen.",
                 },
             )
         return True
@@ -100,7 +103,7 @@ def _redis_enforce_limit(bucket_key: str, max_requests: int, window_seconds: int
 
 
 def _enforce_limit(bucket_key: str, max_requests: int, window_seconds: int) -> None:
-    """Apply sliding-window limit on one in-memory bucket key."""
+    """Wendet ein Sliding-Window-Limit auf einen In-Memory-Bucket-Key an."""
     if _redis_enforce_limit(bucket_key=bucket_key, max_requests=max_requests, window_seconds=window_seconds):
         return
 
@@ -117,7 +120,7 @@ def _enforce_limit(bucket_key: str, max_requests: int, window_seconds: int) -> N
                 status_code=429,
                 detail={
                     "error": "rate_limited",
-                    "message": "Too many requests. Please retry later.",
+                    "message": "Zu viele Anfragen. Bitte spaeter erneut versuchen.",
                 },
             )
 
@@ -125,31 +128,31 @@ def _enforce_limit(bucket_key: str, max_requests: int, window_seconds: int) -> N
 
 
 def _apply_rate_limit(request: Request, action: str, max_requests: int, window_seconds: int) -> None:
-    """Compose action+client bucket and enforce its request limit."""
+    """Bildet einen Action+Client-Bucket und erzwingt dessen Anfrage-Limit."""
     client = _client_identity(request)
     bucket_key = f"{action}:{client}"
     _enforce_limit(bucket_key=bucket_key, max_requests=max_requests, window_seconds=window_seconds)
 
 
 def auth_register_rate_limit(request: Request) -> None:
-    """Dependency for rate-limiting register requests."""
+    """Abhaengigkeit zum Rate-Limiting von Register-Anfragen."""
     max_requests, window_seconds = get_auth_register_rate_limit()
     _apply_rate_limit(request, "auth_register", max_requests, window_seconds)
 
 
 def auth_login_rate_limit(request: Request) -> None:
-    """Dependency for rate-limiting login requests."""
+    """Abhaengigkeit zum Rate-Limiting von Login-Anfragen."""
     max_requests, window_seconds = get_auth_login_rate_limit()
     _apply_rate_limit(request, "auth_login", max_requests, window_seconds)
 
 
 def auth_refresh_rate_limit(request: Request) -> None:
-    """Dependency for rate-limiting refresh requests."""
+    """Abhaengigkeit zum Rate-Limiting von Refresh-Anfragen."""
     max_requests, window_seconds = get_auth_refresh_rate_limit()
     _apply_rate_limit(request, "auth_refresh", max_requests, window_seconds)
 
 
 def auth_bootstrap_rate_limit(request: Request) -> None:
-    """Dependency for rate-limiting bootstrap-admin requests."""
+    """Abhaengigkeit zum Rate-Limiting von Bootstrap-Admin-Anfragen."""
     max_requests, window_seconds = get_auth_bootstrap_rate_limit()
     _apply_rate_limit(request, "auth_bootstrap", max_requests, window_seconds)

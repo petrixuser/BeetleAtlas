@@ -1,9 +1,10 @@
-﻿from math import floor
+"""Repository fuer Kartenpunkte und Cluster-Aggregation."""
+from math import floor
 from typing import Any, Dict, List
 
 from sqlalchemy import text
 
-from backend.config.map_repository_sql import (
+from backend.config.sql.map_repository_sql import (
     MAX_CLUSTERS,
     list_read_map_clusters_sql,
     list_read_map_points_sql,
@@ -15,7 +16,7 @@ from backend.config.map_repository_sql import (
 from backend.core.db import get_connection
 
 def map_sort_to_beetles_sort(sort_by: str) -> str:
-    """Sorts the map points based on the specified sort_by parameter, mapping it to the corresponding column in the beetle database."""
+    """Bildet den Karten-Sortierschluessel auf die entsprechende Kaefer-Spalte ab."""
     return {
         "speciesName": "name",
         "observedAt": "observedAt",
@@ -25,7 +26,7 @@ def map_sort_to_beetles_sort(sort_by: str) -> str:
     }[sort_by]
 
 def build_map_points(items: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-    """This function takes a list of beetle observation items and builds a list of map points with relevant information such as species name, latitude, longitude, elevation, climate, vegetation, and observed date."""
+    """Baut aus Beobachtungen Kartenpunkte (Name, Koordinaten, Umweltattribute)."""
     points: List[Dict[str, Any]] = []
     for item in items:
         coords = item.get("coordinates") or [None, None]
@@ -45,7 +46,7 @@ def build_map_points(items: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     return points
 
 def cluster_map_points(points: List[Dict[str, Any]], zoom: int) -> List[Dict[str, Any]]:
-    """This function takes a list of map points and clusters them based on the specified zoom level. calculating the average latitude and longitude for each cluster and counting the number of points in each cluster."""
+    """Fasst Kartenpunkte je Zoomstufe zu Clustern zusammen (Mittelwert + Anzahl)."""
     cell = _cluster_cell_size(zoom)
     buckets: Dict[tuple, Dict[str, Any]] = {}
 
@@ -82,7 +83,7 @@ def cluster_map_points(points: List[Dict[str, Any]], zoom: int) -> List[Dict[str
     return clusters
 
 def build_map_geojson(points_result: Dict[str, Any]) -> Dict[str, Any]:
-    """This function takes a list of map points and builds a GeoJSON FeatureCollection with the relevant properties for each point, including metadata about the total number of points, pagination, and clustering status."""
+    """Baut aus Kartenpunkten eine GeoJSON-FeatureCollection samt Metadaten."""
     features: List[Dict[str, Any]] = []
     for item in points_result["items"]:
         lat = item.get("lat")
@@ -115,7 +116,7 @@ def build_map_geojson(points_result: Dict[str, Any]) -> Dict[str, Any]:
     }
 
 def _cluster_cell_size(zoom: int) -> float:
-    """This function determines the appropriate cell size for clustering map points based on the current zoom level, with predefined thresholds for different zoom levels."""
+    """Liefert die Rasterzellengroesse fuers Clustering je nach Zoomstufe."""
     if zoom <= 2:
         return 4.0
     if zoom <= 4:
@@ -131,7 +132,7 @@ def fetch_map_clusters_lean(
     cell: float,
     params: Dict[str, Any],
 ) -> List[Dict[str, Any]]:
-    """This function executes a SQL query to fetch clustered map points based on the provided base WHERE clause, additional WHERE clause, cell size for clustering, and query parameters. It returns a list of clusters with their average latitude, longitude, count of points, and cluster status."""
+    """Fuehrt die Cluster-Abfrage (map_point_read) aus und liefert die Cluster-Liste."""
     sql = text(map_clusters_sql(base_where_sql, where_sql))
 
     exec_params = dict(params)
@@ -159,7 +160,7 @@ def fetch_map_points_lean(
     offset: int,
     params: Dict[str, Any],
 ) -> tuple[List[Dict[str, Any]], int]:
-    """This function executes a SQL query to fetch individual map points based on the provided base WHERE clause, additional WHERE clause, limit, and query parameters."""
+    """Fuehrt die Abfrage einzelner Kartenpunkte (map_point_read) samt Gesamtzahl aus."""
     sql = text(map_points_sql(base_where_sql, where_sql))
     total_sql = text(map_points_total_sql(base_where_sql, where_sql))
 
@@ -195,8 +196,8 @@ def fetch_map_clusters_from_list_read(
     cell: float,
     params: Dict[str, Any],
 ) -> List[Dict[str, Any]]:
-    """Aggregate clusters over beetle_list_read for read-model-backed filters
-    (e.g. has_image / observed_year), which map_point_read cannot express."""
+    """Cluster ueber beetle_list_read fuer Read-Model-Filter (z. B. has_image /
+    observed_year), die map_point_read nicht abbilden kann."""
     sql = text(list_read_map_clusters_sql(where_sql))
 
     exec_params = dict(params)
@@ -224,7 +225,7 @@ def fetch_map_points_from_list_read(
     offset: int,
     params: Dict[str, Any],
 ) -> tuple[List[Dict[str, Any]], int]:
-    """Non-clustered map points over beetle_list_read for read-model filters."""
+    """Ungeclusterte Kartenpunkte ueber beetle_list_read fuer Read-Model-Filter."""
     sql = text(list_read_map_points_sql(where_sql))
     total_sql = text(list_read_map_points_total_sql(where_sql))
 

@@ -1,4 +1,12 @@
-﻿-- Consolidated core seed
+﻿-- ============================================================================
+--  Seed: Zusammengefasste Grunddaten (Core-Import aus CSV)
+--  Zweck: laedt beetle_species, location, observation, media und
+--  climate_snapshot aus den CSV-Dateien und schreibt einen Qualitaetsbericht.
+--  Rolle beim DB-Aufbau: Befuellt die im Core-Schema angelegten Tabellen mit
+--  den GBIF-Ausgangsdaten (nach den Schema-Skripten).
+--  NICHT idempotent im Sinne von "anhaengen": die Tabellen werden per TRUNCATE
+--  geleert und neu geladen; ein erneuter Lauf ersetzt die Daten vollstaendig.
+-- ============================================================================
 
 USE beetle_db;
 

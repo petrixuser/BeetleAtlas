@@ -1,4 +1,12 @@
--- Ergaenzt beetle_list_read um die vorberechneten Zahlenwerte Temperatur,
+-- ============================================================================
+--  Ops-Migration: beetle_list_read um vorberechnete Zahlenwerte ergaenzen
+--  Zweck: fuegt die Spalten temperature, precipitation und soil_ph zu
+--  beetle_list_read hinzu und fuellt sie fuer Beobachtungen (observation) und
+--  manuelle Kaefer (beetle_record).
+--  Rolle beim DB-Aufbau: Read-Model-Nachruestung nach dem Basis-Schema.
+--  Idempotent/mehrfach ausfuehrbar: die Spalten werden ueber information_schema
+--  abgesichert; die UPDATEs setzen dieselben Werte erneut.
+-- ============================================================================
 
 SET SESSION sql_mode = '';
 

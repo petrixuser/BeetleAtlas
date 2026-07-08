@@ -31,18 +31,17 @@ KOPPEN_FILE = ASSETS_DIR / "koppen-latam.geojson"
 ECOREGION_FILE = ASSETS_DIR / "ecoregions-latam.geojson"
 COUNTRY_FILE = ASSETS_DIR / "latin-america-countries.js"
 
-# Rastergroesse des raeumlichen Indexes in Grad. 0.5 Grad ist ein guter
-# Kompromiss zwischen Speicher und Kandidatenanzahl je Punkt.
 GRID_SIZE_DEG = 0.5
 
 BATCH_SIZE = 5000
 
-Ring = List[Tuple[float, float]]        # [(lng, lat), ...]
-Polygon = List[Ring]                    # [exterior, hole1, hole2, ...]
-BBox = Tuple[float, float, float, float]  # (min_lng, min_lat, max_lng, max_lat)
+Ring = List[Tuple[float, float]]       
+Polygon = List[Ring]                  
+BBox = Tuple[float, float, float, float]  
 
 
 def db_config() -> Dict[str, object]:
+    """Liest die DB-Verbindungsparameter aus den Umgebungsvariablen."""
     return {
         "host": os.getenv("DB_HOST", "127.0.0.1"),
         "port": int(os.getenv("DB_PORT", "3306")),
@@ -87,6 +86,7 @@ def _polygons_from_geometry(geometry: dict) -> List[Polygon]:
 
 
 def _bbox_of_polygon(polygon: Polygon) -> Optional[BBox]:
+    """Berechnet die Bounding-Box (min_lng, min_lat, max_lng, max_lat) eines Polygons."""
     min_lng = min_lat = math.inf
     max_lng = max_lat = -math.inf
     for lng, lat in polygon[0]:
@@ -114,9 +114,11 @@ class ZoneIndex:
         self._grid: Dict[Tuple[int, int], List[int]] = {}
 
     def _cell(self, lng: float, lat: float) -> Tuple[int, int]:
+        """Berechnet die Rasterzelle (cx, cy) fuer einen Punkt."""
         return (int(math.floor(lng / self.grid_size)), int(math.floor(lat / self.grid_size)))
 
     def add_feature(self, geometry: dict, value: str) -> None:
+        """Fuegt ein GeoJSON-Feature (Polygon/MultiPolygon) mit zugehoerigem Wert hinzu."""
         if not value:
             return
         for polygon in _polygons_from_geometry(geometry):
@@ -150,6 +152,7 @@ class ZoneIndex:
         return inside
 
     def _polygon_contains(self, lng: float, lat: float, polygon: Polygon) -> bool:
+        """Prueft, ob ein Punkt innerhalb eines Polygons (mit Loechern) liegt."""
         if not self._ring_contains(lng, lat, polygon[0]):
             return False
         for hole in polygon[1:]:
@@ -158,6 +161,7 @@ class ZoneIndex:
         return True
 
     def classify(self, lng: float, lat: float) -> Optional[str]:
+        """Gibt den Wert der ersten Polygon-Feature zurueck, das den Punkt enthaelt."""
         candidates = self._grid.get(self._cell(lng, lat))
         if not candidates:
             return None
@@ -172,6 +176,7 @@ class ZoneIndex:
 
 
 def build_index(path: Path, value_key: str) -> ZoneIndex:
+    """Laedt die GeoJSON-Datei und baut den ZoneIndex auf."""
     print(f">> Lade {path.name} ...", flush=True)
     with path.open(encoding="utf-8") as fh:
         data = json.load(fh)
@@ -214,6 +219,7 @@ def build_country_index(path: Path, value_key: str = "name") -> ZoneIndex:
 # ---------------------------------------------------------------------------
 
 def _column_exists(cur, table: str, column: str) -> bool:
+    """Prueft, ob eine Spalte in einer Tabelle existiert."""
     cur.execute(
         """
         SELECT 1 FROM information_schema.columns
@@ -225,6 +231,7 @@ def _column_exists(cur, table: str, column: str) -> bool:
 
 
 def _index_exists(cur, table: str, index: str) -> bool:
+    """Prueft, ob ein Index in einer Tabelle existiert."""
     cur.execute(
         """
         SELECT 1 FROM information_schema.statistics
@@ -268,6 +275,7 @@ def ensure_schema(cur) -> None:
 # ---------------------------------------------------------------------------
 
 def precompute_locations(conn, koppen: ZoneIndex, eco: ZoneIndex, country: ZoneIndex) -> None:
+    """Berechnet Koeppen-/Vegetations-/Land-Zonen fuer alle Standorte und schreibt sie in location."""
     read_cur = conn.cursor()
     read_cur.execute(
         "SELECT location_id, latitude, longitude FROM location "
@@ -290,6 +298,7 @@ def precompute_locations(conn, koppen: ZoneIndex, eco: ZoneIndex, country: ZoneI
     started = time.time()
 
     def flush() -> None:
+        """Schreibt den aktuellen Batch in die temporaere Tabelle tmp_zone."""
         if not batch:
             return
         write_cur.executemany(
@@ -341,6 +350,7 @@ def precompute_locations(conn, koppen: ZoneIndex, eco: ZoneIndex, country: ZoneI
 
 
 def propagate_to_read_models(conn) -> None:
+    """Kopiert die berechneten Zonen aus location in die Read-Modelle map_point_read und beetle_list_read."""
     cur = conn.cursor()
     print(">> Uebertrage Zonen in map_point_read ...", flush=True)
     cur.execute(
@@ -362,6 +372,7 @@ def propagate_to_read_models(conn) -> None:
 
 
 def report(conn) -> None:
+    """Erzeugt eine kurze Statistik der Top-Koeppen- und Vegetationszonen in map_point_read."""
     cur = conn.cursor()
     cur.execute(
         "SELECT koppen_code, COUNT(*) c FROM map_point_read "
@@ -381,6 +392,7 @@ def report(conn) -> None:
 
 
 def main() -> int:
+    """Baut die Zonen-Indizes auf und schreibt die Zonen in location und die Read-Modelle."""
     if not KOPPEN_FILE.exists() or not ECOREGION_FILE.exists():
         print("FEHLER: GeoJSON-Dateien nicht gefunden unter", ASSETS_DIR, file=sys.stderr)
         return 1

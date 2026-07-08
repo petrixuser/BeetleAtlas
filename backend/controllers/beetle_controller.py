@@ -1,4 +1,7 @@
-﻿import time
+"""Controller-Funktionen fuer Kaefer-Listen, Detailansicht, Medien,
+Laender-Aggregationen und Umwelt-Wertebereiche inklusive In-Memory-Caches."""
+
+import time
 from collections import OrderedDict
 from threading import Lock
 from typing import Any, Dict, List, Optional, cast
@@ -16,7 +19,8 @@ from backend.config.beetle_filters import (
     COMPACT_PRECOMPUTED_DIM_FILTER_MAP,
 )
 from backend.config.climate_subtypes import is_climate_subtype_code, parent_climate_code
-from backend.config.country_mappings import COUNTRY_CODE_TO_LOCATION_NAME
+from backend.config.environment_metrics import ENVIRONMENT_METRICS
+from backend.config.data.country_mappings import COUNTRY_CODE_TO_LOCATION_NAME
 from backend.config.error_codes import ERR
 from backend.core.beetle_filter_helpers import (
     append_climate_filter,
@@ -37,8 +41,12 @@ from backend.repositories.beetle_repository import (
     fetch_beetles_list_rows_total,
     fetch_country_detail_rows,
     fetch_environment_ranges,
+    fetch_featured_beetle_rows,
 )
-from backend.repositories.beetle_write_repository import fetch_beetle_record_by_id
+from backend.repositories.beetle_write_repository import (
+    fetch_beetle_record_by_id,
+    fetch_beetle_record_media_rows,
+)
 
 
 ENV_RANGES_CACHE: Optional[Dict[str, Any]] = None
@@ -51,6 +59,7 @@ _list_total_cache: "OrderedDict[tuple, tuple[float, int]]" = OrderedDict()
 _list_total_cache_lock = Lock()
 
 def _compact_total_cache_key(where_sql: str, params: Dict[str, Any]) -> tuple:
+    """Baut einen stabilen Cache-Schluessel aus WHERE-SQL und Filter-Parametern."""
     filtered = []
     for key, value in params.items():
         if key in {"offset", "limit"}:
@@ -61,6 +70,7 @@ def _compact_total_cache_key(where_sql: str, params: Dict[str, Any]) -> tuple:
 
 
 def _compact_total_cache_get(key: tuple) -> Optional[int]:
+    """Liest eine gecachte Gesamtzahl; entfernt abgelaufene Eintraege."""
     now = time.time()
     with _list_total_cache_lock:
         cached = _list_total_cache.get(key)
@@ -75,6 +85,7 @@ def _compact_total_cache_get(key: tuple) -> Optional[int]:
 
 
 def _compact_total_cache_set(key: tuple, total: int) -> None:
+    """Legt eine Gesamtzahl im LRU-Cache ab und begrenzt dessen Groesse."""
     with _list_total_cache_lock:
         _list_total_cache[key] = (time.time() + _LIST_TOTAL_CACHE_TTL_SECONDS, int(total))
         _list_total_cache.move_to_end(key)
@@ -92,7 +103,8 @@ def _compact_single_precomputed_dim(
     raw_climate: Optional[str] = None,
     raw_vegetation: Optional[str] = None,
 ) -> Optional[tuple[str, str]]:
-    # Precomputed totals are valid only for simple, single-dimension filters.
+    """Ermittelt, ob genau EINE vorberechenbare Filter-Dimension aktiv ist."""
+    # Vorberechnete Gesamtzahlen gelten nur fuer einfache Filter mit einer Dimension.
     if q or bbox:
         return None
     if raw_climate_has_subtype(raw_climate) or raw_vegetation_has_zone(raw_vegetation):
@@ -120,6 +132,7 @@ def _append_exact_or_in_filter(
     key: str,
     raw_value: Optional[str],
 ) -> None:
+    """Haengt einen Gleichheits- (=) oder Mehrwert-Filter (IN) an die WHERE-Liste an."""
     if not raw_value:
         return
 
@@ -140,6 +153,7 @@ def _append_exact_or_in_filter(
 
 
 def _normalize_climate_filter(raw_climate: Optional[str]) -> Optional[str]:
+    """Fuehrt Klima-Subtyp-Codes auf ihren Hauptcode zurueck (dedupliziert)."""
     if not raw_climate:
         return raw_climate
 
@@ -163,6 +177,7 @@ def _normalize_climate_filter(raw_climate: Optional[str]) -> Optional[str]:
 
 
 def _expand_event_date_quality_filter(raw_quality: Optional[str]) -> Optional[str]:
+    """Erweitert Datumsqualitaets-Aliasse (deutsch/englisch) auf alle Synonyme."""
     if not raw_quality:
         return raw_quality
 
@@ -195,33 +210,25 @@ def _expand_event_date_quality_filter(raw_quality: Optional[str]) -> Optional[st
 
 
 def _build_environment_ranges_payload(row: Dict[str, Any]) -> Dict[str, Any]:
-    def _pair(min_key: str, max_key: str):
-        min_value = row.get(min_key)
-        max_value = row.get(max_key)
+    """Baut aus einer Min-/Max-Zeile das Umweltbereichs-Payload (min/max je Metrik).
+
+    Nutzt den zentralen ENVIRONMENT_METRICS-Katalog, damit Payload-Schluessel und
+    SQL-Spalten synchron bleiben.
+    """
+    def _pair(column: str):
+        """Liefert {min, max} als Floats fuer die Spalten min_<column>/max_<column>."""
+        min_value = row.get(f"min_{column}")
+        max_value = row.get(f"max_{column}")
         return {
             "min": float(min_value) if min_value is not None else None,
             "max": float(max_value) if max_value is not None else None,
         }
 
-    return {
-        "elevation": _pair("min_elevation", "max_elevation"),
-        "temperature": _pair("min_temperature", "max_temperature"),
-        "worldclimBio01": _pair("min_worldclim_bio01", "max_worldclim_bio01"),
-        "precipitation": _pair("min_precipitation", "max_precipitation"),
-        "worldclimBio12": _pair("min_worldclim_bio12", "max_worldclim_bio12"),
-        "soilMoisture": _pair("min_soil_moisture", "max_soil_moisture"),
-        "ndvi": _pair("min_ndvi", "max_ndvi"),
-        "relativeHumidity": _pair("min_relative_humidity", "max_relative_humidity"),
-        "surfacePressureHpa": _pair("min_surface_pressure_hpa", "max_surface_pressure_hpa"),
-        "nighttimeLights": _pair("min_nighttime_lights", "max_nighttime_lights"),
-        "slope": _pair("min_slope", "max_slope"),
-        "distanceToWaterM": _pair("min_distance_to_water_m", "max_distance_to_water_m"),
-        "humanModification": _pair("min_human_modification", "max_human_modification"),
-    }
+    return {payload_key: _pair(column) for column, payload_key in ENVIRONMENT_METRICS}
 
 
 def warm_environment_ranges_cache(force: bool = False) -> Optional[Dict[str, Any]]:
-    """Warm or refresh environment range cache. Returns cache payload if available."""
+    """Waermt oder aktualisiert den Umwelt-Wertebereich-Cache. Gibt das Cache-Payload zurueck, falls vorhanden."""
     global ENV_RANGES_CACHE, ENV_RANGES_CACHE_TS
 
     now = time.time()
@@ -240,26 +247,27 @@ def warm_environment_ranges_cache(force: bool = False) -> Optional[Dict[str, Any
 
 
 def _parse_entity_id_or_error(beetle_id: str) -> str:
-    """Normalize request beetle id into occ-* or rec-* form."""
+    """Normalisiert die angefragte beetle id in die Form occ-* oder rec-*."""
     normalized = beetle_id.strip()
     if normalized.startswith("occ-"):
         numeric_part = normalized[4:]
         if not numeric_part.isdigit():
-            raise_api_error(400, ERR.BEETLE.INVALID_ID, "Invalid ID. Expected e.g. occ-123, rec-456 or 123.")
+            raise_api_error(400, ERR.BEETLE.INVALID_ID, "Ungueltige ID. Erwartet z. B. occ-123, rec-456 oder 123.")
         return f"occ-{numeric_part}"
     if normalized.startswith("rec-"):
         numeric_part = normalized[4:]
         if not numeric_part.isdigit():
-            raise_api_error(400, ERR.BEETLE.INVALID_ID, "Invalid ID. Expected e.g. occ-123, rec-456 or 123.")
+            raise_api_error(400, ERR.BEETLE.INVALID_ID, "Ungueltige ID. Erwartet z. B. occ-123, rec-456 oder 123.")
         return f"rec-{numeric_part}"
     if normalized.isdigit():
         return f"occ-{normalized}"
 
-    raise_api_error(400, ERR.BEETLE.INVALID_ID, "Invalid ID. Expected e.g. occ-123, rec-456 or 123.")
+    raise_api_error(400, ERR.BEETLE.INVALID_ID, "Ungueltige ID. Erwartet z. B. occ-123, rec-456 oder 123.")
     raise AssertionError("unreachable")
 
 
 def _build_list_order_by_sql(sort_by: str, sort_dir: str) -> str:
+    """Bildet Sortier-Parameter auf eine sichere ORDER-BY-Klausel ab."""
     return resolve_order_clause_or_error(
         sort_by,
         sort_dir,
@@ -304,6 +312,7 @@ def _build_requested_filters(
     media_coverage: Optional[str],
     license_class: Optional[str],
 ) -> Dict[str, Optional[str]]:
+    """Buendelt alle einzelnen Filter-Parameter in ein Dictionary."""
     return {
         "country": country,
         "climate": climate,
@@ -347,6 +356,7 @@ def _build_list_where_sql_and_params(
     raw_climate: Optional[str] = None,
     raw_vegetation: Optional[str] = None,
 ) -> tuple[str, Dict[str, Any]]:
+    """Baut die WHERE-Klausel und die gebundenen Parameter fuer die Listenabfrage."""
     filters: List[str] = []
     params: Dict[str, Any] = {"offset": offset}
 
@@ -431,11 +441,12 @@ def build_read_model_where(
     has_image: Optional[bool] = None,
     bbox: Optional[str] = None,
 ) -> tuple[str, Dict[str, Any]]:
-    """Build a compact (beetle_list_read, ``e`` alias) WHERE clause + params.
+    """Baut eine kompakte WHERE-Klausel + Params (beetle_list_read, Alias ``e``).
 
-    Reuses the list filter pipeline so callers (e.g. the map clustering path)
-    filter identically to /api/beetles. Only filters present on beetle_list_read
-    are accepted; live-only advanced bands are intentionally not parameters here.
+    Nutzt die Listen-Filter-Pipeline wieder, damit Aufrufer (z. B. der Karten-
+    Cluster-Pfad) identisch zu /api/beetles filtern. Es werden nur Filter
+    akzeptiert, die auf beetle_list_read vorhanden sind; rein live-basierte
+    erweiterte Baender sind hier absichtlich keine Parameter.
     """
     normalized_climate = _normalize_climate_filter(climate)
     expanded_event_date_quality = _expand_event_date_quality_filter(event_date_quality)
@@ -482,6 +493,7 @@ def build_read_model_where(
 
 
 def _has_advanced_filters(requested_filters: Dict[str, Optional[str]]) -> bool:
+    """True, wenn erweiterte Filter aktiv sind, die nicht kompakt schnell sind."""
     return any(
         requested_filters.get(key)
         for key in ADVANCED_FILTER_KEYS
@@ -506,6 +518,7 @@ def _fetch_list_rows_total_and_payload_builder(
     raw_climate: Optional[str] = None,
     raw_vegetation: Optional[str] = None,
 ):
+    """Waehlt den passenden Read-Pfad, laedt Zeilen + Gesamtzahl und den Payload-Builder."""
     payload_builder = to_beetle_payload
 
     if compact and not has_advanced_filters:
@@ -592,9 +605,9 @@ def list_beetles_controller(
     sort_dir: str,
     compact: bool = False,
 ):
-    """Return a paginated beetle list using base and advanced filters plus optional bbox.
+    """Gibt eine paginierte Kaefer-Liste anhand von Basis- und erweiterten Filtern sowie optionaler bbox zurueck.
 
-    Uses a lean query path when no advanced filters are active.
+    Nutzt einen schlanken Query-Pfad, wenn keine erweiterten Filter aktiv sind.
     """
     validate_pagination_or_error(limit, offset)
     normalized_climate = _normalize_climate_filter(climate)
@@ -668,13 +681,13 @@ def list_beetles_controller(
     }
 
 def get_beetle_by_id_controller(beetle_id: str):
-    """Retrieves detailed information about a specific beetle observation by its ID, including associated media, and returns it in a structured payload format."""
+    """Liefert Detailinformationen zu einer bestimmten Kaefer-Beobachtung anhand ihrer ID, inklusive zugehoeriger Medien, in einem strukturierten Payload-Format."""
     entity_id = _parse_entity_id_or_error(beetle_id)
 
     row = fetch_beetle_detail_row_by_entity(entity_id)
 
     if row is None:
-        raise_api_error(404, ERR.COMMON.NOT_FOUND, "No entry found for this ID.")
+        raise_api_error(404, ERR.COMMON.NOT_FOUND, "Kein Eintrag fuer diese ID gefunden.")
     row = cast(Dict[str, Any], row)
 
     payload = to_beetle_payload(row)
@@ -715,14 +728,7 @@ _COUNTRY_DETAIL_CACHE_MAX = 64
 
 
 def clear_read_caches() -> None:
-    """Drop in-memory read caches owned by this module.
-
-    Called after a manual beetle write so country-detail and compact-list totals
-    reflect the change immediately. _COUNTRY_DETAIL_CACHE lives until restart (no
-    TTL), so without this a new beetle would not change a country's stats until the
-    backend restarts; _list_total_cache (60s) and ENV_RANGES_CACHE (30min) are
-    TTL-bounded but cleared too for consistency.
-    """
+    """Leert die von diesem Modul verwalteten In-Memory-Read-Caches."""
     global ENV_RANGES_CACHE, ENV_RANGES_CACHE_TS
     with _COUNTRY_DETAIL_CACHE_LOCK:
         _COUNTRY_DETAIL_CACHE.clear()
@@ -733,16 +739,10 @@ def clear_read_caches() -> None:
 
 
 def get_country_detail_controller(country_code: str):
-    """Return aggregated country details for a country code.
-
-    Includes species count, top climates and vegetations, and elevation range.
-    The result is cached in-memory (≈26 countries) because it aggregates the
-    full observation/location join per country (heavy CASE/snapshot evaluation);
-    like the map response cache it lives until the backend restarts.
-    """
+    """Gibt aggregierte Laenderdetails fuer einen Laendercode zurueck. """
     normalized = country_code.strip().upper()
     if not normalized:
-        raise_api_error(400, ERR.BEETLE.INVALID_COUNTRY_CODE, "Country code must not be empty.")
+        raise_api_error(400, ERR.BEETLE.INVALID_COUNTRY_CODE, "Laendercode darf nicht leer sein.")
 
     with _COUNTRY_DETAIL_CACHE_LOCK:
         cached = _COUNTRY_DETAIL_CACHE.get(normalized)
@@ -755,15 +755,17 @@ def get_country_detail_controller(country_code: str):
     overview, climates, vegetations, koppen, vegetation_zones, top_beetles = fetch_country_detail_rows(lookup_value)
 
     if overview is None or (overview.get("species_count") or 0) == 0:
-        raise_api_error(404, ERR.COMMON.NOT_FOUND, "No data found for this country code.")
+        raise_api_error(404, ERR.COMMON.NOT_FOUND, "Keine Daten fuer diesen Laendercode gefunden.")
     overview = cast(Dict[str, Any], overview)
 
     observation_count = int(overview.get("observation_count") or 0)
 
     def _round_int(value):
+        """Rundet auf eine ganze Zahl oder gibt None zurueck."""
         return int(round(value)) if value is not None else None
 
     def _share_rows(rows, key):
+        """Baut Label + Fundzahl + Anteil je Zeile fuer Balken/Prozent."""
         # Label + Fundzahl + Anteil (an allen Funden des Landes) fuer Balken/Prozent.
         out = []
         for row in rows:
@@ -780,9 +782,11 @@ def get_country_detail_controller(country_code: str):
     avg_temp = overview.get("avg_temperature")
 
     def _round_or_none(value, digits):
+        """Rundet auf die angegebene Nachkommastellenzahl oder gibt None zurueck."""
         return round(float(value), digits) if value is not None else None
 
     def _metric_triplet(prefix, digits, as_int=False):
+        """Liefert min/avg/max einer Metrik (as_int -> ganze Zahlen)."""
         # Liefert min/avg/max fuer eine Metrik (as_int -> ganze Zahlen).
         rounder = _round_int if as_int else (lambda v: _round_or_none(v, digits))
         return {
@@ -851,31 +855,31 @@ def get_country_detail_controller(country_code: str):
     return result
 
 def get_beetle_media_controller(beetle_id: str, limit: int, offset: int):
-    """Retrieves a paginated list of media items associated with a specific beetle observation, identified by its ID, and returns them in a structured format."""
+    """Liefert eine paginierte Liste der Medien zu einer bestimmten Kaefer-Beobachtung (per ID) in einem strukturierten Format."""
     validate_pagination_or_error(limit, offset)
 
     entity_id = _parse_entity_id_or_error(beetle_id)
     detail_row = fetch_beetle_detail_row_by_entity(entity_id)
     if detail_row is None:
-        raise_api_error(404, ERR.COMMON.NOT_FOUND, "No entry found for this ID.")
+        raise_api_error(404, ERR.COMMON.NOT_FOUND, "Kein Eintrag fuer diese ID gefunden.")
     detail_row = cast(Dict[str, Any], detail_row)
 
     if detail_row.get("source_type") == "manual":
         record_id = detail_row.get("record_id")
-        manual_row = fetch_beetle_record_by_id(int(record_id)) if record_id is not None else None
-        manual_items = []
-        if manual_row is not None and manual_row.get("image_url"):
-            manual_items.append(
-                {
-                    "mediaId": f"manual-{manual_row['record_id']}",
-                    "url": manual_row.get("image_url"),
-                    "license": manual_row.get("media_license"),
-                    "creator": manual_row.get("media_creator"),
-                    "publisher": manual_row.get("media_publisher"),
-                    "rightsHolder": manual_row.get("media_rights_holder"),
-                    "references": manual_row.get("media_references"),
-                }
-            )
+        media_rows = fetch_beetle_record_media_rows(int(record_id)) if record_id is not None else []
+        manual_items = [
+            {
+                "mediaId": f"manual-{row['media_id']}",
+                "url": row.get("image_url"),
+                "license": row.get("media_license"),
+                "creator": row.get("media_creator"),
+                "publisher": row.get("media_publisher"),
+                "rightsHolder": row.get("media_rights_holder"),
+                "references": row.get("media_references"),
+            }
+            for row in media_rows
+            if row.get("image_url")
+        ]
 
         page_items = manual_items[offset : offset + limit]
         page = (offset // limit) + 1
@@ -889,11 +893,11 @@ def get_beetle_media_controller(beetle_id: str, limit: int, offset: int):
 
     gbif_id_value = detail_row.get("gbif_id")
     if gbif_id_value is None:
-        raise_api_error(404, ERR.COMMON.NOT_FOUND, "No entry found for this ID.")
+        raise_api_error(404, ERR.COMMON.NOT_FOUND, "Kein Eintrag fuer diese ID gefunden.")
 
     gbif_id_text = str(gbif_id_value).strip()
     if not gbif_id_text or not gbif_id_text.isdigit():
-        raise_api_error(404, ERR.COMMON.NOT_FOUND, "No entry found for this ID.")
+        raise_api_error(404, ERR.COMMON.NOT_FOUND, "Kein Eintrag fuer diese ID gefunden.")
 
     gbif_id = int(gbif_id_text)
 
@@ -921,6 +925,21 @@ def get_beetle_media_controller(beetle_id: str, limit: int, offset: int):
 
 
 def get_environment_ranges_controller():
-    """Return global min/max ranges for environmental quicklook metrics."""
+    """Gibt globale Min/Max-Wertebereiche fuer die Umwelt-Quicklook-Metriken zurueck."""
     cached = warm_environment_ranges_cache(force=False)
     return cached or warm_environment_ranges_cache(force=True) or {}
+
+
+def get_featured_beetles_controller():
+    """Liefert die Featured-Kaefer (echte rec-IDs + Name) als Quelle der Wahrheit
+    fuer die Startseite, damit die statischen IDs nicht driften."""
+    rows = fetch_featured_beetle_rows()
+    items = [
+        {
+            "id": f"rec-{row['record_id']}",
+            "name": row.get("scientific_name"),
+            "family": row.get("family"),
+        }
+        for row in rows
+    ]
+    return {"items": items, "total": len(items)}

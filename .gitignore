@@ -38,6 +38,8 @@ build/
 # Umgebungsvariablen
 .env
 .env.*
+# Ausnahme: die Vorlage ohne Geheimnisse wird eingecheckt
+!.env.example
 
 # GBIF Arbeitsordner lokal halten
 GBIFdataandCSVSctipts/
@@ -46,3 +48,6 @@ GBIFdataandCSVSctipts/
 scripts/*.sh
 scripts/*.sql
 scripts/serve-frontend.py
+
+# Rohe GBIF-Quelldateien (archiviert als gbif-raw-source.zip via Git LFS)
+backend/data/*.txt

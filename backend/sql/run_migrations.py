@@ -1,3 +1,13 @@
+"""Wendet die versionierten SQL-Migrationen auf die Datenbank an.
+
+Das Skript verbindet sich mit der MySQL-/MariaDB-Datenbank, legt bei Bedarf den
+DB-Benutzer der Anwendung an, stellt die Tabelle schema_migrations sicher und
+fuehrt anschliessend alle noch nicht angewandten Migrationen aus der Liste
+MIGRATIONS in Reihenfolge aus. Bereits angewandte Migrationen werden anhand von
+schema_migrations uebersprungen. Alle Aenderungen laufen in einer Transaktion:
+Bei einem Fehler wird ein Rollback ausgefuehrt.
+"""
+
 import os
 from pathlib import Path
 
@@ -8,11 +18,6 @@ from pymysql.constants import CLIENT
 SCRIPT_DIR = Path(__file__).resolve().parent
 
 MIGRATIONS: list[tuple[str, str, str]] = [
-    (
-        "20260623_01_auth_and_write_consolidated",
-        "consolidated auth and manual beetle write migrations",
-        "ops/MigrateAuthAndWrite.sql",
-    ),
     (
         "20260623_02_read_model_and_quality_consolidated",
         "consolidated read-model, index, and quality migrations",
@@ -32,6 +37,7 @@ MIGRATIONS: list[tuple[str, str, str]] = [
 
 
 def _required_env(name: str) -> str:
+    """Liest eine Pflicht-Umgebungsvariable; wirft einen Fehler, wenn sie fehlt."""
     value = os.getenv(name, "").strip()
     if not value:
         raise RuntimeError(f"Missing required environment variable {name}.")
@@ -39,15 +45,7 @@ def _required_env(name: str) -> str:
 
 
 def _migration_credentials() -> tuple[str, str]:
-    """Return the (user, password) used to RUN MIGRATIONS.
-
-    Migrations are DDL (CREATE TABLE/PROCEDURE, ALTER, ...) and must run as a
-    privileged DB account. The application's runtime user (DB_USER) is often a
-    least-privilege account that lacks CREATE/CREATE ROUTINE — running migrations
-    as it fails (e.g. "CREATE command denied"). So prefer dedicated migration
-    credentials when provided, and only fall back to the app user otherwise (dev
-    convenience). In production set DB_MIGRATION_USER=root and
-    DB_MIGRATION_PASSWORD to the existing root password.
+    """Liefert das (user, password), das zum AUSFUEHREN DER MIGRATIONEN genutzt wird.
     """
     migration_user = os.getenv("DB_MIGRATION_USER", "").strip()
     migration_password = os.getenv("DB_MIGRATION_PASSWORD", "")
@@ -57,6 +55,7 @@ def _migration_credentials() -> tuple[str, str]:
 
 
 def _connect() -> pymysql.connections.Connection:
+    """Baut die Datenbankverbindung aus den Umgebungsvariablen auf."""
     host = os.getenv("DB_HOST", "127.0.0.1")
     port = int(os.getenv("DB_PORT", "3306"))
     user, password = _migration_credentials()
@@ -75,24 +74,14 @@ def _connect() -> pymysql.connections.Connection:
 
 
 def _maybe_bootstrap_app_user(cursor: pymysql.cursors.Cursor) -> None:
-    """Ensure the least-privilege application DB user exists.
-
-    The app code refuses to run as root (see backend/core/db.py) and connects as
-    a dedicated user (DB_USER, e.g. beetle_app). On a FRESH volume MySQL creates
-    that user from MYSQL_USER/MYSQL_PASSWORD, but on an EXISTING (in-place
-    upgraded) volume it does not — and no SQL script creates it either, so the
-    backend would fail to connect. When migrations run as a privileged user
-    (DB_MIGRATION_USER set), create/refresh the app user here, idempotently,
-    using the very same credentials the app will use (so they always match).
-    Scope is a single schema (no global/admin rights) — non-root, as intended.
-    """
+    """Stellt sicher, dass der DB-Benutzer der Anwendung mit minimalen Rechten existiert."""
     migration_user = os.getenv("DB_MIGRATION_USER", "").strip()
     app_user = os.getenv("DB_USER", "").strip()
     app_password = os.getenv("DB_PASSWORD", "")
     if not migration_user or not app_user:
-        return  # connected as the app user already (dev/fresh) — nothing to do
+        return  # bereits als App-Benutzer verbunden (dev/frisch) - nichts zu tun
     if app_user.lower() == migration_user.lower():
-        return  # app uses the privileged user directly — no separate user needed
+        return  # App nutzt den privilegierten Benutzer direkt - kein separater Benutzer noetig
 
     db_name = os.getenv("DB_NAME", "beetle_db")
     if not all(ch.isalnum() or ch == "_" for ch in db_name):
@@ -106,25 +95,27 @@ def _maybe_bootstrap_app_user(cursor: pymysql.cursors.Cursor) -> None:
 
 
 def _read_sql(relative_path: str) -> str:
+    """Liest ein SQL-Skript vom angegebenen relativen Pfad (relativ zu dieser Datei)."""
     sql_path = SCRIPT_DIR / relative_path
-    # utf-8-sig strips a leading BOM if present. The mysql CLI tolerates a BOM
-    # (so initdb works), but pymysql passes it through as invalid SQL syntax.
+
     return sql_path.read_text(encoding="utf-8-sig")
 
 
 def _split_sql_statements(sql_text: str) -> list[str]:
-    """Split a SQL script into individual statements, honouring `DELIMITER`
-    directives. pymysql cannot execute `DELIMITER`/`CREATE PROCEDURE ... $$`
-    blocks as one blob (DELIMITER is a client-side directive, not server SQL),
-    so we replicate the mysql CLI behaviour: track the active delimiter and emit
-    one statement each time a line ends with it. Statements that are only
-    comments/whitespace are skipped.
+    """Teilt ein SQL-Skript in einzelne Statements auf und beachtet dabei
+    `DELIMITER`-Direktiven. pymysql kann `DELIMITER`/`CREATE PROCEDURE ... $$`
+    Bloecke nicht als einen Block ausfuehren (DELIMITER ist eine clientseitige
+    Direktive, kein Server-SQL). Daher bilden wir das Verhalten der mysql-CLI
+    nach: Wir verfolgen den aktiven Delimiter und geben jedes Mal ein Statement
+    aus, wenn eine Zeile damit endet. Statements, die nur aus
+    Kommentaren/Leerzeichen bestehen, werden uebersprungen.
     """
     statements: list[str] = []
     delimiter = ";"
     buffer: list[str] = []
 
     def _flush() -> None:
+        """Haengt den gepufferten Statement-Text an die Ergebnisliste an (ausser reine Kommentare)."""
         stmt = "\n".join(buffer).strip()
         if stmt and any(
             line.strip() and not line.strip().startswith("--")
@@ -157,6 +148,7 @@ def _split_sql_statements(sql_text: str) -> list[str]:
 
 
 def _execute_sql_script(cursor: pymysql.cursors.Cursor, sql_text: str) -> None:
+    """Fuehrt alle Statements eines SQL-Skripts nacheinander aus."""
     for statement in _split_sql_statements(sql_text):
         cursor.execute(statement)
         while cursor.nextset():
@@ -164,11 +156,13 @@ def _execute_sql_script(cursor: pymysql.cursors.Cursor, sql_text: str) -> None:
 
 
 def _apply_schema_migrations_table(cursor: pymysql.cursors.Cursor) -> None:
+    """Legt die Tabelle schema_migrations an (falls noch nicht vorhanden)."""
     print("Applying SQL: schema/MigrateSchemaMigrations.sql")
     _execute_sql_script(cursor, _read_sql("schema/MigrateSchemaMigrations.sql"))
 
 
 def _is_migration_applied(cursor: pymysql.cursors.Cursor, version: str) -> bool:
+    """Prueft, ob eine Migration mit der angegebenen Version bereits angewandt wurde."""
     cursor.execute(
         "SELECT COUNT(*) FROM schema_migrations WHERE version = %s",
         (version,),
@@ -178,6 +172,7 @@ def _is_migration_applied(cursor: pymysql.cursors.Cursor, version: str) -> bool:
 
 
 def _record_migration(cursor: pymysql.cursors.Cursor, version: str, description: str) -> None:
+    """Traegt eine angewandte Migration in schema_migrations ein."""
     cursor.execute(
         "INSERT INTO schema_migrations(version, description) VALUES (%s, %s)",
         (version, description),
@@ -185,6 +180,7 @@ def _record_migration(cursor: pymysql.cursors.Cursor, version: str, description:
 
 
 def run() -> None:
+    """Fuehrt alle ausstehenden Migrationen in Reihenfolge aus und gibt das Registry aus."""
     conn = _connect()
     try:
         with conn.cursor() as cursor:

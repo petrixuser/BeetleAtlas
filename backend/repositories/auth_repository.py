@@ -1,10 +1,11 @@
+"""Repository fuer Authentifizierung: Benutzer, Refresh-Tokens, Registrierungen."""
 from sqlalchemy import text
 
 from backend.core.db import get_connection
 
 
 def fetch_user_by_email(email: str):
-    """Fetch one user row by email."""
+    """Einen Benutzer anhand der E-Mail laden."""
     sql = text(
         """
         SELECT
@@ -27,7 +28,7 @@ def fetch_user_by_email(email: str):
 
 
 def fetch_user_by_id(user_id: int):
-    """Fetch one user row by ID."""
+    """Einen Benutzer anhand der ID laden."""
     sql = text(
         """
         SELECT
@@ -50,7 +51,7 @@ def fetch_user_by_id(user_id: int):
 
 
 def insert_user(email: str, password_hash: str, role: str):
-    """Insert one user and return the created row."""
+    """Einen Benutzer anlegen und die erzeugte Zeile zurueckgeben."""
     insert_sql = text(
         """
         INSERT INTO app_user (email, password_hash, role, is_active)
@@ -74,7 +75,7 @@ def insert_user(email: str, password_hash: str, role: str):
 
 
 def upsert_pending_registration(email: str, password_hash: str, role: str, token_hash: str, expires_at):
-    """Create or replace one pending registration by email."""
+    """Offene Registrierung je E-Mail anlegen oder ersetzen."""
     sql = text(
         """
         INSERT INTO app_pending_registration (
@@ -117,7 +118,7 @@ def upsert_pending_registration(email: str, password_hash: str, role: str, token
 
 
 def fetch_active_pending_registration_by_token_hash(token_hash: str):
-    """Fetch one non-consumed, non-expired pending registration by token hash."""
+    """Offene, gueltige Registrierung anhand des Token-Hashes laden."""
     sql = text(
         """
         SELECT
@@ -145,7 +146,7 @@ def fetch_active_pending_registration_by_token_hash(token_hash: str):
 
 
 def fetch_active_pending_registration_by_email(email: str):
-    """Fetch one non-consumed, non-expired pending registration by email."""
+    """Offene, gueltige Registrierung anhand der E-Mail laden."""
     sql = text(
         """
         SELECT
@@ -173,7 +174,7 @@ def fetch_active_pending_registration_by_email(email: str):
 
 
 def consume_pending_registration(pending_registration_id: int):
-    """Mark one pending registration as consumed."""
+    """Eine offene Registrierung als eingeloest markieren."""
     sql = text(
         """
         UPDATE app_pending_registration
@@ -189,7 +190,7 @@ def consume_pending_registration(pending_registration_id: int):
 
 
 def fetch_active_admin_user():
-    """Fetch one active admin user if present."""
+    """Einen aktiven Admin-Benutzer laden, falls vorhanden."""
     sql = text(
         """
         SELECT
@@ -214,7 +215,7 @@ def fetch_active_admin_user():
 
 
 def upsert_admin_user(email: str, password_hash: str):
-    """Create or update one admin user by email and return the resulting row."""
+    """Admin-Benutzer je E-Mail anlegen/aktualisieren und zurueckgeben."""
     upsert_sql = text(
         """
         INSERT INTO app_user (email, password_hash, role, is_active)
@@ -234,7 +235,7 @@ def upsert_admin_user(email: str, password_hash: str):
 
 
 def insert_refresh_token(user_id: int, token_hash: str, expires_at):
-    """Persist one refresh token row and return its id."""
+    """Ein Refresh-Token speichern und dessen ID zurueckgeben."""
     sql = text(
         """
         INSERT INTO app_refresh_token (
@@ -268,7 +269,7 @@ def insert_refresh_token(user_id: int, token_hash: str, expires_at):
 
 
 def fetch_refresh_token_by_hash(token_hash: str):
-    """Fetch refresh token row by hash regardless of active/revoked state."""
+    """Refresh-Token per Hash laden, unabhaengig vom Status (aktiv/widerrufen)."""
     sql = text(
         """
         SELECT
@@ -292,7 +293,7 @@ def fetch_refresh_token_by_hash(token_hash: str):
 
 
 def fetch_active_refresh_token_by_hash(token_hash: str):
-    """Fetch active (non-revoked, non-expired) refresh token row by hash."""
+    """Aktives (nicht widerrufenes, nicht abgelaufenes) Refresh-Token per Hash laden."""
     sql = text(
         """
         SELECT
@@ -318,7 +319,7 @@ def fetch_active_refresh_token_by_hash(token_hash: str):
 
 
 def revoke_refresh_token(refresh_token_id: int, replaced_by_token_id: int | None = None):
-    """Revoke one refresh token row if it is still active."""
+    """Ein Refresh-Token widerrufen, sofern es noch aktiv ist."""
     sql = text(
         """
         UPDATE app_refresh_token
@@ -342,7 +343,7 @@ def revoke_refresh_token(refresh_token_id: int, replaced_by_token_id: int | None
 
 
 def revoke_user_refresh_tokens(user_id: int):
-    """Revoke all active refresh tokens for a user."""
+    """Alle aktiven Refresh-Tokens eines Benutzers widerrufen."""
     sql = text(
         """
         UPDATE app_refresh_token

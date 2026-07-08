@@ -1,10 +1,11 @@
+"""Repository fuer Kernstatistiken und Qualitaetsberichte."""
 from datetime import date
 import json
 from typing import Optional
 
 from sqlalchemy import text
 
-from backend.config.core_repository_sql import (
+from backend.config.sql.core_repository_sql import (
     CLIMATE_BY_LOCATION_SQL_TEMPLATE,
     INSERT_QUALITY_REPORT_HISTORY_SQL,
     OBSERVATIONS_COUNT_SQL_TEMPLATE,
@@ -24,19 +25,19 @@ from backend.config.core_repository_sql import (
 from backend.core.db import get_connection
 
 def ping_db() -> None:
-    """Ping the database to verify connectivity."""
+    """Datenbank anpingen, um die Verbindung zu pruefen."""
     with get_connection() as conn:
         conn.execute(text("SELECT 1"))
 
 def fetch_stats_overview_rows():
-    """Fetch row counts for key application tables."""
+    """Zeilenzahlen der wichtigsten Anwendungstabellen laden."""
     sql = text(STATS_OVERVIEW_SQL)
 
     with get_connection() as conn:
         return conn.execute(sql).mappings().all()
 
 def fetch_species(limit: int, offset: int, order_by_sql: str):
-    """Fetch paginated beetle species rows with sorting."""
+    """Seitenweise Kaeferarten mit Sortierung laden."""
     sql = text(build_species_sql(order_by_sql))
     count_sql = text(SPECIES_COUNT_SQL)
 
@@ -54,7 +55,7 @@ def fetch_observations(
     offset: int,
     order_by_sql: str,
 ):
-    """Fetch paginated observation rows with optional filters and sorting."""
+    """Seitenweise Beobachtungen mit optionalen Filtern und Sortierung laden."""
     filters = []
     params = {"limit": limit, "offset": offset}
 
@@ -91,7 +92,7 @@ def fetch_climate_by_location(
     to_date: Optional[date],
     limit: int,
 ):
-    """Fetch climate snapshots for one location in an optional date range."""
+    """Klima-Snapshots eines Standorts in einem optionalen Zeitraum laden."""
     filters = ["location_id = :location_id"]
     params = {"location_id": location_id, "limit": limit}
 
@@ -113,7 +114,7 @@ def fetch_climate_by_location(
     return rows
 
 def fetch_quality_report_rows():
-    """Fetch aggregate metrics required to build the quality report payload."""
+    """Aggregat-Metriken fuer den Qualitaetsbericht laden."""
     totals_sql = text(QUALITY_TOTALS_SQL)
 
     observation_nulls_sql = text(QUALITY_OBSERVATION_NULLS_SQL)
@@ -144,7 +145,7 @@ def insert_quality_report_history_snapshot(
     climate_snapshot_null_rates: list,
     ee_coverage: dict,
 ) -> int:
-    """Insert one quality-report snapshot row and return its ID."""
+    """Einen Qualitaetsbericht-Snapshot speichern und dessen ID zurueckgeben."""
     sql = text(INSERT_QUALITY_REPORT_HISTORY_SQL)
 
     params = {
@@ -164,7 +165,7 @@ def insert_quality_report_history_snapshot(
         return int(result.lastrowid)
 
 def fetch_quality_report_history_rows(limit: int, offset: int):
-    """Fetch paginated quality-report history snapshots."""
+    """Seitenweise Qualitaetsbericht-Historie laden."""
     sql = text(QUALITY_REPORT_HISTORY_LIST_SQL)
 
     count_sql = text(QUALITY_REPORT_HISTORY_COUNT_SQL)
@@ -176,7 +177,7 @@ def fetch_quality_report_history_rows(limit: int, offset: int):
     return rows, int(total)
 
 def fetch_quality_report_history_row(quality_report_id: int):
-    """Fetch one quality-report history snapshot by ID."""
+    """Einen Qualitaetsbericht-Snapshot anhand der ID laden."""
     sql = text(QUALITY_REPORT_HISTORY_BY_ID_SQL)
 
     with get_connection() as conn:

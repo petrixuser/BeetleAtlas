@@ -1,3 +1,12 @@
+"""Fuellt fehlende Klimawerte je snapshot_date aus dem naechstgelegenen Nachbarn.
+
+Das Skript liest die zusammengefuehrte climate_snapshot-CSV und die zugehoerigen
+Koordinaten. Fehlende Messwerte (z. B. avg_temperature) werden pro snapshot_date
+durch den Wert des raeumlich naechsten Fundorts innerhalb eines Radius ersetzt.
+Zusaetzlich werden fehlende nighttime_lights je Fundort aus dem zeitlich naechsten
+vorhandenen Wert derselben location_id gefuellt.
+"""
+
 import argparse
 import math
 from collections import defaultdict
@@ -18,6 +27,7 @@ FIELDS = [
 
 
 def normalize_location_id(series: pd.Series) -> pd.Series:
+    """Normalisiert location_id-Werte zu ganzzahligen Strings ohne Nachkomma/Leerwerte."""
     s = series.astype(str).str.strip()
     n = pd.to_numeric(s, errors="coerce")
     out = s.copy()
@@ -29,6 +39,7 @@ def normalize_location_id(series: pd.Series) -> pd.Series:
 
 
 def normalize_snapshot_date(series: pd.Series) -> pd.Series:
+    """Normalisiert Datumswerte (auch 'YYYY-MM') zu 'YYYY-MM-DD'."""
     raw = series.astype(str).str.strip()
     dt = pd.to_datetime(raw, errors="coerce")
 
@@ -39,12 +50,14 @@ def normalize_snapshot_date(series: pd.Series) -> pd.Series:
 
 
 def to_numeric_with_nan(series: pd.Series) -> pd.Series:
+    """Wandelt in numerische Werte und setzt Sentinel-Werte (<= -9999) auf NA."""
     s = pd.to_numeric(series, errors="coerce")
     s.loc[s <= -9999] = pd.NA
     return s
 
 
 def haversine_km(lat1, lon1, lat2, lon2):
+    """Berechnet die Haversine-Distanz zwischen zwei Koordinaten in Kilometern."""
     r = 6371.0
     dlat = math.radians(lat2 - lat1)
     dlon = math.radians(lon2 - lon1)
@@ -59,6 +72,7 @@ def haversine_km(lat1, lon1, lat2, lon2):
 
 
 def build_spatial_index(group_df: pd.DataFrame, value_col: str, cell_deg: float):
+    """Baut aus den Spendern (Zeilen mit Wert) ein Raster-Index-Dict fuer die Nachbarsuche."""
     donors = group_df[group_df[value_col].notna()].copy()
     grid = defaultdict(list)
 
@@ -71,6 +85,7 @@ def build_spatial_index(group_df: pd.DataFrame, value_col: str, cell_deg: float)
 
 
 def find_nearest_donor_idx(row, donors, grid, radius_km, cell_deg):
+    """Sucht im Raster-Index den naechsten Spender innerhalb von radius_km und liefert dessen Index."""
     lat = row["latitude"]
     lon = row["longitude"]
 
@@ -99,6 +114,7 @@ def find_nearest_donor_idx(row, donors, grid, radius_km, cell_deg):
 
 
 def fill_missing_by_nearest(df: pd.DataFrame, fields, radius_km: float):
+    """Fuellt fehlende Feldwerte je snapshot_date aus dem raeumlich naechsten Nachbarn und zaehlt die Fuellungen."""
     cell_deg = max(radius_km / 111.0, 0.05)
     fill_counts = {field: 0 for field in fields}
 
@@ -122,6 +138,7 @@ def fill_missing_by_nearest(df: pd.DataFrame, fields, radius_km: float):
 
 
 def fill_nighttime_lights_by_same_location_nearest_date(df: pd.DataFrame) -> int:
+    """Fuellt fehlende nighttime_lights je location_id aus dem zeitlich naechsten vorhandenen Wert."""
     field = "nighttime_lights"
     if field not in df.columns:
         return 0
@@ -173,6 +190,7 @@ def fill_nighttime_lights_by_same_location_nearest_date(df: pd.DataFrame) -> int
 
 
 def main():
+    """Liest die CSVs ein, fuellt fehlende Klimawerte und schreibt die Ausgabe-CSV."""
     parser = argparse.ArgumentParser(
         description="Fill missing climate values from nearest location within a radius per snapshot_date."
     )

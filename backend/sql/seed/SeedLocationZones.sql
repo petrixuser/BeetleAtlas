@@ -1,4 +1,12 @@
--- Seed der vorberechneten Klima-/Vegetationszonen pro Fundort.
+-- ============================================================================
+--  Seed: Vorberechnete Klima-/Vegetationszonen pro Fundort
+--  Zweck: laedt koppen_code, vegetation_zone und country_derived je location
+--  aus einer CSV in eine Zwischentabelle und aktualisiert damit location.
+--  Rolle beim DB-Aufbau: reichert die bereits geladenen location-Zeilen um die
+--  abgeleiteten Zonen an (nach SeedCoreData).
+--  Idempotent/mehrfach ausfuehrbar: die Zwischentabelle wird per TRUNCATE neu
+--  befuellt und danach wieder verworfen; das UPDATE ueberschreibt die Werte.
+-- ============================================================================
 
 USE beetle_db;
 

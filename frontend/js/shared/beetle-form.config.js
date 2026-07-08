@@ -20,9 +20,9 @@
     { key: "specific_epithet", label: "Art-Epitheton", type: "text", section: "core" },
     { key: "event_date", label: "Funddatum", type: "text", section: "core", placeholder: "JJJJ-MM-TT", hint: "Format: JJJJ, JJJJ-MM oder JJJJ-MM-TT" },
     { key: "country", label: "Land", type: "text", section: "core" },
-    { key: "latitude", label: "Breitengrad", type: "number", section: "core", min: -90, max: 90, step: "any" },
-    { key: "longitude", label: "Längengrad", type: "number", section: "core", min: -180, max: 180, step: "any" },
-    { key: "image_url", label: "Bild-URL", type: "url", section: "core" },
+    { key: "latitude", label: "Breitengrad", type: "number", section: "core", min: -56, max: 33.5, step: "any", placeholder: "z. B. -12.34", hint: "Dezimalgrad, nur Lateinamerika (-56 bis 33.5)." },
+    { key: "longitude", label: "Längengrad", type: "number", section: "core", min: -118.5, max: -30, step: "any", placeholder: "z. B. -70.12", hint: "Dezimalgrad, nur Lateinamerika (-118.5 bis -30)." },
+    { key: "image_url", label: "Bild-URLs", type: "textarea", section: "core", placeholder: "https://... (eine URL pro Zeile)", hint: "Mehrere Bilder moeglich: eine URL pro Zeile." },
     { key: "notes", label: "Notizen", type: "textarea", section: "core" },
 
     { key: "scientific_name_authorship", label: "Autorschaft", type: "text", section: "advanced" },

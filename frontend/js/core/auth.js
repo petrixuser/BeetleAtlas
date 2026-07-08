@@ -224,6 +224,7 @@
   async function apiFetch(path, options) {
     options = options || {};
 
+    // Ergaenzt die Request-Optionen um den Authorization-Header.
     function withAuth() {
       var headers = Object.assign({}, options.headers || {});
       if (accessToken) headers.Authorization = authHeaders().Authorization;
@@ -247,12 +248,15 @@
     refresh: authRefresh,
     restoreSession: restoreSession,
     apiFetch: apiFetch,
+    // Gibt true zurueck, wenn aktuell ein Nutzer angemeldet ist.
     isLoggedIn: function () {
       return Boolean(currentUser);
     },
+    // Liefert das aktuelle Nutzerobjekt (oder null).
     getCurrentUser: function () {
       return currentUser;
     },
+    // Liefert die Rolle des aktuellen Nutzers (oder null).
     getRole: function () {
       return currentUser ? currentUser.role : null;
     },

@@ -1,3 +1,6 @@
+// Legenden-Controller: verwaltet Aktivzustaende der Klima-, Vegetations- und
+// Hoehenlegenden, wendet Farbfilter auf die GeoJSON-Layer an und behandelt
+// Klicks (inkl. Mehrfachauswahl) auf die Legendeneintraege.
 (function () {
   "use strict";
 

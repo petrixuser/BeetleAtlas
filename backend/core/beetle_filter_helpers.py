@@ -1,3 +1,6 @@
+"""Hilfsfunktionen zum Aufbau von SQL-WHERE-Klauseln fuer Kaefer-Filter
+(Klima-Haupt-/Subtypen, Vegetationsschluessel/-zonen und exakte Filter)."""
+
 from typing import Any, Dict, List, Optional
 
 from backend.config.beetle_filters import FILTER_COLUMN_MAP
@@ -24,14 +27,17 @@ COARSE_VEGETATION_KEYS = frozenset(
 
 
 def _split_csv(raw_value: Optional[str]) -> List[str]:
+    """Zerlegt eine optionale CSV-Stringangabe in eine Liste von nicht-leeren Strings."""
     return [part.strip() for part in str(raw_value or "").split(",") if part.strip()]
 
 
 def raw_climate_has_subtype(raw_climate: Optional[str]) -> bool:
+    """Prueft, ob in der Roh-Klimaangabe mindestens ein Subtyp-Code enthalten ist."""
     return any(is_climate_subtype_code(v) for v in _split_csv(raw_climate))
 
 
 def raw_vegetation_has_zone(raw_vegetation: Optional[str]) -> bool:
+    """Prueft, ob die Roh-Vegetationsangabe eine feine Zone (kein grober Schluessel) enthaelt."""
     return any(v not in COARSE_VEGETATION_KEYS for v in _split_csv(raw_vegetation))
 
 
@@ -122,7 +128,7 @@ def append_vegetation_filter(
 
 
 def apply_exact_filters(filters: List[str], params: Dict[str, Any], requested_filters: Dict[str, Optional[str]]) -> None:
-    """Apply exact-match SQL filters from requested filter values."""
+    """Wendet exakte SQL-Match-Filter aus den angefragten Filterwerten an."""
     for key, column in FILTER_COLUMN_MAP.items():
         value = requested_filters.get(key)
         if not value:

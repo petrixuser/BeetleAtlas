@@ -1,3 +1,5 @@
+"""Versand von E-Mail-Verifizierungsnachrichten ueber den konfigurierten SMTP-Anbieter."""
+
 import smtplib
 from email.message import EmailMessage
 
@@ -14,13 +16,13 @@ from backend.config.settings import (
 
 
 def build_verification_link(verification_token: str) -> str:
-    """Build a public verification URL for one token."""
+    """Baut eine oeffentliche Verifizierungs-URL fuer einen Token."""
     base = get_email_verification_base_url().rstrip("/")
     return f"{base}/verify-email?token={verification_token}"
 
 
 def send_verification_email(email: str, verification_token: str) -> None:
-    """Send one verification email via configured SMTP provider."""
+    """Versendet eine Verifizierungs-E-Mail ueber den konfigurierten SMTP-Anbieter."""
     smtp_host = get_smtp_host()
     if not smtp_host:
         raise RuntimeError("SMTP_HOST is missing.")

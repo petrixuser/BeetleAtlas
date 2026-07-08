@@ -1,3 +1,6 @@
+"""Zentrale Fehler-Codes fuer einheitliche API-Fehlerantworten."""
+
+
 class _Common:
     NOT_FOUND = "not_found"
     FORBIDDEN = "forbidden"
@@ -44,6 +47,7 @@ class ERR:
 
 
 def _validate_unique_codes() -> None:
+    """Prueft, dass alle definierten Fehlercodes ueber alle Gruppen hinweg eindeutig sind."""
     groups = {
         "COMMON": ERR.COMMON,
         "CORE": ERR.CORE,

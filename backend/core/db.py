@@ -1,3 +1,7 @@
+"""Dieses Modul richtet die Datenbankverbindung mit SQLAlchemy ein,
+inklusive Konfiguration aus Umgebungsvariablen, Connection-Pooling und
+Protokollierung langsamer Queries."""
+
 import os
 import logging
 import time
@@ -5,9 +9,6 @@ from contextlib import contextmanager
 
 from dotenv import load_dotenv
 from sqlalchemy import create_engine, event
-
-"""This module sets up the database connection using SQLAlchemy. 
-including configuration from environment variables, connection pooling, and logging of slow queries."""
 
 load_dotenv()
 
@@ -40,13 +41,13 @@ engine = create_engine(
 
 @event.listens_for(engine, "before_cursor_execute")
 def before_cursor_execute(_, cursor, statement, parameters, context, executemany):
-    """Record query start time in the execution context."""
+    """Speichert den Startzeitpunkt der Query im Ausfuehrungskontext."""
     del cursor, statement, parameters, executemany
     context._query_start_time = time.perf_counter()
 
 @event.listens_for(engine, "after_cursor_execute")
 def after_cursor_execute(_, cursor, statement, parameters, context, executemany):
-    """Log queries that exceed the configured slow-query threshold."""
+    """Protokolliert Queries, die den konfigurierten Slow-Query-Schwellwert ueberschreiten."""
     del cursor, parameters, executemany
     if not ENABLE_SLOW_QUERY_LOGGING:
         return
@@ -69,7 +70,7 @@ def after_cursor_execute(_, cursor, statement, parameters, context, executemany)
 
 @contextmanager
 def get_connection():
-    """Yield a database connection and ensure it is closed afterwards."""
+    """Liefert eine Datenbankverbindung und stellt sicher, dass sie danach geschlossen wird."""
     conn = engine.connect()
     try:
         yield conn

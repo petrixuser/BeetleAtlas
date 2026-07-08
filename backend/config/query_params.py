@@ -1,3 +1,4 @@
+"""Wiederverwendbare FastAPI-Query-Parameter fuer Listen-/Filter-Endpunkte."""
 from typing import Dict, Optional
 
 from fastapi import Query
@@ -66,7 +67,7 @@ def beetle_query_params(
 	),
 	sort_dir: str = Query("asc", pattern=SORT_DIR_PATTERN),
 ) -> Dict[str, object]:
-	"""Define and return validated query params for beetle list filtering."""
+	"""Definiert und liefert validierte Query-Parameter fuer die Kaefer-Listenfilterung."""
 	return {
 		"q": q,
 		"country": country,
@@ -147,7 +148,7 @@ def map_query_params(
 	),
 	sort_dir: str = Query("asc", pattern=SORT_DIR_PATTERN),
 ) -> Dict[str, object]:
-	"""Define and return validated query params for map point requests."""
+	"""Definiert und liefert validierte Query-Parameter fuer Kartenpunkt-Anfragen."""
 	return {
 		"bbox": bbox,
 		"zoom": zoom,

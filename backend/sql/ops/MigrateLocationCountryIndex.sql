@@ -1,12 +1,18 @@
--- Performance index for /api/countries/{code}: the country-detail queries
--- (overview, top climates/vegetations/beetles) filter `location` by country.
--- Without this index those queries full-scan the observation/location join
--- (~417k rows) four times per request. The query WHERE was also made sargable
--- (l.country = :country_code) so this index is actually used.
+-- ============================================================================
+--  Ops-Migration: Performance-Index auf location(country)
+--  Zweck fuer /api/countries/{code}: die Laenderdetail-Abfragen (Uebersicht,
+--  Top-Klimazonen/-Vegetationen/-Kaefer) filtern `location` nach Land. Ohne
+--  diesen Index scannen diese Abfragen den observation/location-Join
+--  (~417k Zeilen) viermal pro Anfrage vollstaendig. Die WHERE-Bedingung wurde
+--  ausserdem sargable gemacht (l.country = :country_code), damit dieser Index
+--  tatsaechlich genutzt wird.
 --
--- Guarded via information_schema so it is safe to run multiple times (the
--- pymysql-based run_migrations runner executes this on existing volumes; on a
--- fresh image the index is created here at first backend start too).
+--  Rolle beim DB-Aufbau: Optimierungs-/Migrationsschritt nach dem Basis-Schema.
+--  Ueber information_schema abgesichert und daher mehrfach ausfuehrbar (der
+--  pymysql-basierte run_migrations-Runner fuehrt dies auf bestehenden Volumes
+--  aus; auf einem frischen Image wird der Index hier beim ersten Backend-Start
+--  angelegt).
+-- ============================================================================
 USE beetle_db;
 
 SET @sql := (

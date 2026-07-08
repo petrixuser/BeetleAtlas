@@ -1,4 +1,7 @@
-﻿from collections import OrderedDict
+"""Controller-Funktionen fuer die Karte: Punkte und Cluster je nach Zoom,
+Klima-Subtyp-Geometrien, GeoJSON-Ausgabe und Karten-Antwort-Cache."""
+
+from collections import OrderedDict
 import json
 from pathlib import Path
 from threading import Lock
@@ -32,6 +35,7 @@ _subtype_geometries: Dict[str, List[Dict[str, Any]]] = {}
 
 
 def _freeze_params(value: Any) -> Any:
+    """Wandelt dicts/lists rekursiv in hashbare Tupel um (fuer Cache-Keys)."""
     if isinstance(value, dict):
         return tuple(sorted((k, _freeze_params(v)) for k, v in value.items()))
     if isinstance(value, list):
@@ -40,10 +44,12 @@ def _freeze_params(value: Any) -> Any:
 
 
 def _cache_key_from_lean_args(**kwargs: Any) -> Tuple[Any, ...]:
+    """Baut einen stabilen, hashbaren Cache-Key aus den uebergebenen Argumenten."""
     return tuple(sorted((k, _freeze_params(v)) for k, v in kwargs.items()))
 
 
 def _cache_get(key: Tuple[Any, ...]) -> Optional[Dict[str, Any]]:
+    """Liest einen Eintrag aus dem Karten-Antwort-Cache (LRU-Aktualisierung)."""
     with _map_response_cache_lock:
         value = _map_response_cache.get(key)
         if value is None:
@@ -53,6 +59,7 @@ def _cache_get(key: Tuple[Any, ...]) -> Optional[Dict[str, Any]]:
 
 
 def _cache_set(key: Tuple[Any, ...], value: Dict[str, Any]) -> None:
+    """Schreibt einen Eintrag in den Karten-Antwort-Cache und verdraengt aelteste (LRU)."""
     with _map_response_cache_lock:
         _map_response_cache[key] = value
         _map_response_cache.move_to_end(key)
@@ -61,13 +68,7 @@ def _cache_set(key: Tuple[Any, ...], value: Dict[str, Any]) -> None:
 
 
 def clear_map_response_cache() -> None:
-    """Drop all cached map responses.
-
-    Called after a manual beetle write so the map reflects the new/changed/deleted
-    record immediately instead of serving stale cached points/clusters until the
-    backend restarts. A full clear is intentional: the cache refills cheaply on the
-    next requests, and correctness beats fine-grained eviction here.
-    """
+    """Leert alle gecachten Karten-Antworten."""
     with _map_response_cache_lock:
         _map_response_cache.clear()
 
@@ -79,7 +80,7 @@ def _append_exact_or_in_filter(
     key: str,
     raw_value: Optional[str],
 ) -> None:
-    """Append exact or IN filter for optional comma-separated query params."""
+    """Haengt einen Exact- oder IN-Filter fuer optionale, kommaseparierte Query-Parameter an."""
     if not raw_value:
         return
     values = [part.strip() for part in str(raw_value).split(",") if part.strip()]
@@ -99,6 +100,7 @@ def _append_exact_or_in_filter(
 
 
 def _point_on_segment(px: float, py: float, x1: float, y1: float, x2: float, y2: float) -> bool:
+    """Prueft, ob der Punkt (px, py) auf der Strecke zwischen zwei Punkten liegt."""
     cross = (px - x1) * (y2 - y1) - (py - y1) * (x2 - x1)
     if abs(cross) > 1e-12:
         return False
@@ -107,6 +109,7 @@ def _point_on_segment(px: float, py: float, x1: float, y1: float, x2: float, y2:
 
 
 def _point_in_ring(px: float, py: float, ring: List[Tuple[float, float]]) -> bool:
+    """Prueft per Ray-Casting, ob ein Punkt innerhalb eines Polygon-Rings liegt."""
     inside = False
     j = len(ring) - 1
     for i in range(len(ring)):
@@ -126,6 +129,7 @@ def _point_in_ring(px: float, py: float, ring: List[Tuple[float, float]]) -> boo
 
 
 def _normalize_ring(raw_ring: Any) -> List[Tuple[float, float]]:
+    """Normalisiert einen rohen GeoJSON-Ring zu einer Liste von (lng, lat)-Tupeln."""
     ring: List[Tuple[float, float]] = []
     if not isinstance(raw_ring, list):
         return ring
@@ -143,6 +147,7 @@ def _normalize_ring(raw_ring: Any) -> List[Tuple[float, float]]:
 
 
 def _build_polygon_geometry(raw_polygon: Any) -> Optional[Dict[str, Any]]:
+    """Baut aus rohen GeoJSON-Ringen eine Polygon-Geometrie mit outer, holes und bbox."""
     if not isinstance(raw_polygon, list) or not raw_polygon:
         return None
 
@@ -168,6 +173,7 @@ def _build_polygon_geometry(raw_polygon: Any) -> Optional[Dict[str, Any]]:
 
 
 def _load_climate_subtype_geometries() -> None:
+    """Laedt und cacht die Koeppen-Subtyp-Polygone aus der LATAM-GeoJSON-Datei (einmalig)."""
     global _subtype_geometries_loaded
 
     if _subtype_geometries_loaded:
@@ -212,6 +218,7 @@ def _load_climate_subtype_geometries() -> None:
 
 
 def _point_in_polygon(lng: float, lat: float, polygon: Dict[str, Any]) -> bool:
+    """Prueft, ob (lng, lat) im Polygon liegt (bbox-Vorfilter, outer-Ring, Loecher)."""
     min_lng, min_lat, max_lng, max_lat = polygon["bbox"]
     if lng < min_lng or lng > max_lng or lat < min_lat or lat > max_lat:
         return False
@@ -226,6 +233,7 @@ def _point_in_polygon(lng: float, lat: float, polygon: Dict[str, Any]) -> bool:
 
 
 def _matches_any_subtype(point: Dict[str, Any], subtypes: List[str]) -> bool:
+    """Prueft, ob ein Kartenpunkt in einem der angegebenen Klima-Subtyp-Polygone liegt."""
     lng = point.get("lng")
     lat = point.get("lat")
     if lng is None or lat is None:
@@ -245,6 +253,7 @@ def _matches_any_subtype(point: Dict[str, Any], subtypes: List[str]) -> bool:
 
 
 def _parse_climate_filter(raw_climate: Optional[str]) -> Tuple[Optional[str], List[str]]:
+    """Zerlegt den Klima-Filter in Hauptgruppen-CSV und Liste der Subtyp-Codes."""
     if not raw_climate:
         return None, []
 
@@ -276,6 +285,7 @@ def _fetch_all_points_lean(
     params: Dict[str, Any],
     page_size: int = 5000,
 ) -> List[Dict[str, Any]]:
+    """Laedt seitenweise alle passenden Kartenpunkte (lean) und sammelt sie in einer Liste."""
     all_points: List[Dict[str, Any]] = []
     offset = 0
 
@@ -307,6 +317,7 @@ def _build_lean_where_and_params(
     vegetation: Optional[str],
     elevation: Optional[str],
 ) -> Tuple[str, str, Dict[str, Any]]:
+    """Baut WHERE-/base-WHERE-Klauseln und Params fuer den schlanken Karten-Pfad."""
     base_filters: List[str] = []
     filters: List[str] = []
     params: Dict[str, Any] = {}
@@ -340,6 +351,7 @@ def _build_subtype_filtered_result(
     where_sql: str,
     params: Dict[str, Any],
 ) -> Dict[str, Any]:
+    """Filtert Punkte per Subtyp-Geometrie und liefert Cluster (zoom < 7) oder eine Punkt-Seite."""
     effective_limit = max(1, min(int(limit), _MAP_POINTS_MAX_PAGE_SIZE))
     _load_climate_subtype_geometries()
     points = _fetch_all_points_lean(
@@ -381,9 +393,9 @@ def _map_points_controller_lean(
     limit: int,
     offset: int,
 ) -> Dict[str, Any]:
-    """Fast map-point path for bbox and base filters only.
+    """Schneller Karten-Punkt-Pfad ausschliesslich fuer bbox und Basis-Filter.
 
-    Uses lean SQL queries and returns either clusters (zoom < 7) or points.
+    Nutzt schlanke SQL-Queries und gibt je nach Zoom Cluster (zoom < 7) oder Punkte zurueck.
     """
 
     effective_limit = max(1, min(int(limit), _MAP_POINTS_MAX_PAGE_SIZE))
@@ -468,15 +480,8 @@ def _map_points_controller_from_list_read(
     limit: int,
     offset: int,
 ) -> Dict[str, Any]:
-    """Map points/clusters for read-model-backed filters via full-dataset
-    aggregation over beetle_list_read.
-
-    map_point_read has no has_image/observed_year columns, so filters using them
-    previously fell back to a 200-point list sample (and has_image even errored).
-    beetle_list_read carries every column the compact list filters reference, so
-    we cluster over it for correct, complete results — identical filtering to
-    /api/beetles.
-    """
+    """Karten-Punkte/-Cluster fuer Read-Model-gestuetzte Filter ueber eine
+    Aggregation des gesamten Datensatzes von beetle_list_read."""
     effective_limit = max(1, min(int(limit), _MAP_POINTS_MAX_PAGE_SIZE))
     cache_key = _cache_key_from_lean_args(
         path="list_read",
@@ -550,7 +555,7 @@ def _map_points_controller_from_list_read(
 
 
 def warm_map_points_cache() -> None:
-    """Precompute frequent climate-group map queries at startup for faster first use."""
+    """Berechnet haeufige Klima-Gruppen-Kartenabfragen beim Start vor, fuer eine schnellere erste Nutzung."""
     latam_bbox = "-120,-60,-30,35"
     for climate_code in ["A", "B", "C", "D", "E"]:
         try:
@@ -566,7 +571,6 @@ def warm_map_points_cache() -> None:
                 offset=0,
             )
         except Exception:
-            # Best-effort warmup: runtime requests still work if a warmup query fails.
             continue
 
 def map_points_controller(
@@ -605,11 +609,7 @@ def map_points_controller(
     sort_by: str,
     sort_dir: str,
 ):
-    """Return map points or clusters for the current viewport and filters.
-
-    Delegates to the lean path when no advanced filters are set; otherwise
-    reuses beetle list filtering and transforms results into map points.
-    """
+    """Gibt Karten-Punkte oder -Cluster fuer den aktuellen Viewport und die Filter zurueck."""
     effective_limit = max(1, min(int(limit), _MAP_POINTS_MAX_PAGE_SIZE))
     advanced_filters = (
         temperature_band,
@@ -649,9 +649,6 @@ def map_points_controller(
             offset=offset,
         )
 
-    # Filters backed by beetle_list_read (has_image, observed_year, compact bands)
-    # cluster over that read model for full, correct results. Only the live-only
-    # advanced bands — not present in beetle_list_read — still use the list path.
     live_only_advanced = (
         soil_moisture_band,
         ndvi_band,
@@ -750,9 +747,9 @@ def map_points_controller(
     }
 
 def map_points_geojson_controller(**kwargs):
-    """Return map points as a GeoJSON FeatureCollection.
+    """Gibt Karten-Punkte als GeoJSON-FeatureCollection zurueck.
 
-    Reuses the map points controller output and converts it to GeoJSON.
+    Nutzt die Ausgabe des Karten-Punkt-Controllers wieder und wandelt sie in GeoJSON um.
     """
     points_result = map_points_controller(**kwargs)
     return build_map_geojson(points_result)

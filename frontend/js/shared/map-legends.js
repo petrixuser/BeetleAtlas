@@ -210,7 +210,6 @@
     return el.value;
   }
 
-  // Repraesentative Farbe je Koeppen-Hauptgruppe (A-E).
   var CLIMATE_MAJOR_COLORS = {
     A: "#228B22", B: "#F5A623", C: "#78FF50", D: "#38CCFF", E: "#B0B0B0",
   };
@@ -233,8 +232,8 @@
     climateMajorColor: function (code) {
       return CLIMATE_MAJOR_COLORS[String(code || "").charAt(0).toUpperCase()] || "#9bb59b";
     },
-    koppenColor: function (code) { return KOPPEN_COLORS[code] || "#9bb59b"; },
-    koppenLabel: function (code) { return KOPPEN_LABELS[code] || code || "Unbekannt"; },
+      koppenColor: function (code) { return KOPPEN_COLORS[code] || "#9bb59b"; },
+      koppenLabel: function (code) { return KOPPEN_LABELS[code] || code || "Unbekannt"; },
     vegetationZoneColor: function (zone) { return VEGETATION_ZONE_COLORS[zone] || "#8ba86f"; },
   };
 })();

@@ -1,3 +1,13 @@
+"""Startet Earth-Engine-Exporte der statischen und dynamischen Umweltdaten.
+
+Das Skript liest die Fundort-CSVs (statisch: ein Punkt pro location_id;
+dynamisch: ein Punkt pro location_id + Monat), baut fuer jeden Batch ein
+Earth-Engine-Image aus verschiedenen Datensaetzen (SRTM, WorldCover, ERA5,
+TerraClimate, SMAP, MODIS, CHIRPS, VIIRS/DMSP usw.), sampelt es an den Punkten
+und startet pro Batch einen Export nach Google Drive als CSV. Die Ergebnisse
+werden spaeter mit den merge_ee_*-Skripten zusammengefuehrt.
+"""
+
 import ee
 import pandas as pd
 import time
@@ -16,16 +26,18 @@ DYNAMIC_GROUPING = "year"  # "month" oder "year"
 STATIC_EXPORT_PREFIX = "beetle_static"
 DYNAMIC_EXPORT_PREFIX = "beetle_dynamic"
 EXPORT_DRIVE_FOLDER = "beetle_exports"
-MAX_ROWS = None  # für Test z.B. 1000 setzen, für komplett: None
+MAX_ROWS = None  # fuer Test z.B. 1000 setzen, fuer komplett: None
 
 
 def init_ee(project_id):
+    """Initialisiert Earth Engine mit der angegebenen Projekt-ID (oder dem Default)."""
     project_id = (project_id or "").strip() or DEFAULT_EE_PROJECT
     ee.Initialize(project=project_id)
     print(f"Earth Engine Projekt: {project_id}")
 
 
 def df_to_fc(df, properties):
+    """Wandelt einen DataFrame (mit latitude/longitude) in eine ee.FeatureCollection."""
     features = []
 
     for _, row in df.iterrows():
@@ -47,11 +59,13 @@ def df_to_fc(df, properties):
 
 
 def chunks(df, batch_size):
+    """Zerlegt den DataFrame in Batches und liefert (batch_id, teil-DataFrame)."""
     for i in range(0, len(df), batch_size):
         yield i // batch_size, df.iloc[i:i + batch_size]
 
 
 def parse_batch_filter(raw_value):
+    """Parst einen --batch-filter-Ausdruck (z. B. '0,1,9' oder '10-21') zu einer Menge von IDs."""
     value = (raw_value or "").strip()
     if not value:
         return None
@@ -77,13 +91,13 @@ def parse_batch_filter(raw_value):
 
 
 def remap_batch_filter(batch_filter, source_batch_size, target_batch_size):
+    """Rechnet Batch-IDs von einer Quell-Batchgroesse auf eine Ziel-Batchgroesse um."""
     if batch_filter is None:
         return None
 
     if source_batch_size <= 0 or target_batch_size <= 0:
         raise ValueError("Batchgroessen fuer Remapping muessen > 0 sein")
 
-    # Same size: nothing to map.
     if source_batch_size == target_batch_size:
         return set(batch_filter)
 
@@ -102,6 +116,7 @@ def remap_batch_filter(batch_filter, source_batch_size, target_batch_size):
 
 
 def iter_dynamic_groups(df, grouping):
+    """Iteriert die dynamischen Daten gruppiert nach Monat oder Jahr und liefert (key, start, end, teil-DataFrame)."""
     if grouping == "month":
         months = sorted(df["date"].dropna().unique())
 
@@ -137,10 +152,12 @@ def iter_dynamic_groups(df, grouping):
 
 
 def make_static_description(batch_id):
+    """Baut den Export-Beschreibungsnamen fuer einen statischen Batch."""
     return f"{STATIC_EXPORT_PREFIX}_batch_{batch_id:04d}"
 
 
 def make_dynamic_description(grouping, group_key, batch_id, batch_size):
+    """Baut den Export-Beschreibungsnamen fuer einen dynamischen Batch."""
     # YYYY-MM bleibt lesbar, andere Sonderzeichen entfernen wir vorsichtshalber.
     safe_key = str(group_key).replace("/", "_").replace(" ", "_")
     start_row = batch_id * batch_size
@@ -152,6 +169,7 @@ def make_dynamic_description(grouping, group_key, batch_id, batch_size):
 
 
 def month_window_from_ym(ym):
+    """Berechnet aus 'YYYY-MM' das (start, end)-Datumsfenster [erster Tag, erster Tag Folgemonat)."""
     year, month = str(ym).split("-")
     year = int(year)
     month = int(month)
@@ -166,6 +184,7 @@ def month_window_from_ym(ym):
 
 
 def build_static_image(disable_human_modification=False):
+    """Baut das Earth-Engine-Image mit den zeitlich konstanten (statischen) Umweltbaendern."""
     srtm = ee.Image("USGS/SRTMGL1_003").select("elevation")
     slope = ee.Terrain.slope(srtm).rename("slope")
 
@@ -201,7 +220,6 @@ def build_static_image(disable_human_modification=False):
     gsw = ee.Image("JRC/GSW1_4/GlobalSurfaceWater")
     water_mask = gsw.select("occurrence").gte(50).unmask(0)
 
-    # Approximate Euclidean distance to nearest persistent surface water (meters).
     distance_to_water_m = (
         water_mask
         .fastDistanceTransform(1024)
@@ -250,12 +268,13 @@ def start_static_exports(
     static_csv=STATIC_CSV,
     disable_human_modification=False,
 ):
+    """Startet pro Batch der Static-CSV einen Earth-Engine-Export nach Google Drive."""
     df = pd.read_csv(static_csv)
 
     if MAX_ROWS:
         df = df.head(MAX_ROWS)
 
-    # Prevent dropped rows from masked pixels by filling no-data with sentinel values.
+    # Verhindert verlorene Zeilen durch maskierte Pixel, indem no-data mit Sentinel-Werten gefuellt wird.
     static_image = build_static_image(
         disable_human_modification=disable_human_modification
     ).unmask(-9999)
@@ -288,7 +307,9 @@ def start_static_exports(
 
 
 def build_dynamic_image(start, end):
+    """Baut das Earth-Engine-Image mit den zeitabhaengigen (dynamischen) Klima-/Umweltbaendern fuer das Zeitfenster."""
     def _masked_empty_band(name):
+        """Liefert ein vollstaendig maskiertes (leeres) Band mit dem angegebenen Namen."""
         return ee.Image.constant(0).updateMask(ee.Image.constant(0)).rename(name)
 
     def _collection_stat(
@@ -300,6 +321,7 @@ def build_dynamic_image(start, end):
         divide=None,
         subtract=None,
     ):
+        """Reduziert ein Band einer ImageCollection (mean/sum) und wendet optionale Skalierungen an."""
         base = ee.Image(
             ee.Algorithms.If(
                 collection.size().gt(0),
@@ -344,7 +366,6 @@ def build_dynamic_image(start, end):
         subtract=273.15,
     )
 
-    # TerraClimate tmmx/tmmn are stored as degC * 10.
     tc_tmax = _collection_stat(
         terraclimate_window,
         "tmmx",
@@ -411,7 +432,6 @@ def build_dynamic_image(start, end):
         multiply=1000,
     )
 
-    # CHIRPS provides a robust precipitation fallback for masked/no-data ERA5 pixels.
     precip_chirps = _collection_stat(
         chirps.filterDate(start, end),
         "precipitation",
@@ -435,7 +455,6 @@ def build_dynamic_image(start, end):
     )
     dewpoint_c = dewpoint_primary.unmask(dewpoint_monthly_fallback).rename("dewpoint_c")
 
-    # Compute relative humidity (%) from temperature and dewpoint (Celsius).
     relative_humidity = temp_c.expression(
         "100 * exp((17.625 * td) / (243.04 + td) - (17.625 * t) / (243.04 + t))",
         {
@@ -467,7 +486,6 @@ def build_dynamic_image(start, end):
     smap_new_month = smap_new.filterDate(start, end)
     smap_old_month = smap_old.filterDate(start, end)
 
-    # Fallback order: newest SMAP -> older SMAP -> ERA5 soil water.
     soil_moisture = ee.Image(
         ee.Algorithms.If(
             smap_new_month.size().gt(0),
@@ -542,6 +560,7 @@ def start_dynamic_exports(
     batch_filter=None,
     dynamic_csv=DYNAMIC_CSV,
 ):
+    """Startet pro Monat/Batch der Dynamic-CSV einen Earth-Engine-Export nach Google Drive."""
     df = pd.read_csv(dynamic_csv)
 
     if MAX_ROWS:
@@ -569,7 +588,6 @@ def start_dynamic_exports(
     )
 
     for group_key, start, end, group_df in iter_dynamic_groups(df, DYNAMIC_GROUPING):
-        # Keep yearly grouping for export organization, but compute values per exact month (YYYY-MM).
         if DYNAMIC_GROUPING == "year":
             months = sorted(group_df["date"].dropna().unique())
             print(f"{group_key}: {len(group_df)} rows | {len(months)} month windows")
@@ -582,7 +600,6 @@ def start_dynamic_exports(
                     f"  {ym}: {len(month_df)} rows | {total_batches} batches | window {month_start}..{month_end}"
                 )
 
-                # Keep all requested points even where a dataset has local/temporal no-data.
                 dynamic_image = build_dynamic_image(month_start, month_end).unmask(-9999)
 
                 for batch_id, batch in chunks(month_df, dynamic_batch_size):
@@ -618,7 +635,6 @@ def start_dynamic_exports(
         total_batches = math.ceil(len(group_df) / dynamic_batch_size)
         print(f"{group_key}: {len(group_df)} rows | {total_batches} batches")
 
-        # Keep all requested points even where a dataset has local/temporal no-data.
         dynamic_image = build_dynamic_image(start, end).unmask(-9999)
 
         for batch_id, batch in chunks(group_df, dynamic_batch_size):

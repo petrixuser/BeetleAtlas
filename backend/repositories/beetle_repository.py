@@ -1,8 +1,10 @@
-﻿from typing import Any, Dict, Optional, Tuple
+﻿"""Lese-Repository fuer Kaefer-Listen und -Details (Read-Pfad)."""
+from typing import Any, Dict, Optional, Tuple
 
 from sqlalchemy import text
 
-from backend.config.beetle_repository_sql import (
+from backend.config.environment_metrics import ENVIRONMENT_METRICS
+from backend.config.sql.beetle_repository_sql import (
     compact_rows_select_sql,
     country_overview_sql,
     country_top_beetles_sql,
@@ -18,6 +20,7 @@ from backend.core.db import get_connection
 
 
 def _execute_paginated_queries(sql, count_sql, params: Dict[str, Any], limit: int, offset: int) -> Tuple[list, int]:
+    """Fuehrt eine seitenweise Abfrage samt Gesamtzahl aus und liefert (Zeilen, total)."""
     exec_params = dict(params)
     exec_params["limit"] = limit
     exec_params["offset"] = offset
@@ -41,7 +44,7 @@ def fetch_beetles_list_rows_total(
     offset: int,
     params: Dict[str, Any],
 ) -> Tuple[list, int]:
-    """Fetch paginated beetle rows (full payload) and total count."""
+    """Seitenweise Kaefer-Zeilen (vollstaendiges Payload) inkl. Gesamtzahl laden."""
     cte_sql = full_enriched_cte_sql(base_where_sql)
     select_from_sql = f"""
         SELECT
@@ -80,7 +83,7 @@ def fetch_beetles_list_lean(
     offset: int,
     params: Dict[str, Any],
 ) -> Tuple[list, int]:
-    """Fetch paginated beetle rows (lean payload) and total count."""
+    """Seitenweise Kaefer-Zeilen (schlankes Payload) inkl. Gesamtzahl laden."""
     cte_sql = lean_enriched_cte_sql(base_where_sql)
 
     sql = text(
@@ -125,7 +128,7 @@ def fetch_beetles_list_compact_rows(
     offset: int,
     params: Dict[str, Any],
 ) -> list:
-    """Fetch compact paginated list rows from precomputed beetle_list_read."""
+    """Kompakte Listenzeilen aus dem vorberechneten beetle_list_read laden."""
     sql = text(compact_rows_select_sql(where_sql, order_by_sql))
 
     exec_params = dict(params)
@@ -141,7 +144,7 @@ def fetch_beetles_list_compact_total(
     where_sql: str,
     params: Dict[str, Any],
 ) -> int:
-    """Fetch total count for compact list rows from precomputed read models."""
+    """Gesamtzahl der kompakten Listenzeilen aus den vorberechneten Read-Modellen."""
     with get_connection() as conn:
         if not where_sql.strip():
             total = conn.execute(
@@ -171,7 +174,7 @@ def fetch_beetles_list_compact_total(
 
 
 def fetch_beetles_list_compact_total_precomputed(dim_name: str, dim_value: str) -> Optional[int]:
-    """Fetch precomputed compact total for one filter dimension/value pair."""
+    """Vorberechnete Gesamtzahl fuer ein einzelnes Filter-Dimension/Wert-Paar."""
     with get_connection() as conn:
         value = conn.execute(
             text(
@@ -196,7 +199,7 @@ def fetch_beetles_list_compact(
     offset: int,
     params: Dict[str, Any],
 ) -> Tuple[list, int]:
-    """Compatibility wrapper: fetch compact rows and total."""
+    """Kompatibilitaets-Wrapper: laedt kompakte Zeilen und Gesamtzahl zusammen."""
     rows = fetch_beetles_list_compact_rows(
         where_sql=where_sql,
         order_by_sql=order_by_sql,
@@ -208,21 +211,15 @@ def fetch_beetles_list_compact(
     return rows, total
 
 def fetch_beetle_detail_row(gbif_id: int) -> Optional[Dict[str, Any]]:
-    """Fetch one detailed beetle observation row by GBIF ID."""
+    """Einen Detail-Datensatz einer GBIF-Beobachtung anhand der GBIF-ID laden."""
     return fetch_beetle_detail_row_by_entity(f"occ-{gbif_id}")
 
 
 def fetch_beetle_detail_row_by_entity(entity_id: str) -> Optional[Dict[str, Any]]:
-    """Fetch one detailed beetle row by API entity id (occ-* or rec-*)."""
+    """Einen Detail-Datensatz anhand der API-Entity-ID laden (occ-* oder rec-*)."""
     params: Dict[str, Any] = {"entity_id": entity_id}
     base_where_sql = ""
     media_where_sql = ""
-    # Fast path for GBIF observations (occ-<gbif_id>): push the id into the
-    # observation branch AND the media_agg CTE so we enrich a single row instead
-    # of scanning all 417k observations and aggregating the whole media table.
-    # gbif_id is observation's PRIMARY KEY and media has idx_media_gbif_id, so
-    # this turns a ~2s detail lookup into an index lookup. Manual records (rec-*)
-    # are few, so their branch stays unfiltered (still cheap).
     if entity_id.startswith("occ-"):
         suffix = entity_id[4:]
         if suffix.isdigit():
@@ -247,7 +244,7 @@ def fetch_beetle_detail_row_by_entity(entity_id: str) -> Optional[Dict[str, Any]
     return dict(row) if row is not None else None
 
 def fetch_beetle_media_rows(gbif_id: int, limit: int = 8):
-    """Fetch a limited list of media entries for one beetle observation."""
+    """Begrenzte Liste von Medieneintraegen einer Kaefer-Beobachtung laden."""
     sql = text(
         """
         SELECT
@@ -271,7 +268,7 @@ def fetch_beetle_media_rows(gbif_id: int, limit: int = 8):
     return [dict(row) for row in rows]
 
 def fetch_beetle_media_rows_total(gbif_id: int, limit: int, offset: int):
-    """Fetch paginated media entries and total count for one beetle observation."""
+    """Seitenweise Medieneintraege samt Gesamtzahl einer Beobachtung laden."""
     sql = text(
         """
         SELECT
@@ -308,7 +305,7 @@ def fetch_beetle_media_rows_total(gbif_id: int, limit: int, offset: int):
     return [dict(row) for row in rows], int(total)
 
 def fetch_country_detail_rows(country_code: str):
-    """Fetch country-level overview and top climate/vegetation buckets."""
+    """Laenderueberblick sowie Top-Klima-/Vegetations-Gruppen eines Landes laden."""
     params = {"country_code": country_code}
     with get_connection() as conn:
         overview = conn.execute(text(country_overview_sql()), params).mappings().first()
@@ -322,38 +319,21 @@ def fetch_country_detail_rows(country_code: str):
 
 
 def fetch_environment_ranges() -> Dict[str, Optional[float]]:
-    """Fetch global min/max values for environmental metrics used in detail quicklook bars."""
+    """Globale Min-/Max-Werte der Umweltmetriken fuer die Detail-Balken laden.
+
+    Die MIN/MAX-Spalten werden aus dem zentralen ENVIRONMENT_METRICS-Katalog
+    erzeugt, damit sie mit dem Controller-Payload synchron bleiben.
+    """
     cte_sql = full_enriched_cte_sql("")
+    range_columns = ",\n            ".join(
+        f"MIN(e.{column}) AS min_{column}, MAX(e.{column}) AS max_{column}"
+        for column, _ in ENVIRONMENT_METRICS
+    )
     sql = text(
         f"""
         {cte_sql}
         SELECT
-            MIN(e.elevation) AS min_elevation,
-            MAX(e.elevation) AS max_elevation,
-            MIN(e.temperature) AS min_temperature,
-            MAX(e.temperature) AS max_temperature,
-            MIN(e.worldclim_bio01) AS min_worldclim_bio01,
-            MAX(e.worldclim_bio01) AS max_worldclim_bio01,
-            MIN(e.precipitation) AS min_precipitation,
-            MAX(e.precipitation) AS max_precipitation,
-            MIN(e.worldclim_bio12) AS min_worldclim_bio12,
-            MAX(e.worldclim_bio12) AS max_worldclim_bio12,
-            MIN(e.soil_moisture) AS min_soil_moisture,
-            MAX(e.soil_moisture) AS max_soil_moisture,
-            MIN(e.ndvi) AS min_ndvi,
-            MAX(e.ndvi) AS max_ndvi,
-            MIN(e.relative_humidity) AS min_relative_humidity,
-            MAX(e.relative_humidity) AS max_relative_humidity,
-            MIN(e.surface_pressure_hpa) AS min_surface_pressure_hpa,
-            MAX(e.surface_pressure_hpa) AS max_surface_pressure_hpa,
-            MIN(e.nighttime_lights) AS min_nighttime_lights,
-            MAX(e.nighttime_lights) AS max_nighttime_lights,
-            MIN(e.slope) AS min_slope,
-            MAX(e.slope) AS max_slope,
-            MIN(e.distance_to_water_m) AS min_distance_to_water_m,
-            MAX(e.distance_to_water_m) AS max_distance_to_water_m,
-            MIN(e.human_modification) AS min_human_modification,
-            MAX(e.human_modification) AS max_human_modification
+            {range_columns}
         FROM enriched e
         """
     )
@@ -362,3 +342,26 @@ def fetch_environment_ranges() -> Dict[str, Optional[float]]:
         row = conn.execute(sql).mappings().first()
 
     return dict(row) if row is not None else {}
+
+
+def fetch_featured_beetle_rows():
+    """Die manuell gepflegten Featured-Kaefer (record_id + Name) aus der DB laden.
+
+    Dient als Quelle der Wahrheit fuer die rec-IDs, damit die statische
+    frontend/data/featured-beetles.js nach einem DB-Neuaufbau nicht driftet.
+    """
+    sql = text(
+        """
+        SELECT r.record_id, sp.scientific_name, sp.family
+        FROM beetle_record_core r
+        JOIN beetle_species sp ON sp.beetle_id = r.beetle_id
+        WHERE r.dataset_name = 'featured-beetles.js'
+          AND r.status = 'active'
+        ORDER BY r.record_id
+        """
+    )
+
+    with get_connection() as conn:
+        rows = conn.execute(sql).mappings().all()
+
+    return [dict(row) for row in rows]

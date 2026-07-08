@@ -5,22 +5,27 @@ import re
 from pydantic import BaseModel, ConfigDict, EmailStr, Field, field_validator
 
 
+# Erlaubte Benutzerrollen im System.
 UserRole = Literal["researcher", "admin", "viewer"]
 
 
 def _validate_strong_password(value: str) -> str:
+    """Erzwingt eine starke Passwort-Richtlinie (Gross-/Kleinbuchstabe, Ziffer,
+    Sonderzeichen). Wirft ValueError bei Verstoss."""
     if not re.search(r"[A-Z]", value):
-        raise ValueError("password must contain at least one uppercase letter")
+        raise ValueError("password muss mindestens einen Grossbuchstaben enthalten")
     if not re.search(r"[a-z]", value):
-        raise ValueError("password must contain at least one lowercase letter")
+        raise ValueError("password muss mindestens einen Kleinbuchstaben enthalten")
     if not re.search(r"\d", value):
-        raise ValueError("password must contain at least one digit")
+        raise ValueError("password muss mindestens eine Ziffer enthalten")
     if not re.search(r"[^A-Za-z0-9]", value):
-        raise ValueError("password must contain at least one special character")
+        raise ValueError("password muss mindestens ein Sonderzeichen enthalten")
     return value
 
 
 class RegisterRequest(BaseModel):
+    """Registrierung: E-Mail + starkes Passwort; Researcher-Rolle nur mit Code."""
+
     email: EmailStr
     password: str = Field(min_length=12, max_length=128)
     role: UserRole = "viewer"
@@ -45,6 +50,8 @@ class VerifyEmailRequest(BaseModel):
 
 
 class LoginRequest(BaseModel):
+    """Anmeldung mit E-Mail und Passwort."""
+
     email: EmailStr
     password: str = Field(min_length=1, max_length=128)
 
@@ -64,6 +71,8 @@ class RefreshRequest(BaseModel):
 
 
 class TokenResponse(BaseModel):
+    """Access- und Refresh-Token samt Ablaufzeiten nach Login/Refresh."""
+
     access_token: str
     token_type: str = "bearer"
     expires_in: int

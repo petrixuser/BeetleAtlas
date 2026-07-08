@@ -1,3 +1,6 @@
+"""Controller-Funktionen fuer die Authentifizierung: Registrierung,
+E-Mail-Verifizierung, Login, Token-Refresh, Logout und Admin-Bootstrap."""
+
 import secrets
 from datetime import datetime, timedelta, timezone
 from typing import cast
@@ -56,29 +59,30 @@ from backend.repositories.auth_repository import (
 
 
 def _get_verification_expiry_utc(ttl_seconds: int):
+    """Berechnet den naiven UTC-Ablaufzeitpunkt fuer einen Verifizierungs-Token."""
     return (datetime.now(timezone.utc) + timedelta(seconds=ttl_seconds)).replace(tzinfo=None)
 
 
 def register_controller(payload: RegisterRequest) -> RegisterPendingResponse:
-    """Start registration and store a pending email-verification record."""
+    """Startet die Registrierung und legt einen ausstehenden E-Mail-Verifizierungs-Datensatz an."""
     email = payload.email.lower().strip()
     if not email:
-        raise_api_error(400, ERR.AUTH.INVALID_EMAIL, "Email must not be empty.")
+        raise_api_error(400, ERR.AUTH.INVALID_EMAIL, "E-Mail darf nicht leer sein.")
 
     existing = fetch_user_by_email(email)
     if existing is not None:
-        raise_api_error(409, ERR.AUTH.EMAIL_EXISTS, "An account with this email already exists.")
+        raise_api_error(409, ERR.AUTH.EMAIL_EXISTS, "Ein Konto mit dieser E-Mail existiert bereits.")
 
     if payload.role == "admin":
-        raise_api_error(403, ERR.COMMON.FORBIDDEN, "Admin registration is disabled.")
+        raise_api_error(403, ERR.COMMON.FORBIDDEN, "Admin-Registrierung ist deaktiviert.")
 
     if payload.role == "researcher":
         expected_code = get_researcher_signup_code()
         provided_code = (payload.researcher_signup_code or "").strip()
         if not expected_code:
-            raise_api_error(503, ERR.AUTH.RESEARCHER_SIGNUP_UNAVAILABLE, "Researcher signup is not configured.")
+            raise_api_error(503, ERR.AUTH.RESEARCHER_SIGNUP_UNAVAILABLE, "Forscher-Registrierung ist nicht konfiguriert.")
         if not secrets.compare_digest(provided_code.encode("utf-8"), expected_code.encode("utf-8")):
-            raise_api_error(403, ERR.COMMON.FORBIDDEN, "Invalid researcher signup code.")
+            raise_api_error(403, ERR.COMMON.FORBIDDEN, "Ungueltiger Forscher-Registrierungscode.")
 
     password_hash = hash_password(payload.password)
 
@@ -101,13 +105,11 @@ def register_controller(payload: RegisterRequest) -> RegisterPendingResponse:
             send_verification_email(email=email, verification_token=verification_token)
             email_sent = True
         except Exception:
-            raise_api_error(503, ERR.AUTH.EMAIL_DELIVERY_FAILED, "Could not deliver verification email.")
+            raise_api_error(503, ERR.AUTH.EMAIL_DELIVERY_FAILED, "Konnte die Verifizierungs-E-Mail nicht zustellen.")
 
     return RegisterPendingResponse(
         status="pending_verification",
         email=email,
-        # Bei echtem Mailversand den Token NICHT preisgeben -> Nutzer muss den
-        # Link in der E-Mail anklicken. Ohne Mailversand (Dev) direkt mitgeben.
         verification_token=None if email_sent else verification_token,
         email_sent=email_sent,
         verification_expires_in=verification_ttl_seconds,
@@ -115,18 +117,18 @@ def register_controller(payload: RegisterRequest) -> RegisterPendingResponse:
 
 
 def verify_email_controller(payload: VerifyEmailRequest) -> AuthUserResponse:
-    """Verify token, create account, and activate it for login."""
+    """Verifiziert den Token, legt das Konto an und aktiviert es fuer den Login."""
     token_hash = hash_refresh_token(payload.verification_token)
     pending = fetch_active_pending_registration_by_token_hash(token_hash)
     if pending is None:
-        raise_api_error(401, ERR.AUTH.INVALID_VERIFICATION_TOKEN, "Invalid or expired verification token.")
+        raise_api_error(401, ERR.AUTH.INVALID_VERIFICATION_TOKEN, "Ungueltiger oder abgelaufener Verifizierungs-Token.")
     pending_row = cast(dict, pending)
 
     email = str(pending_row["email"]).lower().strip()
     existing = fetch_user_by_email(email)
     if existing is not None:
         consume_pending_registration(int(pending_row["pending_registration_id"]))
-        raise_api_error(409, ERR.AUTH.EMAIL_EXISTS, "An account with this email already exists.")
+        raise_api_error(409, ERR.AUTH.EMAIL_EXISTS, "Ein Konto mit dieser E-Mail existiert bereits.")
 
     created = None
     try:
@@ -137,35 +139,35 @@ def verify_email_controller(payload: VerifyEmailRequest) -> AuthUserResponse:
         )
     except IntegrityError:
         consume_pending_registration(int(pending_row["pending_registration_id"]))
-        raise_api_error(409, ERR.AUTH.EMAIL_EXISTS, "An account with this email already exists.")
+        raise_api_error(409, ERR.AUTH.EMAIL_EXISTS, "Ein Konto mit dieser E-Mail existiert bereits.")
 
     consume_pending_registration(int(pending_row["pending_registration_id"]))
 
     if created is None:
-        raise_api_error(500, ERR.AUTH.REGISTRATION_FAILED, "Could not create account.")
+        raise_api_error(500, ERR.AUTH.REGISTRATION_FAILED, "Konto konnte nicht erstellt werden.")
 
     return to_auth_user_response(cast(dict, created))
 
 
 def login_controller(payload: LoginRequest) -> TokenResponse:
-    """Authenticate user credentials and issue one access token."""
+    """Prueft die Zugangsdaten und stellt einen Access-Token aus."""
     email = payload.email.lower().strip()
     if not email:
-        raise_api_error(400, ERR.AUTH.INVALID_EMAIL, "Email must not be empty.")
+        raise_api_error(400, ERR.AUTH.INVALID_EMAIL, "E-Mail darf nicht leer sein.")
 
     user = fetch_user_by_email(email)
     if user is None:
         pending = fetch_active_pending_registration_by_email(email)
         if pending is not None:
-            raise_api_error(403, ERR.AUTH.EMAIL_NOT_VERIFIED, "Email address is not verified yet.")
-        raise_api_error(401, ERR.AUTH.INVALID_CREDENTIALS, "Invalid email or password.")
+            raise_api_error(403, ERR.AUTH.EMAIL_NOT_VERIFIED, "E-Mail-Adresse ist noch nicht verifiziert.")
+        raise_api_error(401, ERR.AUTH.INVALID_CREDENTIALS, "Ungültige E-Mail oder Passwort.")
     user_row = cast(dict, user)
 
     if int(user_row.get("is_active") or 0) != 1:
-        raise_api_error(403, ERR.AUTH.ACCOUNT_INACTIVE, "Account is inactive.")
+        raise_api_error(403, ERR.AUTH.ACCOUNT_INACTIVE, "Account ist inaktiv.")
 
     if not verify_password(payload.password, str(user_row.get("password_hash") or "")):
-        raise_api_error(401, ERR.AUTH.INVALID_CREDENTIALS, "Invalid email or password.")
+        raise_api_error(401, ERR.AUTH.INVALID_CREDENTIALS, "Ungültige E-Mail oder Passwort.")
 
     access_token = create_access_token(subject=str(user_row["user_id"]), role=str(user_row["role"]))
     refresh_token = generate_refresh_token()
@@ -187,16 +189,16 @@ def login_controller(payload: LoginRequest) -> TokenResponse:
 
 
 def refresh_controller(payload: RefreshRequest) -> TokenResponse:
-    """Rotate refresh token and issue a new access token pair."""
+    """Rotiert den Refresh-Token und stellt ein neues Token-Paar aus."""
     token_hash = hash_refresh_token(payload.refresh_token)
     stored = fetch_active_refresh_token_by_hash(token_hash)
     if stored is None:
-        raise_api_error(401, ERR.AUTH.INVALID_REFRESH_TOKEN, "Invalid or expired refresh token.")
+        raise_api_error(401, ERR.AUTH.INVALID_REFRESH_TOKEN, "Ungueltiger oder abgelaufener Refresh-Token.")
     stored_row = cast(dict, stored)
 
     user = fetch_user_by_id(int(stored_row["user_id"]))
     if user is None or int(user.get("is_active") or 0) != 1:
-        raise_api_error(401, ERR.AUTH.INVALID_REFRESH_TOKEN, "Invalid or expired refresh token.")
+        raise_api_error(401, ERR.AUTH.INVALID_REFRESH_TOKEN, "Ungueltiger oder abgelaufener Refresh-Token.")
     user_row = cast(dict, user)
 
     new_refresh_token = generate_refresh_token()
@@ -224,7 +226,7 @@ def refresh_controller(payload: RefreshRequest) -> TokenResponse:
 
 
 def logout_controller(current_user: AuthUserResponse, payload: LogoutRequest | None = None) -> LogoutResponse:
-    """Revoke refresh token(s) and return logout acknowledgement."""
+    """Widerruft Refresh-Token und gibt eine Logout-Bestaetigung zurueck."""
     refresh_token = None if payload is None else payload.refresh_token
     if refresh_token:
         token_hash = hash_refresh_token(refresh_token)
@@ -238,34 +240,34 @@ def logout_controller(current_user: AuthUserResponse, payload: LogoutRequest | N
 
 
 def bootstrap_admin_controller(payload: BootstrapAdminRequest, bootstrap_token: str | None) -> AuthUserResponse:
-    """Bootstrap first admin account for dev/setup using a shared secret."""
+    """Legt das erste Admin-Konto fuer Dev/Setup ueber ein gemeinsames Geheimnis an."""
     if not is_admin_bootstrap_enabled():
-        raise_api_error(404, ERR.COMMON.NOT_FOUND, "Route not found.")
+        raise_api_error(404, ERR.COMMON.NOT_FOUND, "Route nicht gefunden.")
 
     expected_token = get_admin_bootstrap_token()
     if not expected_token:
-        raise_api_error(503, ERR.AUTH.BOOTSTRAP_UNAVAILABLE, "Admin bootstrap is not configured.")
+        raise_api_error(503, ERR.AUTH.BOOTSTRAP_UNAVAILABLE, "Admin-Bootstrap ist nicht konfiguriert.")
 
     provided = (bootstrap_token or "").strip()
     if not secrets.compare_digest(provided.encode("utf-8"), expected_token.encode("utf-8")):
-        raise_api_error(403, ERR.COMMON.FORBIDDEN, "Invalid bootstrap token.")
+        raise_api_error(403, ERR.COMMON.FORBIDDEN, "Ungueltiger Bootstrap-Token.")
 
     email = payload.email.lower().strip()
     if not email:
-        raise_api_error(400, ERR.AUTH.INVALID_EMAIL, "Email must not be empty.")
+        raise_api_error(400, ERR.AUTH.INVALID_EMAIL, "E-Mail darf nicht leer sein.")
 
     existing_admin = fetch_active_admin_user()
     if existing_admin is not None and str(existing_admin.get("email", "")).lower() != email:
         raise_api_error(
             409,
             ERR.AUTH.ADMIN_EXISTS,
-            "An active admin account already exists with a different email.",
+            "Es existiert bereits ein aktives Admin-Konto mit einer anderen E-Mail.",
         )
 
     password_hash = hash_password(payload.password)
     admin_row = upsert_admin_user(email=email, password_hash=password_hash)
 
     if admin_row is None:
-        raise_api_error(500, ERR.AUTH.BOOTSTRAP_FAILED, "Could not bootstrap admin account.")
+        raise_api_error(500, ERR.AUTH.BOOTSTRAP_FAILED, "Admin-Konto konnte nicht angelegt werden.")
 
     return to_auth_user_response(cast(dict, admin_row))
