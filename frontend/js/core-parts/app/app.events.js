@@ -22,6 +22,12 @@
 
     card.classList.toggle("is-expanded", willExpand);
     head.setAttribute("aria-expanded", String(willExpand));
+    // Der Handler rendert die Liste NICHT neu (nur Klassenumschaltung), daher
+    // hier die gesperrte Fundort-Karte der aufgeklappten Karte direkt starten.
+    if (willExpand && window.AppCardMap && typeof window.AppCardMap.init === "function") {
+      var miniMap = card.querySelector(".detail-mini-map");
+      if (miniMap) window.AppCardMap.init(miniMap);
+    }
     ctx.actions.saveMainState();
   }
 

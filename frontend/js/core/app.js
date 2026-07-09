@@ -900,21 +900,51 @@ function beetleDetailHtml(beetle) {
   const adminActions = (beetle.id && String(beetle.id).indexOf("rec-") === 0)
     ? `<div class="admin-only beetle-admin-actions"><button type="button" class="beetle-delete" data-delete-id="${beetle.id}">Kaefer loeschen</button></div>`
     : "";
+  const coords = Array.isArray(beetle.coordinates) ? beetle.coordinates : [];
+  const lng = Number(coords[0]);
+  const lat = Number(coords[1]);
+  const hasCoords = Number.isFinite(lat) && Number.isFinite(lng) && (lat !== 0 || lng !== 0);
+  const safeName = String(beetle.name || "Fundort").replace(/"/g, "&quot;");
+  const locationMap = hasCoords
+    ? `<div class="detail-mini-map" data-lat="${lat}" data-lng="${lng}" data-name="${safeName}" data-elevation="${beetle.elevation ?? ""}" data-climate="${beetle.climate ?? ""}" data-vegetation="${beetle.vegetation ?? ""}" data-koppen="${beetle.koppenCode ?? ""}" data-vegzone="${beetle.vegetationZone ?? ""}">
+         <div class="mini-map-toolbar" role="group" aria-label="Kartenansicht">
+           <button type="button" class="mini-map-btn is-active" data-view="normal">Normal</button>
+           <button type="button" class="mini-map-btn" data-view="elevation">Höhe</button>
+           <button type="button" class="mini-map-btn" data-view="climate">Klima</button>
+           <button type="button" class="mini-map-btn" data-view="vegetation">Vegetation</button>
+         </div>
+         <div class="mini-map-frame"></div>
+         <div class="mini-map-legend" aria-live="polite"></div>
+       </div>`
+    : "";
   return `
     ${image}
     ${note}
     ${detailLink}
     ${adminActions}
-    <ul class="detail-list">
-      <li><strong>Fundort</strong>${beetle.location}</li>
-      <li><strong>Klimazone</strong>${climateLabel(beetle.climate)}</li>
-      <li><strong>Vegetation</strong>${vegetationLabel(beetle.vegetation)}</li>
-      <li><strong>Hoehenlage</strong>${beetle.elevation} m</li>
-      <li><strong>Temperatur</strong>${formatTemperature(beetle.temperature)}</li>
-      <li><strong>Niederschlag</strong>${formatPrecipitation(beetle.precipitation)}</li>
-      <li><strong>Boden-pH</strong>${formatSoilPh(beetle)}</li>
-    </ul>
+    <div class="detail-body">
+      <ul class="detail-list">
+        <li><strong>Fundort</strong>${beetle.location}</li>
+        <li><strong>Klimazone</strong>${climateLabel(beetle.climate)}</li>
+        <li><strong>Vegetation</strong>${vegetationLabel(beetle.vegetation)}</li>
+        <li><strong>Hoehenlage</strong>${beetle.elevation} m</li>
+        <li><strong>Temperatur</strong>${formatTemperature(beetle.temperature)}</li>
+        <li><strong>Niederschlag</strong>${formatPrecipitation(beetle.precipitation)}</li>
+        <li><strong>Boden-pH</strong>${formatSoilPh(beetle)}</li>
+      </ul>
+      ${locationMap}
+    </div>
   `;
+}
+
+// Initialisiert die gesperrten Fundort-Karten der aktuell aufgeklappten Karten.
+// Sofort (nicht entprellt): Entprellen wuerde die Init bei haeufigen Re-Renders
+// verhungern lassen. Doppel-Init wird pro Element ueber ein data-Flag verhindert.
+function initCardMaps() {
+  if (!window.AppCardMap || typeof window.AppCardMap.init !== "function") return;
+  resultList.querySelectorAll(".species-card.is-expanded .detail-mini-map").forEach((el) => {
+    window.AppCardMap.init(el);
+  });
 }
 
 // Rendert Ergebnisliste und synchronisiert die aktive Kartenansicht.
@@ -982,6 +1012,8 @@ function render() {
 
   updateResultPager(shown);
 
+  initCardMaps();
+
   if (!syncingListFromMap && !suppressNextMapRefresh) renderMapPoints();
   suppressNextMapRefresh = false;
 }
@@ -1028,13 +1060,13 @@ function openBeetleInfoWindow(marker, beetle, needsFetch) {
     ? `<div style="color:#66736b;font-size:0.82rem;margin-top:0.1rem">${beetle.family}</div>`
     : "";
   const details = beetle.id
-    ? `<a href="${detailPageUrl(beetle.id)}" style="display:inline-block;margin-top:0.45rem;color:#2f6b47;font-weight:700;font-size:0.82rem;text-decoration:none">Zur Detailseite</a>`
+    ? `<a href="${detailPageUrl(beetle.id)}" style="display:block;margin-top:0.4rem;padding-top:0.4rem;border-top:1px solid #e4ebe6;color:#2f6b47;font-weight:700;font-size:0.82rem;text-decoration:none">Zur Detailseite</a>`
     : "";
   activeInfoWindow.setContent(`
     <div style="font-family:Arial,sans-serif;min-width:120px;max-width:210px">
       <strong style="font-size:0.95rem">${beetle.name}</strong>
       ${fam}
-      <button type="button" class="iw-more" style="margin-top:0.55rem;background:none;border:0;color:#2f6b47;font-weight:700;cursor:pointer;padding:0;font-size:0.85rem">▼ Alle Infos</button>
+      <button type="button" class="iw-more" style="display:block;width:100%;text-align:left;margin-top:0.55rem;background:none;border:0;color:#2f6b47;font-weight:700;cursor:pointer;padding:0;font-size:0.85rem">▼ Schnellinfos</button>
       ${details}
     </div>
   `);

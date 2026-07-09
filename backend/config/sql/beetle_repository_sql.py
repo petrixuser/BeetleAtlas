@@ -164,6 +164,7 @@ def full_enriched_cte_sql(base_where_sql: str, media_where_sql: str = "") -> str
                 l.biome_id,
                 l.ecoregion_id,
                 l.koppen_code,
+                l.vegetation_zone,
                 l.distance_to_water_m,
                 l.human_modification,
                 l.slope,
@@ -218,6 +219,7 @@ def full_enriched_cte_sql(base_where_sql: str, media_where_sql: str = "") -> str
                 br.biome_id,
                 br.ecoregion_id,
                 NULL AS koppen_code,
+                NULL AS vegetation_zone,
                 br.distance_to_water_m,
                 br.human_modification,
                 br.slope,
@@ -309,6 +311,8 @@ def full_enriched_cte_sql(base_where_sql: str, media_where_sql: str = "") -> str
                 b.landcover_class,
                 b.ecoregion_id,
                 b.biome_id,
+                b.koppen_code,
+                b.vegetation_zone,
                 {SOIL_CASE_SQL} AS soil
             FROM base b
         )
@@ -346,6 +350,7 @@ def lean_enriched_cte_sql(base_where_sql: str) -> str:
                 l.biome_id,
                 l.ecoregion_id,
                 l.koppen_code,
+                l.vegetation_zone,
                 {normalized_soil_ph_sql("l")} AS soil_ph,
                 {normalized_soil_organic_carbon_sql("l")} AS soil_organic_carbon,
                 {normalized_worldclim_bio01_sql("l")} AS worldclim_bio01,
@@ -388,6 +393,7 @@ def lean_enriched_cte_sql(base_where_sql: str) -> str:
                 br.biome_id,
                 br.ecoregion_id,
                 NULL AS koppen_code,
+                NULL AS vegetation_zone,
                 br.soil_ph,
                 br.soil_organic_carbon,
                 br.worldclim_bio01,
@@ -432,7 +438,9 @@ def lean_enriched_cte_sql(base_where_sql: str) -> str:
                 b.worldclim_bio12,
                 b.landcover_class,
                 b.ecoregion_id,
-                b.biome_id
+                b.biome_id,
+                b.koppen_code,
+                b.vegetation_zone
             FROM base b
         )
     """
@@ -507,7 +515,9 @@ def full_result_projection_sql(alias: str = "e") -> str:
             {alias}.image_url_sample,
             {alias}.country,
             {alias}.region,
-            {alias}.city
+            {alias}.city,
+            {alias}.koppen_code,
+            {alias}.vegetation_zone
     """
 
 
@@ -538,7 +548,9 @@ def compact_result_projection_sql(alias: str = "e") -> str:
                     AND TRIM(m.image_url) <> ''
             ) AS image_url_sample,
             {alias}.country,
-            {alias}.elevation_group AS elevationGroup
+            {alias}.elevation_group AS elevationGroup,
+            {alias}.koppen_code,
+            {alias}.vegetation_zone
     """
 
 
