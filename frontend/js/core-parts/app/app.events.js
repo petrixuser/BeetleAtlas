@@ -22,8 +22,6 @@
 
     card.classList.toggle("is-expanded", willExpand);
     head.setAttribute("aria-expanded", String(willExpand));
-    // Der Handler rendert die Liste NICHT neu (nur Klassenumschaltung), daher
-    // hier die gesperrte Fundort-Karte der aufgeklappten Karte direkt starten.
     if (willExpand && window.AppCardMap && typeof window.AppCardMap.init === "function") {
       var miniMap = card.querySelector(".detail-mini-map");
       if (miniMap) window.AppCardMap.init(miniMap);
@@ -58,12 +56,22 @@
   // Bindet Sofort-Filter (Selects ohne Debounce) an applyFilters.
   function attachImmediateFilterChanges(elements, actions) {
     [
-      elements.countryFilter, elements.soilPhBandFilter, elements.temperatureBandFilter,
+      elements.soilPhBandFilter, elements.temperatureBandFilter,
       elements.precipitationBandFilter, elements.dataQualityFilter, elements.imageFilter,
     ].forEach(function (element) {
       if (!element) return;
       element.addEventListener("change", actions.applyFilters);
     });
+    // Laenderfilter: zusaetzlich die Karte auf das Land zoomen, damit dessen
+    // Fundorte tatsaechlich geladen werden (die Karte laedt bbox-basiert).
+    if (elements.countryFilter) {
+      elements.countryFilter.addEventListener("change", function () {
+        if (typeof window.focusMapOnCountry === "function") {
+          window.focusMapOnCountry(elements.countryFilter.value);
+        }
+        actions.applyFilters();
+      });
+    }
   }
 
   // Synchronisiert Klima-Auswahl zwischen Dropdown, Legende und Datenfilter.

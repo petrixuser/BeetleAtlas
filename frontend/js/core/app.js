@@ -1337,12 +1337,24 @@ updateResultModeToggle();
 // dies sicher, dass die Startseite dennoch Featured-Kaefer sowie Karten-
 // und Listeninhalte laedt.
 async function ensureInitialResultsLoaded() {
-  const hasCards = document.querySelectorAll(".species-card").length > 0;
-  if (hasCards) return;
+  // Featured-IDs + Niederschlag IMMER aus dem Backend abgleichen/anreichern
+  // (die statische Liste hat keinen Niederschlag).
   try {
     if (typeof window.reconcileFeaturedIds === "function") {
       await window.reconcileFeaturedIds();
     }
+  } catch (error) {
+    console.error("Featured-Abgleich fehlgeschlagen:", error);
+  }
+
+  const hasCards = document.querySelectorAll(".species-card").length > 0;
+  if (hasCards) {
+    // Liste ist bereits (statisch) gerendert -> nach der Anreicherung neu
+    // rendern, damit z. B. der Niederschlag der Featured-Kaefer erscheint.
+    if (typeof render === "function") render();
+    return;
+  }
+  try {
     await applyFilters({
       keepPage: true,
       pageOffset: listOffset,

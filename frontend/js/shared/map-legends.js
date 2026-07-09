@@ -282,9 +282,13 @@
     },
 
     // Liefert Farbe + Label fuer die Klima-Hauptgruppe eines Kaefers (A-E).
+    // Unterstuetzt auch die beschreibenden Werte der statischen Featured/Demo-
+    // Daten (hot/warm/mild/cold), damit die Legende nicht "H" o. Ae. zeigt.
     climateSwatch: function (code) {
-      var c = String(code || "").charAt(0).toUpperCase();
-      if (!c) return null;
+      var raw = String(code || "").trim();
+      if (!raw) return null;
+      var descriptive = { hot: "A", warm: "B", mild: "C", cold: "D" };
+      var c = descriptive[raw.toLowerCase()] || raw.charAt(0).toUpperCase();
       var title = CLIMATE_MAJOR_LABELS[c];
       return {
         color: CLIMATE_MAJOR_COLORS[c] || "#9bb59b",

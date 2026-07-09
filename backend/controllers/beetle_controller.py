@@ -939,6 +939,7 @@ def get_featured_beetles_controller():
             "id": f"rec-{row['record_id']}",
             "name": row.get("scientific_name"),
             "family": row.get("family"),
+            "precipitation": float(row["precipitation"]) if row.get("precipitation") is not None else None,
         }
         for row in rows
     ]

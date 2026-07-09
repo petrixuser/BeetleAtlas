@@ -23,9 +23,18 @@
         if (it && it.name && it.id) nameToId[it.name] = it.id;
       });
 
+      var nameToItem = {};
+      items.forEach(function (it) {
+        if (it && it.name) nameToItem[it.name] = it;
+      });
+
       list.forEach(function (entry) {
         var id = nameToId[entry && entry.name];
         if (id) entry.id = id;
+       var apiItem = nameToItem[entry && entry.name];
+        if (apiItem && apiItem.precipitation != null) {
+          entry.precipitation = apiItem.precipitation;
+        }
       });
     } catch (e) {
     }

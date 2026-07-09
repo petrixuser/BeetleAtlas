@@ -352,12 +352,11 @@ def fetch_featured_beetle_rows():
     """
     sql = text(
         """
-        SELECT r.record_id, sp.scientific_name, sp.family
-        FROM beetle_record_core r
-        JOIN beetle_species sp ON sp.beetle_id = r.beetle_id
-        WHERE r.dataset_name = 'featured-beetles.js'
-          AND r.status = 'active'
-        ORDER BY r.record_id
+        SELECT br.record_id, br.scientific_name, br.family, br.precipitation
+        FROM beetle_record br
+        WHERE br.dataset_name = 'featured-beetles.js'
+          AND br.status = 'active'
+        ORDER BY br.record_id
         """
     )
 

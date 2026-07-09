@@ -99,8 +99,6 @@
       },
     });
 
-    // Google zeichnet die Karte in kleinen/spaet gerenderten Containern manchmal
-    // erst nach einem Resize (sonst bleibt sie schwarz). Einmalig nachtriggern.
     g.event.addListenerOnce(map, "idle", function () {
       state.frame.classList.add("is-ready");
     });
@@ -176,8 +174,6 @@
 
   // Zeigt unter der Karte den konkreten Wert DIESES Kaefers als farbige
   // Ein-Zeilen-Legende (passend zum aktiven Modus). Normal -> keine Legende.
-  // Klima/Vegetation bevorzugen den GENAUEN Wert (Koeppen-Subtyp bzw.
-  // Vegetationszone), fallen sonst auf die grobe Ebene zurueck.
   function updateLegend(state, view) {
     if (!state.legend) return;
     var lookups = window.BEETLE_LEGEND_COLORS;

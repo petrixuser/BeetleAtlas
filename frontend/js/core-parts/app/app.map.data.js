@@ -55,6 +55,41 @@ function canLoadMapPoints() {
   return Boolean(googleMapInstance && window.API_BASE_URL && !featuredMode);
 }
 
+// Berechnet die LatLng-Grenzen eines Landes aus dem GeoJSON-Datensatz.
+function countryLatLngBounds(countryValue) {
+  var fc = window.LATIN_AMERICA_COUNTRIES;
+  if (!fc || !Array.isArray(fc.features) || !window.google || !window.google.maps) return null;
+  var target = String(countryValue || "").trim().toLowerCase();
+  if (!target || target === "all") return null;
+  var feat = fc.features.find(function (f) {
+    return f && f.properties && String(f.properties.name || "").toLowerCase() === target;
+  });
+  if (!feat || !feat.geometry) return null;
+
+  var bounds = new window.google.maps.LatLngBounds();
+  function addRing(ring) {
+    ring.forEach(function (pt) {
+      if (Array.isArray(pt) && pt.length >= 2) bounds.extend({ lng: pt[0], lat: pt[1] });
+    });
+  }
+  var coords = feat.geometry.coordinates || [];
+  if (feat.geometry.type === "Polygon") {
+    coords.forEach(addRing);
+  } else if (feat.geometry.type === "MultiPolygon") {
+    coords.forEach(function (poly) { poly.forEach(addRing); });
+  }
+  return bounds.isEmpty() ? null : bounds;
+}
+
+// Zoomt die Karte auf das gewaehlte Land, damit dessen Fundorte (bbox-basiert)
+// geladen werden. Ohne dies blieben die Punkte des vorherigen Ausschnitts stehen.
+function focusMapOnCountry(countryValue) {
+  if (!googleMapInstance) return;
+  var bounds = countryLatLngBounds(countryValue);
+  if (bounds) googleMapInstance.fitBounds(bounds);
+}
+window.focusMapOnCountry = focusMapOnCountry;
+
 // Erzeugt die gemeinsame Grundabfrage (bbox, zoom, Filter) fuer Kartenpunkte.
 function buildMapPointsBaseQuery(useFullSubtypeBounds) {
   const bounds = googleMapInstance.getBounds();
