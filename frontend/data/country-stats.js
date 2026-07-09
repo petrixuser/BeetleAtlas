@@ -1,11 +1,11 @@
 // AUTO-GENERIERT von backend/scripts/gen_country_stats.py - NICHT von Hand editieren.
-// Quelle: http://127.0.0.1:8000/api/countries/  |  Laender: 25  |  ohne Daten: French Guiana
+// Quelle: http://localhost:8000/api/countries/  |  Laender: 26
 window.COUNTRY_STATS = {
   "Argentina": {
     "code": "ARGENTINA",
     "name": "Argentina",
     "speciesCount": 1432,
-    "observationCount": 30590,
+    "observationCount": 30600,
     "topClimates": [
       "C",
       "B",
@@ -212,10 +212,10 @@ window.COUNTRY_STATS = {
     ]
   },
   "Belize": {
-    "code": "BZ",
+    "code": "BELIZE",
     "name": "BZ",
     "speciesCount": 185,
-    "observationCount": 558,
+    "observationCount": 560,
     "topClimates": [
       "A"
     ],
@@ -377,7 +377,7 @@ window.COUNTRY_STATS = {
     "code": "BOLIVIA",
     "name": "Bolivia",
     "speciesCount": 414,
-    "observationCount": 1642,
+    "observationCount": 1638,
     "topClimates": [
       "C",
       "A",
@@ -571,7 +571,7 @@ window.COUNTRY_STATS = {
     "code": "BRAZIL",
     "name": "Brazil",
     "speciesCount": 2497,
-    "observationCount": 32335,
+    "observationCount": 32369,
     "topClimates": [
       "C",
       "A",
@@ -775,7 +775,7 @@ window.COUNTRY_STATS = {
     "code": "CHILE",
     "name": "Chile",
     "speciesCount": 916,
-    "observationCount": 15222,
+    "observationCount": 15210,
     "topClimates": [
       "C",
       "B",
@@ -985,7 +985,7 @@ window.COUNTRY_STATS = {
     "code": "COLOMBIA",
     "name": "Colombia",
     "speciesCount": 1857,
-    "observationCount": 76029,
+    "observationCount": 76026,
     "topClimates": [
       "A",
       "C",
@@ -1545,7 +1545,7 @@ window.COUNTRY_STATS = {
     "code": "DOMINICAN REPUBLIC",
     "name": "Dominican Republic",
     "speciesCount": 380,
-    "observationCount": 2102,
+    "observationCount": 2115,
     "topClimates": [
       "A",
       "C",
@@ -1739,7 +1739,7 @@ window.COUNTRY_STATS = {
     "code": "ECUADOR",
     "name": "Ecuador",
     "speciesCount": 1055,
-    "observationCount": 10130,
+    "observationCount": 10102,
     "topClimates": [
       "C",
       "A",
@@ -1949,7 +1949,7 @@ window.COUNTRY_STATS = {
     "code": "EL SALVADOR",
     "name": "El Salvador",
     "speciesCount": 100,
-    "observationCount": 192,
+    "observationCount": 191,
     "topClimates": [
       "A",
       "C"
@@ -2102,11 +2102,163 @@ window.COUNTRY_STATS = {
       }
     ]
   },
+  "French Guiana": {
+    "code": "FRENCH GUIANA",
+    "name": "GF",
+    "speciesCount": 2944,
+    "observationCount": 25863,
+    "topClimates": [
+      "A"
+    ],
+    "topVegetations": [
+      "tree_cover",
+      "mangroves",
+      "water"
+    ],
+    "elevationRange": [
+      0,
+      789
+    ],
+    "avgElevation": 141,
+    "avgTemperature": 25.5,
+    "avgPrecipitation": 3128,
+    "avgSoilMoisture": 0.346,
+    "avgNdvi": 0.662,
+    "avgHumidity": 78.9,
+    "avgSoilPh": 4.5,
+    "metrics": {
+      "elevation": {
+        "min": 0,
+        "avg": 141,
+        "max": 789
+      },
+      "temperature": {
+        "min": 24.2,
+        "avg": 25.5,
+        "max": 27.3
+      },
+      "precipitation": {
+        "min": 0,
+        "avg": 3128,
+        "max": 3811
+      },
+      "soilMoisture": {
+        "min": 0.0,
+        "avg": 0.346,
+        "max": 0.548
+      },
+      "ndvi": {
+        "min": 0.285,
+        "avg": 0.662,
+        "max": 0.778
+      },
+      "humidity": {
+        "min": 21.6,
+        "avg": 78.9,
+        "max": 89.7
+      },
+      "soilPh": {
+        "min": 4.2,
+        "avg": 4.5,
+        "max": 6.4
+      },
+      "pressure": {
+        "min": 972,
+        "avg": 998,
+        "max": 1013
+      },
+      "light": {
+        "min": 0.0,
+        "avg": 0.49,
+        "max": 57.0
+      },
+      "slope": {
+        "min": 0.0,
+        "avg": 1.7,
+        "max": 9.5
+      },
+      "waterDistance": {
+        "min": 0,
+        "avg": 572,
+        "max": 1802
+      },
+      "humanModification": {
+        "min": 0.0,
+        "avg": 0.094,
+        "max": 0.899
+      }
+    },
+    "climates": [
+      {
+        "climate": "A",
+        "count": 25900,
+        "share": 0.9997
+      }
+    ],
+    "vegetations": [
+      {
+        "vegetation": "tree_cover",
+        "count": 24823,
+        "share": 0.9582
+      },
+      {
+        "vegetation": "mangroves",
+        "count": 1075,
+        "share": 0.0415
+      },
+      {
+        "vegetation": "water",
+        "count": 9,
+        "share": 0.0003
+      }
+    ],
+    "topKoppen": [
+      {
+        "koppen": "Af",
+        "count": 15583,
+        "share": 0.6015
+      },
+      {
+        "koppen": "Am",
+        "count": 10317,
+        "share": 0.3982
+      }
+    ],
+    "topVegetationZones": [
+      {
+        "zone": "Tropischer Regenwald",
+        "count": 23835,
+        "share": 0.92
+      },
+      {
+        "zone": "Mangroven",
+        "count": 1974,
+        "share": 0.0762
+      }
+    ],
+    "topBeetles": [
+      {
+        "name": "Coprophanaeus dardanus (MacLeay, 1819)",
+        "family": "Scarabaeidae",
+        "count": 470
+      },
+      {
+        "name": "Oxysternon festivum (Linnaeus, 1758)",
+        "family": "Scarabaeidae",
+        "count": 362
+      },
+      {
+        "name": "Acanthocinini Blanchard, 1845",
+        "family": "Cerambycidae",
+        "count": 309
+      }
+    ]
+  },
   "Guatemala": {
     "code": "GUATEMALA",
     "name": "Guatemala",
     "speciesCount": 740,
-    "observationCount": 7855,
+    "observationCount": 8288,
     "topClimates": [
       "A",
       "C"
@@ -2291,7 +2443,7 @@ window.COUNTRY_STATS = {
     ]
   },
   "Guyana": {
-    "code": "GY",
+    "code": "GUYANA",
     "name": "GY",
     "speciesCount": 118,
     "observationCount": 1988,
@@ -2442,10 +2594,10 @@ window.COUNTRY_STATS = {
     ]
   },
   "Haiti": {
-    "code": "HT",
+    "code": "HAITI",
     "name": "HT",
     "speciesCount": 52,
-    "observationCount": 89,
+    "observationCount": 76,
     "topClimates": [
       "A",
       "C",
@@ -2628,7 +2780,7 @@ window.COUNTRY_STATS = {
     "code": "HONDURAS",
     "name": "Honduras",
     "speciesCount": 621,
-    "observationCount": 2618,
+    "observationCount": 2653,
     "topClimates": [
       "A",
       "C"
@@ -2813,7 +2965,7 @@ window.COUNTRY_STATS = {
     ]
   },
   "Jamaica": {
-    "code": "JM",
+    "code": "JAMAICA",
     "name": "JM",
     "speciesCount": 120,
     "observationCount": 500,
@@ -2978,7 +3130,7 @@ window.COUNTRY_STATS = {
     "code": "MEXICO",
     "name": "Mexico",
     "speciesCount": 6823,
-    "observationCount": 120206,
+    "observationCount": 121119,
     "topClimates": [
       "A",
       "C",
@@ -3188,7 +3340,7 @@ window.COUNTRY_STATS = {
     "code": "NICARAGUA",
     "name": "Nicaragua",
     "speciesCount": 919,
-    "observationCount": 6460,
+    "observationCount": 6427,
     "topClimates": [
       "A",
       "C"
@@ -3366,7 +3518,7 @@ window.COUNTRY_STATS = {
     "code": "PANAMA",
     "name": "Panama",
     "speciesCount": 838,
-    "observationCount": 3824,
+    "observationCount": 3828,
     "topClimates": [
       "A",
       "C"
@@ -3539,7 +3691,7 @@ window.COUNTRY_STATS = {
     "code": "PARAGUAY",
     "name": "Paraguay",
     "speciesCount": 208,
-    "observationCount": 457,
+    "observationCount": 462,
     "topClimates": [
       "C",
       "A",
@@ -3712,7 +3864,7 @@ window.COUNTRY_STATS = {
     "code": "PERU",
     "name": "Peru",
     "speciesCount": 1100,
-    "observationCount": 11374,
+    "observationCount": 11400,
     "topClimates": [
       "A",
       "C",
@@ -4071,10 +4223,10 @@ window.COUNTRY_STATS = {
     ]
   },
   "Suriname": {
-    "code": "SR",
+    "code": "SURINAME",
     "name": "SR",
     "speciesCount": 201,
-    "observationCount": 654,
+    "observationCount": 656,
     "topClimates": [
       "A"
     ],
@@ -4220,7 +4372,7 @@ window.COUNTRY_STATS = {
     "code": "URUGUAY",
     "name": "Uruguay",
     "speciesCount": 362,
-    "observationCount": 4077,
+    "observationCount": 4097,
     "topClimates": [
       "C"
     ],
@@ -4361,7 +4513,7 @@ window.COUNTRY_STATS = {
     "code": "VENEZUELA",
     "name": "Venezuela",
     "speciesCount": 331,
-    "observationCount": 1970,
+    "observationCount": 1975,
     "topClimates": [
       "A",
       "C",

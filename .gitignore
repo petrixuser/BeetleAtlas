@@ -51,3 +51,6 @@ scripts/serve-frontend.py
 
 # Rohe GBIF-Quelldateien (archiviert als gbif-raw-source.zip via Git LFS)
 backend/data/*.txt
+
+# Entpackte Rohdaten lokal halten (nicht committen)
+backend/data/data/

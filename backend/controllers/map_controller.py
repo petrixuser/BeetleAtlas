@@ -8,6 +8,7 @@ from threading import Lock
 from typing import Any, Dict, List, Optional, Tuple
 
 from backend.config.climate_subtypes import is_climate_subtype_code, parent_climate_code
+from backend.config.country_aliases import country_filter_candidates
 from backend.controllers.beetle_controller import build_read_model_where, list_beetles_controller
 from backend.controllers.core_controller import parse_bbox_or_error
 from backend.core.beetle_filter_helpers import append_climate_filter, append_vegetation_filter
@@ -327,8 +328,15 @@ def _build_lean_where_and_params(
         params["q"] = f"%{q.strip()}%"
     append_climate_filter(filters, params, "e.climate", climate, "e.koppen_code")
     if country:
-        base_filters.append("b.country = :country")
-        params["country"] = country
+        # Land gemischt gespeichert (Name vs. ISO) -> auf alle Varianten matchen.
+        cands = country_filter_candidates(country)
+        if cands:
+            keys = []
+            for idx, cand in enumerate(cands):
+                pkey = f"country_{idx}"
+                params[pkey] = cand
+                keys.append(f":{pkey}")
+            base_filters.append(f"b.country IN ({', '.join(keys)})")
     append_vegetation_filter(filters, params, "e.vegetation", vegetation, "e.vegetation_zone")
     _append_exact_or_in_filter(filters, params, "e.elevationGroup", "elevation", elevation)
 

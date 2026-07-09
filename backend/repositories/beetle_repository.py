@@ -318,6 +318,37 @@ def fetch_country_detail_rows(country_code: str):
     return overview, climates, vegetations, koppen, vegetation_zones, top_beetles
 
 
+def resolve_stored_country_value(candidates):
+    """Liefert den tatsaechlich in location.country gespeicherten Wert aus einer
+    Kandidatenliste (Name/ISO)."""
+    values = [v for v in (candidates or []) if v]
+    if not values:
+        return None
+    placeholders = ", ".join(f":c{i}" for i in range(len(values)))
+    params = {f"c{i}": v for i, v in enumerate(values)}
+    sql = text(
+        f"SELECT country FROM location WHERE country IN ({placeholders}) LIMIT 1"
+    )
+    with get_connection() as conn:
+        row = conn.execute(sql, params).first()
+    return row[0] if row else None
+
+
+def fetch_country_list_count(candidates):
+    """Zaehlt die Funde eines Landes aus DEMSELBEN Read-Model wie die Ergebnisliste
+    (beetle_list_read), damit die Panel-Zahl 'Funde' exakt mit der Listen-
+    Trefferzahl uebereinstimmt (der rohe observation-Join weicht wegen
+    Koordinaten-/Manuell-/Dedup-Regeln minimal ab)."""
+    values = [v for v in (candidates or []) if v]
+    if not values:
+        return None
+    placeholders = ", ".join(f":c{i}" for i in range(len(values)))
+    params = {f"c{i}": v for i, v in enumerate(values)}
+    sql = text(f"SELECT COUNT(*) FROM beetle_list_read WHERE country IN ({placeholders})")
+    with get_connection() as conn:
+        return int(conn.execute(sql, params).scalar() or 0)
+
+
 def fetch_environment_ranges() -> Dict[str, Optional[float]]:
     """Globale Min-/Max-Werte der Umweltmetriken fuer die Detail-Balken laden.
 

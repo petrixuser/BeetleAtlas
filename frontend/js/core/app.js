@@ -570,17 +570,18 @@ function updateResultHeading(shown) {
     return;
   }
 
-  const shouldUseMapTotal =
-    window.API_BASE_URL &&
-    Number.isFinite(lastRenderedMapPointTotal) &&
-    lastRenderedMapPointTotal >= shown;
-
-  if (shouldUseMapTotal) {
-    resultHeading.textContent = `${shown} von ${lastRenderedMapPointTotal} Treffern`;
-  } else
-
+  // Ergebniskopf an die Liste/den Pager koppeln (totalBeetles). Sonst zeigte
+  // die Karten-Bbox-Zahl (lastRenderedMapPointTotal, nur aktueller Ausschnitt)
+  // eine andere Gesamtzahl als der Pager -> verwirrende Diskrepanz.
+  // Die Karten-Bbox-Zahl dient nur noch als Fallback.
   if (window.API_BASE_URL && totalBeetles > shown) {
     resultHeading.textContent = `${shown} von ${totalBeetles} Treffern`;
+  } else if (
+    window.API_BASE_URL &&
+    Number.isFinite(lastRenderedMapPointTotal) &&
+    lastRenderedMapPointTotal > shown
+  ) {
+    resultHeading.textContent = `${shown} von ${lastRenderedMapPointTotal} Treffern`;
   } else {
     resultHeading.textContent = `${shown} gefundene Arten`;
   }
@@ -1337,8 +1338,6 @@ updateResultModeToggle();
 // dies sicher, dass die Startseite dennoch Featured-Kaefer sowie Karten-
 // und Listeninhalte laedt.
 async function ensureInitialResultsLoaded() {
-  // Featured-IDs + Niederschlag IMMER aus dem Backend abgleichen/anreichern
-  // (die statische Liste hat keinen Niederschlag).
   try {
     if (typeof window.reconcileFeaturedIds === "function") {
       await window.reconcileFeaturedIds();
@@ -1349,8 +1348,6 @@ async function ensureInitialResultsLoaded() {
 
   const hasCards = document.querySelectorAll(".species-card").length > 0;
   if (hasCards) {
-    // Liste ist bereits (statisch) gerendert -> nach der Anreicherung neu
-    // rendern, damit z. B. der Niederschlag der Featured-Kaefer erscheint.
     if (typeof render === "function") render();
     return;
   }

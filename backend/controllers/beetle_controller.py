@@ -21,6 +21,7 @@ from backend.config.beetle_filters import (
 from backend.config.climate_subtypes import is_climate_subtype_code, parent_climate_code
 from backend.config.environment_metrics import ENVIRONMENT_METRICS
 from backend.config.data.country_mappings import COUNTRY_CODE_TO_LOCATION_NAME
+from backend.config.country_aliases import country_filter_candidates, ISO_TO_DISPLAY_NAME
 from backend.config.error_codes import ERR
 from backend.core.beetle_filter_helpers import (
     append_climate_filter,
@@ -40,8 +41,10 @@ from backend.repositories.beetle_repository import (
     fetch_beetles_list_lean,
     fetch_beetles_list_rows_total,
     fetch_country_detail_rows,
+    fetch_country_list_count,
     fetch_environment_ranges,
     fetch_featured_beetle_rows,
+    resolve_stored_country_value,
 )
 from backend.repositories.beetle_write_repository import (
     fetch_beetle_record_by_id,
@@ -121,6 +124,11 @@ def _compact_single_precomputed_dim(
         active.append(("has_image", "1" if has_image else "0"))
 
     if len(active) != 1:
+        return None
+    # Land nutzt Name+ISO-Kandidaten (Alias) -> nicht vorberechenbar. Exakter
+    # COUNT ueber die Kandidaten, damit die Listen-Trefferzahl mit der
+    # Panel-"Funde"-Zahl (beetle_list_read) exakt uebereinstimmt.
+    if requested_filters.get("country"):
         return None
     return active[0]
 
@@ -375,6 +383,10 @@ def _build_list_where_sql_and_params(
     requested_filters_for_exact = dict(requested_filters)
     requested_filters_for_exact["elevation"] = None
     requested_filters_for_exact["event_date_quality"] = None
+    if requested_filters_for_exact.get("country"):
+        requested_filters_for_exact["country"] = ",".join(
+            country_filter_candidates(requested_filters_for_exact["country"])
+        )
     if compact:
         requested_filters_for_exact["climate"] = None
         requested_filters_for_exact["vegetation"] = None
@@ -750,7 +762,11 @@ def get_country_detail_controller(country_code: str):
             _COUNTRY_DETAIL_CACHE.move_to_end(normalized)
             return cached
 
-    lookup_value = COUNTRY_CODE_TO_LOCATION_NAME.get(normalized, normalized)
+    candidates = country_filter_candidates(normalized)
+    mapped = COUNTRY_CODE_TO_LOCATION_NAME.get(normalized)
+    if mapped and mapped not in candidates:
+        candidates.append(mapped)
+    lookup_value = resolve_stored_country_value(candidates) or mapped or normalized
 
     overview, climates, vegetations, koppen, vegetation_zones, top_beetles = fetch_country_detail_rows(lookup_value)
 
@@ -759,6 +775,8 @@ def get_country_detail_controller(country_code: str):
     overview = cast(Dict[str, Any], overview)
 
     observation_count = int(overview.get("observation_count") or 0)
+    _list_finds = fetch_country_list_count(candidates)
+    display_finds = _list_finds if _list_finds is not None else observation_count
 
     def _round_int(value):
         """Rundet auf eine ganze Zahl oder gibt None zurueck."""
@@ -766,7 +784,6 @@ def get_country_detail_controller(country_code: str):
 
     def _share_rows(rows, key):
         """Baut Label + Fundzahl + Anteil je Zeile fuer Balken/Prozent."""
-        # Label + Fundzahl + Anteil (an allen Funden des Landes) fuer Balken/Prozent.
         out = []
         for row in rows:
             cnt = int(row["cnt"] or 0)
@@ -787,7 +804,6 @@ def get_country_detail_controller(country_code: str):
 
     def _metric_triplet(prefix, digits, as_int=False):
         """Liefert min/avg/max einer Metrik (as_int -> ganze Zahlen)."""
-        # Liefert min/avg/max fuer eine Metrik (as_int -> ganze Zahlen).
         rounder = _round_int if as_int else (lambda v: _round_or_none(v, digits))
         return {
             "min": rounder(overview.get("min_" + prefix)),
@@ -797,14 +813,12 @@ def get_country_detail_controller(country_code: str):
 
     result = {
         "code": normalized,
-        "name": overview.get("country_name") or lookup_value,
+        "name": ISO_TO_DISPLAY_NAME.get(normalized) or overview.get("country_name") or lookup_value,
         "speciesCount": int(overview.get("species_count") or 0),
-        "observationCount": observation_count,
-        # Bestehende Felder unveraendert (Rueckwaerts-Kompatibilitaet):
+        "observationCount": display_finds,
         "topClimates": [row["climate"] for row in climates],
         "topVegetations": [row["vegetation"] for row in vegetations],
         "elevationRange": [_round_int(min_elev), _round_int(max_elev)],
-        # Neue, angereicherte Felder:
         "avgElevation": _round_int(overview.get("avg_elevation")),
         "avgTemperature": round(float(avg_temp), 1) if avg_temp is not None else None,
         "avgPrecipitation": _round_int(overview.get("avg_precipitation")),
