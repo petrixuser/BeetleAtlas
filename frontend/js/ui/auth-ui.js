@@ -199,11 +199,19 @@
     var btn = $("registerSubmit");
     setSubmitting(btn, true, "Registrieren");
     try {
-      await window.Auth.registerResearcher(
+      var result = await window.Auth.registerResearcher(
         registerInput.email,
         registerInput.password,
         $("registerCode").value.trim()
       );
+      if (result && result.status === "pending_verification") {
+        showError(
+          ctx.registerError,
+          "Fast geschafft! Wir haben dir eine Bestaetigungs-Mail an " + registerInput.email +
+          " geschickt. Bitte klicke den Link darin und melde dich danach an."
+        );
+        return;
+      }
       closeModal(ctx);
     } catch (err) {
       showError(ctx.registerError, authErrorMessage(err, "register"));

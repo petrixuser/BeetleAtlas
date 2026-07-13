@@ -1,4 +1,7 @@
-﻿from datetime import date
+"""Controller-Funktionen fuer Kernendpunkte: Healthcheck, Statistiken,
+Arten- und Beobachtungslisten, Klimadaten sowie Datenqualitaets-Reports."""
+
+from datetime import date
 from typing import Dict, Optional
 from datetime import datetime, timezone
 import json
@@ -19,42 +22,42 @@ from backend.repositories.core_repository import (
 )
 
 def raise_api_error(status_code: int, error: str, message: str) -> None:
-    """Raises an HTTPException with a specified status code, error type, and message, used for consistent error handling in API controllers."""
+    """Loest eine HTTPException mit Statuscode, Fehlertyp und Nachricht aus, fuer einheitliche Fehlerbehandlung in API-Controllern."""
     raise HTTPException(status_code=status_code, detail={"error": error, "message": message})
 
 def validate_pagination_or_error(limit: int, offset: int, max_offset: int = 200000) -> None:
-    """Validate pagination bounds currently enforced in controller layer.
+    """Prueft die aktuell in der Controller-Schicht erzwungenen Pagination-Grenzen.
 
-    Checks only that offset does not exceed max_offset.
+    Prueft nur, dass offset max_offset nicht ueberschreitet.
     """
     if offset > max_offset:
-        raise_api_error(400, ERR.CORE.INVALID_PAGINATION, f"offset must be <= {max_offset}")
+        raise_api_error(400, ERR.CORE.INVALID_PAGINATION, f"offset muss <= {max_offset} sein")
 
 def resolve_order_clause_or_error(sort_by: str, sort_dir: str, allowed_columns: Dict[str, str]) -> str:
-    """Build a safe ORDER BY clause from an allowlist of sortable columns.
+    """Baut eine sichere ORDER-BY-Klausel aus einer Allowlist sortierbarer Spalten.
 
-    Raises an API error when sort_by is not in allowed_columns.
+    Loest einen API-Fehler aus, wenn sort_by nicht in allowed_columns enthalten ist.
     """
     column = allowed_columns.get(sort_by)
     if column is None:
-        raise_api_error(400, ERR.CORE.INVALID_SORT, f"sort_by must be one of: {', '.join(allowed_columns.keys())}")
+        raise_api_error(400, ERR.CORE.INVALID_SORT, f"sort_by muss einer von: {', '.join(allowed_columns.keys())} sein")
 
     direction = "ASC" if sort_dir == "asc" else "DESC"
     return f"{column} {direction}"
 
 def parse_bbox_or_error(bbox: str) -> Dict[str, float]:
-    """Parses a bounding box string in the format "minLng,minLat,maxLng,maxLat" and returns a dictionary with the corresponding float values. Raises an API error if the input is invalid."""
+    """Parst einen Bounding-Box-String im Format "minLng,minLat,maxLng,maxLat" und gibt ein Dict mit den entsprechenden Float-Werten zurueck. Loest einen API-Fehler bei ungueltiger Eingabe aus."""
     parts = [p.strip() for p in bbox.split(",")]
     if len(parts) != 4:
-        raise_api_error(400, ERR.CORE.INVALID_BBOX, "bbox must be minLng,minLat,maxLng,maxLat")
+        raise_api_error(400, ERR.CORE.INVALID_BBOX, "bbox muss minLng,minLat,maxLng,maxLat sein")
 
     try:
         min_lng, min_lat, max_lng, max_lat = [float(p) for p in parts]
     except ValueError:
-        raise_api_error(400, ERR.CORE.INVALID_BBOX, "bbox must contain numeric values")
+        raise_api_error(400, ERR.CORE.INVALID_BBOX, "bbox muss numerische Werte enthalten")
 
     if min_lng >= max_lng or min_lat >= max_lat:
-        raise_api_error(400, ERR.CORE.INVALID_BBOX, "bbox min values must be smaller than max values")
+        raise_api_error(400, ERR.CORE.INVALID_BBOX, "bbox-Minwerte muessen kleiner als die Maxwerte sein")
 
     return {
         "min_lng": min_lng,
@@ -64,17 +67,17 @@ def parse_bbox_or_error(bbox: str) -> Dict[str, float]:
     }
 
 def healthcheck_controller():
-    """Checks the health of the database connection and returns a status message indicating whether the API is healthy."""
+    """Prueft die Datenbankverbindung und gibt eine Statusmeldung zurueck, ob die API gesund ist."""
     ping_db()
     return {"status": "ok"}
 
 def stats_overview_controller():
-    """Retrieves an overview of statistics related to beetle observations, species, and climate snapshots, and returns them in a structured format."""
+    """Liefert eine Uebersicht der Statistiken zu Kaefer-Beobachtungen, Arten und Klima-Snapshots in strukturierter Form."""
     rows = fetch_stats_overview_rows()
     return {"tables": rows}
 
 def list_species_controller(limit: int, offset: int, sort_by: str, sort_dir: str):
-    """Retrieves a paginated list of beetle species based on the provided parameters, including sorting options, and returns them in a structured format."""
+    """Liefert eine paginierte Liste der Kaefer-Arten anhand der uebergebenen Parameter (inkl. Sortieroptionen) in strukturierter Form."""
     validate_pagination_or_error(limit, offset)
     order_by_sql = resolve_order_clause_or_error(
         sort_by,
@@ -103,7 +106,7 @@ def list_observations_controller(
     sort_by: str,
     sort_dir: str,
 ):
-    """Retrieves a list of beetle observations based on various filter parameters, including pagination and sorting options, and returns them in a structured format."""
+    """Liefert eine Liste von Kaefer-Beobachtungen anhand verschiedener Filterparameter, inklusive Pagination und Sortierung, in strukturierter Form."""
     validate_pagination_or_error(limit, offset)
 
     order_by_sql = resolve_order_clause_or_error(
@@ -138,7 +141,7 @@ def climate_by_location_controller(
     to_date: Optional[date],
     limit: int,
 ):
-    """Retrieves climate data for a specific location based on the provided location ID and optional date range, and returns the results in a structured format."""
+    """Liefert Klimadaten fuer einen bestimmten Standort anhand der location_id und eines optionalen Datumsbereichs in strukturierter Form."""
     rows = fetch_climate_by_location(
         location_id=location_id,
         from_date=from_date,
@@ -148,7 +151,7 @@ def climate_by_location_controller(
     return {"location_id": location_id, "items": rows}
 
 def quality_report_controller():
-    """Generates a quality report based on various metrics related to beetle observations, locations, and climate snapshots, and returns the report in a structured format."""
+    """Erstellt einen Qualitaetsreport anhand verschiedener Metriken zu Kaefer-Beobachtungen, Standorten und Klima-Snapshots und gibt ihn strukturiert zurueck."""
     totals, observation_nulls, location_nulls, snapshot_nulls, ee_coverage = fetch_quality_report_rows()
 
     return build_quality_report_payload(
@@ -160,11 +163,12 @@ def quality_report_controller():
     )
 
 def build_quality_report_payload(*, totals, observation_nulls, location_nulls, snapshot_nulls, ee_coverage):
-    """Build the quality-report API payload from aggregate metrics rows.
+    """Baut das Qualitaetsreport-API-Payload aus den aggregierten Metrik-Zeilen.
 
-    Computes null-rate percentages and EE snapshot coverage values.
+    Berechnet Null-Rate-Prozentwerte und die EE-Snapshot-Abdeckung.
     """
     def to_rate_items(row, total):
+        """Wandelt eine Null-Count-Zeile in Feld-Items mit missing-Anzahl und ratePct um."""
         items = []
         denominator = max(int(total or 0), 1)
         for key, value in row.items():
@@ -205,9 +209,9 @@ def build_quality_report_payload(*, totals, observation_nulls, location_nulls, s
     }
 
 def create_quality_report_snapshot_controller(source: Optional[str]):
-    """Create and persist a new quality-report snapshot.
+    """Erstellt und persistiert einen neuen Qualitaetsreport-Snapshot.
 
-    Returns the created snapshot ID together with the generated report payload.
+    Gibt die erzeugte Snapshot-ID zusammen mit dem generierten Report-Payload zurueck.
     """
     report = quality_report_controller()
     snapshot_id = insert_quality_report_history_snapshot(
@@ -228,7 +232,7 @@ def create_quality_report_snapshot_controller(source: Optional[str]):
     }
 
 def list_quality_report_history_controller(limit: int, offset: int):
-    """Retrieves a list of quality report snapshots from the database based on pagination parameters, and returns them in a structured format."""
+    """Liefert eine Liste von Qualitaetsreport-Snapshots aus der Datenbank anhand der Pagination-Parameter in strukturierter Form."""
     validate_pagination_or_error(limit, offset)
 
     rows, total = fetch_quality_report_history_rows(limit=limit, offset=offset)
@@ -245,14 +249,14 @@ def list_quality_report_history_controller(limit: int, offset: int):
     }
 
 def compare_quality_report_history_controller(from_id: int, to_id: int):
-    """Compares two quality report snapshots identified by their IDs, calculates the deltas for various metrics, and returns the comparison results in a structured format."""
+    """Vergleicht zwei Qualitaetsreport-Snapshots anhand ihrer IDs, berechnet die Deltas verschiedener Metriken und gibt das Vergleichsergebnis strukturiert zurueck."""
     from_row = fetch_quality_report_history_row(from_id)
     to_row = fetch_quality_report_history_row(to_id)
 
     if from_row is None:
-        raise_api_error(404, ERR.COMMON.NOT_FOUND, f"Quality snapshot with id {from_id} was not found")
+        raise_api_error(404, ERR.COMMON.NOT_FOUND, f"Qualitaets-Snapshot mit ID {from_id} wurde nicht gefunden")
     if to_row is None:
-        raise_api_error(404, ERR.COMMON.NOT_FOUND, f"Quality snapshot with id {to_id} was not found")
+        raise_api_error(404, ERR.COMMON.NOT_FOUND, f"Qualitaets-Snapshot mit ID {to_id} wurde nicht gefunden")
 
     from_payload = _history_row_to_payload(from_row)
     to_payload = _history_row_to_payload(to_row)
@@ -294,11 +298,11 @@ def compare_quality_report_history_controller(from_id: int, to_id: int):
     }
 
 def _to_field_map(items):
-    """Builds a dict keyed by "field" for fast per-field lookup in delta calculations."""
+    """Baut ein nach "field" indiziertes Dict fuer schnelle Feld-Lookups in Delta-Berechnungen."""
     return {item["field"]: item for item in items}
 
 def _build_delta_items(from_items, to_items):
-    """Computes per-field deltas between two null-rate lists (to - from) for missing count and ratePct. Missing fields on either side are treated as 0 to keep comparisons robust."""
+    """Berechnet feldweise Deltas zwischen zwei Null-Rate-Listen (to - from) fuer missing-Anzahl und ratePct. Fehlende Felder auf einer Seite werden als 0 behandelt, damit Vergleiche robust bleiben."""
     from_map = _to_field_map(from_items)
     to_map = _to_field_map(to_items)
     fields = sorted(set(from_map.keys()) | set(to_map.keys()))
@@ -317,7 +321,7 @@ def _build_delta_items(from_items, to_items):
 
 
 def _parse_json_or_value(value):
-    """Helper function to parse JSON strings or return the value as-is if it's already a dict or list, used for processing quality report history rows."""
+    """Hilfsfunktion, die JSON-Strings parst oder den Wert unveraendert zurueckgibt, falls er bereits ein dict oder list ist; genutzt beim Verarbeiten der Qualitaetsreport-Historie."""
     if isinstance(value, (dict, list)):
         return value
     if value is None:
@@ -328,7 +332,7 @@ def _parse_json_or_value(value):
 
 
 def _history_row_to_payload(row: dict):
-    """Converts a database row representing a quality report snapshot into a structured payload format suitable for API responses."""
+    """Wandelt eine Datenbankzeile eines Qualitaetsreport-Snapshots in ein strukturiertes Payload-Format fuer API-Antworten um."""
     observation_null_rates = _parse_json_or_value(row.get("observation_null_rates_json"))
     location_null_rates = _parse_json_or_value(row.get("location_null_rates_json"))
     climate_snapshot_null_rates = _parse_json_or_value(row.get("climate_snapshot_null_rates_json"))

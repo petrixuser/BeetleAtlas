@@ -66,21 +66,24 @@
     },
   ];
 
+  // "zone" ist der exakte, vorberechnete Vegetationszonen-Name (Spalte
+  // vegetation_zone in der DB). Danach wird serverseitig gefiltert, damit die
+  // Auswahl exakt den farbigen Kartenpolygonen entspricht.
   var VEGETATION_ROWS = [
-    { key: "tree_cover", color: "#006400", label: "Tropischer Regenwald" },
-    { key: "tree_cover", color: "#55A857", label: "Tropischer Trockenwald" },
-    { key: "tree_cover", color: "#2E8B57", label: "Tropischer Nadelwald" },
-    { key: "tree_cover", color: "#8B9B2E", label: "Gem&auml;&szlig;igter Laubwald" },
-    { key: "tree_cover", color: "#556B2F", label: "Gem&auml;&szlig;igter Nadelwald" },
-    { key: "tree_cover", color: "#1E5C3A", label: "Borealer Wald / Taiga" },
-    { key: "grassland", color: "#C8B400", label: "Tropisches Grasland / Savanne" },
-    { key: "grassland", color: "#C8D250", label: "Gem&auml;&szlig;tes Grasland" },
-    { key: "wetland", color: "#00CED1", label: "&Uuml;berschwemmtes Grasland" },
-    { key: "grassland", color: "#8B7355", label: "Gebirgs-Grasland" },
-    { key: "moss_lichen", color: "#B0C4DE", label: "Tundra" },
-    { key: "shrubland", color: "#D4A84B", label: "Mittelmeervegetation" },
-    { key: "bare_sparse", color: "#F5DEB3", label: "W&uuml;ste / Trockengebiete" },
-    { key: "mangroves", color: "#20B2AA", label: "Mangroven" },
+    { zone: "Tropischer Regenwald", color: "#006400", label: "Tropischer Regenwald" },
+    { zone: "Tropischer Trockenwald", color: "#55A857", label: "Tropischer Trockenwald" },
+    { zone: "Tropischer Nadelwald", color: "#2E8B57", label: "Tropischer Nadelwald" },
+    { zone: "Gemäßigter Laubwald", color: "#8B9B2E", label: "Gem&auml;&szlig;igter Laubwald" },
+    { zone: "Gemäßigter Nadelwald", color: "#556B2F", label: "Gem&auml;&szlig;igter Nadelwald" },
+    { zone: "Borealer Wald / Taiga", color: "#1E5C3A", label: "Borealer Wald / Taiga" },
+    { zone: "Tropisches Grasland / Savanne", color: "#C8B400", label: "Tropisches Grasland / Savanne" },
+    { zone: "Gemäßigtes Grasland", color: "#C8D250", label: "Gem&auml;&szlig;igtes Grasland" },
+    { zone: "Überschwemmtes Grasland", color: "#00CED1", label: "&Uuml;berschwemmtes Grasland" },
+    { zone: "Gebirgs-Grasland", color: "#8B7355", label: "Gebirgs-Grasland" },
+    { zone: "Tundra", color: "#B0C4DE", label: "Tundra" },
+    { zone: "Mittelmeervegetation", color: "#D4A84B", label: "Mittelmeervegetation" },
+    { zone: "Wüste / Trockengebiete", color: "#F5DEB3", label: "W&uuml;ste / Trockengebiete" },
+    { zone: "Mangroven", color: "#20B2AA", label: "Mangroven" },
   ];
 
   // Holt ein DOM-Element per ID.
@@ -163,7 +166,7 @@
   // Baut die Vegetationslegende.
   function buildVegetationLegendHtml(interactive) {
     var items = VEGETATION_ROWS.map(function (row) {
-      var attrs = interactive ? 'data-filter-vegetation="' + row.key + '"' : "";
+      var attrs = interactive ? 'data-filter-vegetation="' + row.zone + '"' : "";
       return buildLegendItem(row.color, row.label, attrs);
     });
 
@@ -196,5 +199,107 @@
 
   window.BEETLE_LEGENDS = {
     renderIndexLegends: renderIndexLegends, renderDetailLegends: renderDetailLegends,
+  };
+
+  // ===== Farb-/Label-Lookups fuer das Laender-Panel (gleiche Farben wie Karte/Detail) =====
+
+  // Wandelt HTML-Entities in echten Text um (fuer saubere Labels im Panel).
+  function decodeEntities(text) {
+    var el = document.createElement("textarea");
+    el.innerHTML = String(text == null ? "" : text);
+    return el.value;
+  }
+
+  var CLIMATE_MAJOR_COLORS = {
+    A: "#228B22", B: "#F5A623", C: "#78FF50", D: "#38CCFF", E: "#B0B0B0",
+  };
+
+  var KOPPEN_COLORS = {};
+  var KOPPEN_LABELS = {};
+  CLIMATE_GROUPS.forEach(function (group) {
+    group.rows.forEach(function (row) {
+      KOPPEN_COLORS[row.code] = row.color;
+      KOPPEN_LABELS[row.code] = decodeEntities(row.label);
+    });
+  });
+
+  var VEGETATION_ZONE_COLORS = {};
+  VEGETATION_ROWS.forEach(function (row) {
+    VEGETATION_ZONE_COLORS[row.zone] = row.color;
+  });
+
+  // Klartext-Titel je Klima-Hauptgruppe (A-E) fuer kompakte Einzel-Legenden.
+  var CLIMATE_MAJOR_LABELS = {};
+  CLIMATE_GROUPS.forEach(function (group) {
+    CLIMATE_MAJOR_LABELS[group.code] = decodeEntities(group.title);
+  });
+
+  // Hoehenbaender (gleiche Farben wie die grosse Hoehenlegende), von hoch nach tief.
+  var ELEVATION_BANDS = [
+    { min: 4500, color: "#c4c5cc", label: "> 4500 m" },
+    { min: 3000, color: "#b89e7e", label: "3000–4500 m" },
+    { min: 2000, color: "#c1a27c", label: "2000–3000 m" },
+    { min: 1000, color: "#d8c8a4", label: "1000–2000 m" },
+    { min: 500, color: "#e7e5c9", label: "500–1000 m" },
+    { min: 100, color: "#cee5b9", label: "100–500 m" },
+    { min: -1e9, color: "#aecfa4", label: "0–100 m" },
+  ];
+
+  // Grobe Landbedeckungs-Schluessel (Spalte vegetation) -> Farbe + Klartext.
+  var VEGETATION_COARSE = {
+    tree_cover: { color: "#2E8B57", label: "Wald" },
+    shrubland: { color: "#8B9B2E", label: "Buschland" },
+    grassland: { color: "#C8D250", label: "Grasland" },
+    cropland: { color: "#DAA520", label: "Ackerland" },
+    built_up: { color: "#999999", label: "Bebautes Gebiet" },
+    bare_sparse: { color: "#D2B48C", label: "Vegetationsarm" },
+    snow_ice: { color: "#EAF2F8", label: "Schnee / Eis" },
+    water: { color: "#4A90D9", label: "Wasser" },
+    wetland: { color: "#20B2AA", label: "Feuchtgebiet" },
+    mangroves: { color: "#20B2AA", label: "Mangroven" },
+    moss_lichen: { color: "#9DC183", label: "Moos / Flechten" },
+    unknown: { color: "#B0B0B0", label: "Unbekannt" },
+  };
+
+  window.BEETLE_LEGEND_COLORS = {
+    climateMajorColor: function (code) {
+      return CLIMATE_MAJOR_COLORS[String(code || "").charAt(0).toUpperCase()] || "#9bb59b";
+    },
+      koppenColor: function (code) { return KOPPEN_COLORS[code] || "#9bb59b"; },
+      koppenLabel: function (code) { return KOPPEN_LABELS[code] || code || "Unbekannt"; },
+    vegetationZoneColor: function (zone) { return VEGETATION_ZONE_COLORS[zone] || "#8ba86f"; },
+
+    // Liefert Farbe + Bereichs-Label fuer die konkrete Hoehe eines Kaefers.
+    elevationSwatch: function (meters) {
+      var m = Number(meters);
+      if (!isFinite(m)) return null;
+      for (var i = 0; i < ELEVATION_BANDS.length; i++) {
+        if (m >= ELEVATION_BANDS[i].min) {
+          return { color: ELEVATION_BANDS[i].color, label: ELEVATION_BANDS[i].label };
+        }
+      }
+      return null;
+    },
+
+    // Liefert Farbe + Label fuer die Klima-Hauptgruppe eines Kaefers (A-E).
+    // Unterstuetzt auch die beschreibenden Werte der statischen Featured/Demo-
+    // Daten (hot/warm/mild/cold), damit die Legende nicht "H" o. Ae. zeigt.
+    climateSwatch: function (code) {
+      var raw = String(code || "").trim();
+      if (!raw) return null;
+      var descriptive = { hot: "A", warm: "B", mild: "C", cold: "D" };
+      var c = descriptive[raw.toLowerCase()] || raw.charAt(0).toUpperCase();
+      var title = CLIMATE_MAJOR_LABELS[c];
+      return {
+        color: CLIMATE_MAJOR_COLORS[c] || "#9bb59b",
+        label: title ? c + " " + title : c,
+      };
+    },
+
+    // Liefert Farbe + Label fuer die grobe Vegetation (Landbedeckung) eines Kaefers.
+    vegetationSwatch: function (key) {
+      var v = VEGETATION_COARSE[String(key || "").toLowerCase()];
+      return v ? { color: v.color, label: v.label } : null;
+    },
   };
 })();

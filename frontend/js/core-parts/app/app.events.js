@@ -1,3 +1,5 @@
+// Event-Verdrahtung des Hauptscreens: bindet Ergebnisliste, Filtereingaben,
+// Karteninteraktionen (Zoom/Pan), Reset und den Ergebnismodus-Umschalter.
 (function () {
   "use strict";
 
@@ -20,6 +22,10 @@
 
     card.classList.toggle("is-expanded", willExpand);
     head.setAttribute("aria-expanded", String(willExpand));
+    if (willExpand && window.AppCardMap && typeof window.AppCardMap.init === "function") {
+      var miniMap = card.querySelector(".detail-mini-map");
+      if (miniMap) window.AppCardMap.init(miniMap);
+    }
     ctx.actions.saveMainState();
   }
 
@@ -28,6 +34,16 @@
     var resultList = readElements(ctx).resultList;
     if (!resultList) return;
     resultList.addEventListener("click", function (event) {
+      var delBtn = event.target.closest(".beetle-delete");
+      if (delBtn) {
+        event.preventDefault();
+        event.stopPropagation();
+        if (ctx.actions && typeof ctx.actions.deleteBeetle === "function") {
+          ctx.actions.deleteBeetle(delBtn.getAttribute("data-delete-id"));
+        }
+        return;
+      }
+
       var head = event.target.closest(".species-card-head");
       if (!head) return;
 
@@ -40,12 +56,22 @@
   // Bindet Sofort-Filter (Selects ohne Debounce) an applyFilters.
   function attachImmediateFilterChanges(elements, actions) {
     [
-      elements.countryFilter, elements.soilPhBandFilter, elements.temperatureBandFilter,
+      elements.soilPhBandFilter, elements.temperatureBandFilter,
       elements.precipitationBandFilter, elements.dataQualityFilter, elements.imageFilter,
     ].forEach(function (element) {
       if (!element) return;
       element.addEventListener("change", actions.applyFilters);
     });
+    // Laenderfilter: zusaetzlich die Karte auf das Land zoomen, damit dessen
+    // Fundorte tatsaechlich geladen werden (die Karte laedt bbox-basiert).
+    if (elements.countryFilter) {
+      elements.countryFilter.addEventListener("change", function () {
+        if (typeof window.focusMapOnCountry === "function") {
+          window.focusMapOnCountry(elements.countryFilter.value);
+        }
+        actions.applyFilters();
+      });
+    }
   }
 
   // Synchronisiert Klima-Auswahl zwischen Dropdown, Legende und Datenfilter.

@@ -1,3 +1,12 @@
+"""Erzeugt die Import-CSV fuer die hervorgehobenen Kaefer (featured beetles).
+
+Das Skript liest die im Frontend gepflegte Liste FEATURED_BEETLES aus
+frontend/data/featured-beetles.js, sucht pro Eintrag den naechstgelegenen
+Fundort (location.csv) und den zeitlich passendsten climate_snapshot und
+schreibt daraus eine kombinierte CSV nach
+backend/data/featured_beetle_record_import.csv.
+"""
+
 import json
 import re
 from pathlib import Path
@@ -7,6 +16,7 @@ import pandas as pd
 
 
 def main() -> None:
+    """Baut die featured-beetle Import-CSV aus Frontend-Liste, location und climate_snapshot."""
     repo_root = Path(__file__).resolve().parents[1]
     source_path = repo_root / "frontend" / "data" / "featured-beetles.js"
     output_path = repo_root / "backend" / "data" / "featured_beetle_record_import.csv"
@@ -41,12 +51,12 @@ def main() -> None:
         if field in clim.columns:
             clim[field] = pd.to_numeric(clim[field], errors="coerce")
 
-    # Speed up nearest lookup for a small featured list.
     loc_valid = loc[loc["latitude"].notna() & loc["longitude"].notna()].copy()
     loc_lat = loc_valid["latitude"].to_numpy(dtype=float)
     loc_lng = loc_valid["longitude"].to_numpy(dtype=float)
 
     def nearest_location_row(lat: float | None, lng: float | None):
+        """Liefert die location-Zeile mit der geringsten euklidischen Distanz zu (lat, lng)."""
         if lat is None or lng is None or pd.isna(lat) or pd.isna(lng):
             return None
         d2 = (loc_lat - float(lat)) ** 2 + (loc_lng - float(lng)) ** 2
@@ -56,6 +66,7 @@ def main() -> None:
         return loc_valid.iloc[idx]
 
     def nearest_climate_row(location_id, observed_at_text: str):
+        """Liefert den climate_snapshot der location, dessen Datum observed_at am naechsten liegt."""
         if pd.isna(location_id):
             return None
         sub = clim[clim["location_id"] == location_id]
@@ -65,7 +76,6 @@ def main() -> None:
         if not pd.isna(observed_dt):
             observed_dt = observed_dt.tz_localize(None)
         if pd.isna(observed_dt):
-            # Fallback to the most recent available snapshot if date is unparsable.
             return sub.sort_values("snapshot_date").iloc[-1]
         date_delta = (sub["snapshot_date"] - observed_dt).abs()
         idx = date_delta.idxmin()

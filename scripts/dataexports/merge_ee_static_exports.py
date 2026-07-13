@@ -1,3 +1,10 @@
+"""Fuehrt die statischen Earth-Engine-Export-Batches in die location.csv zusammen.
+
+Alle beetle_static_batch_*-CSVs werden je location_id gesammelt, die kodierten
+Rohwerte (OpenLandMap/WorldClim) in physikalische Einheiten umgerechnet und die
+noch leeren Zielspalten in location.csv damit befuellt.
+"""
+
 import argparse
 import csv
 from glob import glob
@@ -21,6 +28,7 @@ TARGET_FIELDS = [
 
 
 def parse_location_id(value: Optional[str]) -> Optional[str]:
+    """Parst eine location_id zu einem ganzzahligen String (oder None bei ungueltig/leer)."""
     if value is None:
         return None
     s = str(value).strip()
@@ -33,6 +41,7 @@ def parse_location_id(value: Optional[str]) -> Optional[str]:
 
 
 def parse_num(value: Optional[str]) -> Optional[float]:
+    """Parst einen numerischen Wert; None bei leer/ungueltig oder Sentinel-Wert (-9999)."""
     if value is None:
         return None
     s = str(value).strip()
@@ -48,10 +57,10 @@ def parse_num(value: Optional[str]) -> Optional[float]:
 
 
 def format_value(field: str, value: Optional[float]) -> str:
+    """Formatiert einen Feldwert als String und rechnet kodierte Rohwerte in physikalische Einheiten um."""
     if value is None:
         return ""
 
-    # Convert OpenLandMap / WorldClim encoded values to physical units.
     if field == "soil_ph":
         if value > 14:
             value = value / 10.0
@@ -70,6 +79,7 @@ def format_value(field: str, value: Optional[float]) -> str:
 
 
 def load_static_rows(static_files: List[str]) -> Dict[str, Dict[str, str]]:
+    """Sammelt aus den Static-Batch-CSVs je location_id die formatierten Zielfeldwerte."""
     merged: Dict[str, Dict[str, str]] = {}
 
     for file_path in static_files:
@@ -93,6 +103,7 @@ def load_static_rows(static_files: List[str]) -> Dict[str, Dict[str, str]]:
 
 
 def merge_into_location_csv(location_csv: Path, static_values: Dict[str, Dict[str, str]]) -> int:
+    """Befuellt leere Zielspalten in location.csv mit den statischen Werten und liefert die Anzahl geaenderter Zeilen."""
     with location_csv.open("r", encoding="utf-8", newline="") as fin:
         reader = csv.DictReader(fin)
         input_fields = reader.fieldnames or []
@@ -134,6 +145,7 @@ def merge_into_location_csv(location_csv: Path, static_values: Dict[str, Dict[st
 
 
 def main() -> None:
+    """Liest die Static-Batches und Argumente ein und schreibt die aktualisierte location.csv."""
     parser = argparse.ArgumentParser(
         description="Merge Earth Engine static export batches into location.csv"
     )

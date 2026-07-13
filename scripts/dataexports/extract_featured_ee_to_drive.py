@@ -1,3 +1,10 @@
+"""Erzeugt die Earth-Engine-Input-CSVs fuer die hervorgehobenen Kaefer (featured beetles).
+
+Aus der Frontend-Liste featured-beetles.js werden zwei CSVs abgeleitet: eine
+statische (ein Punkt pro location_id) und eine dynamische (ein Punkt pro
+location_id + Monat). Diese dienen als Eingabe fuer extract_ee_to_drive.py.
+"""
+
 import argparse
 import json
 import re
@@ -12,6 +19,7 @@ DEFAULT_DYNAMIC_OUT = "csv/ee_featured_location_dates_dynamic.csv"
 
 
 def load_featured_entries(featured_js_path: Path):
+    """Liest das FEATURED_BEETLES-Array aus featured-beetles.js und liefert es als Liste."""
     raw = featured_js_path.read_text(encoding="utf-8")
     start = raw.find("[")
     end = raw.rfind("];\n")
@@ -26,12 +34,14 @@ def load_featured_entries(featured_js_path: Path):
 
 
 def parse_year_month(value):
+    """Extrahiert 'YYYY-MM' aus einem beliebigen Datumstext (oder None, falls nicht gefunden)."""
     text = str(value or "").strip()
     match = re.search(r"(\d{4}-\d{2})", text)
     return match.group(1) if match else None
 
 
 def build_featured_csvs(featured_js, static_out, dynamic_out):
+    """Schreibt aus der Featured-Liste die statische und dynamische EE-Input-CSV."""
     entries = load_featured_entries(featured_js)
 
     static_rows = []

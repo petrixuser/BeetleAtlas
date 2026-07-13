@@ -7,7 +7,7 @@
   }
 
   var LATAM_BOUNDS = (window.MapCommon && window.MapCommon.LATAM_BOUNDS)
-    || { west: -120, south: -60, east: -30, north: 35 };
+    || { west: -160, south: -58, east: -32, north: 34 };
   var detailGoogleMap = null;
   var detailGoogleMarker = null;
   var googleMapsLoadPromise = null;
@@ -17,6 +17,7 @@
   var detailVegetationDataLayer = null;
   var detailActiveClimateLegendColor = null;
   var detailActiveVegetationLegendColor = null;
+  var ELEVATION_VIEW_MAX_ZOOM = 10;
 
   // ===== Legend helpers =====
 
@@ -76,10 +77,9 @@
 
   // Platzhalter: Detail-Legenden sind derzeit nur informativ und nicht klickbar.
   function initDetailLegendFilters() {
-    // Detail legends are informational only (no click filtering).
   }
 
-  // ===== Google maps script and layer switching =====
+  // ===== Google-Maps-Skript und Ebenen-Umschaltung =====
 
   function loadGoogleMapsScriptForDetail() {
     var common = window.MapCommon;
@@ -134,6 +134,7 @@
     if (detailGoogleMap.overlayMapTypes.getLength() > 0) {
       detailGoogleMap.overlayMapTypes.clear();
     }
+    detailGoogleMap.setOptions({ maxZoom: null });
     if (detailClimateDataLayer) detailClimateDataLayer.setMap(null);
     if (detailVegetationDataLayer) detailVegetationDataLayer.setMap(null);
     hideDetailMapLegends();
@@ -183,6 +184,10 @@
   // Aktiviert die Hoehenansicht auf der Detailkarte.
   function activateDetailElevationView() {
     detailGoogleMap.overlayMapTypes.push(ensureDetailElevationTileType());
+    detailGoogleMap.setOptions({ maxZoom: ELEVATION_VIEW_MAX_ZOOM });
+    if (detailGoogleMap.getZoom() > ELEVATION_VIEW_MAX_ZOOM) {
+      detailGoogleMap.setZoom(ELEVATION_VIEW_MAX_ZOOM);
+    }
     showDetailMapLegend("detailElevationLegend");
   }
 
@@ -237,7 +242,7 @@
     updateDetailMapToggleUI();
   }
 
-  // ===== Coordinate and map rendering =====
+  // ===== Koordinaten und Karten-Rendering =====
 
   function parseCoordinates(coords) {
     if (!Array.isArray(coords) || coords.length < 2) return null;

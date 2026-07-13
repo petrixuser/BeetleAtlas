@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="480" viewBox="0 0 480 480">
+  <!-- Kachelbarer Dschungelboden: dunkelgruene Basis + Koernung + Lichtflecken +
+       tropische Blaetter (Monstera, Farn, Palmwedel) in mehreren Gruentoenen.
+       Halbtransparent -> die Grundfarbe/Verlaeufe aus base-map-results.css scheinen durch. -->
+  <defs>
+    <filter id="jf-grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch" result="n"/>
+      <feColorMatrix in="n" type="matrix"
+        values="0 0 0 0 0.05  0 0 0 0 0.16  0 0 0 0 0.07  0 0 0 -1.05 0.5"/>
+    </filter>
+    <filter id="jf-grain-light" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="2" stitchTiles="stitch" result="n"/>
+      <feColorMatrix in="n" type="matrix"
+        values="0 0 0 0 0.6  0 0 0 0 0.8  0 0 0 0 0.45  0 0 0 -1.2 0.5"/>
+    </filter>
+
+    <!-- Monstera-Blatt mit Einschnitten und zwei Loechern -->
+    <g id="jf-monstera">
+      <path d="M0,-40 C26,-34 40,-14 40,8 C40,30 22,42 0,44 C-22,42 -40,30 -40,8 C-40,-14 -26,-34 0,-40 Z"
+            fill="currentColor"/>
+      <g fill="#0e2a15" opacity="0.55">
+        <path d="M0,-30 C6,-18 6,26 0,38"/>
+        <path d="M6,-6 C18,-2 26,4 33,10 C24,10 14,8 6,4 Z"/>
+        <path d="M-6,-6 C-18,-2 -26,4 -33,10 C-24,10 -14,8 -6,4 Z"/>
+        <path d="M8,16 C18,20 24,26 29,32 C21,31 12,27 8,23 Z"/>
+        <path d="M-8,16 C-18,20 -24,26 -29,32 C-21,31 -12,27 -8,23 Z"/>
+        <ellipse cx="14" cy="2" rx="3.4" ry="5" transform="rotate(20 14 2)"/>
+        <ellipse cx="-12" cy="14" rx="3" ry="4.4" transform="rotate(-20 -12 14)"/>
+      </g>
+    </g>
+
+    <!-- Farnwedel: Stiel mit paarigen Blaettchen -->
+    <g id="jf-fern" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round">
+      <path d="M0,44 C-2,20 -1,-8 0,-40"/>
+      <path d="M0,34 C-10,30 -16,24 -19,16"/>
+      <path d="M0,34 C10,30 16,24 19,16"/>
+      <path d="M0,20 C-9,17 -14,11 -17,4"/>
+      <path d="M0,20 C9,17 14,11 17,4"/>
+      <path d="M0,6 C-7,4 -11,-1 -13,-8"/>
+      <path d="M0,6 C7,4 11,-1 13,-8"/>
+      <path d="M0,-8 C-5,-10 -8,-15 -9,-21"/>
+      <path d="M0,-8 C5,-10 8,-15 9,-21"/>
+    </g>
+
+    <!-- schlankes tropisches Blatt -->
+    <g id="jf-leaf">
+      <path d="M0,-26 C10,-16 10,18 0,28 C-10,18 -10,-16 0,-26 Z" fill="currentColor"/>
+      <path d="M0,-22 L0,24" stroke="#12351c" stroke-width="1.1" opacity="0.5"/>
+    </g>
+  </defs>
+
+  <!-- dunkelgruene Basiswaesche + Textur -->
+  <rect width="480" height="480" fill="#173d21" opacity="0.30"/>
+  <rect width="480" height="480" filter="url(#jf-grain)" opacity="0.35"/>
+  <rect width="480" height="480" filter="url(#jf-grain-light)" opacity="0.10"/>
+
+  <!-- weiche Lichtflecken (Sonne durch das Blaetterdach) -->
+  <g opacity="0.10" fill="#d8f0b0">
+    <circle cx="90" cy="110" r="70"/>
+    <circle cx="360" cy="70" r="55"/>
+    <circle cx="300" cy="340" r="80"/>
+    <circle cx="60" cy="380" r="50"/>
+  </g>
+
+  <!-- grosse Monstera-Blaetter (dunkle Schicht) -->
+  <g color="#1f5a2c" opacity="0.5">
+    <use href="#jf-monstera" transform="translate(80,90) rotate(-18) scale(1.5)"/>
+    <use href="#jf-monstera" transform="translate(400,180) rotate(28) scale(1.35)"/>
+    <use href="#jf-monstera" transform="translate(230,400) rotate(8) scale(1.55)"/>
+  </g>
+
+  <!-- mittlere Monstera-Blaetter (helleres Gruen) -->
+  <g color="#2c7d3c" opacity="0.5">
+    <use href="#jf-monstera" transform="translate(330,300) rotate(-34) scale(1.05)"/>
+    <use href="#jf-monstera" transform="translate(150,250) rotate(46) scale(0.95)"/>
+    <use href="#jf-monstera" transform="translate(30,300) rotate(-8) scale(0.9)"/>
+  </g>
+
+  <!-- Farnwedel -->
+  <g color="#3c8f4a" opacity="0.55">
+    <use href="#jf-fern" transform="translate(200,120) rotate(20) scale(1.1)"/>
+    <use href="#jf-fern" transform="translate(430,380) rotate(-24) scale(1.0)"/>
+    <use href="#jf-fern" transform="translate(120,410) rotate(10) scale(0.95)"/>
+    <use href="#jf-fern" transform="translate(360,120) rotate(-40) scale(0.9)"/>
+  </g>
+
+  <!-- kleine helle Blaetter als Akzente -->
+  <g color="#57a862" opacity="0.5">
+    <use href="#jf-leaf" transform="translate(270,60) rotate(30)"/>
+    <use href="#jf-leaf" transform="translate(60,200) rotate(-24)"/>
+    <use href="#jf-leaf" transform="translate(420,260) rotate(50)"/>
+    <use href="#jf-leaf" transform="translate(190,340) rotate(-14)"/>
+    <use href="#jf-leaf" transform="translate(320,220) rotate(66)"/>
+    <use href="#jf-leaf" transform="translate(110,140) rotate(-52)"/>
+  </g>
+</svg>

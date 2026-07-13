@@ -1,3 +1,4 @@
+"""Zuordnung von Filter-Schluesseln auf SQL-Spalten fuer Listen-/Kartenfilter."""
 FILTER_COLUMN_MAP = {
     "country": "e.country",
     "climate": "e.climate",

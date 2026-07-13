@@ -1,12 +1,14 @@
+// Karten-Bootstrap: laedt Google Maps dynamisch, initialisiert Karte, GeoJSON-
+// Laenderlayer und Marker, mit SVG-Fallback falls Google Maps nicht verfuegbar ist.
 const mapLoadingState = document.querySelector("#mapLoadingState");
 const mapErrorState = document.querySelector("#mapErrorState");
 const googleMapEl = document.querySelector("#googleMap");
 const svgFallbackEl = document.querySelector("#svgFallback");
 const MAP_BOOTSTRAP_BOUNDS = (window.MapCommon && window.MapCommon.LATAM_BOUNDS)
-  || { west: -120, south: -60, east: -30, north: 35 };
+  || { west: -160, south: -58, east: -32, north: 34 };
 let mapBootstrapWatchdogId = null;
 
-// ===== Bootstrap helpers =====
+// ===== Bootstrap-Hilfsfunktionen =====
 
 // Schaltet auf den SVG-Fallback um, wenn Google Maps nicht verfuegbar ist.
 function showMapFallback(reason) {
@@ -92,7 +94,7 @@ window.initMap = function () {
   renderInitialMapView();
 };
 
-// ===== Google map data layer and markers =====
+// ===== Google-Map-Datenlayer und Marker =====
 
 // Wird von Google Maps aufgerufen, wenn der Key ungueltig ist
 window.gm_authFailure = function () {
@@ -223,7 +225,7 @@ async function loadGoogleMapsScript() {
   }
 }
 
-// ===== Page bootstrap =====
+// ===== Seiten-Bootstrap =====
 
 // Bindet die View-Toggle-Buttons auf die Kartenansicht.
 function bindMapViewToggleButtons() {

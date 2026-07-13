@@ -1,3 +1,6 @@
+// Kern-Modul der Detailseite: laedt Kaeferdaten und Medien aus dem Backend
+// (mit lokalem Fallback), formatiert Umweltwerte und rendert Faktenblöcke,
+// Metrikbalken, Sticky-Header und die Standortkarte.
 (function () {
   "use strict";
 
@@ -13,7 +16,7 @@
   var envRangesCache = null;
   var APP_CATALOG = window.AppCatalog || {};
 
-  // ===== Constants and delegation =====
+  // ===== Konstanten und Delegation =====
 
   var DEFAULT_METRIC_RANGES = {
     elevation: { min: 0, max: 4500 },
@@ -63,8 +66,9 @@
     show(errorEl);
   }
 
-  // ===== Generic value helpers =====
+  // ===== Generische Wert-Hilfsfunktionen =====
 
+  // Liefert die API-Basis-URL (leer, wenn kein Backend konfiguriert ist).
   function apiBase() {
     return window.API_BASE_URL || "";
   }
@@ -98,8 +102,14 @@
   // Zentrale Uebersetzung technischer Klassen/Codes kommt aus dem Shared-Catalog.
   var CODE_VALUE_DE = APP_CATALOG.CODE_VALUE_DE || {};
 
-  // ===== Domain formatting =====
+  // Uebersetzt einen numerischen Landbedeckungs-Code in eine deutsche Bezeichnung.
+  var landcoverClassLabelFn = typeof APP_CATALOG.landcoverClassLabel === "function"
+    ? APP_CATALOG.landcoverClassLabel
+    : function () { return null; };
 
+  // ===== Fachliche Formatierung =====
+
+  // Uebersetzt einen technischen Code in eine lesbare deutsche Bezeichnung.
   function formatCodeValue(value) {
     if (value === null || value === undefined || value === "") return null;
     var key = String(value).trim();
@@ -111,6 +121,15 @@
     var text = key.replace(/_/g, " ").trim();
     if (!text) return null;
     return text.charAt(0).toUpperCase() + text.slice(1);
+  }
+
+  // Baut die Landbedeckungs-Anzeige: bevorzugt die deutsche Gruppenbezeichnung,
+  function landcoverText(landcoverGroup, landcoverClass) {
+    var groupText = formatCodeValue(landcoverGroup);
+    if (groupText && groupText !== "Unbekannt") return groupText;
+    var classText = landcoverClassLabelFn(landcoverClass);
+    if (classText) return classText;
+    return groupText || null;
   }
 
   // Kombiniert numerischen Wert und Klassenband in ein gemeinsames Label.
@@ -214,8 +233,9 @@
     ];
   }
 
-  // ===== Sticky header =====
+  // ===== Sticky-Header =====
 
+  // Rendert den mitscrollenden Kopfbereich der Detailseite.
   function renderStickyHeader(detail) {
     callDetailUi("renderStickyHeader", undefined, {
       detail: detail,
@@ -238,11 +258,13 @@
       formatCodeValue: formatCodeValue,
       formatOneDecimal: formatOneDecimal,
       soilPhBandLabel: soilPhBandLabel,
+      landcoverText: landcoverText,
     });
   }
 
-  // ===== Quick environmental metrics =====
+  // ===== Schnelle Umweltmetriken =====
 
+  // Begrenzt einen Wert auf den Prozentbereich 0-100.
   function clampPct(value) {
     var n = Number(value);
     if (!Number.isFinite(n)) return 0;
@@ -508,7 +530,7 @@
       ["Region", location.region],
       ["Stadt", location.city],
       ["Hoehe", elevationText(detail)],
-      ["Vegetation", formatCodeValue(detail && detail.vegetation) || formatCodeValue(bands.landcoverGroup)],
+      ["Vegetation", formatCodeValue(detail && detail.vegetation)],
       ["Koordinaten-Unschaerfe", location.coordinateUncertainty != null ? location.coordinateUncertainty + " m" : null],
       ["Organischer Bodenkohlenstoff", location.soilOrganicCarbon != null ? formatThreeDecimals(location.soilOrganicCarbon) + " %" : null,],
       ["WorldClim Jahresmitteltemperatur", location.worldclimBio01 != null ? formatOneDecimal(location.worldclimBio01) + " °C" : null,],
@@ -523,192 +545,23 @@
       ["Hangneigung", raw.slope != null ? formatOneDecimal(raw.slope) + " °" : null],
       ["Distanz zu Wasser", raw.distanceToWaterM != null ? Math.round(Number(raw.distanceToWaterM)) + " m" : null,],
       ["Menschlicher Einfluss", raw.humanModification != null ? formatThreeDecimals(raw.humanModification) : null,],
-      ["Landbedeckung", raw.landcoverClass != null ? String(raw.landcoverClass) : null],
+      ["Landbedeckung", landcoverText(bands.landcoverGroup, raw.landcoverClass)],
     ];
   }
-  // ===== Data loading =====
+  // ===== Datenladen =====
 
+  // Rendert eine Schluessel-Wert-Liste in das angegebene <dl>-Element.
   function setKv(dl, rows) {
     callDetailUi("renderKeyValue", undefined, { dl: dl, rows: rows, formatValue: formatValue });
   }
 
-  // Gemeinsamer API-Helper mit einheitlicher Fehleraufbereitung.
-  async function fetchJson(path) {
-    var res = await fetch(apiBase() + path);
-    if (!res.ok) {
-      var text = "HTTP " + res.status;
-      try {
-        var body = await res.json();
-        if (body && body.message) text = body.message;
-      } catch (e) {
-        // keep fallback
-      }
-      var err = new Error(text);
-      err.status = res.status;
-      throw err;
-    }
-    return res.json();
-  }
-
-  // Laedt alle Medienseiten fuer einen Kaefer nacheinander.
-  async function fetchAllMedia(beetleId) {
-    var limit = 200;
-    var offset = 0;
-    var all = [];
-    var total = Infinity;
-
-    while (all.length < total) {
-      var page = await fetchJson("/api/beetles/" + encodeURIComponent(beetleId) + "/media?limit=" + limit + "&offset=" + offset);
-      var items = page.items || [];
-      total = Number(page.total || items.length);
-      if (items.length === 0) break;
-      all = all.concat(items);
-      offset += items.length;
-    }
-
-    return all;
-  }
-
-  // Laedt Detaildaten und Medien ueber die Backend-API (parallel, da unabhaengig).
-  async function loadFromApi(beetleId) {
-    var results = await Promise.all([
-      fetchJson("/api/beetles/" + encodeURIComponent(beetleId)),
-      fetchAllMedia(beetleId),
-    ]);
-    return { detail: results[0], media: results[1] };
-  }
-
-  // Laedt Wertebereiche aus Cache/API fuer skalierte Umweltbalken.
-  async function loadEnvironmentRanges() {
-    var cacheKey = "detailEnvRangesV1";
-    var cacheTsKey = "detailEnvRangesV1Ts";
-    var now = Date.now();
-    var ttlMs = 30 * 60 * 1000;
-
-    try {
-      var cachedRaw = window.sessionStorage.getItem(cacheKey);
-      var cachedTs = Number(window.sessionStorage.getItem(cacheTsKey) || "0");
-      if (cachedRaw && Number.isFinite(cachedTs) && now - cachedTs < ttlMs) {
-        return JSON.parse(cachedRaw);
-      }
-    } catch (error) {
-      // ignore storage parse/access issues
-    }
-
-    if (!apiEnabled()) return null;
-    try {
-      var ranges = await fetchJson("/api/beetles/ranges/environment");
-      try {
-        window.sessionStorage.setItem(cacheKey, JSON.stringify(ranges));
-        window.sessionStorage.setItem(cacheTsKey, String(now));
-      } catch (error) {
-      }
-      return ranges;
-    } catch (error) {
-      return null;
-    }
-  }
-
-  // Baut Detaildaten aus lokalen Demo-/Featured-Quellen auf.
-  function loadFromLocal(beetleId) {
-    var pool = []
-      .concat(window.FEATURED_BEETLES || [])
-      .concat(window.DEMO_BEETLES || []);
-
-    var hit = pool.find(function (item) {
-      return String(item.id) === String(beetleId);
-    });
-
-    if (!hit) return null;
-
-    var media = [];
-    if (hit.imageUrl) {
-      media.push({
-        mediaId: "local-1",
-        url: hit.imageUrl,
-        license: null,
-        creator: null,
-        publisher: null,
-        rightsHolder: null,
-        references: null,
-      });
-    }
-
-    return {
-      detail: {
-        id: hit.id,
-        name: hit.name,
-        family: hit.family,
-        location: hit.location,
-        coordinates: hit.coordinates,
-        climate: hit.climate,
-        vegetation: hit.vegetation,
-        elevation: hit.elevation,
-        temperature: hit.temperature,
-        soil: hit.soil,
-        observedAt: hit.observedAt,
-        imageUrl: hit.imageUrl,
-        meta: {
-          local: true,
-          note: hit.note || null,
-          commonName: hit.commonName || null,
-        },
-        ee: null,
-      },
-      media: media,
-    };
-  }
-
-  // Vereinigt Medienquellen und entfernt doppelte URLs.
-  function uniqueMediaUrls(detail, mediaItems) {
-    var seen = new Set();
-    var all = [];
-
-    (mediaItems || []).forEach(function (item) {
-      if (!item || !item.url || seen.has(item.url)) return;
-      seen.add(item.url);
-      all.push(item);
-    });
-
-    var embedded = detail && detail.meta && detail.meta.media && detail.meta.media.items;
-    if (Array.isArray(embedded)) {
-      embedded.forEach(function (item, index) {
-        if (!item || !item.url || seen.has(item.url)) return;
-        seen.add(item.url);
-        all.push({
-          mediaId: "embedded-" + index,
-          url: item.url,
-          license: item.license,
-          creator: item.creator,
-          publisher: item.publisher,
-          rightsHolder: item.rightsHolder,
-          references: null,
-        });
-      });
-    }
-
-    if (detail && detail.imageUrl && !seen.has(detail.imageUrl)) {
-      seen.add(detail.imageUrl);
-      all.unshift({
-        mediaId: "primary",
-        url: detail.imageUrl,
-        license: null,
-        creator: null,
-        publisher: null,
-        rightsHolder: null,
-        references: null,
-      });
-    }
-
-    return all;
-  }
 
   // Rendert die zugehoerigen Inhalte fuer die UI.
   function renderMedia(mediaItems) {
     callDetailUi("renderMedia", undefined, { mediaItems: mediaItems });
   }
 
-  // ===== Main render =====
+  // ===== Haupt-Rendering =====
 
   // Leitet Temperatur-/Niederschlagswerte fuer den oberen Faktenbereich ab.
   function buildTopSummary(detail) {
@@ -779,6 +632,7 @@
     show(contentEl);
   }
 
+  // Rendert die komplette Detailseite (Header, Fakten, Metriken, Karte, Medien).
   async function render(detail, mediaItems) {
     var summary = buildTopSummary(detail);
 
@@ -809,15 +663,15 @@
   async function resolveDetailData(beetleId) {
     if (apiEnabled()) {
       try {
-        return await loadFromApi(beetleId);
+        return await window.DetailData.loadFromApi(beetleId);
       } catch (apiError) {
-        var fallbackData = loadFromLocal(beetleId);
+        var fallbackData = window.DetailData.loadFromLocal(beetleId);
         if (!fallbackData) throw apiError;
         return fallbackData;
       }
     }
 
-    var localData = loadFromLocal(beetleId);
+    var localData = window.DetailData.loadFromLocal(beetleId);
     if (!localData) {
       throw new Error("Ohne Backend konnte diese ID nicht in den lokalen Daten gefunden werden.");
     }
@@ -826,7 +680,7 @@
 
   // Aktualisiert Umweltbereiche im Hintergrund und rendert Metriken danach neu.
   function refreshRangesInBackground(detail) {
-    loadEnvironmentRanges().then(function (ranges) {
+    window.DetailData.loadEnvironmentRanges().then(function (ranges) {
       if (!ranges) return;
       envRangesCache = ranges;
       renderMetricBars(detail);
@@ -852,7 +706,7 @@
     try {
       var data = await resolveDetailData(beetleId);
 
-      var allMedia = uniqueMediaUrls(data.detail, data.media || []);
+      var allMedia = window.DetailData.uniqueMediaUrls(data.detail, data.media || []);
       await render(data.detail, allMedia);
       refreshRangesInBackground(data.detail);
     } catch (error) {

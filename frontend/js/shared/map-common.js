@@ -1,11 +1,12 @@
 (function () {
   "use strict";
 
+  // Kartenausschnitt fuer Lateinamerika 
   var LATAM_BOUNDS = {
-    west: -120,
-    south: -60,
-    east: -30,
-    north: 35,
+    west: -160,
+    south: -58,
+    east: -32,
+    north: 34,
   };
 
   var googleMapsScriptPromises = {};
@@ -22,7 +23,6 @@
     }
     var rgb = text.match(/rgba?\((\d+)\s*,\s*(\d+)\s*,\s*(\d+)/i);
     if (rgb) {
-      // Wandelt einen 0-255 Kanalwert in einen zweistelligen Hex-String um.
       var toHex = function (n) {
         return Number(n).toString(16).padStart(2, "0");
       };

@@ -151,13 +151,19 @@
 
   // Registriert einen Researcher und loggt danach direkt ein.
   async function authRegisterResearcher(email, password, code) {
-    await postJson("/auth/register", {
+    var pending = await postJson("/auth/register", {
       email: email,
       password: password,
       role: "researcher",
       researcher_signup_code: code,
     });
-    return authLogin(email, password);
+
+    if (pending && pending.verification_token) {
+      await postJson("/auth/verify-email", { verification_token: pending.verification_token });
+      return authLogin(email, password);
+    }
+
+    return { status: "pending_verification", email: email, emailSent: Boolean(pending && pending.email_sent) };
   }
 
   // Holt per Refresh-Token einen neuen Access-Token.
@@ -218,6 +224,7 @@
   async function apiFetch(path, options) {
     options = options || {};
 
+    // Ergaenzt die Request-Optionen um den Authorization-Header.
     function withAuth() {
       var headers = Object.assign({}, options.headers || {});
       if (accessToken) headers.Authorization = authHeaders().Authorization;
@@ -241,12 +248,15 @@
     refresh: authRefresh,
     restoreSession: restoreSession,
     apiFetch: apiFetch,
+    // Gibt true zurueck, wenn aktuell ein Nutzer angemeldet ist.
     isLoggedIn: function () {
       return Boolean(currentUser);
     },
+    // Liefert das aktuelle Nutzerobjekt (oder null).
     getCurrentUser: function () {
       return currentUser;
     },
+    // Liefert die Rolle des aktuellen Nutzers (oder null).
     getRole: function () {
       return currentUser ? currentUser.role : null;
     },

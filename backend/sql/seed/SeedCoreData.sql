@@ -1,7 +1,12 @@
-﻿-- Consolidated core seed
-
-
--- BEGIN backend/sql/seed/LoadGBIFCSVToDB.sql
+﻿-- ============================================================================
+--  Seed: Zusammengefasste Grunddaten (Core-Import aus CSV)
+--  Zweck: laedt beetle_species, location, observation, media und
+--  climate_snapshot aus den CSV-Dateien und schreibt einen Qualitaetsbericht.
+--  Rolle beim DB-Aufbau: Befuellt die im Core-Schema angelegten Tabellen mit
+--  den GBIF-Ausgangsdaten (nach den Schema-Skripten).
+--  NICHT idempotent im Sinne von "anhaengen": die Tabellen werden per TRUNCATE
+--  geleert und neu geladen; ein erneuter Lauf ersetzt die Daten vollstaendig.
+-- ============================================================================
 
 USE beetle_db;
 
@@ -63,11 +68,6 @@ UNION ALL SELECT 'location', COUNT(*) FROM location
 UNION ALL SELECT 'observation', COUNT(*) FROM observation
 UNION ALL SELECT 'media', COUNT(*) FROM media;
 
-
--- END backend/sql/seed/LoadGBIFCSVToDB.sql
-
-
--- BEGIN backend/sql/seed/LoadClimateSnapshot.sql
 
 USE beetle_db;
 
@@ -134,11 +134,6 @@ SET FOREIGN_KEY_CHECKS = 1;
 SELECT COUNT(*) AS climate_rows FROM climate_snapshot;
 SELECT COUNT(*) AS climate_stage_rows FROM climate_snapshot_stage;
 
-
--- END backend/sql/seed/LoadClimateSnapshot.sql
-
-
--- BEGIN backend/sql/seed/RecordQualityReportSnapshot.sql
 
 USE beetle_db;
 

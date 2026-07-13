@@ -1,3 +1,6 @@
+"""API-Router fuer Authentifizierung: Registrierung, E-Mail-Verifizierung,
+Login, Token-Refresh, Logout, Profil und Admin-Bootstrap."""
+
 from fastapi import APIRouter, Depends, Header
 
 from backend.contracts.auth_contracts import (
@@ -34,25 +37,25 @@ router = APIRouter()
 
 @router.post("/auth/register", response_model=RegisterPendingResponse)
 def register(payload: RegisterRequest, _: None = Depends(auth_register_rate_limit)):
-    """Start registration and return verification payload."""
+    """Startet die Registrierung und gibt das Verifizierungs-Payload zurueck."""
     return register_controller(payload)
 
 
 @router.post("/auth/verify-email", response_model=AuthUserResponse)
 def verify_email(payload: VerifyEmailRequest):
-    """Verify registration token and create one active user account."""
+    """Verifiziert den Registrierungs-Token und legt ein aktives Nutzerkonto an."""
     return verify_email_controller(payload)
 
 
 @router.post("/auth/login", response_model=TokenResponse)
 def login(payload: LoginRequest, _: None = Depends(auth_login_rate_limit)):
-    """Authenticate one user and issue an access token."""
+    """Authentifiziert einen Nutzer und stellt einen Access-Token aus."""
     return login_controller(payload)
 
 
 @router.post("/auth/refresh", response_model=TokenResponse)
 def refresh(payload: RefreshRequest, _: None = Depends(auth_refresh_rate_limit)):
-    """Rotate refresh token and issue a new access token pair."""
+    """Rotiert den Refresh-Token und stellt ein neues Token-Paar aus."""
     return refresh_controller(payload)
 
 
@@ -61,13 +64,13 @@ def logout(
     payload: LogoutRequest | None = None,
     current_user: AuthUserResponse = Depends(get_current_user),
 ):
-    """Revoke refresh token(s) for the current user."""
+    """Widerruft die Refresh-Token des aktuellen Nutzers."""
     return logout_controller(current_user, payload)
 
 
 @router.get("/auth/me", response_model=AuthUserResponse)
 def me(current_user: AuthUserResponse = Depends(get_current_user)):
-    """Return the authenticated user profile."""
+    """Gibt das Profil des authentifizierten Nutzers zurueck."""
     return current_user
 
 
@@ -77,5 +80,5 @@ def bootstrap_admin(
     bootstrap_token: str | None = Header(default=None, alias="X-Bootstrap-Token"),
     _: None = Depends(auth_bootstrap_rate_limit),
 ):
-    """Bootstrap first admin account for dev/setup with a shared secret."""
+    """Legt das erste Admin-Konto fuer Dev/Setup mit einem gemeinsamen Geheimnis an."""
     return bootstrap_admin_controller(payload=payload, bootstrap_token=bootstrap_token)

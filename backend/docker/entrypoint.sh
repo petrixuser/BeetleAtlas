@@ -1,4 +1,6 @@
 #!/bin/sh
+# Container-Startskript des Backends: wartet auf die Datenbank, fuehrt die
+# Migrationen aus und startet anschliessend die API mit uvicorn.
 set -eu
 
 DB_HOST="${DB_HOST:-beetle-db}"
@@ -8,6 +10,7 @@ API_HOST="${API_HOST:-0.0.0.0}"
 API_PORT="${API_PORT:-8000}"
 
 wait_for_db() {
+  # Wartet, bis die Datenbank erreichbar ist (max. 60 Versuche im 2s-Takt).
   echo "Waiting for database at ${DB_HOST}:${DB_PORT}..."
   i=0
   until python - "$DB_HOST" "$DB_PORT" <<'PY'

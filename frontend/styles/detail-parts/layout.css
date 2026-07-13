@@ -106,7 +106,9 @@
 
 .detail-subheading {
   margin: 1rem 0 0.8rem;
-  font-size: 1.02rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text);
 }
 
 .detail-ee-side {
@@ -233,10 +235,6 @@
   border: 0;
   display: block;
   background: #dfe8df;
-}
-
-.leaflet-control-layers-toggle {
-  background-image: url("../vendor/leaflet/images/layers.png");
 }
 
 #detailMapWrap + p {

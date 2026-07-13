@@ -38,6 +38,19 @@ build/
 # Umgebungsvariablen
 .env
 .env.*
+# Ausnahme: die Vorlage ohne Geheimnisse wird eingecheckt
+!.env.example
 
 # GBIF Arbeitsordner lokal halten
 GBIFdataandCSVSctipts/
+
+# Lokale Dev-Hilfsskripte (WSL-Setup/Diagnose, enthalten lokale Passwoerter) — nie committen
+scripts/*.sh
+scripts/*.sql
+scripts/serve-frontend.py
+
+# Rohe GBIF-Quelldateien (archiviert als gbif-raw-source.zip via Git LFS)
+backend/data/*.txt
+
+# Entpackte Rohdaten lokal halten (nicht committen)
+backend/data/data/

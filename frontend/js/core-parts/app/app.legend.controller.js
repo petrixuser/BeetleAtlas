@@ -1,3 +1,6 @@
+// Legenden-Controller: verwaltet Aktivzustaende der Klima-, Vegetations- und
+// Hoehenlegenden, wendet Farbfilter auf die GeoJSON-Layer an und behandelt
+// Klicks (inkl. Mehrfachauswahl) auf die Legendeneintraege.
 (function () {
   "use strict";
 
@@ -231,6 +234,7 @@
     if (ctx.googleMapInstance.overlayMapTypes.getLength() > 0) {
       ctx.googleMapInstance.overlayMapTypes.clear();
     }
+    ctx.googleMapInstance.setOptions({ maxZoom: null });
     if (ctx.climateDataLayer) ctx.climateDataLayer.setMap(null);
     if (ctx.vegetationDataLayer) ctx.vegetationDataLayer.setMap(null);
     document.querySelectorAll(".map-legend").forEach(function (el) { el.classList.add("is-hidden"); });

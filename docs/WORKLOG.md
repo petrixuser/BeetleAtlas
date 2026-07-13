@@ -1968,6 +1968,10 @@ Runbook: Abschluss in der Zielumgebung
 - Aus backend/sql bzw. backend/SQL den Runner starten (je nach lokaler Ordner-Schreibweise):
 	sh run_migrations.sh
 
+H> Hinweis (Nachtrag): `run_migrations.sh` wurde entfernt; der aktuelle Runner ist
+> `backend/sql/run_migrations.py`. Beim Docker-Aufbau werden die SQL-Dateien zudem
+> direkt über `backend/docker/Dockerfile.db` geladen.
+
 2) Admin initial anlegen (eine Option wählen)
 - Option A (empfohlen Dev/Setup): /auth/bootstrap-admin mit X-Bootstrap-Token.
 - Option B (SQL): backend/sql/seed/SeedBootstrapAdmin.sql mit echtem bcrypt-Hash ausfüllen und ausführen.

@@ -1,4 +1,4 @@
 ﻿/* detail.css als Entry-Point fuer modulare Teile. */
-@import url("detail-parts/layout.css");
-@import url("detail-parts/metrics.css");
-@import url("detail-parts/responsive.css");
+@import url("detail-parts/layout.css?v=20260709l");
+@import url("detail-parts/metrics.css?v=20260709l");
+@import url("detail-parts/responsive.css?v=20260709l");

@@ -1,6 +1,6 @@
 // Datenversorgung fuer Google Maps: Laden, Caching und Marker-Rendering.
 
-// ===== Map runtime state =====
+// ===== Laufzeitzustand der Karte =====
 
 let googleMapInstance = null;
 let activeMarkers = [];
@@ -13,7 +13,7 @@ let mapPointsRequestId = 0;
 let mapPointsAbortController = null;
 const MAP_POINTS_LIMIT = 200;
 
-// ===== Map point loading scheduler =====
+// ===== Ablaufsteuerung fuer das Nachladen der Kartenpunkte =====
 
 // Entprellt das Nachladen der Kartenpunkte (Pan/Zoom/Filter loesen es aus).
 function scheduleMapPoints() {
@@ -25,7 +25,7 @@ function scheduleMapPoints() {
 const mapPointsCache = new Map();
 const subtypeExactCache = new Map();
 const LATAM_BOUNDS = (window.MapCommon && window.MapCommon.LATAM_BOUNDS)
-  || { west: -120, south: -60, east: -30, north: 35 };
+  || { west: -160, south: -58, east: -32, north: 34 };
 
 // ===== Caching keys =====
 
@@ -55,6 +55,41 @@ function canLoadMapPoints() {
   return Boolean(googleMapInstance && window.API_BASE_URL && !featuredMode);
 }
 
+// Berechnet die LatLng-Grenzen eines Landes aus dem GeoJSON-Datensatz.
+function countryLatLngBounds(countryValue) {
+  var fc = window.LATIN_AMERICA_COUNTRIES;
+  if (!fc || !Array.isArray(fc.features) || !window.google || !window.google.maps) return null;
+  var target = String(countryValue || "").trim().toLowerCase();
+  if (!target || target === "all") return null;
+  var feat = fc.features.find(function (f) {
+    return f && f.properties && String(f.properties.name || "").toLowerCase() === target;
+  });
+  if (!feat || !feat.geometry) return null;
+
+  var bounds = new window.google.maps.LatLngBounds();
+  function addRing(ring) {
+    ring.forEach(function (pt) {
+      if (Array.isArray(pt) && pt.length >= 2) bounds.extend({ lng: pt[0], lat: pt[1] });
+    });
+  }
+  var coords = feat.geometry.coordinates || [];
+  if (feat.geometry.type === "Polygon") {
+    coords.forEach(addRing);
+  } else if (feat.geometry.type === "MultiPolygon") {
+    coords.forEach(function (poly) { poly.forEach(addRing); });
+  }
+  return bounds.isEmpty() ? null : bounds;
+}
+
+// Zoomt die Karte auf das gewaehlte Land, damit dessen Fundorte (bbox-basiert)
+// geladen werden. Ohne dies blieben die Punkte des vorherigen Ausschnitts stehen.
+function focusMapOnCountry(countryValue) {
+  if (!googleMapInstance) return;
+  var bounds = countryLatLngBounds(countryValue);
+  if (bounds) googleMapInstance.fitBounds(bounds);
+}
+window.focusMapOnCountry = focusMapOnCountry;
+
 // Erzeugt die gemeinsame Grundabfrage (bbox, zoom, Filter) fuer Kartenpunkte.
 function buildMapPointsBaseQuery(useFullSubtypeBounds) {
   const bounds = googleMapInstance.getBounds();
@@ -81,7 +116,13 @@ function buildMapPointsBaseQuery(useFullSubtypeBounds) {
   if (temperatureBandFilter.value !== "all") params.set("temperature_band", temperatureBandFilter.value);
   if (precipitationBandFilter.value !== "all") params.set("precipitation_band", precipitationBandFilter.value);
   if (dataQualityFilter.value !== "all") params.set("event_date_quality", dataQualityFilter.value);
-  if (yearFilter.value.trim()) params.set("observed_year", yearFilter.value.trim());
+  // Fundjahr nur senden, wenn es der Backend-Validierung (2000-2026) entspricht,
+  // sonst antwortet /api/map/points mit 422 und die Karte bleibt leer.
+  const mapYearRaw = yearFilter.value.trim();
+  if (/^\d{4}$/.test(mapYearRaw)) {
+    const mapYear = Number(mapYearRaw);
+    if (mapYear >= 2000 && mapYear <= 2026) params.set("observed_year", mapYearRaw);
+  }
   if (imageFilter.value === "with_images") params.set("has_image", "true");
   if (imageFilter.value === "no_images") params.set("has_image", "false");
   params.set("limit", String(MAP_POINTS_LIMIT));
@@ -154,7 +195,9 @@ async function getMapPointsEntry(queryParams, signal) {
   return entry;
 }
 
-// Uebertraegt eine Filterkombination in die Query-Parameter.
+// Uebertraegt eine Filterkombination in die Query-Parameter. Klima-Subtypen (Af)
+// und Vegetationszonen werden roh gesendet; das Backend filtert exakt ueber die
+// vorberechneten Spalten koppen_code / vegetation_zone.
 function applyComboToParams(params, combo) {
   if (combo.climate !== "all") params.set("climate", combo.climate);
   if (combo.vegetation !== "all") params.set("vegetation", combo.vegetation);

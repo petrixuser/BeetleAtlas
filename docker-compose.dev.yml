@@ -68,16 +68,44 @@ services:
       - AUTH_REFRESH_MAX_REQUESTS=${AUTH_REFRESH_MAX_REQUESTS:-30}
       - AUTH_REFRESH_WINDOW_SECONDS=${AUTH_REFRESH_WINDOW_SECONDS:-60}
       - REDIS_URL=${REDIS_URL:-redis://beetle-redis:6379/0}
+      # E-Mail-Verifizierung: standardmaessig aktiv gegen den lokalen Mailpit-SMTP.
+      # Mailpit-Web-UI zum Ansehen der Mails: http://localhost:8025
+      #
+      # Fuer ECHTEN Versand (z. B. Gmail) einfach in der .env setzen:
+      #   SMTP_HOST=smtp.gmail.com, SMTP_PORT=587, SMTP_USE_STARTTLS=true,
+      #   SMTP_USERNAME=<gmail-adresse>, SMTP_PASSWORD=<16-stelliges App-Passwort>
+      # Compose liest die .env automatisch; diese Werte ueberschreiben dann Mailpit.
+      - EMAIL_VERIFICATION_SEND_EMAIL=${EMAIL_VERIFICATION_SEND_EMAIL:-true}
+      - SMTP_HOST=${SMTP_HOST:-beetle-mailpit}
+      - SMTP_PORT=${SMTP_PORT:-1025}
+      - SMTP_USERNAME=${SMTP_USERNAME:-}
+      - SMTP_PASSWORD=${SMTP_PASSWORD:-}
+      - SMTP_USE_STARTTLS=${SMTP_USE_STARTTLS:-false}
+      - SMTP_USE_SSL=${SMTP_USE_SSL:-false}
+      - SMTP_FROM_EMAIL=${SMTP_FROM_EMAIL:-noreply@beetleatlas.local}
+      - EMAIL_VERIFICATION_BASE_URL=${EMAIL_VERIFICATION_BASE_URL:-http://localhost:8080}
     depends_on:
       beetle-db:
         condition: service_healthy
       beetle-redis:
+        condition: service_started
+      beetle-mailpit:
         condition: service_started
 
   beetle-redis:
     image: redis:7-alpine
     container_name: beetle-redis
     restart: unless-stopped
+
+  # Lokaler Test-Mailserver: faengt Verifizierungs-E-Mails ab (kein echter Versand).
+  # SMTP auf :1025, Web-Oberflaeche zum Lesen der Mails auf http://localhost:8025
+  beetle-mailpit:
+    image: axllent/mailpit:latest
+    container_name: beetle-mailpit
+    restart: unless-stopped
+    ports:
+      - "1025:1025"
+      - "8025:8025"
 
   beetle-frontend:
     build:

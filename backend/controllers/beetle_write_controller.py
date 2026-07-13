@@ -1,3 +1,6 @@
+"""Controller-Funktionen fuer manuelle Kaefer-Datensaetze:
+Anlegen, Aktualisieren und Soft-Delete inklusive Audit-Eintraegen."""
+
 from backend.contracts.auth_contracts import AuthUserResponse
 from backend.contracts.beetle_write_contracts import (
     BeetleCreateRequest,
@@ -17,6 +20,7 @@ from backend.repositories.beetle_write_repository import (
 
 
 def _to_response(row: dict) -> BeetleRecordResponse:
+    """Mappt eine DB-Zeile eines manuellen Kaefers auf den BeetleRecordResponse-Contract."""
     return BeetleRecordResponse(
         id=int(row["record_id"]),
         gbif_id=int(row["gbif_id"]) if row.get("gbif_id") is not None else None,
@@ -67,7 +71,7 @@ def _validate_gbif_assignment_or_error(
     current_user: AuthUserResponse,
     current_record_id: int | None = None,
 ) -> None:
-    """Validate role and uniqueness constraints for assigning gbif_id."""
+    """Prueft Rollen- und Eindeutigkeits-Bedingungen fuer das Zuweisen von gbif_id."""
     if gbif_id is None:
         return
 
@@ -75,7 +79,7 @@ def _validate_gbif_assignment_or_error(
         raise_api_error(
             403,
             ERR.COMMON.FORBIDDEN,
-            "Researchers are not allowed to set gbif_id.",
+            "Researcher duerfen gbif_id nicht setzen.",
         )
 
     existing_by_gbif = fetch_beetle_record_by_gbif_id(int(gbif_id))
@@ -85,16 +89,16 @@ def _validate_gbif_assignment_or_error(
     if current_record_id is not None and int(existing_by_gbif["record_id"]) == int(current_record_id):
         return
 
-    raise_api_error(409, ERR.BEETLE_WRITE.GBIF_ID_EXISTS, "A beetle record with this GBIF ID already exists.")
+    raise_api_error(409, ERR.BEETLE_WRITE.GBIF_ID_EXISTS, "Ein Kaefer-Datensatz mit dieser GBIF-ID existiert bereits.")
 
 
 def create_beetle_record_controller(payload: BeetleCreateRequest, current_user: AuthUserResponse) -> BeetleRecordResponse:
-    """Create one manual beetle record for researcher/admin."""
+    """Legt einen manuellen Kaefer-Datensatz fuer Researcher/Admin an."""
     _validate_gbif_assignment_or_error(gbif_id=payload.gbif_id, current_user=current_user)
 
     row = insert_beetle_record(payload.model_dump(), created_by=current_user.id)
     if row is None:
-        raise_api_error(500, ERR.BEETLE_WRITE.CREATE_FAILED, "Could not create beetle record.")
+        raise_api_error(500, ERR.BEETLE_WRITE.CREATE_FAILED, "Kaefer-Datensatz konnte nicht erstellt werden.")
 
     insert_beetle_record_audit(
         record_id=int(row["record_id"]),
@@ -112,14 +116,14 @@ def update_beetle_record_controller(
     payload: BeetleUpdateRequest,
     current_user: AuthUserResponse,
 ) -> BeetleRecordResponse:
-    """Patch one active beetle record as admin or as its creator."""
+    """Aktualisiert einen aktiven Kaefer-Datensatz als Admin oder als dessen Ersteller."""
     existing = fetch_beetle_record_by_id(record_id)
     if existing is None or existing.get("status") == "deleted":
-        raise_api_error(404, ERR.COMMON.NOT_FOUND, "Beetle record not found.")
+        raise_api_error(404, ERR.COMMON.NOT_FOUND, "Kaefer-Datensatz nicht gefunden.")
 
     created_by = int(existing.get("created_by") or 0)
     if current_user.role != "admin" and current_user.id != created_by:
-        raise_api_error(403, ERR.COMMON.FORBIDDEN, "Insufficient permissions.")
+        raise_api_error(403, ERR.COMMON.FORBIDDEN, "Unzureichende Berechtigungen.")
 
     patch_payload = payload.model_dump(exclude_unset=True)
     _validate_gbif_assignment_or_error(
@@ -130,7 +134,7 @@ def update_beetle_record_controller(
 
     updated = update_beetle_record(record_id, patch_payload, updated_by=current_user.id)
     if updated is None:
-        raise_api_error(404, ERR.COMMON.NOT_FOUND, "Beetle record not found.")
+        raise_api_error(404, ERR.COMMON.NOT_FOUND, "Kaefer-Datensatz nicht gefunden.")
 
     insert_beetle_record_audit(
         record_id=record_id,
@@ -144,14 +148,14 @@ def update_beetle_record_controller(
 
 
 def delete_beetle_record_controller(record_id: int, current_user: AuthUserResponse) -> dict:
-    """Soft delete one active beetle record (admin only at router level)."""
+    """Soft-Delete eines aktiven Kaefer-Datensatzes (auf Router-Ebene nur Admin)."""
     existing = fetch_beetle_record_by_id(record_id)
     if existing is None or existing.get("status") == "deleted":
-        raise_api_error(404, ERR.COMMON.NOT_FOUND, "Beetle record not found.")
+        raise_api_error(404, ERR.COMMON.NOT_FOUND, "Kaefer-Datensatz nicht gefunden.")
 
     deleted = soft_delete_beetle_record(record_id, deleted_by=current_user.id)
     if deleted is None:
-        raise_api_error(404, ERR.COMMON.NOT_FOUND, "Beetle record not found.")
+        raise_api_error(404, ERR.COMMON.NOT_FOUND, "Kaefer-Datensatz nicht gefunden.")
 
     insert_beetle_record_audit(
         record_id=record_id,

@@ -1,7 +1,10 @@
 ﻿
+// Kern-Modul der Startseite: verwaltet App-Zustand, Filter, Datenladen aus dem
+// Backend, das Rendern der Ergebnisliste sowie die Anbindung von Karte und Legenden.
+
 let beetles = [];
 
-// ===== App state =====
+// ===== App-Zustand =====
 
 let totalBeetles = 0;
 const BEETLE_FETCH_LIMIT = 200;
@@ -38,193 +41,12 @@ function callMapUi(method, fallback, arg) {
   return ui[method](arg);
 }
 
-// During startup, map scripts may initialize after core code paths run.
-// Access map instance defensively to avoid ReferenceError races.
+// Beim Start koennen Kartenskripte erst nach der Kernlogik initialisieren.
+// Zugriff auf die Karteninstanz defensiv, um ReferenceError-Races zu vermeiden.
 function getGoogleMapInstanceSafe() {
   return (typeof googleMapInstance !== "undefined") ? googleMapInstance : null;
 }
 
-// ===== Selection and filter helpers =====
-
-function normalizeElevationKey(value) {
-  return ELEVATION_KEYS.includes(value) ? value : null;
-}
-
-// Gibt die aktuell ausgewaehlten Hoehenstufen in stabiler Reihenfolge zurueck.
-function getSelectedElevationKeys() {
-  return ELEVATION_KEYS.filter((key) => selectedElevationKeys.has(key));
-}
-
-// Uebernimmt Hoehenstufen in den Zustand und synchronisiert das Select-Element.
-function setSelectedElevations(keys) {
-  selectedElevationKeys.clear();
-  (keys || []).forEach((key) => {
-    const normalized = normalizeElevationKey(String(key || "").trim());
-    if (normalized) selectedElevationKeys.add(normalized);
-  });
-  elevationFilter.value = selectedElevationKeys.size === 1 ? getSelectedElevationKeys()[0] : "all";
-}
-
-// Gibt die Hoehenauswahl als API-Parameterwert zurueck.
-function getElevationParamValue() {
-  const keys = getSelectedElevationKeys();
-  if (!keys.length) return "all";
-  if (keys.length === 1) return keys[0];
-  return keys.join(",");
-}
-
-// Uebernimmt ausgewaehlte Klimacodes in Zustand und Select-Wert.
-function setSelectedClimateCodes(codes) {
-  selectedClimateCodes.clear();
-  (codes || []).forEach((code) => {
-    const value = String(code || "").trim();
-    if (value && value !== "all") selectedClimateCodes.add(value);
-  });
-  climateFilter.value = selectedClimateCodes.size === 1 ? Array.from(selectedClimateCodes)[0] : "all";
-}
-
-// Uebernimmt ausgewaehlte Vegetationscodes in Zustand und Select-Wert.
-function setSelectedVegetationCodes(codes) {
-  selectedVegetationCodes.clear();
-  (codes || []).forEach((code) => {
-    const value = String(code || "").trim();
-    if (value && value !== "all") selectedVegetationCodes.add(value);
-  });
-  vegetationFilter.value = selectedVegetationCodes.size === 1 ? Array.from(selectedVegetationCodes)[0] : "all";
-}
-
-// Gibt alle aktiv gewaehlten Klimacodes als Array zurueck.
-function getSelectedClimateCodes() {
-  return Array.from(selectedClimateCodes);
-}
-
-// Gibt alle aktiv gewaehlten Vegetationscodes als Array zurueck.
-function getSelectedVegetationCodes() {
-  return Array.from(selectedVegetationCodes);
-}
-
-// Liefert den Klima-Querywert aus Multi-Select oder Dropdown-Fallback.
-function getClimateParamValue() {
-  const values = getSelectedClimateCodes();
-  if (values.length) return values.join(",");
-  return climateFilter.value || "all";
-}
-
-// Liefert den Vegetations-Querywert aus Multi-Select oder Dropdown-Fallback.
-function getVegetationParamValue() {
-  const values = getSelectedVegetationCodes();
-  if (values.length) return values.join(",");
-  return vegetationFilter.value || "all";
-}
-
-// Liefert die aktiven Werte oder einen gueltigen Fallback fuer Kombinationsabfragen.
-function getFilterValueList(setValues, fallbackValue) {
-  if (setValues.length) return setValues;
-  if (fallbackValue && fallbackValue !== "all") return [fallbackValue];
-  return ["all"];
-}
-
-// Erzeugt alle relevanten Filterkombinationen fuer Backend-Abfragen.
-function buildFilterCombinations() {
-  const climateValues = [getClimateParamValue()];
-  const vegetationValues = [getVegetationParamValue()];
-  const elevationValues = getFilterValueList(getSelectedElevationKeys(), elevationFilter.value);
-  const combos = [];
-  climateValues.forEach((climate) => {
-    vegetationValues.forEach((vegetation) => {
-      elevationValues.forEach((elevation) => {
-        combos.push({ climate, vegetation, elevation });
-      });
-    });
-  });
-  return combos;
-}
-
-// Liest den gespeicherten Hauptzustand aus der Session (fehlertolerant).
-function readMainState() {
-  try {
-    const raw = sessionStorage.getItem(MAIN_STATE_KEY);
-    return raw ? JSON.parse(raw) : null;
-  } catch {
-    return null;
-  }
-}
-
-// ===== Persistence helpers =====
-
-function saveMainState() {
-  try {
-    const climateParam = getClimateParamValue();
-    const vegetationParam = getVegetationParamValue();
-    const elevationParam = getElevationParamValue();
-    const state = {
-      search: searchInput.value,
-      country: countryFilter.value,
-      climate: climateParam,
-      vegetation: vegetationParam,
-      elevation: elevationParam,
-      soilPhBand: soilPhBandFilter.value,
-      temperatureBand: temperatureBandFilter.value,
-      precipitationBand: precipitationBandFilter.value,
-      dataQuality: dataQualityFilter.value,
-      year: yearFilter.value,
-      image: imageFilter.value,
-      resultMode: selectedResultMode,
-      offset: listOffset,
-      expandedIds: Array.from(expandedIds),
-      pinnedBeetleId: pinnedBeetle ? String(pinnedBeetle.id) : pendingPinnedBeetleId,
-      mapView: currentView,
-    };
-    sessionStorage.setItem(MAIN_STATE_KEY, JSON.stringify(state));
-  } catch {
-  }
-}
-
-// Stellt Filter-, Listen- und Kartenzustand aus der Session wieder her.
-function restoreMainState() {
-  const state = readMainState();
-  if (!state || typeof state !== "object") return;
-
-  if (typeof state.search === "string") searchInput.value = state.search;
-  if (typeof state.country === "string" && countryFilter.querySelector(`option[value="${state.country}"]`)) countryFilter.value = state.country;
-  if (typeof state.climate === "string") setSelectedClimateCodes(state.climate.split(","));
-  if (typeof state.vegetation === "string") setSelectedVegetationCodes(state.vegetation.split(","));
-  if (typeof state.elevation === "string") {
-    setSelectedElevations(state.elevation.split(","));
-  }
-  if (typeof state.soilPhBand === "string") soilPhBandFilter.value = state.soilPhBand;
-  if (typeof state.temperatureBand === "string") temperatureBandFilter.value = state.temperatureBand;
-  if (typeof state.precipitationBand === "string") precipitationBandFilter.value = state.precipitationBand;
-  if (typeof state.dataQuality === "string") dataQualityFilter.value = state.dataQuality;
-  if (typeof state.year === "string") yearFilter.value = state.year;
-  if (typeof state.image === "string") imageFilter.value = state.image;
-  if (state.resultMode === RESULT_MODE_FEATURED || state.resultMode === RESULT_MODE_BROWSE) {
-    selectedResultMode = state.resultMode;
-  }
-  if (Number.isFinite(Number(state.offset))) {
-    listOffset = Math.max(0, Number(state.offset));
-  }
-
-  expandedIds.clear();
-  if (Array.isArray(state.expandedIds)) {
-    state.expandedIds.forEach((id) => {
-      if (id !== null && id !== undefined) expandedIds.add(String(id));
-    });
-  }
-
-  pendingPinnedBeetleId = state.pinnedBeetleId ? String(state.pinnedBeetleId) : null;
-  pendingMapView = state.mapView ? String(state.mapView) : null;
-}
-
-// Stellt einen vorgemerkten, gepinnten Kaefer nach dem Laden wieder her.
-function restorePinnedBeetleIfNeeded() {
-  if (!pendingPinnedBeetleId || pinnedBeetle) return;
-  const found = beetles.find((b) => String(b.id) === pendingPinnedBeetleId);
-  if (!found) return;
-  pinnedBeetle = found;
-  expandedIds.add(String(found.id));
-  pendingPinnedBeetleId = null;
-}
 
 // Baut den Querystring fuer die aktuelle Kaeferabfrage.
 function buildBeetleQuery(overrides = null) {
@@ -243,7 +65,11 @@ function buildBeetleQuery(overrides = null) {
   if (temperatureBandFilter.value !== "all") params.set("temperature_band", temperatureBandFilter.value);
   if (precipitationBandFilter.value !== "all") params.set("precipitation_band", precipitationBandFilter.value);
   if (dataQualityFilter.value !== "all") params.set("event_date_quality", dataQualityFilter.value);
-  if (yearFilter.value.trim()) params.set("observed_year", yearFilter.value.trim());
+  const yearRaw = yearFilter.value.trim();
+  if (/^\d{4}$/.test(yearRaw)) {
+    const year = Number(yearRaw);
+    if (year >= 2000 && year <= 2026) params.set("observed_year", yearRaw);
+  }
   if (imageFilter.value === "with_images") params.set("has_image", "true");
   if (imageFilter.value === "no_images") params.set("has_image", "false");
   params.set("limit", String(BEETLE_FETCH_LIMIT));
@@ -275,7 +101,9 @@ function hasActiveFilters() {
 let featuredMode = false;
 const beetlesCache = new Map();
 let browseBeetlesCache = null;
+let listLoadError = false;
 
+// Mischt eine Liste zufaellig (Fisher-Yates) und liefert eine neue Kopie.
 function shuffleList(items) {
   const list = Array.isArray(items) ? items.slice() : [];
   for (let i = list.length - 1; i > 0; i -= 1) {
@@ -287,6 +115,7 @@ function shuffleList(items) {
   return list;
 }
 
+// Laedt die Kaeferliste fuer den Stoeber-Modus (seitenweise, mit Cache).
 async function loadBrowseBeetles(forceRefresh, requestToken = 0) {
   const browseCacheKey = `${buildBeetleQuery()}|offset=${listOffset}`;
   if (!forceRefresh && browseBeetlesCache && browseBeetlesCache.key === browseCacheKey) {
@@ -313,7 +142,8 @@ async function loadBrowseBeetles(forceRefresh, requestToken = 0) {
       return;
     } catch (error) {
       console.error("Stoeber-Modus konnte nicht aus dem Backend geladen werden:", error);
-      // Do not silently switch to demo data when API mode is active.
+      // Im API-Modus nicht stillschweigend auf Demo-Daten umschalten.
+      listLoadError = true;
       beetles = Array.isArray(beetles) ? beetles : [];
       totalBeetles = Number.isFinite(totalBeetles) ? totalBeetles : beetles.length;
       return;
@@ -325,12 +155,15 @@ async function loadBrowseBeetles(forceRefresh, requestToken = 0) {
   browseBeetlesCache = { key: browseCacheKey, items: beetles, total: totalBeetles };
 }
 
-// ===== Data loading =====
+// ===== Datenladen =====
 
+// Zentrale Ladefunktion: waehlt je nach Modus Featured-, Stoeber- oder
+// gefilterte Backend-Daten und fuellt die globale Kaeferliste.
 async function loadBeetles(options = {}) {
   const forceBrowseRefresh = !!options.forceBrowseRefresh;
   const requestToken = Number(options.requestToken || 0);
   const activeFilters = hasActiveFilters();
+  listLoadError = false;
 
   if (!activeFilters && selectedResultMode === RESULT_MODE_FEATURED && (window.FEATURED_BEETLES?.length)) {
     featuredMode = true;
@@ -402,7 +235,8 @@ async function loadBeetles(options = {}) {
     }
   } catch (error) {
     console.error("Kaeferdaten konnten nicht geladen werden:", error);
-    // Keep last server state; no demo fallback in API mode.
+    // Letzten Serverzustand behalten; im API-Modus kein Demo-Fallback.
+    listLoadError = true;
     beetles = Array.isArray(beetles) ? beetles : [];
     totalBeetles = Number.isFinite(totalBeetles) ? totalBeetles : beetles.length;
   }
@@ -476,7 +310,7 @@ async function applyFilters(options = {}) {
     if (getGoogleMapInstanceSafe()) {
       scheduleMapPoints();
     } else {
-      // Avoid locking result-mode controls when map bootstrap is not ready yet.
+      // Result-Mode-Steuerung nicht sperren, solange die Karte noch nicht bereit ist.
       setListLoading(false);
     }
     return;
@@ -589,8 +423,9 @@ function updateCountryHighlight() {
   updateGoogleCountryHighlight();
 }
 
-// ===== DOM references =====
+// ===== DOM-Referenzen =====
 
+// Ermittelt Anzeigename und ISO-Code fuer einen Laendereintrag.
 function resolveCountryDisplay(entry) {
   const fn = AppPageUtils.resolveCountryDisplay;
   if (!fn) return { labelName: String(entry?.name || entry?.code || ""), iso: "" };
@@ -634,11 +469,13 @@ let subtypeListLoading = false;
 let isListLoading = false;
 let suppressNextMapRefresh = false;
 
+// Setzt das Lade-Flag der Liste und aktualisiert den Result-Mode-Umschalter.
 function setListLoading(loading) {
   isListLoading = Boolean(loading);
   updateResultModeToggle();
 }
 
+// Aktualisiert Aktiv-Zustand und Deaktivierung der Ergebnismodus-Buttons.
 function updateResultModeToggle() {
   const browseActive = selectedResultMode === RESULT_MODE_BROWSE;
   const controlsDisabled = isListLoading;
@@ -654,6 +491,7 @@ function updateResultModeToggle() {
   }
 }
 
+// Wechselt zwischen Featured- und Stoeber-Modus und laedt bei Bedarf neu.
 function setResultMode(mode, options = {}) {
   if (mode !== RESULT_MODE_FEATURED && mode !== RESULT_MODE_BROWSE) return;
   const forceRefresh = !!options.forceRefresh;
@@ -675,8 +513,9 @@ function setResultMode(mode, options = {}) {
   });
 }
 
-// ===== Result heading helpers =====
+// ===== Hilfsfunktionen fuer den Ergebniskopf =====
 
+// Liefert die Beschriftung des aktuell aktiven Klima-/Vegetations-Subtyps.
 function activeSubtypeLabel() {
   const legendId = currentView === "climate"
     ? "climateLegend"
@@ -712,6 +551,10 @@ function activeFilterContextLabel() {
 
 // Aktualisiert den Ergebniskopf mit Trefferzahl und aktivem Filterkontext.
 function updateResultHeading(shown) {
+  if (listLoadError) {
+    resultHeading.textContent = "Fehler beim Laden neuer Kaefer - bitte Filter pruefen (z. B. Fundjahr 2000-2026) und erneut versuchen";
+    return;
+  }
   if (featuredMode) {
     resultHeading.textContent = "Bekannte Kaefer Lateinamerikas";
     return;
@@ -727,17 +570,18 @@ function updateResultHeading(shown) {
     return;
   }
 
-  const shouldUseMapTotal =
-    window.API_BASE_URL &&
-    Number.isFinite(lastRenderedMapPointTotal) &&
-    lastRenderedMapPointTotal >= shown;
-
-  if (shouldUseMapTotal) {
-    resultHeading.textContent = `${shown} von ${lastRenderedMapPointTotal} Treffern`;
-  } else
-
+  // Ergebniskopf an die Liste/den Pager koppeln (totalBeetles). Sonst zeigte
+  // die Karten-Bbox-Zahl (lastRenderedMapPointTotal, nur aktueller Ausschnitt)
+  // eine andere Gesamtzahl als der Pager -> verwirrende Diskrepanz.
+  // Die Karten-Bbox-Zahl dient nur noch als Fallback.
   if (window.API_BASE_URL && totalBeetles > shown) {
     resultHeading.textContent = `${shown} von ${totalBeetles} Treffern`;
+  } else if (
+    window.API_BASE_URL &&
+    Number.isFinite(lastRenderedMapPointTotal) &&
+    lastRenderedMapPointTotal > shown
+  ) {
+    resultHeading.textContent = `${shown} von ${lastRenderedMapPointTotal} Treffern`;
   } else {
     resultHeading.textContent = `${shown} gefundene Arten`;
   }
@@ -747,6 +591,7 @@ function updateResultHeading(shown) {
 
 }
 
+// Baut die Seitenumschaltung (Pager) unter der Ergebnisliste auf.
 function updateResultPager(shown) {
   const pagerTargets = [resultPagerTop, resultPager].filter(Boolean);
   if (!pagerTargets.length) return;
@@ -763,7 +608,7 @@ function updateResultPager(shown) {
   const page = Math.floor(listOffset / LIST_PAGE_SIZE) + 1;
   const pages = Math.max(1, Math.ceil(totalBeetles / LIST_PAGE_SIZE));
   const hasPrev = listOffset > 0;
-  const hasNext = listOffset + LIST_PAGE_SIZE < totalBeetles;
+  const hasNext = listOffset + LIST_PAGE_SIZE < totalBeetles && listOffset + LIST_PAGE_SIZE <= API_MAX_OFFSET;
 
   const pagerHtml = `
     <div class="result-pager-meta">Seite ${page}/${pages} | ${start}-${end} von ${totalBeetles}</div>
@@ -777,8 +622,14 @@ function updateResultPager(shown) {
     el.innerHTML = pagerHtml;
     const prevBtn = el.querySelector('[data-page="prev"]');
     const nextBtn = el.querySelector('[data-page="next"]');
+
+    const clearPinForPaging = () => {
+      pinnedBeetle = null;
+      pendingPinnedBeetleId = null;
+    };
     if (prevBtn) {
       prevBtn.addEventListener("click", () => {
+        clearPinForPaging();
         applyFilters({
           keepPage: true,
           pageOffset: Math.max(0, listOffset - LIST_PAGE_SIZE),
@@ -789,9 +640,10 @@ function updateResultPager(shown) {
     }
     if (nextBtn) {
       nextBtn.addEventListener("click", () => {
+        clearPinForPaging();
         applyFilters({
           keepPage: true,
-          pageOffset: listOffset + LIST_PAGE_SIZE,
+          pageOffset: Math.min(listOffset + LIST_PAGE_SIZE, API_MAX_OFFSET),
           forceBrowseRefresh: selectedResultMode === RESULT_MODE_BROWSE,
           suppressMapRefresh: selectedResultMode === RESULT_MODE_BROWSE,
         });
@@ -801,8 +653,6 @@ function updateResultPager(shown) {
 }
 
 // Laender-Dropdown alphabetisch aus dem vorberechneten Snapshot fuellen.
-// option.value = COUNTRY_STATS.code (= DB-Wert, den der Backend-Filter erwartet),
-// option.text = Anzeigename.
 (function populateCountryFilter() {
   if (!countryFilter || !window.COUNTRY_STATS) return;
   Object.values(window.COUNTRY_STATS)
@@ -889,8 +739,9 @@ function getFilteredBeetles() {
   return beetles.filter((beetle) => matcher(beetle, filterContext));
 }
 
-// ===== SVG map rendering =====
+// ===== SVG-Kartendarstellung =====
 
+// Erzeugt ein SVG-Element mit den angegebenen Attributen.
 function svgElement(name, attributes = {}) {
   const fn = AppPageUtils.svgElement;
   return fn ? fn(name, attributes) : document.createElementNS("http://www.w3.org/2000/svg", name);
@@ -1003,8 +854,6 @@ function resetMapView() {
 // der Zustand bleibt ueber Re-Renders hinweg erhalten.
 const expandedIds = new Set();
 
-// Per Karten-InfoWindow ("▼ Alle Infos") ausgewaehlter Kaefer -> erste,
-// aufgeklappte Detailkarte oben in der Liste. null = keiner gewaehlt.
 let pinnedBeetle = null;
 
 restoreMainState();
@@ -1014,6 +863,13 @@ function formatTemperature(value) {
   const fn = AppPageUtils.formatTemperature;
   if (!fn) return "—";
   return fn(value);
+}
+
+// Formatiert Niederschlagswerte (mm) fuer die Listenansicht.
+function formatPrecipitation(value) {
+  if (value === null || value === undefined || value === "") return "--";
+  const num = Number(value);
+  return Number.isFinite(num) ? Math.round(num) + " mm" : "--";
 }
 
 // Baut die URL zur Detailseite fuer einen Kaefer.
@@ -1042,19 +898,54 @@ function beetleDetailHtml(beetle) {
   const detailLink = beetle.id
     ? `<p><a class="detail-page-link" href="${detailPageUrl(beetle.id)}">Zur Detailseite mit allen Daten und Bildern</a></p>`
     : "";
+  const adminActions = (beetle.id && String(beetle.id).indexOf("rec-") === 0)
+    ? `<div class="admin-only beetle-admin-actions"><button type="button" class="beetle-delete" data-delete-id="${beetle.id}">Kaefer loeschen</button></div>`
+    : "";
+  const coords = Array.isArray(beetle.coordinates) ? beetle.coordinates : [];
+  const lng = Number(coords[0]);
+  const lat = Number(coords[1]);
+  const hasCoords = Number.isFinite(lat) && Number.isFinite(lng) && (lat !== 0 || lng !== 0);
+  const safeName = String(beetle.name || "Fundort").replace(/"/g, "&quot;");
+  const locationMap = hasCoords
+    ? `<div class="detail-mini-map" data-lat="${lat}" data-lng="${lng}" data-name="${safeName}" data-elevation="${beetle.elevation ?? ""}" data-climate="${beetle.climate ?? ""}" data-vegetation="${beetle.vegetation ?? ""}" data-koppen="${beetle.koppenCode ?? ""}" data-vegzone="${beetle.vegetationZone ?? ""}">
+         <div class="mini-map-toolbar" role="group" aria-label="Kartenansicht">
+           <button type="button" class="mini-map-btn is-active" data-view="normal">Normal</button>
+           <button type="button" class="mini-map-btn" data-view="elevation">Höhe</button>
+           <button type="button" class="mini-map-btn" data-view="climate">Klima</button>
+           <button type="button" class="mini-map-btn" data-view="vegetation">Vegetation</button>
+         </div>
+         <div class="mini-map-frame"></div>
+         <div class="mini-map-legend" aria-live="polite"></div>
+       </div>`
+    : "";
   return `
     ${image}
     ${note}
     ${detailLink}
-    <ul class="detail-list">
-      <li><strong>Fundort</strong>${beetle.location}</li>
-      <li><strong>Klimazone</strong>${climateLabel(beetle.climate)}</li>
-      <li><strong>Vegetation</strong>${vegetationLabel(beetle.vegetation)}</li>
-      <li><strong>Hoehenlage</strong>${beetle.elevation} m</li>
-      <li><strong>Temperatur</strong>${formatTemperature(beetle.temperature)}</li>
-      <li><strong>Boden-pH</strong>${formatSoilPh(beetle)}</li>
-    </ul>
+    ${adminActions}
+    <div class="detail-body">
+      <ul class="detail-list">
+        <li><strong>Fundort</strong>${beetle.location}</li>
+        <li><strong>Klimazone</strong>${climateLabel(beetle.climate)}</li>
+        <li><strong>Vegetation</strong>${vegetationLabel(beetle.vegetation)}</li>
+        <li><strong>Hoehenlage</strong>${beetle.elevation} m</li>
+        <li><strong>Temperatur</strong>${formatTemperature(beetle.temperature)}</li>
+        <li><strong>Niederschlag</strong>${formatPrecipitation(beetle.precipitation)}</li>
+        <li><strong>Boden-pH</strong>${formatSoilPh(beetle)}</li>
+      </ul>
+      ${locationMap}
+    </div>
   `;
+}
+
+// Initialisiert die gesperrten Fundort-Karten der aktuell aufgeklappten Karten.
+// Sofort (nicht entprellt): Entprellen wuerde die Init bei haeufigen Re-Renders
+// verhungern lassen. Doppel-Init wird pro Element ueber ein data-Flag verhindert.
+function initCardMaps() {
+  if (!window.AppCardMap || typeof window.AppCardMap.init !== "function") return;
+  resultList.querySelectorAll(".species-card.is-expanded .detail-mini-map").forEach((el) => {
+    window.AppCardMap.init(el);
+  });
 }
 
 // Rendert Ergebnisliste und synchronisiert die aktive Kartenansicht.
@@ -1064,8 +955,6 @@ function render() {
   const shown = filteredBeetles.length;
   updateResultHeading(shown);
 
-  // Ein per Karten-Pin gewaehlter Kaefer steht als erste Karte oben
-  // (dedupliziert, falls er ohnehin in der gefilterten Liste ist).
   const displayBeetles = pinnedBeetle
     ? [pinnedBeetle, ...filteredBeetles.filter((b) => String(b.id) !== String(pinnedBeetle.id))]
     : filteredBeetles;
@@ -1124,19 +1013,20 @@ function render() {
 
   updateResultPager(shown);
 
+  initCardMaps();
+
   if (!syncingListFromMap && !suppressNextMapRefresh) renderMapPoints();
   suppressNextMapRefresh = false;
 }
 
-// ===== List and map interactions =====
+// ===== Listen- und Karteninteraktionen =====
 
+// Scrollt sanft zum Kopf der Ergebnisliste.
 function scrollToList() {
   resultHeading.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 // Vom Karten-InfoWindow ("▼ Alle Infos"): Kaefer als erste, aufgeklappte
-// Detailkarte unter die Karte holen und dorthin scrollen. needsFetch=true
-// (Backend-Pins liefern nur Kurzdaten) -> volle DB-Details + Bild nachladen.
 async function selectBeetleFromMap(beetle, needsFetch) {
   pinnedBeetle = beetle;
   expandedIds.add(String(beetle.id));
@@ -1171,13 +1061,13 @@ function openBeetleInfoWindow(marker, beetle, needsFetch) {
     ? `<div style="color:#66736b;font-size:0.82rem;margin-top:0.1rem">${beetle.family}</div>`
     : "";
   const details = beetle.id
-    ? `<a href="${detailPageUrl(beetle.id)}" style="display:inline-block;margin-top:0.45rem;color:#2f6b47;font-weight:700;font-size:0.82rem;text-decoration:none">Zur Detailseite</a>`
+    ? `<a href="${detailPageUrl(beetle.id)}" style="display:block;margin-top:0.4rem;padding-top:0.4rem;border-top:1px solid #e4ebe6;color:#2f6b47;font-weight:700;font-size:0.82rem;text-decoration:none">Zur Detailseite</a>`
     : "";
   activeInfoWindow.setContent(`
     <div style="font-family:Arial,sans-serif;min-width:120px;max-width:210px">
       <strong style="font-size:0.95rem">${beetle.name}</strong>
       ${fam}
-      <button type="button" class="iw-more" style="margin-top:0.55rem;background:none;border:0;color:#2f6b47;font-weight:700;cursor:pointer;padding:0;font-size:0.85rem">▼ Alle Infos</button>
+      <button type="button" class="iw-more" style="display:block;width:100%;text-align:left;margin-top:0.55rem;background:none;border:0;color:#2f6b47;font-weight:700;cursor:pointer;padding:0;font-size:0.85rem">▼ Schnellinfos</button>
       ${details}
     </div>
   `);
@@ -1193,14 +1083,10 @@ function renderMapPoints() {
   const hasGoogleMap = typeof googleMapInstance !== "undefined" && !!googleMapInstance;
   if (hasGoogleMap) {
     if (featuredMode) {
-      // Startseite: nur die kuratierten Featured-Kaefer als Marker (nicht den
-      // gesamten Datenbestand als Cluster laden).
       renderGoogleMapMarkers();
     } else if (window.API_BASE_URL) {
-      // Suche/Filter: bbox-/zoom-basierte Punkte mit Clustering nachladen.
       scheduleMapPoints();
     } else {
-      // Demo-Modus: die geladene Liste als Marker zeichnen.
       renderGoogleMapMarkers();
     }
   } else {
@@ -1208,6 +1094,7 @@ function renderMapPoints() {
   }
 }
 
+// Oeffnet die Laender-Seitenleiste ueber das AppCountryUI-Modul.
 function openCountrySidebar(countryName) {
   const fn = window.AppCountryUI && window.AppCountryUI.openCountrySidebar;
   if (!fn) return;
@@ -1220,6 +1107,7 @@ function openCountrySidebar(countryName) {
   });
 }
 
+// Schliesst die Laender-Seitenleiste ueber das AppCountryUI-Modul.
 function closeCountrySidebar() {
   const fn = window.AppCountryUI && window.AppCountryUI.closeCountrySidebar;
   if (!fn) return;
@@ -1250,6 +1138,7 @@ function closePointPopup() {
   pointPopup.classList.add("is-hidden");
 }
 
+// Setzt alle Filter, Legendenauswahlen und Paginierung auf den Ausgangszustand.
 function resetAllFilters() {
   searchInput.value = "";
   countryFilter.value = "all";
@@ -1272,6 +1161,7 @@ function resetAllFilters() {
   applyFilters();
 }
 
+// Initialisiert die Karten-/Laender-Events ueber das AppCountryEvents-Modul.
 function initCountryEvents() {
   const fn = window.AppCountryEvents && window.AppCountryEvents.init;
   if (typeof fn !== "function") return;
@@ -1288,6 +1178,38 @@ function initCountryEvents() {
   });
 }
 
+// Loescht einen manuell angelegten Kaefer (nur Admin, nur rec-*-Datensaetze).
+async function handleBeetleDelete(beetleId) {
+  const id = String(beetleId || "");
+  if (id.indexOf("rec-") !== 0) return;
+  const recordId = id.split("-")[1];
+  if (!recordId) return;
+  if (!window.confirm("Diesen Kaefer wirklich unwiderruflich loeschen?")) return;
+  try {
+    const res = await window.Auth.apiFetch(`/api/beetles/${recordId}`, { method: "DELETE" });
+    if (!res || !res.ok) {
+      window.alert("Loeschen fehlgeschlagen" + (res ? " (" + res.status + ")" : "") + ".");
+      return;
+    }
+    beetlesCache.clear();
+    browseBeetlesCache = null;
+    pinnedBeetle = null;
+    await applyFilters();
+  } catch (error) {
+    window.alert("Netzwerkfehler beim Loeschen - bitte erneut versuchen.");
+  }
+}
+
+// Setzt die body-Klasse is-admin, damit Admin-only-Elemente (Loeschen) erscheinen.
+function syncAdminBodyClass() {
+  const isAdmin = Boolean(window.Auth && typeof window.Auth.getRole === "function"
+    && window.Auth.getRole() === "admin");
+  document.body.classList.toggle("is-admin", isAdmin);
+}
+window.addEventListener("auth:changed", syncAdminBodyClass);
+syncAdminBodyClass();
+
+// Baut den Payload fuer den DOM-Setup und registriert alle App-Events.
 function initAppEvents() {
   const fn = window.AppEvents && window.AppEvents.init;
   if (typeof fn !== "function") return;
@@ -1323,6 +1245,7 @@ function initAppEvents() {
     actions: {
       saveMainState,
       applyFilters,
+      deleteBeetle: handleBeetleDelete,
       setSelectedClimateCodes,
       setSelectedVegetationCodes,
       setSelectedElevations,
@@ -1396,13 +1319,14 @@ function updateFilterUI() {
 
 let currentView = pendingMapView || "normal";
 
-// ===== Google map theme state =====
+// ===== Google-Karten-Theme-Zustand =====
 
-// Layer-Instanzen (einmalig erstellt, dann nur ein-/ausgeblendet)
 let elevationTileType = null;
 let climateDataLayer = null;
 let vegetationDataLayer = null;
-const ENABLE_SUBTYPE_SPATIAL_FILTER = true;
+
+const ELEVATION_VIEW_MAX_ZOOM = 10;
+const ENABLE_SUBTYPE_SPATIAL_FILTER = false;
 const activeClimateLegendColors = new Set();
 const activeVegetationLegendColors = new Set();
 
@@ -1410,11 +1334,23 @@ initCountryEvents();
 initAppEvents();
 updateResultModeToggle();
 
-// Defensive startup: if another bootstrap step fails silently, ensure
-// the homepage still loads featured beetles and map/list content.
+// Defensiver Start: falls ein Bootstrap-Schritt still fehlschlaegt, stellt
+// dies sicher, dass die Startseite dennoch Featured-Kaefer sowie Karten-
+// und Listeninhalte laedt.
 async function ensureInitialResultsLoaded() {
+  try {
+    if (typeof window.reconcileFeaturedIds === "function") {
+      await window.reconcileFeaturedIds();
+    }
+  } catch (error) {
+    console.error("Featured-Abgleich fehlgeschlagen:", error);
+  }
+
   const hasCards = document.querySelectorAll(".species-card").length > 0;
-  if (hasCards) return;
+  if (hasCards) {
+    if (typeof render === "function") render();
+    return;
+  }
   try {
     await applyFilters({
       keepPage: true,
@@ -1437,8 +1373,9 @@ function normalizeLegendColor(value) {
   return String(value || "").trim().toLowerCase();
 }
 
-// ===== Legend helpers and handlers =====
+// ===== Legenden-Hilfsfunktionen und -Handler =====
 
+// Liefert die normalisierte Farbe eines Legendeneintrags.
 function legendItemColor(li) {
   const fn = window.AppLegendHelpers && window.AppLegendHelpers.legendItemColor;
   if (typeof fn === "function") return fn(li, normalizeLegendColor);
@@ -1451,6 +1388,7 @@ function legendItemFromEvent(event) {
   return typeof fn === "function" ? fn(event) : null;
 }
 
+// Baut den gemeinsamen Kontext (Zustand + Callbacks) fuer den Legenden-Controller.
 function getLegendControllerCtx() {
   const mapInstance = (typeof googleMapInstance !== "undefined") ? googleMapInstance : null;
   return {
@@ -1590,7 +1528,7 @@ function shouldApplySubtypeSpatialFilter() {
   return false;
 }
 
-// ===== Spatial filter bridge to app.spatial-filter.js =====
+// ===== Bruecke zum raeumlichen Filter in app.spatial-filter.js =====
 
 const climatePolygonsCache = new Map();
 const vegetationPolygonsCache = new Map();
@@ -1682,6 +1620,11 @@ function ensureElevationViewLayer() {
     });
   }
   mapInstance.overlayMapTypes.push(elevationTileType);
+
+  mapInstance.setOptions({ maxZoom: ELEVATION_VIEW_MAX_ZOOM });
+  if (mapInstance.getZoom() > ELEVATION_VIEW_MAX_ZOOM) {
+    mapInstance.setZoom(ELEVATION_VIEW_MAX_ZOOM);
+  }
   setElevationLegendActiveState();
   callMapUi("showLegendForView", undefined, { view: "elevation" });
 }

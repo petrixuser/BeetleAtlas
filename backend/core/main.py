@@ -1,3 +1,6 @@
+"""Dieses Modul initialisiert die FastAPI-Anwendung, richtet die CORS-Middleware ein
+und definiert globale Exception-Handler."""
+
 import asyncio
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.exceptions import RequestValidationError
@@ -11,7 +14,6 @@ from backend.controllers.beetle_controller import warm_environment_ranges_cache
 from backend.controllers.map_controller import warm_map_points_cache
 from backend.routers import auth_router, beetle_router, beetle_write_router, core_router, map_router
 
-"""This module initializes the FastAPI application, sets up CORS middleware, and defines global exception handlers"""
 validate_runtime_security()
 app = FastAPI(title="Beetle API", version="1.0.0")
 logger = logging.getLogger("beetle.backend.api")
@@ -29,9 +31,10 @@ app.add_middleware(
 
 @app.on_event("startup")
 async def warm_environment_ranges_on_startup():
-    """Run expensive cache warmups in background so API can answer health checks immediately."""
+    """Fuehrt teure Cache-Warmups im Hintergrund aus, damit die API Healthchecks sofort beantworten kann."""
 
     async def _warm_caches_background() -> None:
+        """Waermt Umweltbereichs- und Kartenpunkt-Cache im Hintergrund-Thread."""
         try:
             await asyncio.to_thread(warm_environment_ranges_cache, force=True)
         except Exception:
@@ -45,7 +48,7 @@ async def warm_environment_ranges_on_startup():
 
 @app.exception_handler(HTTPException)
 async def http_exception_handler(_: Request, exc: HTTPException):
-    """Return normalized JSON errors for FastAPI HTTP exceptions."""
+    """Gibt normalisierte JSON-Fehler fuer FastAPI-HTTP-Exceptions zurueck."""
     if isinstance(exc.detail, dict):
         error = exc.detail.get("error", "http_error")
         message = exc.detail.get("message", "Unknown error.")
@@ -56,31 +59,31 @@ async def http_exception_handler(_: Request, exc: HTTPException):
 
 @app.exception_handler(RequestValidationError)
 async def validation_exception_handler(_: Request, __: RequestValidationError):
-    """Return a standardized 422 validation error response."""
+    """Gibt eine standardisierte 422-Validierungsfehler-Antwort zurueck."""
     return JSONResponse(
         status_code=422,
-        content={"error": "validation_error", "message": "Invalid request parameters."},
+        content={"error": "validation_error", "message": "Ungueltige Anfrageparameter."},
     )
 
 @app.exception_handler(SQLAlchemyError)
 async def sqlalchemy_exception_handler(_: Request, exc: SQLAlchemyError):
-    """Return a 503 response when database operations fail."""
+    """Gibt eine 503-Antwort zurueck, wenn Datenbankoperationen fehlschlagen."""
     logger.exception("Database error handled as 503: %s", exc)
     return JSONResponse(
         status_code=503,
         content={
             "error": "database_unavailable",
-            "message": "Database is currently unavailable. Please try again later.",
+            "message": "Datenbank derzeit nicht verfuegbar. Bitte spaeter erneut versuchen.",
         },
     )
 
 @app.exception_handler(StarletteHTTPException)
 async def starlette_http_exception_handler(_: Request, exc: StarletteHTTPException):
-    """Handle Starlette HTTP exceptions with the API error envelope."""
+    """Behandelt Starlette-HTTP-Exceptions mit dem API-Fehler-Envelope."""
     if exc.status_code == 404:
         return JSONResponse(
             status_code=404,
-            content={"error": "not_found", "message": "Route not found."},
+            content={"error": "not_found", "message": "Route nicht gefunden."},
         )
 
     message = str(exc.detail) if exc.detail else "HTTP error."
@@ -89,7 +92,7 @@ async def starlette_http_exception_handler(_: Request, exc: StarletteHTTPExcepti
         content={"error": "http_error", "message": message},
     )
 
-#includes the API routers for core functionality, beetle-related endpoints, and map-related endpoints into the FastAPI application, making their routes available for handling incoming requests.
+#bindet die API-Router fuer Kernfunktionen, kaeferbezogene Endpunkte und kartenbezogene Endpunkte in die FastAPI-Anwendung ein und macht deren Routen fuer eingehende Anfragen verfuegbar.
 app.include_router(core_router)
 app.include_router(beetle_router)
 app.include_router(beetle_write_router)

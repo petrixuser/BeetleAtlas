@@ -1,9 +1,13 @@
-USE beetle_db;
+-- ============================================================================
+--  Seed: Bestehenden Benutzer zum Admin hochstufen
+--  Zweck: setzt fuer ein bereits existierendes Konto (per E-Mail) die Rolle auf
+--  'admin' und aktiviert es.
+--  Rolle beim DB-Aufbau: optionaler Seed-/Wartungsschritt fuer die Auth-Tabellen.
+--  Idempotent/mehrfach ausfuehrbar: das UPDATE setzt denselben Zielzustand,
+--  ein erneuter Lauf aendert nichts weiter.
+-- ============================================================================
 
--- One-time SQL seed alternative for admin bootstrap.
--- Usage:
--- 1) Register/login once with a normal account (so password_hash already exists).
--- 2) Set desired admin email below and run this script once.
+USE beetle_db;
 
 SET @admin_email := 'admin.contract@example.local';
 

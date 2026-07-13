@@ -188,32 +188,51 @@
     humid: "Feucht",
     wet: "Nass",
     very_humid: "Sehr feucht",
+    moist: "Feucht",
+    arid: "Sehr trocken (arid)",
+    semi_arid: "Halbtrocken (semiarid)",
+    sub_humid: "Maessig feucht (subhumid)",
+    per_humid: "Sehr feucht (perhumid)",
+    barren: "Vegetationslos",
     sparse_vegetation: "Spaerliche Vegetation",
     moderate_vegetation: "Mittlere Vegetation",
     dense_vegetation: "Dichte Vegetation",
     dry_air: "Trockene Luft",
     normal_air: "Normale Luftfeuchte",
+    moderate_humidity: "Mittlere Luftfeuchte",
     humid_air: "Feuchte Luft",
+    very_humid_air: "Sehr feuchte Luft",
+    extreme_low_pressure: "Extrem niedriger Luftdruck",
+    very_low_pressure: "Sehr niedriger Luftdruck",
     low_pressure: "Niedriger Luftdruck",
     normal_pressure: "Normaler Luftdruck",
     high_pressure: "Hoher Luftdruck",
     dark: "Dunkel",
     dim_light: "Schwach beleuchtet",
+    low_light: "Schwach beleuchtet",
+    moderate_light: "Maessig beleuchtet",
     bright_light: "Hell beleuchtet",
     level: "Eben",
+    gentle: "Leicht geneigt",
     undulating: "Wellig",
     steep: "Steil",
     very_steep: "Sehr steil",
     riparian: "Ufernah",
+    near_water: "Gewaessernah",
+    intermediate_distance: "Mittlere Gewaesserdistanz",
     inland: "Binnenland",
+    far_inland: "Weit im Binnenland",
+    natural: "Naturnah",
     low_modification: "Geringe Veraenderung",
     moderate_modification: "Mittlere Veraenderung",
     high_modification: "Hohe Veraenderung",
     strong_modification: "Sehr starke Veraenderung",
     mixed_cover: "Gemischte Bedeckung",
+    very_low_carbon: "Sehr niedriger Kohlenstoffgehalt",
     moderate_carbon: "Mittlerer Kohlenstoffgehalt",
     high_carbon: "Hoher Kohlenstoffgehalt",
     low_carbon: "Niedriger Kohlenstoffgehalt",
+    very_high_carbon: "Sehr hoher Kohlenstoffgehalt",
     unklar_oder_restriktiv: "Unklar oder restriktiv",
     mehrere_bilder: "Mehrere Bilder",
     eine_abbildung: "Ein Bild",
@@ -227,10 +246,10 @@
   };
 
   const LATAM_BOUNDS = {
-    west: -120,
-    south: -60,
-    east: -30,
-    north: 35,
+    west: -160,
+    south: -58,
+    east: -32,
+    north: 34,
   };
 
   // Fuehrt die zugehoerige Logik fuer diese Funktion aus.
@@ -252,6 +271,29 @@
     return VEGETATION_LABELS[raw] ?? VEGETATION_LABELS[lower] ?? raw;
   }
 
+  // ESA-WorldCover-Klassencodes (10..100) auf deutsche Bezeichnungen abbilden.
+  var LANDCOVER_CLASS_LABELS = {
+    "10": "Wald",
+    "20": "Buschland",
+    "30": "Grasland",
+    "40": "Ackerland",
+    "50": "Bebaut",
+    "60": "Vegetationsarm",
+    "70": "Schnee/Eis",
+    "80": "Wasser",
+    "90": "Feuchtgebiet",
+    "95": "Mangroven",
+    "100": "Moos/Flechten",
+  };
+
+  // Uebersetzt einen numerischen Landbedeckungs-Code in eine deutsche Bezeichnung.
+  function landcoverClassLabel(code) {
+    if (code === null || code === undefined || code === "") return null;
+    var key = String(code).trim();
+    if (!key) return null;
+    return LANDCOVER_CLASS_LABELS[key] || null;
+  }
+
   window.AppCatalog = {
     CLIMATE_LABELS,
     VEGETATION_LABELS,
@@ -261,8 +303,10 @@
     tinyLabels,
     SOIL_PH_BAND_LABELS,
     CODE_VALUE_DE,
+    LANDCOVER_CLASS_LABELS,
     LATAM_BOUNDS,
     climateLabel,
     vegetationLabel,
+    landcoverClassLabel,
   };
 })();

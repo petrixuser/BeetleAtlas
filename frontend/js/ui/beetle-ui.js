@@ -148,6 +148,14 @@
     return Number.isNaN(num) ? null : num;
   }
 
+  // Zerlegt einen Mehrzeilen-Text in eine Liste getrimmter, nicht-leerer Zeilen.
+  function splitLines(raw) {
+    return String(raw)
+      .split(/\r?\n/)
+      .map(function (line) { return line.trim(); })
+      .filter(function (line) { return line !== ""; });
+  }
+
   // Liest ausgefuellte Felder und erzeugt das API-Payload.
   function collectPayload() {
     var payload = {};
@@ -157,7 +165,25 @@
       var value = parsePayloadValue(spec.key, raw);
       if (value != null) payload[spec.key] = value;
     });
-    if (payload.image_url) payload.image_available = true;
+    // Mehrbild: eine Bild-URL pro Zeile -> media_items (1:N).
+    var imageRaw = payload.image_url;
+    delete payload.image_url;
+    if (imageRaw) {
+      var urls = splitLines(imageRaw);
+      if (urls.length) {
+        payload.media_items = urls.map(function (url) {
+          return {
+            image_url: url,
+            media_references: payload.media_references || null,
+            media_creator: payload.media_creator || null,
+            media_publisher: payload.media_publisher || null,
+            media_rights_holder: payload.media_rights_holder || null,
+            media_license: payload.media_license || null,
+          };
+        });
+        payload.image_available = true;
+      }
+    }
     return payload;
   }
 
@@ -258,13 +284,65 @@
     show(successEl);
   }
 
+  // Prueft Format/Plausibilitaet weiterer Felder vor dem Absenden.
+  function validateExtraFields(errorEl, successEl) {
+    var dateEl = $(fieldId("event_date"));
+    var dateVal = dateEl ? dateEl.value.trim() : "";
+    if (dateVal) {
+      var m = dateVal.match(/^(\d{4})(?:-(\d{2})(?:-(\d{2}))?)?$/);
+      if (!m) {
+        showError(errorEl, successEl, "Funddatum bitte als JJJJ, JJJJ-MM oder JJJJ-MM-TT angeben.");
+        return false;
+      }
+      var year = Number(m[1]);
+      var month = m[2] ? Number(m[2]) : null;
+      var day = m[3] ? Number(m[3]) : null;
+      var nextYear = new Date().getFullYear() + 1;
+      if (year < 1700 || year > nextYear) {
+        showError(errorEl, successEl, "Funddatum-Jahr unplausibel (1700-" + nextYear + ").");
+        return false;
+      }
+      if (month !== null && (month < 1 || month > 12)) {
+        showError(errorEl, successEl, "Funddatum: Monat muss zwischen 01 und 12 liegen.");
+        return false;
+      }
+      if (day !== null && (day < 1 || day > 31)) {
+        showError(errorEl, successEl, "Funddatum: Tag muss zwischen 01 und 31 liegen.");
+        return false;
+      }
+    }
+
+    var urlEl = $(fieldId("image_url"));
+    var urlVal = urlEl ? urlEl.value.trim() : "";
+    if (urlVal) {
+      var imageUrls = splitLines(urlVal);
+      for (var i = 0; i < imageUrls.length; i++) {
+        if (!/^https?:\/\/.+/i.test(imageUrls[i])) {
+          showError(errorEl, successEl, "Jede Bild-URL muss mit http:// oder https:// beginnen.");
+          return false;
+        }
+      }
+    }
+
+    var elevEl = $(fieldId("elevation"));
+    var elevVal = elevEl ? elevEl.value.trim() : "";
+    if (elevVal !== "") {
+      var elevNum = Number(elevVal);
+      if (!isFinite(elevNum) || elevNum < -500 || elevNum > 9000) {
+        showError(errorEl, successEl, "Hoehe muss zwischen -500 und 9000 m liegen.");
+        return false;
+      }
+    }
+    return true;
+  }
+
   // Fuehrt Vorab-Validierung vor dem API-Submit aus.
   function canSubmit(form, errorEl, successEl) {
     if (!form.checkValidity()) {
       showError(errorEl, successEl, "Bitte Wissenschaftlichen Namen und Familie ausfuellen.");
       return false;
     }
-    return validateCoordinates(errorEl, successEl);
+    return validateCoordinates(errorEl, successEl) && validateExtraFields(errorEl, successEl);
   }
 
   // Validiert und sendet das Formular als POST an die Beetle-API.

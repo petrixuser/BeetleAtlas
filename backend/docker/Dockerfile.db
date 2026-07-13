@@ -1,62 +1,69 @@
-# MySQL image with schema, seed data, ALL consolidated migrations AND the CSV
-# seed data baked in.
+# MySQL-Image mit Schema, Seed-Daten, allen konsolidierten Migrationen UND den
+# CSV-Seed-Daten fest eingebacken.
 #
-# Why a dedicated image instead of bind-mounting backend/sql + backend/data:
-# Portainer runs as a container and resolves the relative compose paths against
-# its own internal repo checkout (/data/compose/...), a path that does not exist
-# on the NAS host. Docker then creates empty directories instead of mounting the
-# files -> MySQL finds no init scripts / no CSVs -> empty DB -> backend 503.
-# Baking everything into the image removes the bind mounts entirely; a git push
-# rebuilds this image via GitHub Actions and Portainer pulls it.
+# Warum ein dediziertes Image statt Bind-Mounts von backend/sql + backend/data:
+# Portainer laeuft selbst als Container und loest relative Compose-Pfade gegen
+# seinen internen Repo-Checkout (/data/compose/...) auf, ein Pfad, der auf dem
+# NAS-Host nicht existiert. Docker legt dann leere Verzeichnisse an statt die
+# Dateien zu mounten -> MySQL findet keine Init-Skripte / keine CSVs -> leere DB
+# -> Backend 503. Das Einbacken entfernt die Bind-Mounts komplett; ein git push
+# baut dieses Image via GitHub Actions neu und Portainer zieht es.
 #
-# A fresh DB (empty data dir) runs every /docker-entrypoint-initdb.d/*.sql once,
-# in alphabetical order, so the numeric prefixes below define the run order. We
-# bake the full pipeline so that wiping the volume + restarting yields a COMPLETE
-# database (base schema + seed data + every migration + read models), with no
-# manual step.
+# Eine frische DB (leeres Datenverzeichnis) fuehrt jede Datei in
+# /docker-entrypoint-initdb.d/*.sql genau einmal aus, in alphabetischer
+# Reihenfolge. Die numerischen Praefixe unten definieren daher die Reihenfolge.
+# Die vollstaendige Pipeline ist eingebacken, damit Volume-loeschen + Neustart
+# eine KOMPLETTE Datenbank ergibt (Basis-Schema + Seed-Daten + Read-Models),
+# ohne manuellen Schritt.
 #
-# Order matters (dependency chain):
-#   01 base schema (observation/location/beetle_species/media/climate/quality)
-#   02 schema_migrations bookkeeping table
-#   03 seed core data (LOAD DATA for the GBIF tables + climate + quality snapshot)
-#   04 auth + manual-beetle-write tables (app_user, beetle_record, ...)
-#        -> MUST precede the featured seed (it inserts into beetle_record)
-#   04b locked system owner account (so the featured seed has a valid created_by)
-#   05 featured beetles seed (INSERT INTO beetle_record, reads app_user) -> needs 04+04b
-#   06 read-model + quality (map_point_read / beetle_list_read; reads observation
-#        AND beetle_record) -> MUST run after the featured seed (05)
-#   07 map query indexes
-#   08 mark the two consolidated migrations as applied, so the backend's
-#        run_migrations.py (runs on every start) SKIPS them instead of re-running
-#        their DELIMITER / CREATE PROCEDURE blocks (which pymysql cannot execute).
+# Reihenfolge (Abhaengigkeitskette), passend zu den COPY-Praefixen unten:
+#   01 Core-Schema (legt DB an: observation/location/beetle_species/media/klima)
+#   02 Auth-Tabellen (app_user, Refresh-Token, offene Registrierungen)
+#   03 Manuelle Kaefer (normalisiert: beetle_record_core/-media/-audit + View)
+#   04 Read-Model-Tabellen
+#   05 schema_migrations Buchhaltungstabelle
+#   06 Seed Core-Daten (LOAD DATA fuer GBIF-Tabellen + Klima + Qualitaets-Snapshot)
+#   06b Gesperrtes System-Eigentuemerkonto (gueltiges created_by fuer Featured-Seed)
+#   07 Featured-Kaefer-Seed (INSERT in beetle_record_core, liest app_user)
+#   07c Vorberechnete Klima-/Vegetationszonen in location
+#   08 Read-Model + Qualitaet (map_point_read / beetle_list_read; liest observation
+#        UND die beetle_record-View) -> MUSS nach dem Featured-Seed laufen
+#   09 Indizes fuer Kartenabfragen
+#   10 Markiert die konsolidierte Migration als angewendet, damit der
+#        run_migrations.py-Lauf des Backends (bei jedem Start) sie ueberspringt
+#        statt ihre DELIMITER/CREATE-PROCEDURE-Bloecke erneut auszufuehren
+#        (die pymysql nicht ausfuehren kann).
 #
-# The admin account is intentionally NOT seeded here; it is bootstrapped after
-# deploy via the admin bootstrap endpoint (ADMIN_BOOTSTRAP_TOKEN).
+# Das Admin-Konto wird hier absichtlich NICHT geseedet; es wird nach dem Deploy
+# ueber den Admin-Bootstrap-Endpunkt angelegt (ADMIN_BOOTSTRAP_TOKEN).
 #
-# Build context = repo root, dockerfile = backend/docker/Dockerfile.db.
-# The root .dockerignore excludes backend/data/, so this build uses the adjacent
-# Dockerfile.db.dockerignore to re-include backend/sql + backend/data.
+# Build-Kontext = Repo-Root, Dockerfile = backend/docker/Dockerfile.db.
+# Die Root-.dockerignore schliesst backend/data/ aus, daher nutzt dieser Build
+# die benachbarte Dockerfile.db.dockerignore, um backend/sql + backend/data
+# wieder einzuschliessen.
 FROM mysql:8.0
 
-# 1) Base schema
-COPY backend/sql/schema/DatabseShema.sql               /docker-entrypoint-initdb.d/01_schema.sql
-# 2) Migration bookkeeping table (must exist before step 08 records into it)
-COPY backend/sql/schema/MigrateSchemaMigrations.sql    /docker-entrypoint-initdb.d/02_schema_migrations.sql
-# 3) Seed core data (CSV load) -- precedes the migrations that read seeded data
-COPY backend/sql/seed/SeedCoreData.sql                 /docker-entrypoint-initdb.d/03_seed_core.sql
-# 4) Auth + manual-beetle-write tables (app_user first -> FK targets; beetle_record)
-COPY backend/sql/ops/MigrateAuthAndWrite.sql           /docker-entrypoint-initdb.d/04_auth_and_write.sql
-# 5) Featured beetles seed (inserts into beetle_record, reads app_user) -- needs step 4
-# 4b) System owner account (locked, non-login) so the featured seed below has a
-#     valid created_by; must precede SeedFeaturedData (FK beetle_record.created_by)
-COPY backend/sql/seed/SeedSystemUser.sql               /docker-entrypoint-initdb.d/04b_system_user.sql
-COPY backend/sql/seed/SeedFeaturedData.sql             /docker-entrypoint-initdb.d/05_seed_featured.sql
-# 6) Read-model + quality (map_point_read/beetle_list_read from observation+beetle_record) -- needs 3+5
-COPY backend/sql/ops/MigrateReadModelAndQuality.sql    /docker-entrypoint-initdb.d/06_read_model_and_quality.sql
-# 7) Map query indexes
-COPY backend/sql/ops/AddMapQueryIndexes.sql            /docker-entrypoint-initdb.d/07_indexes.sql
-# 8) Record the consolidated migrations as applied so the backend runner skips them
-COPY backend/sql/ops/MarkConsolidatedMigrationsApplied.sql /docker-entrypoint-initdb.d/08_mark_migrations_applied.sql
+# 1) Schema: Core (legt DB an) -> Auth -> Manuelle Kaefer (normalisiert) -> Read-Models
+COPY backend/sql/schema/SchemaCore.sql                 /docker-entrypoint-initdb.d/01_schema_core.sql
+COPY backend/sql/schema/SchemaAuth.sql                 /docker-entrypoint-initdb.d/02_schema_auth.sql
+COPY backend/sql/schema/SchemaManualBeetles.sql        /docker-entrypoint-initdb.d/03_schema_manual_beetles.sql
+COPY backend/sql/schema/SchemaReadModels.sql           /docker-entrypoint-initdb.d/04_schema_read_models.sql
+# 2) Migration bookkeeping table (must exist before the mark step records into it)
+COPY backend/sql/schema/MigrateSchemaMigrations.sql    /docker-entrypoint-initdb.d/05_schema_migrations.sql
+# 3) Seed core data (CSV load) -- precedes the steps that read seeded data
+COPY backend/sql/seed/SeedCoreData.sql                 /docker-entrypoint-initdb.d/06_seed_core.sql
+# 3b) System owner account (locked, non-login) so the featured seed has a valid created_by
+COPY backend/sql/seed/SeedSystemUser.sql               /docker-entrypoint-initdb.d/06b_system_user.sql
+# 4) Featured-Kaefer-Seed (INSERT in beetle_record_core, liest app_user)
+COPY backend/sql/seed/SeedFeaturedData.sql             /docker-entrypoint-initdb.d/07_seed_featured.sql
+# 4c) Vorberechnete Klima-/Vegetationszonen in location laden (vor dem Read-Model-Aufbau)
+COPY backend/sql/seed/SeedLocationZones.sql            /docker-entrypoint-initdb.d/07c_seed_location_zones.sql
+# 5) Read-model refresh procedures + quality + rebuild (reads observation + beetle_record view)
+COPY backend/sql/ops/MigrateReadModelAndQuality.sql    /docker-entrypoint-initdb.d/08_read_model_and_quality.sql
+# 6) Map query indexes
+COPY backend/sql/ops/AddMapQueryIndexes.sql            /docker-entrypoint-initdb.d/09_indexes.sql
+# 7) Record the consolidated migration as applied so the backend runner skips it
+COPY backend/sql/ops/MarkConsolidatedMigrationsApplied.sql /docker-entrypoint-initdb.d/10_mark_migrations_applied.sql
 
 # CSV seed files referenced by the LOAD DATA statements above
 COPY backend/data/ /var/lib/mysql-files/

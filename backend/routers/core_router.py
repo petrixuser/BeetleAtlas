@@ -1,4 +1,8 @@
-﻿from datetime import date
+"""API-Router fuer Kernendpunkte: Healthcheck, Statistiken, Arten- und
+Beobachtungslisten, Filteroptionen, Feld-Mappings, Klimadaten und
+Datenqualitaets-Reports."""
+
+from datetime import date
 from typing import Optional
 
 from fastapi import APIRouter, Query
@@ -14,9 +18,9 @@ from backend.controllers.core_controller import (
     list_species_controller,
     stats_overview_controller,
 )
-from backend.config.filter_options import CORE_FILTER_OPTIONS, FILTER_OPTIONS
-from backend.config.field_mappings import FIELD_MAPPINGS
-from backend.tests.openapi_examples import (
+from backend.config.data.filter_options import CORE_FILTER_OPTIONS, FILTER_OPTIONS
+from backend.config.data.field_mappings import FIELD_MAPPINGS
+from backend.routers.openapi_examples import (
     FILTERS_CORE_EXAMPLE,
     HEALTH_OK_EXAMPLE,
     QUALITY_HISTORY_COMPARE_EXAMPLE,
@@ -38,12 +42,12 @@ router = APIRouter()
     },
 )
 def healthcheck():
-    """Return API health status."""
+    """Gibt den Gesundheitsstatus der API zurueck."""
     return healthcheck_controller()
 
 @router.get("/stats/overview")
 def stats_overview():
-    """This endpoint provides an overview of key statistics related to beetle observations, such as total counts, distribution across species, and other aggregated data that gives insights into the dataset."""
+    """Dieser Endpunkt liefert eine Uebersicht wichtiger Statistiken zu Kaefer-Beobachtungen, etwa Gesamtzahlen, Verteilung nach Arten und weitere aggregierte Daten, die Einblicke in den Datensatz geben."""
     return stats_overview_controller()
 
 @router.get("/species")
@@ -53,7 +57,7 @@ def list_species(
     sort_by: str = Query("beetle_id", pattern="^(beetle_id|scientific_name|family)$"),
     sort_dir: str = Query("asc", pattern="^(asc|desc)$"),
 ):
-    """This endpoint retrieves a paginated list of beetle species, allowing clients to specify sorting options and limits for the number of entries returned."""
+    """Dieser Endpunkt liefert eine paginierte Liste der Kaefer-Arten und erlaubt es Clients, Sortieroptionen und ein Limit fuer die Anzahl der zurueckgegebenen Eintraege anzugeben."""
     return list_species_controller(limit=limit, offset=offset, sort_by=sort_by, sort_dir=sort_dir)
 
 @router.get(
@@ -66,14 +70,14 @@ def list_species(
     },
 )
 def list_frontend_filters(profile: str = Query("core", pattern="^(core|extended)$")):
-    """Return core or extended frontend filter option sets."""
+    """Gibt das Kern- oder das erweiterte Set der Frontend-Filteroptionen zurueck."""
     if profile == "extended":
         return FILTER_OPTIONS
     return CORE_FILTER_OPTIONS
 
 @router.get("/api/field-mappings")
 def list_field_mappings():
-    """This endpoint provides a mapping of database fields to their corresponding human-readable names, organized by table."""
+    """Dieser Endpunkt liefert eine Zuordnung von Datenbankfeldern zu ihren menschenlesbaren Namen, nach Tabelle organisiert."""
     return {"tables": FIELD_MAPPINGS}
 
 @router.get(
@@ -86,7 +90,7 @@ def list_field_mappings():
     },
 )
 def quality_report():
-    """Return the current data-quality report."""
+    """Gibt den aktuellen Datenqualitaets-Report zurueck."""
     return quality_report_controller()
 
 @router.post(
@@ -101,7 +105,7 @@ def quality_report():
 def create_quality_report_snapshot(
     source: Optional[str] = Query(None, min_length=1, max_length=128),
 ):
-    """Create and persist a quality-report history snapshot."""
+    """Erstellt und persistiert einen Qualitaetsreport-Historien-Snapshot."""
     return create_quality_report_snapshot_controller(source=source)
 
 @router.get(
@@ -117,7 +121,7 @@ def list_quality_report_history(
     limit: int = Query(20, ge=1, le=200),
     offset: int = Query(0, ge=0),
 ):
-    """Return paginated quality-report history snapshots."""
+    """Gibt paginierte Snapshots der Qualitaetsreport-Historie zurueck."""
     return list_quality_report_history_controller(limit=limit, offset=offset)
 
 @router.get(
@@ -133,7 +137,7 @@ def compare_quality_report_history(
     from_id: int = Query(..., ge=1),
     to_id: int = Query(..., ge=1),
 ):
-    """Compare two quality-report snapshots and return metric deltas."""
+    """Vergleicht zwei Qualitaetsreport-Snapshots und gibt die Metrik-Deltas zurueck."""
     return compare_quality_report_history_controller(from_id=from_id, to_id=to_id)
 
 @router.get("/observations")
@@ -146,7 +150,7 @@ def list_observations(
     sort_by: str = Query("gbif_id", pattern="^(gbif_id|event_date|beetle_id)$"),
     sort_dir: str = Query("asc", pattern="^(asc|desc)$"),
 ):
-    """This endpoint retrieves a list of beetle observations based on the provided query parameters, which can include filters for species, location, date range, and pagination options."""
+    """Dieser Endpunkt liefert eine Liste von Kaefer-Beobachtungen anhand der uebergebenen Query-Parameter, die Filter fuer Art, Standort, Datumsbereich und Pagination enthalten koennen."""
     return list_observations_controller(
         beetle_id=beetle_id,
         year=year,
@@ -164,7 +168,7 @@ def climate_by_location(
     to_date: Optional[date] = None,
     limit: int = Query(500, ge=1, le=5000),
 ):
-    """This endpoint retrieves climate data for a specific location, allowing clients to specify a date range and limit for the number of records returned."""
+    """Dieser Endpunkt liefert Klimadaten fuer einen bestimmten Standort und erlaubt es Clients, einen Datumsbereich und ein Limit fuer die Anzahl der zurueckgegebenen Datensaetze anzugeben."""
     return climate_by_location_controller(
         location_id=location_id,
         from_date=from_date,

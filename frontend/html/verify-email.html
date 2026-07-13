@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-Mail bestätigen | Beetle Box</title>
+    <link rel="stylesheet" href="/styles/app.css?v=20260709l" />
+  </head>
+  <body>
+    <main class="page">
+      <div class="topbar">
+        <header class="header">
+          <h1>Beetle Box</h1>
+          <p>E-Mail-Bestätigung</p>
+        </header>
+      </div>
+
+      <section class="card" style="max-width: 480px; margin: 2rem auto; padding: 1.5rem;">
+        <h2 id="veTitle">E-Mail wird bestätigt …</h2>
+        <p id="veMessage">Einen Moment bitte.</p>
+        <p><a href="/index.html">← Zurück zur Startseite</a></p>
+      </section>
+    </main>
+
+    <!-- Lokale Konfiguration (setzt window.API_BASE_URL). -->
+    <script src="/config/config.local.js"></script>
+    <script>
+      // Liest den Token aus der URL und bestätigt die E-Mail über das Backend.
+      (function () {
+        var titleEl = document.getElementById("veTitle");
+        var msgEl = document.getElementById("veMessage");
+        var params = new URLSearchParams(window.location.search);
+        var token = params.get("token");
+        var base = window.API_BASE_URL || "";
+
+        function show(title, message) {
+          titleEl.textContent = title;
+          msgEl.textContent = message;
+        }
+
+        if (!token) {
+          show("Kein Token gefunden", "Der Bestätigungslink ist unvollständig.");
+          return;
+        }
+        if (!base) {
+          show("Kein Backend konfiguriert", "API_BASE_URL ist nicht gesetzt.");
+          return;
+        }
+
+        fetch(base + "/auth/verify-email", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ verification_token: token }),
+        })
+          .then(function (res) {
+            if (res.ok) {
+              show("E-Mail bestätigt ✅", "Dein Konto ist jetzt aktiv. Du kannst dich anmelden.");
+            } else {
+              return res.json().then(function (body) {
+                show("Bestätigung fehlgeschlagen", (body && body.message) || ("Fehler " + res.status));
+              });
+            }
+          })
+          .catch(function () {
+            show("Netzwerkfehler", "Das Backend war nicht erreichbar.");
+          });
+      })();
+    </script>
+  </body>
+</html>

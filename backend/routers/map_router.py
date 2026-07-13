@@ -1,10 +1,12 @@
+"""API-Router fuer Karten-Endpunkte: Punkte/Cluster und GeoJSON-Ausgabe."""
+
 from fastapi import APIRouter, Depends
 
 from backend.controllers.map_controller import (
     map_points_controller,
     map_points_geojson_controller,
 )
-from backend.tests.openapi_examples import (
+from backend.routers.openapi_examples import (
     MAP_POINTS_EXAMPLE,
     MAP_POINTS_GEOJSON_EXAMPLE,
 )
@@ -23,7 +25,7 @@ router = APIRouter()
     },
 )
 def map_points(params: dict = Depends(map_query_params)):
-    """Return map points or clusters based on zoom and filters."""
+    """Gibt Karten-Punkte oder -Cluster abhaengig von Zoom und Filtern zurueck."""
     return map_points_controller(**params)
 
 @router.get(
@@ -36,5 +38,5 @@ def map_points(params: dict = Depends(map_query_params)):
     },
 )
 def map_points_geojson(params: dict = Depends(map_query_params)):
-    """Return map points as a GeoJSON FeatureCollection."""
+    """Gibt Karten-Punkte als GeoJSON-FeatureCollection zurueck."""
     return map_points_geojson_controller(**params)
