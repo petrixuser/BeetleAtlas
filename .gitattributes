@@ -1,1 +1,2 @@
 backend/data/gbif-raw-source.zip filter=lfs diff=lfs merge=lfs -text
+*.sh text eol=lf
