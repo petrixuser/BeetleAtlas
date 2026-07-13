@@ -33,6 +33,12 @@ MIGRATIONS: list[tuple[str, str, str]] = [
         "seed throwaway test researcher account (delete after verifying)",
         "ops/MigrateSeedTestResearcher.sql",
     ),
+    (
+        "20260713_05_add_list_read_metrics",
+        "add temperature/precipitation/soil_ph columns to beetle_list_read and backfill",
+        "ops/AddListReadMetrics.sql",
+    ),
+
 ]
 
 
