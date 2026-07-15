@@ -1248,6 +1248,63 @@ body.is-admin .admin-only {
   border-style: dashed;
 }
 
+.sources-box {
+  margin: 1.25rem 0 0;
+  padding: 1rem 1.1rem;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 12px 28px rgba(18, 32, 22, 0.12);
+}
+
+.sources-box-header {
+  margin-bottom: 0.65rem;
+}
+
+.sources-kicker {
+  margin-bottom: 0.25rem;
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.sources-box h2 {
+  margin-bottom: 0;
+  font-size: 1.15rem;
+}
+
+.sources-note,
+.sources-overview {
+  margin-bottom: 0.65rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.sources-overview a,
+.sources-list a {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.sources-overview a:hover,
+.sources-list a:hover {
+  text-decoration: underline;
+}
+
+.sources-list {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.sources-list li + li {
+  margin-top: 0.45rem;
+}
+
 /* ============================================================
    Responsive Anpassungen (App)
    ============================================================ */
